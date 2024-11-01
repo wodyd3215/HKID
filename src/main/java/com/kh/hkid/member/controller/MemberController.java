@@ -21,8 +21,8 @@ public class MemberController {
 		return "member/loginView";
 	}
    
-   @RequestMapping("personal.me")
+   @GetMapping("personal.me")
    public String personalForm() {
-	   return "personal/personalPage";
+	   return "member/personalPage";
    }
 }

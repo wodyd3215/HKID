@@ -1,0 +1,114 @@
+.pageName {
+    font-size: 45px;
+    font-weight: bold;
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 9px;
+}
+
+.content {              
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-top: 55px;
+} 
+
+.content>img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.namespace {
+    width: 400px;
+    height: 50px;
+    /* outline: none; */
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: center;
+    padding: auto 0;
+    position: relative;
+    margin-top: 20px;
+}
+
+#nameInput {
+    height: 42px;
+    outline: none;
+    font-size: 35px;
+    flex: 1;
+    text-align: center;
+    align-items: center;
+}
+
+.custom-icon{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.sub-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 135px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background: #00A6FB;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sub-btn .btn {
+    display: none;
+}
+
+.bottom-content{
+    display: flex;
+    justify-content: center;
+}
+
+.bottom-content table{
+    width: 450px;
+}
+
+.bottom-content table tr {
+    height: 60px;
+    /* border: 1px solid black; */
+    padding: 10px 0;
+}
+
+.bottom-content table tr>td:first-child {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.bottom-content table tr>td:nth-child(2) {
+    text-align: right;
+}
+
+.bottom-content table tr:last-child td{
+    height: 110px;
+    text-align: center;
+}
+
+.bottom-content table tr:last-child td .btn{
+    background: #DC3545;
+    color: black;
+}
