@@ -4,16 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 <title>Insert title here</title>
 </head>
 <body>
     <!-- content -->
     <div class="wrapper">
         <div>
-            <a href=""><img src="" alt="로고"></a>
+            <a href=""><img src="${pageContext.request.contextPath}/resources/image/HKID_Logo.png" alt="로고"></a>
             <form action="">
-                <div>
+                <div> 
                     <h3>로그인</h3>
                 </div>
                 <div>
@@ -44,6 +44,9 @@
             </div>
             <fieldset style="text-align: center; border: none; border-top: 1px solid rgb(223, 223, 223);">
                 <legend>&nbsp;&nbsp;간편로그인&nbsp;&nbsp;</legend>
+                <button><img src="">카카오 로그인</button>
+                <button><img src="">네이버 로그인</button>
+                <button><img src="">Google 로그인</button>
             </fieldset>
             
 
