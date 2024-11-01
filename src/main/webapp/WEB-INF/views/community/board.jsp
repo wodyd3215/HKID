@@ -100,6 +100,15 @@
             </button>
         </div>
 
+        <!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
+        <div id="modalContainer" class="hidden">
+            <div id="modal-content">
+                <p>모달창입니다.</p>
+
+            </div>
+        </div>
+
+
         <!-- 검색 바 -->
         <div id="searchbar-div">
             <select name="search-category" id="search-category">전체
@@ -111,7 +120,10 @@
             </select>
             
             <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">
-        </div>
+            <button id="search-btn" type="submit">
+                <img id="searchIcon" src="resources/image/searchIcon.png">
+            </button>
+        </div>  
 
         <!-- 페이지 버튼 -->
         <div id="paging-div">
@@ -124,6 +136,7 @@
             <button class="page-btn">&gt;</button>
         </div>
 
+        
         
         
 

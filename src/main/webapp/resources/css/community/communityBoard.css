@@ -142,11 +142,12 @@ table td:nth-child(5) { /* 5번째 td */
 
 #board-search-bar{
     border: 1px solid rgb(196, 195, 195);
-    border-radius: 9px;
+    border-radius: 9px 0px 0px 9px ;
     width: 400px;
     height: 30px;
     padding-left: 10px;
     margin-left: 10px;
+    border-right: none;
 }
 
 #searchbar-div{
@@ -164,4 +165,18 @@ table td:nth-child(5) { /* 5번째 td */
     border: none;
     background-color: white;
     font-weight: 600;
+    cursor: pointer;
+}
+
+#search-btn{
+    border: 1px solid rgb(196, 195, 195);
+    background-color: white;
+    border-left: none;
+    border-radius: 0px 9px 9px 0px;
+    cursor: pointer;
+}
+
+#searchIcon{
+
+
 }
