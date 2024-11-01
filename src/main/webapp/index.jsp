@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<a href="loginView.me">로그인</a>
 	<a href="personal.me">개인페이지 가기</a>
 </body>
 </html>
