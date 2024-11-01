@@ -23,6 +23,8 @@ a:visited {color: #333;}
 *, html {box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; }
 *, *:before, *:after {box-sizing: border-box;-webkit-box-sizing: border-box; -moz-box-sizing: border-box;}
 
-.wrapper{
-    width: 60%;
+.wrapper {
+    width: 1056px;
+    margin: 0 auto;
 }
+
