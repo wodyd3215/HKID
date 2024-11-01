@@ -29,7 +29,7 @@
 		<property name="maxInMemorySize" value="100000000" />
 	</bean>
  
-	<context:component-scan base-package="aop패키지명" use-default-filters="false">
+	<context:component-scan base-package="com.kh" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
 	</context:component-scan>
 	
