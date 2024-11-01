@@ -5,8 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 </head>
 <body>
-	<a href="personal.me">개인페이지 가기</a>
+    <div class="wrapper">
+        개인페이지 입니다.
+    </div>
 </body>
 </html>

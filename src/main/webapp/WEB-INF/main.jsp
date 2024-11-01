@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="personal.me">개인페이지 가기</a>
+	
 </body>
 </html>
