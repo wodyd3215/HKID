@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	안녕반가워
+	<a href="list.bo">커뮤니티 바로가기</a>
+
 </body>
 </html>

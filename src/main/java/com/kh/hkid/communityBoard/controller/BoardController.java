@@ -1,6 +1,7 @@
 package com.kh.hkid.communityBoard.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.hkid.communityBoard.service.BoardService;
@@ -13,6 +14,8 @@ public class BoardController {
 	public BoardController(BoardService boardService) {
 		this.boardService = boardService;
 	}
+	
+	
 	
 	@GetMapping("list.bo")
 	public String selectList() {

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>전체</h1>
+
+    <div id=""></div>
 </body>
 </html>
