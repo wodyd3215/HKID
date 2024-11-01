@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="loginView.me">로그인</a>
+	<a href="loginForm.me">로그인</a>
 </body>
 </html>

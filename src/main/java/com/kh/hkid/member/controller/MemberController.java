@@ -16,9 +16,23 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
-	@GetMapping("loginView.me")
-	public String loginView() {
-		
-		return "member/loginView";
+	@GetMapping("loginForm.me")
+	public String loginForm() {
+		return "member/loginForm";
+	}
+	
+	@GetMapping("searchIdForm.me")
+	public String searchId() {
+		return "member/searchMemberId";
+	}
+	
+	@GetMapping("searchPwdForm.me")
+	public String searchPwd() {
+		return "member/searchMemberPwd";
+	}
+	
+	@GetMapping("changePwdForm.me")
+	public String changePwd() {
+		return "member/changeMemberPwd";
 	}
 }
