@@ -24,6 +24,10 @@
     user-select:none;
 }
 
+.select-profile {
+    display: none;
+}
+
 .namespace {
     width: 400px;
     height: 50px;
