@@ -12,7 +12,8 @@
 	<a href="loginForm.me">로그인</a>
 =======
 	<a href="list.bo">커뮤니티 바로가기</a>
-	<jsp:forward page="/WEB-INF/views/exercise/mainExercise.jsp" />
+	
+	<a href="list.ex?cpage=1"">운동리스트</a>
 
 
 	<a href="loginView.me">로그인</a>
