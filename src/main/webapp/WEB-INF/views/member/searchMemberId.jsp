@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/searchMemberId.css">
+    <script src="${pageContext.request.contextPath}/resources/js/member/searchMemberId.js"></script>
     <title>Insert title here</title>
 </head>
 <body>
@@ -18,9 +19,9 @@
             <div>
                 <input type="text" id="search-id" placeholder="이메일 입력">
             </div>
-
+            <!-- JS로 AJAX요청! -->
             <div>
-                <input type="submit" value="아이디 찾기">
+                <input type="submit" onclick="searchId()" value="아이디 찾기">
             </div>
         </form>
 
