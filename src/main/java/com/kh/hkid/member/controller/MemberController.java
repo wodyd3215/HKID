@@ -10,17 +10,32 @@ import com.kh.hkid.member.service.MemberService;
 @Controller
 public class MemberController {
 	private final MemberService memberService;
-   
-   @Autowired
-   public MemberController(MemberService memberService) {
-      this.memberService = memberService;
-   }
-   
-   @GetMapping("loginView.me")
-	public String loginView() {
-		return "member/loginView";
+	
+	@Autowired
+	public MemberController(MemberService memberService) {
+		this.memberService = memberService;
 	}
-   
+	
+	@GetMapping("loginForm.me")
+	public String loginForm() {
+		return "member/loginForm";
+	}
+	
+	@GetMapping("searchIdForm.me")
+	public String searchId() {
+		return "member/searchMemberId";
+	}
+	
+	@GetMapping("searchPwdForm.me")
+	public String searchPwd() {
+		return "member/searchMemberPwd";
+	}
+	
+	@GetMapping("changePwdForm.me")
+	public String changePwd() {
+		return "member/changeMemberPwd";
+	}
+
    @GetMapping("personal.me")
    public String personalForm() {
 	   return "member/personalPage";
