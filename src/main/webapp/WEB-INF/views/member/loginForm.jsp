@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/loginForm.css">
+    <script src="${pageContext.request.contextPath}/resources/js/member/loginForm.js"></script>
     <title>Insert title here</title>
 </head>
 <body>
@@ -31,11 +32,11 @@
             <br><br>
 
             <div>
-                <input type="submit" value="로그인">
+                <input type="submit" onclick="loginBtn()" value="로그인">
             </div>
         </form>
         <div class="enroll-search">
-            <a href="enrollForm.me">회원가입</a>&nbsp;
+            <a href="agreeForm.me">회원가입</a>&nbsp;
             &nbsp;<p>|</p>&nbsp;
             &nbsp;<a href="searchIdForm.me">아이디 찾기</a>&nbsp;
             &nbsp;<p>|</p>&nbsp;
