@@ -30,6 +30,11 @@ public class BoardController {
 	}
 	
 	
+	@GetMapping("boardDetail.bo")
+	public String selectDetailBoard() {
+		
+		return "community/boardDetail";
+	}
 	
 	
 	

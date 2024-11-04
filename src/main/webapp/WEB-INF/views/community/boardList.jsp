@@ -81,7 +81,8 @@
             </tr>
             <tr>
                 <td id="board-category">질문</td>
-                <td>세트별 개수 설정에 대해 질문드립니다 [0]</td>
+                <!-- 게시글 임시 링크 -->
+                <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다 [0]</a></td>
                 <td>꾸준히 운동</td>
                 <td>2024-10-10</td>
                 <td>4</td>
