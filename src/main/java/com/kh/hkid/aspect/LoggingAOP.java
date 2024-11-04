@@ -47,7 +47,7 @@ public class LoggingAOP {
 	public Object displayLogInfo(ProceedingJoinPoint pJoinPoint) throws Throwable {
 		long start = System.currentTimeMillis();// 0
 		
-		Object result = pJoinPoint.proceed(); // ¿ø·¡ ÇØ¾ßµÇ´Â ±â´ÉÀ» ½ÇÇàÇØÁØ´Ù.
+		Object result = pJoinPoint.proceed(); // ì›ë˜ ì§„í–‰ì¤‘ì´ë˜ ì‘ì—… ì§„í–‰
 		
 		long end = System.currentTimeMillis(); // 10
 		

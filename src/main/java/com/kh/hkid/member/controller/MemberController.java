@@ -2,13 +2,13 @@ package com.kh.hkid.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.hkid.member.service.MemberService;
 
 @Controller
 public class MemberController {
-
 	private final MemberService memberService;
 	
 	@Autowired
@@ -35,4 +35,9 @@ public class MemberController {
 	public String changePwd() {
 		return "member/changeMemberPwd";
 	}
+
+   @GetMapping("personal.me")
+   public String personalForm() {
+	   return "member/personalPage";
+   }
 }
