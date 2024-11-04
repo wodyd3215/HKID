@@ -132,6 +132,12 @@
     color: rgba(0, 166, 251, 1);
 }
 
+#agree-enter:hover{
+    border: none;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+}
+
 #agree-cancel {
     border: 1px solid black;
 }

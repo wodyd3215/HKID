@@ -18,7 +18,7 @@
         <form action="enrollForm.me" class="agreeContent">
             <div id="use-agree">
                 <p>이용약관 동의&nbsp;<span>(필수)</span></p>
-                <input type="checkbox">
+                <input type="checkbox" name="agreeCheck">
             </div>
             <textarea readonly>
 제1조(목적) 이 약관은 업체 회사(전자상거래 사업자)가 운영하는 업체 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.
@@ -261,7 +261,7 @@
             </textarea>
             <div id="personInfo-agree">
                 <p>개인정보처리방침 동의&nbsp;<span>(필수)</span></p>
-                <input type="checkbox">
+                <input type="checkbox" name="agreeCheck">
             </div>
             <textarea readonly>
 개인정보처리방침
@@ -403,7 +403,7 @@
             </textarea>
             <div id="all-agree">
                 <p>회원가입 약관에 모두 동의합니다.</p>
-                <input id="all-check" type="checkbox" onchange="enrollBtn(this)">
+                <input id="all-check" type="checkbox" onchange="allCheckBtn(this)">
             </div>
             <div class="agree-btn">
                 <button type="submit" id="agree-enter">확인</button>
