@@ -39,7 +39,7 @@
                     <a href="">상점</a>
                 </li>
                 <li class="content">
-                    <a class="login" href="loginView.me">로그인</a>
+                    <a class="login" href="loginForm.me">로그인</a>
                 </li>
             </ul>
         </div>
