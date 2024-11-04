@@ -20,7 +20,7 @@
                     <a href=""><img class="icon" src="./resources/img/icon.png" alt="없음"></a>
                 </li>
                 <li class="content">
-                    <a href="">가이드</a>
+                    <a href="list.ex">가이드</a>
                 </li>
                 <li class="content">
                     <a href="">식단</a>

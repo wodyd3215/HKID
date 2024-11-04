@@ -150,7 +150,7 @@
     margin-top: 100px;
     border-radius: 100px;
     width: 1056px;
-    height: 1000px;
+    height: 2000PX;
     background-color: #DBF1FD;
     display: flex;
     justify-content: space-evenly;
@@ -194,7 +194,11 @@
      margin-right: 10px;
      float: right;
      border: none;
-     background-color: #fff;
+     background-color: #DFF0FF;
      display: block;
      cursor: pointer;
+ }
+
+ .list-text, .list-text2{
+    margin-left: 15px;
  }
