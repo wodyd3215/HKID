@@ -9,7 +9,7 @@
     <title>Document</title>
  
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/communityBoard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css">
 </head>
 <body>
     <div class="wrapper">
@@ -60,7 +60,7 @@
                         <option value="question">질문</option>
                         <option value="tip">팁</option>
                         <option value="show-off">자랑</option>
-                        <option value="AD">홍보</option>
+                        <option value="ad">홍보</option>
                     </select>
                 </th>
                 <th id="th-title">제목</th>
@@ -95,9 +95,9 @@
                 <option value="">10개씩</option>
                 <option value="">15개씩</option>
             </select>
-            <button id="write-btn">
-                글쓰기
-            </button>
+            <form action="boardWrite.bo" method="POST">
+                <button id="write-btn">글쓰기</button>
+            </form>
         </div>
 
         <!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
@@ -136,6 +136,7 @@
             <button class="page-btn">&gt;</button>
         </div>
 
+    
         
         
         

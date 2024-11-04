@@ -119,6 +119,8 @@ table td:nth-child(5) { /* 5번째 td */
     text-align: center;
     font-size: 18px;
     font-weight: 600;
+    padding-top: 2px;
+    cursor: pointer;
 }
 
 #boCount-wirte-div{
@@ -177,6 +179,5 @@ table td:nth-child(5) { /* 5번째 td */
 }
 
 #searchIcon{
-
 
 }

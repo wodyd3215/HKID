@@ -8,6 +8,7 @@
 </head>
 <body>
 	<a href="list.bo">커뮤니티 바로가기</a>
+    <a href=""></a>
 
 </body>
 </html>

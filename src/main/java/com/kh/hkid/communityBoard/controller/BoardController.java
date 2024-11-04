@@ -1,8 +1,8 @@
 package com.kh.hkid.communityBoard.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.kh.hkid.communityBoard.service.BoardService;
 
@@ -20,10 +20,14 @@ public class BoardController {
 	@GetMapping("list.bo")
 	public String selectList() {
 		
-		
-		return "community/board";
+		return "community/boardList";
 	}
 	
+	@PostMapping("boardWrite.bo")
+	public String boardWrite() {
+		
+		return "community/boardWrite";
+	}
 	
 	
 	
