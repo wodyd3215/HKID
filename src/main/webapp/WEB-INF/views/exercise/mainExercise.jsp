@@ -17,7 +17,7 @@
 				<p>운동 라이브러리</p>
 			</div>
 			<div id="exerSearch-form">
-				<form id="searchForm" action="">
+				<form id="searchForm" action="exercise.se" method="post">
 					<table>
 						<tr>
 							<th><p>부위별 선택</p></th>
@@ -60,61 +60,39 @@
 								</td>
 						</tr>
 					</table>
-				</form>
+				
 			</div>
 			<div class="exerContent">
 				<p class="exerTitle2">운동 리스트</p>
-				<fieldset class="search">
-				<input type="text" placeholder="검색어를 입력해주세요.">
-				<input type="submit" value="검색">
-				</fieldset>
+					<div>
+						<input type="text" placeholder="검색어를 입력해주세요.">
+						<input type="submit" value="검색">
+					</div>
+				</form>
 			</div>
+			
+			
 			<div class="content-box">
 				<div class="list-box" id="tour-content">
+				<c:forEach var="e" items="${list}">
 						<div id="list-con">
 							<div id="list-img">
 								<a href="">
-									<img src="./resources/img/SL_LEG_CURL.gif" style="height: 250px; width: 250px;">
+									<img src="./resources/image/exerciseImages/${ e.exerciseImg}" style="height: 250px; width: 250px;">
 								</a>
 							</div>
-							<p class="list-text">풀업</p>
+							<br>
+							<p class="list-text">${e.exerciseName}</p>
+							<br>
 							<div id="under-area">
-								<p class="list-text2">난이도 쉬움</p>
+								<p class="list-text2">${e.exerciseDifficulty}</p>
 								<button type="button">
 									<img src="./resources/img/buy.png" class="like(this)" onclick="like(this)">
 								</button>
 							</div>
 						</div>
-						<div id="list-con">
-							<div id="list-img">
-								<a href="">
-									<img src="./resources/img/SL_LEG_CURL.gif" style="height: 250px; width: 250px;">
-								</a>
-							</div>
-							<p class="list-text">풀업</p>
-							<div id="under-area">
-								<p class="list-text2">난이도 쉬움</p>
-								<button type="button">
-									<img src="./resources/img/buy.png" class="like(this)" onclick="like(this)">
-								</button>
-							</div>
-						</div>
-						<div id="list-con">
-							<div id="list-img">
-								<a href="">
-									<img src="./resources/img/SL_LEG_CURL.gif" style="height: 250px; width: 250px;">
-								</a>
-							</div>
-							<p class="list-text">풀업</p>
-							<div id="under-area">
-								<p class="list-text2">난이도 쉬움</p>
-								<button type="button">
-									<img src="./resources/img/buy.png" class="like(this)" onclick="like(this)">
-								</button>
-							</div>
-						</div>
-				</div>
-				
+					</c:forEach>
+					</div>
 			</div>
 		</div>
 		<br><br><br>

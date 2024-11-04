@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- namespace: 해당 mapper파일의 고유한 별칭 -->
+  
+ <mapper namespace="exerciseMapper">
+ 
+ 	<resultMap type="Exercise" id="ExerciseResult">
+ 		<result column="EXERCISE_NO" property="exerciseNo"/>
+ 		<result column="PART_NO" property="partNo"/>
+ 		<result column="EXERCISE_NAME" property="exerciseName"/>
+ 		<result column="EXERCISE_DIFFICULTY" property="exerciseDifficulty"/>
+ 		<result column="EXERCISE_DESCRIPTION" property="exerciserDescription"/>
+ 		<result column="EXERCISE_IMG" property="exerciseImg"/>
+ 	</resultMap>
+ 	
+ 	
+ 	<!-- 운동치스트 총 갯수 조회 -->
+ 	<select id="selectListCount" resultType="_int">
+ 		SELECT COUNT(*)
+   	  		FROM EXERCISE_LIST
+ 	</select>
+ 	
+ 	<!-- 운동리스트를 가져오는 쿼리 -->
+ 	<select id="selectList" resultType="Exercise">
+      SELECT EXERCISE_NO exerciseNo,
+            PART_NO partNo,
+            EXERCISE_NAME exerciseName,
+            EXERCISE_DIFFICULTY exerciseDifficulty,
+            EXERCISE_DESCRIPTION exerciserDescription,
+            EXERCISE_IMG exerciseImg
+        FROM EXERCISE_LIST
+       ORDER BY EXERCISE_NO ASC
+   </select>
+   
+   
+   <select id="exerciseSearch" resultMap="ExerciseResult">
+   	 SELECT EXERCISE_NO,
+            PART_NO,
+            PART_NAME,
+            EXERCISE_NAME,
+            EXERCISE_DIFFICULTY,
+            EXERCISE_DESCRIPTION,
+            EXERCISE_IMG
+        FROM EXERCISE_LIST
+        JOIN PART_TAG USING(PART_NO)
+        WHERE 1=1
+        <if test="parts != null">
+            <foreach item="part" collection="parts" open="AND (" separator=" OR " close=")">
+                PART_NAME = #{part}
+            </foreach>
+        </if>
+        <if test="difficulties != null">
+            <foreach item="difficulty" collection="difficulties" open="AND (" separator=" OR " close=")">
+                EXERCISE_DIFFICULTY = #{difficulty}
+            </foreach>
+        </if>
+   </select>
+ </mapper>
