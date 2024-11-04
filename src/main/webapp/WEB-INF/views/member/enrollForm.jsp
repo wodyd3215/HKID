@@ -58,6 +58,30 @@
                     </div>
                 </div>
             </div>
+
+            <h2 class="enroll-input-title">*이메일</h2>
+            <div id="enroll-email" class="enroll-input-area">
+                <input id="email-input1" type="text" placeholder="이메일 입력(특수문자 제외)">
+                <p>@</p>
+                <input id="email-input2" type="text" placeholder="ex) naver.com">
+                <select name="">
+                    <option value="">직접 입력</option>
+                </select>
+            </div>
+
+            <h2 class="enroll-input-title">주소</h2>
+            <div id="enroll-address" class="enroll-input-area">
+                <input type="text" placeholder="주소 입력(도로명, 지번)">
+                <button>주소찾기</button>
+            </div>
+            <div id="post-detail-address" class="enroll-input-area">
+                <input id="post-no" type="text" placeholder="우편번호">
+                <input id="detail-address" type="text" placeholder="상세주소 입력">
+            </div>
+            <div class="enroll-btn">
+                <button type="submit" id="enroll-enter">가입</button>
+                <button id="enroll-cancel">취소</button>
+            </div>
         </form>
     </div>
 </body>

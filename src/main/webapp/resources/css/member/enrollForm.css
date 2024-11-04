@@ -2,6 +2,10 @@
     width: 600px;
 }
 
+input::placeholder{
+    color: rgb(199, 199, 199);
+}
+
 #logo-img {
     display: flex;
     justify-content: center;
@@ -34,8 +38,8 @@
 }
 
 .enroll-input-area > input {
-    width: 85%;
-    height: 30px;
+    width: 83%;
+    height: 100%;
 }
 
 .enroll-input-area > input:focus {
@@ -68,4 +72,90 @@
 
 #enroll-certify {
     width: 38%;
+}
+
+#enroll-certify > .enroll-input-area > input {
+    width: 58%;
+}
+
+#enroll-email {
+    border: none;
+    padding: 0px;
+}
+
+#enroll-email > input {
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+}
+
+#email-input1 {
+    padding-left: 5px;
+}
+
+#email-input2 {
+    width: 30%;
+    padding-left: 5px;
+    margin-right: 5px;
+}
+
+#enroll-email > p {
+    padding: 0 10px;
+}
+
+#enroll-email > select {
+    width: 30%;
+    height: 100%;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+}
+
+#enroll-address {
+    margin-bottom: 5px;
+}
+
+#post-detail-address { 
+    border: none;
+    padding: 0px;
+}
+
+#post-no {
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+    padding: 5px;
+    width: 120px;
+    margin-right: 5px;
+}
+
+#detail-address {
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.enroll-btn {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.enroll-btn > button {
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#enroll-enter {
+    border: 1px solid rgba(0, 166, 251, 1);
+    margin-right: 120px;
+    color: rgba(0, 166, 251, 1);
+}
+
+#enroll-cancel {
+    border: 1px solid black;
 }
