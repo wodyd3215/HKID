@@ -4,7 +4,7 @@ h1, h2, h3, h4, h5, h6,
 img, dl, dt, dd,
 fieldset, form, legend, label,
 table, caption, thead, tbody, tfoot, tr, th, td,
-ul, ol, li, a, input, select, textarea {margin: 0;padding: 0; border: 0 none; }
+ul, ol, li, a, input, select, textarea {margin: 0;padding: 0; border:none; }
 
 body {font-family: MalgunGothic, '맑은 고딕','돋움', Dotum, AppleGothic, Sans-serif, Arial; font-size: 12px; line-height: 1;color: #333;}
 
@@ -24,7 +24,7 @@ a:visited {color: #333;}
 *, *:before, *:after {box-sizing: border-box;-webkit-box-sizing: border-box; -moz-box-sizing: border-box;}
 
 .wrapper {
-	/* border: 1px solid black; */
     width: 1056px;
     margin: 0 auto;
 }
+

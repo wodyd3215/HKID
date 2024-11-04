@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/agreeForm.css">
+    <script src="${pageContext.request.contextPath}/resources/js/member/agreeForm.js"></script>
     <title>Insert title here</title>
 </head>
 <body>
@@ -402,11 +403,11 @@
             </textarea>
             <div id="all-agree">
                 <p>회원가입 약관에 모두 동의합니다.</p>
-                <input type="checkbox">
+                <input id="all-check" type="checkbox" onchange="enrollBtn(this)">
             </div>
             <div class="agree-btn">
                 <button type="submit" id="agree-enter">확인</button>
-                <button id="agree-cancel">취소</button>
+                <button id="agree-cancel" onclick="">취소</button>
             </div>
         </form>
     </div>

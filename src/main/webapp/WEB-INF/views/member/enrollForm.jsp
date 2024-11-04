@@ -15,7 +15,7 @@
         </div>
         <h1>회원가입</h1>
         
-        <form action="insert.me">
+        <form action="insert.me" method="post">
             <h2 class="enroll-input-title">*아이디</h2>
             <div class="enroll-input-area">
                 <input type="text" placeholder="아이디 입력(특수문자 제외)">
@@ -66,6 +66,9 @@
                 <input id="email-input2" type="text" placeholder="ex) naver.com">
                 <select name="">
                     <option value="">직접 입력</option>
+                    <option value="">naver.com</option>
+                    <option value="">gmail.com</option>
+                    <option value="">daum.net</option>
                 </select>
             </div>
 

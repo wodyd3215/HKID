@@ -1,0 +1,43 @@
+.footer{
+    width: 1920px;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.maincontent{
+    margin-left: 500px;
+    width: 1370px;
+    height: 160px;
+}
+
+.footerIcon{
+    width: 78px;
+    height: 25px;
+}
+
+.content2{
+    font-size: 15px;
+    color: #C2B5B5;
+    text-align: left;
+    
+}
+
+.content2 > p{
+    margin-top: 15px;
+    
+}
+
+
+#name{
+    color: black;
+    white-space: pre;
+}
+
+a{
+    text-decoration: none;
+    caret-color: transparent;
+    color: #C2B5B5; 
+}
