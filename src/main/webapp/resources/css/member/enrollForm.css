@@ -1,0 +1,71 @@
+.wrapper {
+    width: 600px;
+}
+
+#logo-img {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 30px 0;
+}
+
+#logo-img > a > img{
+    width: 210px;
+    height: 78px;
+}
+
+.wrapper > h1 {
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+}
+
+.enroll-input-title{
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+
+.enroll-input-area{
+    height: 35px;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.enroll-input-area > input {
+    width: 85%;
+    height: 30px;
+}
+
+.enroll-input-area > input:focus {
+    outline: none;
+}
+
+.enroll-input-area > button {
+    width: 90px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#enroll-phone-certify {
+    display: flex;
+}
+
+#enroll-phone {
+    width: 60%;
+    margin-right: 2%;
+}
+
+#enroll-phone > .enroll-input-area > input {
+    width: 73%;
+}
+
+#enroll-certify {
+    width: 38%;
+}

@@ -35,7 +35,7 @@
             </div>
         </form>
         <div class="enroll-search">
-            <a href="enrollForm.me">회원가입</a>&nbsp;
+            <a href="agreeForm.me">회원가입</a>&nbsp;
             &nbsp;<p>|</p>&nbsp;
             &nbsp;<a href="searchIdForm.me">아이디 찾기</a>&nbsp;
             &nbsp;<p>|</p>&nbsp;
