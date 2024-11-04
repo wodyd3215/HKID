@@ -42,7 +42,6 @@
 
 .custom-modal-title{
     margin: auto 0;
-    padding: auto;
     font-size: 25px;
     font-weight: bold;
 }
@@ -72,7 +71,7 @@
     margin: 15px 0;
 }
 
-.custom-modal-content input, select{
+.custom-modal-content .custom-input{
     height: 40px;
     font-size: 18px;
     outline: none;
