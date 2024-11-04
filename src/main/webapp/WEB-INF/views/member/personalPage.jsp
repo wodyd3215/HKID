@@ -9,11 +9,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/personalPage.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=edit_square" />
-
 <script src="${pageContext.request.contextPath}/resources/js/member/personalPage.js"></script>
 </head>
 <body>
+
+	<jsp:include page="../commons/modal.jsp" />
     <div class="wrapper">
         <div class="pageName">
             마이페이지 
@@ -21,13 +21,11 @@
         <div class="content">
             <img src="${pageContext.request.contextPath}/resources/image/3b579a9bc531180d72a68a9686c6da3b.jpg" alt="" class="profile-image" accept=".jpg, .png" onclick="openFile()">
             <input type="file" class="select-profile" onchange="previewProfile(this)">
-            <form action="">
-                <div class="namespace" onclick="showBtn()">
-                    <input type="text" name="memberNickName" id="nameInput">
+            <form action="" onclick="showBtn()">
+                <div class="namespace">
+                    <input type="text" name="memberNickName" id="nameInput" autocomplete="off">
                     <label for="nameInput">
-                        <span class="material-symbols-outlined custom-icon">
-                            edit_square
-                        </span>
+                        <div class="material-symbols-outlined custom-icon">edit_square</div>
                     </label>
                 </div>      
                 <div class="sub-btn">
@@ -39,7 +37,7 @@
             <table>
                 <tr>
                     <td>이메일</td>
-                    <td><button class="btn" onclick="changeEmail()">이메일 변경</button></td>
+                    <td><button class="btn" data-target="email-change" onclick="openModal(event)">이메일 변경</button></td>
                 </tr>
                 <tr>
                     <td>전화번호</td>
@@ -59,7 +57,5 @@
             </table>
         </div>
     </div>
-
-    <jsp:include page="../commons/modal.jsp" />
 </body>
 </html>

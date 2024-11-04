@@ -1,0 +1,48 @@
+.sideNavi a {
+    color: white;
+    outline: none;
+}
+
+.sideNavi a:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.sideNavi {
+    width: 284px;
+    background: #006494;
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+}
+
+#logo {
+    border: 1px solid black;
+    width: 210px;
+    height: 78px;
+    margin-top: 29px;
+    margin-left: 27px;
+    text-align: center;
+}
+
+#nav {
+    margin-top: 100px;
+}
+
+#nav>ul>li {
+    font-size: 25px;
+    padding: 12px 20px;
+}
+
+#nav>ul>li>ul>li {
+    display: none;
+    padding: 9px 0;
+}
+
+#nav>ul>li:hover>ul>li{
+    display: block;
+}
+
+#nav>ul>li>ul>li>a{
+    font-size: 18px;
+}

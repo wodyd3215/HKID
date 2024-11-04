@@ -15,7 +15,7 @@ function previewProfile(input) {
 }
 
 function showBtn() {
-    const showBtn = document.querySelector('.sub-btn .btn').style.display;
+    const showBtn = document.querySelector('.sub-btn .btn')
 
-    showBtn === "none" ? showBtn = "block" : showBtn = "none"
+    showBtn.style.display === "none" ? showBtn.style.display = "block" : showBtn.style.display = "none"
 }
