@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<a href="list.bo">커뮤니티 바로가기</a>
 	<jsp:forward page="/WEB-INF/views/exercise/mainExercise.jsp" />
+
 
 	<a href="loginView.me">로그인</a>
 	<a href="personal.me">개인페이지 가기</a>
