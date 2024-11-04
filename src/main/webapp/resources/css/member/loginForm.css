@@ -1,0 +1,137 @@
+#logo-img {
+    display: flex;
+    justify-content: center;
+    margin: 130px 0 30px 0;
+}
+
+#logo-img > a > img{
+    width: 210px;
+    height: 78px;
+}
+
+.wrapper form {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 450px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.wrapper h1{
+    text-align: center;
+    color: rgba(0, 166, 251, 1);
+    font-weight: 500;
+    padding: 10px 0 25px 0;
+}
+
+.wrapper > form > div > input{
+    display: block;
+    border: 1px solid black;
+    width: 300px;
+    height: 35px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#login-id {
+    padding-left: 10px;
+}
+
+#login-pwd {
+    padding-left: 10px;
+}
+
+.checkbox-btn-area {
+    width: 300px;
+    margin: auto;
+    padding-bottom: 15px;
+}
+
+.checkbox-btn-area > label {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.checkbox-btn-area > label > input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid #999;
+    appearance: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.checkbox-btn-area > label > input[type="checkbox"]:checked{
+    background: #bdbdbd;
+    border: none;
+}
+
+.wrapper > form > div > input[type="submit"] {
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.enroll-search {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 35px;
+}
+
+.enroll-search > a {
+    font-weight: bold;
+}
+
+.wrapper > fieldset {
+    width: 600px;
+    margin: auto;
+    padding-top: 40px;
+}
+
+.wrapper > fieldset > legend {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing :0.5px;
+}
+
+.wrapper > fieldset > button {
+    display: block;
+    width: 300px;
+    height: 38px;
+    margin: auto;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.wrapper > fieldset > button > img {
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+}
+
+.wrapper > fieldset > button > p {
+    font-size: 16px;
+    font-weight: bold;
+    width: calc(100% - 50px);
+}
+
+#kakao-login{
+    background-color: rgba(252, 228, 78, 1);
+}
+
+#naver-login{
+    background-color: rgba(3, 199, 90, 1);
+    color: white;
+}
+
+#google-login{
+    background-color: white;
+}
