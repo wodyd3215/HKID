@@ -23,14 +23,15 @@
             </div>
             <div class="custom-modal-content">
                 <form action="">
-                    <div>
-                        <input type="text" class="input-text custom-input" placeholder="이메일 입력(특수문자 제외)">
-                        <input type="text" class="atSign" name="" value="@" readonly>
-                        <input type="text" class="direct-input custom-input">
-                        <select name="" id="" class="custom-input">
-                            <option>gamil.com</option>
-                            <option>naver.com</option>
-                            <option>직접 입력</option>
+                    <div id="enroll-email" class="enroll-input-area">
+                        <input id="email-input1" type="text" placeholder="이메일 입력(특수문자 제외)">
+                        <input id="email-input3" type="text" name="" value="@" readonly>
+                        <input id="email-input2" type="text" placeholder="ex) naver.com">
+                        <select name="">
+                            <option value="">직접 입력</option>
+                            <option value="">naver.com</option>
+                            <option value="">gmail.com</option>
+                            <option value="">daum.net</option>
                         </select>
                     </div>
                     <div class="button-area">
@@ -45,13 +46,23 @@
         <div class="custom-modal">
             <div class="custom-modal-header">
                 <div class="custom-modal-title">전화번호 변경</div>
-                <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
+                <button class="material-symbols-outlined close-btn" onclick="closeModal()">disabled_by_default</button>
             </div>
             <div class="custom-modal-content">
                 <form action="">
-                    <div class="enroll-input-area">
-                        <input type="text" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
-                        <button>인증번호 받기</button>
+                    <div id="enroll-phone">
+                        <h2 class="enroll-input-title">*전화번호</h2>
+                        <div class="enroll-input-area">
+                            <input type="text" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" maxlength="11">
+                            <button>인증번호 받기</button>
+                        </div>
+                    </div>
+                    <div id="enroll-certify">
+                        <h2 class="enroll-input-title">*인증번호</h2>
+                        <div class="enroll-input-area">
+                            <input type="text" placeholder="인증번호 입력">
+                            <button>인증</button>
+                        </div>
                     </div>
                     <div class="button-area">
                         <button class="btn custom-btn modal-btn" type="submit">변경하기</button>
