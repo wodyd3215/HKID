@@ -34,19 +34,36 @@
                 </div>
                 <div class="productListArr"> <!-- 상품 목록 -->
                     <div class="productList">
+                        
                         <!-- 상품 이미지 -->
                         <div class="productImg" ><img src="${pageContext.request.contextPath}/resources/image/HKID_Logo.png"></div>
+
                         <!-- 상품 text -->
-                        <div class="productText">                            
-                            <div class="productName">
-                                상품 <!-- 상품 이름 -->
+                        <div class="productText">
+                            <div class="productTextHeader">
+                                <div class="productName">
+                                    상품 <!-- 상품 이름 -->
+                                </div>
+                                <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>
+                            </div>
+
+                            
+                            <div class="productTextMid">
+                                <div class="productTexts">
+                                    <div class="textStar">★</div>
+                                    <div class="totalAssess">평점</div>
+                                </div>                                                                
+                                <div class="mainPrice">1000원</div>
                             </div>
                         </div>
-
-                    </div>                    
+                    </div>
+                    
+                    
                 </div>
+                
+                
 
-                <div class=> <!-- bottom -->
+                <div class="productPageBtn"> <!-- bottom -->
                     <button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button>
                     <span><button>1</button></span>
                     <span><button>2</button></span>
