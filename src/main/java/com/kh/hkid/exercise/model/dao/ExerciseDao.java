@@ -29,8 +29,12 @@ public class ExerciseDao {
 	}
 	
 	//필터링 검색 
-	public List<Exercise> search(SqlSessionTemplate sqlSession, HashMap<String, Object> filterMap) {
-		return sqlSession.selectList("exerciseMapper.exerciseSearch", filterMap);
+	public List<Exercise> search(SqlSessionTemplate sqlSession, HashMap<String, Object> filterMap, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return  sqlSession.selectList("exerciseMapper.exerciseSearch", filterMap, rowBounds);
 
 	}
 

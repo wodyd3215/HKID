@@ -169,9 +169,10 @@
     padding: 50px;
 }
 
-.list-con{
-    width: 320px; height: 420px; 
- }
+#list-con{
+    padding-bottom: 30px;
+}
+
  #list-img{
      width: 250px; height: 250px;
      margin: 0 auto;
@@ -181,7 +182,8 @@
      justify-content: space-between;
  }
  .list-text{
-    font-size: 30px;
+    font-size: 15px;
+    font-weight: 700;
  }
 
 .list-text2{
@@ -202,3 +204,15 @@
  .list-text, .list-text2{
     margin-left: 15px;
  }
+ 
+ #paging-area{
+ 	margin-left: 200px;
+    align-items: center;
+    font-size: large;
+ }
+ 
+  #paging-area a {
+  	color: black;
+  }
+  	
+ 
