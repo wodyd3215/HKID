@@ -22,26 +22,26 @@
                 <div>이미 존재하는 아이디 입니다.</div>
             </div>
             <div class="enroll-input-area">
-                <input type="text" id="userInputId" placeholder="아이디 입력(특수문자 제외)" onkeyup="checkUserId(this)">
+                <input type="text" id="userInputId" placeholder="아이디 입력(특수문자 제외)" onkeyup="checkUserId(this)" required>
                 <button id="checkIdBtn">중복확인</button>
             </div>
             
             <h2 class="enroll-input-title">*비밀번호</h2>
             <div class="enroll-input-area">
-                <input type="password" placeholder="비밀번호 입력(4 ~ 12글자)" minlength="4" maxlength="12">
+                <input type="password" id="userInputPwd" placeholder="비밀번호 입력(4 ~ 12글자)" onkeyup="inputPwdCheck()" minlength="4" maxlength="12" required>
             </div>
 
             <div id="pwdArea">
                 <h2 class="enroll-input-title">*비밀번호 확인&nbsp;</h2>
-                <div>비밀번호가 일치하지 않습니다.</div>
+                <div></div>
             </div>
             <div class="enroll-input-area">
-                <input type="password" placeholder="비밀번호 재입력">
+                <input type="password" id="checkPwd" placeholder="비밀번호 재입력" onkeyup="inputPwdCheck()" minlength="4" maxlength="12" required>
             </div>
 
             <h2 class="enroll-input-title">*이름</h2>
             <div class="enroll-input-area">
-                <input type="text" placeholder="이름 입력">
+                <input type="text" placeholder="이름 입력" required>
             </div>
 
             <div id="nickArea">
@@ -49,14 +49,14 @@
                 <div>이미 존재하는 닉네임 입니다.</div>
             </div>
             <div class="enroll-input-area">
-                <input type="text" placeholder="닉네임 입력(특수문자 제외 / 최대 8글자)" maxlength="8">
+                <input type="text" placeholder="닉네임 입력(특수문자 제외 / 최대 8글자)" maxlength="8" required>
             </div>
 
             <div id="enroll-phone-certify">
                 <div id="enroll-phone">
                     <h2 class="enroll-input-title">*전화번호</h2>
                     <div class="enroll-input-area">
-                        <input type="text" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" maxlength="11">
+                        <input type="text" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" maxlength="11" required>
                         <button>인증번호 받기</button>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         <div>인증번호가 일치하지 않습니다.</div>
                     </div>
                     <div class="enroll-input-area">
-                        <input type="text" placeholder="인증번호 입력">
+                        <input type="text" placeholder="인증번호 입력" required>
                         <button>인증</button>
                     </div>
                 </div>
@@ -74,9 +74,9 @@
 
             <h2 class="enroll-input-title">*이메일</h2>
             <div id="enroll-email" class="enroll-input-area">
-                <input id="email-input1" type="text" placeholder="이메일 입력(특수문자 제외)">
+                <input id="email-input1" type="text" placeholder="이메일 입력(특수문자 제외)" required>
                 <input id="email-input3" type="text" name="" value="@" readonly>
-                <input id="email-input2" type="text" placeholder="ex) naver.com">
+                <input id="email-input2" type="text" placeholder="ex) naver.com" required>
                 <select name="emailType" onchange="emailSelect()">
                     <option value="">직접 입력</option>
                     <option value="naver.com">naver.com</option>

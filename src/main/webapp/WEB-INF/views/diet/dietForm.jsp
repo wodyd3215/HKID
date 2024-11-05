@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietForm.css">
+    <script src="${pageContext.request.contextPath}/resources/js/diet/dietForm.js"></script>
+    <title>Insert title here</title>
 </head>
 <body>
-
+    <jsp:include page="../common/header.jsp" />
 </body>
 </html>
