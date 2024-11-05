@@ -65,11 +65,11 @@
                 <input id="email-input1" type="text" placeholder="이메일 입력(특수문자 제외)">
                 <input id="email-input3" type="text" name="" value="@" readonly>
                 <input id="email-input2" type="text" placeholder="ex) naver.com">
-                <select name="">
+                <select name="emailType" onchange="emailSelect()">
                     <option value="">직접 입력</option>
-                    <option value="">naver.com</option>
-                    <option value="">gmail.com</option>
-                    <option value="">daum.net</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="daum.net">daum.net</option>
                 </select>
             </div>
 

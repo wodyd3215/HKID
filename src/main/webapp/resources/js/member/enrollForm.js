@@ -12,3 +12,17 @@ function checkUserId(_this){
         checkBtn.style.backgroundColor = "";
     }
 }
+
+// 이메일 선택시 input창에 value값 삽입
+function emailSelect() {
+    const emailOpt = document.querySelector("select[name=emailType] option:checked").value;
+
+    const emailArea = document.querySelector("#email-input2");
+
+    if(emailOpt){
+        emailArea.value = emailOpt;
+    } else {
+        emailArea.value = '';
+    }
+    
+}
