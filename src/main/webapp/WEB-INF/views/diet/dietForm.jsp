@@ -32,10 +32,6 @@
         <br>
 
         <div id="food-search-btn">
-<<<<<<< HEAD
-            
-=======
->>>>>>> ce47a4834174ea84ff735ba79ddbaf45da7af569
             <button data-target="test-modal" onclick="openModal(event)">검색</button>
         </div>
 
