@@ -17,6 +17,12 @@ function allCheckBtn(checkBox) {
         list.onchange = function() {
             const allCheckBox = document.getElementById("all-check");
             allCheckBox.checked = agreeCheckBox();
+
+            if(agreeCheckBox() === true){
+                enBtn.disabled = false;
+            } else {
+                enBtn.disabled = true;
+            }
         }
     }
 }
