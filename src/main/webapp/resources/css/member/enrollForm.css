@@ -1,0 +1,169 @@
+.wrapper {
+    width: 600px;
+}
+
+input::placeholder{
+    color: rgb(199, 199, 199);
+}
+
+#logo-img {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 30px 0;
+}
+
+#logo-img > a > img{
+    width: 210px;
+    height: 78px;
+}
+
+.wrapper > h1 {
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+}
+
+.enroll-input-title{
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+
+.enroll-input-area{
+    height: 35px;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.enroll-input-area > input {
+    width: 83%;
+    height: 100%;
+}
+
+.enroll-input-area > input:focus {
+    outline: none;
+}
+
+.enroll-input-area > button {
+    width: 90px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#enroll-phone-certify {
+    display: flex;
+}
+
+#enroll-phone {
+    width: 60%;
+    margin-right: 2%;
+}
+
+#enroll-phone > .enroll-input-area > input {
+    width: 73%;
+}
+
+#enroll-certify {
+    width: 38%;
+}
+
+#enroll-certify > .enroll-input-area > input {
+    width: 58%;
+}
+
+#enroll-email {
+    border: none;
+    padding: 0px;
+}
+
+#enroll-email > input {
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+}
+
+#email-input1 {
+    padding-left: 5px;
+}
+
+#email-input2 {
+    width: 30%;
+    padding-left: 5px;
+    margin-right: 5px;
+}
+
+#enroll-email > #email-input3 {
+    width: 7%;
+    padding: 0 10px;
+    border: none;
+}
+
+#enroll-email > select {
+    width: 30%;
+    height: 100%;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+}
+
+#enroll-address {
+    margin-bottom: 5px;
+}
+
+#post-detail-address { 
+    border: none;
+    padding: 0px;
+}
+
+#post-no {
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+    padding: 5px;
+    width: 120px;
+    margin-right: 5px;
+}
+
+#detail-address {
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.enroll-btn {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.enroll-btn > button {
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#enroll-enter {
+    border: 1px solid rgba(0, 166, 251, 1);
+    margin-right: 120px;
+    color: rgba(0, 166, 251, 1);
+}
+
+#enroll-enter:hover{
+    border: none;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+}
+
+#enroll-cancel {
+    border: 1px solid black;
+}

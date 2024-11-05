@@ -36,8 +36,18 @@ public class MemberController {
 		return "member/changeMemberPwd";
 	}
 
-   @GetMapping("personal.me")
-   public String personalForm() {
-	   return "member/personalPage";
-   }
+    @GetMapping("personal.me")
+    public String personalForm() {
+	    return "member/personalPage";
+    }
+    
+    @GetMapping("agreeForm.me")
+    public String agreeForm() {
+    	return "member/agreeForm";
+    }
+    
+    @GetMapping("enrollForm.me")
+    public String enrollForm() {
+    	return "member/enrollForm";
+    }
 }

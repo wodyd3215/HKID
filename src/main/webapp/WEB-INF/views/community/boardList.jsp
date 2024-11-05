@@ -101,6 +101,7 @@
         </div>
 
         <!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
+         <!-- common에 모달 쓰는곳 있으니 그곳에서 작성 사용법은 트렐로에 작성했음 -->
         <div id="modalContainer" class="hidden">
             <div id="modal-content">
                 <p>모달창입니다.</p>
