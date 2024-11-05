@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/enrollForm.css">
+    <script src="${pageContext.request.contextPath}/resources/js/member/enrollForm.js"></script>
     <title>Insert title here</title>
 </head>
 <body>
@@ -24,7 +25,7 @@
             
             <h2 class="enroll-input-title">*비밀번호</h2>
             <div class="enroll-input-area">
-                <input type="password" placeholder="비밀번호 입력">
+                <input type="password" placeholder="비밀번호 입력(4 ~ 12글자)" minlength="4" maxlength="12">
             </div>
 
             <h2 class="enroll-input-title">*비밀번호 확인</h2>
@@ -39,14 +40,14 @@
 
             <h2 class="enroll-input-title">*닉네임</h2>
             <div class="enroll-input-area">
-                <input type="text" placeholder="닉네임 입력(특수문자 제외)">
+                <input type="text" placeholder="닉네임 입력(특수문자 제외 / 최대 8글자)" maxlength="8">
             </div>
 
             <div id="enroll-phone-certify">
                 <div id="enroll-phone">
                     <h2 class="enroll-input-title">*전화번호</h2>
                     <div class="enroll-input-area">
-                        <input type="text" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+                        <input type="text" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" maxlength="11">
                         <button>인증번호 받기</button>
                     </div>
                 </div>
