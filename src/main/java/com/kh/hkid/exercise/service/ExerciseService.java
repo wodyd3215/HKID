@@ -16,6 +16,6 @@ public interface ExerciseService {
 	ArrayList<Exercise> selectList(PageInfo pi);
 	
 	//운동리스트 필터 검색
-	List<Exercise> search(HashMap<String, Object> filterMap);
+	List<Exercise> search(HashMap<String, Object> filterMap, PageInfo pi);
 
 }
