@@ -29,7 +29,7 @@ input::placeholder{
 
 .enroll-input-area{
     height: 35px;
-    border: 1px solid rgb(199, 199, 199);
+    border: 1px solid rgb(199, 199, 199); 
     border-radius: 5px;
     display: flex;
     align-items: center;

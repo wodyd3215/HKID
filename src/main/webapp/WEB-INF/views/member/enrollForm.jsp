@@ -19,8 +19,8 @@
         <form action="insert.me" method="post">
             <h2 class="enroll-input-title">*아이디</h2>
             <div class="enroll-input-area">
-                <input type="text" placeholder="아이디 입력(특수문자 제외)">
-                <button>중복확인</button>
+                <input type="text" id="userInputId" placeholder="아이디 입력(특수문자 제외)" onkeyup="checkUserId(this)">
+                <button id="checkIdBtn">중복확인</button>
             </div>
             
             <h2 class="enroll-input-title">*비밀번호</h2>
