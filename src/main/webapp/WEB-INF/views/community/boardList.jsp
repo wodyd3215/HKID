@@ -12,45 +12,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css">
 </head>
 <body>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="wrapper">
         <h1>전체</h1>
 
-        <!-- <table class="table" style="text-align: center;">
-			<thead id="table-head">
-			<tr>
-				<th>번호</th>
-				<th>카테고리</th>
-				<th width="600px">제목</th>
-				<th>글쓴이</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>추천수</th>
-			</tr>
-			</thead>
-			<tbody>
-			<c:choose>
-				<c:when test="${empty list }">
-					<tr>
-						<td colspan="7">존재하는 게시글이 없습니다.</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="c" items="${list }">
-						<tr onclick="clickDetailPage(${c.communityNo})">
-							<td>${c.communityNo}</td>
-							<td>${c.communityCategory}</td>
-							<td>${c.communityTitle}</td>
-							<td>${c.nickname}</td>
-							<td>${c.communityDate}</td>
-							<td>${c.communityView}</td>
-							<td>${c.communityGood}</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-			</tbody>
-		</table> -->
-<!-- ---------------------------------------------- -->
         <!-- 헤더 대용 테이블  -->
         <table id="top-table">
             <tr>
@@ -74,7 +39,7 @@
         <table id="main-table">
             <tr>
                 <th>공지</th>
-                <th id="th-title">게시글 작성 시 지켜야할 규칙</th>
+                <th id="th-title"><a href="">게시글 작성 시 지켜야할 규칙</a></th>
                 <th>꾸준히 운동</th>
                 <th>2024-10-10</th>
                 <th>2</th>
@@ -138,13 +103,9 @@
             <button class="page-btn">&gt;</button>
         </div>
 
-    
-        
-        
-        
-
-
 
     </div>
+
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>"
 </body>
 </html>

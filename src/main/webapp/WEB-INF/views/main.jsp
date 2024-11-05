@@ -11,7 +11,10 @@
 	<div class="wrapper">
 		<!-- 기능 미완성으로 인한 예비 링크 -->
 		<a href="personal.me">개인페이지 가기</a>
+		<br>
 		<a href="pManagement.ad">상품페이지</a>
+		<br>
+		<a href="list.bo">게시글목록 가기</a>
 	</div>
 	<jsp:include page="common/footer.jsp" />
 </body>

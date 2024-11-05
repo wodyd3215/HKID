@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
 </head>
 <body>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
     <div class="wrapper">
         <hr>
         <!-- 게시글 정보 출력 -->
@@ -35,9 +37,7 @@
 
             <!-- 2번 내용 + 댓글작성-->
             <div id="second-div">
-                <textarea id="content"  style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 
-                    또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?
-                </textarea>
+                <textarea id="content"  style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</textarea>
                     
                 </textarea>
                 <div id="testsss">
@@ -54,14 +54,12 @@
                             </div>
                             
                         </div>
-                        <div>
-                            <div class="img-div">
+                        <div id="copy-siren">
+                            <div id="url-copy" class="img-div">
                                 <img id="link-img" src="resources/image/Link.png" alt="">
-                                <p class="ptext">url복사</p>
                             </div>
                             <div class="img-div">
                                 <img id="siren-img" src="resources/image/siren.png" alt="">
-                                <p class="ptext">신고</p>
                             </div>
                             
                         </div>
@@ -69,9 +67,7 @@
                     <!-- 댓글 작성 -->
                     <form id="comment">
                         <p class="user-name">개떡도지</p>
-                        <textarea name="" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요">
-
-                        </textarea>
+                        <textarea name="" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
                         <input type="submit" name="" id="submit-btn" value="등록">
                     </form>
                 </div>
@@ -127,25 +123,38 @@
         </div>
         
 
-        <!-- 아래 게시글 목록 -->
+        <!------------------ 아래 게시글 목록 -------------------->
+        <!-- 헤더 대용 테이블  -->
         <div id="bottom-wrapper">
-            <table id="main-table">
+            <table id="top-table">
                 <tr>
-                    <th>공지</th>
-                    <th id="th-title">게시글 작성 시 지켜야할 규칙</th>
-                    <th>꾸준히 운동</th>
-                    <th>2024-10-10</th>
-                    <th>2</th>
-                </tr>
-                <tr>
-                    <td id="board-category">질문</td>
-                    <!-- 게시글 임시 링크 -->
-                    <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다 [0]</a></td>
-                    <td>꾸준히 운동</td>
-                    <td>2024-10-10</td>
-                    <td>4</td>
+                    <th>
+                        <select name="category" class="category-choice">전체
+                            <option value="all">전체</option>
+                            <option value="question">질문</option>
+                            <option value="tip">팁</option>
+                            <option value="show-off">자랑</option>
+                            <option value="ad">홍보</option>
+                        </select>
+                    </th>
+                    <th id="th-title">제목</th>
+                    <th id="writer">작성자</th>
+                    <th id="write-date">작성일</th>
+                    <th id="view-count">조회수</th>
                 </tr>
             </table>
+            
+            <!-------------- 게시글 목록 테이블 ---------------->
+            <table id="main-table">
+                <tr>
+                    <td id="board-category">질문</td>
+                    <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다 [0]</a></td>
+                    <td id="writer2">꾸준히 운동</td>
+                    <td id="write-date2">2024-10-10</td>
+                    <td class id="view-counts">4</td>
+                </tr>
+            </table>
+            
             
             <!-- 게시글 수 + 글쓰기 버튼 -->
             <div id="boCount-wirte-div">
@@ -196,12 +205,9 @@
             </div>
         </div>
 
-
-
-
-
     </div>
     
-
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    
 </body>
 </html>
