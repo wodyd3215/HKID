@@ -30,7 +30,7 @@
                     <a href="list.ex">가이드</a>
                 </li>
                 <li class="content">
-                    <a href="">식단</a>
+                    <a href="diet.ca">식단</a>
                 </li>
                 <li class="content">
                     <a href="list.bo">커뮤니티</a>
