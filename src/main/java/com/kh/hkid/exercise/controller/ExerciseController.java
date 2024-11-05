@@ -45,20 +45,39 @@ public class ExerciseController {
 	@PostMapping("exercise.se")
 	public String searchList(
 			@RequestParam(value = "part", defaultValue="") List<String> selectedParts,
-			@RequestParam(value = "difficulty", defaultValue="") List<String> selectDifficulties, Exercise e, HttpSession session,  Model model) {
+			@RequestParam(value = "difficulty", defaultValue="") List<String> selectDifficulties,
+			@RequestParam(value = "keyword", defaultValue="") List<String> keyword,
+			@RequestParam(value = "cpage", defaultValue="1") Integer currentPage, Model model) {
+			int boardCount = exerciseService.selectListCount();
 		
+			// currentPage가 null일 경우 기본값 설정
+		    if (currentPage == null) {
+		        currentPage = 1;  // 기본값을 1로 설정
+		    }
+		    
+			PageInfo pi = Template.getPageInfo(boardCount, currentPage, 12, 15);
+			
 		// HashMap에 필터 조건 추가
 		HashMap<String, Object> filterMap = new HashMap<>();
 		filterMap.put("parts", selectedParts);
 		filterMap.put("difficulties", selectDifficulties);
+		filterMap.put("keywords", keyword);
 		
 		
-		List<Exercise> exercises = exerciseService.search(filterMap);
+		
+		List<Exercise> exercises = exerciseService.search(filterMap, pi);
 		
 		model.addAttribute("list", exercises);
+		model.addAttribute("pi", pi);
 		
 		return "exercise/mainExercise";
 		
+	}
+	
+	@RequestMapping("exercise.de")
+	public String exerciseDetail() {
+		
+		return "exercise/detailExercise";
 	}
 	
 	

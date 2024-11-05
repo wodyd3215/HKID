@@ -1,0 +1,69 @@
+.wrapper{
+    caret-color: transparent;
+}
+
+.exerTitle{
+    font-size: 50px;
+    margin-top: 350px;
+}
+
+.under-area{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    font-size: 25px;
+}
+
+.exerDiffy{
+    display: flex;
+    justify-content: space-between;
+    width: 130px;
+}
+
+.detailContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detailMainContent{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: #DBF1FD;
+    margin-top: 80px;
+    border-radius: 50px;
+}
+
+.detailMainContent p{
+    text-align: center;
+    margin-top: 60px;
+    font-size: 40px;
+}
+
+#long-text{
+    font-size: 24px; /* 글꼴 크기 */
+    line-height: 2.0; /* 줄 간격 */
+    max-width: 900px; /* 최대 너비 제한 */
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+#long-text ol li{
+    font-size: 24px;
+    list-style-type: decimal;
+}
+
+#long-text li{
+    padding: 10px
+}
+
+
+#exerIcon button{
+    background-color: #DFF0FF;
+    display: block;
+    float: right;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 20px;
+}
