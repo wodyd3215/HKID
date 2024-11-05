@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietFormModal.css">
     <script src="${pageContext.request.contextPath}/resources/js/diet/dietForm.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
     <title>Insert title here</title>
@@ -18,8 +19,9 @@
     <div class="wrapper">
         <h1>영양</h1>
         <br>
+
         <div id="food-search-btn">
-            <button>검색</button>
+            <button data-target="test-modal" onclick="openModal(event)">검색</button>
         </div>
 
         <br><br>
@@ -88,9 +90,27 @@
 
     </div>
     
-
     <br>
 
     <jsp:include page="../common/footer.jsp" />
+    
+    <!-- modal -->
+    <div class="modal" id="test-modal">
+
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title">음식 검색</div>
+
+                <div id="searchbar-div">
+                    <input type="search" name="" id="board-search-bar" placeholder="음식을 입력해주세요">
+                    <button id="search-btn" type="submit">
+                        <img id="searchIcon" src="resources/image/searchIcon.png">
+                    </button>
+                </div>
+            </div>
+            <div class="custom-modal-content">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
