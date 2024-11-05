@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sideNavi.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/common.css">
     <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +36,8 @@
                         <li><a href="">계정복구</a></li>
                     </ul>
                 </li>
-                <li><a href="">상품관리</a></li>
+                <li><a href="bManagement.ad">게시글 관리</a></li>
+                <li><a href="pManagement.ad">상품관리</a></li>
                 <li><a href="">신고관리</a></li>
                 <li><a href="">공지</a></li>
             </ul>

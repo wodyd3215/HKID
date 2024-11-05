@@ -8,6 +8,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/pManagement.css">
+    <script src="${pageContext.request.contextPath}/resources/js/admin/pManagement.js"></script>
 </head>
 <body>
     <jsp:include page="sideNavi.jsp" />
@@ -38,22 +39,24 @@
                     <th>100</th>
                     <th>2024-10-10</th>
                     <th class="managementP">
-                        <div><form action="">
-                            <button class="material-symbols-outlined">
+                        <div>
+                            <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
                                 edit
                             </button>
-                        </form>
-                        <form action="">
-                            <button class="material-symbols-outlined">
+                            <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
                                 delete
                             </button>
-                        </form></div>
+
+                            <form action="" method="POST" id="postForm">
+                                <input type="text" hidden name="pno" value="">
+                            </form>
+                        </div>
                     </th>
                 </tr>
             </table>
         </div>
         <div id="boCount-wirte-div" class="custom-div">
-            <form action="boardWrite.bo" method="POST">
+            <form action="" method="POST">
                 <button id="write-btn">글쓰기</button>
             </form>
         </div>

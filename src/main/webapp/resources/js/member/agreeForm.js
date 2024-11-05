@@ -1,3 +1,8 @@
+function init() {
+    allCheckBtn()
+
+}
+
 function allCheckBtn(checkBox) {
     const enBtn = document.querySelector(".agreeContent button[type='submit']");
     enBtn.disabled = !checkBox.checked;

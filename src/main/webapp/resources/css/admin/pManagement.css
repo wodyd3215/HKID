@@ -1,15 +1,3 @@
-.wrapper {
-    height: 100vh;
-}
-
-.managementTitle {
-    font-size: 45px;
-    font-weight: bold;
-    border-bottom: 1px solid black;
-    width: 205px;
-    padding: 15px 10px 8px;
-}
-
 #main-table.custom-table tr:first-child {
     background-color: white;
 }
@@ -21,7 +9,8 @@
     gap: 3px;
 }
 
-.managementP button{
+.managementP .btn.btn-warning.custom-btn,
+.managementP .btn.btn-danger.custom-btn {
     width: 24px; /* 버튼 크기 조정 */
     height: 24px; /* 버튼 크기 조정 */
     font-size: 18px; /* 아이콘이 버튼 안에 잘 맞도록 조정 */
@@ -29,9 +18,21 @@
     align-items: center;
     justify-content: center;
     overflow: hidden; /* 버튼 밖으로 넘치는 요소 숨기기 */
+    color: black;
+}
+
+.managementP .btn.btn-warning.custom-btn:focus,
+.managementP .btn.btn-warning.custom-btn:active,
+.managementP .btn.btn-warning.custom-btn:hover,
+.managementP .btn.btn-danger.custom-btn:focus,
+.managementP .btn.btn-danger.custom-btn:active,
+.managementP .btn.btn-danger.custom-btn:hover{
+    outline: none;
+    box-shadow: none;
 }
 
 #boCount-wirte-div.custom-div{
     display: flex;
     justify-content: right;
 }
+

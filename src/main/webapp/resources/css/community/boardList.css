@@ -67,7 +67,7 @@ table td:nth-child(5) { /* 5번째 td */
     width: 6%;
 }
 
-#th-title{
+.th-title{
     width: 50%;
 }
 

@@ -12,6 +12,7 @@
 		<!-- 기능 미완성으로 인한 예비 링크 -->
 		<a href="personal.me">개인페이지 가기</a>
 		<a href="pManagement.ad">상품페이지</a>
+		<a href="bManagement.ad">게시글 관리</a>
 	</div>
 	<jsp:include page="common/footer.jsp" />
 </body>

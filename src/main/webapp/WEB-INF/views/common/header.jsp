@@ -13,13 +13,16 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 
+<!--js-->
+<script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
+
 <!-- include libraries(jQuery, bootstrap) -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<body>
+<body onload="init('${pageName}', '${optional}')">
     <div class="header">
         <div id="navigator">
             <ul id="nav">
