@@ -62,8 +62,7 @@
             <h2 class="enroll-input-title">*이메일</h2>
             <div id="enroll-email" class="enroll-input-area">
                 <input id="email-input1" type="text" placeholder="이메일 입력(특수문자 제외)">
-                <p>@</p>
-                <!-- <input type="text" class="atSign" name="" value="@" readonly> -->
+                <input id="email-input3" type="text" name="" value="@" readonly>
                 <input id="email-input2" type="text" placeholder="ex) naver.com">
                 <select name="">
                     <option value="">직접 입력</option>

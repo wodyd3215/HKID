@@ -98,8 +98,10 @@ input::placeholder{
     margin-right: 5px;
 }
 
-#enroll-email > p {
+#enroll-email > #email-input3 {
+    width: 7%;
     padding: 0 10px;
+    border: none;
 }
 
 #enroll-email > select {
