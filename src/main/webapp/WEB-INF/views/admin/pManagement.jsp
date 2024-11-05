@@ -8,6 +8,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/pManagement.css">
+    
     <script src="${pageContext.request.contextPath}/resources/js/admin/pManagement.js"></script>
 </head>
 <body>
@@ -16,48 +17,44 @@
         <div class="managementTitle">
             상품관리
         </div>
-        <div class="pmContent">
-            <table id="top-table">
-                <tr>
-                    <th>
-                        <select name="category" class="category-choice">전체
-                            <option value="all">식품</option>
-                            <option value="question">의류</option>
-                            <option value="tip">기구</option>
-                        </select>
-                    </th>
-                    <th id="th-title">상품명</th>
-                    <th>재고</th>
-                    <th>등록일</th>
-                    <th>관리</th>
-                </tr>
-            </table>
-            <table id="main-table" class="custom-table">
-                <tr>
-                    <th>식품</th>
-                    <th id="th-title">게시글 작성 시 지켜야할 규칙</th>
-                    <th>100</th>
-                    <th>2024-10-10</th>
-                    <th class="managementP">
-                        <div>
-                            <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
-                                edit
-                            </button>
-                            <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
-                                delete
-                            </button>
-
-                            <form action="" method="POST" id="postForm">
-                                <input type="text" hidden name="pno" value="">
-                            </form>
-                        </div>
-                    </th>
-                </tr>
+        <div class="content">
+            <table id="common-table">
+                <thead>
+                    <tr id="common-table-header">
+                        <th class="type-width8">유형</th>
+                        <th class="type-width50">상품명</th>
+                        <th class="type-width6">재고</th>
+                        <th class="type-width18">등록일</th>
+                        <th class="type-width8">관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="common-table-body">
+                        <td>식품</td>
+                        <td>게시글 작성 시 지켜야할 규칙</td>
+                        <td>100</td>
+                        <td>2024-10-10</td>
+                        <td>
+                            <div class="pManagement">
+                                <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
+                                    edit
+                                </button>
+                                <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
+                                    delete
+                                </button>
+    
+                                <form action="" method="POST" id="postForm">
+                                    <input type="text" hidden name="pno" value="">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <div id="boCount-wirte-div" class="custom-div">
             <form action="" method="POST">
-                <button id="write-btn">글쓰기</button>
+                <button class="btn btn-primary custom-btn">상품 등록</button>
             </form>
         </div>
 

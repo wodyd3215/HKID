@@ -8,31 +8,48 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/bManagement.css">
+    
 </head>
 <body>
+    <!-- 테이블 구조 및 css 전면 교체 못하면 나 죽어버려 -->
     <jsp:include page="sideNavi.jsp" />
     <div class="wrapper">
         <div class="managementTitle">
-            게시글 관리
+            신고 게시글
         </div>
-        <div class="bContent">
-            <table id="top-table">
-                <tr>
-                    <th class="type">유형</th>
-                    <th class="reporter">신고자명</th>
-                    <th class="th-title">신고대상</th>
-                    <th class="detail">상세 내용</th>
-                    <th class="management">관리</th>
-                </tr>
-            </table>
-            <table id="main-table">
-                <tr>
-                    <th>공지</th>
-                    <th>꾸준히 운동</th>
-                    <th class="th-title" onclick="location.href='detail.ad?bno=?'">게시글 작성 시 지켜야할 규칙</th>
-                    <th><div class="btn custom-btn">확인하기</div></th>
-                    <th></th>
-                </tr>
+        <div class="content">
+            <table id="common-table">
+                <thead>
+                    <tr id="common-table-header">
+                        <th class="type-width8">유형</th>
+                        <th class="type-width18">신고자명</th>
+                        <th class="type-width50">신고대상</th>
+                        <th class="type-width18">상세 내용</th>
+                        <th class="type-width6">관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="common-table-body">
+                        <td>욕설</td>
+                        <td>개떡도지</td>
+                        <td>게시글 작성 시 지켜야할 규칙</td>
+                        <td>
+                            <div class="bManagement">
+                                <button class="btn btn-primary custom-btn" data-target="reportDetail">확인하기</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="bManagement">
+                                <form action="">
+                                    <input type="text" name="bno" value="" hidden>
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" >
+                                        delete
+                                    </button>
+                                </form>
+                            </div> 
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <div id="searchbar-div">

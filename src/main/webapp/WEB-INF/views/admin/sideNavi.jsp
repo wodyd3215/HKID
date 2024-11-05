@@ -9,8 +9,9 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sideNavi.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css">
+    <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css"> -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +32,9 @@
         <div id="nav">
             <ul>
                 <li>
-                    <a href="">유저관리</a>
+                    유저관리
                     <ul>
-                        <li><a href="">계정복구</a></li>
+                        <li><a href="uManagement.ad">계정복구</a></li>
                     </ul>
                 </li>
                 <li><a href="bManagement.ad">게시글 관리</a></li>

@@ -24,4 +24,9 @@ public class AdminController {
 	public String adminB() {
 		return "admin/bManagement";
 	}
+	
+	@GetMapping("uManagement.ad")
+	public String adminU() {
+		return "admin/uManagement";
+	}
 }

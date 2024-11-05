@@ -9,3 +9,100 @@
     display: inline-block;
     padding: 15px 10px 8px;
 }
+
+.content {
+    margin-top: 30px;
+}
+
+.btn.btn-primary.custom-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background: #00A6FB;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+#common-table-body .btn.btn-warning.custom-btn,
+#common-table-body .btn.btn-danger.custom-btn {
+    width: 24px; /* 버튼 크기 조정 */
+    height: 24px; /* 버튼 크기 조정 */
+    font-size: 18px; /* 아이콘이 버튼 안에 잘 맞도록 조정 */
+    display: flex; /* 버튼 내 아이콘 중앙 정렬 */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* 버튼 밖으로 넘치는 요소 숨기기 */
+    color: black;
+}
+
+.btn.btn-primary.custom-btn:focus,
+.btn.btn-primary.custom-btn:active,
+.btn.btn-primary.custom-btn:hover,
+#common-table-body .btn.btn-warning.custom-btn:focus,
+#common-table-body .btn.btn-warning.custom-btn:active,
+#common-table-body .btn.btn-warning.custom-btn:hover,
+#common-table-body .btn.btn-danger.custom-btn:focus,
+#common-table-body .btn.btn-danger.custom-btn:active,
+#common-table-body .btn.btn-danger.custom-btn:hover{
+    outline: none;
+    box-shadow: none;
+}
+
+#boCount-wirte-div{
+    width: 100%;
+    display: flex;
+    justify-content:end;
+    margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#search-category{
+    border: 1px solid rgb(176, 174, 174);
+    border-radius: 9px;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#board-search-bar{
+    border: 1px solid rgb(196, 195, 195);
+    border-radius: 9px 0px 0px 9px ;
+    width: 400px;
+    height: 30px;
+    padding-left: 10px;
+    margin-left: 10px;
+    border-right: none;
+}
+
+#searchbar-div{
+    display: flex;
+    justify-content: center;
+}
+
+#paging-div{
+    margin-top: 50px;
+    display: flex;
+    justify-self: center;
+}
+
+.page-btn{
+    border: none;
+    background-color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#search-btn{
+    border: 1px solid rgb(196, 195, 195);
+    background-color: white;
+    border-left: none;
+    border-radius: 0px 9px 9px 0px;
+    cursor: pointer;
+}

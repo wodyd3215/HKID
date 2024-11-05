@@ -13,7 +13,7 @@ h1{
 }
 
 table{
-    width: 100%;
+    width: 100%;    
     margin-top: 10px;
     border-collapse: separate; /* border-spacing 적용을 위한 설정 */
 }
