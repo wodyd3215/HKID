@@ -3,7 +3,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f5;
 }
 
 #productPage{
@@ -64,12 +63,23 @@ li{
     height: 100%;
 }
 
+/* 페이징, 검색 바*/
+.productPageA{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 1060px;
+    height: 1200px;
+    gap: 35px;
+}
 /* 상품, 중고 이동 버튼 부분*/
 .MoveBtn {
     display: flex;
-    width: 900px;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    width: 1060px;
+    border-bottom: #003554 2px solid;
 }
 
 button.productMove, button.usedMove {
@@ -83,49 +93,91 @@ button.productMove, button.usedMove {
     background: #ffffff;
     font-weight: 400;
     border: none;    
-    width: 350px;
+    width: 100%;
+    height: 73px;
 }
 
 /* 상품 목록 */
 .productListArr{/* 상품 리스트 3*3 으로 정렬 */
     display: flex;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 1030px;
+    height: 912px;
+    gap: 10px;
+    padding: 10px;
 }
 
 .productList{ /* 상품 한 개당 */
-    border: 1px solid;
-    width: 250px;
-    height: 285px;
+    /*border: 1px solid #000000;*/
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: 285px;
+    gap: 20px;
 }
 
-.productImg{ /* 상품 이미지 */
+.productImg img{ /* 상품 이미지 */
     height: 200px;
     width: 200px;
     border-radius: 30px;
     border: none;
+    /*background: #006494;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .productText{
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    width: 200px;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .productName{
     width: 100%;
+    font-size: 24px;
 }
 
-/* 페이징, 검색 바*/
-.productPageA{
+.productTextHeader{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    width: 100%;
 }
 
+.productTextMid{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 90px;
+    width: 100%;
+}
+
+.productTexts{
+    display: flex;
+    flex-direction: row;
+}
+
+.textStar{
+    color:#E19192;
+    font-size: 12px;
+}
+
+.totalAssess{
+    color: #C8C4C4;
+    font-size: 12px;
+}
+
+.mainPrice{
+    font-size: 20px;
+    font-weight: 700;
+}
 
 /* 페이징 스타일 */
 span button{
@@ -141,7 +193,6 @@ span button{
     height: 40px;
     gap: 10px;    
     border-radius: 8px;
-    
 }
 
 #produCategory{
