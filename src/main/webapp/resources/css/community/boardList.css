@@ -150,6 +150,7 @@ table td:nth-child(5) { /* 5번째 td */
     padding-left: 10px;
     margin-left: 10px;
     border-right: none;
+    outline: none;
 }
 
 #searchbar-div{
