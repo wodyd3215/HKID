@@ -9,88 +9,58 @@
     <title>Document</title>
  
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css">
 </head>
 <body>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="wrapper">
+        <br><br>
         <h1>전체</h1>
 
-        <!-- <table class="table" style="text-align: center;">
-			<thead id="table-head">
-			<tr>
-				<th>번호</th>
-				<th>카테고리</th>
-				<th width="600px">제목</th>
-				<th>글쓴이</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>추천수</th>
-			</tr>
-			</thead>
-			<tbody>
-			<c:choose>
-				<c:when test="${empty list }">
-					<tr>
-						<td colspan="7">존재하는 게시글이 없습니다.</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="c" items="${list }">
-						<tr onclick="clickDetailPage(${c.communityNo})">
-							<td>${c.communityNo}</td>
-							<td>${c.communityCategory}</td>
-							<td>${c.communityTitle}</td>
-							<td>${c.nickname}</td>
-							<td>${c.communityDate}</td>
-							<td>${c.communityView}</td>
-							<td>${c.communityGood}</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-			</tbody>
-		</table> -->
-<!-- ---------------------------------------------- -->
-        <!-- 헤더 대용 테이블  -->
-        <table id="top-table">
-            <tr>
-                <th>
-                    <select name="category" class="category-choice">전체
-                        <option value="all">전체</option>
-                        <option value="question">질문</option>
-                        <option value="tip">팁</option>
-                        <option value="show-off">자랑</option>
-                        <option value="ad">홍보</option>
-                    </select>
-                </th>
-                <th id="th-title">제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-                <th>조회수</th>
-            </tr>
+        <table id="common-table">
+            <thead>
+                <tr id="common-table-header">
+                    <th class="type-width8">
+                        <select name="category" class="table-category">전체
+                            <option value="all">전체</option>
+                            <option value="question">질문</option>
+                            <option value="tip">팁</option>
+                            <option value="show-off">자랑</option>
+                            <option value="ad">홍보</option>
+                        </select>
+                    </th>
+                    <th class="type-width50">제목</th>
+                    <th class="type-width6">작성자</th>
+                    <th class="type-width18">작성일</th>
+                    <th class="type-width8">조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="common-table-body">
+                    <td>공지</td>
+                    <td><a href="">게시글 작성 시 지켜야할 규칙</a></td>
+                    <td>꾸준히 운동</td>
+                    <td>2024-10-10</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td id="board-category">질문</td>
+                    <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다</a></td>
+                    <td>꾸준히 운동</td>
+                    <td>2024-10-10</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
         </table>
 
-        <!-------------- 게시글 목록 테이블 ---------------->
-        <table id="main-table">
-            <tr>
-                <th>공지</th>
-                <th id="th-title">게시글 작성 시 지켜야할 규칙</th>
-                <th>꾸준히 운동</th>
-                <th>2024-10-10</th>
-                <th>2</th>
-            </tr>
-            <tr>
-                <td id="board-category">질문</td>
-                <td>세트별 개수 설정에 대해 질문드립니다 [0]</td>
-                <td>꾸준히 운동</td>
-                <td>2024-10-10</td>
-                <td>4</td>
-            </tr>
-        </table>
+
+        
         
         <!-- 게시글 수 + 글쓰기 버튼 -->
         <div id="boCount-wirte-div">
-            <select name="board-bottom-div" class="category-choice">
+            <select name="board-bottom-div" class="table-category">
                 <option value="">5개씩</option>
                 <option value="">10개씩</option>
                 <option value="">15개씩</option>
@@ -101,11 +71,11 @@
         </div>
 
         <!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
-         <!-- common에 모달 쓰는곳 있으니 그곳에서 작성 사용법은 트렐로에 작성했음 -->
+        <!-- common에 모달 쓰는곳 있으니 그곳에서 작성 사용법은 트렐로에 작성했음 -->
         <div id="modalContainer" class="hidden">
             <div id="modal-content">
-                <p>모달창입니다.</p>
-
+                <p></p>
+                
             </div>
         </div>
 
@@ -137,13 +107,9 @@
             <button class="page-btn">&gt;</button>
         </div>
 
-    
-        
-        
-        
-
-
 
     </div>
+
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>"
 </body>
 </html>

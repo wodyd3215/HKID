@@ -21,6 +21,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- include summernote css/js-->
+<link href="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.css" rel="stylesheet">
+<script src="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.js"></script>
+
 </head>
 <body onload="init('${pageName}', '${optional}')">
     <div class="header">
