@@ -15,35 +15,35 @@
     <jsp:include page="sideNavi.jsp" />
     <div class="wrapper">
         <div class="managementTitle">
-            신고 게시글
+            신고 유저
         </div>
         <div class="content">
-            <table id="common-table">
+            <table>
                 <thead>
                     <tr id="common-table-header">
-                        <th class="type-width8">유형</th>
-                        <th class="type-width18">신고자명</th>
-                        <th class="type-width50">신고대상</th>
-                        <th class="type-width18">상세 내용</th>
-                        <th class="type-width6">관리</th>
+                        <th class="type-width14">유형</th>
+                        <th class="type-width24">신고자명</th>
+                        <th class="type-width24">신고 대상</th>
+                        <th class="type-width24">상세 내용</th>
+                        <th class="type-width14">관리</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr id="common-table-body">
                         <td>욕설</td>
                         <td>개떡도지</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
+                        <td>꾸준히운동</td>
                         <td>
-                            <div class="bManagement">
+                            <div class="management">
                                 <button class="btn btn-primary custom-btn" data-target="reportDetail">확인하기</button>
                             </div>
                         </td>
                         <td>
-                            <div class="bManagement">
-                                <form action="">
+                            <div class="management">
+                                <form action="" class="action-stop">
                                     <input type="text" name="bno" value="" hidden>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" >
-                                        delete
+                                    <button class="btn btn-danger custom-btn">
+                                        정지처분
                                     </button>
                                 </form>
                             </div> 

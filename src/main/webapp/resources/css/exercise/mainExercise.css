@@ -22,6 +22,7 @@
     font-weight: 480;
     line-height: 100px;
     border-radius: 100px;
+    text-align: center;
 }
 
 .part{
@@ -170,7 +171,7 @@
 }
 
 #list-con{
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
  #list-img{
@@ -180,25 +181,32 @@
  #under-area{
      display: flex;
      justify-content: space-between;
+     
  }
  .list-text{
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
  }
 
 .list-text2{
-     width: 200px;
      font-size: 25px;
      border: 1px #000; height: 40px;
-     margin-top: 10px;
  }
  #under-area button{
      margin-right: 10px;
      float: right;
+     border-radius: 100px;
      border: none;
      background-color: #DFF0FF;
      display: block;
      cursor: pointer;
+     width: 40px;
+     height: 40px;
+ }
+
+ #under-area button img{
+    width: 40px;
+    height: 40px;
  }
 
  .list-text, .list-text2{
