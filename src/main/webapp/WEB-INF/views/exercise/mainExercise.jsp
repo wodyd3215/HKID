@@ -83,7 +83,7 @@
 							</div>
 							<br>
 							<p class="list-text">${e.exerciseName}</p>
-							<br>
+							
 							<div id="under-area">
 								<p class="list-text2">${e.exerciseDifficulty}</p>
 								<button type="button">
