@@ -37,6 +37,7 @@ public class ExerciseServiceImple implements ExerciseService{
 		return exerciseDao.selectList(sqlSession, pi);
 	}
 
+	//필터
 	@Override
 	public List<Exercise> search(HashMap<String, Object> filterMap, PageInfo pi) {
 		return exerciseDao.search(sqlSession, filterMap, pi);
