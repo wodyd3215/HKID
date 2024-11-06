@@ -38,8 +38,12 @@ table th, td {
     width: 8%;
 }
 
-.type-width16{
-    width: 16%;
+.type-width10{
+    width: 10%;
+}
+
+.type-width14{
+    width: 14%;
 }
 
 .type-width17{
@@ -48,6 +52,10 @@ table th, td {
 
 .type-width18{
     width: 18%;
+}
+
+.type-width24{
+    width: 24%;
 }
 
 .type-width30{
