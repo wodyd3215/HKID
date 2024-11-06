@@ -144,6 +144,11 @@ table td:nth-child(5) { /* 5번째 td */
     cursor: pointer;
 }
 
+/* defualt.css 수정 */
 #common-table-body td {
     font-size: 16px;
+}
+
+#common-table-header th{
+    font-size: 20px;
 }

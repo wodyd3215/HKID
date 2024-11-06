@@ -26,7 +26,7 @@ hr{
     margin-bottom: 10px;
 }
 
-#writer-date--update-delect{
+#writer-date--update-delete{
     display: flex;
     justify-content: space-between;
     padding-right: 10px;
@@ -35,7 +35,7 @@ hr{
     padding-right: 5px; */
 }
 
-#writer-date--update-delect > div > button {
+#writer-date--update-delete > div > button {
     background-color: white;
     border: none;
     font-weight: 600;
@@ -289,7 +289,7 @@ h1 {
 }
 
 #bottom-wrapper {
-    width: 100%;
+    /* width: 100%; */
     margin-top: 100px;
 }
 
@@ -459,3 +459,61 @@ table {
     display: flex;
     align-items: center;
 }
+
+/************ 게시글 삭제 모달 css *************/
+.modal{
+    position: absolute !important;
+}
+
+.custom-modal {
+    width: 280px;
+    height: 120px;
+    border-radius: 15px;
+
+    left: 1200px; 
+    top: 320px; 
+    transform: none;
+}
+
+
+.custom-modal-header{
+    justify-content: center;
+}
+
+.custom-modal-title{
+    font-size: 16px;
+    text-align: center;
+}
+
+.custom-modal-content{
+    height: 80px;
+    margin-top: 10px;
+}
+
+/* 모달 가운데 border 제거 */
+.custom-modal-header{
+    border-bottom: none;
+}
+
+/* 모달 [예/아니오] 버튼  */
+.modal-btn{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #00A6fB;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+#yes-btn{
+    background-color: #00A6fB;
+    color: #ffffff;
+    
+}
+
+#no-btn{
+    background-color: #ffffff;
+    color: #00A6fB;
+    margin-left: 10px;
+}
+
+/***********************************/

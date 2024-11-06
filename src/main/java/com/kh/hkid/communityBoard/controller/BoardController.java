@@ -27,23 +27,46 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 	
+	// 게시글 목록
 	@GetMapping("list.bo")
 	public String selectList() {
 		
 		return "community/boardList";
 	}
 	
+	// 게시글 작성
 	@PostMapping("boardWrite.bo")
 	public String boardWrite() {
 		
 		return "community/boardWrite";
 	}
 	
+	// 게시글 수정
+	@PostMapping("updateForm.bo")
+	public String updateForm() {
+		
+		return "community/boardUpdate";
+	}
 	
+	// 게시글 확인
 	@GetMapping("boardDetail.bo")
 	public String selectDetailBoard() {
 		
 		return "community/boardDetail";
+	}
+	
+	@GetMapping("boardDelete.bo")
+	public String boardDelete() {
+		// 게시글의 상태를 off하는 쿼리 발사!
+		return "community/Delete"; // 맞나??
+	}
+	
+	// 댓글 추가
+	@ResponseBody
+	@PostMapping("insertReply.bo")
+	public String insertReply(){
+		
+		return "null";
 	}
 	
 	 //-------------------------summernote----------------------------

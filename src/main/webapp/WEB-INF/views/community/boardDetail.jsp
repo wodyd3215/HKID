@@ -7,8 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
+    <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -16,32 +21,32 @@
     <br><br><br><br>
     <div class="wrapper">
         <hr>
-        <!-- 게시글 정보 출력 -->
         <div id="top-wrapper">
 
-            <!-- 1번 게시글 제목칸-->
+            <!-- 게시글 제목칸-->
             <div id="board-title-wrapper">
                 <div id="board-title">
                     <p>[전체] 피티 연장할까 고민입니다</p>
                 </div>
-                <div id="writer-date--update-delect">
+                <div id="writer-date--update-delete">
                     <div id="writer-date">
                         <div>풍근풍근</div> &nbsp;&nbsp;&nbsp;
                         <div>2024.10.24</div>
                     </div>
                     <div>
-                        <button>수정</button>
-                        <button>삭제</button>
+                        <button class="btn" onclick="postFormSubmit('edit')">수정</button>
+                        <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>                        
                     </div>
                 </div>
                 <hr>
             </div>
 
-            <!-- 2번 내용 + 댓글작성-->
+            
+            <!--댓글작성-->
             <div id="second-div">
-                <textarea id="content"  style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</textarea>
+                <div id="content"  style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</ㅇ>
                     
-                </textarea>
+                </div>
                 <div id="testsss">
                     <div id="etc-menu">
                         <div> 
@@ -66,10 +71,10 @@
                             
                         </div>
                     </div>
-                    <!-- 댓글 작성 -->
-                    <form id="comment">
+
+                    <form id="comment" action="insertReply.bo" method="post">
                         <p class="user-name">개떡도지</p>
-                        <textarea name="" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
+                        <textarea name="replyContent" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
                         <input type="submit" name="" id="submit-btn" value="등록">
                     </form>
                 </div>
@@ -77,7 +82,7 @@
 
             <hr>
 
-            <!-- 3번 댓글리스트 -->
+            <!-- 댓글리스트 -->
             <div id="comments-body-wrapper">
                 <div id="comments-body">
                     <div id="main-comment">
@@ -97,10 +102,6 @@
                 </div>
             </div>
             <hr>
-
-            <!-- ----------------------------- -->
-
-          
 
             <div id="comments-body-wrapper">
                 <div id="sub-comments-body">
@@ -125,10 +126,8 @@
             </div>
             <hr>
         </div>
-        
 
         <!------------------ 아래 게시글 목록 -------------------->
-        <!-- 헤더 대용 테이블  -->
         <div id="bottom-wrapper">
             <table id="top-table">
                 <tr>
@@ -172,15 +171,6 @@
                 </form>
             </div>
     
-            <!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
-            <div id="modalContainer" class="hidden">
-                <div id="modal-content">
-                    <p></p>
-    
-                </div>
-            </div>
-    
-    
             <!-- 검색 바 -->
             <div id="searchbar-div">
                 <select name="search-category" id="search-category">전체
@@ -208,10 +198,25 @@
                 <button class="page-btn">&gt;</button>
             </div>
         </div>
-
     </div>
     
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
+
+    <!-------- 삭제 버튼 모달 --------->
+    <div class="modal" id="delete-modal">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title">게시글을 삭제하시겠습니까?</div>
+            </div>
+            <div class="custom-modal-content">
+                <!-- 게시글 삭제 버튼 -->
+                <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
+                <!-- 모달 닫기 -->
+                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------->
 </body>
 </html>
