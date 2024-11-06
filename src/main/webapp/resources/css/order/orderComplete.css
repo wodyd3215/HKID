@@ -1,1 +1,103 @@
 @charset "UTF-8";
+
+.orderCp-Title{
+    width: 86%;
+    margin-top: 60px;
+}
+
+.orderCp-Title p{
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.orderCp-Comment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.orderCp-Comment p{
+    font-size: 30px;
+}
+
+.productPaymentInfo-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.productPaymentInfo-title p{
+    font-size: 28px;
+    font-weight: bold;
+
+}
+
+#shortLine{
+    width: 950px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.infoContent{
+    width: 950px;
+    height: 350px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.infoContent p{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#personInfo-title{
+    width: 50%;
+    border-right: 2px solid #D2D2D2;
+    
+}
+
+#payInfo-title{
+    width: 50%;
+    margin-left: 30px;
+}
+
+
+.infoContent table{
+    width: 420px;
+    margin-top: 45px;
+}
+
+.infoContent tr{
+    height: 40px;
+}
+
+.btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btns button{
+    width: 280px;
+    height: 50px;
+    margin: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 20px;
+    font-weight: bolder ;
+}
+
+#home{
+    background-color: white;
+}
+
+#shpping{
+    background-color: #00A6FB;
+}
+    
+
+
