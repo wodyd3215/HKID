@@ -18,7 +18,7 @@
             신고 게시글
         </div>
         <div class="content">
-            <table id="common-table">
+            <table>
                 <thead>
                     <tr id="common-table-header">
                         <th class="type-width8">유형</th>
@@ -34,12 +34,12 @@
                         <td>개떡도지</td>
                         <td>게시글 작성 시 지켜야할 규칙</td>
                         <td>
-                            <div class="bManagement">
+                            <div class="management">
                                 <button class="btn btn-primary custom-btn" data-target="reportDetail">확인하기</button>
                             </div>
                         </td>
                         <td>
-                            <div class="bManagement">
+                            <div class="management">
                                 <form action="">
                                     <input type="text" name="bno" value="" hidden>
                                     <button class="material-symbols-outlined btn btn-danger custom-btn" >

@@ -35,7 +35,7 @@
                         <td>100</td>
                         <td>2024-10-10</td>
                         <td>
-                            <div class="pManagement">
+                            <div class="management">
                                 <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
                                     edit
                                 </button>

@@ -34,12 +34,19 @@
                 <li>
                     유저관리
                     <ul>
-                        <li><a href="uManagement.ad">계정복구</a></li>
+                        <li><a href="">정지 유저</a></li>
+                        <li><a href="accRecovery.ad">계정복구</a></li>
                     </ul>
                 </li>
-                <li><a href="bManagement.ad">게시글 관리</a></li>
                 <li><a href="pManagement.ad">상품관리</a></li>
-                <li><a href="">신고관리</a></li>
+                <li>
+                    신고관리
+                    <ul>
+                        <li><a href="reportedUser.ad">신고 유저<a></li>
+                        <li><a href="reportedBoard.ad">신고 게시글</a></li>
+                        <li><a href="reporedReply.ad">신고 댓글</a></li>
+                    </ul>
+                </li>
                 <li><a href="">공지</a></li>
             </ul>
         </div>

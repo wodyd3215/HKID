@@ -1,6 +1,10 @@
-.pManagement{
+.management{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 3px;
+}
+
+.management button{
+    margin: 0;
 }
