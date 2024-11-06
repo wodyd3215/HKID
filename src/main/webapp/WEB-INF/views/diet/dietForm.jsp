@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietFormModal.css">
     <script src="${pageContext.request.contextPath}/resources/js/diet/dietForm.js"></script>
@@ -14,17 +15,7 @@
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />
-    <div class="modal" id="test-modal">
-        <!-- 실제 모달창은 이곳에 작성 -->
-        <div class="custom-modal">
-            <div class="custom-modal-header">
-                <div class="custom-modal-title"></div>
-                <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
-            </div>
-            <div class="custom-modal-content">
-            </div>
-        </div>
-    </div>
+
     <br><br>
 
     <div class="wrapper">
@@ -123,7 +114,24 @@
                     </button>
                 </div>
             </div>
+
             <div class="custom-modal-content">
+                <table id="common-table">
+                    <thead>
+                        <tr id="common-table-header">
+                            <th class="type-width35">음식 이름</th>
+                            <th class="type-width27">칼로리(kcal)</th>
+                            <th class="type-width5"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="common-table-body">
+                            <td>샌드위치</td>
+                            <td>252 kcal</td>
+                            <td id="food-add-btn"><button>+</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
