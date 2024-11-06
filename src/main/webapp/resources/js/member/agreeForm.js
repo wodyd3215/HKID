@@ -37,4 +37,3 @@ function agreeCheckBox() {
     }
     return true;
 }
-

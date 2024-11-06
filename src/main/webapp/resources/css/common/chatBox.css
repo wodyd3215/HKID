@@ -1,0 +1,263 @@
+.wrapper {
+    height: 1000px;
+}
+
+/* 채팅박스 기본 css */
+#chat-area {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 480px;
+    bottom: 200px;
+}
+
+#chat-area > button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: white;
+}
+
+#chat-area > button > img {
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+.chat-box {
+    width: 450px;
+    height: 550px;
+    border: 1px solid rgba(0, 166, 251, 1);
+    background-color: rgba(219, 241, 253, 1);
+    border-radius: 5px;
+    position: absolute;
+    right: 55px;
+    bottom: 0px;
+    box-shadow: 2px 2px 2px 2px gray;
+}
+
+/* 채팅 박스 헤더 css */
+.chat-box-header {
+    height: 45px;
+    display: flex;
+    justify-content: end;
+    padding-right: 10px;
+    border-bottom: 1px solid rgba(0, 166, 251, 0.5);
+}
+
+.chat-box-header > button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7px;
+    border: none;
+    background: rgba(219, 241, 253, 1);
+}
+
+/* 채팅 박스 컨텐츠 css */
+.chat-box-content {
+    display: flex;
+    height: calc(100% - 45px);
+}
+
+/* 좌측 컨텐츠 */
+.chat-box-left {
+    width: 110px;
+    border-right: 1px solid rgba(0, 166, 251, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.chat-box-left > div {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.chat-box-left > div > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 94px;
+    height: 35px;
+    padding: 0px;
+}
+
+#chat-bot {
+    
+}
+
+#chat-trade > button > img {
+    width: 20px;
+}
+
+#chat-trade-user > img {
+
+}
+
+#chat-trade-user > button {
+    width: 64px;
+    height: 27px;
+    margin-left: 3px;
+    font-size: 12px;
+}
+
+/* 우측 컨텐츠 */
+/* 채팅 컨첸츠 */
+.chat-box-right {
+    width: 338px;
+}
+
+#chat-content {
+    /* display: none; */
+}
+
+#chat-log-area{
+    height: 380px;
+    border-bottom: 1px solid rgba(0, 166, 251, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chat-log-area > div {
+    width: 320px;
+    height: 362px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#chat-input-area {
+    height: 123px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chat-input-area > div {
+    width: 320px;
+    height: 105px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#chat-input-area > div > textarea {
+    width: 320px;
+    height: 75px;
+    border-radius: 5px;
+    resize: none;
+    padding: 3px 5px;
+}
+
+#chat-input-area > div > textarea:focus{
+    outline: none;
+}
+
+#chat-input-area > div > div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#chat-input-area > div button {
+    border: none;
+    background-color: white;
+    width: 27px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chat-input-area img {
+    width: 20px;
+    height: 20px;
+}
+
+/* 검색 컨텐츠 */
+#chat-search {
+    display: none;
+    margin: auto;
+}
+
+#searchbar-div {
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#board-search-bar {
+    border: 1px solid rgb(196, 195, 195);
+    border-radius: 9px 0px 0px 9px ;
+    width: 240px;
+    height: 100%;
+    padding-left: 10px;
+    border-right: none;
+}
+
+#board-search-bar:focus {
+    outline: none;
+}
+
+#search-btn {
+    border: 1px solid rgb(196, 195, 195);
+    background-color: white;
+    border-left: none;
+    border-radius: 0px 9px 9px 0px;
+    cursor: pointer;
+    padding-bottom: 4px;
+}
+
+#searchIcon {
+    width: 20px;
+}
+
+#search-users {
+    width: 273px;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 9px;
+    background-color: white;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 0 10px 0 4px;
+}
+
+#search-users > img {
+    width: 30px;
+    height: 30px;
+}
+
+#search-users > p {
+    margin: 0px;
+    text-align: start;
+    width: 150px;
+}
+
+#search-users > button {
+    border: none;
+    background-color: white;
+    width: 25px;
+    height: 25px;
+}
+
+#search-users > button > img {
+    width: 22px;
+    height: 22px;
+}
