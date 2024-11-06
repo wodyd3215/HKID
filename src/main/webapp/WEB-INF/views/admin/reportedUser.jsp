@@ -21,11 +21,11 @@
             <table>
                 <thead>
                     <tr id="common-table-header">
-                        <th class="type-width8">유형</th>
-                        <th class="type-width18">신고자명</th>
-                        <th class="type-width50">신고 대상</th>
-                        <th class="type-width18">상세 내용</th>
-                        <th class="type-width6">관리</th>
+                        <th class="type-width14">유형</th>
+                        <th class="type-width24">신고자명</th>
+                        <th class="type-width24">신고 대상</th>
+                        <th class="type-width24">상세 내용</th>
+                        <th class="type-width14">관리</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,10 +40,10 @@
                         </td>
                         <td>
                             <div class="management">
-                                <form action="">
+                                <form action="" class="action-stop">
                                     <input type="text" name="bno" value="" hidden>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" >
-                                        delete
+                                    <button class="btn btn-danger custom-btn">
+                                        정지처분
                                     </button>
                                 </form>
                             </div> 
