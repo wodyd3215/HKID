@@ -43,11 +43,19 @@
             <tbody>
                 <tr id="food-detail">
                     <td>샌드위치</td>
-                    <td>252 kcal</td>
-                    <td>27.29 g</td>
-                    <td>8.09 g</td>
-                    <td>12.08 g</td>
-                    <td id="delete-btn"><button>-</button></td>
+                    <td class="kcal-figure">252</td>
+                    <td class="carbo-figure">27.29</td>
+                    <td class="pro-figure">8.09</td>
+                    <td class="fat-figure">12.08</td>
+                    <td class="delete-btn"><button>-</button></td>
+                </tr>
+                <tr id="food-detail">
+                    <td>샌드위치</td>
+                    <td class="kcal-figure">252</td>
+                    <td class="carbo-figure">27.29</td>
+                    <td class="pro-figure">8.09</td>
+                    <td class="fat-figure">12.08</td>
+                    <td class="delete-btn"><button>-</button></td>
                 </tr>
             </tbody>
         </table>
@@ -55,7 +63,7 @@
         <br>
         
         <div id="food-calc-btn">
-            <button>계산</button>
+            <button onclick="foodFigureCalc()">계산</button>
         </div>
 
         <br><br><br><br><br>
@@ -75,11 +83,11 @@
             <tbody>
                 <tr id="food-detail">
                     <td>오늘 드신 음식의 영양정보는</td>
-                    <td>1,512 kcal</td>
-                    <td>163.74 g</td>
-                    <td>48.54 g</td>
-                    <td>72.48 g</td>
-                    <td id="delete-btn"></td>
+                    <td class="total-kcal">1,512</td>
+                    <td class="total-carbo">163.74</td>
+                    <td class="total-pro">48.54</td>
+                    <td class="total-fat">72.48</td>
+                    <td class="delete-btn"></td>
                 </tr>
             </tbody>
         </table>

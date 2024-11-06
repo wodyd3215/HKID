@@ -11,5 +11,12 @@ public class OrderInfoController {
 		
 		return "order/orderInfo";
 	}
+	
+	
+	@RequestMapping("order.cp")
+	public String orderComplete() {
+		
+		return "order/orderComplete";
+	}
 
 }
