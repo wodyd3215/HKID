@@ -14,6 +14,17 @@
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />
+    <div class="modal" id="test-modal">
+        <!-- 실제 모달창은 이곳에 작성 -->
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title"></div>
+                <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
+            </div>
+            <div class="custom-modal-content">
+            </div>
+        </div>
+    </div>
     <br><br>
 
     <div class="wrapper">
