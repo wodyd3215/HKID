@@ -57,6 +57,7 @@ public class ExerciseController {
 		    
 			PageInfo pi = Template.getPageInfo(boardCount, currentPage, 12, 15);
 			
+			
 		// HashMap에 필터 조건 추가
 		HashMap<String, Object> filterMap = new HashMap<>();
 		filterMap.put("parts", selectedParts);

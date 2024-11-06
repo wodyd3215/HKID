@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.orderTitle{
+    width: 90%;
+    margin-top: 80px;
+}
+
+.orderTitle p{
+    font-size: 40px;
+}
+
+.orderTitle hr{
+    border: 0;
+    height: 3px;
+}
