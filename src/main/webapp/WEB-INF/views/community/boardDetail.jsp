@@ -13,13 +13,14 @@
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+    <br><br><br><br>
     <div class="wrapper">
         <hr>
         <!-- 게시글 정보 출력 -->
         <div id="top-wrapper">
 
             <!-- 1번 게시글 제목칸-->
-            <div>
+            <div id="board-title-wrapper">
                 <div id="board-title">
                     <p>[전체] 피티 연장할까 고민입니다</p>
                 </div>

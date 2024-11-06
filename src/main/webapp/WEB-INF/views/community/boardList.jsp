@@ -40,7 +40,7 @@
             <tbody>
                 <tr id="common-table-body">
                     <td>공지</td>
-                    <td>게시글 작성 시 지켜야할 규칙</td>
+                    <td><a href="">게시글 작성 시 지켜야할 규칙</a></td>
                     <td>꾸준히 운동</td>
                     <td>2024-10-10</td>
                     <td>12</td>
