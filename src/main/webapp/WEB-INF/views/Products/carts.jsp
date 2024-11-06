@@ -16,29 +16,25 @@
            	 장바구니
         </div>
         
-        <table class="productCartLists" border="1px solid #000000">
-            <thead>
+        <table class="productCartLists">
+            <thead class="cartTableHead">
                 <tr>
                     <th>
                         <input type="checkbox" class="selectCart"  id="selectAll">
                         <label for="selectAll"></label>
                     </th>
-                    <th>상품 이미지</th>
-                    <th>상품 이름</th>
-                    <th>수량</th>
-                    <th>가격</th>
-                    <th>삭제</th>
+                    
                 </tr>                
             </thead>
 
-            <tbody class="cartList1">
-                <tr>
+            <tbody class="cartTableBody">
+                <tr class="cartItem1">
                     <td>
                         <input type="checkbox" class="selectCart">
                         <label for="selectItem1"></label>
                     </td>
-                    <td><img src="상품이미지.jpg" alt="상품 이미지" class="product-image"></td>
-                    <td><span>장바구니에 담겨있다</span></td>
+                    <td><img src="상품이미지.jpg" class="product-image"></td>
+                    <td class="cartItemName"><span>장바구니에 담겨있다</span></td>
                     <td class="cartQuantity">
                         <button>-</button>
                         <span>1</span>

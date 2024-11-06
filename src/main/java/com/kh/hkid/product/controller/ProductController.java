@@ -10,7 +10,7 @@ public class ProductController {
 	
 	@GetMapping("/products/productPage")
 	public String showProductPage() {
-		return "Products/productPage";
+		return "Products/carts";
 	}
 	
 }
