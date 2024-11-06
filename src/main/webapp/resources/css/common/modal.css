@@ -1,3 +1,4 @@
+/* 팝업창을 띄우기 위한 배경 */
 .modal {
     width: 100vw;
     height: 100vh;
@@ -6,15 +7,7 @@
     display: none;
 }
 
-.modal-test{
-    width: 430px;
-    height: 195px;
-    border: 1px solid black;
-    border-radius: 20px;
-    background: white;
-    margin: 0 auto;
-}
-
+/* 컨텐츠가 표시되는 팝업창 */
 .custom-modal {
     margin: auto;
     padding: 5px;
@@ -32,6 +25,7 @@
     height: 300px;
 }
 
+/* 팝업창 헤더 */
 .custom-modal-header{
     display: flex;
     justify-content: space-between;
@@ -64,6 +58,7 @@
     color: #00A6FB;
 }
 
+/* 팝업창 바디 */
 .custom-modal-content{
     /* border: 1px solid black; */
     display: flex;

@@ -21,18 +21,18 @@
             <table>
                 <thead>
                     <tr id="common-table-header">
-                        <th class="type-width8">유형</th>
-                        <th class="type-width18">신고자명</th>
-                        <th class="type-width50">신고대상</th>
-                        <th class="type-width18">상세 내용</th>
-                        <th class="type-width6">관리</th>
+                        <th data-width="8%">유형</th>
+                        <th data-width="18%">신고자명</th>
+                        <th data-width="50%">신고대상</th>
+                        <th data-width="18%">상세 내용</th>
+                        <th data-width="6%">관리</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr id="common-table-body">
                         <td>욕설</td>
                         <td>개떡도지</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
+                        <td>이딴걸 글이라고 쓰고 있냐 **아</td>
                         <td>
                             <div class="management">
                                 <button class="btn btn-primary custom-btn" data-target="reportDetail">확인하기</button>
