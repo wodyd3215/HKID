@@ -99,8 +99,12 @@
 
         <div class="custom-modal">
             <div class="custom-modal-header">
-                <div class="custom-modal-title">음식 검색</div>
-
+                <div class="custom-modal-title">
+                    <div></div>
+                    <h4>음식 검색</h4>
+                    <button class="material-symbols-outlined close-btn " onclick="closeModal()">x</button>
+                </div>
+                
                 <div id="searchbar-div">
                     <input type="search" name="" id="board-search-bar" placeholder="음식을 입력해주세요">
                     <button id="search-btn" type="submit">
