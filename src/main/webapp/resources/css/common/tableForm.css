@@ -1,12 +1,12 @@
-#common-table {
+table {
     width: 100%;
 }
 
-#common-table tr {
+table tr {
     height: 40px;
 }
 
-#common-table th, td {
+table th, td {
     text-align: center;
 }
 
@@ -15,7 +15,7 @@
 }
 
 #common-table-header th {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 #common-table-body {
@@ -23,7 +23,7 @@
 }
 
 #common-table-body td {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 #common-table-body.notice {

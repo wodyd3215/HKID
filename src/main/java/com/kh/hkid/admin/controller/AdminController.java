@@ -16,17 +16,22 @@ public class AdminController {
 	}
 	
 	@GetMapping("pManagement.ad")
-	public String adminP() {
+	public String pManagement() {
 		return "admin/pManagement";
 	}
 	
-	@GetMapping("bManagement.ad")
-	public String adminB() {
-		return "admin/bManagement";
+	@GetMapping("reportedBoard.ad")
+	public String reportedBoard() {
+		return "admin/reportedBoard";
 	}
 	
-	@GetMapping("uManagement.ad")
-	public String adminU() {
-		return "admin/uManagement";
+	@GetMapping("reportedUser.ad")
+	public String reportedUser() {
+		return "admin/reportedUser";
+	}
+	
+	@GetMapping("accRecovery.ad")
+	public String accRecovery() {
+		return "admin/accRecovery";
 	}
 }
