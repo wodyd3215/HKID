@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/enrollForm.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">

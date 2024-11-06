@@ -21,7 +21,7 @@
             </div>
             <div class="top-content">
                 <img src="${pageContext.request.contextPath}/resources/image/3b579a9bc531180d72a68a9686c6da3b.jpg" alt="" class="profile-image" accept=".jpg, .png" onclick="openFile()">
-                <input type="file" class="select-profile" onchange="previewProfile(this)">
+                <input type="file" class="select-profile" accept="image/*" onchange="previewProfile(this)">
                 <form action="" onclick="showBtn()">
                     <div class="namespace">
                         <input type="text" name="memberNickName" id="nameInput" autocomplete="off">
