@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -97,6 +98,8 @@
             <hr>
 
             <!-- ----------------------------- -->
+
+          
 
             <div id="comments-body-wrapper">
                 <div id="sub-comments-body">

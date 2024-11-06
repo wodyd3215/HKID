@@ -41,8 +41,8 @@ table tr:nth-child(1) { /* 1번째 tr */
     border-bottom: 3px solid rgb(212, 210, 210);
 }
 
-#top-table{ /* 헤더대용 테이블 글씨크기 */
-    font-size: 20px;
+#common-table-body{
+    background-color: #DBF1FD;
 }
 
 table th:nth-child(5) { /* 5번째 th */
@@ -53,29 +53,19 @@ table tr:nth-child(5) { /* 5번째 tr */
     width: 6%;
 }
 
-#main-table th:nth-child(2) {
-    text-align: left;
-    padding-left: 100px;
-}
-
-#main-table td:nth-child(2) {
-    text-align: left;
-    padding-left: 100px;
-}
-
 table td:nth-child(5) { /* 5번째 td */
     width: 6%;
-}
-
-.th-title{
-    width: 50%;
 }
 
 #board-category{
     font-size: 16px;
 }
 
-.category-choice{
+.type-width8{
+    padding-left: 6px;
+}
+
+.table-category{
     border: 1px solid black;
     border-radius: 9px;
     width: 90px;
@@ -83,32 +73,7 @@ table td:nth-child(5) { /* 5번째 td */
     text-align: center;
     font-size: 18px;
     font-weight: 600;
-}
 
-#main-table td:first-child {
-    font-size: 20px;
-}
-
-#main-table tr:first-child {
-    background-color: #DBF1FD;
-}
-
-
-#main-table th {    /* 공지 글씨 크기 */
-    font-size: 14px;
-}
-
-#main-table td {    /* 게시글 글씨 크기 */
-    font-size: 16px;
-}
-
-#main-table td{
-    font-size: 14px;
-}
-
-#main-table th:first-child {    /* 유저 게시글 카테고리 글씨크기 */
-    font-size: 20px;
-    font-weight: 600;
 }
 
 #write-btn{
@@ -179,6 +144,6 @@ table td:nth-child(5) { /* 5번째 td */
     cursor: pointer;
 }
 
-#searchIcon{
-
+#common-table-body td {
+    font-size: 16px;
 }
