@@ -1,0 +1,183 @@
+#h1-wrapper{
+    height: 150px;
+    width: 100%;
+}
+
+h1{
+    height: 150px;
+    width: 100%;
+
+    text-align:center;
+    padding-top: 55px;
+
+}
+
+table{
+    width: 100%;    
+    margin-top: 10px;
+    border-collapse: separate; /* border-spacing 적용을 위한 설정 */
+}
+
+th, td, tr{
+    width: 12.5%;
+    height: 40px;
+    text-align: center;
+}
+
+table th:nth-child(1) { /* 1번째 th */
+    width: 8%;
+}
+
+table td:nth-child(1) { /* 1번째 td */
+    width: 8%;
+}
+
+table tr:nth-child(1) { /* 1번째 tr */
+    width: 8%;
+}
+
+#main-table{
+    border-top: 3px solid black;
+    border-bottom: 3px solid rgb(212, 210, 210);
+}
+
+#top-table{ /* 헤더대용 테이블 글씨크기 */
+    font-size: 20px;
+}
+
+table th:nth-child(5) { /* 5번째 th */
+    width: 6%;
+}
+
+table tr:nth-child(5) { /* 5번째 tr */
+    width: 6%;
+}
+
+#main-table th:nth-child(2) {
+    text-align: left;
+    padding-left: 100px;
+}
+
+#main-table td:nth-child(2) {
+    text-align: left;
+    padding-left: 100px;
+}
+
+table td:nth-child(5) { /* 5번째 td */
+    width: 6%;
+}
+
+.th-title{
+    width: 50%;
+}
+
+#board-category{
+    font-size: 16px;
+}
+
+.category-choice{
+    border: 1px solid black;
+    border-radius: 9px;
+    width: 90px;
+    height: 32px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#main-table td:first-child {
+    font-size: 20px;
+}
+
+#main-table tr:first-child {
+    background-color: #DBF1FD;
+}
+
+
+#main-table th {    /* 공지 글씨 크기 */
+    font-size: 14px;
+}
+
+#main-table td {    /* 게시글 글씨 크기 */
+    font-size: 16px;
+}
+
+#main-table td{
+    font-size: 14px;
+}
+
+#main-table th:first-child {    /* 유저 게시글 카테고리 글씨크기 */
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#write-btn{
+    border: 1px solid black;
+    border-radius: 9px;
+    width: 90px;
+    height: 32px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding-top: 2px;
+    cursor: pointer;
+}
+
+#boCount-wirte-div{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#search-category{
+    border: 1px solid rgb(176, 174, 174);
+    border-radius: 9px;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#board-search-bar{
+    border: 1px solid rgb(196, 195, 195);
+    border-radius: 9px 0px 0px 9px ;
+    width: 400px;
+    height: 30px;
+    padding-left: 10px;
+    margin-left: 10px;
+    border-right: none;
+}
+
+#searchbar-div{
+    display: flex;
+    justify-content: center;
+}
+
+#paging-div{
+    margin-top: 50px;
+    display: flex;
+    justify-self: center;
+}
+
+.page-btn{
+    border: none;
+    background-color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#search-btn{
+    border: 1px solid rgb(196, 195, 195);
+    background-color: white;
+    border-left: none;
+    border-radius: 0px 9px 9px 0px;
+    cursor: pointer;
+}
+
+#searchIcon{
+
+}

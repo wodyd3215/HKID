@@ -22,6 +22,7 @@
     font-weight: 480;
     line-height: 100px;
     border-radius: 100px;
+    text-align: center;
 }
 
 .part{
@@ -150,7 +151,7 @@
     margin-top: 100px;
     border-radius: 100px;
     width: 1056px;
-    height: 1000px;
+    height: 2000PX;
     background-color: #DBF1FD;
     display: flex;
     justify-content: space-evenly;
@@ -169,9 +170,10 @@
     padding: 50px;
 }
 
-.list-con{
-    width: 320px; height: 420px; 
- }
+#list-con{
+    padding-bottom: 20px;
+}
+
  #list-img{
      width: 250px; height: 250px;
      margin: 0 auto;
@@ -179,22 +181,46 @@
  #under-area{
      display: flex;
      justify-content: space-between;
+     
  }
  .list-text{
-    font-size: 30px;
+    font-size: 20px;
+    font-weight: 700;
  }
 
 .list-text2{
-     width: 200px;
      font-size: 25px;
      border: 1px #000; height: 40px;
-     margin-top: 10px;
  }
  #under-area button{
      margin-right: 10px;
      float: right;
+     border-radius: 100px;
      border: none;
-     background-color: #fff;
+     background-color: #DFF0FF;
      display: block;
      cursor: pointer;
+     width: 40px;
+     height: 40px;
  }
+
+ #under-area button img{
+    width: 40px;
+    height: 40px;
+ }
+
+ .list-text, .list-text2{
+    margin-left: 15px;
+ }
+ 
+ #paging-area{
+ 	margin-left: 200px;
+    align-items: center;
+    font-size: large;
+ }
+ 
+  #paging-area a {
+  	color: black;
+  }
+  	
+ 

@@ -1,0 +1,71 @@
+table {
+    width: 100%;
+}
+
+table tr {
+    height: 40px;
+}
+
+table th, td {
+    text-align: center;
+}
+
+#common-table-header {
+    border-bottom: 1px solid black;
+}
+
+#common-table-header th {
+    font-size: 22px;
+}
+
+#common-table-body {
+    border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+#common-table-body td {
+    font-size: 20px;
+}
+
+#common-table-body.notice {
+    background: #DBF1FD;
+}
+
+.type-width6{
+    width: 6%;
+}
+
+.type-width8{
+    width: 8%;
+}
+
+.type-width10{
+    width: 10%;
+}
+
+.type-width14{
+    width: 14%;
+}
+
+.type-width17{
+    width: 17%;
+}
+
+.type-width18{
+    width: 18%;
+}
+
+.type-width24{
+    width: 24%;
+}
+
+.type-width30{
+    width: 30%;
+}
+
+.type-width33{
+    width: 33%;
+}
+
+.type-width50{
+    width: 50%;
+}

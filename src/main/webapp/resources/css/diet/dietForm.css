@@ -1,0 +1,116 @@
+.wrapper > h1 {
+    text-align: center;
+}
+
+#food-search-btn {
+    display: flex;
+    justify-content: end;
+}
+
+#food-search-btn > button{
+    width: 100px;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* table */
+.food-info-table {
+    width: 100%;
+}
+
+.food-info-table tr {
+    height: 40px;
+}
+
+.food-info-table th, td {
+    text-align: center;
+}
+
+#food-title{
+    border-bottom: 1px solid black;
+}
+
+#food-title th {
+    font-size: 22px;
+}
+
+/* 음식 이름 너비 */
+#food-name {
+    width: 30%;
+}
+
+#food-kcal {
+    width: 17%;
+}
+
+#food-carbo {
+    width: 17%;
+}
+
+#food-pro {
+    width: 17%;
+}
+
+#food-fat {
+    width: 16%;
+}
+
+#food-detail{
+    border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+#food-detail td {
+    font-size: 20px;
+}
+
+/* 버튼 css */
+#food-detail button {
+    width: 25px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: rgb(252, 126, 126);
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    padding-bottom: 4px;
+}
+
+#food-calc-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#food-calc-btn > button {
+    width: 100px;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#food-save-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#food-save-btn > button {
+    width: 100px;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
