@@ -1,5 +1,5 @@
 .custom-modal {
-    transform: translate(6%, -37%);
+    transform: translate(6%, -35%);
     width: 500px;
     height: 650px;
     border-radius: 10px;
@@ -11,26 +11,34 @@
     align-items: center;
     border-bottom: none;
     padding-top: 10px;
+    height: 120px;
 }
 
 .custom-modal-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 .custom-modal-title > div {
     width: 36px;
 }
 
+.custom-modal-title > h4 {
+    margin: 0px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
 .custom-modal-title > button {
-    font-size: 16px;
-    padding-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #searchbar-div {
-    height: 35px;
+    height: 32px;
     display: flex;
     justify-content: end;
     margin-bottom: 20px;
@@ -39,7 +47,7 @@
 #board-search-bar {
     border: 1px solid rgb(196, 195, 195);
     border-radius: 9px 0px 0px 9px ;
-    width: 200px;
+    width: 230px;
     height: 100%;
     padding-left: 10px;
     margin-left: 10px;
@@ -56,5 +64,35 @@
     border-left: none;
     border-radius: 0px 9px 9px 0px;
     cursor: pointer;
+    padding-bottom: 4px;
+}
+
+#searchIcon {
+    width: 20px;
+}
+
+.type-width35 {
+    width: 35%;
+}
+
+.type-width27 {
+    width: 27%;
+}
+
+.type-width5 {
+    width: 5%;
+}
+
+#food-add-btn > button {
+    width: 25px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: rgba(219, 241, 253, 1);
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
     padding-bottom: 4px;
 }
