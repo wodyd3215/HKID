@@ -29,7 +29,7 @@ input::placeholder{
 
 .enroll-input-area{
     height: 35px;
-    border: 1px solid rgb(199, 199, 199);
+    border: 1px solid rgb(199, 199, 199); 
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -98,8 +98,10 @@ input::placeholder{
     margin-right: 5px;
 }
 
-#enroll-email > p {
+#enroll-email > #email-input3 {
+    width: 7%;
     padding: 0 10px;
+    border: none;
 }
 
 #enroll-email > select {
@@ -140,7 +142,7 @@ input::placeholder{
     align-items: center;
 }
 
-.enroll-btn > button {
+.enroll-btn button, .enroll-btn a{
     width: 180px;
     height: 40px;
     border-radius: 20px;
@@ -164,4 +166,48 @@ input::placeholder{
 
 #enroll-cancel {
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+#idArea{
+    display: flex;
+    align-items: center;
+}
+
+#idArea > div {
+    font-size: 10px;
+    padding-top: 14px;
+}
+
+#pwdArea{
+    display: flex;
+    align-items: center;
+}
+
+#pwdArea > div {
+    font-size: 10px;
+    padding-top: 14px;
+}
+
+#nickArea{
+    display: flex;
+    align-items: center;
+}
+
+#nickArea > div {
+    font-size: 10px;
+    padding-top: 14px;
+}
+
+#certifyArea{
+    display: flex;
+    align-items: center;
+}
+
+#certifyArea > div {
+    font-size: 10px;
+    padding-top: 14px;
 }

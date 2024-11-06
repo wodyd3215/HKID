@@ -116,7 +116,7 @@
     align-items: center;
 }
 
-.agree-btn > button {
+.agree-btn button, .agree-btn a {
     width: 180px;
     height: 40px;
     border-radius: 20px;
@@ -140,4 +140,8 @@
 
 #agree-cancel {
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }

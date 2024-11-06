@@ -15,6 +15,7 @@
 		<a href="pManagement.ad">상품페이지</a>
 		<br>
 		<a href="list.bo">게시글목록 가기</a>
+		<a href="bManagement.ad">게시글 관리</a>
 	</div>
 	<jsp:include page="common/footer.jsp" />
 </body>

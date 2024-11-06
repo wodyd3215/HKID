@@ -1,0 +1,45 @@
+.custom-modal {
+    transform: translate(6%, -37%);
+    width: 500px;
+    height: 650px;
+    border-radius: 10px;
+}
+
+.custom-modal-header{
+    display: block;
+    justify-content: center;
+    border-bottom: none;
+    padding-top: 10px;
+}
+
+.custom-modal-title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+#searchbar-div {
+    height: 35px;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+#board-search-bar {
+    border: 1px solid rgb(196, 195, 195);
+    border-radius: 9px 0px 0px 9px ;
+    width: 200px;
+    height: 100%;
+    padding-left: 10px;
+    margin-left: 10px;
+    border-right: none;
+}
+
+#search-btn {
+    border: 1px solid rgb(196, 195, 195);
+    background-color: white;
+    border-left: none;
+    border-radius: 0px 9px 9px 0px;
+    cursor: pointer;
+    padding-bottom: 4px;
+}

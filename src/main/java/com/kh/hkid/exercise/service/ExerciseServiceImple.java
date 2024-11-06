@@ -38,8 +38,8 @@ public class ExerciseServiceImple implements ExerciseService{
 	}
 
 	@Override
-	public List<Exercise> search(HashMap<String, Object> filterMap) {
-		return exerciseDao.search(sqlSession, filterMap);
+	public List<Exercise> search(HashMap<String, Object> filterMap, PageInfo pi) {
+		return exerciseDao.search(sqlSession, filterMap, pi);
 	}
 	
 	

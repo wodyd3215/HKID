@@ -407,7 +407,7 @@
             </div>
             <div class="agree-btn">
                 <button type="submit" id="agree-enter">확인</button>
-                <button id="agree-cancel" onclick="">취소</button>
+                <a href="loginForm.me" id="agree-cancel">취소</a>
             </div>
         </form>
     </div>

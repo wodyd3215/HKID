@@ -57,5 +57,11 @@
                 EXERCISE_DIFFICULTY = #{difficulty}
             </foreach>
         </if>
+        <if test="keywords != null and keywords != ''">	
+        	<foreach item="keyword" collection="keywords" open="AND (" separator=" OR " close=")">
+		        (EXERCISE_NAME LIKE '%' || #{keyword} || '%'
+		         OR PART_NAME LIKE '%' || #{keyword} || '%')
+    		</foreach>
+    	</if>
    </select>
  </mapper>

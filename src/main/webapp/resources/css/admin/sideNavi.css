@@ -1,6 +1,7 @@
 .sideNavi a {
     color: white;
     outline: none;
+    text-decoration: none;
 }
 
 .sideNavi a:hover{

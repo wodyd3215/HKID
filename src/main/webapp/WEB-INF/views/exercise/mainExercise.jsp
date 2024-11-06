@@ -65,7 +65,7 @@
 			<div class="exerContent">
 				<p class="exerTitle2">운동 리스트</p>
 					<div>
-						<input type="text" placeholder="검색어를 입력해주세요.">
+						<input type="text" name="keyword" value="${ keyword}" placeholder="검색어를 입력해주세요.">
 						<input type="submit" value="검색">
 					</div>
 				</form>
@@ -93,6 +93,31 @@
 						</div>
 					</c:forEach>
 					</div>
+					
+					<div id="paging-area">
+            <c:if test="${pi.currentPage ne 1}">
+                <a href="list.ex?cpage=${pi.currentPage - 1}">[이전]</a>
+            </c:if>
+
+            <c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
+            	
+            	<c:choose>
+            		<c:when test="${empty part}">
+            			<a href="list.ex?cpage=${i}">${i}</a>
+            		</c:when>
+            		<c:otherwise>
+            			<a href="exercise.se?cpage=${i}">${i}</a>
+            		</c:otherwise>
+            	</c:choose>
+                
+            </c:forEach>
+
+            <c:if test="${pi.currentPage ne pi.maxPage}">
+                <a href="list.ex?cpage=${pi.currentPage + 1}">[다음]</a>
+            </c:if>
+        </div>
+        <br><br>
+    </div>
 			</div>
 		</div>
 		<br><br><br>

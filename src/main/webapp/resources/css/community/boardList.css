@@ -13,7 +13,7 @@ h1{
 }
 
 table{
-    width: 100%;
+    width: 100%;    
     margin-top: 10px;
     border-collapse: separate; /* border-spacing 적용을 위한 설정 */
 }
@@ -67,7 +67,7 @@ table td:nth-child(5) { /* 5번째 td */
     width: 6%;
 }
 
-#th-title{
+.th-title{
     width: 50%;
 }
 

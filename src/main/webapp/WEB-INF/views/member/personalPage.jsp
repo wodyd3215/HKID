@@ -8,7 +8,6 @@
 
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/personalPage.css">
-
 <!-- js -->
 <script src="${pageContext.request.contextPath}/resources/js/member/personalPage.js"></script>
 </head>
@@ -54,7 +53,7 @@
                         <td><button class="btn custom-btn" data-target="address-change" onclick="openModal(event)">주소 변경</button></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><button class="btn btn-danger custom-danger-btn" data-target="withdraw" onclick="openModal(event)">탈퇴</button></td>
+                        <td colspan="2"><button class="btn btn-danger custom-danger-btn" data-target="withdraw" onclick="openModal(event)">회원 탈퇴</button></td>
                     </tr>
                 </table>
             </div>
