@@ -45,7 +45,7 @@
             
             <!--댓글작성-->
             <div id="second-div">
-                <div id="content"  style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</ㅇ>
+                <div id="content" style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</ㅇ>
                     
                 </div>
                 <div id="etc-reply-wrapper">
@@ -58,7 +58,7 @@
                             
                             <div class="heart-div">
                                 <img src="resources/image/talk.png" alt="">
-                                <p class="ptext">2</p>
+                                <p id="reply-count" class="ptext"></p>
                             </div>
                             
                         </div>
@@ -72,7 +72,7 @@
                             
                         </div>
                     </div>
-
+                        
                     <!-- 댓글 작성 -->
                     <form id="comment" action="insertReply.bo" method="post">
                         <p class="user-name">개떡도지</p>

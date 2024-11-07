@@ -78,5 +78,16 @@ function addReply(){
     const replyContent = $("#content")
     const replyDate = "2024.11.07"//${list.replyDate}
     
-    addReplyAjax()
+    addReplyAjax({
+        refBno: boardNo,
+        replyWriter: userId,
+        replyContent: content
+    }, function(res){
+        if(res === "success"){
+            $("#content").val(""); //요소 비우기
+            getReplyList({bno: boardNo}, function(replyList){
+                setReplyCount(replyList.length);
+            })
+        }
+    })
 }
