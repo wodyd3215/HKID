@@ -109,15 +109,15 @@
  <div class="modal" id="login-modal">
     <div class="custom-modal">
         <div class="custom-modal-header">
-            <div class="custom-modal-title"><%= (alert != null) ? alert : "로그인이 필요합니다. 로그인 하시겠습니까?" %></div>
+            <div class="custom-modal-title"><%= (alert != null) ? alert : "null" %></div>
         </div>
         <div class="custom-modal-content">
             <!-- 로그인하러가는  "예" 버튼 -->
-             <form action="boardWrite.bo" method="POST">
-                <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
+             <form action="boardWrite.bo" method="GET">
+                <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">로그인</button>
              </form>
             <!-- 모달 닫기 -->
-            <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+            <button class="modal-btn" id="no-btn" onclick="closeModal()">닫기</button>
         </div>
     </div>
 </div>

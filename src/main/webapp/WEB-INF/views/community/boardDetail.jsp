@@ -48,14 +48,14 @@
                 <div id="content"  style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</ㅇ>
                     
                 </div>
-                <div id="testsss">
+                <div id="etc-reply-wrapper">
                     <div id="etc-menu">
                         <div> 
                             <div class="heart-div">
                                 <img src="resources/image/heart.png" alt="">
                                 <p class="ptext">5</p>
                             </div>
-
+                            
                             <div class="heart-div">
                                 <img src="resources/image/talk.png" alt="">
                                 <p class="ptext">2</p>
@@ -73,6 +73,7 @@
                         </div>
                     </div>
 
+                    <!-- 댓글 작성 -->
                     <form id="comment" action="insertReply.bo" method="post">
                         <p class="user-name">개떡도지</p>
                         <textarea name="replyContent" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
@@ -148,7 +149,7 @@
                 </tr>
             </table>
             
-            <!-------------- 게시글 목록 테이블 ---------------->
+            <!-------------- 게시글 목록  ---------------->
             <table id="main-table">
                 <tr>
                     <td id="board-category">질문</td>
@@ -214,9 +215,8 @@
                 <form class="postForm" method="post">
                     <!-- 게시글 삭제 버튼 -->
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
-                    <!-- 모달 닫기 -->
-                    
                 </form>
+                <!-- 모달 닫기 -->
                 <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
                 
             </div>
