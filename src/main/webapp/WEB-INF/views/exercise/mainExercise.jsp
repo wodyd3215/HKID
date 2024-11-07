@@ -12,6 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<div id="container">
 		<div class="wrapper">
 			<div class="exerTitle">
 				<p>운동 라이브러리</p>
@@ -95,31 +96,41 @@
 					</div>
 					
 					<div id="paging-area">
-            <c:if test="${pi.currentPage ne 1}">
-                <a href="list.ex?cpage=${pi.currentPage - 1}">[이전]</a>
-            </c:if>
+						<c:if test="${pi.currentPage ne 1}">
+							<a href="list.ex?cpage=${pi.currentPage - 1}">[이전]</a>
+						</c:if>
 
-            <c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
-            	
-            	<c:choose>
-            		<c:when test="${empty part}">
-            			<a href="list.ex?cpage=${i}">${i}</a>
-            		</c:when>
-            		<c:otherwise>
-            			<a href="exercise.se?cpage=${i}">${i}</a>
-            		</c:otherwise>
-            	</c:choose>
-                
-            </c:forEach>
+						<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
+							
+							<c:choose>
+								<c:when test="${empty part}">
+									<a href="list.ex?cpage=${i}">${i}</a>
+								</c:when>
+								<c:otherwise>
+									<a href="exercise.se?cpage=${i}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+							
+						</c:forEach>
 
-            <c:if test="${pi.currentPage ne pi.maxPage}">
-                <a href="list.ex?cpage=${pi.currentPage + 1}">[다음]</a>
-            </c:if>
-        </div>
+						<c:if test="${pi.currentPage ne pi.maxPage}">
+							<a href="list.ex?cpage=${pi.currentPage + 1}">[다음]</a>
+						</c:if>
+        			</div>
         <br><br>
-    </div>
+    		</div>
+		</div>
+
+		<div class="flootbox">
+			<div class="flootbox-title">
+				my루틴
+			</div>
+			<div class="flootbox-content">
+
 			</div>
 		</div>
+
+	</div>	
 		<br><br><br>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
