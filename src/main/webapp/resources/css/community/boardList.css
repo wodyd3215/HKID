@@ -152,3 +152,59 @@ table td:nth-child(5) { /* 5번째 td */
 #common-table-header th{
     font-size: 20px;
 }
+
+/*********************모달 css****************/
+
+.modal{ 
+    position: absolute;
+}
+
+#login-modal .custom-modal{
+    height: 120px;
+    width: 350px ;
+    border-radius: 15px;
+    left: 40%; 
+    top: 40%; 
+    transform: none;
+}
+
+
+#login-modal .custom-modal-header{
+    justify-content: center;
+}
+
+#login-modal .custom-modal-title{
+    font-size: 18px;
+    text-align: center;
+}
+
+#login-modal .custom-modal-content{
+    height: 80px;
+    margin-top: 10px;
+}
+
+/* 모달 가운데 border 제거 */
+#login-modal .custom-modal-header{
+    border-bottom: none;
+}
+
+/* 모달 [예/아니오] 버튼  */
+.modal-btn{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #00A6fB;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+#yes-btn{
+    background-color: #00A6fB;
+    color: #ffffff;
+    
+}
+
+#no-btn{
+    background-color: #ffffff;
+    color: #00A6fB;
+    margin-left: 10px;
+}

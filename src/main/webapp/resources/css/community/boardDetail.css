@@ -9,7 +9,6 @@ hr{
 .wrapper{
     display: flex;
     flex-direction: column;
-
 }
 
 #top-wrapper{
@@ -470,7 +469,7 @@ table {
 }
 
 /************ 게시글 삭제 모달 css *************/
-.modal{
+.modal{ /* 모달 위치  */
     position: absolute !important;
 }
 

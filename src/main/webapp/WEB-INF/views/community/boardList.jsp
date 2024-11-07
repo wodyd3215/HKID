@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<% String alert =(String)session.getAttribute("alertMsg"); %> <!-- alert 받기 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,9 +65,9 @@
                 <option value="">10개씩</option>
                 <option value="">15개씩</option>
             </select>
-            <form action="boardWrite.bo" method="POST">
-                <button id="write-btn" data-target="login-modal">글쓰기</button>
-            </form>
+            <!-- <form action="boardWrite.bo" method="POST"> -->
+            <button id="write-btn" data-target="login-modal" onclick="openModal(event)">글쓰기</button>
+            <!-- </form> -->
         </div>
 
         <!-- 검색 바 -->
@@ -102,29 +102,23 @@
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>"
 </body>
 
-<!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
-<div id="modalContainer" class="hidden">
-    <div id="modal-content">
-        <p></p>
-        
-    </div>
-</div>
+
+
 
  <!-------- 로그인 필요 모달 --------->
  <div class="modal" id="login-modal">
     <div class="custom-modal">
         <div class="custom-modal-header">
-            <div class="custom-modal-title">로그인이 필요합니다. <br>로그인 하시겠습니까?</div>
+            <div class="custom-modal-title"><%= (alert != null) ? alert : "로그인이 필요합니다. 로그인 하시겠습니까?" %></div>
         </div>
         <div class="custom-modal-content">
             <!-- 로그인하러가는  "예" 버튼 -->
-            <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
+             <form action="boardWrite.bo" method="POST">
+                <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
+             </form>
             <!-- 모달 닫기 -->
             <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
         </div>
     </div>
 </div>
-<!--------------------------------->
-
-
 </html>

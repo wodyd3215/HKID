@@ -204,7 +204,7 @@
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
 
-    <!-------- 삭제 버튼 모달 --------->
+    <!-------- 로그인 버튼 모달 --------->
     <div class="modal" id="delete-modal">
         <div class="custom-modal">
             <div class="custom-modal-header">

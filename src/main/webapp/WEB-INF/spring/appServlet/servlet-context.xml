@@ -26,11 +26,27 @@
 	<context:component-scan base-package="com.kh.hkid" />
 	
 	<aop:aspectj-autoproxy /> 
+	
+	<!-- 
+		*사용자가 어떤 url로 요청시 해당문서가 읽혀진다고 생각하면 된다.
+		
+		handlerMapping을 통해서 url로 요청시 어떤 Controller를 구동시킬건지 찾아내야 한다. -> 요청값에 적합한 Controller 실행
+		
+		1. 요청될때마다 실행될 Controller클래스들을 been으로 등록
+		<beans:bean class="com.kh.spring.member.controller.MemberController" id="loginController" />
+		
+		2.어떤 url로 요청시 어떤 Controller를 구동시킬것인지 맵핑(handlerMapping)을 시켜줘야한다.
+		<beans:bean class="org.springFramework.web.servlet.habdler.SimpleHandlerMapping">
+		 	<bean:property name="mapping">
+		 		<beans:prop key="login.me">loginController</beans:prop>
+		 	</bean:property>
+		</beans:bean>	
+	 -->
 	 
-	 	<!-- <interceptors>
-	 	<interceptor>
-	 		<mapping path="적용url"/>
-	 		<beans:bean class="적용인터셉터클레스" id="아이디" />
-	 	</interceptor>
-	 </interceptors> -->
+ 	<interceptors>
+ 		<interceptor>
+			<mapping path="/boardWrite.bo" /> <!-- 게시글작성 -->
+			<beans:bean class="com.kh.hkid.common.interceptor.LoginInterceptor" id="loginInterceptor" />
+		</interceptor>
+	</interceptors>
 </beans:beans>
