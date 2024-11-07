@@ -77,7 +77,7 @@
 				<c:forEach var="e" items="${list}">
 						<div id="list-con">
 							<div id="list-img">
-								<a href="">
+								<a href="exercise.de?eno=${e.exerciseNo }">
 									<img src="./resources/image/exerciseImages/${ e.exerciseImg}" style="height: 250px; width: 250px;">
 								</a>
 							</div>

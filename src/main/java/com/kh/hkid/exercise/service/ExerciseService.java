@@ -18,4 +18,7 @@ public interface ExerciseService {
 	//운동리스트 필터 검색
 	List<Exercise> search(HashMap<String, Object> filterMap, PageInfo pi);
 
+	//exerciseNo로 운동 조회
+	Exercise selectExercise(int eno);
+
 }
