@@ -223,4 +223,35 @@
   	color: black;
   }
   	
- 
+
+ .flootbox-title{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+ }
+
+ .flootbox-content{
+    width: 210px;
+    height: 700px;
+    background-color: #DBF1FD;
+    border-radius: 10px;
+    margin-top: 5px;
+ }
+
+ #container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start
+  }
+
+  #container > .wrapper, #container > .flootbox {
+    padding: 80px;
+  }
+
+  #container .flootbox {
+    position: sticky;
+    top: 120px;
+  }
+
