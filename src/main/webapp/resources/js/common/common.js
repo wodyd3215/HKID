@@ -13,8 +13,9 @@ function showAndHideElement(selector){
     }
 }
 
-// 요소를 보여주고 숨겨주는 라이브러리2
+// 요소를 보여주고 숨겨주는 라이브러리
 function showAndHideElement2(selector, selector2){
+
     // selector가 받은 클래스를 탐색
     const showAndHideEl = document.querySelector(selector);
     const showAndHideEl2 = document.querySelector(selector2);

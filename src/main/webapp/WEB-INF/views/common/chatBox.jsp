@@ -28,10 +28,10 @@
                 <div class="chat-box-content">
                     <div class="chat-box-left">
                         <div id="chat-bot">
-                            <button name="chat-name" onclick="changeElement(this)">챗봇</button>
+                            <button name="chat-name" onclick="changeElement(this, '#chat-search', '#chat-content')">챗봇</button>
                         </div>
                         <div id="chat-admin">
-                            <button name="chat-name" onclick="changeElement(this)">관리자</button>
+                            <button name="chat-name" onclick="changeElement(this, '#chat-search', '#chat-content')">관리자</button>
                         </div>
                         <div id="chat-trade">
                             <button onclick="showAndHideElement('#chat-trade-user')">중고거래&nbsp;
@@ -42,18 +42,18 @@
                         <div id="chat-trade-user" class="hide">
                             <div>
                                 <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
-                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this)">개떡도지</button>
-                                <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
+                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content')">개떡도지</button>
+                                <button class="delete-chat hide" onchange="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
                             </div>
                             <div>
                                 <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
-                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this)">개떡도지</button>
-                                <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
+                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content')">개떡도지</button>
+                                <button class="delete-chat hide" onchange="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
                             </div>
                             <div>
                                 <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
-                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this)">무지개</button>
-                                <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
+                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content')">무지개</button>
+                                <button class="delete-chat hide" onchange="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
                             </div>
                         </div>
                         

@@ -1,4 +1,4 @@
-function changeElement(selector) {
+function changeElement(selector, searchUser, selectChat) {
     const otherEls = document.getElementsByName("chat-name"); // 여러 요소를 반환합니다.
 
     // 다른 요소들 배경 색을 흰색으로 변경
@@ -10,6 +10,8 @@ function changeElement(selector) {
     if (window.getComputedStyle(selector).backgroundColor !== "rgba(132, 213, 255, 1)") {
         selector.style.backgroundColor = "rgba(132, 213, 255, 1)";
     }
+    
+    showChat(searchUser, selectChat);
 }
 
 // 채팅창 삭제 기능
@@ -35,7 +37,20 @@ function nickToDelete(element) {
     deleteButton.classList.toggle("hide");
 }
 
+// 채팅창 보여주기
+function showChat(searchUser, selectChat){
 
+    // selector가 받은 클래스를 탐색
+    const showAndHideEl = document.querySelector(searchUser);
+    const showAndHideEl2 = document.querySelector(selectChat);
+
+    // classList 함수를 사용하여 해당 클래스에 hide클래스가 포함되어 있는지 탐색(있다면 true 없다면 false)
+    if(showAndHideEl2.classList.contains("hide")){
+        // if가 true라면 해당 클래스에서 hide클래스를 제거
+        showAndHideEl.classList.add("hide");
+        showAndHideEl2.classList.remove("hide");
+    }
+}
 
 // 채팅 추가 구현해야함
 function addChatting(){
