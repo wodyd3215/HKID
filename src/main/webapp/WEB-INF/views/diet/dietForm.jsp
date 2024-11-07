@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietFormModal.css">
@@ -21,13 +20,14 @@
     <div class="wrapper">
         <h1>영양</h1>
         <br>
-
+        <!-- 음식 검색(모달창 오픈) -->
         <div id="food-search-btn">
-            <button data-target="test-modal" onclick="openModal(event)">검색</button>
+            <button data-target="search-food-modal" onclick="openModal(event)">검색</button>
         </div>
 
         <br><br>
 
+        <!-- 음식 영양 정보 테이블 -->
         <table class="food-info-table">
             <thead>
                 <tr id="food-title">
@@ -61,13 +61,13 @@
         </table>
 
         <br>
-        
         <div id="food-calc-btn">
             <button onclick="foodFigureCalc()">계산</button>
         </div>
 
         <br><br><br><br><br>
 
+        <!-- 총 영양 정보 테이블 -->
         <table class="food-info-table">
             <thead>
                 <tr id="food-title">
@@ -104,8 +104,8 @@
 
     <jsp:include page="../common/footer.jsp" />
     
-    <!-- modal -->
-    <div class="modal" id="test-modal">
+    <!-- 음식 검색 모달창 -->
+    <div class="modal" id="search-food-modal">
 
         <div class="custom-modal">
             <div class="custom-modal-header">
@@ -123,6 +123,7 @@
                 </div>
             </div>
 
+            <!-- 검색된 음식 테이블 -->
             <div class="custom-modal-content">
                 <table id="common-table">
                     <thead>

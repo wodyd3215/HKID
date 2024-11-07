@@ -48,11 +48,29 @@
                     <div class="chat-box-right">
                         <!-- 채팅 컨텐츠 -->
                         <div id="chat-content">
+                            <!-- 채팅 로그 -->
                             <div id="chat-log-area">
                                 <div>
-
+                                    <!-- ajax로 list 요청 후 for,if -->
+                                    <div class="right-log">
+                                        <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
+                                        <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
+                                    </div>
+                                    <div class="left-log">
+                                        <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                                        <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
+                                    </div>
+                                    <div class="right-log">
+                                        <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
+                                        <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
+                                    </div>
+                                    <div class="left-log">
+                                        <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                                        <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- 채팅 입력 -->
                             <div id="chat-input-area">
                                 <div>
                                     <textarea name="input-chatting" placeholder="채팅 입력"></textarea>
