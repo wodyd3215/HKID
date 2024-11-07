@@ -44,6 +44,13 @@ public class ExerciseServiceImple implements ExerciseService{
 	}
 	
 	
+	// exerciseNo로 운동 조회
+	@Override
+	public Exercise selectExercise(int eno) {
+		return exerciseDao.selectExercise(sqlSession, eno);
+	}
+	
+	
 	
 	
 }
