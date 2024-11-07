@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
     <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
@@ -33,10 +31,13 @@
                         <div>풍근풍근</div> &nbsp;&nbsp;&nbsp;
                         <div>2024.10.24</div>
                     </div>
-                    <form class="postForm" method="post">
-                        <button class="btn" onclick="postFormSubmit('edit')">수정</button>
-                        <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>                        
-                    </form>
+                    <div class="btn-div">
+                        <form class="postForm" method="post">
+                            <button class="btn"  onclick="postFormSubmit('edit')">수정</button>
+                        </form>
+                        <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
+                    </div>
+                    
                 </div>
                 <hr>
             </div>
@@ -210,13 +211,13 @@
                 <div class="custom-modal-title">게시글을 삭제하시겠습니까?</div>
             </div>
             <div class="custom-modal-content">
-                <form id="postForm">
+                <form class="postForm" method="post">
                     <!-- 게시글 삭제 버튼 -->
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
                     <!-- 모달 닫기 -->
-                    <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+                    
                 </form>
-                
+                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
                 
             </div>
         </div>

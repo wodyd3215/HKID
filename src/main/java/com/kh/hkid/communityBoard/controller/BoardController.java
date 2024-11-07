@@ -56,7 +56,7 @@ public class BoardController {
 	}
 	
 	// 게시글 삭제
-	@GetMapping("boardDelete.bo")
+	@PostMapping("boardDelete.bo")
 	public String boardDelete() {
 		System.out.println("삭제컨트롤러에서 받음");
 		return "community/boardDetail"; // 임시로 설정

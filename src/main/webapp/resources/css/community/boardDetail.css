@@ -155,6 +155,7 @@ hr{
     height: 110px;
     font-size: 16px;
     font-weight: 600;
+    outline: none;
 }
 
 #write-comment::placeholder{
@@ -390,6 +391,14 @@ table {
     cursor: pointer;
 }
 
+.btn-div{
+    display: flex;
+}
+
+.btn{
+    font-weight: 600 !important;
+}
+
 #boCount-wirte-div {
     width: 100%;
     display: flex;
@@ -465,33 +474,32 @@ table {
     position: absolute !important;
 }
 
-.custom-modal {
-    width: 280px;
+#delete-modal .custom-modal{
     height: 120px;
     border-radius: 15px;
-
-    left: 1200px; 
+    width: 300px ;
+    left: 1300px; 
     top: 320px; 
     transform: none;
 }
 
 
-.custom-modal-header{
+#delete-modal .custom-modal-header{
     justify-content: center;
 }
 
-.custom-modal-title{
-    font-size: 16px;
+#delete-modal .custom-modal-title{
+    font-size: 18px;
     text-align: center;
 }
 
-.custom-modal-content{
+#delete-modal .custom-modal-content{
     height: 80px;
     margin-top: 10px;
 }
 
 /* 모달 가운데 border 제거 */
-.custom-modal-header{
+#delete-modal .custom-modal-header{
     border-bottom: none;
 }
 
