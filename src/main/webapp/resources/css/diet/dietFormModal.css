@@ -1,11 +1,15 @@
-.custom-modal {
-    transform: translate(6%, -35%);
-    width: 500px;
-    height: 650px;
+#search-food-modal {
+    position: absolute;
+}
+
+#search-food-modal .custom-modal {
+    transform: translate(13%, -28%);
+    width: 470px;
+    height: 625px;
     border-radius: 10px;
 }
 
-.custom-modal-header{
+#search-food-modal .custom-modal-header{
     display: block;
     justify-content: center;
     align-items: center;
@@ -14,37 +18,37 @@
     height: 120px;
 }
 
-.custom-modal-title {
+#search-food-modal .custom-modal-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 30px;
 }
 
-.custom-modal-title > div {
+#search-food-modal .custom-modal-title > div {
     width: 36px;
 }
 
-.custom-modal-title > h4 {
+#search-food-modal .custom-modal-title > h4 {
     margin: 0px;
     font-weight: bold;
     padding-top: 10px;
 }
 
-.custom-modal-title > button {
+#search-food-modal .custom-modal-title > button {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#searchbar-div {
+#search-food-modal #searchbar-div {
     height: 32px;
     display: flex;
     justify-content: end;
     margin-bottom: 20px;
 }
 
-#board-search-bar {
+#search-food-modal #board-search-bar {
     border: 1px solid rgb(196, 195, 195);
     border-radius: 9px 0px 0px 9px ;
     width: 230px;
@@ -54,11 +58,11 @@
     border-right: none;
 }
 
-#board-search-bar:focus {
+#search-food-modal #board-search-bar:focus {
     outline: none;
 }
 
-#search-btn {
+#search-food-modal #search-btn {
     border: 1px solid rgb(196, 195, 195);
     background-color: white;
     border-left: none;
@@ -67,23 +71,23 @@
     padding-bottom: 4px;
 }
 
-#searchIcon {
+#search-food-modal #searchIcon {
     width: 20px;
 }
 
-.type-width35 {
+#search-food-modal .type-width35 {
     width: 35%;
 }
 
-.type-width27 {
+#search-food-modal .type-width27 {
     width: 27%;
 }
 
-.type-width5 {
+#search-food-modal .type-width5 {
     width: 5%;
 }
 
-#food-add-btn > button {
+#search-food-modal #food-add-btn > button {
     width: 25px;
     height: 25px;
     border-radius: 10px;
@@ -97,3 +101,14 @@
     padding-bottom: 4px;
 }
 
+#common-table th{
+    font-size: 20px;
+}
+
+#common-table td {
+    font-size: 16px;
+}
+
+#common-table tbody tr {
+    height: 35px;
+}

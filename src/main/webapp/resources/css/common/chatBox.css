@@ -73,13 +73,11 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    overflow-y: auto;
 }
 
 .chat-box-left > div {
     margin-top: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: end;
 }
 
 .chat-box-left > div > button {
@@ -96,23 +94,44 @@
     padding: 0px;
 }
 
-#chat-bot {
-    
+.chat-box-left > div > button:hover {
+    border: 2px solid rgba(0, 166, 251, 0.5);
+}
+
+#chat-bot button {
+    background-color: rgba(132, 213, 255, 1);
 }
 
 #chat-trade > button > img {
     width: 20px;
 }
 
-#chat-trade-user > img {
-
+#chat-trade-user > div{
+    display: flex;
+    align-items: center;
+    height: 27px;
+    margin-bottom: 8px;
 }
 
-#chat-trade-user > button {
+#chat-trade-user img {
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+}
+
+#chat-trade-user button {
+    border: none;
+    border-radius: 5px;
+    background-color: white;
     width: 64px;
     height: 27px;
     margin-left: 3px;
     font-size: 12px;
+    padding: 0px;
+}
+
+.trade-user-nick {
+    /* display: none; */
 }
 
 /* 우측 컨텐츠 */
@@ -125,6 +144,7 @@
     /* display: none; */
 }
 
+/* 채팅 로그 */
 #chat-log-area{
     height: 380px;
     border-bottom: 1px solid rgba(0, 166, 251, 0.5);
@@ -138,8 +158,44 @@
     height: 362px;
     background-color: white;
     border-radius: 5px;
+    padding: 10px 10px 0px;
+    overflow-y: auto;
 }
 
+#chat-log-area > div::-webkit-scrollbar {
+    display: none;
+}
+
+#chat-log-area > div > div {
+    display: flex;
+    align-items: start;
+    margin-bottom: 15px;
+}
+
+#chat-log-area p {
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 10px;
+    width: 230px;
+    margin: 0;
+    word-wrap: break-word;
+    margin: 0px 5px;
+    padding: 6px 8px;
+}
+
+#chat-log-area img {
+    width: 30px;
+    height: 30px;
+}
+
+.right-log {
+    float: right;
+}
+
+.left-log {
+    float: left;
+}
+
+/* 채팅 입력 */
 #chat-input-area {
     height: 123px;
     display: flex;
@@ -160,6 +216,10 @@
     border-radius: 5px;
     resize: none;
     padding: 3px 5px;
+}
+
+#chat-input-area > div > textarea::-webkit-scrollbar {
+    display: none;
 }
 
 #chat-input-area > div > textarea:focus{
@@ -189,7 +249,6 @@
 
 /* 검색 컨텐츠 */
 #chat-search {
-    display: none;
     margin: auto;
 }
 
@@ -237,6 +296,7 @@
     margin: auto;
     margin-bottom: 10px;
     padding: 0 10px 0 4px;
+    overflow-y: auto;
 }
 
 #search-users > img {
