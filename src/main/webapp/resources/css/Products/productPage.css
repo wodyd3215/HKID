@@ -19,6 +19,47 @@ button{
     background: none;
 }
 
+/* 좋아요 버튼 스타일*/
+
+input[type=checkbox].favoriteBtn {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    background-color: #d1d1d1;
+    transform: rotate(45deg);
+}
+
+input[type=checkbox].favoriteBtn:before{
+    position:absolute;
+    content: "";
+    background-color: #d1d1d1;
+    height: 60%;
+    width: 100%;
+    top: -57%;
+    border-radius: 75px 75px 0 0;
+}
+input[type=checkbox].favoriteBtn:after {
+    position:absolute;
+    content: "";
+    background: #d1d1d1;
+    height: 73%;
+    width: 100%;
+    transform: rotate(-90deg);
+    border-radius: 75px 75px 0 0;
+    top: 15%;
+    right: 75%;
+}
+
+input[type=checkbox].favoriteBtn:checked,
+input:checked[type=checkbox].favoriteBtn:before,
+input:checked[type=checkbox].favoriteBtn:after{
+    background: #f20f42;;
+}
+
+
 /* 왼쪽 사이드바 부분 */
 
 ul.side-nav {
@@ -63,6 +104,11 @@ li{
     height: 100%;
 }
 
+li:hover{
+    cursor: pointer;
+    color: #006494;
+}
+
 /* 페이징, 검색 바*/
 .productPageA{
     display: flex;
@@ -79,10 +125,11 @@ li{
     justify-content: center;
     align-items: flex-start;
     width: 1060px;
-    border-bottom: #003554 2px solid;
+    
 }
 
 button.productMove, button.usedMove {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,7 +141,11 @@ button.productMove, button.usedMove {
     font-weight: 400;
     border: none;    
     width: 100%;
-    height: 73px;
+    height: 73px;    
+}
+
+button.productMove, button.usedMove:hover{
+    border-bottom: #003554 2px solid;
 }
 
 /* 상품 목록 */

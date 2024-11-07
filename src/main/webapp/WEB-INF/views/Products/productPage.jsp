@@ -22,7 +22,7 @@
                 <ul class="side-nav">
                     <li class="side-nav-header"> 상품 </li>
                     <li onclick="handleClick('식품')"> 식품 </li>
-                    <li> 의류 </li>
+                    <li onclick="handelClick('의류')"> 의류 </li>
                     <li> 기구 </li>
                 </ul>
             </div>
@@ -44,7 +44,8 @@
                                 <div class="productName">
                                     상품 <!-- 상품 이름 -->
                                 </div>
-                                <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>
+                                
+                                <input type="checkbox" class="favoriteBtn"></input>
                             </div>
 
                             

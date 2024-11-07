@@ -116,6 +116,7 @@
 }
 
 .Btnmin{
+    cursor: pointer;
     border: none;
     font-size: 20px;
     width: 100%;
@@ -124,6 +125,7 @@
 }
 
 .Btnpls{
+    cursor: pointer;
     border: none;
     font-size: 20px;    
     width: 100%;
@@ -133,6 +135,7 @@
 
 
 .phaseCartBtn{
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,6 +144,7 @@
 }
 
 .phaseBtn{
+    cursor: pointer;
     font-size: 24px;
     font-family: "Do Hyeon", serif;
     color: #ffffff;
@@ -161,6 +165,7 @@
 }
 
 .favoriteBtn{
+    cursor: pointer;
     height: 50px;
     border: none;
     width: 357px;
@@ -176,26 +181,32 @@
     width: 45px;
 }
 
+.menuBtn{
+    display: none;
+}
+
 .tab {
+    position: sticky;
+    top: 0;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .tab li {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 250px;
-    height: 50px;
+    width: 352px;
+    height: 60px;
     background: #051923;
     color: #b6b6b6;
     font-family: "Do Hyeon", serif;
     font-size: 28px;
-}
-
-.tab li a {
-    text-decoration-line: none;
+    user-select: none;
 }
 
 .contentDetail div{
@@ -242,4 +253,31 @@
     margin: 10px 0px 10px 0px;
     font-size: 12px;
     color: #bebebe;
+}
+
+
+.exchange-text{
+    background: #051923;
+    font-family: "Do Hyeon", serif;
+    color: #e2e2e2;
+    font-size: 32px;
+    margin: 10px 0px;
+    padding: 10px;
+}
+
+
+/* 클릭 시 메뉴 색깔 바뀜*/
+.menuBtn input:checked + label,
+.detailMenu .tab li input:checked + label {
+    background: #fff;
+    color: #575757;
+}
+
+
+/* 라디오 버튼 체크 상태와 상응하는 콘텐츠 표시 */
+input#contentDetail:checked ~ .tabContent .contentDetail,
+input#contentReview:checked ~ .tabContent .contentReview,
+input#detailMenuExchange:checked ~ .tabContent .contentExchange
+ {
+    display: block;
 }
