@@ -1,14 +1,14 @@
 package com.kh.hkid.exercise.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,8 +75,17 @@ public class ExerciseController {
 		
 	}
 	
-	@RequestMapping("exercise.de")
-	public String exerciseDetail() {
+	@GetMapping("exercise.de")
+	public String selectExercise(int eno, Model model) {
+		
+		 // 운동 정보 가져오기
+		Exercise e = exerciseService.selectExercise(eno);
+		
+		// 운동 설명을 문장 단위로 분할하여 리스트로 변환
+		List<String> descriptionList = Arrays.asList(e.getExerciserDescription().split("\\.\\s*"));
+		
+		model.addAttribute("e", e);
+		model.addAttribute("descriptionList", descriptionList);
 		
 		return "exercise/detailExercise";
 	}

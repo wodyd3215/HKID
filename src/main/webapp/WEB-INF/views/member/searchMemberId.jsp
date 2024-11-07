@@ -24,7 +24,7 @@
                 <input type="submit" onclick="searchId()" value="아이디 찾기">
             </div>
         </form>
-
+        
         <div id="search-id-text">해당 이메일로 가입된 아이디는 'xxxxxxx' 입니다.</div>
 
         <div class="login-searchPwd">

@@ -10,14 +10,14 @@
 .under-area{
     display: flex;
     justify-content: space-between;
-    width: 200px;
+    width: 250px;
     font-size: 25px;
 }
 
 .exerDiffy{
     display: flex;
     justify-content: space-between;
-    width: 130px;
+    width: 160px;
 }
 
 .detailContent{
