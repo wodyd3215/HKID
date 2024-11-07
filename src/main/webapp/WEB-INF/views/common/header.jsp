@@ -12,9 +12,11 @@
 <!--css-->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
 
 <!--js-->
 <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 
 <!-- include libraries(jQuery, bootstrap) -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

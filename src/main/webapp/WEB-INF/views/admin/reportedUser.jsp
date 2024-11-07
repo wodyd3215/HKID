@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/bManagement.css">
-    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/uManagement.css">
+
 </head>
 <body>
-    <!-- 테이블 구조 및 css 전면 교체 못하면 나 죽어버려 -->
     <jsp:include page="sideNavi.jsp" />
     <div class="wrapper">
         <div class="managementTitle">
@@ -21,11 +20,11 @@
             <table>
                 <thead>
                     <tr id="common-table-header">
-                        <th class="type-width14">유형</th>
-                        <th class="type-width24">신고자명</th>
-                        <th class="type-width24">신고 대상</th>
-                        <th class="type-width24">상세 내용</th>
-                        <th class="type-width14">관리</th>
+                        <th data-width="18%">유형</th>
+                        <th data-width="24%">신고자명</th>
+                        <th data-width="24%">신고 대상</th>
+                        <th data-width="24%">상세 내용</th>
+                        <th data-width="14%">관리</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +34,7 @@
                         <td>꾸준히운동</td>
                         <td>
                             <div class="management">
-                                <button class="btn btn-primary custom-btn" data-target="reportDetail">확인하기</button>
+                                <button class="btn btn-primary custom-btn" data-target="report-detail" onclick="openModal(event)">확인하기</button>
                             </div>
                         </td>
                         <td>
@@ -51,6 +50,7 @@
                     </tr>
                 </tbody>
             </table>
+            <jsp:include page="detailModal.jsp" />
         </div>
         <div id="searchbar-div">
             <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">
@@ -70,7 +70,5 @@
             <button class="page-btn">&gt;</button>
         </div>
     </div>
-
-
 </body>
 </html>
