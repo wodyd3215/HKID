@@ -38,4 +38,9 @@ public class ExerciseDao {
 
 	}
 
+	//exerciseNo로 운동 조회
+	public Exercise selectExercise(SqlSessionTemplate sqlSession, int eno) {
+		return sqlSession.selectOne("exerciseMapper.exerciseSelect", eno);
+	}
+
 }

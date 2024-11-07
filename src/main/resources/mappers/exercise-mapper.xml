@@ -8,13 +8,19 @@
  <mapper namespace="exerciseMapper">
  
  	<resultMap type="Exercise" id="ExerciseResult">
+ 		<!-- <result column = "테이블 컬럼명" property="객체의 필드명"/> -->
  		<result column="EXERCISE_NO" property="exerciseNo"/>
  		<result column="PART_NO" property="partNo"/>
  		<result column="EXERCISE_NAME" property="exerciseName"/>
  		<result column="EXERCISE_DIFFICULTY" property="exerciseDifficulty"/>
  		<result column="EXERCISE_DESCRIPTION" property="exerciserDescription"/>
  		<result column="EXERCISE_IMG" property="exerciseImg"/>
+ 		
+ 		<!-- PART_TAG 테이블과 관련된 매핑  -->
+ 		<result column="PART_NAME" property="partName"/>
  	</resultMap>
+ 	
+ 	
  	
  	
  	<!-- 운동치스트 총 갯수 조회 -->
@@ -63,5 +69,19 @@
 		         OR PART_NAME LIKE '%' || #{keyword} || '%')
     		</foreach>
     	</if>
+   </select>
+   
+   <!-- eno로 운동 조회 -->
+   <select id="exerciseSelect" resultMap="ExerciseResult">
+   	SELECT EXERCISE_NO,
+            PART_NO,
+            PART_NAME,
+            EXERCISE_NAME,
+            EXERCISE_DIFFICULTY,
+            EXERCISE_DESCRIPTION,
+            EXERCISE_IMG
+     FROM EXERCISE_LIST
+     JOIN PART_TAG USING(PART_NO)
+     	WHERE EXERCISE_NO = #{eno}
    </select>
  </mapper>
