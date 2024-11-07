@@ -66,19 +66,9 @@
                 <option value="">15개씩</option>
             </select>
             <form action="boardWrite.bo" method="POST">
-                <button id="write-btn">글쓰기</button>
+                <button id="write-btn" data-target="login-modal">글쓰기</button>
             </form>
         </div>
-
-        <!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
-        <!-- common에 모달 쓰는곳 있으니 그곳에서 작성 사용법은 트렐로에 작성했음 -->
-        <div id="modalContainer" class="hidden">
-            <div id="modal-content">
-                <p></p>
-                
-            </div>
-        </div>
-
 
         <!-- 검색 바 -->
         <div id="searchbar-div">
@@ -106,10 +96,35 @@
             <button class="page-btn">5</button>
             <button class="page-btn">&gt;</button>
         </div>
-
-
     </div>
+
 
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>"
 </body>
+
+<!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
+<div id="modalContainer" class="hidden">
+    <div id="modal-content">
+        <p></p>
+        
+    </div>
+</div>
+
+ <!-------- 로그인 필요 모달 --------->
+ <div class="modal" id="login-modal">
+    <div class="custom-modal">
+        <div class="custom-modal-header">
+            <div class="custom-modal-title">로그인이 필요합니다. <br>로그인 하시겠습니까?</div>
+        </div>
+        <div class="custom-modal-content">
+            <!-- 로그인하러가는  "예" 버튼 -->
+            <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
+            <!-- 모달 닫기 -->
+            <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+        </div>
+    </div>
+</div>
+<!--------------------------------->
+
+
 </html>

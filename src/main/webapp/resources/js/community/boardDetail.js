@@ -1,7 +1,8 @@
 // 매개변수 받아서 게시글 수정/삭제하는 함수
 function postFormSubmit(type){
-    const $formEl = $("#postForm"); //요소 선택.
+    const $formEl = $(".postForm"); //요소 선택.
 
+    console.log($formEl)
     switch(type){ 
         // 게시글 수정
         case "edit": 
