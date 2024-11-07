@@ -53,9 +53,7 @@
             </table>
         </div>
         <div id="boCount-wirte-div" class="custom-div">
-            <form action="" method="POST">
-                <button class="btn btn-primary custom-btn">상품 등록</button>
-            </form>
+                <a href="pEnroll.ad" class="btn btn-primary custom-btn">상품 등록</a>
         </div>
 
         <div id="searchbar-div">

@@ -8,9 +8,3 @@
 .management button{
     margin: 0;
 }
-
-#common-table-body .btn.btn-warning.custom-btn,
-#common-table-body .btn.btn-danger.custom-btn {
-    width: 24px; /* 버튼 크기 조정 */
-    height: 24px; /* 버튼 크기 조정 */
-}
