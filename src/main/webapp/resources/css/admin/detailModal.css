@@ -1,0 +1,51 @@
+.custom-modal {
+    width: 400px;
+    height: 500px;
+    overflow: hidden;
+}
+
+.custom-modal-content {
+    display: block;
+    margin: 0;
+    height: calc(100% - 59px);
+}
+
+#report-info {
+    margin-top: 5px;
+    width: 100%;
+    border-bottom: 1px dashed black;
+}
+
+#report-info .title{
+    text-align: left;
+    width: 20%;
+}
+
+#report-info .content {
+    padding: 5px;
+    overflow: hidden;
+}
+
+#report-info .content div {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: 5px;
+    border: 1px solid black;
+    background: #d9d9d9;
+}
+
+#report-detail {
+    margin: 5px 0;
+    
+}
+
+#report-detail textarea{
+    width: 100%;
+    height: 232px;
+    text-align: left;
+    padding: 5px;
+    border: 1px solid black;
+    background: #d9d9d9;
+    resize: none;
+}

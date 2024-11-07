@@ -31,7 +31,23 @@
                     </div>
                     <div>
                         <button>수정</button>
-                        <button>삭제</button>
+                        <button class="btn" data-target="delect-modal" onclick="openModal(event)">삭제</button>
+
+                            <!-------------- 삭제 확인 모달 ----------------->
+                             <!--
+                                id: data-set으로 id를 전달받아 해당 팝업창을 열어줌
+                                팝업창을 띄울 필요가 있는 요소에 data-target="요소 id"를 작성해주면 됨
+                                ex) <button class="btn" data-target="test-modal" onclick="openModal(event)"></button>
+                            -->
+                                <div class="modal" id="delect-modal">
+                                    <div class="custom-modal">
+                                        <div class="custom-modal-header">
+                                            <div class="custom-modal-title"></div>
+                                            <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
+                                        </div>
+                                        <div class="custom-modal-content">
+                                    </div>
+                                </div>
                     </div>
                 </div>
                 <hr>
