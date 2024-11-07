@@ -50,4 +50,9 @@ public class MemberController {
     public String enrollForm() {
     	return "member/enrollForm";
     }
+    
+    @GetMapping("myDiary.me")
+    public String myDiary() {
+    	return "member/myDiaryPage";
+    }
 }

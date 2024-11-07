@@ -9,14 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!--css-->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css?after">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
-
-<!--js-->
-<script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 
 <!-- include libraries(jQuery, bootstrap) -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -27,6 +19,14 @@
 <link href="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.css" rel="stylesheet">
 <script src="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.js"></script>
 
+<!--css-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
+
+<!--js-->
+<script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 </head>
 <body onload="init('${pageName}', '${optional}')">
     <div class="header">

@@ -28,24 +28,21 @@
     border: none;
     background: #00A6FB;
     font-weight: bold;
+    overflow: hidden;
     
 }
 
-#common-table-body .btn.btn-warning.custom-btn,
-#common-table-body .btn.btn-danger.custom-btn {    
+.btn.btn-warning.custom-btn,
+.btn.btn-danger.custom-btn { 
+    width: 24px; /* 버튼 크기 조정 */
+    height: 24px; /* 버튼 크기 조정 */   
     overflow: hidden; /* 버튼 밖으로 넘치는 요소 숨기기 */
     color: black;
 }
 
-.btn.btn-primary.custom-btn:focus,
-.btn.btn-primary.custom-btn:active,
-.btn.btn-primary.custom-btn:hover,
-#common-table-body .btn.btn-warning.custom-btn:focus,
-#common-table-body .btn.btn-warning.custom-btn:active,
-#common-table-body .btn.btn-warning.custom-btn:hover,
-#common-table-body .btn.btn-danger.custom-btn:focus,
-#common-table-body .btn.btn-danger.custom-btn:active,
-#common-table-body .btn.btn-danger.custom-btn:hover{
+.btn.custom-btn:focus,
+.btn.custom-btn:active,
+.btn.custom-btn:hover{
     outline: none;
     box-shadow: none;
 }

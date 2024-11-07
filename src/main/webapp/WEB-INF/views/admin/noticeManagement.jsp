@@ -23,8 +23,8 @@
                     <tr id="common-table-header">
                         <th data-width="8%">게시판</th>
                         <th data-width="50%">제목</th>
-                        <th data-width="8%">작성자</th>
-                        <th data-width="18%">등록일</th>
+                        <th data-width="13%">작성자</th>
+                        <th data-width="13%">등록일</th>
                         <th data-width="8%">조회수</th>
                         <th data-width="8%">관리</th>
                     </tr>
@@ -139,9 +139,7 @@
             </table>
         </div>
         <div id="boCount-wirte-div" class="custom-div">
-            <form action="" method="POST">
-                <button class="btn btn-primary custom-btn">공지 등록</button>
-            </form>
+            <a href="nEnroll.ad" class="btn btn-primary custom-btn">공지 등록</a>
         </div>            
         <div id="searchbar-div">
             <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">

@@ -44,4 +44,14 @@ public class AdminController {
 	public String notice() {
 		return "admin/noticeManagement";
 	}
+	
+	@GetMapping("pEnroll.ad")
+	public String productEnroll() {
+		return "admin/productEnroll";
+	}
+	
+	@GetMapping("nEnroll.ad")
+	public String noticeEnroll() {
+		return "admin/noticeEnroll";
+	}
 }
