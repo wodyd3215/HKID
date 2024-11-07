@@ -5,44 +5,58 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/chatBox.css">
+    <script src="${pageContext.request.contextPath}/resources/js/common/chatBox.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/common.js"></script>
     <title>Insert title here</title>
 </head>
 <body>
     <jsp:include page="header.jsp" />
     <div class="wrapper">
         <div id="chat-area">
-            <button>
+            <!-- 클래스이름을 매개변수로 넘김 -->
+            <button onclick="showAndHideElement('.chat-box')">
                 <img src="${pageContext.request.contextPath}/resources/image/chatting_icon.png">
             </button>
-            <div class="chat-box">
+            <div class="chat-box hide">
                 <div class="chat-box-header">
-                    <button>
+                    <button onclick="showAndHideElement2('#chat-search', '#chat-content')">
                         <img src="${pageContext.request.contextPath}/resources/image/searchIcon.png">
                     </button>
                 </div>
                 <div class="chat-box-content">
                     <div class="chat-box-left">
                         <div id="chat-bot">
-                            <button>챗봇</button>
+                            <button name="chat-name" onclick="changeElement(this)">챗봇</button>
                         </div>
                         <div id="chat-admin">
-                            <button>관리자</button>
+                            <button name="chat-name" onclick="changeElement(this)">관리자</button>
                         </div>
                         <div id="chat-trade">
-                            <button>중고거래&nbsp;
+                            <button onclick="showAndHideElement('#chat-trade-user')">중고거래&nbsp;
                                 <img src="${pageContext.request.contextPath}/resources/image/down.png">
                             </button>
                         </div>
                         <!-- 중고판매유저 -->
-                        <div id="chat-trade-user">
-                            <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
-                            <button>개떡도지</button>
+                        <div id="chat-trade-user" class="hide">
+                            <div>
+                                <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
+                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this)">개떡도지</button>
+                                <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
+                            </div>
+                            <div>
+                                <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
+                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this)">개떡도지</button>
+                                <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
+                            </div>
+                            <div>
+                                <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
+                                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this)">무지개</button>
+                                <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
+                            </div>
                         </div>
-                        <div id="chat-trade-user">
-                            <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
-                            <button>무지개</button>
-                        </div>
+                        
                     </div>
                     <!-- 채팅 우측 컨텐츠 -->
                     <div class="chat-box-right">
@@ -83,17 +97,18 @@
                             </div>
                         </div>
                         <!-- 유저 검색 컨텐츠 -->
-                        <div id="chat-search">
+                        <div id="chat-search" class="hide">
                             <div id="searchbar-div">
                                 <input type="search" name="" id="board-search-bar" placeholder="닉네임을 입력해주세요.">
                                 <button id="search-btn" type="submit">
                                     <img id="searchIcon" src="resources/image/searchIcon.png">
                                 </button>
                             </div>
+                            <!-- 채팅 추가 JS미구현! -->
                             <div id="search-users">
                                 <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
                                 <p>개떡도지</p>
-                                <button>
+                                <button onclick="addChatting()">
                                     <img src="${pageContext.request.contextPath}/resources/image/chat_bubble.png">
                                 </button>
                             </div>

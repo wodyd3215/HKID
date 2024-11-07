@@ -78,9 +78,6 @@
 
 .chat-box-left > div {
     margin-top: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: end;
 }
 
 .chat-box-left > div > button {
@@ -109,16 +106,32 @@
     width: 20px;
 }
 
-#chat-trade-user > img {
-    width: 27px;
+#chat-trade-user > div{
+    display: flex;
+    align-items: center;
     height: 27px;
+    margin-bottom: 8px;
 }
 
-#chat-trade-user > button {
+#chat-trade-user img {
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+}
+
+#chat-trade-user button {
+    border: none;
+    border-radius: 5px;
+    background-color: white;
     width: 64px;
     height: 27px;
     margin-left: 3px;
     font-size: 12px;
+    padding: 0px;
+}
+
+.trade-user-nick {
+    /* display: none; */
 }
 
 /* 우측 컨텐츠 */
@@ -236,7 +249,6 @@
 
 /* 검색 컨텐츠 */
 #chat-search {
-    display: none;
     margin: auto;
 }
 
