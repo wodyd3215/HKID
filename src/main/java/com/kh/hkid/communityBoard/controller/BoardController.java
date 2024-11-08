@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kh.hkid.community.model.dto.CommentReply;
 import com.kh.hkid.community.model.vo.Reply;
 import com.kh.hkid.communityBoard.service.BoardService;
 
@@ -24,11 +26,14 @@ import com.kh.hkid.communityBoard.service.BoardService;
 public class BoardController {
 
 	private final BoardService boardService;
+	
 
 	@Autowired
 	public BoardController(BoardService boardService) {
+		super();
 		this.boardService = boardService;
 	}
+
 	
 	//게시글 목록
 	@GetMapping("list.bo")
@@ -46,7 +51,21 @@ public class BoardController {
 	
 	//게시글 디테일
 	@GetMapping("boardDetail.bo")
-	public String selectDetailBoard() {
+	public String selectDetailBoard(Model model) {
+		
+		//DB 들어가기 전까지만 사용!!
+		ArrayList<CommentReply> replyList = new ArrayList<>();
+		CommentReply commentReply = new CommentReply();
+		
+		commentReply.setContent("댓글 더미데이터입니다");
+		commentReply.setDate("2024.11.08");
+		commentReply.setUserName("안재휘");
+		
+		replyList.add(commentReply)	;	
+		int replyCount = replyList.size();
+		
+		model.addAttribute("replyList", replyList);
+		model.addAttribute("replyCount", replyCount);
 		
 		return "community/boardDetail";
 	}
@@ -73,6 +92,10 @@ public class BoardController {
 		return "null";
 	}
 	
+	//처음 댓글 목록 출력
+	
+	
+	
 	//ajax 댓글목록 select
 	@ResponseBody
 	@PostMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"
@@ -81,9 +104,23 @@ public class BoardController {
 //		ArrayList<Reply> list = boardService.ajaxSelectReplyList(bno); 
 		
 		//DB 들어가기 전까지만 사용!!
-		Reply list = new Reply();
+		CommentReply commentList = null;
+		commentList.setContent("댓글 더미데이터입니다");
+		commentList.setDate("2024.11.08");
+		commentList.setUserName("안재휘");
 		
-		return new Gson().toJson(list); //list를 JSON(문자열)으로 변환해서 리턴 
+		
+		
+		return new Gson().toJson(commentList); //list를 JSON(문자열)으로 변환해서 리턴 
+	}
+	
+	//ajax댓글추가
+	@ResponseBody
+	@PostMapping(value="addReply.bo", produces="application/json; charset=UTF-8")
+	public String ajaxInsertReply() {
+		
+		Reply reply= null;
+		return new Gson().toJson(reply);
 	}
 	
 	

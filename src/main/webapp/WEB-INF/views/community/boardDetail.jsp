@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>​
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,6 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -53,12 +53,12 @@
                         <div> 
                             <div class="heart-div">
                                 <img src="resources/image/heart.png" alt="">
-                                <p class="ptext">5</p>
+                                <p class="ptext">하트 개수</p>
                             </div>
                             
                             <div class="heart-div">
                                 <img src="resources/image/talk.png" alt="">
-                                <p id="reply-count" class="ptext"></p>
+                                <p id="reply-count" class="ptext">${replyCount}</p>
                             </div>
                             
                         </div>
@@ -76,7 +76,7 @@
                     <!-- 댓글 작성 -->
                     <form id="comment" action="insertReply.bo" method="post">
                         <p class="user-name">개떡도지</p>
-                        <textarea name="replyContent" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
+                        <textarea name="replyContent" id="write-comment" style="resize: none;" onclick="addReply()" placeholder="댓글을 작성하세요"></textarea>
                         <input type="submit" name="" id="submit-btn" value="등록">
                     </form>
                 </div>
@@ -85,47 +85,57 @@
             <hr>
 
             <!-- 댓글리스트 -->
-            <div id="comments-body-wrapper">
-                <div id="comments-body">
-                    <div id="main-comment">
-                        <div id="comment-left">
-                            <p class="user-name">개떡도지</p>
-                            <p>2024.10.24 &nbsp; 13:34</p>
-                            <button id="add-sub-comment">답글쓰기</button>
-                        </div>
-                        <div id="comment-middle">
-                            dasdsa
-                        </div>
-                        <div id="comment-right">
-                            <button>수정</button>
-                            <button>삭제</button>
+            <c:if test="${not empty replyList}">
+                <p>댓글 목록이 존재합니다.</p>
+            </c:if>
+            <c:if test="${empty replyList}">
+                <p>댓글 목록이 비어 있습니다.</p>
+            </c:if>
+            
+            <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 --> 
+                <div class="comments-body-wrapper">
+                    <div id="comments-body">
+                        <div class="main-comment">
+                            <div id="comment-left">
+                                <p class="user-name">${c.userName}</p>
+                                <p>${c.date} &nbsp;</p>
+                                <button class="add-sub-comment">답글쓰기</button>
+                            </div>
+                            <div class="comment-middle">
+                                ${c.content}
+                            </div>
+                            <div class="comment-right">
+                                <button>수정</button>
+                                <button>삭제</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
             <hr>
-
-            <div id="comments-body-wrapper">
-                <div id="sub-comments-body">
-                    <div>
-                        <img id="drift-arrow" src="resources/image/driftArrow.png" alt="">
-                    </div>
-                    <div id="main-comment">
-                        <div id="comment-left">
-                            <p class="user-name">개떡도지</p>
-                            <p>2024.10.24 &nbsp; 13:34</p>
-                            <button id="add-sub-comment">답글쓰기</button>
+            
+                <div class="comments-body-wrapper">
+                    <div id="sub-comments-body">
+                        <div>
+                            <img id="drift-arrow" src="resources/image/driftArrow.png" alt="">
                         </div>
-                        <div id="comment-middle">
-                            dasdsa
-                        </div>
-                        <div id="comment-right">
-                            <button>수정</button>
-                            <button>삭제</button>
+                        <div class="main-comment">
+                            <div id="comment-left">
+                                <p class="user-name">개떡도지</p>
+                                <p>2024.10.24 &nbsp; 13:34</p>
+                                <button class="add-sub-comment">답글쓰기</button>
+                            </div>
+                            <div class="comment-middle">
+                                dasdsa
+                            </div>
+                            <div class="comment-right">
+                                <button>수정</button>
+                                <button>삭제</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+   
             <hr>
         </div>
 
@@ -168,9 +178,7 @@
                     <option value="">10개씩</option>
                     <option value="">15개씩</option>
                 </select>
-                <form action="boardWrite.bo" method="POST">
-                    <button id="write-btn">글쓰기</button>
-                </form>
+
             </div>
     
             <!-- 검색 바 -->

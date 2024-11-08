@@ -109,7 +109,7 @@
  <div class="modal" id="login-modal">
     <div class="custom-modal">
         <div class="custom-modal-header">
-            <div class="custom-modal-title"><%= (alert != null) ? alert : "null" %></div>
+            <div class="custom-modal-title"><%= (alert != null) ? alert : "로그인 인터페이스 주석처리 중" %></div>
         </div>
         <div class="custom-modal-content">
             <!-- 로그인하러가는  "예" 버튼 -->
