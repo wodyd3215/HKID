@@ -15,9 +15,9 @@ function changeElement(selector, searchUser, selectChat) {
 }
 
 // 채팅창 삭제 기능
-function deleteChat(button) {
+function deleteChat(_this) {
     // 클릭된 버튼의 부모 요소 (즉, 해당 채팅창의 div)를 찾습니다.
-    const chatDiv = button.closest('div');  // button이 포함된 div 요소 찾기
+    const chatDiv = _this.closest('div');  // button이 포함된 div 요소 찾기
     
     // 해당 채팅창(div)을 삭제합니다.
     chatDiv.remove();

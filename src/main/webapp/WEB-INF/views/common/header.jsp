@@ -53,5 +53,6 @@
             </ul>
         </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/chatBox.jsp" />
 </body>
 </html>

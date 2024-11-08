@@ -1,14 +1,10 @@
-.wrapper {
-    height: 1000px;
-}
-
 /* 채팅박스 기본 css */
 #chat-area {
     width: 50px;
     height: 50px;
     position: fixed;
-    right: 480px;
-    bottom: 200px;
+    right: 30px;
+    bottom: 30px;
 }
 
 #chat-area > button {
