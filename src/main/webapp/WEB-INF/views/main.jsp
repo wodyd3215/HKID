@@ -5,10 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./resources/css/main/main.css?after">
+<link rel="stylesheet" href="./resources/css/default.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main/main.js"></script>
 </head>
 <body>
 	<jsp:include page="common/header.jsp" />
 	<div class="wrapper">
+		<div class="swiper">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+			  <!-- Slides -->
+			  <div class="swiper-slide">
+				  <img src="https://via.placeholder.com/200x200" alt="1">
+			  </div>
+			  <div class="swiper-slide">
+				  <img src="https://via.placeholder.com/200x200" alt="1">
+			   </div>
+			  <div class="swiper-slide">
+				  <img src="https://via.placeholder.com/200x200" alt="1">
+			  </div>
+			  <div class="swiper-slide">
+				  <img src="https://via.placeholder.com/200x200" alt="1">
+			  </div>  
+			</div>
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-pagination"></div>
+
+	  </div>
+
 		<!-- 기능 미완성으로 인한 예비 링크 -->
 		<a href="personal.me">개인페이지 가기</a>
 		<br>
