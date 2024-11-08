@@ -1,5 +1,6 @@
 function init(contextPath, pageName, optional) {
     initWidth()
+    initSummerNote()
 }
 
 function initWidth() {
