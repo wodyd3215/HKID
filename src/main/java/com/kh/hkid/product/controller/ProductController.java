@@ -17,26 +17,32 @@ import com.kh.hkid.product.service.ProductService;
 
 @Controller
 public class ProductController {
-	/*
-	private final ProductService productService;
 	
-	@Autowired
-	public ProductController(ProductService productService) {
-		this.productService = productService;
-	}
-		
-	@RequestMapping("product.li")
-	public String selectProList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int productCount = productService.selectListCount();
-		
-		PageInfo pi = Template.getPageInfo(productCount, currentPage, 9, 5);
-		ArrayList<Product> list = productService.selectList(pi);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("pi", pi);
-		return "board/boardListView";
-	}
-	*/
+//	private final ProductService productService;
+//	
+//	@Autowired
+//	public ProductController(ProductService productService) {
+//		this.productService = productService;
+//	}
+//		
+//	@RequestMapping("product.li") // 상품페이지 메인
+//	public String selectProList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+//		int productCount = productService.selectListCount();
+//		
+//		PageInfo pi = Template.getPageInfo(productCount, currentPage, 9, 5);
+//		ArrayList<Product> list = productService.selectList(pi);
+//		
+//		model.addAttribute("list", list);
+//		model.addAttribute("pi", pi);
+//		return "product/productList";
+//	}
+//	
+//	@RequestMapping("deproduct.li")
+//	public String selectItem() {
+//		
+//		return "product/productDetailview";	
+//	}
+	
 	@GetMapping("/products/productPage")
 	public String showProductPage() {
 		return "Products/productPageDetail";

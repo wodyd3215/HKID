@@ -66,20 +66,7 @@
                     <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
                 </div>                
             </div>
-        </div>
-
-
-
-
-
-        <!-- 상세 ~ 반품 /교환페이지  버튼-->
-        
-        <div class="menuBtn">
-            <input type="radio" id="contentDetail" name="show" checked/>
-            <input type="radio" id="contentReview" name="show" />
-            <input type="radio" id="detailMenuExchange" name="show" />
-        </div>
-        
+        </div>     
 
 
 
@@ -89,28 +76,40 @@
         <div class="productMid">
             <div class="detailMenu">
                 <ul class="tab">
-                    <li id="contentDetail" class="detailMenuContent" onclick="moveScroll('contentDetail')"> <label for="contentDetail"> 상세 내용</label></li>
-                    <li id="contentReview" class="detailMenuReview" onclick="moveScroll('contentReview')"><label for="contentReview">리 뷰</label></li>                    
-                    <li id="contentExchange" class="detailMenuExchange" onclick="moveScroll('contentExchange')"><label for="contentExchange">반품 / 교환</label></li>
+
+                    <li>
+                        <!--<input type="radio" id="contentDetail" name="show"  onclick="moveScroll('contentDetail')" checked/>                        
+                         <label for="contentDetail"> 상세 내용</label> -->
+                         <a href="#contentDetail"> 상세 내용 </a>
+                    </li>
+
+                    <li>
+                        <!-- <input type="radio" id="contentReview" name="show"  onclick="moveScroll('contentReview')"/>
+                        <label for="contentReview">리 뷰</label> -->
+                        <a href="#contentReview"> 리 뷰 </a>
+                    </li>        
+
+                    <li>
+                        <!-- <input type="radio" id="contentExchange" name="show"  onclick="moveScroll('contentExchange')"/>
+                        <label for="contentExchange">반품 / 교환</label> -->
+                        <a href="#contentExchange"> 반품/교환 </a>
+                    </li>
+
                 </ul>
+
+
 
                 <ul class="tabContent">
 
                     <!-- 상품 상세 이미지 -->
-                    <li class="contentDetail"> 
+                    <li id="contentDetail" class="contentDetail"> 
                         <div class="contentImg"></div>
                     </li>
 
-                    <li class="contentReview"> <!-- 리뷰 -->
+                    <li id="contentReview" class="contentReview"> <!-- 리뷰 -->
+                        <br>
                         <div class="review1">
-
-
-
-                            <br>
-
                             <!-- 리뷰 내용 -->
-
-
                             <div class="reviewHeader"> <!-- 리뷰 상단 -->
                                 <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
                                 <div class="assessUser">ㅁㅁㅁㅁㅁ</div> <!-- 평점 -->
@@ -160,7 +159,7 @@
                         
                     </li>
 
-                    <li class="contentExchange">
+                    <li id="contentExchange" class="contentExchange">
                         <div class="exchange-text">반품/교환 안내</div>
                             <table class="exchange-info">
                                 <tr>

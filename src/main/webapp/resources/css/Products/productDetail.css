@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* main*/
 .wrapper{
     display: flex;
     align-items: center;
@@ -7,6 +8,7 @@
     flex-direction: column;
 }
 
+/* ~ header ~ */
 .productDetailHeader{
     font-size: 20px;
     display: flex;
@@ -87,6 +89,8 @@
     font-size: 28px;
 }
 
+/* */
+
 .BtnPrice{
     display: flex;
     justify-content: center;
@@ -133,9 +137,8 @@
     border-radius: 0px 5px 5px 0px;
 }
 
-
+/* 구매 와 장바구니 부분 */
 .phaseCartBtn{
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,6 +146,7 @@
     gap: 10px;
 }
 
+/* 구매하기 버튼 */
 .phaseBtn{
     cursor: pointer;
     font-size: 24px;
@@ -155,7 +159,9 @@
     height: 50px;
 }
 
+/* 장바구니 버튼 */
 .cartBtn{
+    cursor: pointer;
     font-size: 24px;
     font-family: "Do Hyeon", serif;
     background: #ffffff;
@@ -164,6 +170,7 @@
     height: 50px;
 }
 
+/* 찜 버튼 */
 .favoriteBtn{
     cursor: pointer;
     height: 50px;
@@ -181,11 +188,9 @@
     width: 45px;
 }
 
-.menuBtn{
-    display: none;
-}
+/* ~~~~~ mid ~~~~~ */
 
-.tab {
+.tab { /* 이 클래스가 위치한 메뉴로 스크롤 되었을 때, 맨 위 고정 */
     position: sticky;
     top: 0;
     cursor: pointer;
@@ -193,21 +198,50 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-}
-
-.tab li {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 352px;
-    height: 60px;
     background: #051923;
-    color: #b6b6b6;
+    /* 새로(new) 추가 */
+    height: 60px;
     font-family: "Do Hyeon", serif;
     font-size: 28px;
     user-select: none;
 }
+
+/* .tab input[type=radio]{
+    display: none;
+}
+
+.tab input[type=radio] +label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 3px 0px 2px;
+    width: 352px;
+    height: 60px;    
+    font-family: "Do Hyeon", serif;
+    font-size: 28px;
+    user-select: none;
+}
+
+
+.tab input[type=radio] +label{
+    background: #051923;
+    color: #b6b6b6;
+}
+
+.tab input[type=radio]:checked+label{
+    width: 348px;
+    background: #fff;
+    color: #575757;
+} */
+
+.tab > ul > li.active{
+    width: 348px;
+    background: #fff;
+    color: #575757;
+}
+
+
 
 .contentDetail div{
     display: flex;
@@ -217,7 +251,7 @@
 
 .contentImg{
     background: #d8d8d8;
-    height: 1500px;
+    height: 2000px;
     padding: 20px 0px 10px 0px ;
 }
 
@@ -265,19 +299,3 @@
     padding: 10px;
 }
 
-
-/* 클릭 시 메뉴 색깔 바뀜*/
-.menuBtn input:checked + label,
-.detailMenu .tab li input:checked + label {
-    background: #fff;
-    color: #575757;
-}
-
-
-/* 라디오 버튼 체크 상태와 상응하는 콘텐츠 표시 */
-input#contentDetail:checked ~ .tabContent .contentDetail,
-input#contentReview:checked ~ .tabContent .contentReview,
-input#detailMenuExchange:checked ~ .tabContent .contentExchange
- {
-    display: block;
-}
