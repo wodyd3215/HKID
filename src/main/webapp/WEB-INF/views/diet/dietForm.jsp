@@ -135,8 +135,8 @@
                     </thead>
                     <tbody>
                         <tr id="common-table-body">
-                            <td>샌드위치</td>
-                            <td>252</td>
+                            <td>스테이크</td>
+                            <td>620</td>
                             <td id="food-add-btn"><button onclick="foodAddBtn(this)">+</button></td>
                         </tr>
                     </tbody>
