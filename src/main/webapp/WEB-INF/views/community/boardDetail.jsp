@@ -85,13 +85,6 @@
             <hr>
 
             <!-- 댓글리스트 -->
-            <c:if test="${not empty replyList}">
-                <p>댓글 목록이 존재합니다.</p>
-            </c:if>
-            <c:if test="${empty replyList}">
-                <p>댓글 목록이 비어 있습니다.</p>
-            </c:if>
-            
             <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 --> 
                 <div class="comments-body-wrapper">
                     <div id="comments-body">
