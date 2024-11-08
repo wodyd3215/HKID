@@ -169,7 +169,6 @@ hr{
     right: 12px;
     bottom: 5px;
     cursor: pointer;
-    font-size: 16px;
 }
 
 /***** 댓글 div *****/
@@ -243,7 +242,6 @@ hr{
     padding-top: 15px;
     width: calc(100% - 290px);
     font-size: 16px;
-    font-weight: 600;
 }
 
 .comment-right{
