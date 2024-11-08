@@ -12,6 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<div id="container">
 		<div class="wrapper">
 			<div class="exerTitle">
 				<p>${e.exerciseName}</p>
@@ -52,7 +53,31 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="flootbox">
+			<div class="flootbox-title">
+				My 루틴
+			</div>
+			<div class="flootbox-content">
+				<button type="button" id="upbtn"></button>
+				<div class="buyContent">
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+				</div>
+				<button type="button" id="downbtn"></button>
+			</div>
+		</div>
+
+	</div>	
 		<br><br><br>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 </body>
