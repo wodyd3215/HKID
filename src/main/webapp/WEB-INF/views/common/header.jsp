@@ -24,9 +24,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
 
-<!--js-->
-<script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+
 </head>
 <body onload="init('${pageName}', '${optional}')">
     <div class="header">

@@ -50,11 +50,9 @@ function foodDeleteBtn(_this) {
 
 // 음식 추가 버튼
 function foodAddBtn(_this) {
-    const row = _this.closest('tr'); // 클릭된 버튼의 부모 tr 찾기
-    
     // 새로운 행을 만들기
     const newRow = document.createElement('tr');
-    newRow.id = 'food-detail';  // id를 지정
+    newRow.id = 'food-detail';
 
     // 기존 행에서 td를 복사해서 새로운 행에 추가
     // 이후 AJAX로 요청받은 데이터 그려서 넣기

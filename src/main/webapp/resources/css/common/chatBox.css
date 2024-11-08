@@ -281,7 +281,7 @@
     width: 20px;
 }
 
-#search-users {
+.search-users {
     width: 273px;
     height: 35px;
     display: flex;
@@ -295,25 +295,25 @@
     overflow-y: auto;
 }
 
-#search-users > img {
+.search-users > img {
     width: 30px;
     height: 30px;
 }
 
-#search-users > p {
+.search-users > p {
     margin: 0px;
     text-align: start;
     width: 150px;
 }
 
-#search-users > button {
+.search-users > button {
     border: none;
     background-color: white;
     width: 25px;
     height: 25px;
 }
 
-#search-users > button > img {
+.search-users > button > img {
     width: 22px;
     height: 22px;
 }

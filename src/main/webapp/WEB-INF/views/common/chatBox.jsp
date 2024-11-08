@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/chatBox.css">
+    <!--js-->
+    <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+
     <script src="${pageContext.request.contextPath}/resources/js/common/chatBox.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/common.js"></script>
     <title>Insert title here</title>
@@ -66,18 +70,26 @@
                                 <!-- ajax로 list 요청 후 for,if -->
                                 <div class="right-log">
                                     <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
-                                    <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
+                                    <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
                                 </div>
                                 <div class="left-log">
-                                    <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                                    <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
                                     <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
                                 </div>
                                 <div class="right-log">
                                     <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
-                                    <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
+                                    <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
                                 </div>
                                 <div class="left-log">
+                                    <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
+                                    <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
+                                </div>
+                                <div class="right-log">
+                                    <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
                                     <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                                </div>
+                                <div class="left-log">
+                                    <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
                                     <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
                                 </div>
                             </div>
@@ -85,14 +97,16 @@
                         <!-- 채팅 입력 -->
                         <div id="chat-input-area">
                             <div>
-                                <textarea name="input-chatting" placeholder="채팅 입력"></textarea>
+                                <textarea id="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
+                                          oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, '${pageContext.request.contextPath}')"></textarea>
                                 <div>
-                                    <button>
+                                    <button id="send-chat-btn" onclick="inputChatting('${pageContext.request.contextPath}')" disabled>
                                         <img src="${pageContext.request.contextPath}/resources/image/Corner-down-right.png">
                                     </button>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                     <!-- 유저 검색 컨텐츠 -->
                     <div id="chat-search" class="hide">
@@ -103,10 +117,17 @@
                             </button>
                         </div>
                         <!-- 채팅 추가 JS미구현! -->
-                        <div id="search-users">
+                        <div class="search-users">
                             <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
                             <p>개떡도지</p>
-                            <button onclick="addChatting()">
+                            <button onclick="addChattingRoom('${pageContext.request.contextPath}', this)">
+                                <img src="${pageContext.request.contextPath}/resources/image/chat_bubble.png">
+                            </button>
+                        </div>
+                        <div class="search-users">
+                            <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                            <p>개벌레</p>
+                            <button onclick="addChattingRoom('${pageContext.request.contextPath}', this)">
                                 <img src="${pageContext.request.contextPath}/resources/image/chat_bubble.png">
                             </button>
                         </div>
