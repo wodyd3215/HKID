@@ -10,16 +10,20 @@ function postFormSubmit(type){
             console.log("수정요청 전달 성공!")
             break;
         
-            // 게시글 삭제
+        // 게시글 삭제
         case "delete":
             $formEl.attr("action", "boardDelete.bo");
             console.log("삭제요청 전달 성공!")
             break;
+        //신고 요청
+        case "report":
+            $formEl.attr("action", "report.bo");
+            console.log("신고요청 전달 성공!")
     }
     $formEl.submit(); //공통기능
 }
 
-
+// 처음 실행
 $(function(){ //DOM이 로드된 후 자동실행
     const sendData = {
         bno: 1 // ${list.boardNo}
@@ -60,13 +64,18 @@ function setReplyCount(count) {
 //댓글 추가 ajax
 function addReplyAjax(data, callback){
     $.ajax({
-        url: "addReply.bo",
+        url: "insertReply.bo",
         data: data,
+        type: "POST",
         success:function(res){
+            console.log(res)
             callback(res)
         },
-        error: function(){
-            console.log("댓글 생성 ajax 실패")
+        error: function(xhr, status, error) {
+            console.log("댓글 생성 ajax 실패");
+            console.log("Error Status: " + status);  // 에러 상태 출력
+            console.log("Error Details: " + error);  // 에러 세부 내용 출력
+            console.log("Response Text: " + xhr.responseText);  // 서버 응답 내용 출력
         }
     })
 }
@@ -74,89 +83,85 @@ function addReplyAjax(data, callback){
 //댓글 등록
 function addReply(){
     const boardNo = 1 //${list.boardNo}
-    const userId = "개떡도지떡상"
-    const replyContent = $("#content")
+    const memberNo = "1"
+    const replyContent = $("#content").val();
     const replyDate = "2024.11.07"//${list.replyDate}
     
     addReplyAjax({
-        refBno: boardNo,
-        replyWriter: userId,
-        replyContent: content
+        boardNo: boardNo,
+        memberNo: memberNo,
+        replyContent: replyContent,
+        
     }, function(res){
         if(res === "success"){
+            console.log(res)
             $("#content").val(""); // div 비우고
-            getReplyList({bno: boardNo}, function(replyList){ //댓글 리스트 가져오고
-                setReplyCount(replyList.length);    // 댓글 개수 가져오기
-            })
+            getReplyList({bno: boardNo}, function(commentsList){ //댓글 리스트 가져오고
+                console.log(commentsList)
+                
+                setReplyCount(commentsList.length);    // 댓글 개수 가져오기
+
+                drawReplyList(document.querySelector("#all-reply-wrapper"), commentsList);
+                console.log("drawReplyList 실행")
+            });
         }
     })
 }
 
+//댓글 그려주는 함수
 function drawReplyList(tbody, commentsList) {
-    const container = document.getElementById(tbody);
-    container.innerHTML = ""; // 기존 내용을 초기화
+    tbody.innerHTML = ""; // 기존 내용을 초기화
 
-    // comments-body-wrapper 생성
-    const wrapper = document.createElement("div");
-    wrapper.className = "comments-body-wrapper";  // id 대신 class 사용
-    
-    // comments-body 생성
-    const commentsBody = document.createElement("div");
-    commentsBody.className = "comments-body";  // id 대신 class 사용
-
-    commentsList.forEach(c => {
-        // main-comment 생성
-        const mainComment = document.createElement("div");
-        mainComment.className = "main-comment";  // id 대신 class 사용
-
-        // comment-left 생성
-        const commentLeft = document.createElement("div");
-        commentLeft.className = "comment-left";  // id 대신 class 사용
-
-        const userName = document.createElement("p");
-        userName.className = "user-name";
-        userName.textContent = c.userName;
-
-        const date = document.createElement("p");
-        date.textContent = c.date + " ";
-
-        const replyButton = document.createElement("button");
-        replyButton.className = "add-sub-comment";  // id 대신 class 사용
-        replyButton.textContent = "답글쓰기";
-
-        commentLeft.appendChild(userName);
-        commentLeft.appendChild(date);
-        commentLeft.appendChild(replyButton);
-
-        // comment-middle 생성
-        const commentMiddle = document.createElement("div");
-        commentMiddle.className = "comment-middle";  // id 대신 class 사용
-        commentMiddle.textContent = c.content;
-
-        // comment-right 생성
-        const commentRight = document.createElement("div");
-        commentRight.className = "comment-right";  // id 대신 class 사용
-
-        const editButton = document.createElement("button");
-        editButton.textContent = "수정";
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "삭제";
-
-        commentRight.appendChild(editButton);
-        commentRight.appendChild(deleteButton);
-
-        // main-comment에 모든 요소 추가
-        mainComment.appendChild(commentLeft);
-        mainComment.appendChild(commentMiddle);
-        mainComment.appendChild(commentRight);
-
-        // comments-body에 main-comment 추가
-        commentsBody.appendChild(mainComment);
-    });
-
-    // wrapper에 comments-body 추가
-    wrapper.appendChild(commentsBody);
-    // container에 wrapper 추가
-    container.appendChild(wrapper);
+    let str = "";
+    for(const comment of commentsList) { // 반복문 시작
+        str +="<hr>\n" + 
+        "<div class=\"comments-body\">\n" +
+        "<div class=\"main-comment\">\n" +
+        "<div id=\"comment-left\">\n"+
+        "<p class=\"user-name\">" + comment.userName + "</p>\n"+
+        "</p>" + comment.date + "&nbsp;</p>\n"+
+        "<button class=\"add-sub-comment\">답글쓰기</button>\n"+
+        "</div>\n"+
+        "<div class=\"comment-middle\">" + comment.content + "</div>\n"+
+        "<div class=\"comment-right\">\n"+
+        "<button>수정</button>\n" +
+        "<button>삭제</button>\n" +
+        "</div>\n"+
+        "</div>\n"+
+        "</div>\n";
+    }
+    tbody.innerHTML += str;
 }
+
+//댓글 수정ajax
+function updateReply(data, callback){
+    $.ajax({
+        url: "updateReply.bo",
+        type: "POST",
+        data: data,
+        success: function(res){
+            callback(res)
+        },
+        error: console.log("댓글 수정 ajax 통신 실패ㅠㅠ")
+
+
+    })
+
+
+}
+
+//링크 복사 기능(비동기)
+function copyLink(){
+    //window는 전역객체라서 생략가능, promise를 반환함
+    window.navigator.clipboard.writeText(window.location.href) // 클립보드에 현재 url 넣기
+        .then(() => { //성공했을 때
+            alert("클립보드에 현재 url이 복사되었습니다.");
+        })
+        .catch(err =>{
+            alert("복사에 실패했습니다. 다시 시도해주세요.");
+            console.error("복사에 실패했습니다", err);
+        }
+    )
+}
+
+//신고 모달

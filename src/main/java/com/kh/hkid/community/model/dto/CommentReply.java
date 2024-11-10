@@ -8,5 +8,6 @@ public class CommentReply {
 	private String userName;
 	private String date;
 	private String content;
+	private String boardNo;
 	
 }

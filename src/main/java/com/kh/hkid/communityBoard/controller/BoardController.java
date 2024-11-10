@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,62 +86,61 @@ public class BoardController {
 		return "community/boardDetail"; // 임시로 설정
 	}
 	
-	//댓글 추가
+	//댓글추가
 	@ResponseBody
-	@PostMapping("insertReply.bo")
-	public String insertReply(){
-		
-		return "null";
+	@RequestMapping("insertReply.bo")
+//	@PostMapping(value="insertReply.bo", produces="application/json; charset-UTF-8")
+	public String ajaxInsertReply(Reply r) {
+	    // 처리 후 JSON 형식의 응답 반환
+	    return "success";
 	}
+
+
 	
 	//처음 댓글 목록 출력
 	
 	
 	
+//	@SuppressWarnings("null")
 	//ajax 댓글목록 select
 	@ResponseBody
-	@PostMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"
+	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"
 	public String ajaxSelectReplyList(int bno) {
 		//DB들어가면 사용 ㄱㄱ
-//		ArrayList<Reply> list = boardService.ajaxSelectReplyList(bno); 
+		ArrayList<CommentReply> list = new ArrayList<>();
 		
 		//DB 들어가기 전까지만 사용!!
-		CommentReply commentList = null;
-		commentList.setContent("댓글 더미데이터입니다");
-		commentList.setDate("2024.11.08");
-		commentList.setUserName("안재휘");
+		CommentReply commentList1 = new CommentReply();
+		commentList1.setContent("댓글 더미데이터입니다");
+		commentList1.setDate("2024.11.08");
+		commentList1.setUserName("안재휘");
 		
+		CommentReply commentList2 = new CommentReply();
+		commentList2.setContent("댓글 더미데이터입니다");
+		commentList2.setDate("2024.11.08");
+		commentList2.setUserName("안재휘");
 		
+		CommentReply commentList3 = new CommentReply();
+		commentList3.setContent("댓글 더미데이터입니다");
+		commentList3.setDate("2024.11.08");
+		commentList3.setUserName("안재휘");
 		
-		return new Gson().toJson(commentList); //list를 JSON(문자열)으로 변환해서 리턴 
+		list.add(commentList1);
+		list.add(commentList2);
+		list.add(commentList3);
+		
+		return new Gson().toJson(list); //list를 JSON(문자열)으로 변환해서 리턴 
 	}
 	
-	//ajax댓글추가
-	@ResponseBody
-	@PostMapping(value="addReply.bo", produces="application/json; charset=UTF-8")
-	public String ajaxInsertReply() {
+	//신고요청
+	@PostMapping("report.bo")
+	public String insertReport() {
 		
-		Reply reply= null;
-		return new Gson().toJson(reply);
+		System.out.println("신고컨트롤러에서 받음");
+		return "community/boardDetail"; // 임시로 설정
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	 //-------------------------summernote----------------------------
 	
@@ -183,14 +184,5 @@ public class BoardController {
 		return changeName;
 	}
 	//--------------------------------------------------------------------------------
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

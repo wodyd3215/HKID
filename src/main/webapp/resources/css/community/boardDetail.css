@@ -61,6 +61,7 @@ hr{
     height: 300px;
     padding: 20px;
     font-size: 16px;
+    resize:none;
 }
 
 #etc-menu{
@@ -75,7 +76,7 @@ hr{
     display: flex;
 }
 
-#etc-menu > div > div{
+#etc-menu > div > div{ 
     display: flex;
     align-items: center; 
 }
@@ -90,7 +91,6 @@ hr{
     font-weight: 600;
     display: flex;
     align-items: center; 
-    /* margin-top: 2px; */
     padding-top: 2px;
 }
 
@@ -122,35 +122,30 @@ hr{
     width: 100%;
 }
 
-.img-div{
+.img-button{
     display: flex;
     flex-direction: column;
     padding-top: 20px;
 }
 
 #link-img{
-    /* padding-top: 7.5px; */
 }
 
 #siren-img{
     height: 35px;
-    /* margin-top: 5px; */
 }
 
-#url-copy{
-    padding-right: 15px;
-    padding-top: 24px;
+#URLcopy-btn{
+    padding-top: 5px;
 }
 
 #write-comment{
     margin-top: 10px;
-    /* margin-bottom: 10px; */
     padding-top:2px;
     padding-left: 10px;
     width: 100%;
     height: 110px;
     font-size: 16px;
-    /* font-weight: 600; */
     outline: none;
 }
 
@@ -165,9 +160,11 @@ hr{
 
 #submit-btn{
     background-color: white;
+    border: none;
+    font-weight: 600;
     position: absolute;
-    right: 12px;
-    bottom: 5px;
+    right: 220px;
+    bottom: -80px;
     cursor: pointer;
 }
 
@@ -191,6 +188,7 @@ hr{
 #comment-left{
     display: flex;
     flex-direction: column;
+    justify-content:space-around;
     padding: 20px;
     padding-left: 30px;
     padding-top: 10px;
@@ -198,7 +196,7 @@ hr{
 }
 
 #comment-left > p {
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     font-weight: 600;
     color: rgb(95, 95, 95);
     padding-bottom: 2px;
@@ -210,6 +208,7 @@ hr{
     font-size: large;
     font-weight: 600;
     margin-bottom: 0px;
+    /* padding-left: 10px; */
 }
 
 #etc-reply-wrapper .comment .user-name{
@@ -462,20 +461,26 @@ table {
 #copy-siren{
     display: flex;
     align-items: center;
+    padding-top: 20px;
+}
+
+#copy-siren > button{
+    background-color: white;
+    border: none;
 }
 
 /************ 게시글 삭제 모달 css *************/
 .modal{ /* 모달 위치  */
-    position: absolute !important;
+    position: fixed;  
 }
 
 #delete-modal .custom-modal{
     height: 120px;
     border-radius: 15px;
     width: 300px ;
-    left: 1300px; 
+    left: 50%; 
     top: 320px; 
-    transform: none;
+    /* transform: none; */
 }
 
 

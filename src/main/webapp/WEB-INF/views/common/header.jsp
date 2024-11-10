@@ -26,7 +26,7 @@
 
 
 </head>
-<body onload="init('${pageName}', '${optional}')">
+<body>
     <div class="header">
         <div id="navigator">
             <ul id="nav">

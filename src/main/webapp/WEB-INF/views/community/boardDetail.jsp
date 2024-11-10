@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
-    <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
+
     <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -33,7 +34,7 @@
                     </div>
                     <div class="btn-div">
                         <form class="postForm" method="post">
-                            <button class="btn"  onclick="postFormSubmit('edit')">수정</button>
+                            <button class="btn" onclick = "postFormSubmit('edit')">수정</button>
                         </form>
                         <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
                     </div>
@@ -45,7 +46,7 @@
             
             <!--댓글작성-->
             <div id="second-div">
-                <div id="content" style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</ㅇ>
+                <div id="content" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</ㅇ>
                     
                 </div>
                 <div id="etc-reply-wrapper">
@@ -63,50 +64,47 @@
                             
                         </div>
                         <div id="copy-siren">
-                            <div id="url-copy" class="img-div">
-                                <img id="link-img" src="resources/image/Link.png" alt="">
-                            </div>
-                            <div class="img-div">
-                                <img id="siren-img" src="resources/image/siren.png" alt="">
-                            </div>
+                            <button id="URLcopy-btn" class=".img-button">
+                                <img id="link-img" onclick="copyLink()" src="resources/image/Link.png" alt="URL 복사 버튼">
+                            </button>
+                            <button id=siren-btn class=".img-button">
+                                <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal" onclick="openModal(event)">
+                            </button>
                             
                         </div>
                     </div>
                         
                     <!-- 댓글 작성 -->
-                    <form id="comment" action="insertReply.bo" method="post">
+                    <div id="comment">
                         <p class="user-name">개떡도지</p>
-                        <textarea name="replyContent" id="write-comment" style="resize: none;" onclick="addReply()" placeholder="댓글을 작성하세요"></textarea>
-                        <input type="submit" name="" id="submit-btn" value="등록">
-                    </form>
+                        <textarea name="replyContent" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
+                    </div>
+                    <button name="" id="submit-btn" onclick="addReply()">등록</button>
                 </div>
             </div>
 
-            <hr>
-
             <!-- 댓글리스트 -->
-            <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 --> 
-                <div class="comments-body-wrapper">
-                    <div id="comments-body">
-                        <div class="main-comment">
-                            <div id="comment-left">
-                                <p class="user-name">${c.userName}</p>
-                                <p>${c.date} &nbsp;</p>
-                                <button class="add-sub-comment">답글쓰기</button>
-                            </div>
-                            <div class="comment-middle">
-                                ${c.content}
-                            </div>
-                            <div class="comment-right">
-                                <button>수정</button>
-                                <button>삭제</button>
+            <div id="all-reply-wrapper">
+                <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 -->
+                    <hr>     
+                        <div class="comments-body">
+                            <div class="main-comment">
+                                <div id="comment-left">
+                                    <p class="user-name">${c.userName}</p>
+                                    <p>${c.date} &nbsp;</p>
+                                    <button class="add-sub-comment">답글쓰기</button>
+                                </div>
+                                <div class="comment-middle">${c.content}</div>
+                                <div class="comment-right">
+                                    <button>수정</button>
+                                    <button>삭제</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </div>
             <hr>
-            
+                <!-- 대댓글 -->
                 <div class="comments-body-wrapper">
                     <div id="sub-comments-body">
                         <div>
@@ -132,7 +130,7 @@
             <hr>
         </div>
 
-        <!------------------ 아래 게시글 목록 -------------------->
+        <!------------------ 아래쪽 게시글 목록 -------------------->
         <div id="bottom-wrapper">
             <table id="top-table">
                 <tr>
@@ -223,6 +221,26 @@
             </div>
         </div>
     </div>
+
+    <!-------- 신고 버튼 모달 --------->
+    <div class="modal" id="report-modal">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title">게시글을 신고하겠습니까?</div>
+            </div>
+            <div class="custom-modal-content">
+                <form class="postForm" method="post">
+                    <!-- 게시글 신고 버튼 -->
+                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
+                </form>
+                <!-- 모달 닫기 -->
+                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+                
+            </div>
+        </div>
+    </div>
     <!--------------------------------->
+
+
 </body>
 </html>
