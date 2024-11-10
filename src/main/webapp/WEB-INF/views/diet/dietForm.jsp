@@ -43,18 +43,18 @@
             <tbody>
                 <tr id="food-detail">
                     <td>샌드위치</td>
-                    <td class="kcal-figure">252</td>
-                    <td class="carbo-figure">27.29</td>
-                    <td class="pro-figure">8.09</td>
-                    <td class="fat-figure">12.08</td>
+                    <td class="kcal-figure">252.0</td>
+                    <td class="carbo-figure">27.2</td>
+                    <td class="pro-figure">8.0</td>
+                    <td class="fat-figure">12.0</td>
                     <td class="delete-btn"><button onclick="foodDeleteBtn(this)">-</button></td>
                 </tr>
                 <tr id="food-detail">
                     <td>샌드위치</td>
-                    <td class="kcal-figure">252</td>
-                    <td class="carbo-figure">27.29</td>
-                    <td class="pro-figure">8.09</td>
-                    <td class="fat-figure">12.08</td>
+                    <td class="kcal-figure">252.0</td>
+                    <td class="carbo-figure">27.2</td>
+                    <td class="pro-figure">8.0</td>
+                    <td class="fat-figure">12.0</td>
                     <td class="delete-btn"><button onclick="foodDeleteBtn(this)">-</button></td>
                 </tr>
             </tbody>
