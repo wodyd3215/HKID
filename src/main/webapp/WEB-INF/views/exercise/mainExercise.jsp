@@ -84,7 +84,7 @@
 							</div>
 							<br>
 							<p class="list-text">${e.exerciseName}</p>
-							
+							<br>
 							<div id="under-area">
 								<p class="list-text2">${e.exerciseDifficulty}</p>
 								<button type="button">
@@ -123,10 +123,22 @@
 
 		<div class="flootbox">
 			<div class="flootbox-title">
-				my루틴
+				My 루틴
 			</div>
 			<div class="flootbox-content">
-
+				<button type="button" id="upbtn"></button>
+				<div class="buyContent">
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+				</div>
+				<button type="button" id="downbtn"></button>
 			</div>
 		</div>
 

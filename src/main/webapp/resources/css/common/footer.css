@@ -5,8 +5,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    min-width: 1056px;
     margin: auto;
-    min-width: 100vw;
 }
 
 .maincontent{
