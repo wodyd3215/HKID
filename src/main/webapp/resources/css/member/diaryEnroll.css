@@ -1,0 +1,73 @@
+.enroll-form {
+    margin-top: 20px;
+    
+}
+
+.enroll-form #diary-title{
+    margin-bottom: 20px;
+}
+
+.enroll-form input[type='text'] {
+    font-size: 45px;
+    font-weight: bold;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+}
+
+.enroll-form #today-ate-cal-info{
+    border: 1px solid #d9d9d9;
+    padding: 10px 100px;
+    height: 142.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 90%;
+}
+
+#not-loaded-status {
+    font-size: 20px;
+}
+
+.enroll-form input[type='text']::placeholder {
+    color: #838383;
+}
+
+.enroll-form #content-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #d9d9d9;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 1056px;
+    height: 50px;
+    font-size: 16px;
+}
+
+#content-bottom a:hover{
+    text-decoration: none;
+}
+
+#content-bottom button[type='submit'] {
+    background: none;
+    border: none;
+}
+
+/* summernote css변경 */
+.enroll-form .note-editor {
+    border: none; /* 에디터 전체 테두리 제거 */
+    box-shadow: none; /* 그림자 제거 */
+}
+
+.enroll-form .note-toolbar {
+    background: white;
+    border: none;
+}
+
+.enroll-form .note-editable {
+    background: white;
+    border: none;
+}

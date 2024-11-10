@@ -28,7 +28,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 </head>
-<body onload="init('${pageName}', '${optional}')">
+<body onload="init('', '${pageName}', '${optional}')">
     <div class="header">
         <div id="navigator">
             <ul id="nav">

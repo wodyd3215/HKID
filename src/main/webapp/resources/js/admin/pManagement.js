@@ -1,3 +1,4 @@
+// type 인자를 받아 form태그 action에 주소를 넣어주는 함수
 function postFormSubmit(type) {
     const formEl = document.querySelector("#postForm");
     switch(type) {

@@ -51,8 +51,18 @@ public class MemberController {
     	return "member/enrollForm";
     }
     
+    @GetMapping("myDiaryList.me")
+    public String myDiaryList() {
+    	return "member/myDiaryPage";
+    }
+    
     @GetMapping("myDiary.me")
     public String myDiary() {
-    	return "member/myDiaryPage";
+    	return "member/myDiaryDetail";
+    }
+    
+    @GetMapping("diaryEnroll.me")
+    public String diaryEnroll() {
+    	return "member/myDiaryEnroll";
     }
 }
