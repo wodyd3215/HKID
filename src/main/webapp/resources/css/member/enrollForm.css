@@ -63,7 +63,7 @@ input::placeholder{
 
 #enroll-phone {
     width: 60%;
-    margin-right: 2%;
+    margin-right: 5px;
 }
 
 #enroll-phone > .enroll-input-area > input {
@@ -71,7 +71,7 @@ input::placeholder{
 }
 
 #enroll-certify {
-    width: 38%;
+    width: 39%;
 }
 
 #enroll-certify > .enroll-input-area > input {
