@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,25 +10,32 @@
     <script src="${pageContext.request.contextPath}/resources/js/member/loginForm.js"></script>
     <title>Insert title here</title>
 </head>
-<body>
-    <div class="wrapper">  
+<body onload="init('${alertMsg}')">
+    <c:remove var="alertMsg" scope="session"/>
+    <div class="wrapper"> 
+    	<!-- <c:if test="${ not empty alertMsg}">
+			<script>
+				alert("${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>
+		</c:if>  -->
         <div id="logo-img">
             <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/image/HKID_Logo.png" alt="로고"></a>
         </div> 
-        <form action="login.me">
+        <form action="login.me" method="post">
             <!-- 아이디 / 비밀번호 입력 -->
             <h1>로그인</h1>
             <div>
-                <input type="text" id="login-id" placeholder="아이디 입력">
-                <input type="text" id="login-pwd" placeholder="비밀번호 입력">
+                <input type="text" name="memberId" id="login-id" placeholder="아이디 입력">
+                <input type="password" name="memberPwd" id="login-pwd" placeholder="비밀번호 입력">
             </div>
             <!-- 자동로그인 / 아이디저장 버튼 -->
             <div class = "checkbox-btn-area">
                 <label id="autoLogin">
-                    <input type="checkbox">&nbsp;자동로그인
+                    <input type="checkbox" name="autoLogin">&nbsp;자동로그인
                 </label>
                 <label id="saveLogin">
-                    <input type="checkbox">&nbsp;아이디저장
+                    <input type="checkbox" name="saveLogin">&nbsp;아이디저장
                 </label>
             </div>
 

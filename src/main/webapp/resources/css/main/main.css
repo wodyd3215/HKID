@@ -19,6 +19,13 @@ html,
       height: 100%;
     }
 
+    .mySwiper{
+        height: 360px; 
+        border: 1px solid black; 
+        margin-top: 100px; 
+        border-radius: 15px;
+    }
+
     .swiper-slide {
       text-align: center;
       font-size: 18px;
@@ -60,7 +67,8 @@ html,
 }
 
 .area-select{
-    width: 140px;
+    display: flex;
+    width: 200px;
     height: 40px;
     margin: 5px;
 }
@@ -69,9 +77,10 @@ html,
     border: 1px solid black;
     border-radius: 10px;
     height: 100%;
-    width: 100%;
+    width: 40%;
     font-size: 20px;
     font-weight: bold;
+    margin-right: 20px;
 }
 
 .BMI{
@@ -161,4 +170,85 @@ html,
     position: absolute;
     bottom: 30px;
     font-weight: bold;
+}
+
+#btn{
+    background-color: green
+}
+
+#btn2{
+    background-color: darkgray;
+}
+
+.day{
+    display: grid;
+    align-items: center;
+    height: 307px;
+    border-radius: 15px;
+}
+
+
+/* top */
+.top{
+    margin: auto;
+}
+
+.top p:first-child{font-size: 20px;}
+.top p:last-child{
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+/* middle */
+.middle{
+    margin: auto;
+}
+
+.middle .main_icon{margin: 0 auto; width: 72px; height: 72px;}
+.middle p:first-of-type{font-weight: 500; font-size: 40px;}
+
+#WeatherInfo{
+    padding: 0;
+    margin-left: 20px;
+}
+
+/* bottom */
+.bottom svg{
+    height: 30px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-around; /* 각 섹션 사이에 일정한 간격 */
+}
+  
+.bottom div {
+    display: flex;
+    align-items: center; /* 아이콘과 텍스트를 수직 가운데 정렬 */
+}
+
+.bottom p{
+    font-size: 14px;
+}
+
+/* 낮 */
+.day{background: #DBE2EA; color: #2B323C;}
+
+.day svg{fill: #5D6169;}
+.day .bottom .weather1:first-child::after{background: #C2C5CC;}
+.day .bottom .weather1 p:last-of-type{color: #5D6169;}
+
+
+/* 밤 */
+.night{background: #2B323C; color: #DBE2EA;}
+
+.night svg{fill: #A3AAB2;}
+.night .bottom .weather1:first-child::after{background: #979EA6;}
+.night .bottom .weather1 p:last-of-type{color: #A3AAB2;}
+ 
+.night{
+    display: grid;
+    align-items: center;
+    height: 308px;
+    border-radius: 15px;
 }

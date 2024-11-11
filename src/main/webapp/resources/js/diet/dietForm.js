@@ -35,10 +35,10 @@ function foodFigureCalc() {
     }
 
     // 결과 삽입
-    kcalResult.innerHTML = totalKcal.toFixed(2);
-    carboResult.innerHTML = totalCarbo.toFixed(2);
-    proResult.innerHTML = totalPro.toFixed(2);
-    fatResult.innerHTML = totalFat.toFixed(2);
+    kcalResult.innerHTML = totalKcal.toFixed(1);
+    carboResult.innerHTML = totalCarbo.toFixed(1);
+    proResult.innerHTML = totalPro.toFixed(1);
+    fatResult.innerHTML = totalFat.toFixed(1);
 }
 
 // 음식 삭제 버튼
@@ -58,10 +58,10 @@ function foodAddBtn(_this) {
     // 이후 AJAX로 요청받은 데이터 그려서 넣기
     newRow.innerHTML = `
         <td>스테이크</td>
-        <td class="kcal-figure">620</td>
-        <td class="carbo-figure">9.01</td>
-        <td class="pro-figure">18.95</td>
-        <td class="fat-figure">14.64</td>
+        <td class="kcal-figure">620.0</td>
+        <td class="carbo-figure">9.0</td>
+        <td class="pro-figure">18.9</td>
+        <td class="fat-figure">14.6</td>
         <td class="delete-btn"><button onclick="foodDeleteBtn(this)">-</button></td>
     `;
     
