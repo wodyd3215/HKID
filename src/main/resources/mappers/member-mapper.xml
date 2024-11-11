@@ -50,4 +50,25 @@
   	)
   </insert>
   
+  <!-- 로그인 -->
+  <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+  	SELECT MEMBER_ID,
+  		   MEMBER_PWD,
+  		   MEMBER_NAME,
+  		   NICKNAME,
+  		   PHONE,
+  		   EMAIL,
+  		   ADDRESS,
+  		   DETAIL_ADDRESS,
+  		   POST_NO,
+	  	   POINT,
+	  	   ENROLL_DATE,
+  		   STATUS,
+  		   PROFILE_IMG,
+  		   ISADMIN
+  	  FROM MEMBER
+  	 WHERE MEMBER_ID = #{memberId}
+  	   AND STATUS = 'Y'
+  </select>
+  
 </mapper>
