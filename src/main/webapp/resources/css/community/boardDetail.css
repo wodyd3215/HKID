@@ -129,14 +129,20 @@ hr{
 }
 
 #link-img{
+
 }
 
 #siren-img{
     height: 35px;
 }
 
+#siren-btn{
+    padding-right: 0px;
+}
+
 #URLcopy-btn{
     padding-top: 5px;
+    padding-left: 0px;
 }
 
 #write-comment{
@@ -144,14 +150,26 @@ hr{
     padding-top:2px;
     padding-left: 10px;
     width: 100%;
-    height: 110px;
+    height: 85px;
     font-size: 16px;
     outline: none;
+    resize: none;
+}
+
+#comment > div{
+    display: flex;
+    justify-content: end;
 }
 
 #write-comment::placeholder{
     color: rgb(195, 195, 195);
 }
+
+#write-comment ::-webkit-scrollbar {
+    display: none;
+}
+
+
 #sumbit-div{
     display: flex;
     width: 100%;
@@ -162,7 +180,7 @@ hr{
     background-color: white;
     border: none;
     font-weight: 600;
-    position: absolute;
+    /* position: absolute; */
     right: 220px;
     bottom: -80px;
     cursor: pointer;
@@ -224,6 +242,8 @@ hr{
     font-size: large;
     font-weight: 600;
 }
+
+
 
 .add-sub-comment{
     background-color: white;
@@ -524,4 +544,9 @@ table {
     margin-left: 10px;
 }
 
-/***********************************/
+/************** 댓글 수정 **************/
+#comment-middle-input{
+    width: 100%;
+    height: 100%;
+    /* s */
+}

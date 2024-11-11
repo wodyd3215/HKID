@@ -27,3 +27,19 @@ function showAndHideElement2(selector, selector2){
         showAndHideEl.classList.remove("hide");
     }
 }
+
+//링크 복사 기능(비동기)
+function copyLink(text, successMsg, errorMsg){
+    //window는 전역객체라서 생략가능, promise를 반환함
+    window.navigator.clipboard.writeText(text) // 클립보드에 현재 url 넣기
+        .then(() => { //성공했을 때
+            // alert("클립보드에 현재 url이 복사되었습니다.");
+            alert(successMsg);
+        })
+        .catch(err =>{
+            alert(errorMsg);
+            // alert("복사에 실패했습니다. 다시 시도해주세요.");
+            console.error("복사에 실패했습니다", err);
+        }
+    )
+}

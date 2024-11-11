@@ -12,16 +12,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
 
     <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/common.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/apis/boardApi.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
 
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
     <br><br><br><br>
     <div class="wrapper">
         <hr>
         <div id="top-wrapper">
-
             <!-- 게시글 제목칸-->
             <div id="board-title-wrapper">
                 <div id="board-title">
@@ -38,15 +39,13 @@
                         </form>
                         <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
                     </div>
-                    
                 </div>
-                <hr>
             </div>
-
+        <hr>
             
             <!--댓글작성-->
             <div id="second-div">
-                <div id="content" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</ㅇ>
+                <div id="content" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</div>
                     
                 </div>
                 <div id="etc-reply-wrapper">
@@ -65,7 +64,8 @@
                         </div>
                         <div id="copy-siren">
                             <button id="URLcopy-btn" class=".img-button">
-                                <img id="link-img" onclick="copyLink()" src="resources/image/Link.png" alt="URL 복사 버튼">
+                                <img id="link-img" onclick="copyLink(window.location.href, '클립보드에 현재 url이 복사되었습니다.', '복사에 실패했습니다. 다시 시도해주세요.')" 
+                                    src="resources/image/Link.png" alt="URL 복사 버튼">
                             </button>
                             <button id=siren-btn class=".img-button">
                                 <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal" onclick="openModal(event)">
@@ -74,17 +74,37 @@
                         </div>
                     </div>
                         
-                    <!-- 댓글 작성 -->
+                    <!-- 댓글 작성?? -->
                     <div id="comment">
                         <p class="user-name">개떡도지</p>
-                        <textarea name="replyContent" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
+                        <textarea name="replyContent" id="write-comment" placeholder="댓글을 작성하세요"></textarea>
+                        <div>
+                            <button name="" id="submit-btn" onclick="addReply()">등록</button>
+                        </div>
                     </div>
-                    <button name="" id="submit-btn" onclick="addReply()">등록</button>
+                    
                 </div>
             </div>
 
             <!-- 댓글리스트 -->
             <div id="all-reply-wrapper">
+            <!-- 댓글 목록 요소1 -->
+            <div class="comments-body">
+                <div class="main-comment">
+                    <div id="comment-left">
+                        <p class="user-name"> 안재휘 <!-- ${c.userName} --></p>
+                        <p>2024.11.11<!-- ${c.date} --> &nbsp;</p>
+                        <button class="add-sub-comment">답글쓰기</button>
+                    </div>
+                    <div class="comment-middle"> 나를 쏘고가라</div>
+                    <div class="comment-right">
+                        <button class="reply-update-btn" onclick="updateReply()">수정</button>
+                        <button class="reply-delete-btn">삭제</button>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
                 <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 -->
                     <hr>     
                         <div class="comments-body">
@@ -96,8 +116,8 @@
                                 </div>
                                 <div class="comment-middle">${c.content}</div>
                                 <div class="comment-right">
-                                    <button>수정</button>
-                                    <button>삭제</button>
+                                    <button class="reply-update-btn">수정</button>
+                                    <button class="reply-delete-btn">삭제</button>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +242,7 @@
         </div>
     </div>
 
-    <!-------- 신고 버튼 모달 --------->
+    <!-------- 신고 모달 --------->
     <div class="modal" id="report-modal">
         <div class="custom-modal">
             <div class="custom-modal-header">
@@ -230,16 +250,16 @@
             </div>
             <div class="custom-modal-content">
                 <form class="postForm" method="post">
-                    <!-- 게시글 신고 버튼 -->
+                    <!-- 신고 버튼 -->
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
                 </form>
                 <!-- 모달 닫기 -->
                 <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
-                
             </div>
         </div>
     </div>
-    <!--------------------------------->
+
+
 
 
 </body>

@@ -94,14 +94,10 @@ public class BoardController {
 	    // 처리 후 JSON 형식의 응답 반환
 	    return "success";
 	}
-
-
 	
 	//처음 댓글 목록 출력
 	
 	
-	
-//	@SuppressWarnings("null")
 	//ajax 댓글목록 select
 	@ResponseBody
 	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"
@@ -130,6 +126,13 @@ public class BoardController {
 		list.add(commentList3);
 		
 		return new Gson().toJson(list); //list를 JSON(문자열)으로 변환해서 리턴 
+	}
+	
+	//댓글 수정
+	@PostMapping("updateReply.bo")
+	public String updateReply() {
+		System.out.println("update댓글 컨트롤러 실행");
+		return "redirect: /community/boardDetail";
 	}
 	
 	//신고요청
