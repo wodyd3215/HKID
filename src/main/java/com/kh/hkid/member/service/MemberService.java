@@ -9,4 +9,7 @@ public interface MemberService {
 	
 	// 로그인
 	Member loginMember(Member m);
+	
+	// 회원 정보 변경(이메일)
+	int updateEmail(Member m);
 }

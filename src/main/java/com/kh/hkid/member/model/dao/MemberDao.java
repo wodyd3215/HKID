@@ -17,4 +17,8 @@ public class MemberDao {
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
+	
+	public int updateEmail(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateEmail", m);
+	}
 }

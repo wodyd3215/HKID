@@ -8,6 +8,7 @@
 
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/personalPage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/PersonalModal.css">
 <!-- js -->
 <script src="${pageContext.request.contextPath}/resources/js/member/personalPage.js"></script>
 </head>

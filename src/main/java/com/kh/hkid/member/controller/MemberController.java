@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
@@ -110,12 +109,29 @@ public class MemberController {
     		response.addCookie(ck);
     		
     		session.setAttribute("loginMember", loginMember);
-    		if(loginMember.getIsAdmain().equals('N')) {
+    		if(loginMember.getIsAdmain().equals("N")) {
     			return "redirect:/";
     		} else {
     			return "redirect:/product.ad";
     		}
     		
     	}
+    }
+    
+    // 이메일 변경
+    @PostMapping("changeEmail.me")
+    public String changeEmail(Member m, HttpSession session) {
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	int result = memberService.updateEmail(m);
+    	
+    	if(result > 0) {
+    		session.setAttribute("loginMember", memberService.loginMember(m));
+    		session.setAttribute("alert", "이메일 변경 완료");
+    	} else {
+    		session.setAttribute("alert", "이메일 변경 실패");
+    	}
+    	
+    	return "redirect:/personal.me";
     }
 }

@@ -71,4 +71,9 @@
   	   AND STATUS = 'Y'
   </select>
   
+  <update id="updateEmail">
+  	UPDATE MEMBER 
+  	   SET EMAIL = #{email}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
 </mapper>

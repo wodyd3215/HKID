@@ -32,4 +32,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return memberDao.loginMember(sqlSession, m);
 	}
+
+	@Override
+	public int updateEmail(Member m) {
+		return memberDao.updateEmail(sqlSession, m);
+	}
+	
+	
 }
