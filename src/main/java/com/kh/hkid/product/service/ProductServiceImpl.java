@@ -1,6 +1,7 @@
 package com.kh.hkid.product.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,17 @@ public class ProductServiceImpl implements ProductService{
 	private ProductDao productDao;
 
 	@Override
-	public int selectListCount() {
+	public int selectListTotal() {
 		return productDao.selectListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Product> selectList(PageInfo pi) {
 		return productDao.selectList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Product> selectSideItem(Product p) {
+		return productDao.selectSideItem(sqlSession, p);
 	}
 }

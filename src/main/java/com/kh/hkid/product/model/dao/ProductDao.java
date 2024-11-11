@@ -1,6 +1,7 @@
 package com.kh.hkid.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,6 +23,10 @@ public class ProductDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("productMapper.selectList", null, rowBounds);
+	}
+
+	public ArrayList<Product> selectSideItem(SqlSessionTemplate sqlSession, Product p) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectList",p);
 	}
 
 	

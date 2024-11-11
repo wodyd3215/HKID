@@ -23,6 +23,8 @@
     
 // }
 
+
+
 $('.tab > ul > li > a').click(function(e) {
     let href = $(this).attr('href');
 

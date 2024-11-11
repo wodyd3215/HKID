@@ -13,6 +13,10 @@
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
      <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+     <!-- js -->
+     <script src="${pageContext.request.contextPath }/resources/js/Products/productPage.js" defer></script>
+
 <title>상품 페이지</title>
 </head>
 <body>
@@ -20,10 +24,31 @@
         <div id="productPage">
             <div id="selected"> <!-- 왼쪽 사이드바 nav -->
                 <ul class="side-nav">
-                    <li class="side-nav-header"> 상품 </li>
-                    <li onclick="handleClick('식품')"> 식품 </li>
-                    <li onclick="handelClick('의류')"> 의류 </li>
-                    <li> 기구 </li>
+                    <li class="side-nav-header"> 상품 </li> 
+                    
+                    <li>
+                        <input type="radio" id="contentDetail" name="side-itemType" value="전체"checked/>                        
+                        <label for="All"> 전체 </label>
+                    </li>
+
+                    <li>
+                        <input type="radio" id="contentDetail" name="side-itemType" value="식품"/>                        
+                        <label for="food"> 식품 </label>
+                    <!-- <li onclick="handleClick('식품')"> 식품 </li> -->
+                    </li>                    
+
+                    <li>
+                        <input type="radio" id="contentDetail" name="side-itemType" value="의류" />                        
+                         <label for="clothes"> 의류 </label>
+                    <!-- <li onclick="handelClick('의류')"> 의류 </li> -->
+                    </li>
+                    
+                    <li>
+                        <input type="radio" id="contentDetail" name="side-itemType" value="기구"/>                        
+                         <label for="equipment"> 기구 </label>
+                    <!-- <li> 기구 </li> -->
+                    </li>
+                    
                 </ul>
             </div>
 
@@ -36,13 +61,14 @@
                     <div class="productList">
                         
                         <!-- 상품 이미지 -->
-                        <div class="productImg" ><img src="${pageContext.request.contextPath}/resources/image/HKID_Logo.png"></div>
+                        <div class="productImg" ></div>
 
                         <!-- 상품 text -->
                         <div class="productText">
                             <div class="productTextHeader">
                                 <div class="productName">
-                                    상품 <!-- 상품 이름 -->
+                                    <!-- 상품 이름 -->
+                                     ${p.productName}
                                 </div>
                                 
                                 <input type="checkbox" class="favoriteBtn"></input>

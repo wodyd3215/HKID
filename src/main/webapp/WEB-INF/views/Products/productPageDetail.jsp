@@ -43,9 +43,12 @@
                 <div class="productLocation"> 상품 > 가구</div>
     
                 <!-- 상품 이름 및 평점 -->
-                <div class="productDetail">                
-                    <div> 멀킨 육각덤벨 3Kg</div>
-                    <div class="assess"> 평점 () </div>
+                <div class="productDetail">
+                     <!-- 상품 이름 -->
+                    <div> ${p.productName}</div>
+
+                    <!-- 평점 -->
+                    <div class="assess"> ${p.productAssess}</div> 
                 </div>            
     
                 <!-- 수량 버튼 -->
@@ -55,7 +58,7 @@
                         <span class="quanText">1</span>
                         <button class="Btnpls">+</button>
                     </div>                                       
-                    <div class="priceText"> 가격 </div>
+                    <div class="priceText"> ${p.productPrice} </div>
                 </div>
     
 
@@ -121,42 +124,7 @@
                             <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
                             <div> !@#%$#!^@#$^@$%!#%!^ </div> <!-- 리뷰 내용 -->
                         </div>
-
-
-
-
-                        
-                        <div class="review1">
-                            <div class="reviewHeader"> <!-- 리뷰 상단 -->
-                                <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
-                                <div class="assessUser">ㅁㅁㅁㅁㅁ</div> <!-- 평점 -->
-                                <div class="assessDate">9999.99.99</div> <!-- 리뷰 작성일 -->
-                            </div> 
-                            <div class="reviewImg">
-                                <div class="reviImg"></div>
-                            </div>
-                            <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
-                            <div> !@#%$#!^@#$^@$%!#%!^ </div> <!-- 리뷰 내용 -->
-                        </div>
-
-
-
-
-
-                        <div class="review1">
-                            <div class="reviewHeader"> <!-- 리뷰 상단 -->
-                                <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
-                                <div class="assessUser">ㅁㅁㅁㅁㅁ</div> <!-- 평점 -->
-                                <div class="assessDate">9999.99.99</div> <!-- 리뷰 작성일 -->
-                            </div> 
-                            <div class="reviewImg">
-                                <div class="reviImg"></div>
-                            </div>
-                            <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
-                            <div> !@#%$#!^@#$^@$%!#%!^ </div> <!-- 리뷰 내용 -->
-                        </div>
-                        
-                        
+   
                     </li>
 
                     <li id="contentExchange" class="contentExchange">
