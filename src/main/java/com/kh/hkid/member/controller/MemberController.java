@@ -100,7 +100,7 @@ public class MemberController {
     		response.addCookie(ck);
     		
     		session.setAttribute("loginMember", loginMember);
-    		if(loginMember.getIsAdmain().equals('N')) {
+    		if(loginMember.getIsAdmain().equals("N")) {
     			return "redirect:/";
     		} else {
     			return "redirect:/product.ad";
