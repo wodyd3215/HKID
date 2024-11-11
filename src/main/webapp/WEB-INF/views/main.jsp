@@ -10,13 +10,13 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/resources/js/main/main.js"></script>
 </head>
 <body>
 	<jsp:include page="common/header.jsp" />
 	<div class="wrapper">
-			<div class="swiper mySwiper" style="height: 360px; border: 1px solid black; margin-top: 100px; border-radius: 15px;">
+			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
 				  <div class="swiper-slide">
 					<a href="">
@@ -42,13 +42,54 @@
 					<div class="weather-header">
 						<p>날씨 정보</p>
 						<div class="area-select">
-							<select name="area" id="area">
-								<option value="">서울</option>
+							<select name="area" id="area" onchange="categoryChange(this)">
+								<option value>시/도 선택</option>
+								<option value="general01">강원</option>
+								<option value="general02">경기</option>
+								<option value="general03">경남</option>
+								<option value="general04">경북</option>
+								<option value="general05">광주</option>
+								<option value="general06">대구</option>
+								<option value="general07">대전</option>
+								<option value="general08">부산</option>
+								<option value="general09">서울</option>
+								<option value="general10">울산</option>
+								<option value="general11">인천</option>
+								<option value="general12">전남</option>
+								<option value="general13">전북</option>
+								<option value="general14">제주</option>
+								<option value="general15">충남</option>
+								<option value="general16">충북</option>
+							</select>
+							<select name="location" id="state">
+								<option>군/구 선택</option>
 							</select>
 						</div>
 					</div>
-					<div>
-						<p>날씨 api</p>
+					<div id="dayNight" class="container day">
+						<div class="top">
+							<p id="location">서울, 강서구</p>
+							<p id="time"></p>
+						</div>
+						<div class="middle">
+							<div class="main_icon">
+								<canvas id="mainIcon" width="72" height="72">
+							</div>
+							<p id="temperature"></p>
+							<p id="WeatherInfo">맑음</p>
+						  </div>
+						  <div class="bottom">
+							<div class="weather1">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32 192h320c52.94 0 96-43.06 96-96s-43.06-96-96-96h-32c-17.69 0-32 14.31-32 32s14.31 32 32 32h32c17.66 0 32 14.34 32 32s-14.34 32-32 32H32C14.31 128 0 142.3 0 160S14.31 192 32 192zM160 320H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h128c17.66 0 32 14.34 32 32s-14.34 32-32 32H128c-17.69 0-32 14.31-32 32s14.31 32 32 32h32c52.94 0 96-43.06 96-96S212.9 320 160 320zM416 224H32C14.31 224 0 238.3 0 256s14.31 32 32 32h384c17.66 0 32 14.34 32 32s-14.34 32-32 32h-32c-17.69 0-32 14.31-32 32s14.31 32 32 32h32c52.94 0 96-43.06 96-96S468.9 224 416 224z"/></svg>
+								<p>바람</p>
+								<p id="wind">sadsad</p>
+							</div>
+							<div class="weather1"> 
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M16 319.1C16 245.9 118.3 89.43 166.9 19.3C179.2 1.585 204.8 1.585 217.1 19.3C265.7 89.43 368 245.9 368 319.1C368 417.2 289.2 496 192 496C94.8 496 16 417.2 16 319.1zM112 319.1C112 311.2 104.8 303.1 96 303.1C87.16 303.1 80 311.2 80 319.1C80 381.9 130.1 432 192 432C200.8 432 208 424.8 208 416C208 407.2 200.8 400 192 400C147.8 400 112 364.2 112 319.1z"/></svg>
+								<p>습도</p>
+        						<p id="humidity">dsdasd</p>
+							</div>
+						  </div>
 					</div>
 				</div>
 				<div class="BMI">
@@ -72,9 +113,9 @@
 						&nbsp; &nbsp; &nbsp; &nbsp; 
 
 
-						<button id="btn" style="background-color: green;">계산하기</button>
+						<button id="btn">계산하기</button>
 						&nbsp;
-						<button id="btn2" style="background-color: darkgray;">초기화</button>
+						<button id="btn2">초기화</button>
 					</div>
 					<div id="result">
 						<p>비만도 결과</p>
@@ -89,10 +130,7 @@
 						<div id="range-section" class="range-section obese">비만</div>
 						<div id="current-bmi" class="current-bmi">BMI</div>
 					</div>
-
-					
 				</div>
-
 			</div>
 
 			<!-- 기능 미완성으로 인한 예비 링크 -->
@@ -112,6 +150,6 @@
 	<jsp:include page="common/footer.jsp" />
 
 
-
+<script src="./resources/js/main/main.js"></script>
 </body>
 </html>

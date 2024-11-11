@@ -65,7 +65,22 @@
             	<a class="login" href="loginForm.me">로그인</a>
             </c:when>
             <c:otherwise>
-            	<button><img></button>
+                <div id="myPage-btn" onclick="showAndHideElement('.myPage-area')">
+                    <button>
+                        <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                    </button>
+                    <div class="myPage-area hide" >
+                        <p>닉네임</p>
+                        <hr>
+                        <a href="personal.me">개인설정</a>
+                        <a href="">내 다이어리</a>
+                        <hr>
+                        <a href="">찜목록</a>
+                        <a href="">구매목록</a>
+                        <hr>
+                        <a href="logout.me" id="logout-btn">로그아웃</a>
+                    </div>
+                </div>
             </c:otherwise>
         </c:choose>
         </div>

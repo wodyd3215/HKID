@@ -94,7 +94,7 @@ public class MemberController {
     
     // 로그인
     @PostMapping("login.me")
-    public String loginMember(Member m, HttpSession session, Model model, String saveId, HttpServletResponse response) {
+    public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response) {
     	System.out.println(m);
     	Member loginMember = memberService.loginMember(m);
     	System.out.println(loginMember);
@@ -116,6 +116,13 @@ public class MemberController {
     		}
     		
     	}
+    }
+    
+    @GetMapping("logout.me")
+    public String logoutMember(HttpSession session) {
+    	session.removeAttribute("loginMember");
+    	
+    	return "redirect:/";
     }
     
     // 이메일 변경

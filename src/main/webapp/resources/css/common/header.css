@@ -131,3 +131,57 @@ a.login {
 #product-drop-bar:hover > ul {
     display: block;
 }
+
+#myPage-btn {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border-radius: 100px;
+}
+
+#myPage-btn > button {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 100px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#myPage-btn img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+}
+
+.myPage-area {
+    width: 120px;
+    height: 270px;
+    position: absolute;
+    left: -38px;
+    top: 45px;
+    border: 1px solid rgba(0, 166, 251, 1);
+    border-radius: 5px;
+    z-index: 100;
+    background-color: rgba(219, 241, 253, 1);
+}
+
+.myPage-area a{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 8px;
+}
+
+.myPage-area p {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+#logout-btn {
+    color: red;
+}
