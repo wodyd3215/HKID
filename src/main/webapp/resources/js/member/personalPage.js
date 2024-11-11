@@ -18,7 +18,7 @@ function previewProfile(input) {
 }
 
 function showBtn() {
-    const showBtn = document.querySelector('.btn.sub-btn.custom-btn')
+  const btnShow = $('.btn.sub-btn.custom-btn')
 
-    showBtn.style.display === "none" ? showBtn.style.display = "block" : showBtn.style.display = "none"
+  btnShow.css("display") === "none" ? btnShow.show() : btnShow.hide()
 }

@@ -1,7 +1,3 @@
-.wrapper {
-    height: 5000px
-}
-
 #side-navi {
     width: 100px;
     padding: 5px;
@@ -32,24 +28,28 @@
     margin: auto;
     width: 950px;
     height: 175px;
-    display: flex;
-    justify-content: flex-start;
     padding: 10px;
 }
 
-.list-area .img-area{
+.list-area .my-content{
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.my-content .img-area{
     width: 155px;
     height: 155px;
     margin-right: 10px;
 }
 
-.list-area img{
+.my-content img{
     width: 155px;
     height: 155px;
     object-fit: cover;
 }
 
-.list-area .content-area {
+.my-content .content-area {
     width: 100%;
     height: 155px;
     position: relative;
@@ -58,7 +58,7 @@
 .content-area .diary-title{
     font-size: 30px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin: 0 0 20px 5px;
 }
 
 .content-area .diary-content{

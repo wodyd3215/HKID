@@ -18,10 +18,10 @@
         <div class="custom-modal">
             <div class="custom-modal-header">
                 <div class="custom-modal-title">이메일 변경</div>
-                <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
+                <button class="material-symbols-outlined close-btn " onclick="closeModal()">close</button>
             </div>
             <div class="custom-modal-content">
-                <form action="">
+                <form action="changeEmail.me">
                     <div id="enroll-email" class="enroll-input-area">
                         <input id="email-input1" type="text" placeholder="이메일 입력(특수문자 제외)">
                         <input id="email-input3" type="text" name="" value="@" readonly>
