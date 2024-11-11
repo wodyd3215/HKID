@@ -1,3 +1,7 @@
+function init(alertMsg){
+    checkAlertMessage(alertMsg)
+}
+
 function loginBtn(){
     const inputId = document.querySelector("#login-id").value;
     const inputPwd = document.querySelector("#login-pwd").value;
@@ -8,5 +12,11 @@ function loginBtn(){
         
     } else {
         logBtn.disabled = false;
+    }
+}
+
+function checkAlertMessage(alertMsg){
+    if(alertMsg) {
+        alert(alertMsg);
     }
 }

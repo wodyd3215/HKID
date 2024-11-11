@@ -59,7 +59,14 @@
             </ul>
         </div>
         <div id="login-form-btn" class="content">
-            <a class="login" href="loginForm.me">로그인</a>
+        <c:choose>
+        	<c:when test="${empty loginMember}">
+            	<a class="login" href="loginForm.me">로그인</a>
+            </c:when>
+            <c:otherwise>
+            	<button><img></button>
+            </c:otherwise>
+        </c:choose>
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/chatBox.jsp" />
