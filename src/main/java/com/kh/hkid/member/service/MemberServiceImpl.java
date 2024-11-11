@@ -21,9 +21,15 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 	
 	// 회원가입
-	@Transactional
+	@Transactional // 트랜잭션 관리를 해주는 어노테이션
 	@Override
 	public int insertMember(Member m) {
 		return memberDao.insertMember(sqlSession, m);
+	}
+
+	// 로그인
+	@Override
+	public Member loginMember(Member m) {
+		return memberDao.loginMember(sqlSession, m);
 	}
 }
