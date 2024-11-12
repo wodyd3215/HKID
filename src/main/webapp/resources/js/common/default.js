@@ -1,7 +1,8 @@
 function init(pageName, optional) {
-    initSummerNote();
-    
-    
+    initDiaryPage()
+    initDiaryEnroll()
+    initSummerNote()
+
     switch(pageName) {
         // case "ex":
         //     initpagename(optional); // 인자가 있을 경우

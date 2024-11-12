@@ -1,18 +1,103 @@
-.wrapper {
-    /* border: 1px solid black; */
-}
-
 #side-navi {
     width: 100px;
     padding: 5px;
     position: fixed;
     z-index: 10000;
+    left: 18%;
     top: 25%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 #side-title{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #d9d9d9;
     padding-bottom: 5px;
     margin-bottom: 5px;
+}
+
+#content-area{
+    margin-top: 100px;
+}
+
+#btn-area{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+.list-area {
+    margin: auto;
+    width: 950px;
+    height: 175px;
+    padding: 10px;
+}
+
+.list-area .my-content{
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.my-content .img-area{
+    width: 155px;
+    height: 155px;
+    margin-right: 10px;
+}
+
+.my-content img{
+    width: 155px;
+    height: 155px;
+    object-fit: cover;
+}
+
+.my-content .content-area {
+    width: 100%;
+    height: 155px;
+    position: relative;
+}
+
+.content-area .diary-title{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 0 20px 5px;
+}
+
+.content-area .diary-content{
+    width: 100%;
+    height: 3rem;
+    margin-left: 10px;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content-area .enroll-date{
+    position: absolute;
+    bottom: 0;
+    margin-left: 5px;
+}
+
+.btn.btn-primary.custom-btn{
+    width: 125px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background: #00A6FB;
+    font-weight: bold;
+    overflow: hidden;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn.btn-primary.custom-btn:hover,
+.btn.btn-primary.custom-btn:active,
+.btn.btn-primary.custom-btn:focus{
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
 }

@@ -3,14 +3,12 @@
 //  >> 앞 줄에 제이쿼리가 써머노트보다 먼저 추가 되어야 한다는 뜻(jQuery중복도 체크!)
 
 function initSummerNote() {
-    console.log($('#sumHe').data('he'))
-    
     $('#content').summernote({ 
         placeholder: '글을 입력하세요.', 
         tabsize: 2,
-        minHeight: $('#sumHe').data('he') || 400,
-        maxHeight: $('#sumHe').data('he') || 400,
+        height: $('#sumHe').data('he') || 400,
         width: '100%',
+        disableResizeEditor: true,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
@@ -20,7 +18,9 @@ function initSummerNote() {
             ['insert', ['link', 'picture']],
         ],
         callbacks: {
-            onImageUpload: fileUpload
+            onImageUpload: fileUpload,
+            // 썸머노트 하단 리사이즈 바 삭제
+            onInit: notResize,
         }
 });
 }
@@ -58,4 +58,8 @@ function insertFile(data, callback){
            console.log("파일업로드 api요청 실패")
        } 
    })
+}
+
+function notResize() {
+    $('.note-statusbar').remove(); // 리사이즈 바 제거
 }

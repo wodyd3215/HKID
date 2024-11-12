@@ -2,19 +2,9 @@ package com.kh.hkid.member.model.vo;
 
 import java.sql.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
 public class Member {
 	private int memberNo;
 	private String memberId;
@@ -30,5 +20,5 @@ public class Member {
 	private Date enrollDate;
 	private String status;
 	private String profileImg;
-	private String isAdmain;
+	private String isAdmin;
 }

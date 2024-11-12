@@ -24,9 +24,16 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
 
-
+<script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </head>
-<body>
+<body onload="init('${pageName}', '${optional}')">
+    <c:if test="${ not empty alertMsg}">
+			<script>
+				alert("${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>
+		</c:if> 
     <div class="header">
         <div id="logo-img">
             <a href="${pageContext.request.contextPath}"><img class="icon" src="./resources/img/icon.png" alt="없음"></a>
