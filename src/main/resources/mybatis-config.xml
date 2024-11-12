@@ -13,12 +13,15 @@
  	<typeAliases>
  		<typeAlias type="com.kh.hkid.exercise.model.vo.Exercise" alias="Exercise"/>
  		<typeAlias type="com.kh.hkid.member.model.vo.Member" alias="Member"/>
+ 		<typeAlias type="com.kh.hkid.community.model.vo.Board" alias="Board"/>
+ 		<typeAlias type="com.kh.hkid.community.model.dto.Community" alias="Community"/>
  	</typeAliases>
  	
 
  	<mappers>
  		<mapper resource="mappers/exercise-mapper.xml"/>
  		<mapper resource="mappers/member-mapper.xml"/>
+ 		<mapper resource="mappers/board-mapper.xml"/>
  	</mappers>
 
  	

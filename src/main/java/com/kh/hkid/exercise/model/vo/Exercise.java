@@ -19,6 +19,4 @@ public class Exercise {
 	private String exerciserDescription;
 	private String exerciseImg;
 	private String partName;
-
-	
 }
