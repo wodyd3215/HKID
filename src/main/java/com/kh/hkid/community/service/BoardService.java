@@ -3,7 +3,7 @@ package com.kh.hkid.community.service;
 import java.util.ArrayList;
 
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.dto.Community;
 
 public interface BoardService {
 	
@@ -11,6 +11,6 @@ public interface BoardService {
 	int selectListCount();
 	
 	//게시글 목록
-	ArrayList<Board> selectList(PageInfo pi);
+	ArrayList<Community> selectList(PageInfo pi);
 
 }

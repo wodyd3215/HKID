@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dao.BoardDao;
-import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.dto.Community;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private final BoardDao boardDao;
-
 	
 	@Override
 	public int selectListCount() {
@@ -29,11 +28,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Community> selectList(PageInfo pi) {
 		return boardDao.selectList(sqlSession, pi);
 	}
-
-
+	
+	
 	
 	
 //	@Autowired

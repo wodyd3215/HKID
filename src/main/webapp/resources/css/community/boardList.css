@@ -171,6 +171,10 @@ table td:nth-child(5) { /* 5번째 td */
     font-size: 20px;
 }
 
+#common-table a{
+    color: black;
+}
+
 /*********************모달 css****************/
 
 .modal{ 

@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.CommentReply;
-import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.community.model.vo.Reply;
 import com.kh.hkid.community.service.BoardService;
 
@@ -38,8 +38,6 @@ public class BoardController {
 		super();
 		this.boardService = boardService;
 	}
-
-
 	
 	//게시글 개수, 목록
 	@GetMapping("list.bo")
@@ -47,7 +45,7 @@ public class BoardController {
 		int boardCount = boardService.selectListCount();
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		
-		ArrayList<Board> list = boardService.selectList(pi);	//게시글 리스트
+		ArrayList<Community> list = boardService.selectList(pi);	//게시글 리스트
 		
 		
 		System.out.println("시작페이지: "+pi.getStartPage());
@@ -95,7 +93,7 @@ public class BoardController {
 	@PostMapping("updateForm.bo")
 	public String updateForm() {
 		System.out.println("updateForm.bo���� ����");
-		return "community/boardDetail"; //�ӽ÷� ����
+		return "community/boardDetail"; 
 	}
 	
 	//댓글추가

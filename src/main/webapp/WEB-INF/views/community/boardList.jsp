@@ -48,11 +48,11 @@
                 <!-- <c:forEach var="b" items=""> </c:forEach> -->
                  <c:forEach var="b" items="${list}">
                     <tr>
-                    <td class="board-category">질문</td>
-                    <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다</a></td>
-                    <td>꾸준히 운동</td>
-                    <td>2024-10-10</td>
-                    <td>4</td>
+                    <td class="board-category">${b.communityName}</td>
+                    <td><a href="boardDetail.bo?bno=${boardNo}">${b.boardName}</a></td>
+                    <td>${b.userName}</td>
+                    <td>${b.boardDate}</td>
+                    <td>${b.boardViewCount}</td>
                 </tr>
                  </c:forEach>
             </tbody>

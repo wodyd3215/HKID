@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.dto.Community;
 
 @Repository
 public class BoardDao {
@@ -18,7 +18,7 @@ public class BoardDao {
 	}
 	
 	//게시글 목록
-	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Community> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
