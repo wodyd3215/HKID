@@ -1,0 +1,42 @@
+#logo-img > a > img{
+    width: 150px;
+    height: 60px;
+}
+
+#password-change .custom-modal {
+    height: 350px;
+}
+
+
+.enroll-input-area.custom-input-area {
+    margin: auto;
+    display: block;
+    border: none;
+    font-size: 20px;
+    height: 100%;
+}
+
+.enroll-input-area.custom-input-area > div{
+    margin-bottom: 20px;
+}
+
+.enroll-input-area input {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(199, 199, 199);
+    width: 83%;
+    height: 100%;
+}
+
+.enroll-input-area  input:focus {
+    outline: none;
+}
+
+.button-area{
+    margin-top: 20px;
+}
+
+.btn.custom-btn.modal-btn{
+    display: block;
+    margin: 0 auto;
+}

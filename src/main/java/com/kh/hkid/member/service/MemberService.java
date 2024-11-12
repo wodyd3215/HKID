@@ -9,4 +9,19 @@ public interface MemberService {
 	
 	// 로그인
 	Member loginMember(Member m);
+	
+	// 회원 정보 변경(이메일)
+	int updateEmail(Member m);
+	
+	// 회원 정보 변경(전화번호)
+	int updatePhone(Member m);
+	
+	// 회원 정보 변경(비밀번호)
+	int updatePwd(Member m);
+	
+	// 회원 정보 변경(주소)
+	int updateAddress(Member m);
+	
+	// 회원 탈퇴
+	int deleteMember(String memberId);
 }

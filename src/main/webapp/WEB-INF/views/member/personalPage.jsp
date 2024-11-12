@@ -8,6 +8,7 @@
 
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/personalPage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/PersonalModal.css">
 <!-- js -->
 <script src="${pageContext.request.contextPath}/resources/js/member/personalPage.js"></script>
 </head>
@@ -24,7 +25,7 @@
                 <input type="file" class="select-profile" accept="image/*" onchange="previewProfile(this)">
                 <form action="" onclick="showBtn()">
                     <div class="namespace">
-                        <input type="text" name="memberNickName" id="nameInput" autocomplete="off">
+                        <input type="text" name="nickName" id="nameInput" autocomplete="off" value="${loginMember.nickName}">
                         <label for="nameInput">
                             <div class="material-symbols-outlined custom-icon">edit_square</div>
                         </label>

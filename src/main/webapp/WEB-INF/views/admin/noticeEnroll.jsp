@@ -31,9 +31,6 @@
                 </div>
             </form>
         </div>
-        <!-- 서머노트 js 추가 (헤더에 jQuery가 있어서 아래에 추가함) -->
-        <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
-        </div>
     <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </body>
 </html>
