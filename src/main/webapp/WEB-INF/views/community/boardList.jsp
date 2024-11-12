@@ -45,8 +45,9 @@
                     <td>2024-10-10</td>
                     <td>12</td>
                 </tr>
+                <!-- <c:forEach var="b" items=""> </c:forEach> -->
                 <tr>
-                    <td id="board-category">질문</td>
+                    <td class="board-category">질문</td>
                     <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다</a></td>
                     <td>꾸준히 운동</td>
                     <td>2024-10-10</td>
@@ -80,21 +81,42 @@
                 <option value="ad">홍보</option>
             </select>
             
-            <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">
+            <input type="search" name="" id="boardsearch-bar" placeholder="검색어를 입력해주세요">
             <button id="search-btn" type="submit">
                 <img id="searchIcon" src="resources/image/searchIcon.png">
             </button>
         </div>  
 
-        <!-- 페이지 버튼 -->
+
+
+        
         <div id="paging-div">
-            <button class="page-btn">&lt;</button>
-            <button class="page-btn">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">4</button>
-            <button class="page-btn">5</button>
-            <button class="page-btn">&gt;</button>
+            <!-- 이전페이지 버튼 -->
+            <c:choose>
+                <c:when test="${pi.currentPage eq 1 }"> <!-- 현재 페이지가 1이면 -->
+                    <a class="page-btn disabled" href="">&lt;</a> <!-- 비활성화 -->
+                </c:when>
+                <c:otherwise>
+                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage - 1}">&lt;</a>
+                </c:otherwise>
+            </c:choose>
+
+            <!-- 1~5 페이지 -->
+             <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+                    <!-- 현재페이지일 경우 active 클래스 추가 -->
+                    <a class="page-btn ${pi.currentPage != p ? 'active' : ''}" href="list.bo?cpage=${p}">${p}</a> <!-- 현재 페이지 검정색 -->
+             </c:forEach>
+             
+
+             <c:choose>
+                <c:when test="${pi.currentPage eq pi.maxPage }"> <!-- 현재 페이지가 마지막 페이지라면 -->
+                    <a class="page-btn disabled" href="">&gt;</a> <!-- 비활성화 -->
+                </c:when>
+                <c:otherwise>
+                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage + 1}">&gt;</a>
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </div>
 
@@ -121,4 +143,5 @@
         </div>
     </div>
 </div>
+
 </html>

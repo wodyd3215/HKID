@@ -3,6 +3,16 @@
     width: 100%;
 }
 
+#paging-div a{
+    padding-left: 3px;
+}
+
+#paging-div a:hover{
+    text-decoration: none;
+    color: black;
+    /* font-size: 18px; */
+}
+
 h1{
     height: 150px;
     width: 100%;
@@ -57,7 +67,7 @@ table td:nth-child(5) { /* 5번째 td */
     width: 6%;
 }
 
-#board-category{
+.board-category{
     font-size: 16px;
 }
 
@@ -107,7 +117,7 @@ table td:nth-child(5) { /* 5번째 td */
     font-weight: 600;
 }
 
-#board-search-bar{
+#boardsearch-bar{
     border: 1px solid rgb(196, 195, 195);
     border-radius: 9px 0px 0px 9px ;
     width: 400px;
@@ -134,6 +144,14 @@ table td:nth-child(5) { /* 5번째 td */
     background-color: white;
     font-weight: 600;
     cursor: pointer;
+}
+
+#paging-div .active{
+    color:gainsboro;
+}
+
+.disabled{
+    pointer-events: none; /* 이벤트 비활성화 */
 }
 
 #search-btn{

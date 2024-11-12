@@ -1,4 +1,4 @@
-package com.kh.hkid.communityBoard.controller;
+package com.kh.hkid.community.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,15 +14,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kh.hkid.common.template.Template;
+import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.CommentReply;
+import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.community.model.vo.Reply;
-import com.kh.hkid.communityBoard.service.BoardService;
+import com.kh.hkid.community.service.BoardService;
 
 @Controller
 public class BoardController {
@@ -36,32 +39,48 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 
+
 	
-	//°Ô½Ã±Û ¸ñ·Ï
+	//ê²Œì‹œê¸€ ê°œìˆ˜, ëª©ë¡
 	@GetMapping("list.bo")
-	public String selectList() {
+	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		int boardCount = boardService.selectListCount();
 		
+		System.out.println(boardCount);
+		
+
+		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 5); //í˜ì´ì§• ì²˜ë¦¬
+		System.out.println("ì‹œì‘í˜ì´ì§€: "+pi.getStartPage());
+		System.out.println("ë§ˆì§€ë§‰í˜ì´ì§€: "+pi.getEndPage());
+		ArrayList<Board> list = boardService.selectList();	//ê²Œì‹œê¸€ ë¦¬ìŠ¤íŠ¸
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "community/boardList";
 	}
 	
-	//°Ô½Ã±Û ÀÛ¼º
+	
+	
+	
+	//ê²Œì‹œê¸€ ì‘ì„±
 	@GetMapping("boardWrite.bo")
 	public String boardWrite() {
 		
 		return "community/boardWrite";
 	}
 	
-	//°Ô½Ã±Û µğÅ×ÀÏ
+	//ê²Œì‹œê¸€ ë””í…Œì¼
 	@GetMapping("boardDetail.bo")
 	public String selectDetailBoard(Model model) {
 		
-		//DB µé¾î°¡±â Àü±îÁö¸¸ »ç¿ë!!
+		//DB ë“¤ì–´ê°€ê¸° ì „ê¹Œì§€ë§Œ ì‚¬ìš©!!
 		ArrayList<CommentReply> replyList = new ArrayList<>();
 		CommentReply commentReply = new CommentReply();
 		
-		commentReply.setContent("´ñ±Û ´õ¹Ìµ¥ÀÌÅÍÀÔ´Ï´Ù");
+		commentReply.setContent("ëŒ“ê¸€ ë”ë¯¸ë°ì´í„°ì…ë‹ˆë‹¤");
 		commentReply.setDate("2024.11.08");
-		commentReply.setUserName("¾ÈÀçÈÖ");
+		commentReply.setUserName("ì•ˆì¬íœ˜");
 		
 		replyList.add(commentReply)	;	
 		int replyCount = replyList.size();
@@ -72,83 +91,83 @@ public class BoardController {
 		return "community/boardDetail";
 	}
 	
-	//°Ô½Ã±Û ¼öÁ¤
+	//ê²Œì‹œê¸€ ìˆ˜ì •
 	@PostMapping("updateForm.bo")
 	public String updateForm() {
-		System.out.println("updateForm.bo¿¡¼­ ¹ŞÀ½");
-		return "community/boardDetail"; //ÀÓ½Ã·Î ¼³Á¤
+		System.out.println("updateForm.boï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		return "community/boardDetail"; //ï¿½Ó½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 	
-	//°Ô½Ã±Û »èÁ¦
-	@PostMapping("boardDelete.bo")
-	public String boardDelete() {
-		System.out.println("»èÁ¦ÄÁÆ®·Ñ·¯¿¡¼­ ¹ŞÀ½");
-		return "community/boardDetail"; // ÀÓ½Ã·Î ¼³Á¤
-	}
-	
-	//´ñ±ÛÃß°¡
+	//ëŒ“ê¸€ì¶”ê°€
 	@ResponseBody
 	@RequestMapping("insertReply.bo")
 //	@PostMapping(value="insertReply.bo", produces="application/json; charset-UTF-8")
 	public String ajaxInsertReply(Reply r) {
-	    // Ã³¸® ÈÄ JSON Çü½ÄÀÇ ÀÀ´ä ¹İÈ¯
+	    // ì²˜ë¦¬ í›„ JSON í˜•ì‹ì˜ ì‘ë‹µ ë°˜í™˜
 	    return "success";
 	}
 	
-	//Ã³À½ ´ñ±Û ¸ñ·Ï Ãâ·Â
+	//ê²Œì‹œê¸€ ì‚­ì œ
+	@PostMapping("boardDelete.bo")
+	public String boardDelete() {
+		System.out.println("ì‚­ì œì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë°›ìŒ");
+		return "community/boardDetail"; // ì„ì‹œë¡œ ì„¤ì •
+	}
+	
+	//ì²˜ìŒ ëŒ“ê¸€ ëª©ë¡ ì¶œë ¥
 	
 	
-	//ajax ´ñ±Û¸ñ·Ï select
+	//ajax ëŒ“ê¸€ëª©ë¡ select
 	@ResponseBody
-	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="Å¸ÀÔ/¼­ºêÅ¸ÀÔ"
+	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="íƒ€ì…/ì„œë¸Œíƒ€ì…"
 	public String ajaxSelectReplyList(int bno) {
-		//DBµé¾î°¡¸é »ç¿ë ¤¡¤¡
+		//DBë“¤ì–´ê°€ë©´ ì‚¬ìš© ã„±ã„±
 		ArrayList<CommentReply> list = new ArrayList<>();
 		
-		//DB µé¾î°¡±â Àü±îÁö¸¸ »ç¿ë!!
+		//DB ë“¤ì–´ê°€ê¸° ì „ê¹Œì§€ë§Œ ì‚¬ìš©!!
 		CommentReply commentList1 = new CommentReply();
-		commentList1.setContent("´ñ±Û ´õ¹Ìµ¥ÀÌÅÍÀÔ´Ï´Ù");
+		commentList1.setContent("ëŒ“ê¸€ ë”ë¯¸ë°ì´í„°ì…ë‹ˆë‹¤");
 		commentList1.setDate("2024.11.08");
-		commentList1.setUserName("¾ÈÀçÈÖ");
+		commentList1.setUserName("ì•ˆì¬íœ˜");
 		
 		CommentReply commentList2 = new CommentReply();
-		commentList2.setContent("´ñ±Û ´õ¹Ìµ¥ÀÌÅÍÀÔ´Ï´Ù");
+		commentList2.setContent("ëŒ“ê¸€ ë”ë¯¸ë°ì´í„°ì…ë‹ˆë‹¤");
 		commentList2.setDate("2024.11.08");
-		commentList2.setUserName("¾ÈÀçÈÖ");
+		commentList2.setUserName("ì•ˆì¬íœ˜");
 		
 		CommentReply commentList3 = new CommentReply();
-		commentList3.setContent("´ñ±Û ´õ¹Ìµ¥ÀÌÅÍÀÔ´Ï´Ù");
+		commentList3.setContent("ëŒ“ê¸€ ë”ë¯¸ë°ì´í„°ì…ë‹ˆë‹¤");
 		commentList3.setDate("2024.11.08");
-		commentList3.setUserName("¾ÈÀçÈÖ");
+		commentList3.setUserName("ì•ˆì¬íœ˜");
 		
 		list.add(commentList1);
 		list.add(commentList2);
 		list.add(commentList3);
 		
-		return new Gson().toJson(list); //list¸¦ JSON(¹®ÀÚ¿­)À¸·Î º¯È¯ÇØ¼­ ¸®ÅÏ 
+		return new Gson().toJson(list); //listë¥¼ JSON(ë¬¸ìì—´)ìœ¼ë¡œ ë³€í™˜í•´ì„œ ë¦¬í„´ 
 	}
 	
-	//´ñ±Û ¼öÁ¤
+	//ëŒ“ê¸€ ìˆ˜ì •
 	@PostMapping("updateReply.bo")
 	public String updateReply() {
-		System.out.println("update´ñ±Û ÄÁÆ®·Ñ·¯ ½ÇÇà");
+		System.out.println("updateëŒ“ê¸€ ì»¨íŠ¸ë¡¤ëŸ¬ ì‹¤í–‰");
 		return "redirect: /community/boardDetail";
 	}
 	
-	//½Å°í¿äÃ»
+	//ì‹ ê³ ìš”ì²­
 	@PostMapping("report.bo")
 	public String insertReport() {
 		
-		System.out.println("½Å°íÄÁÆ®·Ñ·¯¿¡¼­ ¹ŞÀ½");
-		return "community/boardDetail"; // ÀÓ½Ã·Î ¼³Á¤
+		System.out.println("ì‹ ê³ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë°›ìŒ");
+		return "community/boardDetail"; // ì„ì‹œë¡œ ì„¤ì •
 	}
 	
 
 	
-	 //-------------------------summernote----------------------------
+	//-------------------------summernote----------------------------
 	
-	//ajax·Î ÆÄÀÏ ¾÷·Îµå
-	//ÆÄÀÏ¸ñ·ÏÀ» ÀúÀåÇÏ°í ÀúÀåµÈ ÆÄÀÏ¸í ¸ñ·Ï¸íÀ» ¹İÈ¯
+	//ajaxë¡œ íŒŒì¼ ì—…ë¡œë“œ
+	//íŒŒì¼ëª©ë¡ì„ ì €ì¥í•˜ê³  ì €ì¥ëœ íŒŒì¼ëª… ëª©ë¡ëª…ì„ ë°˜í™˜
 	@ResponseBody
 	@PostMapping("upload")
 	public String upload(List<MultipartFile> fileList, HttpSession session) {
@@ -162,20 +181,20 @@ public class BoardController {
 	}
 	
 	public String saveFile(MultipartFile upfile, HttpSession session, String path) {
-		//ÆÄÀÏ ¿øº»¸í
+		//íŒŒì¼ ì›ë³¸ëª…
 		String originName = upfile.getOriginalFilename();
 		
-		//È®ÀåÀÚ
+		//í™•ì¥ì
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
-		//³â¿ù½ÃºĞÃÊ
+		//ë…„ì›”ì‹œë¶„ì´ˆ
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		
-		//5ÀÚ¸® ·£´ı°ª
+		//5ìë¦¬ ëœë¤ê°’
 		int randNum = (int)(Math.random()*90000) + 10000;
 		String changeName = currentTime + "_" + randNum + ext;
 		
-		//Ã·ºÎÆÄÀÏ ÀúÀåÇÒ Æú´õÀÇ ¹°¸®Àû °æ·Î
+		//ì²¨ë¶€íŒŒì¼ ì €ì¥í•  í´ë”ì˜ ë¬¼ë¦¬ì  ê²½ë¡œ
 		String savePath = session.getServletContext().getRealPath(path);
 		
 		try {
