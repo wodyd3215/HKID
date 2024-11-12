@@ -20,7 +20,7 @@
   	<result column="ENROLL_DATE" property="enrollDate"/>
   	<result column="STATUS" property="status"/>
   	<result column="PROFILE_IMG" property="profileImg"/>
-  	<result column="ISADMIN" property="isAdmain"/>
+  	<result column="ISADMIN" property="isAdmin"/>
   </resultMap>
   
   <!-- 회원가입 -->
@@ -74,6 +74,32 @@
   <update id="updateEmail">
   	UPDATE MEMBER 
   	   SET EMAIL = #{email}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <update id="updatePhone">
+  	UPDATE MEMBER 
+  	   SET PHONE = #{phone}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <update id="updatePwd">
+  	UPDATE MEMBER
+  	   SET MEMBER_PWD = #{memberPwd}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <update id="updateAddress">
+  	UPDATE MEMBER
+  	   SET ADDRESS = #{address},
+  	       DETAIL_ADDRESS = #{detailAddress},
+  	       POST_NO = #{postNo}
+  	 WHERE MEMBER_ID = #{memberId} 
+  </update>
+  
+  <update id="deleteMember">
+  	UPDATE MEMBER
+  	   SET STATUS = 'N'
   	 WHERE MEMBER_ID = #{memberId}
   </update>
 </mapper>

@@ -23,7 +23,7 @@
                 <button class="material-symbols-outlined close-btn " onclick="closeModal()">close</button>
             </div>
             <div class="custom-modal-content">
-                <form action="changeEmail.me">
+                <form action="updateEmail.me" method="POST">
                     <div id="enroll-email" class="enroll-input-area">
                         <input id="email-input1" type="text" name="emailId" oninput="totalEmail()" placeholder="이메일 입력(특수문자 제외)" required>
                         <input id="email-input3" type="text" name="@" value="@" readonly>
@@ -51,7 +51,7 @@
                 <button class="material-symbols-outlined close-btn" onclick="closeModal()">disabled_by_default</button>
             </div>
             <div class="custom-modal-content">
-                <form action="">
+                <form action="updatePhone.me" method="POST">
                     <div id="enroll-phone-certify">
                         <div id="enroll-phone">
                             <div class="enroll-input-area">
@@ -85,11 +85,11 @@
                 <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
             </div>
             <div class="custom-modal-content">
-                <form action="" >
+                <form action="updatePwd.me" method="POST">
                     <div class="enroll-input-area custom-input-area">
                         <div>
                             <div>현재 비밀번호</div>
-                            <div><input type="password" id="currPW" name="currPw" placeholder="현재 비밀번호 입력"></div>
+                            <div><input type="password" id="currPw" name="currPw" placeholder="현재 비밀번호 입력"></div>
                         </div>
                         <div>
                             <div>새 비밀번호</div>
@@ -97,11 +97,11 @@
                         </div>
                         <div>
                             <div>새 비밀번호 확인</div>
-                            <div><input type="password" id="checkmemberPwd" name="checkmemberPwd" placeholder="새 비밀번호 재입력"></div>
+                            <div><input type="password" id="checkMemberPwd" name="checkMemberPwd" placeholder="새 비밀번호 재입력"></div>
                         </div>
                     </div>
                     <div class="button-area">
-                        <button class="btn custom-btn modal-btn" type="submit">변경하기</button>
+                        <button class="btn custom-btn modal-btn" type="submit" onclick="return checkPwd()">변경하기</button>
                     </div>  
                 </form>
             </div>
@@ -115,14 +115,14 @@
                 <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
             </div>
             <div class="custom-modal-content">
-                <form action="">
+                <form action="changeAddress.me" method="POST">
                     <div id="enroll-address" class="enroll-input-area">
-                        <input type="text" placeholder="주소 입력(도로명, 지번)">
+                        <input type="text" placeholder="주소 입력(도로명, 지번)" name="address">
                         <button>주소찾기</button>
                     </div>
                     <div id="post-detail-address" class="enroll-input-area">
-                        <input id="post-no" type="text" placeholder="우편번호">
-                        <input id="detail-address" type="text" placeholder="상세주소 입력">
+                        <input id="post-no" type="text" placeholder="우편번호" name="postNo">
+                        <input id="detail-address" type="text" placeholder="상세주소 입력" name="detailAddress">
                     </div>
                     <div class="button-area">
                         <button class="btn custom-btn modal-btn" type="submit">변경하기</button>
@@ -139,9 +139,13 @@
                 <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
             </div>
             <div class="custom-modal-content">
-                <form action="">
+                <form action="deleteMember.me" method="POST">
                     <div>
                         <h2>정말로 탈퇴하시겠습니까?</h2>
+                    </div>
+                    <div>
+                        <div>비밀번호 입력</div>
+                        <div><input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호 입력"></div>
                     </div>
                     <div class="button-area">
                         <button class="btn custom-btn modal-btn" type="submit">변경하기</button>

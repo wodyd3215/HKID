@@ -22,3 +22,15 @@ function showBtn() {
 
   btnShow.css("display") === "none" ? btnShow.show() : btnShow.hide()
 }
+
+function checkPwd() {
+  const newPwd = $('#memberPwd').val()
+  const checknewPwd = $('#checkMemberPwd').val()
+
+  if(newPwd === checknewPwd) {
+    return true
+  } else {
+    return false
+  }
+
+}

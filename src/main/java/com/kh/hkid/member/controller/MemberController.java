@@ -95,11 +95,10 @@ public class MemberController {
     // 로그인
     @PostMapping("login.me")
     public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response) {
-    	System.out.println(m);
     	Member loginMember = memberService.loginMember(m);
-    	System.out.println(loginMember);
+
     	if(loginMember == null || !bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
-    		session.setAttribute("alertMsg", "로그인 정보에 맞는 아이디가 존재하지 않습니다.");
+    		session.setAttribute("alertMsg", "로그인 정보에 맞는 아이디가 존재하지 않습니다."); 
     		return "redirect:/loginForm.me";
     	} else {
     		Cookie ck = new Cookie("saveId", loginMember.getMemberId());
@@ -109,7 +108,7 @@ public class MemberController {
     		response.addCookie(ck);
     		
     		session.setAttribute("loginMember", loginMember);
-    		if(loginMember.getIsAdmain().equals("N")) {
+    		if(loginMember.getIsAdmin().equals("N")) {
     			return "redirect:/";
     		} else {
     			return "redirect:/product.ad";
@@ -126,19 +125,93 @@ public class MemberController {
     }
     
     // 이메일 변경
-    @PostMapping("changeEmail.me")
-    public String changeEmail(Member m, HttpSession session) {
+    @PostMapping("updateEmail.me")
+    public String updateEmail(Member m, HttpSession session) {
     	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
     	
     	int result = memberService.updateEmail(m);
     	
     	if(result > 0) {
     		session.setAttribute("loginMember", memberService.loginMember(m));
-    		session.setAttribute("alert", "이메일 변경 완료");
+    		session.setAttribute("alertMsg", "이메일 변경 완료");
     	} else {
-    		session.setAttribute("alert", "이메일 변경 실패");
+    		session.setAttribute("alertMsg", "이메일 변경 실패");
     	}
     	
     	return "redirect:/personal.me";
+    }
+    
+    @PostMapping("updatePhone.me")
+    public String updatePhone(Member m, HttpSession session) {
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	int result = memberService.updatePhone(m);
+    	
+    	if(result > 0) {
+    		session.setAttribute("loginMember", memberService.loginMember(m));
+    		session.setAttribute("alertMsg", "전화번호 변경 완료");
+    	} else {
+    		session.setAttribute("alertMsg", "전화번호 변경 실패");
+    	}
+    	
+    	return "redirect:/personal.me";
+    }
+    
+    @PostMapping("updatePwd.me")
+    public String updatePwd(Member m, String currPw, HttpSession session) {
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	if(!bcryptPasswordEncoder.matches(currPw, ((Member)session.getAttribute("loginMember")).getMemberPwd())) {
+    		session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+    		return "redirect:/";
+    	} else {
+        	m.setMemberPwd(bcryptPasswordEncoder.encode(m.getMemberPwd()));
+        	
+    		int result = memberService.updatePwd(m);
+    		
+    		if(result > 0) {
+    			session.setAttribute("loginMember", memberService.loginMember(m));
+    			session.setAttribute("alertMsg", "비밀번호 변경 완료");
+        	} else {
+        		session.setAttribute("alertMsg", "비밀번호 변경 실패");
+        	}
+    		
+    		return "redirect:/personal.me";
+    	}
+    }
+    
+    @PostMapping("changeAddress.me")
+    public String changeAddress(Member m, HttpSession session) {
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	int result = memberService.updateAddress(m);
+    	
+    	if(result > 0) {
+    		session.setAttribute("loginMember", memberService.loginMember(m));
+    		session.setAttribute("alertMsg", "주소 변경 완료");
+    	} else {
+    		session.setAttribute("alertMsg", "주소 변경 실패");
+    	}
+    	
+    	return "redirect:/personal.me";
+    }
+    
+    @PostMapping("deleteMember.me")
+    public String deleteMember(String memberPwd, HttpSession session) {
+    	if(!bcryptPasswordEncoder.matches(memberPwd, ((Member)session.getAttribute("loginMember")).getMemberPwd())) {
+    		session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
+    	} else {
+    		int result = memberService.deleteMember(((Member)session.getAttribute("loginMember")).getMemberId());
+    		
+    		if(result > 0) {
+    			session.removeAttribute("loginMember");
+    			session.setAttribute("alertMsg", "회원탈퇴가 정상적으로 이루어졌습니다.");
+    			return "redirect:/";
+    		} else {
+    			session.setAttribute("alertMsg", "회원탈퇴가 실패하였습니다.");
+    		}
+    	}
+    	
+		return "redirect:/personal.me";
     }
 }
