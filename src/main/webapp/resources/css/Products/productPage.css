@@ -81,6 +81,8 @@ li{
     width: 100%;
 }
 
+
+/* 왼쪽 사이드바 부분 */
 .side-nav-header{ /* 왼쪽 사이드바 헤더*/
     background: #003554;
     color: #ffffff;
@@ -94,20 +96,38 @@ li{
     font-weight: 700;
 }
 
-#selected{ /* 왼쪽 사이드바 나머지*/
+/* 왼쪽 사이드바 나머지*/
+#selected{ 
     display: flex;
     align-items: center;
     justify-content: center;
-    color:#636363;    
-    font-size: 20px;
-    font-weight: 600;
     height: 100%;
 }
 
-li:hover{
-    cursor: pointer;
-    color: #006494;
+.side-nav input[type=radio]{
+    display: none;
 }
+
+.side-nav input[type=radio] +label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    user-select: none;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+
+.side-nav input[type=radio] +label{
+    color: #636363;
+}
+
+.side-nav input[type=radio]:checked+label{
+    color: #000000;
+    font-size: 22px;
+}
+
 
 /* 페이징, 검색 바*/
 .productPageA{
@@ -120,12 +140,35 @@ li:hover{
     gap: 35px;
 }
 /* 상품, 중고 이동 버튼 부분*/
-.MoveBtn {
+/* .MoveBtn {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    width: 1060px;
-    
+    width: 1060px;    
+} */
+
+/* .MoveBtn li:hover{
+    cursor: pointer;
+    color: #006494;
+} */
+
+.MoveBtn input[type=radio]{
+    display: none;
+}
+
+.MoveBtn input[type=radio] +label {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;   
+    user-select: none;
+    font-weight: 700;
+    font-size: 28px;
+    border: none;
+}
+
+.MoveBtn input[type=radio]:checked+label{
+    border-bottom: #006494;
 }
 
 button.productMove, button.usedMove {
@@ -220,9 +263,10 @@ button.productMove, button.usedMove:hover{
     font-size: 12px;
 }
 
-.totalAssess{
+.totalRate{
+    margin-left: 5px;
     color: #C8C4C4;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .mainPrice{

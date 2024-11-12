@@ -43,7 +43,7 @@
                     <a href="list.bo">커뮤니티</a>
                 </li>
                 <li class="content">
-                    <a href="">상점</a>
+                    <a href="product.li">상점</a>
                 </li>
                 <li class="content">
                     <a class="login" href="loginForm.me">로그인</a>

@@ -13,7 +13,8 @@ public interface ProductService {
 	// 상품 페이지 목록 불러오기 
 	ArrayList<Product> selectList(PageInfo pi);
 
-	// 상품 사이드바 선택한 목록 불러오기
-	ArrayList<Product> selectSideItem(Product p);
+	//productNo로 상품 목록 조회
+	Product selectProduct(int pno);
+
 
 }

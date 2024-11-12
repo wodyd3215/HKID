@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,8 @@
 <title>상품 페이지</title>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
     <div class="wrapper">
         <div id="productPage">
             <div id="selected"> <!-- 왼쪽 사이드바 nav -->
@@ -27,26 +30,25 @@
                     <li class="side-nav-header"> 상품 </li> 
                     
                     <li>
-                        <input type="radio" id="contentDetail" name="side-itemType" value="전체"checked/>                        
-                        <label for="All"> 전체 </label>
+                        <input type="radio" id="side-itemAll" name="sideNav" value="전체" checked/>                        
+                        <label for="all"> 전체 </label>
                     </li>
 
                     <li>
-                        <input type="radio" id="contentDetail" name="side-itemType" value="식품"/>                        
+                        <input type="radio" id="food" name="sideNav" value="식품"/>                        
                         <label for="food"> 식품 </label>
                     <!-- <li onclick="handleClick('식품')"> 식품 </li> -->
                     </li>                    
 
                     <li>
-                        <input type="radio" id="contentDetail" name="side-itemType" value="의류" />                        
+                        <input type="radio" id="clothes" name="sideNav" value="의류" />                        
                          <label for="clothes"> 의류 </label>
                     <!-- <li onclick="handelClick('의류')"> 의류 </li> -->
                     </li>
                     
                     <li>
-                        <input type="radio" id="contentDetail" name="side-itemType" value="기구"/>                        
-                         <label for="equipment"> 기구 </label>
-                    <!-- <li> 기구 </li> -->
+                        <input type="radio" id="equipment" name="sideNav" value="기구"/>                        
+                         <label for="equipment"> 기구 </label>                    
                     </li>
                     
                 </ul>
@@ -54,9 +56,24 @@
 
             <div class="productPageA">
                 <div class="MoveBtn"> <!-- 상품, 중고 전환 버튼-->            
-                    <button class="productMove"> 상품 </button>
-                    <button class="usedMove" > 중고 </button>
+                    <input class="productMove" id="storeItem"> <label for="storeItem"> 상품 </label> </input>
+                    <input class="usedMove" id="usedItem" > <label for="usedItem"> 중고 </label> </input>
                 </div>
+
+
+                <c:set var="i" value=""/>
+                <c:set var="j" value="3"/>
+
+                <table>
+                    <c:choose>
+                        <c:when test="">
+
+                        </c:when>
+                    </c:choose>
+                </table>
+
+
+
                 <div class="productListArr"> <!-- 상품 목록 -->
                     <div class="productList">
                         
@@ -78,9 +95,21 @@
                             <div class="productTextMid">
                                 <div class="productTexts">
                                     <div class="textStar">★</div>
-                                    <div class="totalAssess">평점</div>
+                                    
+                                    <c:choose >
+                                        <c:when test="${r.rate == null}">
+                                            <div class="totalRate">
+                                                0.0
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="totalRate">
+                                                ${r.rate}
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>                                    
                                 </div>                                                                
-                                <div class="mainPrice">1000원</div>
+                                <div class="mainPrice">${p.price}</div>
                             </div>
                         </div>
                     </div>
@@ -91,33 +120,57 @@
                 
 
                 <div class="productPageBtn"> <!-- bottom -->
-                    <button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button>
-                    <span><button>1</button></span>
-                    <span><button>2</button></span>
-                    <span><button>3</button></span>
-                    <span><button>4</button></span>
-                    <span><button>5</button></span>
-                    <button><img src="${pageContext.request.contextPath}/resources/image/rightBtn.svg"></button>
+
+                    <c:choose>
+                        <c:when test="${pi.currentPage eq 1}">
+                            <a class="" href="#"><button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button></a>
+                        </c:when>
+
+                        <c:otherwise>
+                            <a class="" href="product.li?cpage=${pi.currentPage - 1}"><button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button></a>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:forEach var="p" begin ="${pi.startPage}" end="${pi.endPage}">
+                        <a class="" href="product.li?cpage=${p}">${p}</a>
+                    </c:forEach>
+
+                    <c:choose>
+                        <c:when test="${pi.currentPage eq pi.maxPage}">
+                            <a class="" href="#"><button><img src="${pageContext.request.contextPath}/resources/image/rightBtn.svg"></button></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="" href="product.li?cpage=${pi.currentPage + 1}"><button><img src="${pageContext.request.contextPath}/resources/image/rightBtn.svg"></button></a>
+                        </c:otherwise>
+                    </c:choose>
+                    
+                    
+                
                 </div>
 
-                <div class="produBottom">                    
-                    <select name="" id="produCategory">
-                        <option value="전체">전체</option>
-                        <option value="식품">식품</option>
-                        <option value="의류">의류</option>
-                        <option value="기구">기구</option>
-                    </select>
-                    
-                    <div class="produSearch">
-                        <input type="text" class="produSearchCan" placeholder="검색어를 입력하세요.">
-                        <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
+
+                <!-- 검색 바 -->
+                <form action="">
+                    <div class="produBottom">                    
+                        <select name="" id="produCategory">
+                            <option value="전체">전체</option>
+                            <option value="식품">식품</option>
+                            <option value="의류">의류</option>
+                            <option value="기구">기구</option>
+                        </select>
+                        
+                        <div class="produSearch">
+                            <input type="text" class="produSearchCan" placeholder="검색어를 입력하세요.">
+                            <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
+                        </div>                        
                     </div>
-                    
-                </div>
+                </form>
+                
             </div>
 
             
         </div>
     </div>
+    
 </body>
 </html>

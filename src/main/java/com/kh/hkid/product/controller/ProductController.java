@@ -34,27 +34,24 @@ public class ProductController {
 		
 		PageInfo pi = Template.getPageInfo(productCount, currentPage, 9, 5);
 		ArrayList<Product> list = productService.selectList(pi);
+
 		
 		model.addAttribute("list", list);
+
 		model.addAttribute("pi", pi);
-		return "product/productList";
+		return "Products/productPage";
 	}
 	
-	@GetMapping("deproduct.li")
-	public String selectItem() {
-		
-		return "product/productDetailview";	
+	@GetMapping("deteilItem.li")
+	public String selectItem(int pno, Model model) {
+		Product p = productService.selectProduct(pno);
+		return "Products/productPageDetail";	
 	}
 	
 	
-	@GetMapping("/products/productPage")
-	public String showProductPage() {
-		return "Products/productPageDetail";
-	}
+//	@GetMapping("/products/productPage")
+//	public String showProductPage() {
+//		return "Products/productPageDetail";
+//	}
 	
-	@ResponseBody
-	@RequestMapping("pselectSide.li")
-	public List<Product> ajaxSelect(Product p) {
-		return productService.selectSideItem(p);
-	}
 }

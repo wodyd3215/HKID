@@ -12,11 +12,14 @@
  
  	<typeAliases>
  		<typeAlias type="com.kh.hkid.exercise.model.vo.Exercise" alias="Exercise"/>
+ 		<typeAlias type="com.kh.hkid.product.model.vo.Product" alias="Product"/>
+ 		<typeAlias type="com.kh.hkid.product.model.vo.Review" alias="Review"/>
  	</typeAliases>
  	
 
  	<mappers>
  		<mapper resource="mappers/exercise-mapper.xml"/>
+ 		<mapper resource="mappers/product-mapper.xml"/>
  	</mappers>
 
  	

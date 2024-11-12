@@ -11,18 +11,21 @@ import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.product.model.dao.ProductDao;
 import com.kh.hkid.product.model.vo.Product;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private final SqlSessionTemplate sqlSession;
 	
 	@Autowired
-	private ProductDao productDao;
+	private final ProductDao productDao;
 
 	@Override
 	public int selectListTotal() {
-		return productDao.selectListCount(sqlSession);
+		return productDao.selectListTotal(sqlSession);
 	}
 
 	@Override
@@ -31,7 +34,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public ArrayList<Product> selectSideItem(Product p) {
-		return productDao.selectSideItem(sqlSession, p);
+	public Product selectProduct(int pno) {
+		return productDao.selectProduct(sqlSession, pno);
 	}
+
 }

@@ -58,7 +58,9 @@
                         <span class="quanText">1</span>
                         <button class="Btnpls">+</button>
                     </div>                                       
-                    <div class="priceText"> ${p.productPrice} </div>
+                    <div class="priceText">                         
+                        ${p.productPrice} 
+                    </div>
                 </div>
     
 
