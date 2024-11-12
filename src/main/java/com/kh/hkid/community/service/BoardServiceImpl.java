@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dao.BoardDao;
 import com.kh.hkid.community.model.vo.Board;
 
@@ -28,9 +29,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Board> selectList() {
-		return boardDao.selectList(sqlSession);
+	public ArrayList<Board> selectList(PageInfo pi) {
+		return boardDao.selectList(sqlSession, pi);
 	}
+
 
 	
 	

@@ -46,13 +46,15 @@
                     <td>12</td>
                 </tr>
                 <!-- <c:forEach var="b" items=""> </c:forEach> -->
-                <tr>
+                 <c:forEach var="b" items="${list}">
+                    <tr>
                     <td class="board-category">질문</td>
                     <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다</a></td>
                     <td>꾸준히 운동</td>
                     <td>2024-10-10</td>
                     <td>4</td>
                 </tr>
+                 </c:forEach>
             </tbody>
         </table>
 
@@ -89,7 +91,7 @@
 
 
 
-        
+        <!------------------------ 페이징 처리 ----------------------->
         <div id="paging-div">
             <!-- 이전페이지 버튼 -->
             <c:choose>
@@ -103,11 +105,9 @@
 
             <!-- 1~5 페이지 -->
              <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
-                    <!-- 현재페이지일 경우 active 클래스 추가 -->
+                    <!-- 현재페이지가 아닐 경우 active 클래스 추가(회색) -->
                     <a class="page-btn ${pi.currentPage != p ? 'active' : ''}" href="list.bo?cpage=${p}">${p}</a> <!-- 현재 페이지 검정색 -->
              </c:forEach>
-             
-
              <c:choose>
                 <c:when test="${pi.currentPage eq pi.maxPage }"> <!-- 현재 페이지가 마지막 페이지라면 -->
                     <a class="page-btn disabled" href="">&gt;</a> <!-- 비활성화 -->

@@ -45,14 +45,14 @@ public class BoardController {
 	@GetMapping("list.bo")
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int boardCount = boardService.selectListCount();
+		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		
-		System.out.println(boardCount);
+		ArrayList<Board> list = boardService.selectList(pi);	//게시글 리스트
 		
-
-		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 5); //페이징 처리
+		
 		System.out.println("시작페이지: "+pi.getStartPage());
 		System.out.println("마지막페이지: "+pi.getEndPage());
-		ArrayList<Board> list = boardService.selectList();	//게시글 리스트
+		
 		
 		
 		model.addAttribute("list", list);
