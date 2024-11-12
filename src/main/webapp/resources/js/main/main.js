@@ -11,11 +11,25 @@
       prevEl: ".swiper-button-prev",
     },
   });
+  
+
+  var swiper = new Swiper(".underSwiper", {
+    slidesPerView: 4,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
 
 
-
-document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("btn").addEventListener("click", function() {
+//bmi계산기
+function calculateBMI() {
       const heightInput = document.getElementById("height").value;
       const weightInput = document.getElementById("weight").value;
       const height = parseFloat(heightInput) / 100; // cm to meters
@@ -84,10 +98,10 @@ document.addEventListener("DOMContentLoaded", function() {
       const currentBmiElement = document.getElementById("current-bmi");
       currentBmiElement.innerHTML = `BMI: ${bmi.toFixed(1)}`;
       currentBmiElement.style.left = `calc(${position}% - 30px)`; // -30px은 BMI 텍스트 크기 보정
-  });
+    }
 
+  function resetFields() {
   // 초기화 버튼 기능
-  document.getElementById("btn2").addEventListener("click", function() {
       document.getElementById("height").value = "";
       document.getElementById("weight").value = "";
       document.getElementById("man").checked = false;
@@ -96,8 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById("result").style.color = "black"; // 초기 색상
       document.getElementById("current-bmi").innerHTML = "BMI";
       document.getElementById("current-bmi").style.left = "0";
-  });
-});
+    }
 
 // 지역선택 기능
 function categoryChange(e) {
