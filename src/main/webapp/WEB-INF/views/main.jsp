@@ -15,6 +15,8 @@
 </head>
 <body>
 	<jsp:include page="common/header.jsp" />
+
+	<!-- 배너 슬라이퍼-->
 	<div class="wrapper">
 			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
@@ -35,8 +37,9 @@
 				<div class="swiper-button-next"></div>
 				<div class="swiper-button-prev"></div>
 				<div class="swiper-pagination"></div>
-			  </div>
+			</div>
 
+			<!-- SELECT BOX -->
 			<div class="mainContent2">
 				<div class="weather">
 					<div class="weather-header">
@@ -66,6 +69,8 @@
 							</select>
 						</div>
 					</div>
+
+					<!-- 날시 API 화면 -->
 					<div id="dayNight" class="container day">
 						<div class="top">
 							<p id="location">서울, 강서구</p>
@@ -92,6 +97,8 @@
 						  </div>
 					</div>
 				</div>
+
+				<!-- BMI 계산기 -->
 				<div class="BMI">
 					<div class="BMI-header">
 						<p>BMI 계산기</p>
@@ -113,9 +120,9 @@
 						&nbsp; &nbsp; &nbsp; &nbsp; 
 
 
-						<button id="btn">계산하기</button>
+						<button id="btn" onclick="calculateBMI()">계산하기</button>
 						&nbsp;
-						<button id="btn2">초기화</button>
+						<button id="btn2" onclick="resetFields()">초기화</button>
 					</div>
 					<div id="result">
 						<p>비만도 결과</p>
@@ -132,6 +139,131 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- 아래쪽 슬라이퍼 -->
+		<div class="popular-product">
+			<div class="product-title">
+				<p class="product-text">인기상품</p>
+				<div class="product-link">
+					<a href="">자세히보기
+						<img src="./resources/img/arrow.png" alt="없음">
+					</a>
+				</div>
+			</div>
+			<div class="swiper underSwiper">
+				<div class="swiper-wrapper">
+				  <div class="swiper-slide">
+					<a href="">
+						<img src="./resources/img/image.png" alt="없음" id="underImg">
+					</a>
+				</div>
+				  <div class="swiper-slide">
+					<a href="">
+						<img src="./resources/img/image.png" alt="없음" id="underImg">
+					</a>
+				  </div>
+				  <div class="swiper-slide">
+					<a href="">
+						<img src="./resources/img/image.png" alt="없음" id="underImg">
+					</a>
+				  </div>
+				  <div class="swiper-slide">
+					<a href="">
+						<img src="./resources/img/image.png" alt="없음" id="underImg">
+					</a>
+				  </div>
+				  <div class="swiper-slide">Slide 5</div>
+				  <div class="swiper-slide">Slide 6</div>
+				  <div class="swiper-slide">Slide 7</div>
+				  <div class="swiper-slide">Slide 8</div>
+				  <div class="swiper-slide">Slide 9</div>
+				</div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+
+		<!-- 공지사항 -->
+		<div class="notice">
+			<div class="notice-title">
+				<p class="notice-head">공지사항</p>
+				<div class="notice-link">
+					<a href="">자세히보기
+						<img src="./resources/img/arrow.png" alt="없음">
+					</a>
+				</div>
+			</div>
+			<table>
+				<tbody>
+					<tr id="common-table-body">
+						<td>공지</td>
+						<td>
+							<a href="">게시글 작성 시 지켜야할 규칙 [필독]
+								<img src="./resources/img/file.png" alt="없음">
+							</a>
+						</td>
+						<td>꾸준히 운동</td>
+						<td>2024-10-10</td>
+						<td>2</td>
+					</tr>
+					<tr id="common-table-body">
+						<td>공지</td>
+						<td>
+							<a href="">게시글 작성 시 지켜야할 규칙 [필독]</a>
+						</td>
+						<td>꾸준히 운동</td>
+						<td>2024-10-10</td>
+						<td>2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- 커뮤니티 -->
+		<div class="notice">
+			<div class="notice-title">
+				<p class="notice-head">커뮤니티</p>
+				<div class="notice-link">
+					<a href="">자세히보기
+						<img src="./resources/img/arrow.png" alt="없음">
+					</a>
+				</div>
+			</div>
+			<table>
+				<tbody>
+					<tr id="community-table-body">
+						<td>자랑</td>
+						<td>
+							<a href="">세트별 개수 설정에 대해 질문드립니다 [0]
+								<img src="./resources/img/file.png" alt="없음">
+							</a>
+						</td>
+						<td>꾸준히 운동</td>
+						<td>2024-10-10</td>
+						<td>16</td>
+					</tr>
+					<tr id="community-table-body">
+						<td>팁</td>
+						<td>
+							<a href="">세트별 개수 설정에 대해 질문드립니다 [0]</a>
+						</td>
+						<td>꾸준히 운동</td>
+						<td>2024-10-10</td>
+						<td>15</td>
+					</tr>
+					<tr id="community-table-body">
+						<td>질문</td>
+						<td>
+							<a href="">세트별 개수 설정에 대해 질문드립니다 [0]</a>
+						</td>
+						<td>꾸준히 운동</td>
+						<td>2024-10-10</td>
+						<td>23</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
 			<!-- 기능 미완성으로 인한 예비 링크 -->
 			<a href="personal.me">개인페이지 가기</a>
