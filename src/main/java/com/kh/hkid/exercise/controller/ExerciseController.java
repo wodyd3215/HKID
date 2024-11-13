@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,7 @@ public class ExerciseController {
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int boardCount = exerciseService.selectListCount();
 		
-		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 12, 15);
+		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 15);
 		
 		ArrayList<Exercise> list = exerciseService.selectList(pi);
 		
@@ -47,7 +49,7 @@ public class ExerciseController {
 			@RequestParam(value = "part", defaultValue="") List<String> selectedParts,
 			@RequestParam(value = "difficulty", defaultValue="") List<String> selectDifficulties,
 			@RequestParam(value = "keyword", defaultValue="") List<String> keyword,
-			@RequestParam(value = "cpage", defaultValue="1") Integer currentPage, Model model) {
+			@RequestParam(value = "cpage", defaultValue="1") Integer currentPage, Model model, HttpSession session) {
 			int boardCount = exerciseService.selectListCount();
 		
 			// currentPage가 null일 경우 기본값 설정
@@ -55,7 +57,7 @@ public class ExerciseController {
 		        currentPage = 1;  // 기본값을 1로 설정
 		    }
 		    
-			PageInfo pi = Template.getPageInfo(boardCount, currentPage, 12, 15);
+			PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 15);
 			
 			
 		// HashMap에 필터 조건 추가
@@ -64,12 +66,16 @@ public class ExerciseController {
 		filterMap.put("difficulties", selectDifficulties);
 		filterMap.put("keywords", keyword);
 		
+		// 검색 조건을 세션에 저장
+        session.setAttribute("filterMap", filterMap);
 		
 		
 		List<Exercise> exercises = exerciseService.search(filterMap, pi);
 		
+		model.addAttribute("filterMap", filterMap);
 		model.addAttribute("list", exercises);
 		model.addAttribute("pi", pi);
+		
 		
 		return "exercise/mainExercise";
 		

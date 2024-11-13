@@ -97,24 +97,28 @@
 					
 					<div id="paging-area">
 						<c:if test="${pi.currentPage ne 1}">
-							<a href="list.ex?cpage=${pi.currentPage - 1}">[이전]</a>
+							<a href="list.ex?cpage=${pi.currentPage - 5}">&lt;</a>
 						</c:if>
 
 						<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
 							
 							<c:choose>
-								<c:when test="${empty part}">
-									<a href="list.ex?cpage=${i}">${i}</a>
+								<c:when test="${i == pi.currentPage}">
+									<!-- 현재 페이지에는 current-page 클래스 적용 -->
+									<a href="list.ex?cpage=${i}" class="paging-link current-page">${i}</a>
+								</c:when>
+								<c:when test="${empty filterMap}">
+									<a href="list.ex?cpage=${i}" class="paging-link">${i}</a>
 								</c:when>
 								<c:otherwise>
-									<a href="exercise.se?cpage=${i}">${i}</a>
+									<a href="exercise.se?cpage=${i}" class="paging-link">${i}</a>
 								</c:otherwise>
 							</c:choose>
 							
 						</c:forEach>
 
 						<c:if test="${pi.currentPage ne pi.maxPage}">
-							<a href="list.ex?cpage=${pi.currentPage + 1}">[다음]</a>
+							<a href="list.ex?cpage=${pi.currentPage + 5}">&gt;</a>
 						</c:if>
         			</div>
         <br><br>
