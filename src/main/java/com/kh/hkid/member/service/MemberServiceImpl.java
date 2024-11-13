@@ -1,10 +1,13 @@
 package com.kh.hkid.member.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.hkid.diary.model.vo.Diary;
 import com.kh.hkid.member.model.dao.MemberDao;
 import com.kh.hkid.member.model.vo.Member;
 
@@ -33,6 +36,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.loginMember(sqlSession, m);
 	}
 
+	// 회원 정보 수정(이메일, 전화번호, 비밀번호, 주소)
 	@Transactional
 	@Override
 	public int updateEmail(Member m) {
@@ -57,10 +61,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updateAddress(sqlSession, m);
 	}
 
+	// 회원 삭제
+	@Transactional
 	@Override
 	public int deleteMember(String memberId) {
 		return memberDao.deleteMember(sqlSession, memberId);
 	}
-	
-	
 }

@@ -1,5 +1,8 @@
 package com.kh.hkid.member.service;
 
+import java.util.ArrayList;
+
+import com.kh.hkid.diary.model.vo.Diary;
 import com.kh.hkid.member.model.vo.Member;
 
 public interface MemberService {
