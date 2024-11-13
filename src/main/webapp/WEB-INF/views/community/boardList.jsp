@@ -120,7 +120,6 @@
                     <a class="page-btn" href="list.bo?cpage=${pi.currentPage + 1}">&gt;</a>
                 </c:otherwise>
             </c:choose>
-
         </div>
     </div>
 

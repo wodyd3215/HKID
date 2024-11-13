@@ -10,7 +10,6 @@ function initScrollPaging(mNo) {
     }
 
     // loadDiary가 실행될 때 매개 변수로 사용되는 pageInfo를 기억하고 있음
-
     const loadDiary = loadMyDiaryAjax(pageInfo, (dList) => {
         drawDiaryPreview(dList)
     })

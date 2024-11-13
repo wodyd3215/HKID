@@ -107,6 +107,9 @@ public class BoardController {
 		return "community/boardDetail";
 	}
 	
+	//조회수 증가
+//	public 
+	
 //	--------------- 댓글 기능 -------------------------
 	
 	//댓글추가

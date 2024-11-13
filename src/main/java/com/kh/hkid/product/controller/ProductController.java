@@ -33,7 +33,7 @@ public class ProductController {
 	public String selectProList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int productCount = productService.selectListTotal();
 		
-		PageInfo pi = Template.getPageInfo(productCount, currentPage, 9, 5);
+		PageInfo pi = Template.getPageInfo(productCount, currentPage, 5, 9);
 		ArrayList<Product> list = productService.selectList(pi);
 
 		
