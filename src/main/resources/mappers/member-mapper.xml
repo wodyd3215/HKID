@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberMapper">
+  
+  <resultMap type="Member" id="memberResultSet">
+  	<result column="MEMBER_NO" property="memberNo"/>
+  	<result column="MEMBER_ID" property="memberId"/>
+  	<result column="MEMBER_PWD" property="memberPwd"/>
+  	<result column="MEMBER_NAME" property="memberName"/>
+  	<result column="NICKNAME" property="nickName"/>
+  	<result column="PHONE" property="phone"/>
+  	<result column="EMAIL" property="email"/>
+  	<result column="ADDRESS" property="address"/>
+  	<result column="DETAIL_ADDRESS" property="detailAddress"/>
+  	<result column="POST_NO" property="postNo"/>
+  	<result column="POINT" property="point"/>
+  	<result column="ENROLL_DATE" property="enrollDate"/>
+  	<result column="STATUS" property="status"/>
+  	<result column="PROFILE_IMG" property="profileImg"/>
+  	<result column="ISADMIN" property="isAdmin"/>
+  </resultMap>
+  
+  <!-- 회원가입 -->
+  <insert id="insertMember">
+  	INSERT INTO MEMBER(
+  		MEMBER_NO,
+  		MEMBER_ID,
+  		MEMBER_PWD,
+  		MEMBER_NAME,
+  		NICKNAME,
+  		PHONE,
+  		EMAIL,
+  		ADDRESS,
+  		DETAIL_ADDRESS,
+  		POST_NO
+  	) VALUES (
+  		SEQ_MNO.NEXTVAL, <!-- DB 시퀀스 생성해야함 -->
+  		#{memberId},
+  		#{memberPwd},
+  		#{memberName},
+  		#{nickName},
+  		#{phone},
+  		#{email},
+  		#{address},
+  		#{detailAddress},
+  		#{postNo}
+  	)
+  </insert>
+  
+  <!-- 로그인 -->
+  <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+  	SELECT MEMBER_NO,
+  		   MEMBER_ID,
+  		   MEMBER_PWD,
+  		   MEMBER_NAME,
+  		   NICKNAME,
+  		   PHONE,
+  		   EMAIL,
+  		   ADDRESS,
+  		   DETAIL_ADDRESS,
+  		   POST_NO,
+	  	   POINT,
+	  	   ENROLL_DATE,
+  		   STATUS,
+  		   PROFILE_IMG,
+  		   ISADMIN
+  	  FROM MEMBER
+  	 WHERE MEMBER_ID = #{memberId}
+  	   AND STATUS = 'Y'
+  </select>
+  
+  <update id="updateEmail">
+  	UPDATE MEMBER 
+  	   SET EMAIL = #{email}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <update id="updatePhone">
+  	UPDATE MEMBER 
+  	   SET PHONE = #{phone}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <update id="updatePwd">
+  	UPDATE MEMBER
+  	   SET MEMBER_PWD = #{memberPwd}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <update id="updateAddress">
+  	UPDATE MEMBER
+  	   SET ADDRESS = #{address},
+  	       DETAIL_ADDRESS = #{detailAddress},
+  	       POST_NO = #{postNo}
+  	 WHERE MEMBER_ID = #{memberId} 
+  </update>
+  
+  <update id="deleteMember">
+  	UPDATE MEMBER
+  	   SET STATUS = 'N'
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
+</mapper>

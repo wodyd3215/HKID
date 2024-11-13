@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>​
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,128 +8,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
+
+    <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/common.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/apis/boardApi.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
+
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
     <br><br><br><br>
     <div class="wrapper">
         <hr>
-        <!-- 게시글 정보 출력 -->
         <div id="top-wrapper">
-
-            <!-- 1번 게시글 제목칸-->
+            <!-- 게시글 제목칸-->
             <div id="board-title-wrapper">
                 <div id="board-title">
                     <p>[전체] 피티 연장할까 고민입니다</p>
                 </div>
-                <div id="writer-date--update-delect">
+                <div id="writer-date--update-delete">
                     <div id="writer-date">
                         <div>풍근풍근</div> &nbsp;&nbsp;&nbsp;
                         <div>2024.10.24</div>
                     </div>
-                    <div>
-                        <button>수정</button>
-                        <button>삭제</button>
+                    <div class="btn-div">
+                        <form class="postForm" method="post">
+                            <button class="btn" onclick = "postFormSubmit('edit')">수정</button>
+                        </form>
+                        <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
                     </div>
                 </div>
-                <hr>
             </div>
-
-            <!-- 2번 내용 + 댓글작성-->
+        <hr>
+            
+            <!--댓글작성-->
             <div id="second-div">
-                <textarea id="content"  style="resize:none;" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</textarea>
+                <div id="content" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</div>
                     
-                </textarea>
-                <div id="testsss">
+                </div>
+                <div id="etc-reply-wrapper">
                     <div id="etc-menu">
                         <div> 
                             <div class="heart-div">
                                 <img src="resources/image/heart.png" alt="">
-                                <p class="ptext">5</p>
+                                <p class="ptext">하트 개수</p>
                             </div>
-
+                            
                             <div class="heart-div">
                                 <img src="resources/image/talk.png" alt="">
-                                <p class="ptext">2</p>
+                                <p id="reply-count" class="ptext">${replyCount}</p>
                             </div>
                             
                         </div>
                         <div id="copy-siren">
-                            <div id="url-copy" class="img-div">
-                                <img id="link-img" src="resources/image/Link.png" alt="">
-                            </div>
-                            <div class="img-div">
-                                <img id="siren-img" src="resources/image/siren.png" alt="">
-                            </div>
+                            <button id="URLcopy-btn" class=".img-button">
+                                <img id="link-img" onclick="copyLink(window.location.href, '클립보드에 현재 url이 복사되었습니다.', '복사에 실패했습니다. 다시 시도해주세요.')" 
+                                    src="resources/image/Link.png" alt="URL 복사 버튼">
+                            </button>
+                            <button id=siren-btn class=".img-button">
+                                <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal" onclick="openModal(event)">
+                            </button>
                             
                         </div>
                     </div>
-                    <!-- 댓글 작성 -->
-                    <form id="comment">
+                        
+                    <!-- 댓글 작성?? -->
+                    <div id="comment">
                         <p class="user-name">개떡도지</p>
-                        <textarea name="" id="write-comment" style="resize: none;" placeholder="댓글을 작성하세요"></textarea>
-                        <input type="submit" name="" id="submit-btn" value="등록">
-                    </form>
+                        <textarea name="replyContent" id="write-comment" placeholder="댓글을 작성하세요"></textarea>
+                        <div>
+                            <button name="" id="submit-btn" onclick="addReply()">등록</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
 
+            <!-- 댓글리스트 -->
+            <div id="all-reply-wrapper">
+            <!-- 댓글 목록 요소1 -->
+            <div class="comments-body">
+                <div class="main-comment">
+                    <div id="comment-left">
+                        <p class="user-name"> 안재휘 <!-- ${c.userName} --></p>
+                        <p>2024.11.11<!-- ${c.date} --> &nbsp;</p>
+                        <button class="add-sub-comment">답글쓰기</button>
+                    </div>
+                    <div class="comment-middle"> 나를 쏘고가라</div>
+                    <div class="comment-right">
+                        <button class="reply-update-btn" onclick="updateReply()">수정</button>
+                        <button class="reply-delete-btn">삭제</button>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
+                <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 -->
+                    <hr>     
+                        <div class="comments-body">
+                            <div class="main-comment">
+                                <div id="comment-left">
+                                    <p class="user-name">${c.userName}</p>
+                                    <p>${c.date} &nbsp;</p>
+                                    <button class="add-sub-comment">답글쓰기</button>
+                                </div>
+                                <div class="comment-middle">${c.content}</div>
+                                <div class="comment-right">
+                                    <button class="reply-update-btn">수정</button>
+                                    <button class="reply-delete-btn">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                </c:forEach>
+            </div>
             <hr>
-
-            <!-- 3번 댓글리스트 -->
-            <div id="comments-body-wrapper">
-                <div id="comments-body">
-                    <div id="main-comment">
-                        <div id="comment-left">
-                            <p class="user-name">개떡도지</p>
-                            <p>2024.10.24 &nbsp; 13:34</p>
-                            <button id="add-sub-comment">답글쓰기</button>
+                <!-- 대댓글 -->
+                <div class="comments-body-wrapper">
+                    <div id="sub-comments-body">
+                        <div>
+                            <img id="drift-arrow" src="resources/image/driftArrow.png" alt="">
                         </div>
-                        <div id="comment-middle">
-                            dasdsa
-                        </div>
-                        <div id="comment-right">
-                            <button>수정</button>
-                            <button>삭제</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-
-            <!-- ----------------------------- -->
-
-          
-
-            <div id="comments-body-wrapper">
-                <div id="sub-comments-body">
-                    <div>
-                        <img id="drift-arrow" src="resources/image/driftArrow.png" alt="">
-                    </div>
-                    <div id="main-comment">
-                        <div id="comment-left">
-                            <p class="user-name">개떡도지</p>
-                            <p>2024.10.24 &nbsp; 13:34</p>
-                            <button id="add-sub-comment">답글쓰기</button>
-                        </div>
-                        <div id="comment-middle">
-                            dasdsa
-                        </div>
-                        <div id="comment-right">
-                            <button>수정</button>
-                            <button>삭제</button>
+                        <div class="main-comment">
+                            <div id="comment-left">
+                                <p class="user-name">개떡도지</p>
+                                <p>2024.10.24 &nbsp; 13:34</p>
+                                <button class="add-sub-comment">답글쓰기</button>
+                            </div>
+                            <div class="comment-middle">
+                                dasdsa
+                            </div>
+                            <div class="comment-right">
+                                <button>수정</button>
+                                <button>삭제</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+   
             <hr>
         </div>
-        
 
-        <!------------------ 아래 게시글 목록 -------------------->
-        <!-- 헤더 대용 테이블  -->
+        <!------------------ 아래쪽 게시글 목록 -------------------->
         <div id="bottom-wrapper">
             <table id="top-table">
                 <tr>
@@ -148,7 +170,7 @@
                 </tr>
             </table>
             
-            <!-------------- 게시글 목록 테이블 ---------------->
+            <!-------------- 게시글 목록  ---------------->
             <table id="main-table">
                 <tr>
                     <td id="board-category">질문</td>
@@ -167,19 +189,8 @@
                     <option value="">10개씩</option>
                     <option value="">15개씩</option>
                 </select>
-                <form action="boardWrite.bo" method="POST">
-                    <button id="write-btn">글쓰기</button>
-                </form>
+
             </div>
-    
-            <!-- 글쓰기 버튼 누를 때 나오는 로그인 모달 -->
-            <div id="modalContainer" class="hidden">
-                <div id="modal-content">
-                    <p></p>
-    
-                </div>
-            </div>
-    
     
             <!-- 검색 바 -->
             <div id="searchbar-div">
@@ -208,10 +219,48 @@
                 <button class="page-btn">&gt;</button>
             </div>
         </div>
-
     </div>
     
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
+
+    <!-------- 로그인 버튼 모달 --------->
+    <div class="modal" id="delete-modal">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title">게시글을 삭제하시겠습니까?</div>
+            </div>
+            <div class="custom-modal-content">
+                <form class="postForm" method="post">
+                    <!-- 게시글 삭제 버튼 -->
+                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
+                </form>
+                <!-- 모달 닫기 -->
+                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-------- 신고 모달 --------->
+    <div class="modal" id="report-modal">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title">게시글을 신고하겠습니까?</div>
+            </div>
+            <div class="custom-modal-content">
+                <form class="postForm" method="post">
+                    <!-- 신고 버튼 -->
+                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
+                </form>
+                <!-- 모달 닫기 -->
+                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </body>
 </html>

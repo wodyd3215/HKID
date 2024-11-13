@@ -2,26 +2,30 @@
 //  - jQuery 파일이 먼저 로드 되어야함!
 //  >> 앞 줄에 제이쿼리가 써머노트보다 먼저 추가 되어야 한다는 뜻(jQuery중복도 체크!)
 
-$(function(){
+function initSummerNote() {
     $('#content').summernote({ 
-           placeholder: '글을 입력하세요.', 
-           tabsize: 2,
-           height: 400,
-           width: 800,
-           toolbar: [
-             ['style', ['style']],
-             ['font', ['bold', 'underline', 'clear']],
-             ['color', ['color']],
-             ['para', ['ul', 'ol', 'paragraph']],
-             ['table', ['table']],
-             ['insert', ['link', 'picture']],
-             ['view', ['fullscreen', 'codeview', 'help']]
-           ],
-           callbacks: {
-               onImageUpload: fileUpload
-           }
-         });
-})
+        placeholder: '글을 입력하세요.', 
+        tabsize: 2,
+        height: $('#sumHe').data('he') || 400,
+        width: '100%',
+        disableResizeEditor: true,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']],
+        ],
+        callbacks: {
+            onImageUpload: fileUpload,
+            // 썸머노트 하단 리사이즈 바 삭제
+            onInit: notResize,
+        }
+});
+}
+
+
 
 //썸머노트에 이미지업로드가 발생하였을 때 동작하는 함수
 function fileUpload(files){
@@ -54,4 +58,8 @@ function insertFile(data, callback){
            console.log("파일업로드 api요청 실패")
        } 
    })
+}
+
+function notResize() {
+    $('.note-statusbar').remove(); // 리사이즈 바 제거
 }

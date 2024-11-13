@@ -6,12 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sideNavi.css">
-    <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css"> -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/common.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
+    <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/common.js"></script>
+    
     <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +20,17 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.css" rel="stylesheet">
+    <script src="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.js"></script>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sideNavi.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
 </head>
-<body>
+<body onload="init('${pageContext.request.contextPath}', '${pageName}', '${optional}')">
     <div class="sideNavi">
         <div id="logo">
             <a href="">대충 로고</a>
@@ -38,16 +44,16 @@
                         <li><a href="accRecovery.ad">계정복구</a></li>
                     </ul>
                 </li>
-                <li><a href="pManagement.ad">상품관리</a></li>
+                <li><a href="product.ad">상품관리</a></li>
                 <li>
                     신고관리
                     <ul>
                         <li><a href="reportedUser.ad">신고 유저<a></li>
                         <li><a href="reportedBoard.ad">신고 게시글</a></li>
-                        <li><a href="reporedReply.ad">신고 댓글</a></li>
+                        <li><a href="reportedReply.ad">신고 댓글</a></li>
                     </ul>
                 </li>
-                <li><a href="">공지</a></li>
+                <li><a href="notice.ad">공지</a></li>
             </ul>
         </div>
     </div>

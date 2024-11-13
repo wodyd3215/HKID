@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietFormModal.css">
@@ -21,13 +20,14 @@
     <div class="wrapper">
         <h1>영양</h1>
         <br>
-
+        <!-- 음식 검색(모달창 오픈) -->
         <div id="food-search-btn">
-            <button data-target="test-modal" onclick="openModal(event)">검색</button>
+            <button data-target="search-food-modal" onclick="openModal(event)">검색</button>
         </div>
 
         <br><br>
 
+        <!-- 음식 영양 정보 테이블 -->
         <table class="food-info-table">
             <thead>
                 <tr id="food-title">
@@ -43,23 +43,31 @@
             <tbody>
                 <tr id="food-detail">
                     <td>샌드위치</td>
-                    <td>252 kcal</td>
-                    <td>27.29 g</td>
-                    <td>8.09 g</td>
-                    <td>12.08 g</td>
-                    <td id="delete-btn"><button>-</button></td>
+                    <td class="kcal-figure">252.0</td>
+                    <td class="carbo-figure">27.2</td>
+                    <td class="pro-figure">8.0</td>
+                    <td class="fat-figure">12.0</td>
+                    <td class="delete-btn"><button onclick="foodDeleteBtn(this)">-</button></td>
+                </tr>
+                <tr id="food-detail">
+                    <td>샌드위치</td>
+                    <td class="kcal-figure">252.0</td>
+                    <td class="carbo-figure">27.2</td>
+                    <td class="pro-figure">8.0</td>
+                    <td class="fat-figure">12.0</td>
+                    <td class="delete-btn"><button onclick="foodDeleteBtn(this)">-</button></td>
                 </tr>
             </tbody>
         </table>
 
         <br>
-        
         <div id="food-calc-btn">
-            <button>계산</button>
+            <button onclick="foodFigureCalc()">계산</button>
         </div>
 
         <br><br><br><br><br>
 
+        <!-- 총 영양 정보 테이블 -->
         <table class="food-info-table">
             <thead>
                 <tr id="food-title">
@@ -75,11 +83,11 @@
             <tbody>
                 <tr id="food-detail">
                     <td>오늘 드신 음식의 영양정보는</td>
-                    <td>1,512 kcal</td>
-                    <td>163.74 g</td>
-                    <td>48.54 g</td>
-                    <td>72.48 g</td>
-                    <td id="delete-btn"></td>
+                    <td class="total-kcal"></td>
+                    <td class="total-carbo"></td>
+                    <td class="total-pro"></td>
+                    <td class="total-fat"></td>
+                    <td class="delete-btn"></td>
                 </tr>
             </tbody>
         </table>
@@ -96,8 +104,8 @@
 
     <jsp:include page="../common/footer.jsp" />
     
-    <!-- modal -->
-    <div class="modal" id="test-modal">
+    <!-- 음식 검색 모달창 -->
+    <div class="modal" id="search-food-modal">
 
         <div class="custom-modal">
             <div class="custom-modal-header">
@@ -115,6 +123,7 @@
                 </div>
             </div>
 
+            <!-- 검색된 음식 테이블 -->
             <div class="custom-modal-content">
                 <table id="common-table">
                     <thead>
@@ -126,9 +135,9 @@
                     </thead>
                     <tbody>
                         <tr id="common-table-body">
-                            <td>샌드위치</td>
-                            <td>252 kcal</td>
-                            <td id="food-add-btn"><button>+</button></td>
+                            <td>스테이크</td>
+                            <td>620</td>
+                            <td id="food-add-btn"><button onclick="foodAddBtn(this)">+</button></td>
                         </tr>
                     </tbody>
                 </table>

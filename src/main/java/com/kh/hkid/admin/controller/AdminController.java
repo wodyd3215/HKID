@@ -15,9 +15,9 @@ public class AdminController {
 		this.adminService = adminService;
 	}
 	
-	@GetMapping("pManagement.ad")
-	public String pManagement() {
-		return "admin/pManagement";
+	@GetMapping("product.ad")
+	public String product() {
+		return "admin/productManagement";
 	}
 	
 	@GetMapping("reportedBoard.ad")
@@ -33,5 +33,25 @@ public class AdminController {
 	@GetMapping("accRecovery.ad")
 	public String accRecovery() {
 		return "admin/accRecovery";
+	}
+	
+	@GetMapping("reportedReply.ad")
+	public String reportedReply() {
+		return "admin/reportedReply";
+	}
+	
+	@GetMapping("notice.ad")
+	public String notice() {
+		return "admin/noticeManagement";
+	}
+	
+	@GetMapping("pEnroll.ad")
+	public String productEnroll() {
+		return "admin/productEnroll";
+	}
+	
+	@GetMapping("nEnroll.ad")
+	public String noticeEnroll() {
+		return "admin/noticeEnroll";
 	}
 }

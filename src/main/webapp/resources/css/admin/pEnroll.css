@@ -1,0 +1,88 @@
+.content {
+    height: calc(100vh - 128px);
+    margin-bottom: 10px;
+}
+
+.enroll-body{
+    height: 90%;
+}
+
+.enroll-body table {
+    height: 100%;
+}
+
+.enroll-body table .he-50 {
+    height: 50%;
+}
+
+.enroll-body table .he-20 {
+    height: 20%;
+    overflow: hidden;
+}
+
+.enroll-body table tr {
+    border: 1px solid black;
+    font-size: 18px;
+}
+
+.enroll-body table th {
+    width: 20%;
+    border-right: 1px solid black;
+    background: #EFEFEF;
+}
+
+.enroll-body table th,
+.enroll-body table td {
+    padding: 5px;
+    text-align: left;
+}
+
+.enroll-body table td input[type="text"] {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+}
+
+.enroll-body table td input[type="number"] {
+    height: 40px;
+    width: 100%;
+    outline: none;
+}
+
+.enroll-body table td textarea {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    resize: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox  */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.enroll-body>div {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.note-editable {
+    resize: none;
+}
+
+.content .btn.btn-primary.custom-btn,
+.content .btn.btn-danger.custom-btn{
+    width: 110px;
+    height: 35px;
+    border-radius: 25px;
+    margin-left: 10px;
+}

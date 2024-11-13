@@ -51,6 +51,7 @@
                     </tr>
                 </tbody>
             </table>
+            <jsp:include page="detailModal.jsp" />
         </div>
         <div id="searchbar-div">
             <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">

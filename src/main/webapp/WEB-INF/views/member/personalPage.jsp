@@ -8,6 +8,7 @@
 
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/personalPage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/PersonalModal.css">
 <!-- js -->
 <script src="${pageContext.request.contextPath}/resources/js/member/personalPage.js"></script>
 </head>
@@ -21,10 +22,10 @@
             </div>
             <div class="top-content">
                 <img src="${pageContext.request.contextPath}/resources/image/3b579a9bc531180d72a68a9686c6da3b.jpg" alt="" class="profile-image" accept=".jpg, .png" onclick="openFile()">
-                <input type="file" class="select-profile" onchange="previewProfile(this)">
+                <input type="file" class="select-profile" accept="image/*" onchange="previewProfile(this)">
                 <form action="" onclick="showBtn()">
                     <div class="namespace">
-                        <input type="text" name="memberNickName" id="nameInput" autocomplete="off">
+                        <input type="text" name="nickName" id="nameInput" autocomplete="off" value="${loginMember.nickName}">
                         <label for="nameInput">
                             <div class="material-symbols-outlined custom-icon">edit_square</div>
                         </label>

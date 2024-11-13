@@ -1,3 +1,9 @@
 .management button{
     margin: 0 auto;
 }
+
+#common-table-body .btn.btn-danger.custom-btn {
+    width: 125px;
+    height: 30px;
+}
+

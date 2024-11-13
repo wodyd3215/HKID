@@ -3,6 +3,16 @@
     width: 100%;
 }
 
+#paging-div a{
+    padding-left: 3px;
+}
+
+#paging-div a:hover{
+    text-decoration: none;
+    color: black;
+    /* font-size: 18px; */
+}
+
 h1{
     height: 150px;
     width: 100%;
@@ -57,11 +67,11 @@ table td:nth-child(5) { /* 5번째 td */
     width: 6%;
 }
 
-#board-category{
+.board-category{
     font-size: 16px;
 }
 
-.type-width8{
+.type-width{
     padding-left: 6px;
 }
 
@@ -107,7 +117,7 @@ table td:nth-child(5) { /* 5번째 td */
     font-weight: 600;
 }
 
-#board-search-bar{
+#boardsearch-bar{
     border: 1px solid rgb(196, 195, 195);
     border-radius: 9px 0px 0px 9px ;
     width: 400px;
@@ -136,6 +146,14 @@ table td:nth-child(5) { /* 5번째 td */
     cursor: pointer;
 }
 
+#paging-div .active{
+    color:gainsboro;
+}
+
+.disabled{
+    pointer-events: none; /* 이벤트 비활성화 */
+}
+
 #search-btn{
     border: 1px solid rgb(196, 195, 195);
     background-color: white;
@@ -144,6 +162,71 @@ table td:nth-child(5) { /* 5번째 td */
     cursor: pointer;
 }
 
+/* defualt.css 수정 */
 #common-table-body td {
     font-size: 16px;
+}
+
+#common-table-header th{
+    font-size: 20px;
+}
+
+#common-table a{
+    color: black;
+}
+
+/*********************모달 css****************/
+
+.modal{ 
+    position: absolute;
+}
+
+#login-modal .custom-modal{
+    height: 120px;
+    width: 350px ;
+    border-radius: 15px;
+    left: 40%; 
+    top: 40%; 
+    transform: none;
+}
+
+
+#login-modal .custom-modal-header{
+    justify-content: center;
+}
+
+#login-modal .custom-modal-title{
+    font-size: 18px;
+    text-align: center;
+}
+
+#login-modal .custom-modal-content{
+    height: 80px;
+    margin-top: 10px;
+}
+
+/* 모달 가운데 border 제거 */
+#login-modal .custom-modal-header{
+    border-bottom: none;
+}
+
+/* 모달 [예/아니오] 버튼  */
+.modal-btn{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #00A6fB;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+#yes-btn{
+    background-color: #00A6fB;
+    color: #ffffff;
+    
+}
+
+#no-btn{
+    background-color: #ffffff;
+    color: #00A6fB;
+    margin-left: 10px;
 }

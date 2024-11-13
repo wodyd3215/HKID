@@ -18,6 +18,5 @@ public class Exercise {
 	private String exerciseDifficulty;
 	private String exerciserDescription;
 	private String exerciseImg;
-
-	
+	private String partName;
 }

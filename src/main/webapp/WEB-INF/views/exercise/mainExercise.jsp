@@ -12,12 +12,13 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<div id="container">
 		<div class="wrapper">
 			<div class="exerTitle">
 				<p>운동 라이브러리</p>
 			</div>
 			<div id="exerSearch-form">
-				<form id="searchForm" action="exercise.se" method="post">
+				<form id="searchForm" action="exercise.se" method="get">
 					<table>
 						<tr>
 							<th><p>부위별 선택</p></th>
@@ -71,19 +72,18 @@
 				</form>
 			</div>
 			
-			
 			<div class="content-box">
 				<div class="list-box" id="tour-content">
 				<c:forEach var="e" items="${list}">
 						<div id="list-con">
 							<div id="list-img">
-								<a href="">
+								<a href="exercise.de?eno=${e.exerciseNo }">
 									<img src="./resources/image/exerciseImages/${ e.exerciseImg}" style="height: 250px; width: 250px;">
 								</a>
 							</div>
 							<br>
 							<p class="list-text">${e.exerciseName}</p>
-							
+							<br>
 							<div id="under-area">
 								<p class="list-text2">${e.exerciseDifficulty}</p>
 								<button type="button">
@@ -95,31 +95,75 @@
 					</div>
 					
 					<div id="paging-area">
-            <c:if test="${pi.currentPage ne 1}">
-                <a href="list.ex?cpage=${pi.currentPage - 1}">[이전]</a>
-            </c:if>
+						<c:choose>
+							<c:when test="${pi.currentPage > 1}">
+								<c:choose>
+									<c:when test="${empty part and empty difficulty and empty keyword}">
+										<a href="list.ex?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}">&lt;</a>
+									</c:when>
+									<c:otherwise>
+										<a href="exercise.se?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&lt;</a>
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+						</c:choose>
 
-            <c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
-            	
-            	<c:choose>
-            		<c:when test="${empty part}">
-            			<a href="list.ex?cpage=${i}">${i}</a>
-            		</c:when>
-            		<c:otherwise>
-            			<a href="exercise.se?cpage=${i}">${i}</a>
-            		</c:otherwise>
-            	</c:choose>
-                
-            </c:forEach>
+						<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
+							
+							<c:choose>
+								<c:when test="${empty part and empty difficulty and empty keyword}">
+									<a href="list.ex?cpage=${i}"
+									class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
+								</c:when>
+								
+								<c:otherwise>
+									<a href="exercise.se?cpage=${i}&part=${part}&difficulty=${difficulty}&keyword=${keyword}"
+									class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+							
+						</c:forEach>
 
-            <c:if test="${pi.currentPage ne pi.maxPage}">
-                <a href="list.ex?cpage=${pi.currentPage + 1}">[다음]</a>
-            </c:if>
-        </div>
+						<c:choose>
+							<c:when test="${pi.currentPage ne pi.maxPage}">
+								<c:choose>
+									<c:when test="${empty part and empty difficulty and empty keyword}">
+										<a href="list.ex?cpage=${pi.currentPage + 5}">&gt;</a>
+									</c:when>
+									
+									<c:otherwise>
+										<a href="exercise.se?cpage=${pi.currentPage + 5}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&gt;</a>
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+						</c:choose>
+        			</div>
         <br><br>
-    </div>
+    		</div>
+		</div>
+
+		<div class="flootbox">
+			<div class="flootbox-title">
+				My 루틴
+			</div>
+			<div class="flootbox-content">
+				<button type="button" id="upbtn"></button>
+				<div class="buyContent">
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+					<div class="rutinContent">
+						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
+					</div>
+				</div>
+				<button type="button" id="downbtn"></button>
 			</div>
 		</div>
+
+	</div>	
 		<br><br><br>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
