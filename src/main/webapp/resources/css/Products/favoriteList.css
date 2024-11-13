@@ -1,0 +1,78 @@
+@charset "UTF-8";
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* 버튼 스타일 */
+button{
+    background: none;
+    border: none;
+}
+
+
+/* 체크박스 스타일 */
+input[type=checkbox].selected {
+    appearance: none; /* 기본 체크박스 스타일 제거 */
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: 2px solid #00A6FB;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+input[type=checkbox].selected:checked{
+    background-color: #fff;
+    border-color: #00A6FB;
+}
+
+input[type=checkbox].selected:checked:after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    border: solid #00A6FB;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    top: 6px;
+    left: 12px;
+}
+
+/* 찜목록 text */
+.location-text{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+
+/* 테이블 스타일 */
+.falist{
+    width: 100%;
+    border-top: 2px solid #051923;
+    
+}
+
+tr, td {
+    border-top: 1px solid #051923; /* 안쪽 테두리만 적용 */
+    border-bottom: 1px solid #051923;
+}
+
+.falistfoot{
+    height: 60px;
+    border-top: 2px solid #051923;
+    border-bottom: none;
+}
+
+/* 찜 리스트 스타일 */
+.content-space{
+    height: 150px;
+}

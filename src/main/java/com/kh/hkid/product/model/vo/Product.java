@@ -2,18 +2,9 @@ package com.kh.hkid.product.model.vo;
 
 import java.sql.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 public class Product {
 	private int productNo;
 	private int memberNo;
