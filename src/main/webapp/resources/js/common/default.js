@@ -1,7 +1,7 @@
 function init(pageName, optional) {
-    initDiaryPage()
-    initDiaryEnroll()
-    initSummerNote()
+    // initDiaryPage()
+    // initDiaryEnroll()
+    // initSummerNote()
 
     switch(pageName) {
         // case "ex":
