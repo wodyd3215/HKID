@@ -24,9 +24,20 @@ public class BoardDao {
 		
 		//1,2번째 매개변수는 파라미터, 3번째 자리가 rowBounds의 자리
 		return (ArrayList)sqlSession.selectList("boardMapper.selectList", null, rowBounds);
-		
 	}
- 
+	
+	//카테고리 게시글 개수
+	public int selectCategoryListCount(SqlSessionTemplate sqlSession, String category){
+		return sqlSession.selectOne("boardMapper.selectCategoryListCount", category);
+	}
+	
+	//카테고리 게시글 목록
+	public ArrayList<Community> selectCategoryList(SqlSessionTemplate sqlSession , PageInfo pi, String category){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectCategoryList", category, rowBounds);
+	}
 	
 	
 }

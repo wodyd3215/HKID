@@ -1,5 +1,4 @@
 function init(pageName, optional) {
-    
     // initDiaryEnroll()
     // initSummerNote()
 

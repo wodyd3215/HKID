@@ -9,11 +9,13 @@
     <title>Document</title>
  
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardList.css">
+    <script src="${pageContext.request.contextPath}/resources/js/community/boardList.js"></script>
+     
 </head>
-<body>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--favicon.ico:1 에러 해결용-->
+<body onload="defaultCategory('${category}')">
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="wrapper">
         <br><br>
@@ -22,14 +24,16 @@
         <table id="common-table">
             <thead>
                 <tr id="common-table-header">
-                    <th class="type-width8">
-                        <select name="category" class="table-category">전체
-                            <option value="all">전체</option>
-                            <option value="question">질문</option>
-                            <option value="tip">팁</option>
-                            <option value="show-off">자랑</option>
-                            <option value="ad">홍보</option>
-                        </select>
+                    <th class="type-width">
+                        <form class="category-select" action="categoryList.bo">
+                            <select name="category" class="table-category" onchange="this.form.submit()" >전체
+                                <option value="전체">전체</option>
+                                <option value="질문" >질문</option>
+                                <option value="팁">팁</option>
+                                <option value="자랑">자랑</option>
+                                <option value="홍보">홍보</option>
+                            </select>
+                        </form>
                     </th>
                     <th class="type-width50">제목</th>
                     <th class="type-width6">작성자</th>
@@ -75,7 +79,7 @@
 
         <!-- 검색 바 -->
         <div id="searchbar-div">
-            <select name="search-category" id="search-category">전체
+            <select name="search-category" id="search-category" >전체
                 <option value="all">전체</option>
                 <option value="question">질문</option>
                 <option value="tip">팁</option>

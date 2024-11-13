@@ -31,12 +31,17 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Community> selectList(PageInfo pi) {
 		return boardDao.selectList(sqlSession, pi);
 	}
+
+	@Override
+	public int selectCategoryListCount(String category) {
+		return boardDao.selectCategoryListCount(sqlSession, category);
+	}
+
+	@Override
+	public ArrayList<Community> selectCategoryList(PageInfo pi, String category) {
+		return boardDao.selectCategoryList(sqlSession, pi, category);
+	}
 	
-	
-	
-	
-//	@Autowired
-//	private final BoardDao boardDao;
 	
 	
 
