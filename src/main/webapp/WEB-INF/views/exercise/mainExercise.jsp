@@ -18,7 +18,7 @@
 				<p>운동 라이브러리</p>
 			</div>
 			<div id="exerSearch-form">
-				<form id="searchForm" action="exercise.se" method="post">
+				<form id="searchForm" action="exercise.se" method="get">
 					<table>
 						<tr>
 							<th><p>부위별 선택</p></th>
@@ -72,7 +72,6 @@
 				</form>
 			</div>
 			
-			
 			<div class="content-box">
 				<div class="list-box" id="tour-content">
 				<c:forEach var="e" items="${list}">
@@ -96,30 +95,48 @@
 					</div>
 					
 					<div id="paging-area">
-						<c:if test="${pi.currentPage ne 1}">
-							<a href="list.ex?cpage=${pi.currentPage - 5}">&lt;</a>
-						</c:if>
+						<c:choose>
+							<c:when test="${pi.currentPage > 1}">
+								<c:choose>
+									<c:when test="${empty part and empty difficulty and empty keyword}">
+										<a href="list.ex?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}">&lt;</a>
+									</c:when>
+									<c:otherwise>
+										<a href="exercise.se?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&lt;</a>
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+						</c:choose>
 
 						<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
 							
 							<c:choose>
-								<c:when test="${i == pi.currentPage}">
-									<!-- 현재 페이지에는 current-page 클래스 적용 -->
-									<a href="list.ex?cpage=${i}" class="paging-link current-page">${i}</a>
+								<c:when test="${empty part and empty difficulty and empty keyword}">
+									<a href="list.ex?cpage=${i}"
+									class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
 								</c:when>
-								<c:when test="${empty filterMap}">
-									<a href="list.ex?cpage=${i}" class="paging-link">${i}</a>
-								</c:when>
+								
 								<c:otherwise>
-									<a href="exercise.se?cpage=${i}" class="paging-link">${i}</a>
+									<a href="exercise.se?cpage=${i}&part=${part}&difficulty=${difficulty}&keyword=${keyword}"
+									class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
 								</c:otherwise>
 							</c:choose>
 							
 						</c:forEach>
 
-						<c:if test="${pi.currentPage ne pi.maxPage}">
-							<a href="list.ex?cpage=${pi.currentPage + 5}">&gt;</a>
-						</c:if>
+						<c:choose>
+							<c:when test="${pi.currentPage ne pi.maxPage}">
+								<c:choose>
+									<c:when test="${empty part and empty difficulty and empty keyword}">
+										<a href="list.ex?cpage=${pi.currentPage + 5}">&gt;</a>
+									</c:when>
+									
+									<c:otherwise>
+										<a href="exercise.se?cpage=${pi.currentPage + 5}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&gt;</a>
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+						</c:choose>
         			</div>
         <br><br>
     		</div>

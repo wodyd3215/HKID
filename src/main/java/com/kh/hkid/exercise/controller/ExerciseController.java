@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,42 +43,37 @@ public class ExerciseController {
 	}
 	
 	//필터검색
-	@PostMapping("exercise.se")
-	public String searchList(
-			@RequestParam(value = "part", defaultValue="") List<String> selectedParts,
-			@RequestParam(value = "difficulty", defaultValue="") List<String> selectDifficulties,
-			@RequestParam(value = "keyword", defaultValue="") List<String> keyword,
-			@RequestParam(value = "cpage", defaultValue="1") Integer currentPage, Model model, HttpSession session) {
-			int boardCount = exerciseService.selectListCount();
-		
-			// currentPage가 null일 경우 기본값 설정
-		    if (currentPage == null) {
-		        currentPage = 1;  // 기본값을 1로 설정
-		    }
-		    
-			PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 15);
+		@GetMapping("exercise.se")
+		public String searchList(
+				@RequestParam(value = "part", defaultValue= "") List<String> selectedParts,
+				@RequestParam(value = "difficulty", defaultValue="") List<String> selectDifficulties,
+				@RequestParam(value = "keyword", defaultValue="") List<String> keyword,
+				@RequestParam(value = "cpage", defaultValue="1") Integer currentPage, Model model) {
+				int boardCount = exerciseService.selectListCount();
+			
+				
+			// HashMap에 필터 조건 추가
+			HashMap<String, Object> filterMap = new HashMap<>();
+			filterMap.put("parts", selectedParts);
+			filterMap.put("difficulties", selectDifficulties);
+			filterMap.put("keywords", keyword);
+			
+			 int filteredBoardCount = exerciseService.searchListCount(filterMap);  // 필터링된 항목 수
+			 
+			 PageInfo pi = Template.getPageInfo(filteredBoardCount, currentPage, 5, 15);
+			
+			List<Exercise> exercises = exerciseService.search(filterMap, pi);
+			
+			model.addAttribute("part", String.join( ",", selectedParts));
+			model.addAttribute("difficulty", String.join( ",", selectDifficulties));
+			model.addAttribute("keyword", String.join( ",", keyword));
+			model.addAttribute("list", exercises);
+			model.addAttribute("pi", pi);
 			
 			
-		// HashMap에 필터 조건 추가
-		HashMap<String, Object> filterMap = new HashMap<>();
-		filterMap.put("parts", selectedParts);
-		filterMap.put("difficulties", selectDifficulties);
-		filterMap.put("keywords", keyword);
-		
-		// 검색 조건을 세션에 저장
-        session.setAttribute("filterMap", filterMap);
-		
-		
-		List<Exercise> exercises = exerciseService.search(filterMap, pi);
-		
-		model.addAttribute("filterMap", filterMap);
-		model.addAttribute("list", exercises);
-		model.addAttribute("pi", pi);
-		
-		
-		return "exercise/mainExercise";
-		
-	}
+			return "exercise/mainExercise";
+			
+		}
 	
 	@GetMapping("exercise.de")
 	public String selectExercise(int eno, Model model) {

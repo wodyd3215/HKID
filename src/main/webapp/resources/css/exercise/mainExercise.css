@@ -238,7 +238,7 @@
 }
 
 /* 현재 페이지 스타일 */
-.paging-link.current-page {
+.paging-link.active {
     color: white;
     font-weight: bold;
     pointer-events: none;
@@ -317,6 +317,4 @@
     border-color: black transparent transparent transparent;
     margin-top: 30px;
   }
-
-
 
