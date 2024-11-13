@@ -1,5 +1,4 @@
 function init(pageName, optional) {
-    // initDiaryPage()
     // initDiaryEnroll()
     // initSummerNote()
 
@@ -8,5 +7,8 @@ function init(pageName, optional) {
         //     initpagename(optional); // 인자가 있을 경우
         //     initpagename();         // 인자가 없을 경우
         //     break;
+        case "myDiaryList":
+            initDiaryPage(optional)
+            break;
     }
 }

@@ -1,5 +1,6 @@
 package com.kh.hkid.member.controller;
 
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -59,22 +59,7 @@ public class MemberController {
     public String enrollForm() {
     	return "member/enrollForm";
     }
-    
-    @GetMapping("myDiaryList.me")
-    public String myDiaryList() {
-    	return "member/myDiaryPage";
-    }
-    
-    @GetMapping("myDiary.me")
-    public String myDiary() {
-    	return "member/myDiaryDetail";
-    }
-    
-    @GetMapping("diaryEnroll.me")
-    public String diaryEnroll() {
-    	return "member/myDiaryEnroll";
-    }
-    
+        
     // 회원가입
     @PostMapping("insert.me")
     public String insertMember(Member m, HttpSession session) {
