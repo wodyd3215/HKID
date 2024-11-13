@@ -30,36 +30,44 @@
                     <li class="side-nav-header"> 상품 </li> 
                     
                     <li>
-                        <input type="radio" id="side-itemAll" name="sideNav" value="전체" checked/>                        
-                        <label for="all"> 전체 </label>
+                        <input type="radio" id="sideAll" name="sideNav" value="전체" checked/>                        
+                        <label for="sideAll"> 전체 </label>
                     </li>
 
                     <li>
-                        <input type="radio" id="food" name="sideNav" value="식품"/>                        
-                        <label for="food"> 식품 </label>
-                    <!-- <li onclick="handleClick('식품')"> 식품 </li> -->
+                        <input type="radio" id="sideFood" name="sideNav" value="식품"/>                        
+                        <label for="sideFood"> 식품 </label>                    
                     </li>                    
 
                     <li>
-                        <input type="radio" id="clothes" name="sideNav" value="의류" />                        
-                         <label for="clothes"> 의류 </label>
-                    <!-- <li onclick="handelClick('의류')"> 의류 </li> -->
+                        <input type="radio" id="sideClothes" name="sideNav" value="의류" />                        
+                        <label for="sideClothes"> 의류 </label>
                     </li>
                     
                     <li>
-                        <input type="radio" id="equipment" name="sideNav" value="기구"/>                        
-                         <label for="equipment"> 기구 </label>                    
+                        <input type="radio" id="sideEquipment" name="sideNav" value="기구"/>                        
+                        <label for="sideEquipment"> 기구 </label>                    
                     </li>
                     
                 </ul>
             </div>
 
-            <div class="productPageA">
-                <div class="MoveBtn"> <!-- 상품, 중고 전환 버튼-->            
-                    <input class="productMove" id="storeItem"> <label for="storeItem"> 상품 </label> </input>
-                    <input class="usedMove" id="usedItem" > <label for="usedItem"> 중고 </label> </input>
-                </div>
+            <div class="productPageAll">
 
+
+                <div class="tabItem"> <!-- 상품, 중고 전환 버튼-->
+                    <ul class="ItemBtn">
+                        <li>
+                            <input type="radio" class="productMove" id="storeItem" name="ItemRbtn" value="1" checked/> 
+                            <label for="storeItem"> 상품 </label> 
+    
+                        </li>
+                        <li>
+                            <input type="radio" class="usedMove" id="usedItem" name="ItemRbtn" value="2"/> 
+                            <label for="usedItem"> 중고 </label>
+                        </li>
+                    </ul>                
+                </div>
 
                 <c:set var="i" value=""/>
                 <c:set var="j" value="3"/>
@@ -123,7 +131,7 @@
 
                     <c:choose>
                         <c:when test="${pi.currentPage eq 1}">
-                            <a class="" href="#"><button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button></a>
+                            <a class="leftBtn" href="#"><button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button></a>
                         </c:when>
 
                         <c:otherwise>
@@ -148,6 +156,7 @@
                 
                 </div>
 
+            
 
                 <!-- 검색 바 -->
                 <form action="">
@@ -160,14 +169,14 @@
                         </select>
                         
                         <div class="produSearch">
-                            <input type="text" class="produSearchCan" placeholder="검색어를 입력하세요.">
+                            <input type="text" class="produSearchCan" name="keyword" placeholder="검색어를 입력하세요.">
                             <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
                         </div>                        
                     </div>
                 </form>
                 
-            </div>
-
+            
+            
             
         </div>
     </div>

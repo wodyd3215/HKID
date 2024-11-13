@@ -28,6 +28,14 @@ public class ProductDao {
 		return sqlSession.selectOne("productMapper.selectProduct", pno);
 	}
 
+	public ArrayList<Product> chooseNav(SqlSessionTemplate sqlSession, String selectedValue) {
+		return (ArrayList)sqlSession.selectList("productMapper.choseNav", selectedValue);
+	}
+
+	public ArrayList<Product> selectRbtn(SqlSessionTemplate sqlSession, String rbtn) {
+		return (ArrayList)sqlSession.selectList("productMapper.Rbtn", rbtn);
+	}
+
 
 	
 }

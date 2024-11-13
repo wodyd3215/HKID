@@ -1,30 +1,46 @@
 // 라디오박스의 선택된 값을 가져오는 코드
-//document.querySelector('input[type=radio][name = {side}]:checked').value;
-let side = 'sideNav'; 
-$(`input:radio[name='{side}']:checked`).val();
+/* 
+    .change(function() { ... }) 에서 change 는 이벤트 타입이며,
+    특정 요소의 상태가 변경되었을 때 발생하는 이벤트 타입이다.
 
-// 라디오버튼에 선택된 값을 ajax 통신 post로 값을 넘겨주는 코드
-let sideItem = '#element-id';
-$(sideItem).on('click',function(){
-    // 
+*/
+$(function(){
+    $('input[name=sideNav]').change(function(){
+        const selectedValue = $(this).val(); // 현재 선택된 라디오 버튼의 값
+        console.log('선택된 값 : ', selectedValue);
+    
+        $.ajax({
+            url: 'chooseNav',
+            method: 'GET', // 또는 'POST' 필요에 따라 변경
+            data: { sideNav: selectedValue }, // name 의  sideNav 의 값을 받음
+            success: function(response) {
+                // 성공 시 페이지 업데이트
+                $('#result').html(response);
+            },
+            error: function() {
+                alert('데이터 로드 중 오류가 발생했습니다.');
+            }
+        });
+    });
 
-    const content1 = {
-        checked:document.querySelector('input[type=radio][name=enable]:checked').value
-    } // 체크된 값을 content1에 담아서 아래 data 값에 넘겨준다.
+    $('input[name=ItemRbtn]').change(function(){
+        const Rbtn = $(this).val(); // 현재 선택된 라디오 버튼의 값
+        console.log('선택된 값 : ', Rbtn);
+    
+        $.ajax({
+            url: 'chooseNav',
+            method: 'GET', // 또는 'POST' 필요에 따라 변경
+            data: { ItemRbtn: Rbtn }, // name 의  ItemRbtn 의 값을 받음
+            success: function(response) {
+                // 성공 시 페이지 업데이트
+                $('#result').html(response);
+            },
+            error: function() {
+                alert('데이터 로드 중 오류가 발생했습니다.');
+            }
+        });
+    });
 
-    const url = '{product.li}';
-
-    $.ajax({
-        url:url,
-        method:"POST",
-        contentType:"application/json", // 각자 설정한 형식 입력
-        data : JSON.stringify(content1),
-        success:function(response){
-            console.log(response)
-        },
-        error:function(error){
-            console.log(error);
-        }
-    })
+    console.log($('input[name=sideNav]'))
+    console.log($('input[name=ItemRbtn]'))
 })
-

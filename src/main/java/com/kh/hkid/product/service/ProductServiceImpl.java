@@ -38,4 +38,14 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.selectProduct(sqlSession, pno);
 	}
 
+	@Override
+	public ArrayList<Product> ajaxSelectedNav(String selectedValue) {
+		return productDao.chooseNav(sqlSession, selectedValue);
+	}
+
+	@Override
+	public ArrayList<Product> ajaxTabBtn(String rbtn) {
+		return productDao.selectRbtn(sqlSession, rbtn);
+	}
+
 }
