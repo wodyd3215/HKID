@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/chatBox.css">
     <!--js-->
     <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 
     <script src="${pageContext.request.contextPath}/resources/js/common/chatBox.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/common.js"></script>

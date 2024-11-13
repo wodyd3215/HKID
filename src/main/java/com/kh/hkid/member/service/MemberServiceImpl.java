@@ -32,4 +32,35 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return memberDao.loginMember(sqlSession, m);
 	}
+
+	@Transactional
+	@Override
+	public int updateEmail(Member m) {
+		return memberDao.updateEmail(sqlSession, m);
+	}
+
+	@Transactional
+	@Override
+	public int updatePhone(Member m) {
+		return memberDao.updatePhone(sqlSession, m);
+	}
+	
+	@Transactional
+	@Override
+	public int updatePwd(Member m) {
+		return memberDao.updatePwd(sqlSession, m);
+	}
+
+	@Transactional
+	@Override
+	public int updateAddress(Member m) {
+		return memberDao.updateAddress(sqlSession, m);
+	}
+
+	@Override
+	public int deleteMember(String memberId) {
+		return memberDao.deleteMember(sqlSession, memberId);
+	}
+	
+	
 }

@@ -1,6 +1,6 @@
 function openModal(e) {
-    console.log(e.target.dataset.target)
     document.getElementById(e.target.dataset.target).style.display = 'block'
+    
 }
 
 function closeModal() {

@@ -273,7 +273,7 @@
 			<a href="reportedBoard.ad">게시글 관리</a>
 			<a href="chatting.ch">채팅창</a>
 
-			<a href="myDiary.me">마이페이지</a>
+			<a href="myDiaryList.me">마이페이지</a>
 
 			<a href="order.in">주문 정보</a>
 			<a href="order.cp">주문 완료</a>
