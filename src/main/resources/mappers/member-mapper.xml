@@ -52,7 +52,8 @@
   
   <!-- 로그인 -->
   <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-  	SELECT MEMBER_ID,
+  	SELECT MEMBER_NO,
+  		   MEMBER_ID,
   		   MEMBER_PWD,
   		   MEMBER_NAME,
   		   NICKNAME,
