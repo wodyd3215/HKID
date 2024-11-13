@@ -49,6 +49,12 @@ public class ExerciseServiceImple implements ExerciseService{
 	public Exercise selectExercise(int eno) {
 		return exerciseDao.selectExercise(sqlSession, eno);
 	}
+
+	//검색된 운동 갯수
+	@Override
+	public int searchListCount(HashMap<String, Object> filterMap) {
+		return exerciseDao.selectListCount(sqlSession, filterMap);
+	}
 	
 	
 	

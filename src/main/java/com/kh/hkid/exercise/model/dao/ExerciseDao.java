@@ -42,5 +42,10 @@ public class ExerciseDao {
 	public Exercise selectExercise(SqlSessionTemplate sqlSession, int eno) {
 		return sqlSession.selectOne("exerciseMapper.exerciseSelect", eno);
 	}
+	
+	//검색된 운동리스트 갯수
+	public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> filterMap) {
+		return sqlSession.selectOne("exerciseMapper.searchListCount");
+	}
 
 }

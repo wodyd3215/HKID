@@ -217,11 +217,33 @@
  	margin-left: 200px;
     align-items: center;
     font-size: large;
+    font-weight: 600;
  }
  
   #paging-area a {
-  	color: black;
+    padding-inline: 15px;
   }
+
+ /* 기본 스타일 */
+.paging-link {
+    color: #333; /* 기본 글자 색 */
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 0 2px;
+}
+
+/* 마우스 오버 시 */
+.paging-link:hover {
+    color: #007bff;
+}
+
+/* 현재 페이지 스타일 */
+.paging-link.active {
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+}
+
 
   
 .flootbox{
@@ -295,6 +317,4 @@
     border-color: black transparent transparent transparent;
     margin-top: 30px;
   }
-
-
 
