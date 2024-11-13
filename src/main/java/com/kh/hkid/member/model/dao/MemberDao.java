@@ -1,8 +1,11 @@
 package com.kh.hkid.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hkid.diary.model.vo.Diary;
 import com.kh.hkid.member.model.vo.Member;
 
 @Repository

@@ -29,9 +29,7 @@ import com.kh.hkid.community.service.BoardService;
 
 @Controller
 public class BoardController {
-
 	private final BoardService boardService;
-	
 
 	@Autowired
 	public BoardController(BoardService boardService) {
@@ -42,30 +40,50 @@ public class BoardController {
 	//게시글 개수, 목록
 	@GetMapping("list.bo")
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int boardCount = boardService.selectListCount();
+		int boardCount = boardService.selectListCount(); //게시글 개수
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		
 		ArrayList<Community> list = boardService.selectList(pi);	//게시글 리스트
-		
-		
-		System.out.println("시작페이지: "+pi.getStartPage());
-		System.out.println("마지막페이지: "+pi.getEndPage());
-		
-		
-		
+
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "community/boardList";
 	}
 	
-	
-	
+	//카테고리 게시판 개수, 목록
+	@GetMapping("categoryList.bo")
+	public String selectCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String category, Model model) {	
+		int boardCount = boardService.selectCategoryListCount(category);
+		
+		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
+		
+		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//게시글 리스트
+		model.addAttribute("list", list);
+		model.addAttribute("category", category);
+		model.addAttribute("pi", pi);
+		
+		return "community/boardList";
+	}
 	
 	//게시글 작성
 	@GetMapping("boardWrite.bo")
 	public String boardWrite() {
 		
 		return "community/boardWrite";
+	}
+	
+	//게시글 수정
+	@PostMapping("updateForm.bo")
+	public String updateForm() {
+		
+		return "community/boardDetail"; 
+	}
+	
+	//게시글 삭제
+	@PostMapping("boardDelete.bo")
+	public String boardDelete() {
+		System.out.println("삭제컨트롤러에서 받음");
+		return "community/boardDetail"; // 임시로 설정
 	}
 	
 	//게시글 디테일
@@ -89,12 +107,7 @@ public class BoardController {
 		return "community/boardDetail";
 	}
 	
-	//게시글 수정
-	@PostMapping("updateForm.bo")
-	public String updateForm() {
-		System.out.println("updateForm.bo���� ����");
-		return "community/boardDetail"; 
-	}
+//	--------------- 댓글 기능 -------------------------
 	
 	//댓글추가
 	@ResponseBody
@@ -105,12 +118,6 @@ public class BoardController {
 	    return "success";
 	}
 	
-	//게시글 삭제
-	@PostMapping("boardDelete.bo")
-	public String boardDelete() {
-		System.out.println("삭제컨트롤러에서 받음");
-		return "community/boardDetail"; // 임시로 설정
-	}
 	
 	//처음 댓글 목록 출력
 	
@@ -159,6 +166,7 @@ public class BoardController {
 		System.out.println("신고컨트롤러에서 받음");
 		return "community/boardDetail"; // 임시로 설정
 	}
+	
 	
 
 	
