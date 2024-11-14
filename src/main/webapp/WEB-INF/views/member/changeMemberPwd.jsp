@@ -14,7 +14,7 @@
             <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/image/HKID_Logo.png" alt="로고"></a>
         </div> 
         <form action="changePwd.me">
-            <h1>비밀번호 찾기</h1>
+            <h1>비밀번호 변경</h1>
             <div>
                 <input type="text" id="pwd-input" placeholder="비밀번호 입력">
                 <input type="text" id="pwd-reInput" placeholder="비밀번호 재입력">

@@ -33,4 +33,10 @@ public interface MemberService {
 	
 	// 회원 탈퇴
 	int deleteMember(String memberId);
+	
+	// 회원 아이디 찾기
+	String searchId(String email);
+	
+	// 비밀번호 찾기
+	int searchPwd(Member m);
 }

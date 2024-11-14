@@ -8,13 +8,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class MemberController {
 	private final MemberService memberService;
@@ -41,11 +46,6 @@ public class MemberController {
 		return "member/searchMemberPwd";
 	}
 	
-	@GetMapping("changePwdForm.me")
-	public String changePwd() {
-		return "member/changeMemberPwd";
-	}
-
     @GetMapping("personal.me")
     public String personalForm() {
 	    return "member/personalPage";
@@ -112,7 +112,7 @@ public class MemberController {
     }
     
     // 아이디 중복체크
-    @PostMapping("idCheck.me")
+    @GetMapping("idCheck.me")
     @ResponseBody
     public String idCheck(String checkId) {
     	System.out.println(checkId);
@@ -129,7 +129,7 @@ public class MemberController {
     }
     
     // 닉네임 중복체크
-    @PostMapping("nickCheck.me")
+    @GetMapping("nickCheck.me")
     @ResponseBody
     public String nickCheck(String checkNick) {
     	int result = memberService.nickCheck(checkNick);
@@ -230,5 +230,34 @@ public class MemberController {
     	}
     	
 		return "redirect:/personal.me";
+    }
+    
+    // 아이디 찾기
+    @RequestMapping("searchId.me")
+    @ResponseBody
+    public String searchId(String email) {
+    	log.info(email);
+    	String memberId = memberService.searchId(email);
+    	log.info("memberId :" + memberId);
+    	
+    	return memberId;
+    }
+    
+    // 비밀번호 찾기
+    @RequestMapping("changePwdForm.me")
+    public String searchPwd(Member m, Model model, HttpSession session) {    	
+    	int result = memberService.searchPwd(m);
+    	
+    	System.out.println("result :" + result);
+    	
+    	if(result > 0) {
+    		model.addAttribute("memberId", memberService.loginMember(m));
+    		
+    		return "member/changeMemberPwd";
+    	} else {
+    		session.setAttribute("alertMsg", "입력한 정보와 일치하는 비밀번호가 존재하지 않습니다.");
+    		
+    		return "redirect:/searchPwdForm.me";
+    	}
     }
 }

@@ -55,4 +55,14 @@ public class MemberDao {
 	public int deleteMember(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.update("memberMapper.deleteMember", memberId);
 	}
+	
+	// 회원 아이디 찾기
+	public String searchId(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.searchId", email);
+	}
+	
+	// 비밀번호 찾기
+	public int searchPwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.searchPwd", m);
+	}
 }

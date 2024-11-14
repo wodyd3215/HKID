@@ -80,4 +80,17 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.deleteMember(sqlSession, memberId);
 	}
 
+	// 회원 아이디 찾기
+	@Transactional
+	@Override
+	public String searchId(String email) {
+		return memberDao.searchId(sqlSession, email);
+	}
+
+	// 비밀번호 찾기
+	@Override
+	public int searchPwd(Member m) {
+		return memberDao.searchPwd(sqlSession, m);
+	}
+
 }
