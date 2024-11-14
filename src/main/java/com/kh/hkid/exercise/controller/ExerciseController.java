@@ -49,8 +49,6 @@ public class ExerciseController {
 				@RequestParam(value = "difficulty", defaultValue="") List<String> selectDifficulties,
 				@RequestParam(value = "keyword", defaultValue="") List<String> keyword,
 				@RequestParam(value = "cpage", defaultValue="1") Integer currentPage, Model model) {
-				int boardCount = exerciseService.selectListCount();
-			
 				
 			// HashMap에 필터 조건 추가
 			HashMap<String, Object> filterMap = new HashMap<>();
