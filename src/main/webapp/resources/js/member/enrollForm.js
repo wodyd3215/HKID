@@ -50,9 +50,11 @@ function inputPwdCheck() {
         if (userPwd !== checkPwd) {
             checkPwdArea.style.color = 'red';
             checkPwdArea.innerText = '비밀번호가 일치하지 않습니다.';
+            $("#enroll-enter").attr("disabled", true);
         } else {
             checkPwdArea.style.color = 'blue';
             checkPwdArea.innerText = '비밀번호가 일치합니다.';
+            $("#enroll-enter").attr("disabled", false);
         }
     } else {
         checkPwdArea.innerText = '';

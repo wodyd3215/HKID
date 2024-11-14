@@ -132,4 +132,11 @@
   	 WHERE MEMBER_ID = #{memberId}
   	   AND PHONE = #{phone}
   </select>
+  
+  <!-- 회원 비밀번호 수정(로그인 x) -->
+  <update id="changePwd">
+  	UPDATE MEMBER
+  	   SET MEMBER_PWD = #{memberPwd}
+  	 WHERE MEMBER_ID = #{memberId}
+  </update>
 </mapper>

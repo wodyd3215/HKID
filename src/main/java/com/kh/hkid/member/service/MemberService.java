@@ -39,4 +39,7 @@ public interface MemberService {
 	
 	// 비밀번호 찾기
 	int searchPwd(Member m);
+	
+	// 비밀번호 수정(로그인 x)
+	int changePwd(Member m);
 }

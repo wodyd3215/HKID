@@ -23,8 +23,8 @@
         <form action="changePwdForm.me">
             <h1>비밀번호 찾기</h1>
             <div>
-                <input type="text" name="memberId" id="searchPwd-id" placeholder="아이디 입력">
-                <input type="text" name="phone" id="searchPwd-phone" placeholder="전화번호 입력" maxlength="11">
+                <input type="text" name="memberId" id="searchPwd-id" placeholder="아이디 입력" required>
+                <input type="text" name="phone" id="searchPwd-phone" placeholder="전화번호 입력" maxlength="11" required>
             </div>
 
             <div>

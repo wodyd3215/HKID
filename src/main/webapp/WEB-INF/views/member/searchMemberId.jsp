@@ -19,11 +19,11 @@
         <div id="search-id-area">
             <h1>아이디 찾기</h1>
             <div>
-                <input type="text" id="search-id" placeholder="이메일 입력">
+                <input type="text" id="search-id" placeholder="이메일 입력" required>
             </div>
             <!-- JS로 AJAX요청! -->
             <div>
-                <input type="submit" onclick="searchId()" value="아이디 찾기">
+                <input type="submit" onclick="searchId()" value="아이디 찾기" required>
             </div>
         </div>
         

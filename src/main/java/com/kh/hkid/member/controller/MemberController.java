@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hkid.member.model.vo.Member;
@@ -74,7 +75,7 @@ public class MemberController {
     		return "redirect:/loginForm.me";
     	} else {
     		session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
-    		return "redirect:loginForm.me";
+    		return "redirect:/loginForm.me";
     	}
     }
     
@@ -251,13 +252,34 @@ public class MemberController {
     	System.out.println("result :" + result);
     	
     	if(result > 0) {
-    		model.addAttribute("memberId", memberService.loginMember(m));
+    		model.addAttribute("memberId", memberService.loginMember(m).getMemberId());
     		
     		return "member/changeMemberPwd";
     	} else {
     		session.setAttribute("alertMsg", "입력한 정보와 일치하는 비밀번호가 존재하지 않습니다.");
     		
     		return "redirect:/searchPwdForm.me";
+    	}
+    }
+    
+    // 비밀번호 수정(로그인 X)
+    @PostMapping("changePwd.me")
+    public String changePwd(Member m, @RequestParam(value="memberId") String memberId, HttpSession session) {
+    	String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
+    	m.setMemberPwd(encPwd);
+    	m.setMemberId(memberId);
+    	System.out.println("member :" + m);
+    	System.out.println("memberId : " + memberId);
+    	int result = memberService.changePwd(m);
+    	
+    	if(result > 0) {
+    		session.setAttribute("alertMsg", "비밀번호 수정에 성공하셨습니다.");
+    		
+    		return "redirect:/loginForm.me";
+    	} else {
+    		session.setAttribute("alertMsg", "비밀번호 수정에 실패하였습니다.");
+    		
+    		return "redirect:/loginForm.me";
     	}
     }
 }

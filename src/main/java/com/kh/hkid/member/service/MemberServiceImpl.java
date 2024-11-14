@@ -88,9 +88,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 비밀번호 찾기
+	@Transactional
 	@Override
 	public int searchPwd(Member m) {
 		return memberDao.searchPwd(sqlSession, m);
+	}
+
+	// 비밀번호 수정(로그인 x)
+	@Transactional
+	@Override
+	public int changePwd(Member m) {
+		return memberDao.changePwd(sqlSession, m);
 	}
 
 }

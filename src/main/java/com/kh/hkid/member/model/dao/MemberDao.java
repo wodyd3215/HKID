@@ -65,4 +65,9 @@ public class MemberDao {
 	public int searchPwd(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.searchPwd", m);
 	}
+	
+	// 비밀번호 수정(로그인 x)
+	public int changePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.changePwd", m);
+	}
 }
