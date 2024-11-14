@@ -17,7 +17,16 @@
 		<result column="CATEGORY" property="category" />
 		<result column="REGISTRATION_DATE" property="registrationDate" />
 		<result column="TYPE" property="type" />
-		
+	</resultMap>
+	
+	<resultMap type="Review" id="reviewResultSet">
+		<!-- <result column="테이블 컬럼명" property="객체의 필드명"/> -->
+		<result column="REVIEW_NO" property="reviewNo" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="REVIEW_CONTENT" property="reviewContent" />
+		<result column="REVIEW_RATE" property="reviewRate" />
+		<result column="REVIEW_DATE" property="reviewDate" />
 	</resultMap>
 	<!-- 
 		* SELECT문 전송 시
@@ -33,21 +42,13 @@
 	 </select>
 	  
 	<!-- 상품 목록 (전체) 조회 -->
-	
 	<select id="selectList" resultType="Product">
-		SELECT p.PRODUCT_NO,
-			   p.PRODUCT_NAME productName,
-			   p.CONTENT content,
-			   p.QUANTITY quantity,
-			   p.PRICE price,
-			   r.rate
-		  FROM PRODUCT p
-		  JOIN (
-		  	SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
-		  		FROM REVIEW
-		  		GROUP BY PRODUCT_NO
-		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
-		 ORDER BY p.PRODUCT_NO DESC
+		SELECT PRODUCT_NO productNo,
+			   PRODUCT_NAME productName,
+			   CONTENT content,
+			   QUANTITY quantity,
+			   PRICE price
+		  FROM PRODUCT 
 	</select>
 	
 	<!-- 상품 왼쪽 사이드바 -->

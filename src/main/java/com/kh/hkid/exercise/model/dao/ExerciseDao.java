@@ -45,7 +45,7 @@ public class ExerciseDao {
 	
 	//검색된 운동리스트 갯수
 	public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> filterMap) {
-		return sqlSession.selectOne("exerciseMapper.searchListCount");
+		return sqlSession.selectOne("exerciseMapper.searchListCount", filterMap);
 	}
 
 }

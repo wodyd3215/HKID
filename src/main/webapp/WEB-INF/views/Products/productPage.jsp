@@ -83,10 +83,15 @@
 
 
                 <div class="productListArr"> <!-- 상품 목록 -->
+                
+                <c:forEach var="p" items="${list}">
                     <div class="productList">
-                        
                         <!-- 상품 이미지 -->
-                        <div class="productImg" ></div>
+                        <div class="productImg" >
+                            <a href="">
+                                <img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="noting">
+                            </a>
+                        </div>
 
                         <!-- 상품 text -->
                         <div class="productText">
@@ -98,7 +103,6 @@
                                 
                                 <input type="checkbox" class="favoriteBtn"></input>
                             </div>
-
                             
                             <div class="productTextMid">
                                 <div class="productTexts">
@@ -117,12 +121,11 @@
                                         </c:otherwise>
                                     </c:choose>                                    
                                 </div>                                                                
-                                <div class="mainPrice">${p.price}</div>
+                                <div class="mainPrice">${p.price}원</div>
                             </div>
                         </div>
                     </div>
-                    
-                    
+                    </c:forEach>
                 </div>
                 
                 
