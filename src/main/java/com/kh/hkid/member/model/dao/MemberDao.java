@@ -21,6 +21,16 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 	
+	// 아이디 중복체크
+	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
+		return sqlSession.selectOne("memberMapper.idCheck", checkId);
+	}
+	
+	// 닉네임 중복체크
+	public int nickCheck(SqlSessionTemplate sqlSession, String checkNick) {
+		return sqlSession.selectOne("memberMapper.nickCheck", checkNick);
+	}
+	
 	// 회원 정보 변경(이메일)
 	public int updateEmail(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateEmail", m);
@@ -44,5 +54,20 @@ public class MemberDao {
 	// 회원 탈퇴
 	public int deleteMember(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.update("memberMapper.deleteMember", memberId);
+	}
+	
+	// 회원 아이디 찾기
+	public String searchId(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.searchId", email);
+	}
+	
+	// 비밀번호 찾기
+	public int searchPwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.searchPwd", m);
+	}
+	
+	// 비밀번호 수정(로그인 x)
+	public int changePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.changePwd", m);
 	}
 }
