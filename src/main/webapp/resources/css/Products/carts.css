@@ -2,129 +2,175 @@
 .wrapper{
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-content: center;    
+    flex-direction: column;
 }
+
 button{
     border: none;
-    background: none;
+    background: none;    
+    cursor: pointer;
 }
 
 /* 체크박스 스타일 */
-.selectCart{
-    display: none;
+input[type=checkbox].selectCart {
+    appearance: none; /* 기본 체크박스 스타일 제거 */
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: 2px solid #00A6FB;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
-label{
-    display: block;
-    width: 50px;
-    height: 50px;
+input[type=checkbox].selectCart:checked{
+    background-color: #fff;
+    border-color: #00A6FB;
 }
 
-/* 체크박스 off */
-.selectCart+label{
-    background-repeat: no-repeat;
-    background-image: url('');
+input[type=checkbox].selectCart:checked:after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    border: solid #00A6FB;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    top: 6px;
+    left: 12px;
 }
 
-/* 체크박스 on */
-.select:checked+label{
-    background-repeat: no-repeat;
-    background-image: url('');
-}
-
-
-/* wrapper 를 제외한 맨 위 class*/
-.productPageDetailSty{
+/* 장바구니 text */
+.cart-text{
     width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.PDheader{
-    width: 100%;
     height: 50px;
     display: flex;
-    align-items: center;
     justify-content: flex-start;
-    font-size: 26px;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+/* 테이블 스타일 */
+.productCartLists{
+    width: 100%;
+    border-top: 2px solid #051923;
     border-bottom: 2px solid #051923;
 }
 
-.productCartLists{
-    width: 100%;
-    height: 100%;
+
+tr, td {
+    text-align: center;        /* 수평 가운데 정렬 */
+    vertical-align: middle;    /* 수직 가운데 정렬 */
+    border-top: 1px solid #051923; /* 안쪽 테두리만 적용 */
+    border-bottom: 1px solid #051923;
+}
+
+/* thead (각 구역마다 크기 조절) */
+.cartTableHead{
+    height: 60px;
+}
+
+.check-space{
+    width: 80px;
+}
+
+.img-space{
+    width: 200px;
+}
+
+.quantity-space{
+    width: 130px;
+}
+
+.price-space{
+    width: 150px;
+}
+
+.delete-space{
+    width: 30px;
+}
+
+
+/* tbody */
+.content-space{
+    height: 150px;
+}
+
+.cartItemName{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* 수량 버튼 스타일*/
+.cartQuantity{
+    border: 1px solid #f5f5f5;
+    border-radius: 5px;
+    background: #DBF1FD;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 2px solid #051923;
-    flex-direction: column;
+    gap: 10px;
+    margin: 25px;
+    height: 40px;
 }
 
-.cartTableHead{
-    width: 100%;
-    height: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    border-bottom: 2px solid #051923;
-    padding: 8px;
+.cartQuantity button{
+    font-size: 20px;
+    font-weight: 700;
+    width: 100%-50px;
 }
 
-.cartTableBody{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 8px;
-}
-
-.cartItem1{
-    display: flex;
-    gap: 10px 100px;
-    align-items: center;
-    padding: 10px 0px;
-}
-
-/* 상품 이미지 스타일 */
-.product-image {
-    width: 90px;
-    height: 130px;
-    border-radius: 4px;
-}
-
-/* 상품 정보 스타일 */
-.cartItemName{
-    flex-grow: 1;
+.cartQuantity div{
+    background: #fff;
+    width: 40px;
+    height: 100%;
     font-size: 16px;
-    font-weight: bold;
-}
-
-/* 수량 조절 버튼 스타일 */
-.cartQuantity {
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 5px;
-}
-
-.cartQuantity button {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ddd;
-    background: none;
-    font-size: 16px;
+    justify-content: center;
 }
 
 /* 가격 스타일 */
 .product-price {
     font-size: 16px;
-    color: #333;
+    color: #5f5f5f;
     font-weight: bold;
     margin-right: 10px;
+}
+
+/* 총 금액 스타일 */
+.totalPrice{
+    font-size: 26px;
+    font-weight: 700;
+    word-spacing: 10px;
 }
 
 /* 삭제 버튼 스타일 */
 .delete-button img {
     width: 24px;
     height: 24px;
+}
+
+
+/* 장바구니 구매 버튼*/
+.BuyBtn{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+    border: none;
+}
+
+.cartBuyBtn{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background: #00A6FB;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: 10px;
 }
