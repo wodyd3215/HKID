@@ -40,23 +40,6 @@ function totalEmail(){
     submitEmail.value = fullEmail;
 }
 
-// function submitEnrollInfo() {
-//     const emailId = document.querySelector("#email-input1").value;
-//     const emailAt = document.querySelector("#email-input3").value;
-//     const emailArea = document.querySelector("#email-input2").value;
-//     const submitEmail = document.querySelector("#submit-email");
-
-//     const fullEmail = emailId + emailAt + emailArea;
-
-//     if (submitEmail) {
-//         submitEmail.value = '';
-//     }
-
-//     console.log(fullEmail);
-//     submitEmail.value = fullEmail;
-//     console.log(submitEmail);
-// }
-
 // 비밀번호 확인
 function inputPwdCheck() {
     const userPwd = document.querySelector("#userInputPwd").value; 
@@ -74,4 +57,47 @@ function inputPwdCheck() {
     } else {
         checkPwdArea.innerText = '';
     }
+}
+
+function enrollIdCheck() {
+    $.ajax({
+        url: "idCheck.me",
+        type : "post",
+        data: {checkId : $("#userInputId").val()},
+        success : function(result) {
+            console.log("중복체크 ajax 성공!");
+            if(result === "N") {
+                $("#idArea div").css("color", "red");
+                $("#idArea div").text("이미 존재하는 아이디 입니다.");
+                $("#enroll-enter").attr("disabled", true);
+            } else {
+                $("#idArea div").css("color", "blue");
+                $("#idArea div").text("사용 가능한 아이디 입니다.");
+                $("#enroll-enter").attr("disabled", false);
+            }
+        },
+        error : function(result){
+            console.log("error: " + result);
+            console.log("아이디 중복체크 실패");
+        }
+    })
+}
+
+function enrollNickCheck() {
+    $.ajax({
+        url : "nickCheck.me",
+        type : "post",
+        data : {checkNick : $(".enroll-input-area input[name=nickName]").val()},
+        success : function(result) {
+            if(result === "N") {
+                $("#nickArea div").css("color", "red");
+                $("#nickArea div").text("이미 존재하는 닉네임 입니다.");
+                $("#enroll-enter").attr("disabled", true);
+            } else {
+                $("#nickArea div").css("color", "blue");
+                $("#nickArea div").text("사용 가능한 닉네임 입니다.");
+                $("#enroll-enter").attr("disabled", false);
+            }
+        }
+    })
 }

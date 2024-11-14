@@ -21,6 +21,16 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 	
+	// 아이디 중복체크
+	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
+		return sqlSession.selectOne("memberMapper.idCheck", checkId);
+	}
+	
+	// 닉네임 중복체크
+	public int nickCheck(SqlSessionTemplate sqlSession, String checkNick) {
+		return sqlSession.selectOne("memberMapper.nickCheck", checkNick);
+	}
+	
 	// 회원 정보 변경(이메일)
 	public int updateEmail(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateEmail", m);

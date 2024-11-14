@@ -46,7 +46,7 @@ input::placeholder{
     outline: none;
 }
 
-.enroll-input-area > button {
+.enroll-input-area > div {
     width: 90px;
     height: 25px;
     font-size: 12px;
@@ -210,4 +210,11 @@ input::placeholder{
 #certifyArea > div {
     font-size: 10px;
     padding-top: 14px;
+}
+
+.all-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

@@ -13,6 +13,12 @@ public interface MemberService {
 	// 로그인
 	Member loginMember(Member m);
 	
+	// 아이디 중복체크
+	int idCheck(String checkId);
+	
+	// 닉네임 중복체크
+	int nickCheck(String checkNick);
+	
 	// 회원 정보 변경(이메일)
 	int updateEmail(Member m);
 	

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
@@ -102,11 +103,42 @@ public class MemberController {
     	}
     }
     
+    // 로그아웃
     @GetMapping("logout.me")
     public String logoutMember(HttpSession session) {
     	session.removeAttribute("loginMember");
     	
     	return "redirect:/";
+    }
+    
+    // 아이디 중복체크
+    @PostMapping("idCheck.me")
+    @ResponseBody
+    public String idCheck(String checkId) {
+    	System.out.println(checkId);
+    	
+    	int result = memberService.idCheck(checkId);
+    	
+    	System.out.println(result);
+    	
+    	if(result > 0) {
+    		return "N";
+    	} else {
+    		return "Y";
+    	}
+    }
+    
+    // 닉네임 중복체크
+    @PostMapping("nickCheck.me")
+    @ResponseBody
+    public String nickCheck(String checkNick) {
+    	int result = memberService.nickCheck(checkNick);
+    	
+    	if(result > 0) {
+    		return "N";
+    	} else {
+    		return "Y";
+    	}
     }
     
     // 이메일 변경
