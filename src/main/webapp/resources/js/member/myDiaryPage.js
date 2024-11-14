@@ -6,37 +6,52 @@ function initScrollPaging(mNo) {
     let pageInfo = {
         memberNo: mNo,
         currentPage: 1,
-        diaryLimit: 10,  
+        diaryLimit: 10,
+        isLoad: true,
     }
 
-    // loadDiary가 실행될 때 매개 변수로 사용되는 pageInfo를 기억하고 있음
+    const loadEl = (dList) => {
+        if(dList) {
+            drawDiaryPreview(dList)
+            pageInfo.currentPage++
+        } else {
+            pageInfo.isLoad = false;
+        }
+        
+    }
 
-    const loadDiary = loadMyDiaryAjax(pageInfo, (dList) => {
-        drawDiaryPreview(dList)
-    })
 
+    // loadDiary가 실행될 때 매개 변수로 사용되는 pageInfo를 기억하고 있음(계속 참조)
+    // 이후 호출 시, loadDiary가 기억하고 있는 pageInfo를 가지고 옴
+    const loadDiary = loadMyDiaryAjax(pageInfo, loadEl)
     loadDiary()
+
 
     // $(window).scrollTop() : 스크롤이 시작하는 부분부터 스크롤바 맨 위 부분의 사이 간격(스크롤바 맨 위 부분 위치)
     // $(window).height() : 우리가 보는 화면 크기(100vh)
     // $(document).height() : 전체(모든 요소 포함) 화면 크기
 
-    // document.onscroll = () => {
-    //     if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-    //     }
-    // } 
-}
-
-function loadMyDiaryAjax(pageInfo, callback) {
-    $.ajax({
-        type: 'POST',
-        url: 'selectDiaryList.me',
-        data: pageInfo,
-        success: callback,
-        error: () => {
-            console.log('회원 조회 실패')
+    document.onscroll = () => {
+        if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+            if(pageInfo.isLoad === true) {
+                loadDiary()
+            }        
         }
-    })
+    } 
+}
+ 
+function loadMyDiaryAjax(pageInfo, callback) {
+    return function() {
+        $.ajax({
+            type: 'POST',
+            url: 'selectDiaryList.me',
+            data: pageInfo,
+            success: callback,
+            error: () => {
+                console.log('회원 조회 실패')
+            }
+        })
+    } 
 }
 
 function drawDiaryPreview(dList) {
@@ -56,15 +71,3 @@ function drawDiaryPreview(dList) {
         conArea.append(dTitle, dContent, enrollDate)
     });
 }
-
-/**
-        <div class="my-content">
-                        <div class="content-area">
-                            <div class="diary-title" onclick="location.href='myDiary.me?dNo=${d.diaryNo}'">${d.diaryTitle}</div>
-                            <p class="diary-content">
-                                ${d.diaryContent}
-                            </p>
-                            <div class="enroll-date">${d.createDate}</div>
-                        </div>
-                    </div>
- */
