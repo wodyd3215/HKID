@@ -51,8 +51,43 @@
 		  FROM PRODUCT 
 	</select>
 	
+	<!-- 카테고리별 삼품 목록 총 갯수 -->
+	<select id="selectProductCategoryListCount" resultType="_int">
+		SELECT COUNT(*)
+			FROM PRODUCT
+		WHERE TYPE = '1'
+		<if test="category != '전체'">
+        	AND CATEGORY = #{category}
+    	</if>
+	</select>
+	
+	<!--  카테고리별 상품 목록 리스트  -->
+	<select id="selectProductCategoryList" resultType="Product">
+		SELECT PRODUCT_NO productNo,
+			   PRODUCT_NAME productName,
+			   CONTENT content,
+			   QUANTITY quantity,
+			   PRICE price
+		FROM PRODUCT
+		WHERE TYPE = '1' 
+	  	<if test="category != '전체'">
+        	AND CATEGORY = #{category}
+    	</if>
+	</select>
+	
+	<!-- 상품 상세 페이지 -->
+	<select id="selectProduct" resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+            PRODUCT_NAME,
+            CONTENT,
+            CATEGORY,
+            QUANTITY,
+            PRICE
+     FROM PRODUCT
+     	WHERE PRODUCT_NO = #{pno}
+	</select>
+	
 	<!-- 상품 왼쪽 사이드바 -->
-
 	<select id="choseNav" resultType="Product">
 		SELECT p.PRODUCT_NO,
 			   p.PRODUCT_NAME productName,

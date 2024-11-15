@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <% String contextPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +42,7 @@
 
             <div class="productContent"> <!-- 상품 버튼-->
                 <!-- 상품 위치 -->
-                <div class="productLocation"> 상품 > 가구</div>
+                <div class="productLocation"> 상품 > ${p.category}</div>
     
                 <!-- 상품 이름 및 평점 -->
                 <div class="productDetail">
@@ -48,7 +50,7 @@
                     <div> ${p.productName}</div>
 
                     <!-- 평점 -->
-                    <div class="assess"> ${p.productAssess}</div> 
+                    <div class="assess"></div> 
                 </div>            
     
                 <!-- 수량 버튼 -->
@@ -59,7 +61,7 @@
                         <button class="Btnpls">+</button>
                     </div>                                       
                     <div class="priceText">                         
-                        ${p.productPrice} 
+                        ${p.price} 
                     </div>
                 </div>
     

@@ -48,4 +48,15 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.selectRbtn(sqlSession, rbtn);
 	}
 
+	
+	@Override
+	public int selectProductCategoryListCount(String category) {
+		return productDao.selectProductCategoryListCount(sqlSession, category);
+	}
+
+	@Override
+	public ArrayList<Product> selectProductCategoryList(PageInfo pi, String category) {
+		return productDao.selectProductCategoryList(sqlSession, pi, category);
+	}
+
 }
