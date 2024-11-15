@@ -256,7 +256,7 @@
     margin: 20px 0;
 }
 
-#board-search-bar {
+#chat-search-bar {
     border: 1px solid rgb(196, 195, 195);
     border-radius: 9px 0px 0px 9px ;
     width: 240px;
@@ -265,7 +265,7 @@
     border-right: none;
 }
 
-#board-search-bar:focus {
+#chat-search-bar:focus {
     outline: none;
 }
 

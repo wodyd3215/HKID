@@ -89,6 +89,7 @@ public class MemberController {
     		return "redirect:/loginForm.me";
     	} else {
     		Cookie ck = new Cookie("saveId", loginMember.getMemberId());
+    		System.out.println("쿠키:" + ck);
     		if(saveId == null) {
     			ck.setMaxAge(0); // 쿠키의 유효기간 설정
     		}
