@@ -46,7 +46,7 @@
 		  	SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
 		  		FROM REVIEW
 		  		GROUP BY PRODUCT_NO
-		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
+		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO	  
 		 ORDER BY p.PRODUCT_NO DESC
 	</select>
 	
@@ -84,7 +84,7 @@
 		  		GROUP BY PRODUCT_NO
 		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
 		 WHERE CATEGORY = #{selectedValue}
-		 WHERE TYPE = #{rbtn}
+		 AND TYPE = #{rbtn}
 		 ORDER BY p.PRODUCT_NO DESC
 	</select>
 		
