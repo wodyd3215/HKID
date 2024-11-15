@@ -57,7 +57,7 @@
                     </ul>
                 </li>
                 <li id="product-drop-bar" class="content">
-                    <a href="">상점</a>
+                    <a href="product.li">상점</a>
                     <ul>
                         <li><a href="">상품</a></li>
                         <li><a href="">중고</a></li>
