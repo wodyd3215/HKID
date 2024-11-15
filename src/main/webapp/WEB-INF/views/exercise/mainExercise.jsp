@@ -61,17 +61,16 @@
 								</td>
 						</tr>
 					</table>
-				
-			</div>
-			<div class="exerContent">
-				<p class="exerTitle2">운동 리스트</p>
-					<div>
-						<input type="text" name="keyword" value="${ keyword}" placeholder="검색어를 입력해주세요.">
-						<input type="submit" value="검색">
+			
+					<div class="exerContent">
+						<p class="exerTitle2">운동 리스트</p>
+						<div>
+							<input type="text" name="keyword" value="${ keyword}" placeholder="검색어를 입력해주세요.">
+							<input type="submit" value="검색">
+						</div>
 					</div>
 				</form>
 			</div>
-			
 			<div class="content-box">
 				<div class="list-box" id="tour-content">
 				<c:forEach var="e" items="${list}">
