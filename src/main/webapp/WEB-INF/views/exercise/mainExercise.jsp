@@ -61,17 +61,16 @@
 								</td>
 						</tr>
 					</table>
-				
-			</div>
-			<div class="exerContent">
-				<p class="exerTitle2">운동 리스트</p>
-					<div>
-						<input type="text" name="keyword" value="${ keyword}" placeholder="검색어를 입력해주세요.">
-						<input type="submit" value="검색">
+			
+					<div class="exerContent">
+						<p class="exerTitle2">운동 리스트</p>
+						<div>
+							<input type="text" name="keyword" value="${ keyword}" placeholder="검색어를 입력해주세요.">
+							<input type="submit" value="검색">
+						</div>
 					</div>
 				</form>
 			</div>
-			
 			<div class="content-box">
 				<div class="list-box" id="tour-content">
 				<c:forEach var="e" items="${list}">
@@ -125,14 +124,14 @@
 						</c:forEach>
 
 						<c:choose>
-							<c:when test="${pi.currentPage ne pi.maxPage}">
+							<c:when test="${pi.currentPage < pi.maxPage}">
 								<c:choose>
 									<c:when test="${empty part and empty difficulty and empty keyword}">
-										<a href="list.ex?cpage=${pi.currentPage + 5}">&gt;</a>
+										<a href="list.ex?cpage=${pi.currentPage + 5 < pi.maxPage ? pi.currentPage + 5 : pi.maxPage}">&gt;</a>
 									</c:when>
 									
 									<c:otherwise>
-										<a href="exercise.se?cpage=${pi.currentPage + 5}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&gt;</a>
+										<a href="exercise.se?cpage=${pi.currentPage + 5 < pi.maxPage ? pi.currentPage + 5 : pi.maxPage}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&gt;</a>
 									</c:otherwise>
 								</c:choose>
 							</c:when>
@@ -166,5 +165,7 @@
 	</div>	
 		<br><br><br>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
+	<script src="./resources/js/exercise/mainExercise.js"></script>
 </body>
 </html>
