@@ -39,5 +39,10 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectCategoryList", category, rowBounds);
 	}
 	
+	//공지 게시글 목록
+	public ArrayList<Community> selectNoticeList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectNoticeList");
+	}
+	
 	
 }

@@ -41,6 +41,12 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Community> selectCategoryList(PageInfo pi, String category) {
 		return boardDao.selectCategoryList(sqlSession, pi, category);
 	}
+
+	@Override
+	public ArrayList<Community> selectNoticeList() {
+		
+		return boardDao.selectNoticeList(sqlSession);
+	}
 	
 	
 	
