@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- namespace : 해당 mapper파일의 고유한 별칭 -->
+
+<mapper namespace="favoriteMapper">
+	<resultMap type="Cart" id="favoriteResultSet">
+		<!-- <result column="테이블 컬럼명" property="객체의 필드명"/> -->
+		<result column="BUCKEY_LIST" property="buckeyList"/>
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="PRODUCT_QUANTITY" property="productQuantity" />			
+	</resultMap>
+</mapper>

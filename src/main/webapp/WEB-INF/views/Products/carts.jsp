@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,82 +24,80 @@
            	 장바구니
         </div>
 
-
         
-        <table class="productCartLists">
+            <table class="productCartLists">
+                <thead class="cartTableHead">
+                    <tr>
+                        <th class="check-space">
+                            <input type="checkbox" class="selectCart" onclick="selectAll(this)">
+                        </th>
+                        <th class="img-space"></th> <!-- 상품이미지 영역 -->
+                        <th class="name-space">상품명</th>
+                        <th class="quantity-space">수량</th> <!-- 수량조절 버튼 영역 -->
+                        <th class="price-space">가격</th>
+                        <th class="delete-space">
+                            <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
+                        </th>
+                    </tr>
+                </thead>                       
+    
+                <tbody class="cartTableBody">
+                    <c:choose>
+                    <c:when test="${empty productQuantities}">
+                        <div class="cartListNone"> 장바구니에 담긴 상품이 없어요 ! </div>
+                    </c:when>
+                    <c:otherwise>
 
+                    <c:forEach var="entry" items="${productQuantities}">
+                        <tr class="content-space">
+                            <td>
+                                <input type="checkbox" class="selectCart" name="selectBox">
+                            </td>
+                            <td>
+                                <c:if test="${}">
+                                    <img src="${pageContext.request.contextPath}/resources/image/${entry.key}.jpg" alt="${entry.key}" class="product-image">
+                                </c:if>
+                            </td>
+                            <td class="cartItemName">${}</td>
+                            <td>
+                                <div class="cartQuantity">
+                                    <button class="decreaseBtn" >-</button>
+                                    <div class="quantityBtnText">${c.productQuantity}</div>
+                                    <button class="increaseBtn">+</button>
+                                </div>
+                            </td>
+                            <td class="productPrice">${}</td>
+                            <td>
+                                <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+    
+                
+            </table>
+        </c:otherwise>
+    </c:choose>
+        
+        <tfoot class="cartTableFoot">
+            <tr>
+                <th>
+                    <input type="checkbox" class="selectCart" id="selectAll" onclick="selectAll(this)">
+                </th>
+                
+                <td>총</td>
+                <td class="totalPrice" id="totalPrice"></td>
+                <td>원</td>
 
-            <thead class="cartTableHead">
-                <tr>
-                    <th class="check-space">
-                        <input type="checkbox" class="selectCart"  onclick="selectAll(this)">                        
-                    </th>
+                <td class="BuyBtn">
+                    <button class="cartBuyBtn" onclick="bottomBtn('buy')">구매하기</button>
+                </td>
 
-                    <!-- 체크박스와 delete 사이에 있는 공간 -->
-                    <th class="img-space"></th> <!-- 상품이미지 영역 -->
-                    <th class="name-space"></th> <!-- 상품이름 영역 -->
-                    <th class="quantity-space"></th> <!-- 수량조절 버튼 영역 -->
-                    <th class="price-space"></th> <!-- 가격 영역 -->
-
-                    <th delete-space>
-                        <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
-                    </th>
-                </tr>                
-            </thead>
-
-  
-            <tbody class="cartTableBody">
-                <tr class="content-space">
-                    <td>
-                        <input type="checkbox" class="selectCart" name="selectBox">                        
-                    </td>
-
-                    <td><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" class="product-image"></td>
-                    
-                    <td class="cartItemName">장바구니에 담겨있다</td>
-
-                    
-                    <td>
-                        <div class="cartQuantity">
-                            <button>-</button>
-                            <div>1</div>
-                            <button>+</button>
-                        </div>                        
-                    </td>
-
-
-                    <td class="product-price">26,880 원</td>
-
-
-                    <td>
-                        <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
-                    </td>
-                </tr>                
-            </tbody>
-
-
-
-            <tfoot class="cartTableFoot">
-                <tr>
-                    <th>
-                        <input type="checkbox" class="selectCart"  id="selectAll" onclick="selectAll(this)">
-                    </th>
-                    
-
-                    <td class="totalPrice" colspan="3">총 100,000 원 </td>
-                    
-                    <td class="BuyBtn">
-                        <button class="cartBuyBtn">구매하기</button>
-                    </td>
-
-                    <td>
-                        <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
-                    </td>
-                    
-                </tr>
-            </tfoot>
-
-        </table>
+                <td>
+                    <button class="delete-button" onclick="bottomBtn('delete')"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg"></button>
+                </td>
+            </tr>
+        </tfoot>
 
     </div>
 </body>

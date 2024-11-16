@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- namespace : 해당 mapper파일의 고유한 별칭 -->
+
+<mapper namespace="cartMapper">
+	<resultMap type="Cart" id="cartResultSet">
+		<!-- <result column="테이블 컬럼명" property="객체의 필드명"/> -->
+		<result column="BUCKEY_LIST" property="buckeyList"/>
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="PRODUCT_QUANTITY" property="productQuantity" />			
+	</resultMap>
+	<!-- 
+		* SELECT문 전송 시
+		<select id="각 sql문의 식별자" [parameterType="전달받을 자바타입"] resultMap="결과객체" | resultType="결과타입">
+								    ↪없으면 생략해도 된다               ↪ mapper 에서  
+	 -->
+	 
+	 <select id="selectCart" resultType="Cart">
+	 	SELECT B.BUCKEY_LIST,
+	 		   B.MEMBER_NO,
+	 		   PRODUCT_NO,
+	 		   B.PRODUCT_QUANTITY,
+	 		   P.PRODUCT_NAME
+	 	  FROM BUCKEY_LIST B
+	 	  JOIN PRODUCT P
+	 	 USING (PRODUCT_NO)
+	 	 WHERE B.MEMBER_NO = #{memberNo}
+	 </select>
+	 
+	 <update id="changeQuantity">
+	 	UPDATE BUCKEY_LIST
+	 	   SET PRODUCT_QUANTITY = #{productId}
+	 	 WHERE MEMBER_NO = #{memberNo}
+	 </update>
+	 
+	 
+	 <delete id="deleteCart">
+	 	DELETE B	
+	 	  FROM BUCKEY_LIST B
+	 	  JOIN PRODUCT P 
+	 	 USING (PRODUCT_NO)
+	 	 WHERE MEMBER_NO = #{memberNo} 
+	 	   AND PRODUCT_NO = #{productNo}
+	 </delete>
+</mapper>
