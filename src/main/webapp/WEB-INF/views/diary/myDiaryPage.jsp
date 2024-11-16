@@ -9,8 +9,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/myDiaryPage.css">
-
-    <script src="${pageContext.request.contextPath}/resources/js/member/myDiaryPage.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/diary/myDiaryPage.js"></script>
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />
