@@ -160,6 +160,7 @@ table td:nth-child(5) { /* 5번째 td */
     border-left: none;
     border-radius: 0px 9px 9px 0px;
     cursor: pointer;
+    height: 30px;
 }
 
 /* defualt.css 수정 */
