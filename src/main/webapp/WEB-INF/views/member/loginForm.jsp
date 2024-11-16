@@ -26,16 +26,13 @@
             <!-- 아이디 / 비밀번호 입력 -->
             <h1>로그인</h1>
             <div>
-                <input type="text" name="memberId" id="login-id" placeholder="아이디 입력">
+                <input type="text" name="memberId" id="login-id" value="${cookie.saveId.value}" placeholder="아이디 입력">
                 <input type="password" name="memberPwd" id="login-pwd" placeholder="비밀번호 입력">
             </div>
             <!-- 자동로그인 / 아이디저장 버튼 -->
             <div class = "checkbox-btn-area">
-                <label id="autoLogin">
-                    <input type="checkbox" name="autoLogin">&nbsp;자동로그인
-                </label>
                 <label id="saveLogin">
-                    <input type="checkbox" name="saveLogin">&nbsp;아이디저장
+                    <input type="checkbox" name="saveId" checked>&nbsp;아이디저장
                 </label>
             </div>
 
