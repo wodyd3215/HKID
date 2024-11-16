@@ -19,12 +19,12 @@ public class FavoriteController {
 	}
 	
 	
-	public String selectList(Model model) {
-		ArrayList<Favorite> list = favoriteService.selectList();
-		
-		model.addAttribute("list",list);
-		
-		return "Products/favoriteList";
-	}
-	
+//	public String selectList(Model model) {
+//		ArrayList<Favorite> list = favoriteService.selectList();
+//		
+//		model.addAttribute("list",list);
+//		
+//		return "Products/favoriteList";
+//	}
+//	
 }

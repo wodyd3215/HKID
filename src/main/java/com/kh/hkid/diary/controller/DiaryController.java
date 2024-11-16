@@ -68,7 +68,6 @@ public class DiaryController {
     @ResponseBody
     @PostMapping("upload.di")
     public String insertDiaryImgAjax(List<MultipartFile> fileList, HttpSession session) {
-    	
     	ArrayList<String> imgList = new ArrayList<>();
     	
     	for(MultipartFile f : fileList) {	
