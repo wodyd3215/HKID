@@ -47,7 +47,7 @@
 						<div class="area-select">
 							<select name="area" id="area" onchange="categoryChange(this)">
 								<option value>시/도 선택</option>
-								<option value="general01">강원</option>
+								<option value="geranel01">강원</option>
 								<option value="general02">경기</option>
 								<option value="general03">경남</option>
 								<option value="general04">경북</option>
