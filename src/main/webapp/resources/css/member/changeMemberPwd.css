@@ -47,10 +47,14 @@
     cursor: pointer;
 }
 
-#pwd-input{
+#userInputPwd{
     padding-left: 10px;
 }
 
-#pwd-reInput{
+#checkPwd{
     padding-left: 10px;
+}
+
+#pwdArea > div {
+    text-align: center;
 }

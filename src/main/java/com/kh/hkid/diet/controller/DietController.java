@@ -1,6 +1,7 @@
 package com.kh.hkid.diet.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.hkid.diet.service.DietService;
@@ -15,7 +16,7 @@ public class DietController {
 	}
 	
 	@GetMapping("diet.ca")
-	public String dietForm() {
+	public String dietForm(Model model) {
 		return "diet/dietForm";
 	}
 }

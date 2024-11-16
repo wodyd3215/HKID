@@ -36,6 +36,22 @@
    	  		FROM EXERCISE_LIST
    	  		JOIN PART_TAG USING(PART_NO)
         WHERE 1=1
+        <if test="parts != null">
+            <foreach item="part" collection="parts" open="AND (" separator=" OR " close=")">
+                PART_NAME = #{part}
+            </foreach>
+        </if>
+        <if test="difficulties != null">
+            <foreach item="difficulty" collection="difficulties" open="AND (" separator=" OR " close=")">
+                EXERCISE_DIFFICULTY = #{difficulty}
+            </foreach>
+        </if>
+        <if test="keywords != null and keywords != ''">	
+        	<foreach item="keyword" collection="keywords" open="AND (" separator=" OR " close=")">
+		        (EXERCISE_NAME LIKE '%' || #{keyword} || '%'
+		         OR PART_NAME LIKE '%' || #{keyword} || '%')
+    		</foreach>
+    	</if>
  	</select>
  	
  	<!-- 운동리스트를 가져오는 쿼리 -->
@@ -81,7 +97,7 @@
    </select>
    
    <!-- eno로 운동 조회 -->
-   <select id="exerciseSelect" resultMap="ExerciseResult">
+   <select id="exerciseSelect" resultMap="Ex	erciseResult">
    	SELECT EXERCISE_NO,
             PART_NO,
             PART_NAME,

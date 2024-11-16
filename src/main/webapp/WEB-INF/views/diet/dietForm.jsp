@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/diet/dietFormModal.css">
+    
     <script src="${pageContext.request.contextPath}/resources/js/diet/dietForm.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
+
     <title>Insert title here</title>
 </head>
 <body>
@@ -116,8 +119,9 @@
                 </div>
                 
                 <div id="searchbar-div">
-                    <input type="search" name="" id="board-search-bar" placeholder="음식을 입력해주세요">
-                    <button id="search-btn" type="submit">
+                    <input type="text" id="diet-search-bar" placeholder="음식을 입력해주세요">
+                    
+                    <button id="search-btn" onclick="searchFoodList()">
                         <img id="searchIcon" src="resources/image/searchIcon.png">
                     </button>
                 </div>
@@ -134,11 +138,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="common-table-body">
+                        <!-- <tr id="common-table-body">
                             <td>스테이크</td>
                             <td>620</td>
                             <td id="food-add-btn"><button onclick="foodAddBtn(this)">+</button></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>

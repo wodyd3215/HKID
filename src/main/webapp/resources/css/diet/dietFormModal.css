@@ -14,7 +14,6 @@
     justify-content: center;
     align-items: center;
     border-bottom: none;
-    padding-top: 10px;
     height: 120px;
 }
 
@@ -23,6 +22,7 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 30px;
+    margin: 10px 0 0;
 }
 
 #search-food-modal .custom-modal-title > div {
@@ -45,10 +45,10 @@
     height: 32px;
     display: flex;
     justify-content: end;
-    margin-bottom: 20px;
+    margin: 0 0 10px;
 }
 
-#search-food-modal #board-search-bar {
+#search-food-modal #diet-search-bar {
     border: 1px solid rgb(196, 195, 195);
     border-radius: 9px 0px 0px 9px ;
     width: 230px;
@@ -58,7 +58,7 @@
     border-right: none;
 }
 
-#search-food-modal #board-search-bar:focus {
+#search-food-modal #diet-search-bar:focus {
     outline: none;
 }
 

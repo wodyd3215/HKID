@@ -69,3 +69,36 @@ function foodAddBtn(_this) {
     const tbody = document.querySelector('tbody');
     tbody.appendChild(newRow);
 }
+
+// 음식 검색 리스트
+function searchFoodList() {
+    const food = $("#diet-search-bar").val()
+    console.log("Food:" + food);
+
+    getFoodList({food: food}, function(foodList){
+        const itemList = foodList.response.body.items;
+
+        // drawFoodBody(document.querySelector("#common-table tbody"), itemList);
+    })
+}
+
+function getFoodList(data, callback) {
+    $.ajax({
+        url : "foods",
+        data : data,
+        success : callback,
+        error : function() {
+            console.log("음식 정보 api 요청 실패")
+        }
+    })
+}
+
+// function drawFoodBody(parent, itemArr) {
+//     parent.innerHTML = "";
+
+//     for(const item of itemArr){
+//         parent.innerHTML += ("<tr>"
+//                                 + "<td>" + item. + "</td>"
+//                             + "<tr>")
+//     }
+// }

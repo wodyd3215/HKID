@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/searchMemberId.css">
     <script src="${pageContext.request.contextPath}/resources/js/member/searchMemberId.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Insert title here</title>
 </head>
 <body>
@@ -14,18 +16,18 @@
         <div id="logo-img">
             <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/image/HKID_Logo.png" alt="로고"></a>
         </div> 
-        <form action="searchId.me">
+        <div id="search-id-area">
             <h1>아이디 찾기</h1>
             <div>
-                <input type="text" id="search-id" placeholder="이메일 입력">
+                <input type="text" id="search-id" placeholder="이메일 입력" required>
             </div>
             <!-- JS로 AJAX요청! -->
             <div>
-                <input type="submit" onclick="searchId()" value="아이디 찾기">
+                <input type="submit" onclick="searchId()" value="아이디 찾기" required>
             </div>
-        </form>
+        </div>
         
-        <div id="search-id-text">해당 이메일로 가입된 아이디는 'xxxxxxx' 입니다.</div>
+        <div id="search-id-text"></div>
 
         <div class="login-searchPwd">
             <a href="loginForm.me">로그인</a>&nbsp;

@@ -19,5 +19,7 @@ public interface BoardService {
 	//카테고리 게시글 목록
 	ArrayList<Community> selectCategoryList(PageInfo pi, String category);
 	
+	//공지글 목록
+	ArrayList<Community> selectNoticeList();
 	
 }

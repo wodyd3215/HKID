@@ -27,6 +27,9 @@ import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.community.model.vo.Reply;
 import com.kh.hkid.community.service.BoardService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class BoardController {
 	private final BoardService boardService;
@@ -37,14 +40,16 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 	
-	//게시글 개수, 목록
+	//전체 게시글 개수, 목록
 	@GetMapping("list.bo")
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int boardCount = boardService.selectListCount(); //게시글 개수
+		int boardCount = boardService.selectListCount(); //게시글의 총 개수
+																		//게시글 개수(4번째 매개변수)
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		
 		ArrayList<Community> list = boardService.selectList(pi);	//게시글 리스트
-
+		
+		model.addAttribute("nList", boardService.selectNoticeList());
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "community/boardList";
@@ -53,16 +58,52 @@ public class BoardController {
 	//카테고리 게시판 개수, 목록
 	@GetMapping("categoryList.bo")
 	public String selectCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String category, Model model) {	
+		
+		//전체 카테고리를 선택했으면 list.bo로 리다이렉트
+		if(category.equals("전체")) { 	
+			return "redirect:list.bo";
+		}
+		
+		currentPage = 1; // 카테고리 변경 시 1페이지로
 		int boardCount = boardService.selectCategoryListCount(category);
-		
+	
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
-		
 		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//게시글 리스트
+	
+		selectNoticeList(model); //공지 출력함수 실행
+
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
 		model.addAttribute("pi", pi);
-		
 		return "community/boardList";
+	}
+	
+	// 게시글 개수 선택
+	@PostMapping("boardCount.bo")
+	public String boardCount( String commuName, int listCount, int currentPage, int choiceBoardCount, Model model) {
+	
+		PageInfo pi = Template.getPageInfo(listCount, currentPage, 10, choiceBoardCount); //페이징 처리
+//		pi.setBoardLimit(choiceBoardCount);
+
+		ArrayList<Community> list;
+		// 카테고리 선택 후 일 경우 카테고리 게시글
+		if(commuName != null) {
+			list = boardService.selectCategoryList(pi, commuName);	//게시글 리스트	//카테고리 게시글 리스트
+		}
+		// 카테고리 선택 안 한 상태일 경우 전체 게시글
+		list = boardService.selectList(pi);	//게시글 리스트
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		model.addAttribute("nList", boardService.selectNoticeList()); //공지게시글
+		return "community/boardList";
+	}
+	
+	//공지 (model에 공지게시글 넣어주는 함수)
+	public void selectNoticeList(Model model) {	
+		ArrayList<Community> nList = boardService.selectNoticeList();
+		
+		model.addAttribute("nList", boardService.selectNoticeList());
 	}
 	
 	//게시글 작성
@@ -107,6 +148,8 @@ public class BoardController {
 		return "community/boardDetail";
 	}
 	
+	
+	
 //	--------------- 댓글 기능 -------------------------
 	
 	//댓글추가
@@ -118,10 +161,8 @@ public class BoardController {
 	    return "success";
 	}
 	
-	
 	//처음 댓글 목록 출력
-	
-	
+
 	//ajax 댓글목록 select
 	@ResponseBody
 	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"

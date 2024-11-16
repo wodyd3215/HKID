@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
+import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.product.model.vo.Product;
 import com.kh.hkid.product.model.vo.Review;
 import com.kh.hkid.product.service.ProductService;
@@ -33,19 +34,34 @@ public class ProductController {
 	public String selectProList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int productCount = productService.selectListTotal();
 		
-		PageInfo pi = Template.getPageInfo(productCount, currentPage, 9, 5);
+		PageInfo pi = Template.getPageInfo(productCount, currentPage, 5, 9);
 		ArrayList<Product> list = productService.selectList(pi);
 
-		
 		model.addAttribute("list", list);
-
 		model.addAttribute("pi", pi);
 		return "Products/productPage";
 	}
 	
+	// 카테고리에 맞는 상품 목록을 반환하는 API
+    @GetMapping("product.se")
+    public String selectProductCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model, String category) {
+    	int productCount = productService.selectProductCategoryListCount(category);
+    	
+    	PageInfo pi = Template.getPageInfo(productCount, currentPage, 5, 9);
+    	ArrayList<Product> list = productService.selectProductCategoryList(pi, category);	//게시글 리스트
+    	
+    	model.addAttribute("list", list);
+		model.addAttribute("category", category);
+		model.addAttribute("pi", pi);
+		
+        return "Products/productPage";
+    }
+    
+	
 	@GetMapping("deteilItem.li")
 	public String selectItem(int pno, Model model) {
 		Product p = productService.selectProduct(pno);
+		model.addAttribute("p", p);
 		return "Products/productPageDetail";	
 	}
 	

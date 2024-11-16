@@ -110,7 +110,7 @@
                     <!-- 유저 검색 컨텐츠 -->
                     <div id="chat-search" class="hide">
                         <div id="searchbar-div">
-                            <input type="search" name="" id="board-search-bar" placeholder="닉네임을 입력해주세요.">
+                            <input type="search" name="" id="chat-search-bar" placeholder="닉네임을 입력해주세요.">
                             <button id="search-btn" type="submit">
                                 <img id="searchIcon" src="resources/image/searchIcon.png">
                             </button>

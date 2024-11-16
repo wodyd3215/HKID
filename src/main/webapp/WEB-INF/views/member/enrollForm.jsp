@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/enrollForm.css">
     <script src="${pageContext.request.contextPath}/resources/js/member/enrollForm.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Insert title here</title>
 </head>
 <body>
@@ -20,11 +22,11 @@
             <!-- 아이디 -->
             <div id="idArea">
                 <h3 class="enroll-input-title">*아이디&nbsp;</h3>
-                <div>이미 존재하는 아이디 입니다.</div>
+                <div></div>
             </div>
             <div class="enroll-input-area">
                 <input type="text" id="userInputId" name="memberId" placeholder="아이디 입력(특수문자 제외)" onkeyup="checkUserId(this)" required>
-                <button id="checkIdBtn" required>중복확인</button>
+                <div id="checkIdBtn" class="all-btn" onclick="enrollIdCheck()" required>중복확인</div>
             </div>
             
             <!-- 비밀번호 -->
@@ -51,10 +53,11 @@
             <!-- 닉네임 -->
             <div id="nickArea">
                 <h3 class="enroll-input-title">*닉네임&nbsp;</h3>
-                <div>이미 존재하는 닉네임 입니다.</div>
+                <div></div>
             </div>
             <div class="enroll-input-area">
                 <input type="text" name="nickName" placeholder="닉네임 입력(특수문자 제외 / 최대 8글자)" maxlength="8" required>
+                <div id="checkNickBtn" class="all-btn" onclick="enrollNickCheck()" required>중복확인</div>
             </div>
 
             <!-- 전화번호 -->
@@ -63,7 +66,7 @@
                     <h3 class="enroll-input-title">*전화번호</h3>
                     <div class="enroll-input-area">
                         <input type="text" name="phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" maxlength="11" required>
-                        <button>인증번호 받기</button>
+                        <div class="all-btn">인증번호 받기</div>
                     </div>
                 </div>
                 <!-- 인증번호 -->
@@ -74,7 +77,7 @@
                     </div>
                     <div class="enroll-input-area">
                         <input type="text" name="certifyNo" placeholder="인증번호 입력" required>
-                        <button>인증</button>
+                        <div class="all-btn">인증</div>
                     </div>
                 </div>
             </div>
@@ -98,7 +101,7 @@
             <h3 class="enroll-input-title">주소</h3>
             <div id="enroll-address" class="enroll-input-area">
                 <input type="text" name="address" placeholder="주소 입력(도로명, 지번)">
-                <button>주소찾기</button>
+                <div class="all-btn">주소찾기</div>
             </div>
             <div id="post-detail-address" class="enroll-input-area">
                 <input id="post-no" name="postNo" type="text" placeholder="우편번호">
