@@ -18,8 +18,8 @@ public class ProductDao {
 
 	public ArrayList<Product> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		return (ArrayList)sqlSession.selectList("productMapper.selectList", null, rowBounds);
 	}
@@ -27,6 +27,7 @@ public class ProductDao {
 	public Product selectProduct(SqlSessionTemplate sqlSession, int pno) {
 		return sqlSession.selectOne("productMapper.selectProduct", pno);
 	}
+	
 
 	public ArrayList<Product> chooseNav(SqlSessionTemplate sqlSession, String selectedValue) {
 		return (ArrayList)sqlSession.selectList("productMapper.choseNav", selectedValue);
@@ -34,6 +35,19 @@ public class ProductDao {
 
 	public ArrayList<Product> selectRbtn(SqlSessionTemplate sqlSession, String rbtn) {
 		return (ArrayList)sqlSession.selectList("productMapper.Rbtn", rbtn);
+	}
+
+	
+	
+	public int selectProductCategoryListCount(SqlSessionTemplate sqlSession, String category) {
+		return sqlSession.selectOne("productMapper.selectProductCategoryListCount", category);
+	}
+
+	public ArrayList<Product> selectProductCategoryList(SqlSessionTemplate sqlSession, PageInfo pi, String category) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("productMapper.selectProductCategoryList", category, rowBounds);
 	}
 
 

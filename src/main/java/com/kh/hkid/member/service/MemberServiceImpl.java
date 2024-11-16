@@ -35,6 +35,18 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return memberDao.loginMember(sqlSession, m);
 	}
+	
+	// 아이디 중복체크
+	@Override
+	public int idCheck(String checkId) {
+		return memberDao.idCheck(sqlSession, checkId);
+	}
+	
+	// 닉네임 중복체크
+	@Override
+	public int nickCheck(String checkNick) {
+		return memberDao.nickCheck(sqlSession, checkNick);
+	}
 
 	// 회원 정보 수정(이메일, 전화번호, 비밀번호, 주소)
 	@Transactional
@@ -67,4 +79,26 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(String memberId) {
 		return memberDao.deleteMember(sqlSession, memberId);
 	}
+
+	// 회원 아이디 찾기
+	@Transactional
+	@Override
+	public String searchId(String email) {
+		return memberDao.searchId(sqlSession, email);
+	}
+
+	// 비밀번호 찾기
+	@Transactional
+	@Override
+	public int searchPwd(Member m) {
+		return memberDao.searchPwd(sqlSession, m);
+	}
+
+	// 비밀번호 수정(로그인 x)
+	@Transactional
+	@Override
+	public int changePwd(Member m) {
+		return memberDao.changePwd(sqlSession, m);
+	}
+
 }

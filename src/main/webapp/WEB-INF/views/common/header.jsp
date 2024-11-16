@@ -56,14 +56,8 @@
                         <li><a href="">챌린지</a></li>
                     </ul>
                 </li>
-                <li class="content">
-                    <a href="product.li">상점</a>
-                </li>
-                <li class="content">
-                    <a class="login" href="loginForm.me">로그인</a>
-
                 <li id="product-drop-bar" class="content">
-                    <a href="">상점</a>
+                    <a href="product.li">상점</a>
                     <ul>
                         <li><a href="">상품</a></li>
                         <li><a href="">중고</a></li>

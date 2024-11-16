@@ -45,6 +45,7 @@ public class AdminController {
 		return "admin/noticeManagement";
 	}
 	
+	//상품 등록
 	@GetMapping("pEnroll.ad")
 	public String productEnroll() {
 		return "admin/productEnroll";

@@ -8,12 +8,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class MemberController {
 	private final MemberService memberService;
@@ -40,11 +47,6 @@ public class MemberController {
 		return "member/searchMemberPwd";
 	}
 	
-	@GetMapping("changePwdForm.me")
-	public String changePwd() {
-		return "member/changeMemberPwd";
-	}
-
     @GetMapping("personal.me")
     public String personalForm() {
 	    return "member/personalPage";
@@ -73,7 +75,7 @@ public class MemberController {
     		return "redirect:/loginForm.me";
     	} else {
     		session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
-    		return "redirect:loginForm.me";
+    		return "redirect:/loginForm.me";
     	}
     }
     
@@ -102,11 +104,42 @@ public class MemberController {
     	}
     }
     
+    // 로그아웃
     @GetMapping("logout.me")
     public String logoutMember(HttpSession session) {
     	session.removeAttribute("loginMember");
     	
     	return "redirect:/";
+    }
+    
+    // 아이디 중복체크
+    @GetMapping("idCheck.me")
+    @ResponseBody
+    public String idCheck(String checkId) {
+    	System.out.println(checkId);
+    	
+    	int result = memberService.idCheck(checkId);
+    	
+    	System.out.println(result);
+    	
+    	if(result > 0) {
+    		return "N";
+    	} else {
+    		return "Y";
+    	}
+    }
+    
+    // 닉네임 중복체크
+    @GetMapping("nickCheck.me")
+    @ResponseBody
+    public String nickCheck(String checkNick) {
+    	int result = memberService.nickCheck(checkNick);
+    	
+    	if(result > 0) {
+    		return "N";
+    	} else {
+    		return "Y";
+    	}
     }
     
     // 이메일 변경
@@ -198,5 +231,55 @@ public class MemberController {
     	}
     	
 		return "redirect:/personal.me";
+    }
+    
+    // 아이디 찾기
+    @RequestMapping("searchId.me")
+    @ResponseBody
+    public String searchId(String email) {
+    	log.info(email);
+    	String memberId = memberService.searchId(email);
+    	log.info("memberId :" + memberId);
+    	
+    	return memberId;
+    }
+    
+    // 비밀번호 찾기
+    @RequestMapping("changePwdForm.me")
+    public String searchPwd(Member m, Model model, HttpSession session) {    	
+    	int result = memberService.searchPwd(m);
+    	
+    	System.out.println("result :" + result);
+    	
+    	if(result > 0) {
+    		model.addAttribute("memberId", memberService.loginMember(m).getMemberId());
+    		
+    		return "member/changeMemberPwd";
+    	} else {
+    		session.setAttribute("alertMsg", "입력한 정보와 일치하는 비밀번호가 존재하지 않습니다.");
+    		
+    		return "redirect:/searchPwdForm.me";
+    	}
+    }
+    
+    // 비밀번호 수정(로그인 X)
+    @PostMapping("changePwd.me")
+    public String changePwd(Member m, @RequestParam(value="memberId") String memberId, HttpSession session) {
+    	String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
+    	m.setMemberPwd(encPwd);
+    	m.setMemberId(memberId);
+    	System.out.println("member :" + m);
+    	System.out.println("memberId : " + memberId);
+    	int result = memberService.changePwd(m);
+    	
+    	if(result > 0) {
+    		session.setAttribute("alertMsg", "비밀번호 수정에 성공하셨습니다.");
+    		
+    		return "redirect:/loginForm.me";
+    	} else {
+    		session.setAttribute("alertMsg", "비밀번호 수정에 실패하였습니다.");
+    		
+    		return "redirect:/loginForm.me";
+    	}
     }
 }
