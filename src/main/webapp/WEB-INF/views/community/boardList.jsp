@@ -26,8 +26,10 @@
     <br><br>
     listCount = ${pi.listCount}
     <br><br>
-
     pi.boardLimit = ${pi.boardLimit}
+    <br><br>
+    category = ${category}
+
 
     <div class="wrapper">
         <br><br>
@@ -43,7 +45,7 @@
                                 <option value="질문" >질문</option>
                                 <option value="팁">팁</option>
                                 <option value="자랑">자랑</option>
-                                <option value="홍보">홍명보</option>
+                                <option value="홍보">홍보</option>
                             </select>
                         </form>
                     </th>
@@ -86,7 +88,7 @@
         <div id="boCount-wirte-div">
             <!-- 게시글 수  -->
             <form action="boardCount.bo" method="post">
-                <input type="hidden" name="commuName" value="${b.communityName}">
+                <input type="hidden" name="category" value="${category}">
                 <input type="hidden" name="listCount" value="${pi.listCount}">
                 <input type="hidden" name="currentPage" value="${pi.currentPage}">
                 <select name="choiceBoardCount" class="table-category" onchange="this.form.submit()">
@@ -115,7 +117,7 @@
                 <img id="searchIcon" src="resources/image/searchIcon.png">
             </button>
         </div> 
-
+        
         <!------------------------ 페이징 처리 ----------------------->
         <div id="paging-div">
             <!-- 이전페이지 버튼 -->
