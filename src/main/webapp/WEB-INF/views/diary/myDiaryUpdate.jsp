@@ -21,27 +21,27 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/diaryEnroll.css">
 
 <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/diary/diaryEnroll.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member/diaryEnroll.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 
 </head>
-<body onload="init('', '${pageName}', '${optional}')">
+<body onload="init('${pageContext.request.contextPath}')">
     <div class="wrapper">
-        <form action="" class="enroll-form">
+        <form action="updateDiary.di" class="enroll-form" method="POST">
             <div id="diary-title">
-                <input type="text" name="diary-title" placeholder="제목을 입력하세요">
+                <input type="text" name="diaryTitle" placeholder="제목을 입력하세요" value="${diary.diaryTitle}">
             </div>
-            <div id="today-ate-cal-info" onclick="loadTodayCal()">
-                <div id="not-loaded-status">클릭해서 가져오기</div>
+            <div id="today-ate-cal-info">
             </div>
-            <div>
-                <textarea id="content" name="detail-content"></textarea>
+            <div class="edit-area">
+                <textarea id="content" name="diaryContent" value="#{diary.diaryContent}"></textarea>
             </div>
             <div id="content-bottom">
                 <a href="">나가기</a>
-                <button type="submit" href="">저장하기</ㅠ>
+                <button type="submit">저장하기</button>
             </div>
         </form>
     </div>
-    <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </body>
 </html>

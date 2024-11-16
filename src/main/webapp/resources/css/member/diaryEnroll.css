@@ -1,3 +1,7 @@
+.wrapper {
+    overflow: hidden;
+}
+
 .enroll-form {
     margin-top: 20px;
 }
@@ -31,6 +35,11 @@
 
 .enroll-form input[type='text']::placeholder {
     color: #838383;
+}
+
+.enroll-form .edit-area {
+    height: 620px;
+    overflow: hidden;
 }
 
 .enroll-form #content-bottom{
@@ -69,4 +78,15 @@
 .enroll-form .note-editable {
     background: white;
     border: none;
+    max-height: calc(100% - 42px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.enroll-form .note-editable.card-block img{
+    max-width: 99%;
+}
+
+.enroll-form .note-statusbar {
+    display: none;
 }

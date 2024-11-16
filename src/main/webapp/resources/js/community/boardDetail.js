@@ -78,10 +78,8 @@ function addReply(){
         replyContent: replyContent,
         
     }, function(res){
-       
         $("#content").val(""); // div 비우고
         getReplyList({bno: boardNo}, setReplyData);
-        
     })
 }
 
