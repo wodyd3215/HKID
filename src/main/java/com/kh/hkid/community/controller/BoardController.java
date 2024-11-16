@@ -66,7 +66,7 @@ public class BoardController {
 		
 		currentPage = 1; // 카테고리 변경 시 1페이지로
 		int boardCount = boardService.selectCategoryListCount(category);
-	
+		
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//게시글 리스트
 	
@@ -86,12 +86,14 @@ public class BoardController {
 //		pi.setBoardLimit(choiceBoardCount);
 
 		ArrayList<Community> list;
-		// 카테고리 선택 후 일 경우 카테고리 게시글
-		if(commuName != null) {
-			list = boardService.selectCategoryList(pi, commuName);	//게시글 리스트	//카테고리 게시글 리스트
-		}
+		
 		// 카테고리 선택 안 한 상태일 경우 전체 게시글
 		list = boardService.selectList(pi);	//게시글 리스트
+		
+		// 카테고리가 선택되어있고, 전체가 아닐 경우에 카테고리 게시글 출력
+		if((commuName != null) && (commuName != "전체")) {
+			list = boardService.selectCategoryList(pi, commuName); 	//카테고리 게시글 리스트
+		}
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
