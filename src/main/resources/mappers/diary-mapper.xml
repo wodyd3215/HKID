@@ -11,6 +11,7 @@
 			<result column="CREATE_DATE" property="createDate"></result>
 			<result column="STATUS" property="status"></result>
 			<result column="NICKNAME" property="writer"></result>
+			<result column="MEMBER_NO" property="memberNo"></result>
 		</resultMap>
 		
 		<!-- 내 다이어리 총 갯수 조회 -->
@@ -35,4 +36,39 @@
 	           AND D.STATUS = 'Y'
 	         ORDER BY DIARY_NUMBER DESC
 		</select>
+		
+		<!-- 내 다이어리 등록 -->
+		<insert id="insertDiary">
+			INSERT INTO DIARY (
+			 					DIARY_NUMBER,
+								DIARY_TITLE,
+								DIARY_CONTENT,
+								MEMBER_NO
+			                  )
+			           VALUES (
+			           			SEQ_DNO.NEXTVAL,
+			           			#{diaryTitle},
+			           			#{diaryContent},
+			           			#{memberNo}
+			                  )
+		</insert>
+		
+		<select id="detailDiary" resultMap="diaryResultSet">
+			SELECT DIARY_NUMBER,
+				   DIARY_TITLE,
+				   DIARY_CONTENT,
+				   CREATE_DATE,
+				   d.STATUS,
+				   NICKNAME
+			  FROM DIARY d
+			  JOIN MEMBER USING (MEMBER_NO)
+			 WHERE DIARY_NUMBER = #{diaryNo}
+			   AND MEMBER_NO = #{memberNo}
+		</select>
+		
+		<delete id="deleteDiary">
+			DELETE FROM DIARY
+			 WHERE DIARY_NUMBER = #{diaryNo}
+			   AND MEMBER_NO = #{memberNo}
+		</delete>
 </mapper>

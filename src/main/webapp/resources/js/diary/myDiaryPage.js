@@ -20,12 +20,10 @@ function initScrollPaging(mNo) {
         
     }
 
-
     // loadDiary가 실행될 때 매개 변수로 사용되는 pageInfo를 기억하고 있음(계속 참조)
     // 이후 호출 시, loadDiary가 기억하고 있는 pageInfo를 가지고 옴
     const loadDiary = loadMyDiaryAjax(pageInfo, loadEl)
     loadDiary()
-
 
     // $(window).scrollTop() : 스크롤이 시작하는 부분부터 스크롤바 맨 위 부분의 사이 간격(스크롤바 맨 위 부분 위치)
     // $(window).height() : 우리가 보는 화면 크기(100vh)
@@ -33,8 +31,10 @@ function initScrollPaging(mNo) {
 
     document.onscroll = () => {
         if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+            console.log(pageInfo.currentPage)
             if(pageInfo.isLoad === true) {
                 loadDiary()
+                console.log(pageInfo.isLoad)
             }        
         }
     } 
@@ -61,9 +61,9 @@ function drawDiaryPreview(dList) {
         const conPre = $("<div>").addClass("my-content");
         const conArea = $("<div>").addClass("content-area");
         const dTitle = $("<div>").addClass("diary-title").text(diary.diaryTitle).click(() => {
-            location.href = `myDiary.me?dNo=${diary.diaryNo}`;
+            location.href = `detailDiary.di?diaryNo=${diary.diaryNo}`;
         });
-        const dContent = $("<p>").addClass("diary-content").text(diary.diaryContent);
+        const dContent = $("<p>").addClass("diary-content").html(diary.diaryContent);
         const enrollDate = $("<div>").addClass("enroll-date").text(diary.createDate);
 
         listArea.append(conPre)

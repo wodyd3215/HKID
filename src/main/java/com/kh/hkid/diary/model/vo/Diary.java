@@ -10,5 +10,6 @@ public class Diary {
 	private String createDate;
 	private String status;
 	private String writer;
+	private int memberNo;
 //	private String foodInfo;
 }
