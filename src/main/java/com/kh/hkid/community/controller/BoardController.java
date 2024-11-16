@@ -72,6 +72,7 @@ public class BoardController {
 	
 		selectNoticeList(model); //공지 출력함수 실행
 
+		
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
 		model.addAttribute("pi", pi);
@@ -80,21 +81,19 @@ public class BoardController {
 	
 	// 게시글 개수 선택
 	@PostMapping("boardCount.bo")
-	public String boardCount( String commuName, int listCount, int currentPage, int choiceBoardCount, Model model) {
+	public String boardCount(String category, int listCount, int currentPage, int choiceBoardCount, Model model) {
 	
 		PageInfo pi = Template.getPageInfo(listCount, currentPage, 10, choiceBoardCount); //페이징 처리
-//		pi.setBoardLimit(choiceBoardCount);
+		
 
-		ArrayList<Community> list;
+		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//카테고리 게시글 리스트
 		
-		// 카테고리 선택 안 한 상태일 경우 전체 게시글
-		list = boardService.selectList(pi);	//게시글 리스트
-		
-		// 카테고리가 선택되어있고, 전체가 아닐 경우에 카테고리 게시글 출력
-		if((commuName != null) && (commuName != "전체")) {
-			list = boardService.selectCategoryList(pi, commuName); 	//카테고리 게시글 리스트
+		//카테고리가 전체 or 선택x
+		if(category.equals("전체") || (category == null)) {
+			list = boardService.selectList(pi); //전체 게시글
 		}
 		
+		model.addAttribute("category", category);
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		model.addAttribute("nList", boardService.selectNoticeList()); //공지게시글
