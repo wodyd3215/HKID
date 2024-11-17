@@ -3,6 +3,8 @@ function initDiaryPage(optional) {
 }
 
 function initScrollPaging(mNo) {
+    let timer;
+
     let pageInfo = {
         memberNo: mNo,
         currentPage: 1,
@@ -29,11 +31,15 @@ function initScrollPaging(mNo) {
     // $(window).height() : 우리가 보는 화면 크기(100vh)
     // $(document).height() : 전체(모든 요소 포함) 화면 크기
     document.onscroll = () => {
-        if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-            if(pageInfo.isLoad === true) {
-                loadDiary()
-            }        
-        }
+        clearTimeout(timer)
+
+        timer = setTimeout( () => {
+            if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+                if(pageInfo.isLoad === true) {
+                    loadDiary()
+                }        
+            }
+        }, 200)    
     } 
 }
  

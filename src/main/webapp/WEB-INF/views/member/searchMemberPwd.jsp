@@ -28,15 +28,9 @@
             </div>
 
             <div>
-                <input type="submit" onclick="eee()" value="비밀번호 찾기">
+                <input type="submit" value="비밀번호 찾기">
             </div>
         </form>
     </div>
-    <script>
-        function eee() {
-            console.log(document.querySelector("#searchPwd-id").value)
-            console.log(document.querySelector("#searchPwd-phone").value)
-        }
-    </script>
 </body>
 </html>

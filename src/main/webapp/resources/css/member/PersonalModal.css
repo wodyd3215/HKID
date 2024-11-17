@@ -1,42 +1,69 @@
-#logo-img > a > img{
-    width: 150px;
-    height: 60px;
+.custom-modal {
+    width: 600px;
 }
 
-#password-change .custom-modal {
-    height: 350px;
+#password-change .enroll-input-area.custom-input-area>div{
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding: 0 50px;
 }
 
-
-.enroll-input-area.custom-input-area {
-    margin: auto;
-    display: block;
-    border: none;
-    font-size: 20px;
-    height: 100%;
+.custom-modal-content input[type='password'] {
+    width: 100%;
+    height: 35px;
+    border: 1px solid #d9d9d9;
+    padding: 5px;
+    margin: 5px 5px 0;
 }
 
-.enroll-input-area.custom-input-area > div{
-    margin-bottom: 20px;
-}
-
-.enroll-input-area input {
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid rgb(199, 199, 199);
-    width: 83%;
-    height: 100%;
-}
-
-.enroll-input-area  input:focus {
+.custom-modal-content input[type='password']:focus {
     outline: none;
 }
 
-.button-area{
-    margin-top: 20px;
+.custom-modal-content .button-area {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 0;
 }
 
-.btn.custom-btn.modal-btn{
-    display: block;
-    margin: 0 auto;
+.custom-modal-content .button-area button {
+    border: none;
+    border-radius: 25px;
+    width: 90px;
+    height: 30px;
+    font-size: 14px;
+    margin: 0 50px;
+    font-weight: bold;
+}
+
+#password-change .button-area button[type='submit']{
+    background: #00A6FB;
+    color: white;
+}
+
+#password-change .button-area button[type='reset']{
+    background: #dc3545;
+    color: black;
+}
+
+#withdraw h2 {
+    color: #dc3545;
+    text-align: center;
+}
+
+#withdraw #checkPwd {
+    font-size: 15px;
+    margin: 10px 0;
+    padding: 0 50px;
+
+}
+
+#withdraw .button-area button[type='submit']{
+    background: #dc3545;
+    color: black;
+}
+
+#withdraw .button-area button[type='reset']{
+    background: #00A6FB;
+    color: white;
 }
