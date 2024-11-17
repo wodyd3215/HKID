@@ -52,4 +52,9 @@ public class DiaryServiceImpl implements DiaryService{
 	public int deleteDiary(Diary d) {
 		return diaryDao.deleteDiary(sqlSession, d);
 	}
+
+	@Override
+	public int updateDiary(Diary d) {
+		return diaryDao.updateDiary(sqlSession, d);
+	}
 }
