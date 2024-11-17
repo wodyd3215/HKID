@@ -128,10 +128,10 @@ table td:nth-child(5) { /* 5번째 td */
     outline: none;
 }
 
-#searchbar-div{
-    display: flex;
-    justify-content: center;
+#search-form{
+    height: 30px;
 }
+
 
 #paging-div{
     margin-top: 50px;
@@ -154,13 +154,24 @@ table td:nth-child(5) { /* 5번째 td */
     pointer-events: none; /* 이벤트 비활성화 */
 }
 
-#search-btn{
+#board-search-btn{
+    align-items: center;
     border: 1px solid rgb(196, 195, 195);
     background-color: white;
     border-left: none;
     border-radius: 0px 9px 9px 0px;
     cursor: pointer;
     height: 30px;
+
+}
+
+#search-form{
+    display: flex;
+}
+
+#search-wrapper{
+    width: 100%;
+    display: flex;
 }
 
 /* defualt.css 수정 */
