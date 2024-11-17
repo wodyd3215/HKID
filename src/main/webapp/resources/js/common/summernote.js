@@ -15,24 +15,27 @@ function initSummerNote(setting, contextPath) {
         disableResizeEditor: true,
         toolbar: setting.toolbar,
         callbacks: {
-            onImageUpload: (files) => {fileUpload(files, contextPath)},
+            onImageUpload: (files) => {fileUpload(files, contextPath, setting.url)},
+            onMediaDelete: (target) => {deleteFile($(target[0]), setting.url)},
         }
     });
 }
 
+// DB에서 가져온 Content(게시글 내용)을 서머노트에 넣어주는 함수
+function initUpdateSummernote(Content) {
+    $('#content').summernote('code', Content);
+}
+
 //썸머노트에 이미지업로드가 발생하였을 때 동작하는 함수
-function fileUpload(files, contextPath){
-   console.log(files)
-   
+function fileUpload(files, contextPath, url){
    const fd = new FormData();
    for(let file of files) {
        fd.append("fileList", file);
    }
    
-   insertFile(fd, function(res){
+   insertFile(fd, url, function(res){
     if(res !== 'error') {
         for(let img of res){
-            console.log(contextPath + "/resources/image/diary/" + img)
             $("#content").summernote("insertImage", contextPath + "/resources/image/diary/" + img);
         }
     } else {
@@ -41,9 +44,9 @@ function fileUpload(files, contextPath){
    })
 }
 
-function insertFile(data, callback){
+function insertFile(data, url, callback){
    $.ajax({
-       url: "upload.di",
+       url: url.insert,
        type: "POST",
        data: data,
        processData: false, //기본이 true -> 전송하는 data를 string으로 변환해서 요청
@@ -56,4 +59,13 @@ function insertFile(data, callback){
            console.log("파일업로드 api요청 실패")
        } 
    })
+}
+
+// 썸머노트에 업로드한 이미지를 삭제할 때 동작하는 메서드
+function deleteFile(target, url) {
+    $.ajax({
+        url: url.delete,
+        type:"POST",
+        data: { img: target.attr("src").replace("/HKID", "").trim() },
+    })
 }

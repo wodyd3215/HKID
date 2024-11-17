@@ -1,7 +1,7 @@
 package com.kh.hkid.diary.controller;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
-import com.kh.hkid.aspect.LoggingAOP;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.diary.model.vo.Diary;
@@ -66,7 +65,7 @@ public class DiaryController {
     
     // summernote로 추가한 이미지 서버에 저장
     @ResponseBody
-    @PostMapping("upload.di")
+    @PostMapping("insertImgAjax.di")
     public String insertDiaryImgAjax(List<MultipartFile> fileList, HttpSession session) {
     	ArrayList<String> imgList = new ArrayList<>();
     	
@@ -96,9 +95,7 @@ public class DiaryController {
     public String detailDiary(Diary d, Model model, HttpSession session) {
     	d.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
     	
-    	Diary diary = diaryService.detailDiary(d);
-    	
-    	model.addAttribute("diary", diary);
+    	model.addAttribute("diary", diaryService.detailDiary(d));
     	
     	return "diary/myDiaryDetail";
     }
@@ -112,7 +109,7 @@ public class DiaryController {
     		return "redirect:/myDiaryList.me";
     	} else {
     		session.setAttribute("alertMsg", "일기 삭제 실패");
-    		return "redirect:/detailDiary.di";
+    		return "redirect:/detailDiary.di?diaryNo=d.getDiaryNo()";
     	}
     	
     }
@@ -124,5 +121,25 @@ public class DiaryController {
     	model.addAttribute("diary", diaryService.detailDiary(d));
     	
     	return "diary/myDiaryUpdate";
+    }
+    
+    @PostMapping("updateDiary.di")
+    public String updateDiary(Diary d, Model model, HttpSession session) {
+    	
+    	d.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    	
+    	if(diaryService.updateDiary(d) > 0) {
+    		session.setAttribute("alertMsg", "다이어릭 수정 성공");
+    	} else { 
+    		session.setAttribute("alertMsg", "다이어릭 수정 실패");
+    	}
+    	
+    	return "redirect:/detailDiary.di?diaryNo=" + d.getDiaryNo();
+    }
+    
+    @ResponseBody
+    @PostMapping("deleteImgAjax.di")
+    public void deleteImgAjax(String img, HttpSession session) {
+    	new File(session.getServletContext().getRealPath(img)).delete();
     }
 }
