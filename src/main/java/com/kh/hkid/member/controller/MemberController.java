@@ -114,7 +114,7 @@ public class MemberController {
     }
     
     // 아이디 중복체크
-    @GetMapping("idCheck.me")
+    @PostMapping("idCheck.me")
     @ResponseBody
     public String idCheck(String checkId) {
     	System.out.println(checkId);
@@ -131,7 +131,7 @@ public class MemberController {
     }
     
     // 닉네임 중복체크
-    @GetMapping("nickCheck.me")
+    @PostMapping("nickCheck.me")
     @ResponseBody
     public String nickCheck(String checkNick) {
     	int result = memberService.nickCheck(checkNick);

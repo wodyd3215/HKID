@@ -46,6 +46,8 @@ public class APIController {
 		br.close();
 		urlConnection.disconnect();
 		
+		System.out.println("result : " + result);
+		
 		return result;
 	}
 }
