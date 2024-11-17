@@ -18,7 +18,7 @@
 <body onload="defaultCategory('${category}')">
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     
-    게시글 = ${list}
+    <!-- 게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
@@ -28,12 +28,20 @@
     <br><br>
     pi.boardLimit = ${pi.boardLimit}
     <br><br>
-    category = ${category}
+    category = ${category} -->
 
 
     <div class="wrapper">
-        <br><br>
-        <h1>전체</h1>
+        <br><br><br><br><br>
+        <c:choose>
+            <c:when test="${category != null}"> <!-- 카테고리 정보가 있으면 출력 -->   
+                <h1>${category}</h1>
+            </c:when>
+            <c:otherwise>
+                <h1>전체</h1>
+            </c:otherwise>
+        </c:choose>
+        
 
         <table id="common-table">
             <thead>
@@ -69,7 +77,6 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-
                     </c:otherwise>
                 </c:choose>
                 <c:forEach var="b" items="${list}">
