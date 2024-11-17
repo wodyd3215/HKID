@@ -61,6 +61,7 @@ function inputPwdCheck() {
     }
 }
 
+// 아이디 중복체크
 function enrollIdCheck() {
     $.ajax({
         url: "idCheck.me",
@@ -85,6 +86,7 @@ function enrollIdCheck() {
     })
 }
 
+// 닉네임 중복체크
 function enrollNickCheck() {
     $.ajax({
         url : "nickCheck.me",
