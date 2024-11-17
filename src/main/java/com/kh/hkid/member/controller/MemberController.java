@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.hkid.common.template.Template;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
 
@@ -144,7 +146,11 @@ public class MemberController {
     }
     
     @PostMapping("updateMember")
-    public String updateMember(Member m, HttpSession session) {
+    public String updateMember(Member m, MultipartFile upfile, HttpSession session) {
+    	if(!upfile.getOriginalFilename().equals("")) {
+    		m.setProfileImg( "/resources/image/profileImg/"+ Template.saveFile(upfile, session, "/resources/image/profileImg/"));
+    	}
+    	
     	int result = memberService.updateMember(m);
     	
     	if(result > 0) {

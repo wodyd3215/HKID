@@ -17,10 +17,10 @@
     <jsp:include page="/WEB-INF/views//modal/personalModal.jsp" />
     <div class="wrapper">
         <div id="pageName">내 프로필</div>
-        <form action="updateMember?memberNo=${loginMember.memberNo}" method="POST" id="content-area">
+        <form id="content-area" action="updateMember?memberNo=${loginMember.memberNo}" method="POST" enctype="multipart/form-data">
             <div id="img-area">
-                <img src="${pageContext.request.contextPath}/resources/image/3b579a9bc531180d72a68a9686c6da3b.jpg" alt="" onclick="openFile()">
-                <input type="file" accept=".jpg, .png, .jpeg" id="select-profile">
+                <img src="${pageContext.request.contextPath}${loginMember.profileImg}" class="profile-img" onclick="openFile()">
+                <input type="file" accept=".jpg, .png, .jpeg" id="select-profile" name="upfile" onchange="previewProfile(this, '${pageContext.request.contextPath}', '${loginMember.profileImg}')">
                 <div id="notice">*이미지를 눌러 프로필 변경</div>
                 <div id="account-deletion" data-target="withdraw" onclick="openModal(event)">회원탈퇴</div>
             </div>
