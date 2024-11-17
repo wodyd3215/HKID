@@ -93,7 +93,8 @@
   	   	   EMAIL = #{email},
   	       ADDRESS = #{address},
   	       DETAIL_ADDRESS = #{detailAddress},
-  	       POST_NO = #{postNo}
+  	       POST_NO = #{postNo},
+  	       PROFILE_IMG = #{profileImg}
   	 WHERE MEMBER_NO = #{memberNo}
   </update>
   

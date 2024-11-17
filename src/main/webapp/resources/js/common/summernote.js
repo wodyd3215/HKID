@@ -16,6 +16,7 @@ function initSummerNote(setting, contextPath) {
         toolbar: setting.toolbar,
         callbacks: {
             onImageUpload: (files) => {fileUpload(files, contextPath, setting.url)},
+            // target[0]: target에서 첫 번째 돔 요소를 가져오는 방식
             onMediaDelete: (target) => {deleteFile($(target[0]), setting.url)},
         }
     });
