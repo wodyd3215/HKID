@@ -71,4 +71,12 @@
 			 WHERE DIARY_NUMBER = #{diaryNo}
 			   AND MEMBER_NO = #{memberNo}
 		</delete>
+		
+		<update id="updateDiary">
+			UPDATE DIARY
+			   SET DIARY_TITLE = #{diaryTitle},
+			   	   DIARY_CONTENT = #{diaryContent}
+			 WHERE DIARY_NUMBER = #{diaryNo}
+			   AND MEMBER_NO = #{memberNo}	   
+		</update>
 </mapper>

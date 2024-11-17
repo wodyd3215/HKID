@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,21 +22,21 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/diaryEnroll.css">
 
 <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/diary/diaryEnroll.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/diary/diary.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member/diaryEnroll.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 
 </head>
-<body onload="init('${pageContext.request.contextPath}')">
+<body onload="init('${pageContext.request.contextPath}', '${fn:escapeXml(diary.diaryContent)}')">
     <div class="wrapper">
-        <form action="updateDiary.di" class="enroll-form" method="POST">
+        <form action="updateDiary.di?diaryNo=${diary.diaryNo}" class="enroll-form" method="POST">
             <div id="diary-title">
                 <input type="text" name="diaryTitle" placeholder="제목을 입력하세요" value="${diary.diaryTitle}">
             </div>
             <div id="today-ate-cal-info">
             </div>
             <div class="edit-area">
-                <textarea id="content" name="diaryContent" value="#{diary.diaryContent}"></textarea>
+                <textarea id="content" name="diaryContent"></textarea>
             </div>
             <div id="content-bottom">
                 <a href="">나가기</a>

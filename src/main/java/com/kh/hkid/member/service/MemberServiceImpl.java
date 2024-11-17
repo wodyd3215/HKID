@@ -48,31 +48,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.nickCheck(sqlSession, checkNick);
 	}
 
-	// 회원 정보 수정(이메일, 전화번호, 비밀번호, 주소)
+	// 회원 정보 변경(비밀번호 X)
 	@Transactional
 	@Override
-	public int updateEmail(Member m) {
-		return memberDao.updateEmail(sqlSession, m);
+	public int updateMember(Member m) {
+		return memberDao.updateMember(sqlSession, m);
 	}
 
-	@Transactional
-	@Override
-	public int updatePhone(Member m) {
-		return memberDao.updatePhone(sqlSession, m);
-	}
-	
 	@Transactional
 	@Override
 	public int updatePwd(Member m) {
 		return memberDao.updatePwd(sqlSession, m);
 	}
-
-	@Transactional
-	@Override
-	public int updateAddress(Member m) {
-		return memberDao.updateAddress(sqlSession, m);
-	}
-
+	
 	// 회원 삭제
 	@Transactional
 	@Override
@@ -100,5 +88,4 @@ public class MemberServiceImpl implements MemberService {
 	public int changePwd(Member m) {
 		return memberDao.changePwd(sqlSession, m);
 	}
-
 }

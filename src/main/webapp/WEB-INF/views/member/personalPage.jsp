@@ -14,51 +14,59 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	<jsp:include page="../common/modal.jsp" />
+    <jsp:include page="/WEB-INF/views//modal/personalModal.jsp" />
     <div class="wrapper">
-        <div class="content">
-            <div class="pageName">
-                마이페이지 
+        <div id="pageName">내 프로필</div>
+        <form action="updateMember?memberNo=${loginMember.memberNo}" method="POST" id="content-area">
+            <div id="img-area">
+                <img src="${pageContext.request.contextPath}/resources/image/3b579a9bc531180d72a68a9686c6da3b.jpg" alt="" onclick="openFile()">
+                <input type="file" accept=".jpg, .png, .jpeg" id="select-profile">
+                <div id="notice">*이미지를 눌러 프로필 변경</div>
+                <div id="account-deletion" data-target="withdraw" onclick="openModal(event)">회원탈퇴</div>
             </div>
-            <div class="top-content">
-                <img src="${pageContext.request.contextPath}/resources/image/3b579a9bc531180d72a68a9686c6da3b.jpg" alt="" class="profile-image" accept=".jpg, .png" onclick="openFile()">
-                <input type="file" class="select-profile" accept="image/*" onchange="previewProfile(this)">
-                <form action="" onclick="showBtn()">
-                    <div class="namespace">
-                        <input type="text" name="nickName" id="nameInput" autocomplete="off" value="${loginMember.nickName}">
-                        <label for="nameInput">
-                            <div class="material-symbols-outlined custom-icon">edit_square</div>
-                        </label>
-                    </div>      
-                    <div class="sub-btn-area">
-                        <button type="submit" class="btn sub-btn custom-btn">변경하기</button>
-                    </div>
-                </form>
-            </div>
-            <div class="bottom-content">
+            <div id="info-area">
                 <table>
                     <tr>
-                        <td>이메일</td>
-                        <td><button class="btn custom-btn" data-target="email-change" onclick="openModal(event)">이메일 변경</button></td>
+                        <th>아이디</th>
+                        <td><input type="text" name="memberId" value="${loginMember.memberId}" readonly></td>
                     </tr>
                     <tr>
-                        <td>전화번호</td>
-                        <td><button class="btn custom-btn" data-target="phone-change" onclick="openModal(event)">전화번호 변경</button></td>
+                        <th>비밀번호</th>
+                        <td><div id="password" class="btn" data-target="password-change" onclick="openModal(event)">변경하기</div></td>
                     </tr>
                     <tr>
-                        <td>비밀번호</td>
-                        <td><button class="btn custom-btn" data-target="password-change" onclick="openModal(event)">비밀번호 변경</button></td>
+                        <th>이름</th>
+                        <td><input type="text" name="memberName" value="${loginMember.memberName}" readonly></td>
                     </tr>
                     <tr>
-                        <td>주소</td>
-                        <td><button class="btn custom-btn" data-target="address-change" onclick="openModal(event)">주소 변경</button></td>
+                        <th>*닉네임</th>
+                        <td><input type="text" name="nickName" value="${loginMember.nickName}" placeholder="닉네임" required></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><button class="btn btn-danger custom-danger-btn" data-target="withdraw" onclick="openModal(event)">회원 탈퇴</button></td>
+                        <th>*전화번호</th>
+                        <td><input type="text" name="phone" value="${loginMember.phone}" placeholder="전화번호" minlength="11" maxlength="11" required></td>
+                    </tr>
+                    <tr>
+                        <th>*이메일</th>
+                        <td><input type="text" name="email" value="${loginMember.email}" placeholder="이메일" required></td>
+                    </tr>
+                    <tr>
+                        <th>주소</th>
+                        <td id="address-info">
+                            <input id="postNo" type="text" name="postNo" value="${loginMember.postNo}" placeholder="우편번호">
+                            <span class="btn">주소 찾기</span>
+                            <input id="address" type="text" name="address" value="${loginMember.address}" placeholder="주소">
+                            <input type="text" name="detailAddress" value="${loginMember.detailAddress}" placeholder="상세주소"> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" id="submit-btn">
+                            <button type="submit">변경하기</button>
+                        </th>
                     </tr>
                 </table>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>

@@ -48,7 +48,7 @@ public class MemberController {
 	}
 	
     @GetMapping("personal.me")
-    public String personalForm() {
+    public String personalForm(Member m) {
 	    return "member/personalPage";
     }
     
@@ -143,34 +143,15 @@ public class MemberController {
     	}
     }
     
-    // 이메일 변경
-    @PostMapping("updateEmail.me")
-    public String updateEmail(Member m, HttpSession session) {
-    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
-    	
-    	int result = memberService.updateEmail(m);
+    @PostMapping("updateMember")
+    public String updateMember(Member m, HttpSession session) {
+    	int result = memberService.updateMember(m);
     	
     	if(result > 0) {
     		session.setAttribute("loginMember", memberService.loginMember(m));
-    		session.setAttribute("alertMsg", "이메일 변경 완료");
+    		session.setAttribute("alertMsg", "정보 변경 완료");
     	} else {
-    		session.setAttribute("alertMsg", "이메일 변경 실패");
-    	}
-    	
-    	return "redirect:/personal.me";
-    }
-    
-    @PostMapping("updatePhone.me")
-    public String updatePhone(Member m, HttpSession session) {
-    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
-    	
-    	int result = memberService.updatePhone(m);
-    	
-    	if(result > 0) {
-    		session.setAttribute("loginMember", memberService.loginMember(m));
-    		session.setAttribute("alertMsg", "전화번호 변경 완료");
-    	} else {
-    		session.setAttribute("alertMsg", "전화번호 변경 실패");
+    		session.setAttribute("alertMsg", "정보 변경 실패");
     	}
     	
     	return "redirect:/personal.me";
@@ -197,22 +178,6 @@ public class MemberController {
     		
     		return "redirect:/personal.me";
     	}
-    }
-    
-    @PostMapping("changeAddress.me")
-    public String changeAddress(Member m, HttpSession session) {
-    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
-    	
-    	int result = memberService.updateAddress(m);
-    	
-    	if(result > 0) {
-    		session.setAttribute("loginMember", memberService.loginMember(m));
-    		session.setAttribute("alertMsg", "주소 변경 완료");
-    	} else {
-    		session.setAttribute("alertMsg", "주소 변경 실패");
-    	}
-    	
-    	return "redirect:/personal.me";
     }
     
     @PostMapping("deleteMember.me")

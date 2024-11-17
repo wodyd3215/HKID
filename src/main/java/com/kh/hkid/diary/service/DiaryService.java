@@ -19,4 +19,6 @@ public interface DiaryService {
 	Diary detailDiary(Diary d);
 	
 	int deleteDiary(Diary d);
+	
+	int updateDiary(Diary d);
 }
