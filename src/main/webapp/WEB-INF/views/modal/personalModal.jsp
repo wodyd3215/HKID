@@ -13,6 +13,26 @@
 
 </head>
 <body>
+    <div class="modal" id="profile-change">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title">프로필 변경</div>
+                <button class="material-symbols-outlined close-btn " onclick="closeModal()">close</button>
+            </div>
+            <div class="custom-modal-content">
+                <div id="notice-info">*이미지는 자동으로 변경됩니다.</div>
+                <div id="profileimg">
+                    <img src="${pageContext.request.contextPath}${loginMember.profileImg}" class="profile-img">
+                </div>
+                <div class="button-area">
+                    <input type="file" accept=".jpg, .png, .jpeg" id="select-profile" name="upfile" onchange="previewProfile(this, '${pageContext.request.contextPath}', '${loginMember.profileImg}')">
+                    <button class="changeImg" onclick="changeImg()">변경하기</button>
+                    <button class="resetImg" onclick="resetImg('${pageContext.request.contextPath}', '/resources/image/profileImg/guest-icon.png')">지우기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal" id="password-change">
         <div class="custom-modal">
             <div class="custom-modal-header">

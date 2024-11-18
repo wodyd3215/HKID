@@ -22,43 +22,43 @@
 					<table>
 						<tr>
 							<th><p>부위별 선택</p></th>
-								<td>
-									<div class="part">
-										<input type="checkbox" name="part" id="chest" value="가슴">
-										<label for="chest">#가슴</label>
+							<td>
+								<div class="part">
+									<input type="checkbox" name="part" id="chest" value="가슴">
+									<label for="chest">#가슴</label>
 
-										<input type="checkbox" name="part" id="back" value="등">
-										<label for="back">#등</label>
+									<input type="checkbox" name="part" id="back" value="등">
+									<label for="back">#등</label>
 
-										<input type="checkbox" name="part" id="abs" value="복근">
-										<label for="abs">#복근</label>
+									<input type="checkbox" name="part" id="abs" value="복근">
+									<label for="abs">#복근</label>
 
-										<input type="checkbox" name="part" id="shoulder" value="어깨">
-										<label for="shoulder">#어깨</label>
+									<input type="checkbox" name="part" id="shoulder" value="어깨">
+									<label for="shoulder">#어깨</label>
 
-										<input type="checkbox" name="part" id="arm" value="팔">
-										<label for="arm">#팔</label>
+									<input type="checkbox" name="part" id="arm" value="팔">
+									<label for="arm">#팔</label>
 
-										<input type="checkbox" name="part" id="leg" value="하체">
-										<label for="leg">#하체</label>
-									</div>
-								</td>
+									<input type="checkbox" name="part" id="leg" value="하체">
+									<label for="leg">#하체</label>
+								</div>
+							</td>
 						</tr>
 
 						<tr>
 							<th><p>난이도 선택</p></th>
-								<td>
-									<div class="difficulty">
-										<input type="checkbox" name="difficulty" id="hard" value="어려움">
-										<label for="hard">어려움</label>
+							<td>
+								<div class="difficulty">
+									<input type="checkbox" name="difficulty" id="hard" value="어려움">
+									<label for="hard">어려움</label>
 
-										<input type="checkbox" name="difficulty" id="middle" value="보통">
-										<label for="middle">보통</label>
+									<input type="checkbox" name="difficulty" id="middle" value="보통">
+									<label for="middle">보통</label>
 
-										<input type="checkbox" name="difficulty" id="easy" value="쉬움">
-										<label for="easy">쉬움</label>
-									</div>
-								</td>
+									<input type="checkbox" name="difficulty" id="easy" value="쉬움">
+									<label for="easy">쉬움</label>
+								</div>
+							</td>
 						</tr>
 					</table>
 			

@@ -33,7 +33,7 @@ function initScrollPaging(mNo) {
     document.onscroll = () => {
         clearTimeout(timer)
 
-        timer = setTimeout( () => {
+        timer = setTimeout(() => {
             if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
                 if(pageInfo.isLoad === true) {
                     loadDiary()

@@ -59,4 +59,8 @@ public class MemberDao {
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
+	
+	public int imgChangeAjax(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.imgChangeAjax", m);
+	}
 }

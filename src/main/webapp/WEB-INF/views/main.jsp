@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/js/main/main.js"></script>
 
 </head>
 <body>
@@ -22,7 +23,7 @@
 				<div class="swiper-wrapper">
 				  <div class="swiper-slide">
 					<a href="">
-						<img src="./resources/img/image.png" alt="없음">
+						<img src="${pageContext.servletContext.contextPath}/resources/img/image.png" alt="없음">
 					</a>
 				</div>
 				  <div class="swiper-slide">Slide 2</div>
@@ -263,25 +264,8 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-
-			<!-- 기능 미완성으로 인한 예비 링크 -->
-			<a href="personal.me">개인페이지 가기</a>
-			<br>
-			<a href="product.ad">상품페이지</a>
-			<br>
-			<a href="reportedBoard.ad">게시글 관리</a>
-			<a href="chatting.ch">채팅창</a>
-
-			<a href="myDiaryList.me">마이페이지</a>
-
-			<a href="order.in">주문 정보</a>
-			<a href="order.cp">주문 완료</a>
-		
+		</div>	
 	</div>
 	<jsp:include page="common/footer.jsp" />
-
-
-<script src="./resources/js/main/main.js"></script>
 </body>
 </html>

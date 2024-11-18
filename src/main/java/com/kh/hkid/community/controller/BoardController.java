@@ -45,8 +45,8 @@ public class BoardController {
 	//전체 게시글 개수, 목록
 	@GetMapping("list.bo")
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int boardCount = boardService.selectListCount(); //게시글의 총 개수
-																		//게시글 개수(4번째 매개변수)
+		int boardCount = boardService.selectListCount(); //게시글의 총 개수											
+														 //게시글 개수(4번째 매개변수)
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		
 		ArrayList<Community> list = boardService.selectList(pi);	//게시글 리스트
