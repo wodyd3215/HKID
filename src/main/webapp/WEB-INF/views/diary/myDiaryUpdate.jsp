@@ -37,7 +37,7 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="edit-area">
                 <textarea id="content" name="diaryContent"></textarea>
-            </div>
+            </div> 
             <div id="content-bottom">
                 <a href="detailDiary.di?diaryNo=${diary.diaryNo}">나가기</a>
                 <button type="submit">저장하기</button>
