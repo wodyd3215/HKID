@@ -29,10 +29,14 @@
 }
 
 .reImg{
-    background: #bebebe;
     border-radius: 20px;
     width: 370px;
     height: 370px;
+}
+
+.reImg > img{
+    height: 100%;
+    width: 100%;
 }
 
 .detailImg{
@@ -49,6 +53,12 @@
     border-radius: 20px;
     width: 80px;
     height: 80px;
+}
+
+.diImg > img{
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
 }
 
 .productContent{
@@ -196,7 +206,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     overflow: hidden;
     background: #051923;
     /* 새로(new) 추가 */
@@ -235,10 +245,23 @@
     color: #575757;
 } */
 
-.tab > ul > li.active{
-    width: 348px;
-    background: #fff;
-    color: #575757;
+.tab > li {
+    width: 264px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab  > li > a{
+    color: #B6B6B6;
+}
+
+.tab-link.active {
+    border: solid 1px black;
+    border-bottom: none;
+    background-color: white; /* 선택된 링크의 배경색 */
+    color: black;
 }
 
 
@@ -250,8 +273,7 @@
 }
 
 .contentImg{
-    background: #d8d8d8;
-    height: 2000px;
+    height: auto;
     padding: 20px 0px 10px 0px ;
 }
 
@@ -299,3 +321,6 @@
     padding: 10px;
 }
 
+#qwer{
+    width: 120px;
+}
