@@ -110,5 +110,32 @@
 }
 
 #common-table tbody tr {
-    height: 35px;
+    height: 40px;
+}
+
+#search-food-modal > .custom-modal{
+    overflow: hidden;
+}
+  
+/* 모달 내부 설정 */
+
+/* 헤더 고정 설정 */
+.custom-modal-header {
+background-color: white; /* 헤더의 배경 색상 */
+padding: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid #ddd;
+position: sticky; /* 스크롤 시 헤더 고정 */
+top: 0;
+z-index: 1; /* 헤더가 내용 위에 있도록 설정 */
+}
+
+/* 내용 영역에 스크롤 적용 */
+.custom-modal-content {
+padding: 10px;
+height: calc(100% - 130px); /* 헤더의 높이를 제외한 나머지 영역에만 스크롤 */
+overflow-y: auto; /* 세로 스크롤 추가 */
+max-height: calc(100vh - 100px); /* 화면 높이에 맞게 최대 높이 설정 */
 }
