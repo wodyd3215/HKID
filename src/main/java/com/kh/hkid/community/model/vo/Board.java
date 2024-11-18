@@ -10,5 +10,5 @@ public class Board {
 	private int boardViewCount;
 	private String boardStatus;
 	private int communityNo;
-	private int memberNo;
+	private int memberName;
 }

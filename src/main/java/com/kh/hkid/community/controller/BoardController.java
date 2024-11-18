@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.CommentReply;
 import com.kh.hkid.community.model.dto.Community;
+import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.community.model.vo.Reply;
 import com.kh.hkid.community.service.BoardService;
 
@@ -63,16 +65,12 @@ public class BoardController {
 		if(category.equals("전체")) { 	
 			return "redirect:list.bo";
 		}
-		
 		currentPage = 1; // 카테고리 변경 시 1페이지로
 		int boardCount = boardService.selectCategoryListCount(category);
 		
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//게시글 리스트
 	
-		selectNoticeList(model); //공지 출력함수 실행
-
-		
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
 		model.addAttribute("pi", pi);
@@ -93,6 +91,7 @@ public class BoardController {
 			list = boardService.selectList(pi); //전체 게시글
 		}
 		
+		model.addAttribute("choiceBoardCount", choiceBoardCount);
 		model.addAttribute("category", category);
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -100,12 +99,34 @@ public class BoardController {
 		return "community/boardList";
 	}
 	
-	//공지 (model에 공지게시글 넣어주는 함수)
-	public void selectNoticeList(Model model) {	
-		ArrayList<Community> nList = boardService.selectNoticeList();
+	//게시글 검색
+	@GetMapping("searchBoard.bo")
+	public String selectSearchBoardList(String condition, String keyword, int choiceBoardCount, int currentPage, Model model) {
+		HashMap<String, String> map = new HashMap<>();
 		
-		model.addAttribute("nList", boardService.selectNoticeList());
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		int searchCount = boardService.selectSearchCount(map);	//검색한 게시글 개수
+		System.out.println("검색한 게시글 개수: "+searchCount + "개");
+		
+		PageInfo pi = Template.getPageInfo(searchCount, currentPage, 10, choiceBoardCount);
+		
+		
+		ArrayList<Community> list = boardService.selectSearchList(map, pi);
+		
+		System.out.println("검색한 게시글 목록 >>>" + list);
+		
+		model.addAttribute("nList", boardService.selectNoticeList()); //공지게시글
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		return "community/boardList";
 	}
+	
+	
+	
+	
+	
 	
 	//게시글 작성
 	@GetMapping("boardWrite.bo")
@@ -130,7 +151,11 @@ public class BoardController {
 	
 	//게시글 디테일
 	@GetMapping("boardDetail.bo")
-	public String selectDetailBoard(Model model) {
+	public String selectDetailBoard(Model model, int bno) {
+		
+		//게시글 조회
+		Board b = boardService.selectBoard(bno);
+		
 		
 		//DB 들어가기 전까지만 사용!!
 		ArrayList<CommentReply> replyList = new ArrayList<>();
@@ -146,6 +171,9 @@ public class BoardController {
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("replyCount", replyCount);
 		
+//		----------------
+		
+		model.addAttribute("b", b);
 		return "community/boardDetail";
 	}
 	
