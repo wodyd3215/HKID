@@ -43,19 +43,19 @@
 	  
 	<!-- 상품 목록 (전체) 조회 -->
 	<select id="selectList" resultType="Product">
-		SELECT p.PRODUCT_NO,
-			   p.PRODUCT_NAME productName,
-			   p.CONTENT content,
-			   p.QUANTITY quantity,
-			   p.PRICE price,
-			   r.rate
-		  FROM PRODUCT p
-		  JOIN (
-		  	SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
-		  		FROM REVIEW
-		  		GROUP BY PRODUCT_NO
-		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO	  
-		 ORDER BY p.PRODUCT_NO DESC
+		SELECT p.PRODUCT_NO productNo,
+	       p.PRODUCT_NAME productName,
+	       p.CONTENT content,
+	       p.QUANTITY quantity,
+	       p.PRICE price,
+	       COALESCE(r.rate, 0) AS rate
+	  FROM PRODUCT p
+	  LEFT JOIN (
+	       SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
+	         FROM REVIEW
+	        GROUP BY PRODUCT_NO
+	  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
+	 ORDER BY p.PRODUCT_NO DESC
 	</select>
 	
 	<!-- 카테고리별 삼품 목록 총 갯수 -->
@@ -70,12 +70,18 @@
 	
 	<!--  카테고리별 상품 목록 리스트  -->
 	<select id="selectProductCategoryList" resultType="Product">
-		SELECT PRODUCT_NO productNo,
-			   PRODUCT_NAME productName,
-			   CONTENT content,
-			   QUANTITY quantity,
-			   PRICE price
-		FROM PRODUCT
+		SELECT p.PRODUCT_NO productNo,
+	       p.PRODUCT_NAME productName,
+	       p.CONTENT content,
+	       p.QUANTITY quantity,
+	       p.PRICE price,
+	       COALESCE(r.rate, 0) AS rate
+	  FROM PRODUCT p
+	  LEFT JOIN (
+	       SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
+	         FROM REVIEW
+	        GROUP BY PRODUCT_NO
+	  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
 		WHERE TYPE = '1' 
 	  	<if test="category != '전체'">
         	AND CATEGORY = #{category}
@@ -83,15 +89,21 @@
 	</select>
 	
 	<!-- 상품 상세 페이지 -->
-	<select id="selectProduct" resultMap="productResultSet">
-		SELECT PRODUCT_NO,
-            PRODUCT_NAME,
-            CONTENT,
-            CATEGORY,
-            QUANTITY,
-            PRICE
-     FROM PRODUCT
-     	WHERE PRODUCT_NO = #{pno}
+	<select id="selectProduct" resultType="Product">
+		    SELECT p.PRODUCT_NO,
+           p.PRODUCT_NAME productName,
+           p.CONTENT content,
+           p.CATEGORY category,
+           p.QUANTITY quantity,
+           p.PRICE price,
+           COALESCE(r.rate, 0) AS rate
+      FROM PRODUCT p
+      LEFT JOIN (
+           SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
+             FROM REVIEW
+            GROUP BY PRODUCT_NO
+      ) r ON p.PRODUCT_NO = r.PRODUCT_NO
+     WHERE p.PRODUCT_NO = #{pno}
 	</select>
 	
 	<!-- 상품 왼쪽 사이드바 -->

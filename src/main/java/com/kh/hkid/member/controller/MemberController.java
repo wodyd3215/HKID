@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.hkid.common.template.Template;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
 
@@ -114,7 +116,7 @@ public class MemberController {
     }
     
     // 아이디 중복체크
-    @GetMapping("idCheck.me")
+    @PostMapping("idCheck.me")
     @ResponseBody
     public String idCheck(String checkId) {
     	System.out.println(checkId);
@@ -131,7 +133,7 @@ public class MemberController {
     }
     
     // 닉네임 중복체크
-    @GetMapping("nickCheck.me")
+    @PostMapping("nickCheck.me")
     @ResponseBody
     public String nickCheck(String checkNick) {
     	int result = memberService.nickCheck(checkNick);
@@ -143,34 +145,15 @@ public class MemberController {
     	}
     }
     
-    // 이메일 변경
-    @PostMapping("updateEmail.me")
-    public String updateEmail(Member m, HttpSession session) {
-    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
-    	
-    	int result = memberService.updateEmail(m);
+    @PostMapping("updateMember")
+    public String updateMember(Member m, HttpSession session) {
+    	int result = memberService.updateMember(m);
     	
     	if(result > 0) {
     		session.setAttribute("loginMember", memberService.loginMember(m));
-    		session.setAttribute("alertMsg", "이메일 변경 완료");
+    		session.setAttribute("alertMsg", "정보 변경 완료");
     	} else {
-    		session.setAttribute("alertMsg", "이메일 변경 실패");
-    	}
-    	
-    	return "redirect:/personal.me";
-    }
-    
-    @PostMapping("updatePhone.me")
-    public String updatePhone(Member m, HttpSession session) {
-    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
-    	
-    	int result = memberService.updatePhone(m);
-    	
-    	if(result > 0) {
-    		session.setAttribute("loginMember", memberService.loginMember(m));
-    		session.setAttribute("alertMsg", "전화번호 변경 완료");
-    	} else {
-    		session.setAttribute("alertMsg", "전화번호 변경 실패");
+    		session.setAttribute("alertMsg", "정보 변경 실패");
     	}
     	
     	return "redirect:/personal.me";
@@ -197,22 +180,6 @@ public class MemberController {
     		
     		return "redirect:/personal.me";
     	}
-    }
-    
-    @PostMapping("changeAddress.me")
-    public String changeAddress(Member m, HttpSession session) {
-    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
-    	
-    	int result = memberService.updateAddress(m);
-    	
-    	if(result > 0) {
-    		session.setAttribute("loginMember", memberService.loginMember(m));
-    		session.setAttribute("alertMsg", "주소 변경 완료");
-    	} else {
-    		session.setAttribute("alertMsg", "주소 변경 실패");
-    	}
-    	
-    	return "redirect:/personal.me";
     }
     
     @PostMapping("deleteMember.me")
@@ -281,6 +248,48 @@ public class MemberController {
     		session.setAttribute("alertMsg", "비밀번호 수정에 실패하였습니다.");
     		
     		return "redirect:/loginForm.me";
+    	}
+    }
+    
+    @ResponseBody
+    @PostMapping("imgChangeAjax.me")
+    public String imgChangeAjax(Member m, MultipartFile imgProfile, HttpSession session) {
+    	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	if(!imgProfile.getOriginalFilename().equals("")) {
+	    	m.setProfileImg("/resources/image/profileImg/"+ Template.saveFile(imgProfile, session, "/resources/image/profileImg/"));
+	    	
+	    	int result = memberService.imgChangeAjax(m);
+	    	
+	    	if(result > 0) {
+	    		Member nm = memberService.loginMember(m);
+	    		
+	    		session.setAttribute("loginMember", nm);
+	    		return nm.getProfileImg();
+	    	} else {
+	    		return "false";
+	    	}
+    	} else {
+    		return "false";
+    	}
+    }
+    
+    @ResponseBody
+    @PostMapping("resetImage.me")
+    public String resetImage(Member m, HttpSession session) {
+    	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	int result = memberService.imgChangeAjax(m);
+    	
+    	if(result > 0) {
+    		Member nm = memberService.loginMember(m);
+    		
+    		session.setAttribute("loginMember", nm);
+    		return nm.getProfileImg();
+    	} else {
+    		return "false";
     	}
     }
 }

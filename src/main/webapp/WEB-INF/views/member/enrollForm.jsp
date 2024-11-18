@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/enrollForm.css">
     <script src="${pageContext.request.contextPath}/resources/js/member/enrollForm.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/apis/findAddressAPI.js"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Insert title here</title>
@@ -61,47 +62,51 @@
             </div>
 
             <!-- 전화번호 -->
-            <div id="enroll-phone-certify">
-                <div id="enroll-phone">
-                    <h3 class="enroll-input-title">*전화번호</h3>
+            <div id="enroll-phone">
+                <h3 class="enroll-input-title">*전화번호</h3>
+                <div class="enroll-input-area">
+                    <input type="text" name="phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" maxlength="11" required>
+                    <!-- <div class="all-btn">인증번호 받기</div> -->
+                </div>
+            </div>
+            <!-- 인증번호 -->
+            <!-- <div id="enroll-certify">
+                <div id="certifyArea">
+                    <h3 class="enroll-input-title">*인증번호&nbsp;</h3>
+                    <div>인증번호가 일치하지 않습니다.</div>
+                </div>
+                <div class="enroll-input-area">
+                    <input type="text" name="certifyNo" placeholder="인증번호 입력" required>
+                    <div class="all-btn">인증</div>
+                </div>
+            </div> -->
+
+            <!-- 이메일 -->
+            <div id="enroll-email-certify">
+                <div id="enroll-email">
+                    <h3 class="enroll-input-title">*이메일</h3>
                     <div class="enroll-input-area">
-                        <input type="text" name="phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" maxlength="11" required>
-                        <div class="all-btn">인증번호 받기</div>
+                        <input id="email-input1" type="text" name="email" placeholder="이메일 입력" required>
+                        <div class="all-btn" id="email-certify">이메일 인증</div>
                     </div>
                 </div>
-                <!-- 인증번호 -->
                 <div id="enroll-certify">
                     <div id="certifyArea">
                         <h3 class="enroll-input-title">*인증번호&nbsp;</h3>
                         <div>인증번호가 일치하지 않습니다.</div>
                     </div>
                     <div class="enroll-input-area">
-                        <input type="text" name="certifyNo" placeholder="인증번호 입력" required>
+                        <input type="text" id="certifyNo" name="certifyNo" placeholder="인증번호 입력" required>
                         <div class="all-btn">인증</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 이메일 -->
-            <h3 class="enroll-input-title">*이메일</h3>
-            <div id="enroll-email" class="enroll-input-area">
-                <input id="email-input1" type="text" name="emailId" oninput="totalEmail()" placeholder="이메일 입력(특수문자 제외)" required>
-                <input id="email-input3" type="text" name="@" value="@" readonly>
-                <input id="email-input2" type="text" name="emailAddress" oninput="totalEmail()" placeholder="ex) naver.com" required>
-                <select name="emailType" onchange="emailSelect()">
-                    <option value="">직접 입력</option>
-                    <option value="naver.com">naver.com</option>
-                    <option value="gmail.com">gmail.com</option>
-                    <option value="daum.net">daum.net</option>
-                </select>
-                <input id="submit-email" type="text" name="email" hidden>
-            </div>
-
             <!-- 주소 -->
             <h3 class="enroll-input-title">주소</h3>
             <div id="enroll-address" class="enroll-input-area">
-                <input type="text" name="address" placeholder="주소 입력(도로명, 지번)">
-                <div class="all-btn">주소찾기</div>
+                <input type="text" id="input-address" name="address" placeholder="주소 입력(도로명, 지번)">
+                <div class="all-btn" onclick="sample6_execDaumPostcode()">주소찾기</div>
             </div>
             <div id="post-detail-address" class="enroll-input-area">
                 <input id="post-no" name="postNo" type="text" placeholder="우편번호">
@@ -114,4 +119,7 @@
         </form>
     </div>
 </body>
+<!-- 주소찾기 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </html>

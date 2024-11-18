@@ -1,7 +1,3 @@
-window.onload = function() {
-    emailSelect();
-};
-
 // 아이디에 특수문자 입력시 버튼 비활성화
 function checkUserId(_this){
     const regExp = /[^a-zA-Z0-9]/; 
@@ -15,29 +11,6 @@ function checkUserId(_this){
         checkBtn.disabled = false;
         checkBtn.style.backgroundColor = "";
     }
-}
-
-// 이메일 선택시 input창에 value값 삽입
-function emailSelect() {
-    const emailOpt = document.querySelector("select[name=emailType] option:checked").value;
-    const emailArea = document.querySelector("#email-input2");
-
-    if (emailOpt) {
-        emailArea.value = emailOpt;
-    } else {
-        emailArea.value = '';
-    }
-}
-
-function totalEmail(){
-    const emailId = document.querySelector("#email-input1").value;
-    const emailAt = document.querySelector("#email-input3").value;
-    const emailArea = document.querySelector("#email-input2").value;
-    const submitEmail = document.querySelector("#submit-email");
-
-    const fullEmail = emailId + emailAt + emailArea;
-
-    submitEmail.value = fullEmail;
 }
 
 // 비밀번호 확인
@@ -61,6 +34,7 @@ function inputPwdCheck() {
     }
 }
 
+// 아이디 중복체크
 function enrollIdCheck() {
     $.ajax({
         url: "idCheck.me",
@@ -85,6 +59,7 @@ function enrollIdCheck() {
     })
 }
 
+// 닉네임 중복체크
 function enrollNickCheck() {
     $.ajax({
         url : "nickCheck.me",
@@ -100,6 +75,11 @@ function enrollNickCheck() {
                 $("#nickArea div").text("사용 가능한 닉네임 입니다.");
                 $("#enroll-enter").attr("disabled", false);
             }
+        },
+        error : function(result){
+            console.log("error: " + result);
+            console.log("닉네임 중복체크 실패");
         }
     })
 }
+

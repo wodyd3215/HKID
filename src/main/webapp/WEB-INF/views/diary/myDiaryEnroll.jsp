@@ -21,11 +21,11 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/diaryEnroll.css">
 
 <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/diary/diaryEnroll.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/diary/diary.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member/diaryEnroll.js"></script>
 
 </head>
-<body onload="init('${pageContext.request.contextPath}')" onunload="initUnload()">
+<body onload="init('${pageContext.request.contextPath}')">
     <div class="wrapper">
         <form action="insertDiary.di" class="enroll-form" method="POST">
             <div id="diary-title">
@@ -38,7 +38,7 @@ pageEncoding="UTF-8"%>
                 <textarea id="content" name="diaryContent"></textarea>
             </div>
             <div id="content-bottom">
-                <a href="">나가기</a>
+                <a href="myDiaryList.me">나가기</a>
                 <button type="submit">저장하기</button>
             </div>
         </form>

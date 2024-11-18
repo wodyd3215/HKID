@@ -24,16 +24,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
 
+<script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </head>
-<body onload='init("${pageName}", "${optional}")'>
+<body onload="init('${pageName}', '${optional}')">
     <c:if test="${ not empty alertMsg}">
-			<script>
-				alert("${alertMsg}");
-			</script>
-			<c:remove var="alertMsg" scope="session"/>
-		</c:if> 
+        <script>
+            alert("${alertMsg}");
+        </script>
+        <c:remove var="alertMsg" scope="session"/>
+    </c:if> 
     <div class="header">
         <div id="logo-img">
             <a href="${pageContext.request.contextPath}"><img class="icon" src="./resources/img/icon.png" alt="없음"></a>
@@ -73,13 +74,21 @@
             <c:otherwise>
                 <div id="myPage-btn" onclick="showAndHideElement('.myPage-area')">
                     <button>
-                        <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                        <c:choose>
+                            <c:when test="${loginMember.profileImg eq null}">
+                                <img src="${pageContext.request.contextPath}/resources/image/profileImg/guest-icon.png">
+                            </c:when>
+                            <c:otherwise>
+                                <img class="profile-img" src="${pageContext.request.contextPath}${loginMember.profileImg}">
+                            </c:otherwise>
+                        </c:choose>
+                        
                     </button>
                     <div class="myPage-area hide" >
                         <p>닉네임</p>
                         <hr>
                         <a href="personal.me">개인설정</a>
-                        <a href="">내 다이어리</a>
+                        <a href="myDiaryList.me">내 다이어리</a>
                         <hr>
                         <a href="">찜목록</a>
                         <a href="">구매목록</a>

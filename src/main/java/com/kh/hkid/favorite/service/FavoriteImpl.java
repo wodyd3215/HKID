@@ -26,6 +26,5 @@ public class FavoriteImpl implements FavoriteService{
 	}
 	
 
-	
 
 }

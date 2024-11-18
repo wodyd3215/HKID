@@ -1,11 +1,13 @@
 package com.kh.hkid.favorite.model.dao;
-
+      
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.favorite.model.vo.Favorite;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class FavoriteDao {

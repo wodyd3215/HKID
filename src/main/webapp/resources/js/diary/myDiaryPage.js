@@ -3,6 +3,8 @@ function initDiaryPage(optional) {
 }
 
 function initScrollPaging(mNo) {
+    let timer;
+
     let pageInfo = {
         memberNo: mNo,
         currentPage: 1,
@@ -28,15 +30,16 @@ function initScrollPaging(mNo) {
     // $(window).scrollTop() : 스크롤이 시작하는 부분부터 스크롤바 맨 위 부분의 사이 간격(스크롤바 맨 위 부분 위치)
     // $(window).height() : 우리가 보는 화면 크기(100vh)
     // $(document).height() : 전체(모든 요소 포함) 화면 크기
-
     document.onscroll = () => {
-        if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-            console.log(pageInfo.currentPage)
-            if(pageInfo.isLoad === true) {
-                loadDiary()
-                console.log(pageInfo.isLoad)
-            }        
-        }
+        clearTimeout(timer)
+
+        timer = setTimeout(() => {
+            if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+                if(pageInfo.isLoad === true) {
+                    loadDiary()
+                }        
+            }
+        }, 200)    
     } 
 }
  

@@ -15,24 +15,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
-    <!-- js -->
-     <script src="${pageContext.request.contextPath }/resources/js/Products/productDetail.js" defer></script>
+    
 <title>상품 상세 페이지</title>
 </head>
 <body>
     <div class="wrapper">
-        <div class="productDetailHeader"> <!-- 상품 맨 위 -->
+        <div class="productDetailHeader" id="top"> <!-- 상품 맨 위 -->
 
             <div class="productImg">
                 <!-- 상품 대표이미지 -->
                 <div class="representImg">                     
-                    <div class="reImg"></div>                    
+                    <div class="reImg">
+                        <img src="./resources/img/main_img.png/" alt="없음">
+                    </div>                    
                 </div>
 
                 <!-- 상품이미지 밑에 있는 다른 이미지들 -->
                 <div class="detailImg"> 
-                    <div class="diImg"></div> <!-- 이미지 1 -->
-                    <div class="diImg"></div> <!-- 이미지 2 -->
+                    <div class="diImg">
+                        <img src="./resources/img/sebuImg1.png/" alt="없음">
+                    </div> <!-- 이미지 1 -->
+                    <div class="diImg">
+                        <img src="./resources/img/sebuImg2.png/" alt="없음">
+                    </div> <!-- 이미지 2 -->
                     <div class="diImg"></div> <!-- 이미지 3 -->
                     <div class="diImg"></div> <!-- 이미지 4 -->
                 </div>
@@ -50,18 +55,18 @@
                     <div> ${p.productName}</div>
 
                     <!-- 평점 -->
-                    <div class="assess"></div> 
+                    <div class="assess">${r.rate}</div> 
                 </div>            
     
                 <!-- 수량 버튼 -->
                 <div class="BtnPrice">
-                    <div class="quantityBtn">
-                        <button class="Btnmin">-</button>
+                    <div class="quantityBtn" data-max-quantity="${p.quantity}">
+                        <button class="Btnmin" onclick="decreaseQuantity()">-</button>
                         <span class="quanText">1</span>
-                        <button class="Btnpls">+</button>
+                        <button class="Btnpls" onclick="increaseQuantity()">+</button>
                     </div>                                       
-                    <div class="priceText">                         
-                        ${p.price} 
+                    <div class="priceText" data-price="${p.price}">                         
+                        ${p.price} 원
                     </div>
                 </div>
     
@@ -84,22 +89,26 @@
             <div class="detailMenu">
                 <ul class="tab">
 
-                    <li>
+                    <li class="tab-link">
                         <!--<input type="radio" id="contentDetail" name="show"  onclick="moveScroll('contentDetail')" checked/>                        
                          <label for="contentDetail"> 상세 내용</label> -->
-                         <a href="#contentDetail"> 상세 내용 </a>
+                         <a href="#contentDetail" onclick="activateTab(this)"> 상세 내용 </a>
                     </li>
 
-                    <li>
+                    <li class="tab-link">
                         <!-- <input type="radio" id="contentReview" name="show"  onclick="moveScroll('contentReview')"/>
                         <label for="contentReview">리 뷰</label> -->
-                        <a href="#contentReview"> 리 뷰 </a>
-                    </li>        
+                        <a href="#contentReview"  onclick="activateTab(this)"> 리 뷰 </a>
+                    </li> 
+                    
+                    <li class="tab-link">
+                        <a href="#top" onclick="activateTab(this)"> 상품 정보 </a>
+                    </li>
 
-                    <li>
+                    <li class="tab-link">
                         <!-- <input type="radio" id="contentExchange" name="show"  onclick="moveScroll('contentExchange')"/>
                         <label for="contentExchange">반품 / 교환</label> -->
-                        <a href="#contentExchange"> 반품/교환 </a>
+                        <a href="#contentExchange" onclick="activateTab(this)"> 반품/교환 </a>
                     </li>
 
                 </ul>
@@ -110,7 +119,9 @@
 
                     <!-- 상품 상세 이미지 -->
                     <li id="contentDetail" class="contentDetail"> 
-                        <div class="contentImg"></div>
+                        <div class="contentImg">
+                            <img src="./resources/img/detail_Image.png/" alt="없음">
+                        </div>
                     </li>
 
                     <li id="contentReview" class="contentReview"> <!-- 리뷰 -->
@@ -119,14 +130,42 @@
                             <!-- 리뷰 내용 -->
                             <div class="reviewHeader"> <!-- 리뷰 상단 -->
                                 <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
-                                <div class="assessUser">ㅁㅁㅁㅁㅁ</div> <!-- 평점 -->
-                                <div class="assessDate">9999.99.99</div> <!-- 리뷰 작성일 -->
+                                <div class="assessUser">★★★★★</div> <!-- 평점 -->
+                                <div class="assessDate">2024.12.12</div> <!-- 리뷰 작성일 -->
                             </div>  
                             <div class="reviewImg">
                                 <div class="reviImg"></div>
                             </div>
                             <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
-                            <div> !@#%$#!^@#$^@$%!#%!^ </div> <!-- 리뷰 내용 -->
+                            <div> 너무 좋아요!! </div> <!-- 리뷰 내용 -->
+                        </div>
+
+                        <div class="review1">
+                            <!-- 리뷰 내용 -->
+                            <div class="reviewHeader"> <!-- 리뷰 상단 -->
+                                <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
+                                <div class="assessUser">★★★★★</div> <!-- 평점 -->
+                                <div class="assessDate">2024.12.12</div> <!-- 리뷰 작성일 -->
+                            </div>  
+                            <div class="reviewImg">
+                                <div class="reviImg"></div>
+                            </div>
+                            <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
+                            <div> 너무 좋아요!! </div> <!-- 리뷰 내용 -->
+                        </div>
+
+                        <div class="review1">
+                            <!-- 리뷰 내용 -->
+                            <div class="reviewHeader"> <!-- 리뷰 상단 -->
+                                <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
+                                <div class="assessUser">★★★★★</div> <!-- 평점 -->
+                                <div class="assessDate">2024.12.12</div> <!-- 리뷰 작성일 -->
+                            </div>  
+                            <div class="reviewImg">
+                                <div class="reviImg"></div>
+                            </div>
+                            <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
+                            <div> 너무 좋아요!! </div> <!-- 리뷰 내용 -->
                         </div>
    
                     </li>
@@ -170,6 +209,9 @@
             </div>
             
         </div>
-    </div>    
+    </div>
+    
+    <!-- js -->
+    <script src="${pageContext.request.contextPath }/resources/js/Products/productDetail.js" defer></script>
 </body>
 </html>

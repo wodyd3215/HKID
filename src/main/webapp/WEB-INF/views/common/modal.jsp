@@ -25,15 +25,7 @@
             <div class="custom-modal-content">
                 <form action="updateEmail.me" method="POST">
                     <div id="enroll-email" class="enroll-input-area">
-                        <input id="email-input1" type="text" name="emailId" oninput="totalEmail()" placeholder="이메일 입력(특수문자 제외)" required>
-                        <input id="email-input3" type="text" name="@" value="@" readonly>
-                        <input id="email-input2" type="text" name="emailAddress" oninput="totalEmail()" placeholder="ex) naver.com" required>
-                        <select name="emailType" onchange="emailSelect()">
-                            <option value="">직접 입력</option>
-                            <option value="naver.com">naver.com</option>
-                            <option value="gmail.com">gmail.com</option>
-                            <option value="daum.net">daum.net</option>
-                        </select>
+                        
                         <input id="submit-email" type="text" name="email" hidden>
                     </div>
                     <div class="button-area">

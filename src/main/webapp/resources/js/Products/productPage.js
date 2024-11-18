@@ -12,3 +12,15 @@ function productView(viewType) {
         usedItemDiv.style.display = "block";
     }
 }
+
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedCategory = urlParams.get("category"); // 단일 값 가져오기
+
+    if (selectedCategory) {
+        const radiobox = document.querySelector(`input[name="category"][value="${selectedCategory}"]`);
+        if (radiobox) {
+            radiobox.checked = true;
+        }
+    }
+};

@@ -48,8 +48,19 @@
  		<interceptor>
 			<mapping path="" /> <!-- 게시글작성 -->
 			<!-- <mapping path="/boardWrite.bo" /> -->
+			<mapping path="/personal.me" /> <!-- 개인설정 -->
 			
-
+			<!-- 내 다이어리 -->
+			<mapping path="/myDiaryList.me" />
+			<mapping path="/selectDiaryList.me" />
+			<mapping path="/diaryEnroll.me" />
+			<mapping path="/insertImgAjax.di" />
+			<mapping path="/insertDiary.di" />
+			<mapping path="/detailDiary.di" />
+			<mapping path="/delete.di" />
+			<mapping path="/updateDiaryForm.di" />
+			<mapping path="/updateDiary.di" />
+			<mapping path="/deleteImgAjax.di" />			 
 			<beans:bean class="com.kh.hkid.common.interceptor.LoginInterceptor" id="loginInterceptor" />
 		</interceptor>
 	</interceptors>
