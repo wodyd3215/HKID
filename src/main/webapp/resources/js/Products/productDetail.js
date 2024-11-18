@@ -23,6 +23,54 @@
     
 // }
 
+ // 초기 수량
+ let quantity = 1;
+
+ // 증가 함수
+ function increaseQuantity() {
+     const quantityBtn = document.querySelector(".quantityBtn");
+     const maxQuantity = parseInt(quantityBtn.getAttribute("data-max-quantity"), 10); // 최대 재고
+     const quanText = quantityBtn.querySelector(".quanText");
+     const priceText = document.querySelector(".priceText");
+     const unitPrice = parseInt(priceText.getAttribute("data-price"), 10); // 단가 가져오기
+
+     if (quantity < maxQuantity) {
+         quantity += 1; // 수량 증가
+         quanText.textContent = quantity; // 수량 업데이트
+         priceText.textContent = (quantity * unitPrice).toLocaleString() + " 원"; // 총 가격 업데이트
+     } else {
+         alert("재고가 부족합니다.");
+     }
+ }
+
+ // 감소 함수
+ function decreaseQuantity() {
+     const quantityBtn = document.querySelector(".quantityBtn");
+     const quanText = quantityBtn.querySelector(".quanText");
+     const priceText = document.querySelector(".priceText");
+     const unitPrice = parseInt(priceText.getAttribute("data-price"), 10); // 단가 가져오기
+
+     if (quantity > 1) {
+         quantity -= 1; // 수량 감소
+         quanText.textContent = quantity; // 수량 업데이트
+         priceText.textContent = (quantity * unitPrice).toLocaleString() + " 원"; // 총 가격 업데이트
+     }
+ }
+
+ function activateTab(clickedElement) {
+    // 모든 탭 링크에서 'active' 클래스 제거
+    const tabs = document.getElementsByClassName("tab-link");
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+
+    // 클릭된 요소의 부모 중 'tab-link' 클래스가 있는 요소에 'active' 클래스 추가
+    const tabLinkElement = clickedElement.closest(".tab-link");
+    if (tabLinkElement) {
+        tabLinkElement.classList.add("active");
+    }
+}
+
 
 
 $('.tab > ul > li > a').click(function(e) {
