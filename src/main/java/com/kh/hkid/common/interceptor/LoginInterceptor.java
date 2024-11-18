@@ -24,7 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		//return : false -> 요청중단후 반환
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser") != null) {		// 로그인이 되어있으면 기존요청 진행
+		if(session.getAttribute("loginMember") != null) {		// 로그인이 되어있으면 기존요청 진행
 			return true;
 		} else {	// 로그인 안 돼있으면 
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
