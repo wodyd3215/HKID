@@ -36,4 +36,7 @@ public interface MemberService {
 	
 	// 비밀번호 수정(로그인 x)
 	int changePwd(Member m);
+	
+	// 이미지 수정
+	int imgChangeAjax(Member m);
 }

@@ -129,17 +129,11 @@ public class DiaryController {
     	d.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
     	
     	if(diaryService.updateDiary(d) > 0) {
-    		session.setAttribute("alertMsg", "다이어릭 수정 성공");
+    		session.setAttribute("alertMsg", "다이어리 수정 성공");
     	} else { 
-    		session.setAttribute("alertMsg", "다이어릭 수정 실패");
+    		session.setAttribute("alertMsg", "다이어리 수정 실패");
     	}
     	
     	return "redirect:/detailDiary.di?diaryNo=" + d.getDiaryNo();
-    }
-    
-    @ResponseBody
-    @PostMapping("deleteImgAjax.di")
-    public void deleteImgAjax(String img, HttpSession session) {
-    	new File(session.getServletContext().getRealPath(img)).delete();
     }
 }

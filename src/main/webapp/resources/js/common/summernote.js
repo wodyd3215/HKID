@@ -17,7 +17,7 @@ function initSummerNote(setting, contextPath) {
         callbacks: {
             onImageUpload: (files) => {fileUpload(files, contextPath, setting.url)},
             // target[0]: target에서 첫 번째 돔 요소를 가져오는 방식
-            onMediaDelete: (target) => {deleteFile($(target[0]), setting.url)},
+            // onMediaDelete: (target) => {deleteFile($(target[0]), setting.url)},
         }
     });
 }
@@ -33,7 +33,7 @@ function fileUpload(files, contextPath, url){
    for(let file of files) {
        fd.append("fileList", file);
    }
-   
+
    insertFile(fd, url, function(res){
     if(res !== 'error') {
         for(let img of res){
@@ -47,11 +47,11 @@ function fileUpload(files, contextPath, url){
 
 function insertFile(data, url, callback){
    $.ajax({
-       url: url.insert,
+       url: url,
        type: "POST",
        data: data,
        processData: false, //기본이 true -> 전송하는 data를 string으로 변환해서 요청
-       contentType: false, //
+       contentType: false,  // 요청할 때 타입 -> false -> multipart/form-data 형식
        dataType: "json", //받을 때 타입 
        success: function(res){
            callback(res)
@@ -62,11 +62,11 @@ function insertFile(data, url, callback){
    })
 }
 
-// 썸머노트에 업로드한 이미지를 삭제할 때 동작하는 메서드
-function deleteFile(target, url) {
-    $.ajax({
-        url: url.delete,
-        type:"POST",
-        data: { img: target.attr("src").replace("/HKID", "").trim() },
-    })
-}
+// // 썸머노트에 업로드한 이미지를 삭제할 때 동작하는 메서드
+// function deleteFile(target, url) {
+//     $.ajax({
+//         url: url.delete,
+//         type:"POST",
+//         data: { img: target.attr("src").replace("/HKID", "").trim() },
+//     })
+// }

@@ -1,3 +1,4 @@
+/* 공용 모달 */
 .custom-modal {
     width: 600px;
 }
@@ -31,11 +32,12 @@
     border-radius: 25px;
     width: 90px;
     height: 30px;
-    font-size: 14px;
+    font-size: 0.9em;
     margin: 0 50px;
     font-weight: bold;
 }
 
+/* 비밀번호 변경 모달 */
 #password-change .button-area button[type='submit']{
     background: #00A6FB;
     color: white;
@@ -46,6 +48,7 @@
     color: black;
 }
 
+/* 회원 탈퇴 모달 */
 #withdraw h2 {
     color: #dc3545;
     text-align: center;
@@ -66,4 +69,47 @@
 #withdraw .button-area button[type='reset']{
     background: #00A6FB;
     color: white;
+}
+
+/* 이미지 변경 모달 */
+#profile-change .custom-modal {
+    width: 350px;
+    height: 475px;
+    transform: translate(-50%, -60%);
+}
+
+#notice-info{
+    font-size: 0.6em;
+    color: #b6b6b6;
+    text-align: center;
+}
+
+#profileimg {
+    display: flex;
+    justify-content: center;
+}
+
+#profileimg img{
+    border: 1px solid #d9d9d9;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    margin-top: 30px;
+    object-fit: cover;
+}
+
+#profile-change .button-area {
+    margin-top: 50px;
+}
+
+#profile-change .button-area button{
+    width: 150px;
+    height: 40px;
+    margin: 0 10px;
+    background: #00A6FB;
+    color: white;
+}
+
+.button-area input[type='file'] {
+    display: none;
 }

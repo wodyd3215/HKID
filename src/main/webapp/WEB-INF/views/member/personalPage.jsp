@@ -19,8 +19,7 @@
         <div id="pageName">내 프로필</div>
         <form id="content-area" action="updateMember?memberNo=${loginMember.memberNo}" method="POST" enctype="multipart/form-data">
             <div id="img-area">
-                <img src="${pageContext.request.contextPath}${loginMember.profileImg}" class="profile-img" onclick="openFile()">
-                <input type="file" accept=".jpg, .png, .jpeg" id="select-profile" name="upfile" onchange="previewProfile(this, '${pageContext.request.contextPath}', '${loginMember.profileImg}')">
+                <img src="${pageContext.request.contextPath}${loginMember.profileImg}" class="profile-img" data-target="profile-change" onclick="openModal(event)">
                 <div id="notice">*이미지를 눌러 프로필 변경</div>
                 <div id="account-deletion" data-target="withdraw" onclick="openModal(event)">회원탈퇴</div>
             </div>

@@ -11,10 +11,7 @@ function init(contextPath, diaryContent) {
             ['table', ['table']],
             ['insert', ['link', 'picture']],
         ],
-        url : {
-            insert: "insertImgAjax.di",
-            delete: "deleteImgAjax.di",
-        }
+        url : "insertImgAjax.di",
     }
     
     initSummerNote(setting, contextPath)
