@@ -79,7 +79,7 @@
                                 <img src="${pageContext.request.contextPath}/resources/image/profileImg/guest-icon.png">
                             </c:when>
                             <c:otherwise>
-                                <img src="${pageContext.request.contextPath}${loginMember.profileImg}">
+                                <img class="profile-img" src="${pageContext.request.contextPath}${loginMember.profileImg}">
                             </c:otherwise>
                         </c:choose>
                         

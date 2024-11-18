@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
                 <textarea id="content" name="diaryContent"></textarea>
             </div>
             <div id="content-bottom">
-                <a href="">나가기</a>
+                <a href="detailDiary.di?diaryNo=${diary.diaryNo}">나가기</a>
                 <button type="submit">저장하기</button>
             </div>
         </form>
