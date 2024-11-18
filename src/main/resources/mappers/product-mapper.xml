@@ -44,18 +44,18 @@
 	<!-- 상품 목록 (전체) 조회 -->
 	<select id="selectList" resultType="Product">
 		SELECT p.PRODUCT_NO,
-			   p.PRODUCT_NAME productName,
-			   p.CONTENT content,
-			   p.QUANTITY quantity,
-			   p.PRICE price,
-			   r.rate
-		  FROM PRODUCT p
-		  JOIN (
-		  	SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
-		  		FROM REVIEW
-		  		GROUP BY PRODUCT_NO
-		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO	  
-		 ORDER BY p.PRODUCT_NO DESC
+	       p.PRODUCT_NAME productName,
+	       p.CONTENT content,
+	       p.QUANTITY quantity,
+	       p.PRICE price,
+	       COALESCE(r.rate, 0) AS rate
+	  FROM PRODUCT p
+	  LEFT JOIN (
+	       SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
+	         FROM REVIEW
+	        GROUP BY PRODUCT_NO
+	  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
+	 ORDER BY p.PRODUCT_NO DESC
 	</select>
 	
 	<!-- 카테고리별 삼품 목록 총 갯수 -->
