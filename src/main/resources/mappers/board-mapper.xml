@@ -13,6 +13,7 @@
   	<result column="BOARD_STATUS" property="boardStatus"/>
   	<result column="COMMUNITY_NO" property="communityNo"/>
   	<result column="MEMBER_NO" property="memberNo"/>
+  	<result column="MEMBER_NO" property="memberName"/>
   </resultMap>
   
   <resultMap type="Community" id="commmunityResultSet">

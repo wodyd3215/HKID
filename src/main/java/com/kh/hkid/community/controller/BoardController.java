@@ -71,6 +71,7 @@ public class BoardController {
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
 		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//게시글 리스트
 	
+		model.addAttribute("nList", boardService.selectNoticeList());
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
 		model.addAttribute("pi", pi);
@@ -155,7 +156,6 @@ public class BoardController {
 		
 		//게시글 조회
 		Board b = boardService.selectBoard(bno);
-		
 		
 		//DB 들어가기 전까지만 사용!!
 		ArrayList<CommentReply> replyList = new ArrayList<>();
