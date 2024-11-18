@@ -231,6 +231,13 @@
 		    <artifactId>aspectjweaver</artifactId>
 		    <version>${org.aspectj-version}</version>
 		</dependency>
+		
+		<!-- iamport : 결제 api -->
+		<dependency>
+		  <groupId>io.portone</groupId>
+		  <artifactId>server-sdk</artifactId>
+		  <version>0.8.1</version>		 
+		</dependency>
 	</dependencies>
 	
 	

@@ -29,7 +29,7 @@
                 <thead class="cartTableHead">
                     <tr>
                         <th class="check-space">
-                            <input type="checkbox" class="selectCart" onclick="selectAll(this)">
+                           <input type="checkbox" class="selectCart" onclick="selectAll(this)">
                         </th>
                         <th class="img-space"></th> <!-- 상품이미지 영역 -->
                         <th class="name-space">상품명</th>
@@ -43,12 +43,12 @@
     
                 <tbody class="cartTableBody">
                     <c:choose>
-                    <c:when test="${empty productQuantities}">
+                    <c:when test="${empty item}">
                         <div class="cartListNone"> 장바구니에 담긴 상품이 없어요 ! </div>
                     </c:when>
                     <c:otherwise>
 
-                    <c:forEach var="entry" items="${productQuantities}">
+                    <c:forEach var="items" items="${list}">
                         <tr class="content-space">
                             <td>
                                 <input type="checkbox" class="selectCart" name="selectBox">
@@ -58,47 +58,43 @@
                                     <img src="${pageContext.request.contextPath}/resources/image/${entry.key}.jpg" alt="${entry.key}" class="product-image">
                                 </c:if>
                             </td>
-                            <td class="cartItemName">${}</td>
+                            <td class="cartItemName">${list.name}</td>
                             <td>
                                 <div class="cartQuantity">
                                     <button class="decreaseBtn" >-</button>
-                                    <div class="quantityBtnText">${c.productQuantity}</div>
+                                    <div class="quantityBtnText">${list.Quantity}</div>
                                     <button class="increaseBtn">+</button>
                                 </div>
                             </td>
-                            <td class="productPrice">${}</td>
+                            <td class="productPrice">${list.price}</td>
                             <td>
                                 <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
-    
-                
-            </table>
         </c:otherwise>
-    </c:choose>
-        
-        <tfoot class="cartTableFoot">
-            <tr>
-                <th>
-                    <input type="checkbox" class="selectCart" id="selectAll" onclick="selectAll(this)">
-                </th>
-                
-                <td>총</td>
-                <td class="totalPrice" id="totalPrice"></td>
-                <td>원</td>
+    </c:choose>        
+            <tfoot class="cartTableFoot">
+                <tr>
+                    <th>
+                        <input type="checkbox" class="selectCart" id="selectAll" onclick="selectAll(this)">
+                    </th>
+                    
+                    <td>총</td>
+                    <td class="totalPrice" id="totalPrice"></td>
+                    <td>원</td>
 
-                <td class="BuyBtn">
-                    <button class="cartBuyBtn" onclick="bottomBtn('buy')">구매하기</button>
-                </td>
+                    <td class="BuyBtn">
+                        <button class="cartBuyBtn" onclick="bottomBtn('buy')">구매하기</button>
+                    </td>
 
-                <td>
-                    <button class="delete-button" onclick="bottomBtn('delete')"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg"></button>
-                </td>
-            </tr>
-        </tfoot>
-
+                    <td>
+                        <button class="delete-button" onclick="bottomBtn('delete')"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg"></button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 </body>
 </html>
