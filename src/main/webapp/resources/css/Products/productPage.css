@@ -323,3 +323,24 @@ input::placeholder{
     font-size: 14px;
 }
 
+/* 기본 스타일 */
+.paging-link {
+    color: #333; /* 기본 글자 색 */
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 0 2px;
+}
+
+/* 마우스 오버 시 */
+.paging-link:hover {
+    color: #007bff;
+}
+
+/* 현재 페이지 스타일 */
+.paging-link.active {
+    color: #006494;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+
