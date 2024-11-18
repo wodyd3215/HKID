@@ -1,30 +1,37 @@
-function openFile() {
+function changeImg() {
     document.querySelector('#select-profile').click()
 }
 
 function previewProfile(input, contextPath, imgUrl) {
   // 가져온 파일이 있는지 검수
   if(input.files && input.files[0]) {
-    // 파일이나 Blob 객체를 읽어들여 데이터를 비동기적으로 처리할 수 있도록
-    // 도와주는 Web API
-    const reader = new FileReader();
+    const fd = new FormData();
+    fd.append("imgProfile", input.files[0])
 
-    // 파일 읽기 성공 시, 콜백 함수 실행
-    reader.onload = (e) => {
-      $('.profile-img').attr('src', e.target.result)
-    }
-    
-    // 파일 객체를 읽은 후 데이터 url로 변환
-    reader.readAsDataURL(input.files[0])
+    imgChangeAjax(fd, (res) => {
+      if(res === 'false') {
+        $('.profile-img').attr('src', contextPath + imgUrl)
+      } else {
+        $('.profile-img').attr('src', contextPath + res)
+      }
+    })
   } else {
       $('.profile-img').attr('src', contextPath + imgUrl)
   }
 }
 
-function showBtn() {
-  const btnShow = $('.btn.sub-btn.custom-btn')
+function resetImg(contextPath, imgUrl) {
+  const data = {
+    profileImg: imgUrl,
+  }
 
-  btnShow.css("display") === "none" ? btnShow.show() : btnShow.hide()
+  resetImgAjax(data, (res) => {
+    if(res === 'false') {
+      $('.profile-img').attr('src', contextPath + imgUrl)
+    } else {
+      $('.profile-img').attr('src', contextPath + res)
+    }
+  })
 }
 
 function checkPwd() {
@@ -36,5 +43,30 @@ function checkPwd() {
   } else {
     return false
   }
+}
 
+function imgChangeAjax(data, callback) {
+  $.ajax({
+    type: 'POST',
+    url: 'imgChangeAjax.me',
+    data: data,
+    processData: false, //기본이 true -> 전송하는 data를 string으로 변환해서 요청
+    contentType: false, //
+    success: callback,
+    error: () => {
+      console.log('이미지 변경 실패')
+    }
+  })
+}
+
+function resetImgAjax(data, callback) {
+  $.ajax({
+    url: 'resetImage.me',
+    type: 'POST',
+    data: data,
+    success: callback,
+    error: () => {
+      console.log('이미지 변경 실패')
+    }
+  })
 }

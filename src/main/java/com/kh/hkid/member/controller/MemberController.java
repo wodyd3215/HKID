@@ -1,8 +1,6 @@
 package com.kh.hkid.member.controller;
 
 
-import java.io.File;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -148,20 +146,7 @@ public class MemberController {
     }
     
     @PostMapping("updateMember")
-    public String updateMember(Member m, MultipartFile upfile, HttpSession session) {
-    	String profileImg = ((Member)session.getAttribute("loginMember")).getProfileImg();
-    
-    	// 업로드한 이미지 파일이 존재하는지 확인
-    	if(!upfile.getOriginalFilename().equals("")) {	
-    		if(profileImg != null ) {	
-    			new File(session.getServletContext().getRealPath(profileImg)).delete();
-    		}
-    		
-    		m.setProfileImg( "/resources/image/profileImg/"+ Template.saveFile(upfile, session, "/resources/image/profileImg/"));
-    	} else {
-    		m.setProfileImg(profileImg);
-    	}
-    	
+    public String updateMember(Member m, HttpSession session) {
     	int result = memberService.updateMember(m);
     	
     	if(result > 0) {
@@ -263,6 +248,48 @@ public class MemberController {
     		session.setAttribute("alertMsg", "비밀번호 수정에 실패하였습니다.");
     		
     		return "redirect:/loginForm.me";
+    	}
+    }
+    
+    @ResponseBody
+    @PostMapping("imgChangeAjax.me")
+    public String imgChangeAjax(Member m, MultipartFile imgProfile, HttpSession session) {
+    	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	if(!imgProfile.getOriginalFilename().equals("")) {
+	    	m.setProfileImg("/resources/image/profileImg/"+ Template.saveFile(imgProfile, session, "/resources/image/profileImg/"));
+	    	
+	    	int result = memberService.imgChangeAjax(m);
+	    	
+	    	if(result > 0) {
+	    		Member nm = memberService.loginMember(m);
+	    		
+	    		session.setAttribute("loginMember", nm);
+	    		return nm.getProfileImg();
+	    	} else {
+	    		return "false";
+	    	}
+    	} else {
+    		return "false";
+    	}
+    }
+    
+    @ResponseBody
+    @PostMapping("resetImage.me")
+    public String resetImage(Member m, HttpSession session) {
+    	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	int result = memberService.imgChangeAjax(m);
+    	
+    	if(result > 0) {
+    		Member nm = memberService.loginMember(m);
+    		
+    		session.setAttribute("loginMember", nm);
+    		return nm.getProfileImg();
+    	} else {
+    		return "false";
     	}
     }
 }

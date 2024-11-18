@@ -74,7 +74,15 @@
             <c:otherwise>
                 <div id="myPage-btn" onclick="showAndHideElement('.myPage-area')">
                     <button>
-                        <img src="${pageContext.request.contextPath}${loginMember.profileImg}">
+                        <c:choose>
+                            <c:when test="${loginMember.profileImg eq null}">
+                                <img src="${pageContext.request.contextPath}/resources/image/profileImg/guest-icon.png">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="${pageContext.request.contextPath}${loginMember.profileImg}">
+                            </c:otherwise>
+                        </c:choose>
+                        
                     </button>
                     <div class="myPage-area hide" >
                         <p>닉네임</p>

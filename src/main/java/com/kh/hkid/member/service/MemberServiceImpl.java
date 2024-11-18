@@ -88,4 +88,10 @@ public class MemberServiceImpl implements MemberService {
 	public int changePwd(Member m) {
 		return memberDao.changePwd(sqlSession, m);
 	}
+	
+	@Transactional
+	@Override
+	public int imgChangeAjax(Member m) {
+		return memberDao.imgChangeAjax(sqlSession, m);
+	}
 }

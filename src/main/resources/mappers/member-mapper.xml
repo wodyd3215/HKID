@@ -93,8 +93,7 @@
   	   	   EMAIL = #{email},
   	       ADDRESS = #{address},
   	       DETAIL_ADDRESS = #{detailAddress},
-  	       POST_NO = #{postNo},
-  	       PROFILE_IMG = #{profileImg}
+  	       POST_NO = #{postNo}
   	 WHERE MEMBER_NO = #{memberNo}
   </update>
   
@@ -130,5 +129,11 @@
   	UPDATE MEMBER
   	   SET MEMBER_PWD = #{memberPwd}
   	 WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <update id="imgChangeAjax">
+    UPDATE MEMBER
+  	   SET PROFILE_IMG = #{profileImg}
+  	 WHERE MEMBER_NO = #{memberNo}
   </update>
 </mapper>
