@@ -23,6 +23,7 @@ public class APIController {
 		String url = "https://apis.data.go.kr/1471000/FoodNtrCpntDbInfo01/getFoodNtrCpntDbInq01";
 		url += "?serviceKey=" + SERVICE_KEY;
 		url += "&type=json";
+		url += "&numOfRows=100";
 		url += "&FOOD_NM_KR=" + URLEncoder.encode(food, "UTF-8");
 		
 		// 1. 요청하고자하는 url을 전달하면서 java.net.URL 객체 생성
