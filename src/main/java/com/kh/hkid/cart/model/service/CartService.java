@@ -7,7 +7,7 @@ import com.kh.hkid.cart.model.vo.Cart;
 public interface CartService {
 
 	// 장바구니 조회
-	ArrayList<Cart> selectCart(String memberNo);
+	ArrayList<Cart> selectCart(int memberNo);
 	
 	// 수량 변경
 	int changeQuantity(Cart c);
