@@ -1,6 +1,7 @@
 package com.kh.hkid.community.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.Community;
+import com.kh.hkid.community.model.vo.Board;
 
 @Repository
 public class BoardDao {
@@ -39,5 +41,29 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectCategoryList", category, rowBounds);
 	}
 	
+	//공지 게시글 목록
+	public ArrayList<Community> selectNoticeList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectNoticeList");
+	}
+	
+	//검색게시글  개수
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map){
+		System.out.println(map);
+		return sqlSession.selectOne("boardMapper.selectSearchCount", map);
+	}
+	
+	// 검색게시글  목록
+	public ArrayList<Community> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchList", map, rowBounds);
+	}
+	
+
+	// 게시글 상세 조회
+	public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
+	}
 	
 }

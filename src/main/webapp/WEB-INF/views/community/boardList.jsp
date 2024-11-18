@@ -17,15 +17,37 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--favicon.ico:1 에러 해결용-->
 <body onload="defaultCategory('${category}')">
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    
+    게시글 = ${list}
+    <br><br><br>
+    공지 = ${nList}
+    <br><br>
+    pi = ${pi}
+    <br><br>
+    listCount = ${pi.listCount}
+    <br><br>
+    pi.boardLimit = ${pi.boardLimit}
+    <br><br>
+    category = ${category}
+
+
     <div class="wrapper">
-        <br><br>
-        <h1>전체</h1>
+        <br><br><br><br><br>
+        <c:choose>
+            <c:when test="${category != null}"> <!-- 카테고리 정보가 있으면 출력 -->   
+                <h1>${category}</h1>
+            </c:when>
+            <c:otherwise>
+                <h1>전체</h1>
+            </c:otherwise>
+        </c:choose>
+        
 
         <table id="common-table">
             <thead>
                 <tr id="common-table-header">
                     <th class="type-width">
-                        <form class="category-select" action="categoryList.bo">
+                        <form action="categoryList.bo">
                             <select name="category" class="table-category" onchange="this.form.submit()" >전체
                                 <option value="전체">전체</option>
                                 <option value="질문" >질문</option>
@@ -42,59 +64,74 @@
                 </tr>
             </thead>
             <tbody>
-                <tr id="common-table-body">
-                    <td>공지</td>
-                    <td><a href="">게시글 작성 시 지켜야할 규칙</a></td>
-                    <td>꾸준히 운동</td>
-                    <td>2024-10-10</td>
-                    <td>12</td>
-                </tr>
-                <!-- <c:forEach var="b" items=""> </c:forEach> -->
-                 <c:forEach var="b" items="${list}">
+                <!-- 공지 게시글 -->
+                <c:choose>
+                    <c:when test="${pi.currentPage eq 1}"> <!-- 현재페이지가 1일 경우 공지 출력 -->   
+                        <c:forEach var="n" items="${nList}">
+                            <tr id="common-table-body">
+                                <td>${n.communityName}</td>
+                                <td><a href="">${n.boardName}</a></td>
+                                <td>${n.userName}</td>
+                                <td>${n.boardDate}</td>
+                                <td>${n.boardViewCount}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+                <!-------------- 일반 게시글 --------------->
+                <c:forEach var="b" items="${list}">
                     <tr>
                     <td class="board-category">${b.communityName}</td>
-                    <td><a href="boardDetail.bo?bno=${boardNo}">${b.boardName}</a></td>
+                    <td><a href="boardDetail.bo?bno=${b.boardNo}">${b.boardName}</a></td>
                     <td>${b.userName}</td>
                     <td>${b.boardDate}</td>
                     <td>${b.boardViewCount}</td>
                 </tr>
-                 </c:forEach>
+                </c:forEach>
+
             </tbody>
         </table>
-
-
         
         
-        <!-- 게시글 수 + 글쓰기 버튼 -->
         <div id="boCount-wirte-div">
-            <select name="board-bottom-div" class="table-category">
-                <option value="">5개씩</option>
-                <option value="">10개씩</option>
-                <option value="">15개씩</option>
-            </select>
-            <!-- <form action="boardWrite.bo" method="POST"> -->
+            <!-- 게시글 수  -->
+            <form action="boardCount.bo" method="post">
+                <input type="hidden" name="category" value="${category}">
+                <input type="hidden" name="listCount" value="${pi.listCount}">
+                <input type="hidden" name="currentPage" value="${pi.currentPage}">
+                <select name="choiceBoardCount" class="table-category" onchange="this.form.submit()">
+                    <option value="게시글 수" hidden>글 개수</option>
+                    <option value="5">5개씩</option>
+                    <option value="10">10개씩</option>
+                    <option value="15">15개씩</option>
+                </select>
+            </form>
+            <!-- 글쓰기  -->
             <button id="write-btn" data-target="login-modal" onclick="openModal(event)">글쓰기</button>
-            <!-- </form> -->
         </div>
 
-        <!-- 검색 바 -->
+        <!-------------------------- 검색 바 -------------------------->
         <div id="searchbar-div">
-            <select name="search-category" id="search-category" >전체
-                <option value="all">전체</option>
-                <option value="question">질문</option>
-                <option value="tip">팁</option>
-                <option value="show-off">자랑</option>
-                <option value="ad">홍보</option>
-            </select>
-            
-            <input type="search" name="" id="boardsearch-bar" placeholder="검색어를 입력해주세요">
-            <button id="search-btn" type="submit">
-                <img id="searchIcon" src="resources/image/searchIcon.png">
-            </button>
-        </div>  
+            <form action="searchBoard.bo" id="search-form">
+                <!-- 필요 데이터 전송 -->
+                <input type="hidden" name="choiceBoardCount" value="${choiceBoardCount}">
+                <input type="hidden" name="currentPage" value="${pi.currentPage}">
 
-
-
+                <select name="condition" id="search-category" >전체
+                    <option value="writer">작성자</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                </select>
+                
+                <div id="search-wrapper">
+                    <input type="search" name="keyword" id="boardsearch-bar" placeholder="검색어를 입력해주세요">
+                    <button id="board-search-btn" type="submit">
+                        <img id="searchIcon" src="resources/image/searchIcon.png">
+                    </button>
+                </div>
+            </form>
+        </div> 
+        
         <!------------------------ 페이징 처리 ----------------------->
         <div id="paging-div">
             <!-- 이전페이지 버튼 -->
@@ -120,7 +157,6 @@
                     <a class="page-btn" href="list.bo?cpage=${pi.currentPage + 1}">&gt;</a>
                 </c:otherwise>
             </c:choose>
-
         </div>
     </div>
 

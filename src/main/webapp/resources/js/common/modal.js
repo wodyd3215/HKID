@@ -1,6 +1,5 @@
 function openModal(e) {
     document.getElementById(e.target.dataset.target).style.display = 'block'
-    
 }
 
 function closeModal() {

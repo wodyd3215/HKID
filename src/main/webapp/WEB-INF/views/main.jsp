@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/main/main.css?after">
-<link rel="stylesheet" href="./resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/main/main.css?after">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/default.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -47,7 +47,7 @@
 						<div class="area-select">
 							<select name="area" id="area" onchange="categoryChange(this)">
 								<option value>시/도 선택</option>
-								<option value="general01">강원</option>
+								<option value="geranel01">강원</option>
 								<option value="general02">경기</option>
 								<option value="general03">경남</option>
 								<option value="general04">경북</option>

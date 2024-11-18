@@ -11,24 +11,23 @@ public class LoginInterceptor implements HandlerInterceptor{
 	/*
 	 * HandlerInterceptor
 	 * 
-	 * -Controller°¡ ½ÇÇàµÇ±â Àü/ÈÄ¿¡ ³¬¾ÆÃ¤¼­ ½ÇÇàµÈ´Ù.
-	 * -·Î±×ÀÎ À¯/¹«ÆÇ´Ü, È¸¿ø±ÇÇÑÃ¼Å© 
+	 * -Controllerê°€ ì‹¤í–‰ë˜ê¸° ì „/í›„ì— ë‚šì•„ì±„ì„œ ì‹¤í–‰ëœë‹¤.
+	 * -ë¡œê·¸ì¸ ìœ /ë¬´íŒë‹¨, íšŒì›ê¶Œí•œì²´í¬ 
 	 * 
-	 * preHandle(ÀüÃ³¸®) : DispatcherServletÀÌ ÄÁÆ®·Ñ·¯¸¦ È£ÃâÇÏ±â Àü¿¡ ³¬¾ÆÃ¤´Â ¿µ¿ª
-	 * postHandle(ÈÄÃ³¸®) : ÄÁÆ®·Ñ·¯¿¡¼­ ¿äÃ» ÈÄ DispatcherServletÀ¸·Î viewÁ¤º¸¸¦ ¸®ÅÏÇÏ´Â ¼ø°£ ³¬¾ÆÃ¤´Â ¿µ¿ª
+	 * preHandle(ì „ì²˜ë¦¬) : DispatcherServletì´ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ í˜¸ì¶œí•˜ê¸° ì „ì— ë‚šì•„ì±„ëŠ” ì˜ì—­
+	 * postHandle(í›„ì²˜ë¦¬) : ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ìš”ì²­ í›„ DispatcherServletìœ¼ë¡œ viewì •ë³´ë¥¼ ë¦¬í„´í•˜ëŠ” ìˆœê°„ ë‚šì•„ì±„ëŠ” ì˜ì—­
 	 */
 	
-	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		//return : true -> ±âÁ¸¿äÃ»Èå¸§´ë·Î ÁøÇà(Controller·Î ÀÌµ¿)
-		//return : false -> ¿äÃ»Áß´ÜÈÄ ¹İÈ¯
+		//return : true -> ê¸°ì¡´ìš”ì²­íë¦„ëŒ€ë¡œ ì§„í–‰(Controllerë¡œ ì´ë™)
+		//return : false -> ìš”ì²­ì¤‘ë‹¨í›„ ë°˜í™˜
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser") != null) {		// ·Î±×ÀÎÀÌ µÇ¾îÀÖÀ¸¸é ±âÁ¸¿äÃ» ÁøÇà
+		if(session.getAttribute("loginUser") != null) {		// ë¡œê·¸ì¸ì´ ë˜ì–´ìˆìœ¼ë©´ ê¸°ì¡´ìš”ì²­ ì§„í–‰
 			return true;
-		} else {	// ·Î±×ÀÎ ¾È µÅÀÖÀ¸¸é 
-			session.setAttribute("alertMsg", "·Î±×ÀÎ ÈÄ ÀÌ¿ë°¡´ÉÇÑ ¼­ºñ½ºÀÔ´Ï´Ù.");
+		} else {	// ë¡œê·¸ì¸ ì•ˆ ë¼ìˆìœ¼ë©´ 
+			session.setAttribute("alertMsg", "ë¡œê·¸ì¸ í›„ ì´ìš©ê°€ëŠ¥í•œ ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤.");
 			response.sendRedirect(request.getContextPath()+"/loginForm.me");
 			return false;
 		}

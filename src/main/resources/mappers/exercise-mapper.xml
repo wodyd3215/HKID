@@ -97,7 +97,7 @@
    </select>
    
    <!-- eno로 운동 조회 -->
-   <select id="exerciseSelect" resultMap="Ex	erciseResult">
+   <select id="exerciseSelect" resultMap="ExerciseResult">
    	SELECT EXERCISE_NO,
             PART_NO,
             PART_NAME,

@@ -78,6 +78,7 @@ function searchFoodList() {
     getFoodList({food: food}, function(foodList){
         const itemList = foodList.response.body.items;
 
+        console.log("itemList : " + itemList);
         // drawFoodBody(document.querySelector("#common-table tbody"), itemList);
     })
 }

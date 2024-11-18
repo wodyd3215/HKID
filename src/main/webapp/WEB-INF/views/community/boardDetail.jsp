@@ -19,6 +19,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    b = ${b}
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -26,12 +27,12 @@
             <!-- 게시글 제목칸-->
             <div id="board-title-wrapper">
                 <div id="board-title">
-                    <p>[전체] 피티 연장할까 고민입니다</p>
+                    <p>${b.boardName}</p>
                 </div>
                 <div id="writer-date--update-delete">
                     <div id="writer-date">
-                        <div>풍근풍근</div> &nbsp;&nbsp;&nbsp;
-                        <div>2024.10.24</div>
+                        <div>${b.memberName}</div> &nbsp;&nbsp;&nbsp;
+                        <div>${b.boardDate}</div>
                     </div>
                     <div class="btn-div">
                         <form class="postForm" method="post">
