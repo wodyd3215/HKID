@@ -74,13 +74,13 @@
             <c:otherwise>
                 <div id="myPage-btn" onclick="showAndHideElement('.myPage-area')">
                     <button>
-                        <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
+                        <img src="${pageContext.request.contextPath}${loginMember.profileImg}">
                     </button>
                     <div class="myPage-area hide" >
                         <p>닉네임</p>
                         <hr>
                         <a href="personal.me">개인설정</a>
-                        <a href="">내 다이어리</a>
+                        <a href="myDiaryList.me">내 다이어리</a>
                         <hr>
                         <a href="">찜목록</a>
                         <a href="">구매목록</a>

@@ -1,6 +1,8 @@
 package com.kh.hkid.member.controller;
 
 
+import java.io.File;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -50,7 +52,7 @@ public class MemberController {
 	}
 	
     @GetMapping("personal.me")
-    public String personalForm(Member m) {
+    public String personalForm() {
 	    return "member/personalPage";
     }
     
@@ -147,8 +149,17 @@ public class MemberController {
     
     @PostMapping("updateMember")
     public String updateMember(Member m, MultipartFile upfile, HttpSession session) {
-    	if(!upfile.getOriginalFilename().equals("")) {
+    	String profileImg = ((Member)session.getAttribute("loginMember")).getProfileImg();
+    
+    	// 업로드한 이미지 파일이 존재하는지 확인
+    	if(!upfile.getOriginalFilename().equals("")) {	
+    		if(profileImg != null ) {	
+    			new File(session.getServletContext().getRealPath(profileImg)).delete();
+    		}
+    		
     		m.setProfileImg( "/resources/image/profileImg/"+ Template.saveFile(upfile, session, "/resources/image/profileImg/"));
+    	} else {
+    		m.setProfileImg(profileImg);
     	}
     	
     	int result = memberService.updateMember(m);
