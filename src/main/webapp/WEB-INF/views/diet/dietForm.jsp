@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,13 @@
     <br><br>
 
     <div class="wrapper">
+    	<c:if test="${ not empty alertMsg}">
+			<script>
+				alert("${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>
+		</c:if>
+		
         <h1>영양</h1>
         <br>
         <!-- 음식 검색(모달창 오픈) -->
@@ -44,22 +52,7 @@
             </thead>
             <!-- 반복 -->
             <tbody>
-                <tr id="food-detail">
-                    <td>샌드위치</td>
-                    <td class="kcal-figure">252.0</td>
-                    <td class="carbo-figure">27.2</td>
-                    <td class="pro-figure">8.0</td>
-                    <td class="fat-figure">12.0</td>
-                    <td class="delete-btn"><button onclick="foodDeleteBtn(this)">-</button></td>
-                </tr>
-                <tr id="food-detail">
-                    <td>샌드위치</td>
-                    <td class="kcal-figure">252.0</td>
-                    <td class="carbo-figure">27.2</td>
-                    <td class="pro-figure">8.0</td>
-                    <td class="fat-figure">12.0</td>
-                    <td class="delete-btn"><button onclick="foodDeleteBtn(this)">-</button></td>
-                </tr>
+
             </tbody>
         </table>
 
@@ -82,14 +75,13 @@
                     <th id="food-btn"></th>
                 </tr>
             </thead>
-            <!-- 반복 -->
             <tbody>
                 <tr id="food-detail">
                     <td>오늘 드신 음식의 영양정보는</td>
-                    <td class="total-kcal"></td>
-                    <td class="total-carbo"></td>
-                    <td class="total-pro"></td>
-                    <td class="total-fat"></td>
+                    <td name="totalKcal" class="total-kcal"></td>
+                    <td name="totalCarbo" class="total-carbo"></td>
+                    <td name="totalProtein" class="total-pro"></td>
+                    <td name="totalFat" class="total-fat"></td>
                     <td class="delete-btn"></td>
                 </tr>
             </tbody>
@@ -97,10 +89,11 @@
 
         <br>
         
-        <div id="food-save-btn">
-            <button>저장</button>
-        </div>
-
+        <c:if test="${loginMember ne null}">
+            <div id="food-save-btn">
+                <button onclick="saveDietInfo()">저장</button>
+            </div>
+        </c:if>
     </div>
     
     <br>
@@ -138,11 +131,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr id="common-table-body">
-                            <td>스테이크</td>
-                            <td>620</td>
-                            <td id="food-add-btn"><button onclick="foodAddBtn(this)">+</button></td>
-                        </tr> -->
+
                     </tbody>
                 </table>
             </div>
