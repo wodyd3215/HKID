@@ -100,6 +100,10 @@ function enrollNickCheck() {
                 $("#nickArea div").text("사용 가능한 닉네임 입니다.");
                 $("#enroll-enter").attr("disabled", false);
             }
+        },
+        error : function(result){
+            console.log("error: " + result);
+            console.log("닉네임 중복체크 실패");
         }
     })
 }
