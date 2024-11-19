@@ -18,20 +18,22 @@
 <body onload="defaultCategory('${category}')">
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     
+
     <!-- 게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
     pi = ${pi}
     <br><br>
-    listCount = ${pi.listCount}
+    pi.listCount = 현재 게시글의 총 개수: ${pi.listCount}
     <br><br>
-    category = ${category}
+    pi.currentPage = ${pi.currentPage}
     <br><br>
     pi.boardLimit = ${pi.boardLimit}
     <br><br>
-    category = ${category}
- -->
+    category = ${category} -->
+
+
 
     <div class="wrapper">
         <br><br><br><br><br>
@@ -49,7 +51,7 @@
             <thead>
                 <tr id="common-table-header">
                     <th class="type-width">
-                        <form action="categoryList.bo">
+                        <form action="list.bo">
                             <input type="hidden" name="choiceBoardCount" value="${pi.boardLimit}">
                             <select name="category" class="table-category" onchange="this.form.submit()" >전체
                                 <option value="전체">전체</option>
@@ -98,10 +100,10 @@
         
         <div id="boCount-wirte-div">
             <!-- 게시글 수  -->
-            <form action="boardCount.bo" method="post">
+            <form action="list.bo" method="Get">
                 <input type="hidden" name="category" value="${category}">
                 <input type="hidden" name="listCount" value="${pi.listCount}">
-                <input type="hidden" name="currentPage" value="${pi.currentPage}">
+                <input type="hidden" name="cpage" value="${pi.currentPage}">
                 <select name="choiceBoardCount" class="table-category" onchange="this.form.submit()">
                     <option value="게시글 수" hidden>글 개수</option>
                     <option value="5">5개씩</option>
@@ -117,8 +119,8 @@
         <div id="searchbar-div">
             <form action="searchBoard.bo" id="search-form">
                 <!-- 필요 데이터 전송 -->
-                <input type="hidden" name="choiceBoardCount" value="${choiceBoardCount}">
-                <input type="hidden" name="currentPage" value="${pi.currentPage}">
+                <input type="hidden" name="cpage" value="${pi.currentPage}">
+                <input type="hidden" name="choiceBoardCount" value="${pi.boardLimit}">
                 <input type="hidden" name="category" value="${category}">
                 
                 <select name="condition" id="search-category" >전체
@@ -138,31 +140,63 @@
         
         <!------------------------ 페이징 처리 ----------------------->
         <div id="paging-div">
-            <!-- 이전페이지 버튼 -->
+            <!-- 이전 페이지 버튼 -->
             <c:choose>
-                <c:when test="${pi.currentPage eq 1 }"> <!-- 현재 페이지가 1이면 -->
-                    <a class="page-btn disabled" href="">&lt;</a> <!-- 비활성화 -->
+                <c:when test="${pi.currentPage eq 1}">
+                    <a class="page-btn disabled startEnd-btn" href=""></a> <!-- 비활성화 -->
                 </c:when>
                 <c:otherwise>
-                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage - 1}&category=${category}&boardLimit=pi.boardLimit=${pi.boardLimit}">&lt;</a>
+                    <c:choose>
+                        <c:when test="${empty condition}">
+                            <a class="page-btn startEnd-btn" href="list.bo?cpage=${pi.currentPage - 1}&category=${category}&boardLimit=${pi.boardLimit}">&nbsp;[이전]</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="page-btn startEnd-btn" href="searchBoard.bo?cpage=${pi.currentPage - 1}&condition=${condition}&keyword=${keyword}&category=${category}&boardLimit=${pi.boardLimit}">&nbsp;[이전]</a>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
-
+        
             <!-- 1~5 페이지 -->
-             <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
-                    <!-- 현재페이지가 아닐 경우 active 클래스 추가(회색) -->
-                    <a class="page-btn ${pi.currentPage != p ? 'active' : ''}" href="list.bo?cpage=${p}&category=${category}&boardLimit=${pi.boardLimit}">${p}</a> <!-- 현재 페이지 검정색 -->
-             </c:forEach>
-             <c:choose>
-                <c:when test="${pi.currentPage eq pi.maxPage }"> <!-- 현재 페이지가 마지막 페이지라면 -->
-                    <a class="page-btn disabled" href="">&gt;</a> <!-- 비활성화 -->
+            <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+                <c:choose>
+                    <c:when test="${empty condition}">
+                        <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
+                           href="list.bo?cpage=${p}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">
+                           ${p}
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
+                           href="searchBoard.bo?cpage=${p}&condition=${condition}&keyword=${keyword}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">
+                           ${p}
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        
+            <!-- 다음 페이지 버튼 -->
+            <c:choose>
+                <c:when test="${pi.currentPage eq pi.maxPage}">
+                    <a class="page-btn disabled" href=""></a> <!-- 비활성화 -->
                 </c:when>
                 <c:otherwise>
-                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage + 1}&category=${category}&boardLimit=pi.boardLimit=${pi.boardLimit}">&gt;</a>
+                    <c:choose>
+                        <c:when test="${empty condition}">
+                            <a class="page-btn startEnd-btn" href="list.bo?cpage=${pi.currentPage + 1}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">&nbsp;[다음]</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="page-btn startEnd-btn" href="searchBoard.bo?cpage=${pi.currentPage + 1}&condition=${condition}&keyword=${keyword}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">&nbsp;[다음]</a>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
         </div>
-    </div>
+        
+
+    <!-- --------------------------------------------------------------------------- -->
+
+
 
 
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>"

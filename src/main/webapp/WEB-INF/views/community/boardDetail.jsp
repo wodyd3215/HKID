@@ -42,13 +42,14 @@
                     </div>
                 </div>
             </div>
+        </div>
         <hr>
             
             <!--댓글작성-->
             <div id="second-div">
-                <div id="content" name="boardContent" required>피티는 지금 50번 정도 받았고  몸이 좋아지긴 했는데 또 받자니 부담이 되네요.. 연장을 하는게 좋을까요?</div>
+                <div id="content" name="boardContent" required>${b.content}</div>
                     
-                </div>
+                
                 <div id="etc-reply-wrapper">
                     <div id="etc-menu">
                         <div> 
@@ -89,22 +90,22 @@
 
             <!-- 댓글리스트 -->
             <div id="all-reply-wrapper">
-            <!-- 댓글 목록 요소1 -->
-            <div class="comments-body">
-                <div class="main-comment">
-                    <div id="comment-left">
-                        <p class="user-name"> 안재휘 <!-- ${c.userName} --></p>
-                        <p>2024.11.11<!-- ${c.date} --> &nbsp;</p>
-                        <button class="add-sub-comment">답글쓰기</button>
-                    </div>
-                    <div class="comment-middle"> 나를 쏘고가라</div>
-                    <div class="comment-right">
-                        <button class="reply-update-btn" onclick="updateReply()">수정</button>
-                        <button class="reply-delete-btn">삭제</button>
+                <!-- 댓글 목록 요소1 -->
+                <div class="comments-body">
+                    <div class="main-comment">
+                        <div id="comment-left">
+                            <p class="user-name"> 안재휘 <!-- ${c.userName} --></p>
+                            <p>2024.11.11<!-- ${c.date} --> &nbsp;</p>
+                            <button class="add-sub-comment">답글쓰기</button>
+                        </div>
+                        <div class="comment-middle"> 나를 쏘고가라</div>
+                        <div class="comment-right">
+                            <button class="reply-update-btn" onclick="updateReply()">수정</button>
+                            <button class="reply-delete-btn">삭제</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--  -->
+                <!--  -->
 
                 <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 -->
                     <hr>     
@@ -149,7 +150,6 @@
                 </div>
    
             <hr>
-        </div>
 
         <!------------------ 아래쪽 게시글 목록 -------------------->
         <div id="bottom-wrapper">
@@ -259,6 +259,7 @@
             </div>
         </div>
     </div>
+
 
 
 
