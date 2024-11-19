@@ -13,4 +13,9 @@
 		<result column="PRODUCT_NO" property="productNo" />
 		<result column="PRODUCT_QUANTITY" property="productQuantity" />			
 	</resultMap>
+	
+	<select id="selectList">
+	
+	</select>
+	
 </mapper>

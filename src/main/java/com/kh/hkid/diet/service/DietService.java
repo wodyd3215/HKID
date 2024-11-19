@@ -1,5 +1,9 @@
 package com.kh.hkid.diet.service;
 
-public interface DietService {
+import com.kh.hkid.diet.model.vo.Diet;
 
+public interface DietService {
+	
+	// 영양정보 저장
+	public int saveDietInfo(Diet d);
 }

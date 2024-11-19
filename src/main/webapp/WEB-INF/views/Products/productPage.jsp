@@ -168,7 +168,7 @@
                     </c:choose>
 
                     <c:forEach var="p" begin ="${pi.startPage}" end="${pi.endPage}">
-                        <a class="" href="product.li?cpage=${p}">${p}</a>
+                        <a class="paging-link ${p == pi.currentPage ? 'active' : ''}" href="product.li?cpage=${p}">${p}</a>
                     </c:forEach>
 
                     <c:choose>

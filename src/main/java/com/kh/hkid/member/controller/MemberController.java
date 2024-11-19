@@ -50,7 +50,7 @@ public class MemberController {
 	}
 	
     @GetMapping("personal.me")
-    public String personalForm(Member m) {
+    public String personalForm() {
 	    return "member/personalPage";
     }
     
@@ -146,11 +146,7 @@ public class MemberController {
     }
     
     @PostMapping("updateMember")
-    public String updateMember(Member m, MultipartFile upfile, HttpSession session) {
-    	if(!upfile.getOriginalFilename().equals("")) {
-    		m.setProfileImg( "/resources/image/profileImg/"+ Template.saveFile(upfile, session, "/resources/image/profileImg/"));
-    	}
-    	
+    public String updateMember(Member m, HttpSession session) {
     	int result = memberService.updateMember(m);
     	
     	if(result > 0) {
@@ -252,6 +248,48 @@ public class MemberController {
     		session.setAttribute("alertMsg", "비밀번호 수정에 실패하였습니다.");
     		
     		return "redirect:/loginForm.me";
+    	}
+    }
+    
+    @ResponseBody
+    @PostMapping("imgChangeAjax.me")
+    public String imgChangeAjax(Member m, MultipartFile imgProfile, HttpSession session) {
+    	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	if(!imgProfile.getOriginalFilename().equals("")) {
+	    	m.setProfileImg("/resources/image/profileImg/"+ Template.saveFile(imgProfile, session, "/resources/image/profileImg/"));
+	    	
+	    	int result = memberService.imgChangeAjax(m);
+	    	
+	    	if(result > 0) {
+	    		Member nm = memberService.loginMember(m);
+	    		
+	    		session.setAttribute("loginMember", nm);
+	    		return nm.getProfileImg();
+	    	} else {
+	    		return "false";
+	    	}
+    	} else {
+    		return "false";
+    	}
+    }
+    
+    @ResponseBody
+    @PostMapping("resetImage.me")
+    public String resetImage(Member m, HttpSession session) {
+    	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	int result = memberService.imgChangeAjax(m);
+    	
+    	if(result > 0) {
+    		Member nm = memberService.loginMember(m);
+    		
+    		session.setAttribute("loginMember", nm);
+    		return nm.getProfileImg();
+    	} else {
+    		return "false";
     	}
     }
 }

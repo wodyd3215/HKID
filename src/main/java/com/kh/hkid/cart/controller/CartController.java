@@ -27,12 +27,13 @@ public class CartController {
 		this.cartService = cartService;
 	}
 	
-	@GetMapping("/cartlist/{memberNo}")
-	public String cartPage(@PathVariable("memberNo") String memberNo, Model model) {
+	@RequestMapping("cartlist.li")
+	public String cartPage(int memberNo, Model model) {
 		
 		ArrayList<Cart> list = cartService.selectCart(memberNo);
 		
-		model.addAttribute("list", list);		
+		
+		model.addAttribute("list", list);
 		return "Products/carts";
 	}
 	

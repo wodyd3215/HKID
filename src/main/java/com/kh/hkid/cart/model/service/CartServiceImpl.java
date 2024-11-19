@@ -21,7 +21,7 @@ public class CartServiceImpl implements CartService{
 	private final CartDao cartDao;
 
 	@Override
-	public ArrayList<Cart> selectCart(String memberNo) {
+	public ArrayList<Cart> selectCart(int memberNo) {
 		return cartDao.selectCart(sqlSession, memberNo);
 	}
 

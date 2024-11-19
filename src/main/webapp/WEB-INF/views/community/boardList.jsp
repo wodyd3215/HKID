@@ -30,7 +30,8 @@
     <br><br>
     pi.boardLimit = ${pi.boardLimit}
     <br><br>
-    choiceBoardCount = ${choiceBoardCount} -->
+    category = ${category}
+ -->
 
     <div class="wrapper">
         <br><br><br><br><br>

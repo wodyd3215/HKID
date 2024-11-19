@@ -57,58 +57,34 @@ input::placeholder{
     border-radius: 5px;
 }
 
-#enroll-phone-certify {
+#enroll-phone {
+    width: 100%;
+}
+
+#enroll-email-certify{
     display: flex;
 }
 
-#enroll-phone {
+#enroll-email {
     width: 60%;
     margin-right: 5px;
 }
 
-#enroll-phone > .enroll-input-area > input {
-    width: 73%;
-}
-
 #enroll-certify {
-    width: 39%;
-}
-
-#enroll-certify > .enroll-input-area > input {
-    width: 58%;
-}
-
-#enroll-email {
-    border: none;
-    padding: 0px;
+    width: 40%;
 }
 
 #enroll-email > input {
-    border: 1px solid rgb(199, 199, 199);
+    border: none;
     border-radius: 5px;
 }
 
 #email-input1 {
-    padding-left: 5px;
+    width: 70%;
 }
 
-#email-input2 {
-    width: 30%;
-    padding-left: 5px;
-    margin-right: 5px;
-}
-
-#enroll-email > #email-input3 {
-    width: 7%;
-    padding: 0 10px;
-    border: none;
-}
-
-#enroll-email > select {
-    width: 30%;
-    height: 100%;
-    border: 1px solid rgb(199, 199, 199);
-    border-radius: 5px;
+#certifyNo {
+    width: 56%;
 }
 
 #enroll-address {
