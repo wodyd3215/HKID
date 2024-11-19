@@ -44,7 +44,7 @@ public class BoardController {
 	
 	//전체 게시글 개수, 목록
 	@GetMapping("list.bo")
-<<<<<<< HEAD
+
 	public String selectList(
 			@RequestParam(value="cpage", defaultValue="1") int cpage,
 			@RequestParam(value="choiceBoardCount", defaultValue="10") int choiceBoardCount,
@@ -53,14 +53,6 @@ public class BoardController {
 		int boardCount = boardService.selectListCount(); //게시글의 총 개수
 																	//게시글 개수(4번째 매개변수)
 		PageInfo pi = Template.getPageInfo(boardCount, cpage, 10, 10); //페이징 처리
-=======
-	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int boardCount = boardService.selectListCount(); //게시글의 총 개수											
-														 //게시글 개수(4번째 매개변수)
-		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
-		
-		ArrayList<Community> list = boardService.selectList(pi);	//게시글 리스트
->>>>>>> 3fbbd5c0aca6c172451a508077199dd11f67dda6
 		
 		ArrayList<Community> list = boardService.selectList(pi);
 		System.out.println("list.bo에 있는 전체 게시글 가져옴");
