@@ -51,10 +51,10 @@
             &nbsp;<a href="searchPwdForm.me">비밀번호 찾기</a>
         </div>
         <!-- 간편로그인 -->
-        <fieldset style="text-align: center; border: none; border-top: 1px solid rgb(223, 223, 223);">
+        <fieldset id="social-login">
             <legend>&nbsp;&nbsp;간편 로그인&nbsp;&nbsp;</legend>
             <button id="kakao-login"><img src="${pageContext.request.contextPath}/resources/image/Kakao_Logo.png"><p>카카오 로그인</p></button>
-            <button id="naver-login"><img src="${pageContext.request.contextPath}/resources/image/Naver_Logo.png"><p>네이버 로그인</p></button>
+            <button id="naver-login" onclick="naverLogin()" value="네이버로그인"><img src="${pageContext.request.contextPath}/resources/image/Naver_Logo.png"><p>네이버 로그인</p></button>
             <button id="google-login"><img src="${pageContext.request.contextPath}/resources/image/Google_Logo.png"><p>Google 로그인</p></button>
         </fieldset>
     </div>
