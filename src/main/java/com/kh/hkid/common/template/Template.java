@@ -1,9 +1,16 @@
 package com.kh.hkid.common.template;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -57,5 +64,60 @@ public class Template {
 		}
 		
 		return changeName;
+	}
+	
+	// API에 GET요청 보내고 응답을 받아오는 메서드
+	public static String get(String apiUrl, Map<String, String> requestHeaders) {
+		HttpURLConnection conn = connect(apiUrl);
+		
+		try {
+			conn.setRequestMethod("GET");
+			
+			for(Map.Entry<String, String> header : requestHeaders.entrySet()) {
+				conn.setRequestProperty(header.getKey(), header.getValue());
+			}
+			
+			int responseCode = conn.getResponseCode();
+			
+			if(responseCode == 200) {
+				return readBody(conn.getInputStream());
+			}
+			
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("API요청을 통한 응답 실패 : " + apiUrl, e);
+		}
+	}
+	
+	// API에 연결하기위한 HttpURLConnection객체를 생성해서 반환하는 메서드
+	private static HttpURLConnection connect(String apiUrl) {
+		try {
+			URL url = new URL(apiUrl);
+			return (HttpURLConnection)url.openConnection();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("연결에 실패하였습니다. : " + apiUrl, e);
+		}
+	}
+	
+	public static String readBody(InputStream bodyInput) {
+		
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(bodyInput))){
+			StringBuffer res = new StringBuffer();
+			
+			String inputLine;
+	    	while((inputLine = br.readLine()) != null) {
+	    		res.append(inputLine);
+	    	}
+	    	
+	    	return res.toString();
+		} catch(IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("바디정보를 읽는데 실패하였습니다. ", e);
+		}
 	}
 }

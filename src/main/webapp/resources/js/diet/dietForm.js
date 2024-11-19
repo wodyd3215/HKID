@@ -50,12 +50,19 @@ function foodDeleteBtn(_this) {
 
 // 음식 검색 리스트
 function searchFoodList() {
-    const food = $("#diet-search-bar").val()
+    const food = $("#diet-search-bar").val();
+    const tbody = document.querySelector("#common-table tbody");
     console.log("Food:" + food);
+
+    tbody.innerHTML = ("<tr class='container mt-3'>"
+                            + "<td id='table-spinner' colspan='3'>"
+                                + "<div class='spinner-border'>" + "</div>"
+                            + "</td>"
+                        + "</tr>");
 
     getFoodList({food: food}, function(itemList){
         console.log(itemList);
-        drawFoodBody(document.querySelector("#common-table tbody"), itemList);
+        drawFoodBody(tbody, itemList);
     })
 }
 
@@ -84,14 +91,14 @@ function drawFoodBody(parent, itemArr) {
                                 + "<td>" + item.FOOD_NM_KR + "</td>"
                                 + "<td>" + Math.floor(item.AMT_NUM1) + "</td>"
                                 + "<td id='food-add-btn'>" 
-                                    + "<button onclick='foodAddBtn(event, " + JSON.stringify(item) + ")'>" + "+" + "</button>" 
+                                    + "<button onclick='foodAddBtn(" + JSON.stringify(item) + ")'>" + "+" + "</button>" 
                                 + "</td>"
                             + "</tr>")
     }
 }
 
 // 음식 추가 버튼
-function foodAddBtn(event, item) {
+function foodAddBtn(item) {
     // 새로운 행을 만들기
     const newRow = document.createElement('tr');
     newRow.id = 'food-detail';
