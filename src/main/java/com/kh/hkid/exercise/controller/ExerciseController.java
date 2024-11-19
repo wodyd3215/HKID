@@ -33,7 +33,7 @@ public class ExerciseController {
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int boardCount = exerciseService.selectListCount();
 		
-		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 15);
+		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 9);
 		
 		ArrayList<Exercise> list = exerciseService.selectList(pi);
 		
@@ -58,7 +58,7 @@ public class ExerciseController {
 			
 			 int filteredBoardCount = exerciseService.searchListCount(filterMap);  // 필터링된 항목 수
 			 
-			 PageInfo pi = Template.getPageInfo(filteredBoardCount, currentPage, 5, 15);
+			 PageInfo pi = Template.getPageInfo(filteredBoardCount, currentPage, 5, 9);
 			
 			List<Exercise> exercises = exerciseService.search(filterMap, pi);
 			
