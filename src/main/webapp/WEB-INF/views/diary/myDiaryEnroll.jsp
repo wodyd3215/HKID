@@ -23,6 +23,7 @@ pageEncoding="UTF-8"%>
 <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/diary/diary.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member/diaryEnroll.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 
 </head>
 <body onload="init('${pageContext.request.contextPath}')">
@@ -43,6 +44,5 @@ pageEncoding="UTF-8"%>
             </div>
         </form>
     </div>
-    <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </body>
 </html>

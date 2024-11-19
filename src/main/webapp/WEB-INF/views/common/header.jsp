@@ -103,3 +103,5 @@
     <jsp:include page="/WEB-INF/views/common/chatBox.jsp" />
 </body>
 </html>
+
+<!-- favorite.li -->
