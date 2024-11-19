@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/resources/js/main/main.js"></script>
+
 
 </head>
 <body>
@@ -267,5 +267,6 @@
 		</div>	
 	</div>
 	<jsp:include page="common/footer.jsp" />
+	<script src="${pageContext.servletContext.contextPath}/resources/js/main/main.js"></script>
 </body>
 </html>

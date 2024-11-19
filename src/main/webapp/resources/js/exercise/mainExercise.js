@@ -19,3 +19,26 @@ window.onload = function () {
         }
     });
 };
+
+
+/*swiper */
+var swiper = new Swiper(".mySwiper", {
+    direction: 'vertical',
+      slidesPerView: 3,//보여줄 이미지갯수
+      spaceBetween: 15,
+      slidesPerGroup: 1,//페이징 그룹핑할 갯수(슬라이드할 이미지 갯수)
+      loop: true,
+      loopFillGroupWithBlank: true,
+      /*하단 ... 페이징 ui 표시 여부
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      */
+      navigation: {//좌우 이동 클릭
+        nextEl: ".slider__next",
+        prevEl: ".slider__prev",
+      },
+      
+      
+    });
