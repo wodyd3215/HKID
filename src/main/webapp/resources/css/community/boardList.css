@@ -210,11 +210,14 @@ table td:nth-child(5) { /* 5번째 td */
 #login-modal .custom-modal-title{
     font-size: 18px;
     text-align: center;
+    padding-top: 10px;
 }
 
 #login-modal .custom-modal-content{
     height: 80px;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 /* 모달 가운데 border 제거 */

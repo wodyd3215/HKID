@@ -95,7 +95,10 @@
   <select id="selectSearchCount" resultType="_int">
   	SELECT COUNT(*)
   	  FROM COMMUNITY
-  	  JOIN MEMBER USING (MEMBER_NO)
+  	  JOIN MEMBER 
+  	  	   USING (MEMBER_NO)
+  	  JOIN COMMUNITY_CATEGORY 
+  	  	   USING (COMMUNITY_NO)
   	 WHERE BOARD_STATUS = 'Y'
   	 <if test="condition == 'writer'">
   		 AND MEMBER_NAME
@@ -109,6 +112,11 @@
 	 </if>
 	 -->
 	 LIKE '%' || #{keyword} || '%'
+	 <if test="category != NULL">
+	 	 AND COMMUNITY_NAME 
+	 	LIKE '%' || #{category} || '%'
+	 </if>
+	 
 	</select>
 	 
 	<!-- 검색 게시글 목록 -->
@@ -135,6 +143,10 @@
 		</if>
 		-->
 		 	LIKE '%' || #{keyword} || '%'
+		 <if test="category != NULL">
+		 	AND COMMUNITY_NAME 
+	 	 	LIKE '%' || #{category} || '%'
+	 	 </if>
   		 	ORDER BY BOARD_NO DESC
   </select>
  

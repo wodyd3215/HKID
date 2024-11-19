@@ -44,13 +44,21 @@ public class BoardController {
 	
 	//전체 게시글 개수, 목록
 	@GetMapping("list.bo")
-	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int boardCount = boardService.selectListCount(); //게시글의 총 개수											
-														 //게시글 개수(4번째 매개변수)
-		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
+
+	public String selectList(
+			@RequestParam(value="cpage", defaultValue="1") int cpage,
+			@RequestParam(value="choiceBoardCount", defaultValue="10") int choiceBoardCount,
+			String category, 
+			Model model) {
+		int boardCount = boardService.selectListCount(); //게시글의 총 개수
+																	//게시글 개수(4번째 매개변수)
+		PageInfo pi = Template.getPageInfo(boardCount, cpage, 10, 10); //페이징 처리
 		
-		ArrayList<Community> list = boardService.selectList(pi);	//게시글 리스트
-		
+		ArrayList<Community> list = boardService.selectList(pi);
+		System.out.println("list.bo에 있는 전체 게시글 가져옴");
+
+		model.addAttribute("choiceBoardCount", choiceBoardCount);
+		model.addAttribute("category", category);
 		model.addAttribute("nList", boardService.selectNoticeList());
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
@@ -59,7 +67,11 @@ public class BoardController {
 	
 	//카테고리 게시판 개수, 목록
 	@GetMapping("categoryList.bo")
-	public String selectCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String category, Model model) {	
+	public String selectCategoryList(
+			@RequestParam(value="cpage", defaultValue="1") int currentPage, 
+			@RequestParam(value="choiceBoardCount", defaultValue="10") int choiceBoardCount, 
+			String category, 
+			Model model) {	
 		
 		//전체 카테고리를 선택했으면 list.bo로 리다이렉트
 		if(category.equals("전체")) { 	
@@ -68,9 +80,10 @@ public class BoardController {
 		currentPage = 1; // 카테고리 변경 시 1페이지로
 		int boardCount = boardService.selectCategoryListCount(category);
 		
-		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, 10); //페이징 처리
+		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 10, choiceBoardCount); //페이징 처리
 		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//게시글 리스트
 	
+		model.addAttribute("choiceBoardCount", choiceBoardCount);
 		model.addAttribute("nList", boardService.selectNoticeList());
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
@@ -80,18 +93,15 @@ public class BoardController {
 	
 	// 게시글 개수 선택
 	@PostMapping("boardCount.bo")
-	public String boardCount(String category, int listCount, int currentPage, int choiceBoardCount, Model model) {
-	
+	public String boardCount(String category, int listCount, int currentPage, @RequestParam(value="choiceBoardCount", defaultValue="10")int choiceBoardCount, Model model) {
 		PageInfo pi = Template.getPageInfo(listCount, currentPage, 10, choiceBoardCount); //페이징 처리
+		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//카테고리 게시글 리스트(작동X)
 		
-
-		ArrayList<Community> list = boardService.selectCategoryList(pi, category);	//카테고리 게시글 리스트
-		
-		//카테고리가 전체 or 선택x
-		if(category.equals("전체") || (category == null)) {
-			list = boardService.selectList(pi); //전체 게시글
+		if((category == null) || (category == "")) { //카테고리 선택이 안 됐으면 전체 게시글
+			listCount = boardService.selectListCount(); //게시글의 총 개수
+			pi = Template.getPageInfo(listCount, currentPage, 10, choiceBoardCount);
+			list = boardService.selectList(pi);
 		}
-		
 		model.addAttribute("choiceBoardCount", choiceBoardCount);
 		model.addAttribute("category", category);
 		model.addAttribute("pi", pi);
@@ -102,32 +112,37 @@ public class BoardController {
 	
 	//게시글 검색
 	@GetMapping("searchBoard.bo")
-	public String selectSearchBoardList(String condition, String keyword, int choiceBoardCount, int currentPage, Model model) {
-		HashMap<String, String> map = new HashMap<>();
+	public String selectSearchBoardList(
+			String condition, 
+			String keyword, 
+			String category,
+			@RequestParam(value="choiceBoardCount", defaultValue="10")int choiceBoardCount, 
+			int currentPage, 
+			Model model) {
 		
+		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
+	
+		map.put("category", category);
 		
-		int searchCount = boardService.selectSearchCount(map);	//검색한 게시글 개수
-		System.out.println("검색한 게시글 개수: "+searchCount + "개");
-		
+		int searchCount = boardService.selectSearchCount(map);	//검색한 게시글의 개수
 		PageInfo pi = Template.getPageInfo(searchCount, currentPage, 10, choiceBoardCount);
-		
-		
 		ArrayList<Community> list = boardService.selectSearchList(map, pi);
 		
+//		if((category != null) || (category != "")) { //카테고리를 선택했으면
+//			
+//		}
+
 		System.out.println("검색한 게시글 목록 >>>" + list);
 		
+		model.addAttribute("category", category);
+		model.addAttribute("choiceBoardCount", choiceBoardCount);
 		model.addAttribute("nList", boardService.selectNoticeList()); //공지게시글
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "community/boardList";
 	}
-	
-	
-	
-	
-	
 	
 	//게시글 작성
 	@GetMapping("boardWrite.bo")
@@ -165,7 +180,7 @@ public class BoardController {
 		commentReply.setDate("2024.11.08");
 		commentReply.setUserName("안재휘");
 		
-		replyList.add(commentReply)	;	
+		replyList.add(commentReply)	;
 		int replyCount = replyList.size();
 		
 		model.addAttribute("replyList", replyList);
