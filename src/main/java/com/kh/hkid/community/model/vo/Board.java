@@ -12,4 +12,5 @@ public class Board {
 	private int communityNo;
 	private int memberNo;
 	private String memberName;
+	private String content;
 }

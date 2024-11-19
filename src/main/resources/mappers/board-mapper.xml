@@ -5,10 +5,11 @@
 
 <mapper namespace="boardMapper">
   
-  <resultMap type="Board" id="boardResultSet">
+  <resultMap id="boardResultSet" type="Board">
   	<result column="BOARD_NO" property="boardNo"/>
   	<result column="BOARD_NAME" property="boardName"/>
   	<result column="BOARD_DATE" property="boardDate"/>
+  	<result column="BOARD_CONTENT" property="content"/>
   	<result column="BOARD_VIEW_COUNT" property="boardViewCount"/>
   	<result column="BOARD_STATUS" property="boardStatus"/>
   	<result column="COMMUNITY_NO" property="communityNo"/>
@@ -16,7 +17,7 @@
   	<result column="MEMBER_NO" property="memberName"/>
   </resultMap>
   
-  <resultMap type="Community" id="commmunityResultSet">
+  <resultMap id="commmunityResultSet" type="Community">
   	<result column="BOARD_NO" property="boardNo"/>
   	<result column="BOARD_NAME" property="boardName"/>
   	<result column="BOARD_DATE" property="boardDate"/>
@@ -112,7 +113,7 @@
 	 </if>
 	 -->
 	 LIKE '%' || #{keyword} || '%'
-	 <if test="category != NULL">
+	 <if test="category != '전체'"> <!-- 카테고리가 '전체'일 경우 커뮤니티 where 실행안함 -->
 	 	 AND COMMUNITY_NAME 
 	 	LIKE '%' || #{category} || '%'
 	 </if>
@@ -143,7 +144,7 @@
 		</if>
 		-->
 		 	LIKE '%' || #{keyword} || '%'
-		 <if test="category != NULL">
+		 <if test="category != '전체'">
 		 	AND COMMUNITY_NAME 
 	 	 	LIKE '%' || #{category} || '%'
 	 	 </if>
@@ -152,10 +153,11 @@
  
   	
   	<!-- 게시글 상세 -->
-  	<select id="selectBoard" resultType="Board">
+  	<select id="selectBoard" resultMap="boardResultSet">
   	 SELECT BOARD_NO,
 			BOARD_NAME,
-			BOARD_DATE,
+			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') as BOARD_DATE,
+			BOARD_CONTENT,
 			SEQ_BOARD_VIEW_COUNT.nextval
 			MEMBER_NAME
 	   FROM COMMUNITY
@@ -163,8 +165,6 @@
 	  WHERE BOARD_STATUS = 'Y'
 	  	AND	BOARD_NO = #{boardNo}
   </select>
-  
-  
 </mapper>
 
 
