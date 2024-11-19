@@ -19,6 +19,7 @@
  		<typeAlias type="com.kh.hkid.community.model.vo.Board" alias="Board"/>
  		<typeAlias type="com.kh.hkid.community.model.dto.Community" alias="Community"/>
  		<typeAlias type="com.kh.hkid.cart.model.vo." alias="Cart"/>
+ 		<typeAlias type="com.kh.hkid.cart.model.vo.Cart" alias="Cart"/>
 		<typeAlias type="com.kh.hkid.favorite.model.vo.Favorite" alias="Favorite"/>
 		<typeAlias type="com.kh.hkid.diet.model.vo.Diet" alias="Diet"/>
  	</typeAliases>
