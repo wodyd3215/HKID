@@ -13,8 +13,7 @@
 	</resultMap>
 	
 	<select id="selectList" resultType="Favorite">
-		SELECT F.MEMBER_ID memberId,
-			   PRODUCT_NO productNo
+		SELECT PRODUCT_NO productNo
 		  FROM FAVORITE F
 		  JOIN PRODUCT P
 		 USING (PRODUCT_NO)
