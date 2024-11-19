@@ -54,9 +54,9 @@
                                 <input type="checkbox" class="selectCart" name="selectBox">
                             </td>
                             <td>
-                                <c:if test="${}">
+                                <!-- <c:if test="${}">
                                     <img src="${pageContext.request.contextPath}/resources/image/${entry.key}.jpg" alt="${entry.key}" class="product-image">
-                                </c:if>
+                                </c:if> -->
                             </td>
                             <td class="cartItemName">${list.name}</td>
                             <td>
