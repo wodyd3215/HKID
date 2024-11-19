@@ -10,7 +10,7 @@ import com.kh.hkid.cart.model.vo.Cart;
 @Repository
 public class CartDao {
 
-	public ArrayList<Cart> selectCart(SqlSessionTemplate sqlSession, String memberNo) {
+	public ArrayList<Cart> selectCart(SqlSessionTemplate sqlSession, int memberNo) {
 		return (ArrayList)sqlSession.selectList("cartMapper.selectCart", memberNo);
 	}
 

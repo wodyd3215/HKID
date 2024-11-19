@@ -79,7 +79,7 @@
                                 <img src="${pageContext.request.contextPath}/resources/image/profileImg/guest-icon.png">
                             </c:when>
                             <c:otherwise>
-                                <img src="${pageContext.request.contextPath}${loginMember.profileImg}">
+                                <img class="profile-img" src="${pageContext.request.contextPath}${loginMember.profileImg}">
                             </c:otherwise>
                         </c:choose>
                         
@@ -90,7 +90,7 @@
                         <a href="personal.me">개인설정</a>
                         <a href="myDiaryList.me">내 다이어리</a>
                         <hr>
-                        <a href="">찜목록</a>
+                        <a href="favorite.li">찜목록</a>
                         <a href="">구매목록</a>
                         <hr>
                         <a href="logout.me" id="logout-btn">로그아웃</a>
