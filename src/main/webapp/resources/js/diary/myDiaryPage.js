@@ -59,18 +59,38 @@ function loadMyDiaryAjax(pageInfo, callback) {
 
 function drawDiaryPreview(dList) {
     const listArea = $('.list-area')
-
     dList.forEach(diary => {
+        const dEdit = diary.diaryContent
         const conPre = $("<div>").addClass("my-content");
         const conArea = $("<div>").addClass("content-area");
         const dTitle = $("<div>").addClass("diary-title").text(diary.diaryTitle).click(() => {
             location.href = `detailDiary.di?diaryNo=${diary.diaryNo}`;
         });
-        const dContent = $("<p>").addClass("diary-content").html(diary.diaryContent);
+        const dImg = searchImg(dEdit)
+        const dContent = $("<p>").addClass("diary-content").html(dEdit.replace(/<img\b[^>]*>/g, ''));
         const enrollDate = $("<div>").addClass("enroll-date").text(diary.createDate);
 
         listArea.append(conPre)
+        if(dImg !== null) {
+            conPre.append(dImg)
+        }
         conPre.append(conArea)
         conArea.append(dTitle, dContent, enrollDate)
     });
+}
+
+function searchImg(content) {
+    const container = document.createElement("div"); // 임시 DOM 컨테이너
+    container.innerHTML = content; // HTML 문자열 삽입
+
+    const image = container.querySelector('img'); // 첫 번째 <img> 태그 검색
+
+    if (image) { // 이미지가 있는 경우
+        const imgArea = $("<div>").addClass("img-area"); // 이미지 컨테이너
+        const imgTag = $("<img>").attr('src', image.getAttribute('src')); // <img> 태그 생성
+        imgArea.append(imgTag);
+        return imgArea;
+    } else {
+        return null; // 이미지가 없으면 null 반환
+    }
 }

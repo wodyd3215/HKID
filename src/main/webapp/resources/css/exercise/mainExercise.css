@@ -1,34 +1,29 @@
 @charset "UTF-8";
 .exerTitle{
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
-    margin-top: 80px;
+    margin-left: 400px;
     caret-color: transparent;
 }
 
 #exerSearch-form{
-    width: 1056px;
+    width: 1000px;
     height: 320px;
     margin-top: 100px;
-    padding-top: 1px;
 }
 
 
 
 #exerSearch-form table th p{
-    width: 150px; height: 100px;
+    width: 120px; height: 100px;
     background-color: #DBF1FD;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 480;
     line-height: 100px;
-    border-radius: 100px;
+    border-radius: 40px;
     text-align: center;
 }
 
-.part{
-    height: 100px;
-    width: 1000px;
-}
 
 .part select{
     appearance: none;
@@ -41,7 +36,6 @@
 .part{
     width: 970px; height: 80px;
     border-radius: 50px;
-    border: solid none;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -52,19 +46,17 @@
 }
 
 .part input[type=checkbox]+label{
-    display: inline-block;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 30px;
-    line-height: 24px;
-    align-items: center;
-    font-weight:bold;
-    font-size:20px;
+    /* line-height: 24px; */
+    font-weight: bold;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 50px 25px;
+    margin: 15px;
     caret-color: transparent;
 }
 
@@ -104,15 +96,13 @@
 }
 
 .difficulty input[type=checkbox]+label{
-    display: inline-block;
     cursor: pointer;
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     border-radius: 30px;
     line-height: 24px;
-    align-items: center;
-    font-weight:bold;
-    font-size:20px;
+    font-weight: bold;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,14 +121,13 @@
 }
 
 .exerContent{
-    margin-top: 180px;
     display: flex;
     justify-content: space-between;
     align-items: center; /* 세로 정렬 */
 }
 
 .exerTitle2{
-    font-size: 50px;
+    font-size: 35px;
     caret-color: transparent;
 }
 
@@ -148,10 +137,9 @@
 }
 
 .content-box{
-    margin-top: 350px;
+    width: 1000px;
+    margin-top: 150px;
     border-radius: 100px;
-    width: 1056px;
-    height: 2000PX;
     background-color: #DBF1FD;
     display: flex;
     justify-content: space-evenly;
@@ -161,22 +149,22 @@
 }
 
 .list-box {
-    width: 1080px;
     height: fit-content;
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 50px;
+    justify-content: center;
 }
 
 #list-con{
-    padding-bottom: 20px;
+    padding: 30px;
 }
 
- #list-img{
-     width: 250px; height: 250px;
-     margin: 0 auto;
+ #list-img > a > img{
+    border-radius: 20px;
+    width: 250px;
+    height: 225px;
+    margin: 0 auto;
+
  }
  #under-area{
      display: flex;
@@ -189,8 +177,8 @@
  }
 
 .list-text2{
-     font-size: 25px;
-     border: 1px #000; height: 40px;
+    font-size: 15px;
+    font-weight: bold;
  }
  #under-area button{
      margin-right: 10px;
@@ -215,9 +203,9 @@
  
  #paging-area{
  	margin-left: 200px;
-    align-items: center;
     font-size: large;
     font-weight: 600;
+    padding-block: 50px;
  }
  
   #paging-area a {
@@ -247,7 +235,8 @@
 
   
 .flootbox{
-    margin-top: 850px;
+    margin-top: 650px;
+    overflow: hidden; /* 슬라이드 외부 콘텐츠 숨김 */
 }
  
 
@@ -263,6 +252,7 @@
     border: 1px solid black;
     margin-left: 55px;
  }
+ 
 
  .flootbox-content{
     width: 210px;
@@ -318,3 +308,72 @@
     margin-top: 30px;
   }
 
+  /*swiper*/
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-wrapper{
+    display: flex;
+    align-items: center;
+  }
+  
+  .mySwiper{
+    border: solid black;
+    background-color: #DBF1FD;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .box-size{
+    margin-block: 20px;
+    width: 170px !important; 
+    height: 170px !important;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+
+.slider__prev,
+.slider__next {
+cursor: pointer;
+text-align: center;
+font-size: 14px;
+height: 48px;
+display: flex;
+align-items: center;
+justify-content: center;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.slider__prev:focus,
+.slider__next:focus {
+outline: none;
+}

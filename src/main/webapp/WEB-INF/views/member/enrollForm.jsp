@@ -86,7 +86,7 @@
                 <div id="enroll-email">
                     <h3 class="enroll-input-title">*이메일</h3>
                     <div class="enroll-input-area">
-                        <input id="email-input1" type="text" name="email" placeholder="이메일 입력" required>
+                        <input id="email-input1" type="text" name="email" placeholder="이메일 입력" required readonly>
                         <div class="all-btn" id="email-certify">이메일 인증</div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                         <div>인증번호가 일치하지 않습니다.</div>
                     </div>
                     <div class="enroll-input-area">
-                        <input type="text" id="certifyNo" name="certifyNo" placeholder="인증번호 입력" required>
+                        <input type="text" id="certifyNo" name="certifyNo" placeholder="인증번호 입력" required readonly>
                         <div class="all-btn">인증</div>
                     </div>
                 </div>
