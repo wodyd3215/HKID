@@ -18,7 +18,7 @@
 <body onload="defaultCategory('${category}')">
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     
-    게시글 = ${list}
+    <!-- 게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
@@ -26,15 +26,16 @@
     <br><br>
     listCount = ${pi.listCount}
     <br><br>
+    category = ${category}
+    <br><br>
     pi.boardLimit = ${pi.boardLimit}
     <br><br>
-    category = ${category}
-
+    choiceBoardCount = ${choiceBoardCount} -->
 
     <div class="wrapper">
         <br><br><br><br><br>
         <c:choose>
-            <c:when test="${category != null}"> <!-- 카테고리 정보가 있으면 출력 -->   
+            <c:when test="${category != null and not empty category}"> <!-- 카테고리 정보가 있으면 출력 -->   
                 <h1>${category}</h1>
             </c:when>
             <c:otherwise>
@@ -48,6 +49,7 @@
                 <tr id="common-table-header">
                     <th class="type-width">
                         <form action="categoryList.bo">
+                            <input type="hidden" name="choiceBoardCount" value="${pi.boardLimit}">
                             <select name="category" class="table-category" onchange="this.form.submit()" >전체
                                 <option value="전체">전체</option>
                                 <option value="질문" >질문</option>
@@ -116,9 +118,10 @@
                 <!-- 필요 데이터 전송 -->
                 <input type="hidden" name="choiceBoardCount" value="${choiceBoardCount}">
                 <input type="hidden" name="currentPage" value="${pi.currentPage}">
-
+                <input type="hidden" name="category" value="${category}">
+                
                 <select name="condition" id="search-category" >전체
-                    <option value="writer">작성자</option>
+                    <option value="writer" selected>작성자</option>
                     <option value="title">제목</option>
                     <option value="content">내용</option>
                 </select>
@@ -140,21 +143,21 @@
                     <a class="page-btn disabled" href="">&lt;</a> <!-- 비활성화 -->
                 </c:when>
                 <c:otherwise>
-                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage - 1}">&lt;</a>
+                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage - 1}&category=${category}&boardLimit=pi.boardLimit=${pi.boardLimit}">&lt;</a>
                 </c:otherwise>
             </c:choose>
 
             <!-- 1~5 페이지 -->
              <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
                     <!-- 현재페이지가 아닐 경우 active 클래스 추가(회색) -->
-                    <a class="page-btn ${pi.currentPage != p ? 'active' : ''}" href="list.bo?cpage=${p}">${p}</a> <!-- 현재 페이지 검정색 -->
+                    <a class="page-btn ${pi.currentPage != p ? 'active' : ''}" href="list.bo?cpage=${p}&category=${category}&boardLimit=${pi.boardLimit}">${p}</a> <!-- 현재 페이지 검정색 -->
              </c:forEach>
              <c:choose>
                 <c:when test="${pi.currentPage eq pi.maxPage }"> <!-- 현재 페이지가 마지막 페이지라면 -->
                     <a class="page-btn disabled" href="">&gt;</a> <!-- 비활성화 -->
                 </c:when>
                 <c:otherwise>
-                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage + 1}">&gt;</a>
+                    <a class="page-btn" href="list.bo?cpage=${pi.currentPage + 1}&category=${category}&boardLimit=pi.boardLimit=${pi.boardLimit}">&gt;</a>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -175,9 +178,9 @@
         </div>
         <div class="custom-modal-content">
             <!-- 로그인하러가는  "예" 버튼 -->
-             <form action="boardWrite.bo" method="GET">
-                <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">로그인</button>
-             </form>
+             <!-- <form action="boardWrite.bo" method="GET"> -->
+            <a href=""><button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">로그인</button></a>
+             <!-- </form> -->
             <!-- 모달 닫기 -->
             <button class="modal-btn" id="no-btn" onclick="closeModal()">닫기</button>
         </div>

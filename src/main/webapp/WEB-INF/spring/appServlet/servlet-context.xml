@@ -47,7 +47,7 @@
  	<interceptors>
  		<interceptor>
 			<mapping path="" /> <!-- 게시글작성 -->
-			<!-- <mapping path="/boardWrite.bo" /> -->
+			<mapping path="/boardWrite.bo" />
 			
 
 			<beans:bean class="com.kh.hkid.common.interceptor.LoginInterceptor" id="loginInterceptor" />
