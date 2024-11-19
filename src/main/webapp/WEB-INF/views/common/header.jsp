@@ -90,7 +90,7 @@
                         <a href="personal.me">개인설정</a>
                         <a href="myDiaryList.me">내 다이어리</a>
                         <hr>
-                        <a href="favorite.li">찜목록</a>
+                        <a href="">찜목록</a>
                         <a href="">구매목록</a>
                         <hr>
                         <a href="logout.me" id="logout-btn">로그아웃</a>
@@ -103,3 +103,5 @@
     <jsp:include page="/WEB-INF/views/common/chatBox.jsp" />
 </body>
 </html>
+
+<!-- favorite.li -->
