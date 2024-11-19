@@ -175,12 +175,12 @@
  <div class="modal" id="login-modal">
     <div class="custom-modal">
         <div class="custom-modal-header">
-            <div class="custom-modal-title"><%= (alert != null) ? alert : "로그인 인터페이스 주석처리 중" %></div>
+            <div class="custom-modal-title"><%= (alert != null) ? alert : "로그인이 필요한 기능입니다" %></div>
         </div>
         <div class="custom-modal-content">
             <!-- 로그인하러가는  "예" 버튼 -->
              <!-- <form action="boardWrite.bo" method="GET"> -->
-            <a href=""><button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">로그인</button></a>
+            <a href="boardWrite.bo"><button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">로그인</button></a>
              <!-- </form> -->
             <!-- 모달 닫기 -->
             <button class="modal-btn" id="no-btn" onclick="closeModal()">닫기</button>
