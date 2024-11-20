@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
 
 <script src="${pageContext.request.contextPath}/resources/js/common/default.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/diary/diary.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/member/diaryEnroll.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/diary/diaryEnroll.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 
 </head>
@@ -32,9 +32,11 @@ pageEncoding="UTF-8"%>
             <div id="diary-title">
                 <input type="text" name="diaryTitle" placeholder="제목을 입력하세요">
             </div>
-            <div id="today-ate-cal-info" onclick="loadTodayCal()">
+            <div id="today-ate-cal-info" onclick="loadTodayCal('${loginMember.memberNo}')">
                 <div id="not-loaded-status">클릭해서 가져오기</div>
+                
             </div>
+            <input type="hidden" name="foodNo">
             <div class="edit-area">
                 <textarea id="content" name="diaryContent"></textarea>
             </div>
