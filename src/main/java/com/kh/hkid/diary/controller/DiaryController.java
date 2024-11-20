@@ -54,7 +54,6 @@ public class DiaryController {
 		PageInfo pi = Template.getPageInfo(diaryCount, currentPage, 1, diaryLimit);
 		
 		ArrayList<Diary> dList = diaryService.selectMyDiaryList(pi, memberNo);
-		
 		return new Gson().toJson(dList);
     }
         
@@ -81,7 +80,6 @@ public class DiaryController {
     @PostMapping("insertDiary.di")
     public String insertDiary(Diary d, HttpSession session) {
     	d.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
-    	
     	if(diaryService.insertDiary(d) > 0) {
     		session.setAttribute("alertMsg", "일기 작성 성공");
     	} else {

@@ -27,4 +27,9 @@ public class DietServiceImpl implements DietService {
 		return dietDao.saveDietInfo(sqlSession, d);
 	}
 
+	@Override
+	public Diet loadDietAjax(int memberNo) {
+		return dietDao.loadDietAjax(sqlSession, memberNo);
+	}
+
 }

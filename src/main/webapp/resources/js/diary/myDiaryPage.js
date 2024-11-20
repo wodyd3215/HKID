@@ -14,6 +14,7 @@ function initScrollPaging(mNo) {
 
     const loadEl = (dList) => {
         if(dList) {
+            console.log(dList)
             drawDiaryPreview(dList)
             pageInfo.currentPage++
         } else {

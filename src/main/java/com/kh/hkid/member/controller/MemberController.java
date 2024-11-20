@@ -85,7 +85,7 @@ public class MemberController {
     @PostMapping("login.me")
     public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response) {
     	Member loginMember = memberService.loginMember(m);
-
+    	System.out.println(loginMember);
     	if(loginMember == null || !bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
     		session.setAttribute("alertMsg", "로그인 정보에 맞는 아이디가 존재하지 않습니다."); 
     		return "redirect:/loginForm.me";
