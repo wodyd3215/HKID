@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="./resources/css/default.css">
 <link rel="stylesheet" href="./resources/css/exercise/detailExercise.css?after">
+<link rel="stylesheet" href="./resources/css/exercise/exerciseFloat.css?after">
+ <!-- Link Swiper's CSS -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -47,32 +50,28 @@
 					</ol>
 				</div>
 				<div id="exerIcon">
-					<button type="button">
-						<img src="./resources/img/buy.png">
+					<button type="button" onclick="addToSwiper('${e.exerciseImg}')">
+						<img src="./resources/img/buy.png" class="like(this)" onclick="buy()">
 					</button>
 				</div>
 			</div>
 		</div>
+		<div id="message-container"></div> <!-- 메시지가 표시될 위치 -->
 
 		<div class="flootbox">
-			<div class="flootbox-title">
-				My 루틴
+			<div>
+				<p><img src="./resources/img/buy.png" alt="없음">
+					를 눌러 운동을 담아보세요!
+				</p>
 			</div>
-			<div class="flootbox-content">
-				<button type="button" id="upbtn"></button>
-				<div class="buyContent">
-					<div class="rutinContent">
-						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
-					</div>
-					<div class="rutinContent">
-						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
-					</div>
-					<div class="rutinContent">
-						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
-					</div>
-				</div>
-				<button type="button" id="downbtn"></button>
+			<!-- Swiper -->
+			<div class="slider__prev"></div>
+			<div class="swiper mySwiper" style="height: 39rem;width: 15rem;">
+			  <ul class="swiper-wrapper">
+				
+			  </ul>
 			</div>
+			<div class="slider__next"></div>
 		</div>
 
 	</div>	
@@ -80,5 +79,7 @@
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
+	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+	<script src="./resources/js/exercise/exerciseFloat.js"></script>
 </body>
 </html>

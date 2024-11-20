@@ -44,7 +44,7 @@
 #long-text{
     font-size: 24px; /* 글꼴 크기 */
     line-height: 2.0; /* 줄 간격 */
-    max-width: 900px; /* 최대 너비 제한 */
+    max-width: 600px; /* 최대 너비 제한 */
     margin-bottom: 50px;
     margin-top: 50px;
 }
