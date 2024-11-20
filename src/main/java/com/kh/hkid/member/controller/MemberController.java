@@ -355,24 +355,27 @@ public class MemberController {
         	
         	System.out.println("result : " + memberInfo.get("email"));
         	
-        	m.setNickName(memberInfo.get("nickname").toString());
-        	m.setEmail(memberInfo.get("email").toString());
-        	m.setPhone(memberInfo.get("mobile").toString());
-        	m.setMemberName(memberInfo.get("name").toString());
+        	m.setNickName(memberInfo.get("nickname").getAsString());
+        	m.setEmail(memberInfo.get("email").getAsString());
+        	String mobile = memberInfo.get("mobile").getAsString();
+        	String replacedPhone = mobile.replaceAll("-", "");
+        	m.setPhone(replacedPhone);
+        	m.setMemberName(memberInfo.get("name").getAsString());
+        	m.setProfileImg(memberInfo.get("profile_image").getAsString());
         	
-        	int findMember = memberService.searchMember(memberInfo);
+        	int findMember = memberService.searchMember(m);
         	
         	if(findMember > 0) {
-        		Member loginMember = memberService.socialLoginMember(memberInfo);
-        		
+        		Member loginMember = memberService.socialLoginMember(m);
+        		System.out.println(loginMember);
         		session.setAttribute("loginMember", loginMember);
         		
         		return "redirect:/";
         	} else {
-        		int socialResult = memberService.insertSocialMember(memberInfo);
+        		int socialResult = memberService.insertSocialMember(m);
         		
         		if(socialResult > 0) {
-        			Member loginMember = memberService.socialLoginMember(memberInfo);
+        			Member loginMember = memberService.socialLoginMember(m);
         			
         			session.setAttribute("loginMember", loginMember);
         			

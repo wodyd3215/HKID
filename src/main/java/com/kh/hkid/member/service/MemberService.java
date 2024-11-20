@@ -39,11 +39,11 @@ public interface MemberService {
 	int imgChangeAjax(Member m);
 	
 	// 회원유무 판단
-	int searchMember(JsonObject memberInfo);
+	int searchMember(Member m);
 	
 	// 소셜로그인
-	Member socialLoginMember(JsonObject memberInfo);
+	Member socialLoginMember(Member m);
 	
 	// 소셜회원가입
-	int insertSocialMember(JsonObject memberInfo);
+	int insertSocialMember(Member m);
 }

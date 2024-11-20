@@ -63,17 +63,17 @@ public class MemberDao {
 	}
 	
 	// 회원 유무 판단
-	public int searchMember(SqlSessionTemplate sqlSession, JsonObject memberInfo) {
-		return sqlSession.selectOne("memberMapper.searchMember", memberInfo);
+	public int searchMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.searchMember", m);
 	}
 	
 	// 소셜로그인
-	public Member socialLoginMember(SqlSessionTemplate sqlSession, JsonObject memberInfo) {
-		return sqlSession.selectOne("memberMapper.socialLoginMember", memberInfo);
+	public Member socialLoginMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.socialLoginMember", m);
 	}
 	
 	// 소셜 회원가입
-	public int insertSocialMember(SqlSessionTemplate sqlSession, JsonObject memberInfo) {
-		return sqlSession.insert("memberMapper.insertSocialMember", memberInfo);
+	public int insertSocialMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("memberMapper.insertSocialMember", m);
 	}
 }
