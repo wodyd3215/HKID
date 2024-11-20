@@ -47,8 +47,7 @@
 
  	<interceptors>
  		<interceptor>
-			<!-- 게시글작성 -->
-			<mapping path="/boardWrite.bo" />
+			<mapping path="/boardWrite.bo" /> <!-- 게시글작성 -->
 			<mapping path="/personal.me" /> <!-- 개인설정 -->
 			
 			<!-- 내 다이어리 -->

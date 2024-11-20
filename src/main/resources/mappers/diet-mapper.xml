@@ -25,7 +25,7 @@
   		TOTAL_FAT
   	) VALUES (
   		SEQ_FNO.NEXTVAL,
-  		SEQ_MNO.CURRVAL,
+  		#{memberNo},
   		#{totalKcal}, 
   		#{totalCarbo},
   		#{totalProtein},
@@ -33,4 +33,14 @@
   	)
   </insert>
   
+  <select id="loadDietAjax" resultMap="dietResultSet">
+  	SELECT FOOD_NO,
+  		   TOTAL_KCAL,
+  		   TOTAL_CARBO,
+  		   TOTAL_PROTEIN,
+  		   TOTAL_FAT
+  	  FROM CAL_LOG
+  	 WHERE MEMBER_NO = #{memberNo}
+  	   AND TO_CHAR(SAVE_DATE) = TO_CHAR(SYSDATE)
+  </select>
 </mapper>

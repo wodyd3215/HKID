@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="adminMapper">
+
+	<resultMap id="noticeResultSet" type="Board">
+		<result column="BOARD_NO" property="boardNo"/>
+	  	<result column="BOARD_NAME" property="boardName"/>
+	  	<result column="BOARD_DATE" property="boardDate"/>
+	  	<result column="BOARD_CONTENT" property="content"/>
+	  	<result column="BOARD_VIEW_COUNT" property="boardViewCount"/>
+	  	<result column="BOARD_STATUS" property="boardStatus"/>
+	  	<result column="COMMUNITY_NO" property="communityNo"/>
+	  	<result column="MEMBER_NO" property="memberNo"/>
+	  	<result column="MEMBER_NO" property="memberName"/>
+	</resultMap>
+	
+  <select id="noticeCount" resultType="_int">
+  	SELECT COUNT(*) 
+  	  FROM COMMUNITY
+  	 WHERE BOARD_STATUS = 'Y' AND
+  	 	   COMMUNITY_NO = 1
+  </select>
+
+</mapper>

@@ -150,8 +150,16 @@ table td:nth-child(5) { /* 5번째 td */
     color:gainsboro;
 }
 
+#paging-div .nowpage{
+    color: black;
+}
+
 .disabled{
     pointer-events: none; /* 이벤트 비활성화 */
+}
+
+#paging-div .startEnd-btn{
+    color:rgb(0, 0, 0);
 }
 
 #board-search-btn{
