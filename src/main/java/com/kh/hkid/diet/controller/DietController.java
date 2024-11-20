@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.hkid.diet.model.vo.Diet;
 import com.kh.hkid.diet.service.DietService;
 import com.kh.hkid.member.model.vo.Member;
@@ -45,5 +47,12 @@ public class DietController {
 			
 			return "redirect:/diet.ca";
 		}
+	}
+	
+	@ResponseBody
+	@PostMapping(value="loadDietAjax", produces="application/json; charset=UTF-8")
+	public String loadDietAjax(HttpSession session) {
+		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		return new Gson().toJson(dietService.loadDietAjax(memberNo)); 
 	}
 }

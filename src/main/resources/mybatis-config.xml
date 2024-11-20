@@ -33,6 +33,7 @@
  		<mapper resource="mappers/cart-mapper.xml"/>
  		<mapper resource="mappers/favorite-mapper.xml"/>
  		<mapper resource="mappers/diet-mapper.xml"/>
+ 		<mapper resource="mappers/admin-mapper.xml"/>
  	</mappers>
 
  	
