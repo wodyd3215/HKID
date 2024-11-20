@@ -37,3 +37,8 @@ function naverLogin() {
 
     location.href = apiURL;
 }
+
+// 카카오로그인
+function kakaoLogin() {
+    
+}
