@@ -225,7 +225,7 @@
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
 
-    <!-------- 로그인 버튼 모달 --------->
+    <!-------- 삭제 버튼 모달 --------->
     <div class="modal" id="delete-modal">
         <div class="custom-modal">
             <div class="custom-modal-header">
@@ -233,12 +233,12 @@
             </div>
             <div class="custom-modal-content">
                 <form class="postForm" method="post">
+                    <input type="hidden" name="bno" value="${boardNo}">
                     <!-- 게시글 삭제 버튼 -->
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
                 </form>
                 <!-- 모달 닫기 -->
                 <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
-                
             </div>
         </div>
     </div>
@@ -251,6 +251,7 @@
             </div>
             <div class="custom-modal-content">
                 <form class="postForm" method="post">
+                    <input type="hidden" name="bno" value="${boardNo}">
                     <!-- 신고 버튼 -->
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
                 </form>
@@ -259,9 +260,6 @@
             </div>
         </div>
     </div>
-
-
-
 
 
 </body>

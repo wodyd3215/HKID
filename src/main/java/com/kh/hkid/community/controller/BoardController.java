@@ -115,17 +115,10 @@ public class BoardController {
 		//게시글 조회
 		Board b = boardService.selectBoard(bno);
 	
-		
-		
-		
 		model.addAttribute("b", b);
+		model.addAttribute("pageName", "boardDetail");
 		return "community/boardDetail";
 	}
-		
-
-		
-		
-
 	
 	//게시글 작성
 	@GetMapping("boardWrite.bo")
@@ -143,9 +136,9 @@ public class BoardController {
 	
 	//게시글 삭제
 	@PostMapping("boardDelete.bo")
-	public String boardDelete() {
+	public String boardDelete(int bno) {
 		System.out.println("삭제컨트롤러에서 받음");
-		return "community/boardDetail"; // 임시로 설정
+		return "community/list.bo"; // 임시로 설정
 	}
 	
 
