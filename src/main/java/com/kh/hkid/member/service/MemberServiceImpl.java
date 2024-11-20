@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.JsonObject;
 import com.kh.hkid.diary.model.vo.Diary;
 import com.kh.hkid.member.model.dao.MemberDao;
 import com.kh.hkid.member.model.vo.Member;
@@ -69,14 +70,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 회원 아이디 찾기
-	@Transactional
 	@Override
 	public String searchId(String email) {
 		return memberDao.searchId(sqlSession, email);
 	}
 
 	// 비밀번호 찾기
-	@Transactional
 	@Override
 	public int searchPwd(Member m) {
 		return memberDao.searchPwd(sqlSession, m);
@@ -93,5 +92,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int imgChangeAjax(Member m) {
 		return memberDao.imgChangeAjax(sqlSession, m);
+	}
+
+	// 회원 유무 판단
+	@Override
+	public int searchMember(JsonObject memberInfo) {
+		return memberDao.searchMember(sqlSession, memberInfo);
+	}
+	
+	// 소셜로그인
+	@Override
+	public Member socialLoginMember(JsonObject memberInfo) {
+		return memberDao.socialLoginMember(sqlSession, memberInfo);
+	}
+
+	// 소셜 회원가입
+	@Transactional
+	@Override
+	public int insertSocialMember(JsonObject memberInfo) {
+		return memberDao.insertSocialMember(sqlSession, memberInfo);
 	}
 }

@@ -1,8 +1,6 @@
 package com.kh.hkid.member.service;
 
-import java.util.ArrayList;
-
-import com.kh.hkid.diary.model.vo.Diary;
+import com.google.gson.JsonObject;
 import com.kh.hkid.member.model.vo.Member;
 
 public interface MemberService {
@@ -39,4 +37,13 @@ public interface MemberService {
 	
 	// 이미지 수정
 	int imgChangeAjax(Member m);
+	
+	// 회원유무 판단
+	int searchMember(JsonObject memberInfo);
+	
+	// 소셜로그인
+	Member socialLoginMember(JsonObject memberInfo);
+	
+	// 소셜회원가입
+	int insertSocialMember(JsonObject memberInfo);
 }

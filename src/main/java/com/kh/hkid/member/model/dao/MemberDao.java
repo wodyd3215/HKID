@@ -1,11 +1,9 @@
 package com.kh.hkid.member.model.dao;
 
-import java.util.ArrayList;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.hkid.diary.model.vo.Diary;
+import com.google.gson.JsonObject;
 import com.kh.hkid.member.model.vo.Member;
 
 @Repository
@@ -62,5 +60,20 @@ public class MemberDao {
 	
 	public int imgChangeAjax(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.imgChangeAjax", m);
+	}
+	
+	// 회원 유무 판단
+	public int searchMember(SqlSessionTemplate sqlSession, JsonObject memberInfo) {
+		return sqlSession.selectOne("memberMapper.searchMember", memberInfo);
+	}
+	
+	// 소셜로그인
+	public Member socialLoginMember(SqlSessionTemplate sqlSession, JsonObject memberInfo) {
+		return sqlSession.selectOne("memberMapper.socialLoginMember", memberInfo);
+	}
+	
+	// 소셜 회원가입
+	public int insertSocialMember(SqlSessionTemplate sqlSession, JsonObject memberInfo) {
+		return sqlSession.insert("memberMapper.insertSocialMember", memberInfo);
 	}
 }
