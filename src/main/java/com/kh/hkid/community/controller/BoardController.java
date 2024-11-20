@@ -120,6 +120,16 @@ public class BoardController {
 		return "community/boardDetail";
 	}
 	
+	//게시글 삭제
+	@PostMapping("boardDelete.bo")
+	public String boardDelete(int bno) {
+		System.out.println("삭제컨트롤러에서 받음");
+		System.out.println("받은 bno = " + bno);
+//		
+		
+		return "community/list.bo"; // 임시로 설정
+	}
+	
 	//게시글 작성
 	@GetMapping("boardWrite.bo")
 	public String boardWrite() {
@@ -134,12 +144,6 @@ public class BoardController {
 		return "community/boardDetail"; 
 	}
 	
-	//게시글 삭제
-	@PostMapping("boardDelete.bo")
-	public String boardDelete(int bno) {
-		System.out.println("삭제컨트롤러에서 받음");
-		return "community/list.bo"; // 임시로 설정
-	}
 	
 
 	

@@ -232,8 +232,8 @@
                 <div class="custom-modal-title">게시글을 삭제하시겠습니까?</div>
             </div>
             <div class="custom-modal-content">
-                <form class="postForm" method="post">
-                    <input type="hidden" name="bno" value="${boardNo}">
+                <form class="postForm" method="post" action="">
+                    <input type="hidden" name="bno" value="${b.boardNo}">
                     <!-- 게시글 삭제 버튼 -->
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
                 </form>

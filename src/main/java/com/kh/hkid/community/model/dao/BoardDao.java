@@ -48,8 +48,6 @@ public class BoardDao {
 	
 	//검색게시글  개수
 	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map){
-		System.out.println(map);
-		int result = sqlSession.selectOne("boardMapper.selectSearchCount", map);
 		return sqlSession.selectOne("boardMapper.selectSearchCount", map);
 	}
 	
