@@ -44,7 +44,7 @@
   		#{memberName},
   		#{nickName},
   		#{phone},
-  		#{email},
+  		'12312321313',
   		#{address},
   		#{detailAddress},
   		#{postNo}
@@ -67,8 +67,7 @@
 	  	   ENROLL_DATE,
   		   STATUS,
   		   PROFILE_IMG,
-  		   ISADMIN,
-  		   IS_SOCAIL
+  		   ISADMIN
   	  FROM MEMBER
   	 WHERE MEMBER_ID = #{memberId}
   	   AND STATUS = 'Y'

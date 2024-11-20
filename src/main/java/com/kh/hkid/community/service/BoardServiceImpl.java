@@ -64,6 +64,16 @@ public class BoardServiceImpl implements BoardService {
 	public Board selectBoard(int bno) {
 		return boardDao.selectBoard(sqlSession, bno); //해당 게시글 가져오기;
 	}
+
+	@Override
+	public int deleteboard(int bno) {
+		return boardDao.deleteboard(sqlSession, bno);
+	}
+
+	@Override
+	public int insertReport(int bno) {
+		return boardDao.insertReport(sqlSession, bno);
+	}
 	
 
 	

@@ -24,12 +24,12 @@
 	<select id="selectList" resultType="">
 		SELECT MEMBER_NAME,
 			   ADDRESS,
-			   PRODUCT_NAME,
+			   PRODUCT_NAME ,
 			   TOTAL_PURCHASE
 		  FROM PURCHASE
 		  JOIN MEMBER ON MEMBER_NO
 		  JOIN PRODUCT ON PRODUCT_NO
-		 WHERE MEMBER_ID = #{memberNO}
+		 WHERE MEMBER_ID = #{memberNo}
 		   AND PRODUCT_ID = #{productId}
 	</select>
 </mapper>
