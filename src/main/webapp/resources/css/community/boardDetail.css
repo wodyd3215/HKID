@@ -1,5 +1,5 @@
 hr{
-    margin: 8px !important;
+    margin: 8px;
 }
 
 .wrapper{
@@ -530,9 +530,14 @@ table {
 /* 모달 가운데 border 제거 */
 #delete-modal .custom-modal-header{
     border-bottom: none;
+    padding-top: 10px;
 }
 
-
+.report-h3{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    /* padding-top: 20px; */
+}
 
 /* 모달 [예/아니오] 버튼  */
 .modal-btn{
@@ -556,23 +561,22 @@ table {
 }
 /************ 게시글 신고 모달 css *************/
 #report-modal .custom-modal{
-    height: 120px;
-    border-radius: 15px;
-    width: 300px ;
+    height: 450px;
+    border-radius: 1px;
+    width: 350px ;
     left: 50%; 
-    top: 320px; 
+    top: 500px; 
     /* transform: none; */
 }
 
-
 #report-modal .custom-modal-header{
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
 }
 
 #report-modal .custom-modal-title{
     font-size: 18px;
-    text-align: center;
+
 }
 
 #report-modal .custom-modal-content{
@@ -586,9 +590,72 @@ table {
 #report-modal .custom-modal-header{
     border-bottom: none;
 }
+
+#report-modal h3{
+    padding-left: 5px;
+    font-weight: 600;
+}
+
+#model-middle{
+    width: 100%;
+    padding-left: 5px;
+}
+
+#model-middle label{
+    width: 30%;
+    font-size: 18px;
+}
+
+#target-div{
+
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#target1{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding-left: 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+    width: 212px;
+    height: 28px;
+    background-color: #dfdfdf;
+    font-weight: 600;
+}
+
+#target2{
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 30px;
+}
+
+#model-middle input{
+    border: 1px solid black;
+    font-size: 18px;
+}
+
+#report-textarea{
+    width: 330px;
+    height: 180px;
+    border: 1px solid black;
+    resize: none;
+}
+
+#model-middle h5{
+    padding-bottom: 5px;
+}
+
+#report-submit-btn{
+    background-color: #ffffff;
+    color: #00A6fB;
+    margin-left: 10px;
+}
+
+
 /************** 댓글 수정 **************/
 #comment-middle-input{
     width: 100%;
     height: 100%;
-    /* s */
 }
