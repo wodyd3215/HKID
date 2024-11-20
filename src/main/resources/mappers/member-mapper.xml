@@ -21,7 +21,7 @@
   	<result column="STATUS" property="status"/>
   	<result column="PROFILE_IMG" property="profileImg"/>
   	<result column="ISADMIN" property="isAdmin"/>
-  	<result column="IS_SOCAIL" property="isSocial"/>
+  	<result column="IS_SOCIAL" property="isSocial"/>
   </resultMap>
   
   <!-- 회원가입 -->
@@ -68,7 +68,7 @@
   		   STATUS,
   		   PROFILE_IMG,
   		   ISADMIN,
-  		   IS_SOCAIL
+  		   IS_SOCIAL
   	  FROM MEMBER
   	 WHERE MEMBER_ID = #{memberId}
   	   AND STATUS = 'Y'
@@ -140,7 +140,7 @@
   </update>
   
   <!-- 회원 유무 판단 -->
-  <select id="searchMember">
+  <select id="searchMember" resultType="_int">
   	SELECT COUNT(*)
   	  FROM MEMBER
   	 WHERE EMAIL = #{email}
@@ -164,7 +164,7 @@
   		   STATUS,
   		   PROFILE_IMG,
   		   ISADMIN,
-  		   IS_SOCAIL
+  		   IS_SOCIAL
   	  FROM MEMBER
   	 WHERE EMAIL = #{email}
   	   AND STATUS = 'Y'
@@ -179,14 +179,16 @@
   		PHONE,
   		EMAIL,
   		POST_NO,
-  		IS_SOCAIL
+  		PROFILE_IMG,
+  		IS_SOCIAL
   	) VALUES (
   		SEQ_MNO.NEXTVAL, <!-- DB 시퀀스 생성해야함 -->
-  		#{memberId},
+  		#{memberName},
   		#{nickName},
   		#{phone},
   		#{email},
   		#{postNo},
+  		#{profileImg},
   		'Y'
   	)
   </insert>
