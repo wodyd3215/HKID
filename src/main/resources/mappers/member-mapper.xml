@@ -21,6 +21,7 @@
   	<result column="STATUS" property="status"/>
   	<result column="PROFILE_IMG" property="profileImg"/>
   	<result column="ISADMIN" property="isAdmin"/>
+  	<result column="IS_SOCAIL" property="isSocial"/>
   </resultMap>
   
   <!-- 회원가입 -->
@@ -66,7 +67,8 @@
 	  	   ENROLL_DATE,
   		   STATUS,
   		   PROFILE_IMG,
-  		   ISADMIN
+  		   ISADMIN,
+  		   IS_SOCAIL
   	  FROM MEMBER
   	 WHERE MEMBER_ID = #{memberId}
   	   AND STATUS = 'Y'
@@ -136,4 +138,56 @@
   	   SET PROFILE_IMG = #{profileImg}
   	 WHERE MEMBER_NO = #{memberNo}
   </update>
+  
+  <!-- 회원 유무 판단 -->
+  <select id="searchMember">
+  	SELECT COUNT(*)
+  	  FROM MEMBER
+  	 WHERE EMAIL = #{email}
+  	   AND STATUS = 'Y'
+  </select>
+  
+  <!-- 소셜 로그인 -->
+  <select id="socialLoginMember" resultMap="memberResultSet">
+    SELECT MEMBER_NO,
+  		   MEMBER_ID,
+  		   MEMBER_PWD,
+  		   MEMBER_NAME,
+  		   NICKNAME,
+  		   PHONE,
+  		   EMAIL,
+  		   ADDRESS,
+  		   DETAIL_ADDRESS,
+  		   POST_NO,
+	  	   POINT,
+	  	   ENROLL_DATE,
+  		   STATUS,
+  		   PROFILE_IMG,
+  		   ISADMIN,
+  		   IS_SOCAIL
+  	  FROM MEMBER
+  	 WHERE EMAIL = #{email}
+  	   AND STATUS = 'Y'
+  </select>
+  
+  <!-- 소셜 회원가입 -->
+  <insert id="insertSocialMember">
+  	INSERT INTO MEMBER(
+  		MEMBER_NO,
+  		MEMBER_NAME,
+  		NICKNAME,
+  		PHONE,
+  		EMAIL,
+  		POST_NO,
+  		IS_SOCAIL
+  	) VALUES (
+  		SEQ_MNO.NEXTVAL, <!-- DB 시퀀스 생성해야함 -->
+  		#{memberId},
+  		#{nickName},
+  		#{phone},
+  		#{email},
+  		#{postNo},
+  		'Y'
+  	)
+  </insert>
 </mapper>

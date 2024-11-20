@@ -21,4 +21,5 @@ public class Member {
 	private String status;
 	private String profileImg;
 	private String isAdmin;
+	private String isSocial;
 }
