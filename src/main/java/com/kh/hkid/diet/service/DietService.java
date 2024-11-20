@@ -6,4 +6,6 @@ public interface DietService {
 	
 	// 영양정보 저장
 	public int saveDietInfo(Diet d);
+	
+	public Diet loadDietAjax(int memberNo);
 }

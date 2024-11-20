@@ -1,11 +1,11 @@
 // 처음 실행
-$(function(){ //DOM이 로드된 후 자동실행
+function detailOnload(){ //DOM이 로드된 후 자동실행
     const sendData = {
         bno: 1 // ${list.boardNo}
     }
     //댓글 목록 가져오기
     getReplyList(sendData, setReplyData)
-})
+}
 
 // 매개변수 받아서 게시글 수정/삭제/신고 기능
 function postFormSubmit(type){

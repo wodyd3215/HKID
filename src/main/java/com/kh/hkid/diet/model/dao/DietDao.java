@@ -12,4 +12,8 @@ public class DietDao {
 	public int saveDietInfo(SqlSessionTemplate sqlSession, Diet d) {
 		return sqlSession.insert("dietMapper.saveDietInfo", d);
 	}
+	
+	public Diet loadDietAjax(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.selectOne("dietMapper.loadDietAjax", memberNo);
+	}
 }

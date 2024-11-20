@@ -512,6 +512,7 @@ table {
 
 #delete-modal .custom-modal-header{
     justify-content: center;
+    align-items: center;
 }
 
 #delete-modal .custom-modal-title{
@@ -520,6 +521,8 @@ table {
 }
 
 #delete-modal .custom-modal-content{
+    display: flex;
+    justify-content: center;
     height: 80px;
     margin-top: 10px;
 }
@@ -528,6 +531,8 @@ table {
 #delete-modal .custom-modal-header{
     border-bottom: none;
 }
+
+
 
 /* 모달 [예/아니오] 버튼  */
 .modal-btn{
@@ -549,7 +554,38 @@ table {
     color: #00A6fB;
     margin-left: 10px;
 }
+/************ 게시글 신고 모달 css *************/
+#report-modal .custom-modal{
+    height: 120px;
+    border-radius: 15px;
+    width: 300px ;
+    left: 50%; 
+    top: 320px; 
+    /* transform: none; */
+}
 
+
+#report-modal .custom-modal-header{
+    justify-content: center;
+    align-items: center;
+}
+
+#report-modal .custom-modal-title{
+    font-size: 18px;
+    text-align: center;
+}
+
+#report-modal .custom-modal-content{
+    display: flex;
+    justify-content: center;
+    height: 80px;
+    margin-top: 10px;
+}
+
+/* 모달 가운데 border 제거 */
+#report-modal .custom-modal-header{
+    border-bottom: none;
+}
 /************** 댓글 수정 **************/
 #comment-middle-input{
     width: 100%;

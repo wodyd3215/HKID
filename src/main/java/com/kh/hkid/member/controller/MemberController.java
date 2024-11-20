@@ -102,7 +102,7 @@ public class MemberController {
     @PostMapping("login.me")
     public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response) {
     	Member loginMember = memberService.loginMember(m);
-
+    	System.out.println(loginMember);
     	if(loginMember == null || !bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
     		session.setAttribute("alertMsg", "로그인 정보에 맞는 아이디가 존재하지 않습니다."); 
     		return "redirect:/loginForm.me";
@@ -312,7 +312,7 @@ public class MemberController {
     
     // 소셜 로그인(네이버)
     @RequestMapping("naver-login")
-    public String naverLoginCallback(String code, String state) throws IOException {
+    public String naverLoginCallback(Member m, String code, String state, HttpSession session) throws IOException {
     	
     	String redirectURL = URLEncoder.encode("http://localhost:7777/HKID/naver-login", "UTF-8");
     	String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code";
@@ -348,10 +348,37 @@ public class MemberController {
         	
         	JsonObject memberInfo = JsonParser.parseString(responseBody).getAsJsonObject();
         	memberInfo = memberInfo.getAsJsonObject("response");
-
+        	
         	log.info("result : {}", memberInfo);
         	// 받아온 email과 데이터베이스의 email을 비교하여 가입 유무를 판단
         	// 가입되어 있다면 로그인, 가입되어있지 않다면 회원가입창으로 해당 정보를 담아서 보내주면 된다.
+        	
+        	System.out.println("result : " + memberInfo.get("email"));
+        	
+        	m.setNickName(memberInfo.get("nickname").toString());
+        	m.setEmail(memberInfo.get("email").toString());
+        	m.setPhone(memberInfo.get("mobile").toString());
+        	m.setMemberName(memberInfo.get("name").toString());
+        	
+        	int findMember = memberService.searchMember(memberInfo);
+        	
+        	if(findMember > 0) {
+        		Member loginMember = memberService.socialLoginMember(memberInfo);
+        		
+        		session.setAttribute("loginMember", loginMember);
+        		
+        		return "redirect:/";
+        	} else {
+        		int socialResult = memberService.insertSocialMember(memberInfo);
+        		
+        		if(socialResult > 0) {
+        			Member loginMember = memberService.socialLoginMember(memberInfo);
+        			
+        			session.setAttribute("loginMember", loginMember);
+        			
+        			return "redirect:/";
+        		}
+        	}
     	}
     	
     	return "redirect:/";

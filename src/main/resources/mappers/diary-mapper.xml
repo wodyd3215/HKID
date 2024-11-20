@@ -12,6 +12,7 @@
 			<result column="STATUS" property="status"></result>
 			<result column="NICKNAME" property="writer"></result>
 			<result column="MEMBER_NO" property="memberNo"></result>
+			<result column="FOOD_NO" property="foodNo"></result>
 		</resultMap>
 		
 		<!-- 내 다이어리 총 갯수 조회 -->
@@ -43,13 +44,15 @@
 			 					DIARY_NUMBER,
 								DIARY_TITLE,
 								DIARY_CONTENT,
-								MEMBER_NO
+								MEMBER_NO,
+								FOOD_NO
 			                  )
 			           VALUES (
 			           			SEQ_DNO.NEXTVAL,
 			           			#{diaryTitle},
 			           			#{diaryContent},
-			           			#{memberNo}
+			           			#{memberNo},
+			           			#{foodNo}
 			                  )
 		</insert>
 		

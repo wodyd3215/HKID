@@ -42,10 +42,10 @@
                     </thead>
                     <tbody>
                         <tr id="food-detail">
-                            <td class="kcal-figure">252</td>
-                            <td class="carbo-figure">27.29</td>
-                            <td class="pro-figure">8.09</td>
-                            <td class="fat-figure">12.08</td>
+                            <td class="kcal-figure"></td>
+                            <td class="carbo-figure"></td>
+                            <td class="pro-figure"></td>
+                            <td class="fat-figure"></td>
                         </tr>
                     </tbody>
                 </table>
