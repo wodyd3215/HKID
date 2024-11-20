@@ -321,7 +321,7 @@
   }
   
   .mySwiper{
-    border: solid black;
+    border-radius: 15PX;
     background-color: #DBF1FD;
   }
 
@@ -358,13 +358,30 @@
     object-fit: cover;
   }
   
+.slider__prev{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 15px 15px; /* 아래쪽이 굵게 설정됨 */
+  border-color: transparent transparent black transparent; /* 아래쪽 색상만 지정 */
+  margin-left: 110px;
+  margin-bottom: 10px;  
+}
+
+.slider__next{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 15px 0 15px; /* 아래쪽이 굵게 설정됨 */
+  border-color: black transparent transparent transparent; /* 아래쪽 색상만 지정 */
+  margin-left: 110px;
+  margin-top: 10px;  
+}
 
 .slider__prev,
 .slider__next {
 cursor: pointer;
 text-align: center;
-font-size: 14px;
-height: 48px;
 display: flex;
 align-items: center;
 justify-content: center;

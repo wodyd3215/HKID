@@ -145,22 +145,16 @@
 
 		<div class="flootbox">
 			<!-- Swiper -->
-			<div class="slider__prev" style="
-			margin-top: 1rem;
-			margin-bottom: -1rem;
-			"><button>Prev</button></div>
+			<div class="slider__prev"></div>
 			<div class="swiper mySwiper" style="height: 40rem;width: 15rem;">
 			  <ul class="swiper-wrapper">
 				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="1"/></li>
 				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="2"/></li>
 				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="3"/></li>
-				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="4"/></li>
+				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/ABS_CRUNCH_MC.gif" alt="4"/></li>
 			  </ul>
-			  <div class="swiper-button-next " style="display:none"></div>
-			  <div class="swiper-button-prev " style="display:none"></div>
-			  <div class="swiper-pagination"></div>
 			</div>
-			  <div class="slider__next"><button>Next</button></div>
+			<div class="slider__next"></div>
 		</div>
 
 	</div>	

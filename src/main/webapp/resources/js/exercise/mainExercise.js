@@ -36,8 +36,8 @@ var swiper = new Swiper(".mySwiper", {
       },
       */
       navigation: {//좌우 이동 클릭
-        nextEl: ".slider__next",
-        prevEl: ".slider__prev",
+        nextEl: ".slider__prev",
+        prevEl: ".slider__next",
       },
       
       
