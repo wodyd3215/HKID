@@ -86,19 +86,22 @@
     font-weight: bold;
 }
 
-.wrapper > fieldset {
+#social-login {
     width: 600px;
     margin: auto;
     padding-top: 40px;
+    text-align: center;
+    border: none;
+    border-top: 1px solid rgb(223, 223, 223);
 }
 
-.wrapper > fieldset > legend {
+#social-login > legend {
     font-size: 16px;
     font-weight: bold;
     letter-spacing :0.5px;
 }
 
-.wrapper > fieldset > button {
+#social-login button {
     display: block;
     width: 300px;
     height: 38px;
@@ -111,16 +114,20 @@
     cursor: pointer;
 }
 
-.wrapper > fieldset > button > img {
+#social-login button > img {
     width: 25px;
     height: 25px;
     margin-left: 5px;
 }
 
-.wrapper > fieldset > button > p {
+#social-login button > p {
     font-size: 16px;
     font-weight: bold;
     width: calc(100% - 50px);
+}
+
+#social-login form {
+    border: none;
 }
 
 #kakao-login{

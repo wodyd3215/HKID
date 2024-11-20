@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="./resources/css/exercise/mainExercise.css?after">
 <link rel="stylesheet" href="./resources/css/default.css">
+ <!-- Link Swiper's CSS -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -77,7 +79,7 @@
 						<div id="list-con">
 							<div id="list-img">
 								<a href="exercise.de?eno=${e.exerciseNo }">
-									<img src="./resources/image/exerciseImages/${ e.exerciseImg}" style="height: 250px; width: 250px;">
+									<img src="./resources/image/exerciseImages/${ e.exerciseImg}">
 								</a>
 							</div>
 							<br>
@@ -142,30 +144,30 @@
 		</div>
 
 		<div class="flootbox">
-			<div class="flootbox-title">
-				My 루틴
+			<!-- Swiper -->
+			<div class="slider__prev" style="
+			margin-top: 1rem;
+			margin-bottom: -1rem;
+			"><button>Prev</button></div>
+			<div class="swiper mySwiper" style="height: 40rem;width: 15rem;">
+			  <ul class="swiper-wrapper">
+				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="1"/></li>
+				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="2"/></li>
+				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="3"/></li>
+				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="4"/></li>
+			  </ul>
+			  <div class="swiper-button-next " style="display:none"></div>
+			  <div class="swiper-button-prev " style="display:none"></div>
+			  <div class="swiper-pagination"></div>
 			</div>
-			<div class="flootbox-content">
-				<button type="button" id="upbtn"></button>
-				<div class="buyContent">
-					<div class="rutinContent">
-						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
-					</div>
-					<div class="rutinContent">
-						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
-					</div>
-					<div class="rutinContent">
-						<img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="없음">
-					</div>
-				</div>
-				<button type="button" id="downbtn"></button>
-			</div>
+			  <div class="slider__next"><button>Next</button></div>
 		</div>
 
 	</div>	
 		<br><br><br>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
+	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script src="./resources/js/exercise/mainExercise.js"></script>
 </body>
 </html>
