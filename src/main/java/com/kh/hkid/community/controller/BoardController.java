@@ -114,8 +114,7 @@ public class BoardController {
 		
 		//게시글 조회
 		Board b = boardService.selectBoard(bno);
-		
-		System.out.println("board 잘 가져오나?? >> 결과" + b);
+	
 		
 		
 		
