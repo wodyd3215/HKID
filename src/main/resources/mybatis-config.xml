@@ -21,7 +21,7 @@
  		<typeAlias type="com.kh.hkid.cart.model.vo.Cart" alias="Cart"/>
 		<typeAlias type="com.kh.hkid.favorite.model.vo.Favorite" alias="Favorite"/>
 		<typeAlias type="com.kh.hkid.diet.model.vo.Diet" alias="Diet"/>
-		<typeAlias type="com.kh.hkid.diet.model.vo.Phase" alias="Phase"/>
+		<typeAlias type="com.kh.hkid.phase.model.vo.Phase" alias="Phase"/>
  	</typeAliases>
  	
 
