@@ -70,24 +70,25 @@
             </thead>
             <tbody>
                 <!-- 공지 게시글 -->
-                <c:choose>
-                    <c:when test="${pi.currentPage eq 1}"> <!-- 현재페이지가 1일 경우 공지 출력 -->   
+                 <!-- 현재페이지가 1일 경우 공지 출력 --> 
+                <!-- <c:choose>
+                    <c:when test="${pi.currentPage eq 1}">   
                         <c:forEach var="n" items="${nList}">
                             <tr id="common-table-body">
                                 <td>${n.communityName}</td>
-                                <td><a href="">${n.boardName}</a></td>
+                                <td><a href="">${n.boardTitle}</a></td>
                                 <td>${n.userName}</td>
                                 <td>${n.boardDate}</td>
                                 <td>${n.boardViewCount}</td>
                             </tr>
                         </c:forEach>
                     </c:when>
-                </c:choose>
+                </c:choose> -->
                 <!-------------- 일반 게시글 --------------->
                 <c:forEach var="b" items="${list}">
                     <tr>
                     <td class="board-category">${b.communityName}</td>
-                    <td><a href="boardDetail.bo?bno=${b.boardNo}">${b.boardName}</a></td>
+                    <td><a href="boardDetail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
                     <td>${b.userName}</td>
                     <td>${b.boardDate}</td>
                     <td>${b.boardViewCount}</td>

@@ -7,7 +7,7 @@
   
   <resultMap id="boardResultSet" type="Board">
   	<result column="BOARD_NO" property="boardNo"/>
-  	<result column="BOARD_NAME" property="boardName"/>
+  	<result column="BOARD_TITLE" property="boardTitle"/>
   	<result column="BOARD_DATE" property="boardDate"/>
   	<result column="BOARD_CONTENT" property="content"/>
   	<result column="BOARD_VIEW_COUNT" property="boardViewCount"/>
@@ -19,7 +19,7 @@
   
   <resultMap id="commmunityResultSet" type="Community">
   	<result column="BOARD_NO" property="boardNo"/>
-  	<result column="BOARD_NAME" property="boardName"/>
+  	<result column="BOARD_TITLE" property="boardTitle"/>
   	<result column="BOARD_DATE" property="boardDate"/>
   	<result column="BOARD_VIEW_COUNT" property="boardViewCount"/>
   	<result column="COMMUNITY_NAME" property="communityName"/>
@@ -47,7 +47,7 @@
   <!-- 게시글 조회 -->
   <select id="selectList" resultType="Community">
   	 SELECT BOARD_NO boardNo,
-			BOARD_NAME boardName,
+			BOARD_TITLE boardTitle,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
@@ -63,7 +63,7 @@
   <!-- 카테고리 게시글 조회 -->
   <select id="selectCategoryList" resultType="Community">
   	 SELECT BOARD_NO boardNo,
-			BOARD_NAME boardName,
+			BOARD_TITLE boardTitle,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
@@ -79,7 +79,7 @@
   <!-- 공지 게시글 조회 -->
   <select id="selectNoticeList" resultType="Community">
   	 SELECT BOARD_NO boardNo,
-			BOARD_NAME boardName,
+			BOARD_TITLE boardTitle,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
@@ -105,7 +105,7 @@
   		 AND NICKNAME
 	 </if>
 	 <if test="condition == 'title'">
-	 	AND BOARD_NAME
+	 	AND BOARD_TITLE
 	 </if>
 	 <!--  
 	 <if test="condition == 'content'">
@@ -123,7 +123,7 @@
 	<!-- 검색 게시글 목록 -->
   <select id="selectSearchList" resultType="Community">
   	 SELECT BOARD_NO boardNo,
-			BOARD_NAME boardName,
+			BOARD_TITLE boardTitle,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
@@ -136,7 +136,7 @@
        		AND NICKNAME
 		</if>
 		<if test="condition == 'title'">
-			AND BOARD_NAME
+			AND BOARD_TITLE
 		</if>
 		<!--  
 		<if test="condition == 'content'">
@@ -155,7 +155,7 @@
   	<!-- 게시글 상세 -->
   	<select id="selectBoard" resultMap="boardResultSet">
   	 SELECT BOARD_NO,
-			BOARD_NAME,
+			BOARD_TITLE,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') as BOARD_DATE,
 			SEQ_BOARD_VIEW_COUNT.nextval,
 			BOARD_STATUS,

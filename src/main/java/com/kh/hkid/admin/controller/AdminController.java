@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.hkid.admin.service.AdminService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.dto.Community;
 
 @Controller
 public class AdminController {
@@ -48,7 +48,24 @@ public class AdminController {
 	}
 	
 	@GetMapping("notice.ad")
-	public String notice() {
+	public String notice(@RequestParam(value="cpage", defaultValue="1") int currentPage, 
+			   			 @RequestParam(value="categoty", defaultValue="co") String category, Model model) {
+		int totalCount;
+		ArrayList<Community> list = null;
+		PageInfo pi = null;
+		
+		if(category.equals("co")) {
+			totalCount = adminService.noticeCount();
+			
+			pi = Template.getPageInfo(totalCount, currentPage, 10, 10);
+			list = adminService.selectNotice(pi);
+		}
+		
+		System.out.println(list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
 		return "admin/noticeManagement";
 	}
 	
@@ -59,11 +76,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("nEnroll.ad")
-	public String noticeEnroll(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int noticeCount = adminService.noticeCount();
+	public String noticeEnroll() {
 		
-		PageInfo pi = Template.getPageInfo(noticeCount, currentPage, 10, 10);
-		ArrayList<Board> list = adminService.selectNotice(pi);
 		
 		return "admin/noticeEnroll";
 	}
