@@ -22,7 +22,7 @@ function loadDietAjax(callback) {
 
 function drawTableDiet(calLog) {
     const calInfo = $('#today-ate-cal-info')
-    const str = `<table class="">
+    const str = `<table class="food-info-table">
                 <thead>
                     <tr id="food-title">
                         <th id="food-kcal">칼로리(kcal)</th>

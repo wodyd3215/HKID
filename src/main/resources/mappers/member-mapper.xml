@@ -44,7 +44,7 @@
   		#{memberName},
   		#{nickName},
   		#{phone},
-  		'12312321313',
+  		#{email},
   		#{address},
   		#{detailAddress},
   		#{postNo}

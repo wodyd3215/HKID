@@ -24,7 +24,6 @@
 		<typeAlias type="com.kh.hkid.phase.model.vo.Phase" alias="Phase"/>
  	</typeAliases>
  	
-
  	<mappers>
  		<mapper resource="mappers/exercise-mapper.xml"/>
  		<mapper resource="mappers/product-mapper.xml"/>
