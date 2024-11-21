@@ -73,7 +73,7 @@
 
                 <!-- 구매 및 장바구니 버튼 -->
                 <div class="phaseCartBtn">
-                    <button class="phaseBtn"> 구매 </button>
+                    <button type="submit" class="phaseBtn"> <a href="phaseInfo.li"> 구매 </a></button>
                     <button class="cartBtn"> 장바구니 </button> 
                     <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
                 </div>                
