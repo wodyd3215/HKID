@@ -48,12 +48,9 @@
                     <a href="diet.ca">식단</a>
                 </li>
                 <li id="community-drop-bar" class="content">
-                    <a href="list.bo">커뮤니티</a>
+                    <a href="list.bo">게시판</a>
                     <ul>
-                        <li><a href="">질문</a></li>
-                        <li><a href="">팁</a></li>
-                        <li><a href="">자랑</a></li>
-                        <li><a href="">홍보</a></li>
+                        <li><a href="list.bo">커뮤니티</a></li>
                         <li><a href="">챌린지</a></li>
                     </ul>
                 </li>
@@ -87,7 +84,7 @@
                     <div class="myPage-area hide" >
                         <p>닉네임</p>
                         <hr>
-                        <a href="personal.me">개인설정</a>
+                       	<a href="personal.me">개인설정</a>
                         <a href="myDiaryList.me">내 다이어리</a>
                         <hr>
                         <a href="">찜목록</a>

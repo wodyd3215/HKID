@@ -32,4 +32,11 @@ public interface BoardService {
 	
 	//게시글 조회
 	Board selectBoard(int bno);
+	
+	//게시글 삭제
+	int deleteboard(int bno);
+	
+	//게시글 신고
+	int insertReport(int bno);
 }
+

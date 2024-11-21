@@ -14,7 +14,7 @@
   	<result column="BOARD_STATUS" property="boardStatus"/>
   	<result column="COMMUNITY_NO" property="communityNo"/>
   	<result column="MEMBER_NO" property="memberNo"/>
-  	<result column="MEMBER_NO" property="memberName"/>
+  	<result column="NICKNAME" property="nickName"/>
   </resultMap>
   
   <resultMap id="commmunityResultSet" type="Community">
@@ -23,7 +23,7 @@
   	<result column="BOARD_DATE" property="boardDate"/>
   	<result column="BOARD_VIEW_COUNT" property="boardViewCount"/>
   	<result column="COMMUNITY_NAME" property="communityName"/>
-  	<result column="MEMBER_NAME" property="userName"/>
+  	<result column="NICKNAME" property="userName"/>
   </resultMap>
   
   <!-- 게시글 총 갯수 조회 -->
@@ -51,7 +51,7 @@
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
-			MEMBER_NAME userName
+			NICKNAME userName
 	   FROM COMMUNITY
        JOIN COMMUNITY_CATEGORY USING(COMMUNITY_NO)
        JOIN MEMBER USING(MEMBER_NO)
@@ -67,7 +67,7 @@
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
-			MEMBER_NAME userName
+			NICKNAME userName
 	   FROM COMMUNITY
        JOIN COMMUNITY_CATEGORY USING(COMMUNITY_NO)
        JOIN MEMBER USING(MEMBER_NO)
@@ -83,7 +83,7 @@
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
-			MEMBER_NAME userName
+			NICKNAME userName
 	   FROM COMMUNITY
        JOIN COMMUNITY_CATEGORY USING(COMMUNITY_NO)
        JOIN MEMBER USING(MEMBER_NO)
@@ -102,7 +102,7 @@
   	  	   USING (COMMUNITY_NO)
   	 WHERE BOARD_STATUS = 'Y'
   	 <if test="condition == 'writer'">
-  		 AND MEMBER_NAME
+  		 AND NICKNAME
 	 </if>
 	 <if test="condition == 'title'">
 	 	AND BOARD_TITLE
@@ -127,13 +127,13 @@
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') boardDate ,
 			BOARD_VIEW_COUNT boardViewCount ,
 			COMMUNITY_NAME communityName,
-			MEMBER_NAME userName
+			NICKNAME userName
 	   FROM COMMUNITY
        JOIN COMMUNITY_CATEGORY USING(COMMUNITY_NO)
        JOIN MEMBER USING(MEMBER_NO)
        WHERE BOARD_STATUS = 'Y'
        	<if test="condition == 'writer'">
-       		AND MEMBER_NAME
+       		AND NICKNAME
 		</if>
 		<if test="condition == 'title'">
 			AND BOARD_TITLE
@@ -157,14 +157,40 @@
   	 SELECT BOARD_NO,
 			BOARD_TITLE,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') as BOARD_DATE,
+			SEQ_BOARD_VIEW_COUNT.nextval,
+			BOARD_STATUS,
+			COMMUNITY_NO,
+			MEMBER_NO,
 			BOARD_CONTENT,
-			SEQ_BOARD_VIEW_COUNT.nextval
-			MEMBER_NAME
+			NICKNAME
 	   FROM COMMUNITY
 	   JOIN MEMBER USING(MEMBER_NO)
 	  WHERE BOARD_STATUS = 'Y'
 	  	AND	BOARD_NO = #{boardNo}
   </select>
+  
+  <update id="deleteboard">
+  	 UPDATE COMMUNITY
+  	 	SET BOARD_STATUS = 'N'
+	  WHERE BOARD_NO = #{boardNo}
+  </update>
+  <!-- 신고기능
+  <insert>
+  	INSERT INTO REPORT(
+		  		REPORT_NO,
+				TYPE_NO,
+				REPORT_DATE,
+				DETAIL_CONTENT,
+				MEMBER_NO,
+				REPORTED_MEMBER_NO,
+				REPLY_NO,
+				BOARD_NO,
+				REVIEW_NO
+				) 
+				VALUES (
+		  	)
+  </insert>
+  	-->
 </mapper>
 
 

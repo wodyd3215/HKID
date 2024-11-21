@@ -48,8 +48,6 @@ public class BoardDao {
 	
 	//검색게시글  개수
 	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map){
-		System.out.println(map);
-		int result = sqlSession.selectOne("boardMapper.selectSearchCount", map);
 		return sqlSession.selectOne("boardMapper.selectSearchCount", map);
 	}
 	
@@ -64,8 +62,17 @@ public class BoardDao {
 
 	// 게시글 상세 조회
 	public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		Board result = sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
+	}
+	
+	//게시글 삭제
+	public int deleteboard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.deleteboard", boardNo);
+	}
+	
+	//게시글 삭제
+	public int insertReport(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.insert("boardMapper.insertReport", boardNo);
 	}
 	
 }
