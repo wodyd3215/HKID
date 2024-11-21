@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.service.AdminService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.dto.Community;
 
 @Controller
 public class AdminController {
@@ -48,21 +48,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("notice.ad")
-	public String notice(@RequestParam(value="cpage", defaultValue="1") int currentPage, 
-			   			 @RequestParam(value="categoty", defaultValue="co") String category, Model model) {
-		int totalCount;
-		ArrayList<Community> list = null;
-		PageInfo pi = null;
-		
-		if(category.equals("co")) {
-			totalCount = adminService.noticeCount();
-			
-			pi = Template.getPageInfo(totalCount, currentPage, 10, 10);
-			list = adminService.selectNotice(pi);
-		}
+	public String notice(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		int totalCount = adminService.noticeCount();
+		PageInfo pi = Template.getPageInfo(totalCount, currentPage, 10, 10);
+		ArrayList<Notice> list = adminService.selectNotice(pi);
 		
 		System.out.println(list);
-		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		

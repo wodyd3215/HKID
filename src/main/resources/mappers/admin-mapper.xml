@@ -5,46 +5,36 @@
 
 <mapper namespace="adminMapper">
 
-	<resultMap id="noticeResultSet" type="Board">
-		<result column="BOARD_NO" property="boardNo"/>
-	  	<result column="BOARD_NAME" property="boardName"/>
-	  	<result column="BOARD_DATE" property="boardDate"/>
-	  	<result column="BOARD_CONTENT" property="content"/>
-	  	<result column="BOARD_VIEW_COUNT" property="boardViewCount"/>
-	  	<result column="BOARD_STATUS" property="boardStatus"/>
-	  	<result column="COMMUNITY_NO" property="communityNo"/>
+	<resultMap id="noticeResultSet" type="Notice">
+		<result column="NOTICE_NO" property="noticeNo"/>
 	  	<result column="MEMBER_NO" property="memberNo"/>
+	  	<result column="NOTICE_TITLE" property="noticeTitle"/>
+	  	<result column="NOTICE_CONTENT" property="noticeContent"/>
+	  	<result column="ENROLL_DATE" property="noticeDate"/>
+	  	<result column="VIEW_COUNT" property="viewCount"/>
+	  	<result column="CATEGORY_NO" property="noticeType"/>
+	  	<result column="NOTICE_STATUS" property="noticeStatus"/>
 	  	<result column="NICKNAME" property="nickName"/>
+	  	<result column="CATEGOTY_NAME" property="noticeTypeName"/>
 	</resultMap>
 	
-	<resultMap id="commmunityResultSet" type="Community">
-	  	<result column="BOARD_NO" property="boardNo"/>
-	  	<result column="BOARD_NAME" property="boardName"/>
-	  	<result column="BOARD_DATE" property="boardDate"/>
-	  	<result column="BOARD_VIEW_COUNT" property="boardViewCount"/>
-	  	<result column="COMMUNITY_NAME" property="communityName"/>
-	  	<result column="MEMBER_NAME" property="userName"/>
-  	</resultMap>
-	
 	<select id="noticeCount" resultType="_int">
-		SELECT COUNT(*) 
-		  FROM COMMUNITY
-		 WHERE BOARD_STATUS = 'Y' AND
-		 	   COMMUNITY_NO = 1
+		SELECT COUNT(*)
+		  FROM NOTICE
+		 WHERE NOTICE_STATUS = 'Y'
 	</select>
 	
-	<select id="selectNotice" resultMap="commmunityResultSet">
-		SELECT BOARD_NO,
-			   BOARD_NAME,
-			   TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') AS BOARD_DATE,
-			   BOARD_VIEW_COUNT,
-			   COMMUNITY_NAME,
-			   MEMBER_NAME
-	   	  FROM COMMUNITY
-       	  JOIN COMMUNITY_CATEGORY USING(COMMUNITY_NO)
-       	  JOIN MEMBER USING(MEMBER_NO)
-	  	 WHERE BOARD_STATUS = 'Y' 
-	  	   AND COMMUNITY_NO = 1
-   		 ORDER BY BOARD_NO DESC
+	<select id="selectNotice" resultMap="noticeResultSet">
+		SELECT NOTICE_NO,
+			   NOTICE_TITLE,
+			   TO_CHAR(N.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
+			   VIEW_COUNT,
+			   NICKNAME,
+			   CATEGOTY_NAME
+		  FROM NOTICE N
+		  JOIN MEMBER USING (MEMBER_NO)
+		  JOIN NOTICE_CATEGORY USING (CATEGORY_NO)
+		 WHERE NOTICE_STATUS = 'Y'
+		 ORDER BY NOTICE_NO DESC
 	</select>
 </mapper>
