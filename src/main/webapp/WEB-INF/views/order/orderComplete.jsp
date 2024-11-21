@@ -7,8 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- css -->
 <link rel="stylesheet" href="./resources/css/order/orderComplete.css?after">
 <link rel="stylesheet" href="./resources/css/default.css">
+
+<!-- js -->
+<script src="./resources/js/order/orderComplete.js" defer></script>
 </head>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -103,17 +107,13 @@
 			
 			<div class="btns">
 				<button onclick="goHome()" id="home" type="button">홈으로</button>
-				<button id="shpping" type="button">쇼핑 계속하기</button>
+				<button onclick="ContinueBtn()" id="shpping" type="button">쇼핑 계속하기</button>
 			</div>
 
 		</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	<script>
-		function goHome() {
-		  window.location.href = "index.jsp"; // 임시로 홈페이지 이동 js
-		}
-	  </script>	
+	
 		
 
 </body>
