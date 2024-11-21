@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.dto.Community;
 
 @Repository
 public class AdminDao {
@@ -15,7 +15,7 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.noticeCount");
 	}
 	
-	public ArrayList<Board> selectNotice(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Community> selectNotice(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());

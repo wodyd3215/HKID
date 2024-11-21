@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hkid.admin.model.dao.AdminDao;
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.dto.Community;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +30,7 @@ public class AdminServiceImpl implements AdminService{
 
 
 	@Override
-	public ArrayList<Board> selectNotice(PageInfo pi) {
+	public ArrayList<Community> selectNotice(PageInfo pi) {
 		return adminDao.selectNotice(sqlSession, pi);
 	}
 }

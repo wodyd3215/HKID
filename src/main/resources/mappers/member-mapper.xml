@@ -21,7 +21,7 @@
   	<result column="STATUS" property="status"/>
   	<result column="PROFILE_IMG" property="profileImg"/>
   	<result column="ISADMIN" property="isAdmin"/>
-  	<result column="IS_SOCAIL" property="isSocial"/>
+  	<!-- <result column="IS_SOCAIL" property="isSocial"/> -->
   </resultMap>
   
   <!-- 회원가입 -->
@@ -67,8 +67,8 @@
 	  	   ENROLL_DATE,
   		   STATUS,
   		   PROFILE_IMG,
-  		   ISADMIN,
-  		   IS_SOCAIL
+  		   ISADMIN
+  		   <!--  , IS_SOCAIL -->
   	  FROM MEMBER
   	 WHERE MEMBER_ID = #{memberId}
   	   AND STATUS = 'Y'

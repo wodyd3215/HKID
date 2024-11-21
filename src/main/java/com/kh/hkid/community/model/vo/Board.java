@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Board {
 	private int boardNo;
-	private String boardName;
+	private String boardTitle;
 	private String boardDate;
 	private int boardViewCount;
 	private String boardStatus;

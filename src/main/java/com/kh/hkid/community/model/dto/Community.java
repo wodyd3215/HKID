@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Community {
 	private int boardNo;	//게시글 번호
-	private String boardName; // 게시글 제목
+	private String boardTitle; // 게시글 제목
 	private String boardDate; // 작성일
 	private int boardViewCount; // 조회수
 	private String communityName; // 카테고리 이름 (조인)

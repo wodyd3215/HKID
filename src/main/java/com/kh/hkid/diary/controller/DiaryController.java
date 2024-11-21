@@ -107,7 +107,7 @@ public class DiaryController {
     		return "redirect:/myDiaryList.me";
     	} else {
     		session.setAttribute("alertMsg", "일기 삭제 실패");
-    		return "redirect:/detailDiary.di?diaryNo=d.getDiaryNo()";
+    		return "redirect:/detailDiary.di?diaryNo=" + d.getDiaryNo();
     	}
     	
     }

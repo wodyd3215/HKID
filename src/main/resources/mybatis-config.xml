@@ -23,7 +23,6 @@
 		<typeAlias type="com.kh.hkid.diet.model.vo.Diet" alias="Diet"/>
  	</typeAliases>
  	
-
  	<mappers>
  		<mapper resource="mappers/exercise-mapper.xml"/>
  		<mapper resource="mappers/product-mapper.xml"/>
