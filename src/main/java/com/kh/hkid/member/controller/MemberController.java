@@ -44,7 +44,7 @@ public class MemberController {
 	
 	@Value("${sns.naver.clientSecret}")
 	private String clientSecret;
-	
+
 	@Autowired
 	public MemberController(MemberService memberService, BCryptPasswordEncoder bcryptPasswordEncoder) {
 		this.memberService = memberService;
@@ -273,7 +273,6 @@ public class MemberController {
     public String imgChangeAjax(Member m, MultipartFile imgProfile, HttpSession session) {
     	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
     	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
-    	
     	if(!imgProfile.getOriginalFilename().equals("")) {
 	    	m.setProfileImg("/resources/image/profileImg/"+ Template.saveFile(imgProfile, session, "/resources/image/profileImg/"));
 	    	
@@ -327,8 +326,7 @@ public class MemberController {
     	HttpURLConnection con = (HttpURLConnection)url.openConnection();
     	
     	int responseCode = con.getResponseCode();
-    	
-    	String inputLine = "";
+
     	if(responseCode == 200) {
     		// 응답데이터를 읽어오기
         	String result = Template.readBody(con.getInputStream());
@@ -386,6 +384,5 @@ public class MemberController {
     	
     	return "redirect:/";
     }
-    
     
 }
