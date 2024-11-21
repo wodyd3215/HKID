@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,111 +31,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="common-table-body">
-                        <td>챌린지</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
-                        <td>헬스키드</td>
-                        <td>2024-10-30</td>
-                        <td>2</td>
-                        <td>
-                            <div class="management">
-                                <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
-                                    edit
-                                </button>
-                                <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
-                                    delete
-                                </button>
-    
-                                <form action="" method="POST" id="postForm">
-                                    <input type="text" hidden name="pno" value="">
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr id="common-table-body">
-                        <td>게시판</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
-                        <td>헬스키드</td>
-                        <td>2024-10-30</td>
-                        <td>2</td>
-                        <td>
-                            <div class="management">
-                                <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
-                                    edit
-                                </button>
-                                <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
-                                    delete
-                                </button>
-    
-                                <form action="" method="POST" id="postForm">
-                                    <input type="text" hidden name="pno" value="">
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr id="common-table-body">
-                        <td>게시판</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
-                        <td>헬스키드</td>
-                        <td>2024-10-30</td>
-                        <td>2</td>
-                        <td>
-                            <div class="management">
-                                <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
-                                    edit
-                                </button>
-                                <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
-                                    delete
-                                </button>
-    
-                                <form action="" method="POST" id="postForm">
-                                    <input type="text" hidden name="pno" value="">
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr id="common-table-body">
-                        <td>챌린지</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
-                        <td>헬스키드</td>
-                        <td>2024-10-30</td>
-                        <td>2</td>
-                        <td>
-                            <div class="management">
-                                <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
-                                    edit
-                                </button>
-                                <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
-                                    delete
-                                </button>
-    
-                                <form action="" method="POST" id="postForm">
-                                    <input type="text" hidden name="pno" value="">
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr id="common-table-body">
-                        <td>게시판</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
-                        <td>헬스키드</td>
-                        <td>2024-10-30</td>
-                        <td>2</td>
-                        <td>
-                            <div class="management">
-                                <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
-                                    edit
-                                </button>
-                                <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
-                                    delete
-                                </button>
-    
-                                <form action="" method="POST" id="postForm">
-                                    <input type="text" hidden name="pno" value="">
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                    <c:forEach var="n" items="${list}">
+                        <tr id="common-table-body">
+                            <td>${n.communityName}</td>
+                            <td>${n.boardName}</td>
+                            <td>${n.userName}</td>
+                            <td>${n.boardDate}</td>
+                            <td>${n.boardViewCount}</td>
+                            <td>
+                                <div class="management">
+                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
+                                        edit
+                                    </button>
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
+                                        delete
+                                    </button>
+        
+                                    <form action="" method="POST" id="postForm">
+                                        <input type="text" hidden name="pno" value="">
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -150,13 +69,59 @@
 
         <!-- 페이지 버튼 -->
         <div id="paging-div">
-            <button class="page-btn">&lt;</button>
-            <button class="page-btn">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">4</button>
-            <button class="page-btn">5</button>
-            <button class="page-btn">&gt;</button>
+            <div id="paging-div">
+                <!-- 이전 페이지 버튼 -->
+                <c:choose>
+                    <c:when test="${pi.currentPage eq 1}">
+                        <a class="page-btn disabled startEnd-btn" href=""></a> <!-- 비활성화 -->
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${empty condition}">
+                                <a class="page-btn startEnd-btn" href="list.bo?cpage=${pi.currentPage - 1}&category=${category}&boardLimit=${pi.boardLimit}">&nbsp;[이전]</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-btn startEnd-btn" href="searchBoard.bo?cpage=${pi.currentPage - 1}&condition=${condition}&keyword=${keyword}&category=${category}&boardLimit=${pi.boardLimit}">&nbsp;[이전]</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
+            
+                <!-- 1~5 페이지 -->
+                <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+                    <c:choose>
+                        <c:when test="${empty condition}">
+                            <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
+                               href="list.bo?cpage=${p}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">
+                               ${p}
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
+                               href="searchBoard.bo?cpage=${p}&condition=${condition}&keyword=${keyword}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">
+                               ${p}
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            
+                <!-- 다음 페이지 버튼 -->
+                <c:choose>
+                    <c:when test="${pi.currentPage eq pi.maxPage}">
+                        <a class="page-btn disabled" href=""></a> <!-- 비활성화 -->
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${empty condition}">
+                                <a class="page-btn startEnd-btn" href="list.bo?cpage=${pi.currentPage + 1}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">&nbsp;[다음]</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-btn startEnd-btn" href="searchBoard.bo?cpage=${pi.currentPage + 1}&condition=${condition}&keyword=${keyword}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">&nbsp;[다음]</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
     </div>
 </body>

@@ -27,7 +27,7 @@
             <!-- 게시글 제목칸-->
             <div id="board-title-wrapper">
                 <div id="board-title">
-                    <p>${b.boardName}</p>
+                    <p>${b.boardTitle}</p>
                 </div>
                 <div id="writer-date--update-delete">
                     <div id="writer-date">

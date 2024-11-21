@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <th>*이메일</th>
-                        <td><input type="text" name="email" value="${loginMember.email}" placeholder="이메일" required readonly></td>
+                        <td><input type="text" name="email" value="${loginMember.email}" placeholder="이메일" required></td>
                     </tr>
                     <tr>
                         <th>주소</th>
