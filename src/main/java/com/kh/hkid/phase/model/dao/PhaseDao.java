@@ -16,10 +16,6 @@ public class PhaseDao {
 		return (ArrayList)sqlSession.selectList("phaseMapper", order1);
 	}
 
-	public int insertPhase(SqlSessionTemplate sqlSession, Phase p) {
-		return sqlSession.insert("phaseMapper", p);
-	}
-
 	
 
 }

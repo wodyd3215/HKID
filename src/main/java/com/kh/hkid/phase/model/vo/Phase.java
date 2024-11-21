@@ -17,10 +17,4 @@ public class Phase {
 	private String paymentStatus;
 	private String bankCode;
 	private String bankName;
-	private String memberName;
-	private String address;
-	private String phone;
-	private String email;
-	private String productName;
-	private int price;
 }
