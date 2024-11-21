@@ -44,15 +44,19 @@
 			 					DIARY_NUMBER,
 								DIARY_TITLE,
 								DIARY_CONTENT,
-								MEMBER_NO,
-								FOOD_NO
+								MEMBER_NO
+								<if test="foodNo != 0">
+								,FOOD_NO
+								</if>
 			                  )
 			           VALUES (
 			           			SEQ_DNO.NEXTVAL,
 			           			#{diaryTitle},
 			           			#{diaryContent},
-			           			#{memberNo},
-			           			#{foodNo}
+			           			#{memberNo}
+								<if test="foodNo != 0">
+			           			,#{foodNo}
+								</if>
 			                  )
 		</insert>
 		

@@ -36,7 +36,7 @@ pageEncoding="UTF-8"%>
                 <div id="not-loaded-status">클릭해서 가져오기</div>
                 
             </div>
-            <input type="hidden" name="foodNo">
+            <input type="hidden" name="foodNo" value="0">
             <div class="edit-area">
                 <textarea id="content" name="diaryContent"></textarea>
             </div>
