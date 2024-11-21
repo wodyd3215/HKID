@@ -174,12 +174,20 @@
   	 	SET BOARD_STATUS = 'N'
 	  WHERE BOARD_NO = #{boardNo}
   </update>
-  <!-- 신고기능
-  <insert>
+  
+  <!-- 신고당한 게시글의 userNo찾기 -->
+  	<select id="selectReportedUserNo" resultType="_int">
+  		SELECT MEMBER_NO
+  		  FROM COMMUNITY
+  		WHERE USER_NO = #{boardNo}
+  	</select>
+  
+  
+  <!-- 신고기능 -->
+  <insert id="insertReport">
   	INSERT INTO REPORT(
 		  		REPORT_NO,
 				TYPE_NO,
-				REPORT_DATE,
 				DETAIL_CONTENT,
 				MEMBER_NO,
 				REPORTED_MEMBER_NO,
@@ -188,9 +196,15 @@
 				REVIEW_NO
 				) 
 				VALUES (
+				SEQ_REPORT_NO.nextval,
+				#{TypeNo},
+				#{detailContent},
+				
+				
+				
 		  	)
   </insert>
-  	-->
+
 </mapper>
 
 

@@ -69,11 +69,20 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteboard(int bno) {
 		return boardDao.deleteboard(sqlSession, bno);
 	}
+	
+	
+	@Override
+	public int selectReportedUserNo(int bno) {
+		return boardDao.selectReportedUserNo(sqlSession, bno);
+	}
+	
 
 	@Override
-	public int insertReport(int bno) {
-		return boardDao.insertReport(sqlSession, bno);
+	public int insertReport(HashMap<String, Object> map) {
+		return boardDao.insertReport(sqlSession, map);
 	}
+
+	
 	
 
 	

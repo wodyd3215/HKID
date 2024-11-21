@@ -246,47 +246,50 @@
     <!-------- 신고 모달 --------->
     <div class="modal" id="report-modal">
         <div class="custom-modal">
-            <div class="custom-modal-header">
-                <div class="custom-modal-title"><h3>신고</h3></div>
-                <button class="material-symbols-outlined close-btn " onclick="closeModal()">x</button>
-            </div>
-            <hr class="report-h3">
-            <div id="model-middle">
-                <div id="target-div">
-                    <label for="target1">대상</label>
-                    <div id="target1">${b.boardName}</div>
+            <form class="postForm" method="post" action="">
+                <input type="hidden" name="bno" value="${b.boardNo}">
+                <div class="custom-modal-header">
+                    <div class="custom-modal-title"><h3>신고</h3></div>
+                    <button class="material-symbols-outlined close-btn " onclick="closeModal()">x</button>
                 </div>
-                <div>
-                    <label for="target2">신고 사유</label>
-                    <select name="" id="target2">
-                        <option value="" hidden>신고 유형을 선택해주세요</option>
-                        <option value="">욕설</option>
-                        <option value="">스팸 / 홍보</option>
-                        <option value="">음란물</option>
-                        <option value="">개인정보 노출</option>
-                        <option value="">불쾌한 표현</option>
-                    </select>
+                <hr class="report-h3">
+                <div id="model-middle">
+                    <div id="target-div">
+                        <label for="target1">대상</label>
+                        <div id="target1">${b.boardName}</div>
+                    </div>
+                    <div>
+                        <label for="target2">신고 사유</label>
+                        <select name="reportTypeNo" id="target2">
+                            <option value="" hidden>신고 유형을 선택해주세요</option>
+                            <option value="1">욕설</option>
+                            <option value="2">스팸 / 홍보</option>
+                            <option value="3">음란물</option>
+                            <option value="4">개인정보 노출</option>
+                            <option value="5">불쾌한 표현</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div>
+                        <h5>상세내용</h5>
+                        <textarea name="reportDetailContent" id="report-textarea"></textarea>
+                    </div>
                 </div>
-                <hr>
-                <div>
-                    <h5>상세내용</h5>
-                    <textarea name="" id="report-textarea"></textarea>
-                </div>
-            </div>
-            
-
-            <div class="custom-modal-content">
-
-                <button class="modal-btn" id="report-submit-btn">제출</button>
-              
-                <!-- <form class="postForm" method="post" action="">
-                    <input type="hidden" name="bno" value="${boardNo}">
-                    
-                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
-                </form>
                 
-                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button> -->
-            </div>
+
+                <div class="custom-modal-content">
+
+                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report')">제출</button>
+                
+                    <!-- <form class="postForm" method="post" action="">
+                        <input type="hidden" name="bno" value="${boardNo}">
+                        
+                        <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
+                    </form>
+                    
+                    <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button> -->
+                </div>
+            </form>
         </div>
     </div>
 

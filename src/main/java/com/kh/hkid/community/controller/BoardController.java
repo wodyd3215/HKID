@@ -28,6 +28,7 @@ import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.community.model.vo.Reply;
 import com.kh.hkid.community.service.BoardService;
+import com.kh.hkid.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -152,6 +153,31 @@ public class BoardController {
 	
 	
 
+	//신고
+	@PostMapping("report.bo")
+	public String insertReport(int bno, int reportTypeNo, String reportDetailContent, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		
+		int reportedUserNo = boardService.selectReportedUserNo(bno); //신고당한 사람
+		System.out.println("신고당한 사람의 번호" + reportedUserNo);
+		
+		
+		map.put("boardNo", bno);
+		map.put("TypeNo", reportTypeNo);
+		map.put("detailContent", reportDetailContent);
+		map.put("memberNo", memberNo);
+		
+		
+		
+		//신고
+		int result = boardService.insertReport(map);
+		
+		System.out.println("신고컨트롤러에서 받음");
+		return "community/boardDetail"; // 임시로 설정
+	}
+		
 	
 	
 //	--------------- 댓글 기능 -------------------------
@@ -203,21 +229,7 @@ public class BoardController {
 		System.out.println("update댓글 컨트롤러 실행");
 		return "redirect: /community/boardDetail";
 	}
-	
-	//신고요청
-	@PostMapping("report.bo")
-	public String insertReport(int bno) {
-		
-		//신고
-		int result = boardService.insertReport(bno);
-		
-		System.out.println("신고컨트롤러에서 받음");
-		return "community/boardDetail"; // 임시로 설정
-	}
-	
-	
 
-	
 	//-------------------------summernote----------------------------
 	
 	//ajax로 파일 업로드

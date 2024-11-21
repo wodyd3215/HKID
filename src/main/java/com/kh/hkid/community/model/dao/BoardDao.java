@@ -37,7 +37,6 @@ public class BoardDao {
 	public ArrayList<Community> selectCategoryList(SqlSessionTemplate sqlSession , PageInfo pi, String category){
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
 		return (ArrayList)sqlSession.selectList("boardMapper.selectCategoryList", category, rowBounds);
 	}
 	
@@ -55,7 +54,6 @@ public class BoardDao {
 	public ArrayList<Community> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi){
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
 		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchList", map, rowBounds);
 	}
 	
@@ -70,9 +68,16 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deleteboard", boardNo);
 	}
 	
-	//게시글 삭제
-	public int insertReport(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.insert("boardMapper.insertReport", boardNo);
+	//신고당한 사람
+	public int selectReportedUserNo(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectReportedUserNo", boardNo);
 	}
+	
+	//신고
+	public int insertReport(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.insert("boardMapper.insertReport", map);
+	}
+	
+	
 	
 }
