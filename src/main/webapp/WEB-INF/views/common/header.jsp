@@ -82,7 +82,7 @@
                         
                     </button>
                     <div class="myPage-area hide" >
-                        <p>닉네임</p>
+                        <p>${loginMember.nickName}</p>
                         <hr>
                        	<a href="personal.me">개인설정</a>
                         <a href="myDiaryList.me">내 다이어리</a>
