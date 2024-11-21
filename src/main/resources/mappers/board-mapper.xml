@@ -179,7 +179,7 @@
   	<select id="selectReportedUserNo" resultType="_int">
   		SELECT MEMBER_NO
   		  FROM COMMUNITY
-  		WHERE USER_NO = #{boardNo}
+  		WHERE BOARD_NO = #{boardNo}
   	</select>
   
   
@@ -187,21 +187,19 @@
   <insert id="insertReport">
   	INSERT INTO REPORT(
 		  		REPORT_NO,
-				TYPE_NO,
+				"TYPE_NO",
 				DETAIL_CONTENT,
 				MEMBER_NO,
 				REPORTED_MEMBER_NO,
-				REPLY_NO,
-				BOARD_NO,
-				REVIEW_NO
+				BOARD_NO
 				) 
 				VALUES (
 				SEQ_REPORT_NO.nextval,
 				#{TypeNo},
 				#{detailContent},
-				
-				
-				
+				#{memberNo},
+				#{reportedMemberNo},
+				#{boardNo}
 		  	)
   </insert>
 

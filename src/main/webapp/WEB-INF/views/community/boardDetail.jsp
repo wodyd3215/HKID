@@ -256,7 +256,7 @@
                 <div id="model-middle">
                     <div id="target-div">
                         <label for="target1">대상</label>
-                        <div id="target1">${b.boardName}</div>
+                        <div id="target1">${b.boardTitle}</div>
                     </div>
                     <div>
                         <label for="target2">신고 사유</label>

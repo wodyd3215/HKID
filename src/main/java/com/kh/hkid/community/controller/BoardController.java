@@ -159,23 +159,24 @@ public class BoardController {
 		HashMap<String, Object> map = new HashMap<>();
 		
 		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-		
 		int reportedUserNo = boardService.selectReportedUserNo(bno); //신고당한 사람
-		System.out.println("신고당한 사람의 번호" + reportedUserNo);
-		
 		
 		map.put("boardNo", bno);
 		map.put("TypeNo", reportTypeNo);
 		map.put("detailContent", reportDetailContent);
 		map.put("memberNo", memberNo);
+		map.put("reportedMemberNo", reportedUserNo);
 		
+		if(boardService.insertReport(map) > 0) {
+			System.out.println("신고 INSERT 성공");
+			session.setAttribute("alertMsg", "신고 완료");
+		}else {
+			System.out.println("신고 INSERT 실패");
+			session.setAttribute("alertMsg", "신고 실패");
+		}
 		
-		
-		//신고
-		int result = boardService.insertReport(map);
-		
-		System.out.println("신고컨트롤러에서 받음");
-		return "community/boardDetail"; // 임시로 설정
+		session.setAttribute("alertMsg", "신고 완료");
+		return "redirect:/boardDetail.bo?bno=" + bno;
 	}
 		
 	
