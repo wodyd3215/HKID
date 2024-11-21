@@ -96,20 +96,20 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원 유무 판단
 	@Override
-	public int searchMember(JsonObject memberInfo) {
-		return memberDao.searchMember(sqlSession, memberInfo);
+	public int searchMember(Member m) {
+		return memberDao.searchMember(sqlSession, m);
 	}
 	
 	// 소셜로그인
 	@Override
-	public Member socialLoginMember(JsonObject memberInfo) {
-		return memberDao.socialLoginMember(sqlSession, memberInfo);
+	public Member socialLoginMember(Member m) {
+		return memberDao.socialLoginMember(sqlSession, m);
 	}
 
 	// 소셜 회원가입
 	@Transactional
 	@Override
-	public int insertSocialMember(JsonObject memberInfo) {
-		return memberDao.insertSocialMember(sqlSession, memberInfo);
+	public int insertSocialMember(Member m) {
+		return memberDao.insertSocialMember(sqlSession, m);
 	}
 }

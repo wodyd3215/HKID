@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="./resources/css/exercise/mainExercise.css?after">
 <link rel="stylesheet" href="./resources/css/default.css">
+<link rel="stylesheet" href="./resources/css/exercise/exerciseFloat.css?after">
  <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
 </head>
@@ -74,7 +75,7 @@
 				</form>
 			</div>
 			<div class="content-box">
-				<div class="list-box" id="tour-content">
+				<div class="list-box">
 				<c:forEach var="e" items="${list}">
 						<div id="list-con">
 							<div id="list-img">
@@ -87,14 +88,17 @@
 							<br>
 							<div id="under-area">
 								<p class="list-text2">${e.exerciseDifficulty}</p>
-								<button type="button">
-									<img src="./resources/img/buy.png" class="like(this)" onclick="like(this)">
+								<button type="button" onclick="addToSwiper('${e.exerciseImg}')">
+									<img src="./resources/img/buy.png" class="like(this)" onclick="buy()">
 								</button>
 							</div>
 						</div>
+						<div id="message-container"></div> <!-- 메시지가 표시될 위치 -->
 					</c:forEach>
 					</div>
 					
+					
+
 					<div id="paging-area">
 						<c:choose>
 							<c:when test="${pi.currentPage > 1}">
@@ -144,14 +148,16 @@
 		</div>
 
 		<div class="flootbox">
+			<div>
+				<p><img src="./resources/img/buy.png" alt="없음">
+					를 눌러 운동을 담아보세요!
+				</p>
+			</div>
 			<!-- Swiper -->
 			<div class="slider__prev"></div>
-			<div class="swiper mySwiper" style="height: 40rem;width: 15rem;">
+			<div class="swiper mySwiper" style="height: 39rem;width: 15rem;">
 			  <ul class="swiper-wrapper">
-				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="1"/></li>
-				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="2"/></li>
-				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="3"/></li>
-				<li class="swiper-slide box-size"><img src="./resources/image/exerciseImages/ABS_CRUNCH_MC.gif" alt="4"/></li>
+				
 			  </ul>
 			</div>
 			<div class="slider__next"></div>
@@ -163,5 +169,6 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script src="./resources/js/exercise/mainExercise.js"></script>
+	<script src="./resources/js/exercise/exerciseFloat.js"></script>
 </body>
 </html>

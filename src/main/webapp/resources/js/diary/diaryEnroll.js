@@ -41,7 +41,7 @@ function drawTableDiet(calLog) {
                 </tbody>
             </table>`
     
-    $('input[name="foodNo"').val(calLog.foodNo)
+    $('input[name="foodNo"]').val(calLog.foodNo)
 
     calInfo.append(str)
 }

@@ -120,6 +120,22 @@ public class BoardController {
 		return "community/boardDetail";
 	}
 	
+	//게시글 삭제
+	@PostMapping("boardDelete.bo")
+	public String boardDelete(int bno, HttpSession session, Model model) {
+
+		if(boardService.deleteboard(bno) > 0) { //성공 시	
+			session.setAttribute("alertMsg", "게시글 삭제 완료");
+			return "redirect:/list.bo";
+		}else {
+			session.setAttribute("alertMsg", "게시글 삭제 실패");
+			return "redirect:/boardDetail.bo?bno=" + bno;
+		}
+		
+		
+		
+	}
+	
 	//게시글 작성
 	@GetMapping("boardWrite.bo")
 	public String boardWrite() {
@@ -134,12 +150,6 @@ public class BoardController {
 		return "community/boardDetail"; 
 	}
 	
-	//게시글 삭제
-	@PostMapping("boardDelete.bo")
-	public String boardDelete(int bno) {
-		System.out.println("삭제컨트롤러에서 받음");
-		return "community/list.bo"; // 임시로 설정
-	}
 	
 
 	
@@ -196,7 +206,10 @@ public class BoardController {
 	
 	//신고요청
 	@PostMapping("report.bo")
-	public String insertReport() {
+	public String insertReport(int bno) {
+		
+		//신고
+		int result = boardService.insertReport(bno);
 		
 		System.out.println("신고컨트롤러에서 받음");
 		return "community/boardDetail"; // 임시로 설정

@@ -31,7 +31,7 @@
                 </div>
                 <div id="writer-date--update-delete">
                     <div id="writer-date">
-                        <div>${b.memberName}</div> &nbsp;&nbsp;&nbsp;
+                        <div>${b.nickName}</div> &nbsp;&nbsp;&nbsp;
                         <div>${b.boardDate}</div>
                     </div>
                     <div class="btn-div">
@@ -232,8 +232,8 @@
                 <div class="custom-modal-title">게시글을 삭제하시겠습니까?</div>
             </div>
             <div class="custom-modal-content">
-                <form class="postForm" method="post">
-                    <input type="hidden" name="bno" value="${boardNo}">
+                <form class="postForm" method="post" action="">
+                    <input type="hidden" name="bno" value="${b.boardNo}">
                     <!-- 게시글 삭제 버튼 -->
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">예</button>
                 </form>
@@ -247,16 +247,45 @@
     <div class="modal" id="report-modal">
         <div class="custom-modal">
             <div class="custom-modal-header">
-                <div class="custom-modal-title">게시글을 신고하겠습니까?</div>
+                <div class="custom-modal-title"><h3>신고</h3></div>
+                <button class="material-symbols-outlined close-btn " onclick="closeModal()">x</button>
             </div>
+            <hr class="report-h3">
+            <div id="model-middle">
+                <div id="target-div">
+                    <label for="target1">대상</label>
+                    <div id="target1">${b.boardName}</div>
+                </div>
+                <div>
+                    <label for="target2">신고 사유</label>
+                    <select name="" id="target2">
+                        <option value="" hidden>신고 유형을 선택해주세요</option>
+                        <option value="">욕설</option>
+                        <option value="">스팸 / 홍보</option>
+                        <option value="">음란물</option>
+                        <option value="">개인정보 노출</option>
+                        <option value="">불쾌한 표현</option>
+                    </select>
+                </div>
+                <hr>
+                <div>
+                    <h5>상세내용</h5>
+                    <textarea name="" id="report-textarea"></textarea>
+                </div>
+            </div>
+            
+
             <div class="custom-modal-content">
-                <form class="postForm" method="post">
+
+                <button class="modal-btn" id="report-submit-btn">제출</button>
+              
+                <!-- <form class="postForm" method="post" action="">
                     <input type="hidden" name="bno" value="${boardNo}">
-                    <!-- 신고 버튼 -->
+                    
                     <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
                 </form>
-                <!-- 모달 닫기 -->
-                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
+                
+                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button> -->
             </div>
         </div>
     </div>

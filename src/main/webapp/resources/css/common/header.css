@@ -87,16 +87,17 @@ a.login {
 #community-drop-bar > ul {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: rgb(250, 249, 249);
     width: 80px;
-    height: 140px;
+    height: 130px;
     left: 44px;
-    top: 20px;
-    opacity: 0.5;
+    top: 23px;
+    z-index: 100;
+    padding-top: 20px;
 }
 
 #community-drop-bar > ul > li {
-    padding-top: 15px;
+    padding-top: 20px;
 }
 
 #community-drop-bar:hover > ul {
@@ -118,10 +119,10 @@ a.login {
     position: absolute;
     background-color: white;
     width: 80px;
-    height: 140px;
+    height: 80px;
     left: 44px;
-    top: 20px;
-    opacity: 0.5;
+    top: 30px;
+    z-index: 100;
 }
 
 #product-drop-bar > ul > li {
