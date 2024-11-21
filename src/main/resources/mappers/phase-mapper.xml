@@ -28,7 +28,7 @@
 		<result column="PRODUCT_NAME" property="productName" />
 		<result column="PRICE" property="price" />
 	</resultMap>
-	
+	<!-- 
 	<select id="selectList" resultMap="PhaseResult">
 		SELECT MEMBR_NAME memberName,
 			   EMAIL email,
@@ -42,4 +42,7 @@
 		 WHERE MEMBER_ID = #{memberNo}
 		   AND PRODUCT_ID = #{productId}
 	</select>
+	 -->
+	 
+	 
 </mapper>

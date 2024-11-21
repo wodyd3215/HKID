@@ -31,19 +31,19 @@
 						<tbody>
 							<tr>
 								<th>이름</th>
-								<td><input type="text" readonly value="${p.name}"></td>
+								<td><input type="text" readonly name="userName" value="${p.name}"></td>
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td><input type="text" readonly value="${p.email}"></td>
+								<td><input type="text" readonly name="userEmail" value="${p.email}"></td>
 							</tr>
 							<tr>
 								<th>연락처</th>
-								<td><input type="text" readonly value="${p.phone}"></td>
+								<td><input type="text" readonly name="userPhone" value="${p.phone}"></td>
 							</tr>
 							<tr>
 								<th>배송주소</th>
-								<td><input type="text" readonly value="${p.address}"></td>
+								<td><input type="text" readonly name="userAddress" value="${p.address}"></td>
 							</tr>
 							<tr>
 								<th>배송 요청사항</th>
@@ -81,7 +81,7 @@
 
 				<br><br>
 				<div class="pay-btn">
-					<button type="submit">결제하기</button>
+					<button type="submit"><a href="${phase.in}">결제하기</a></button>
 				</div>
 			</form>
 		
