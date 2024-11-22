@@ -15,10 +15,26 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.noticeCount");
 	}
 	
-	public ArrayList<Notice> selectNotice(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("adminMapper.selectNotice", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("adminMapper.selectNoticeList", null, rowBounds);
+	}
+	
+	public int insertNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.insert("adminMapper.insertNotice", n);
+	}
+	
+	public int deleteNotice(SqlSessionTemplate sqlSession, int noticeNo) {
+		return sqlSession.delete("adminMapper.deleteNotice", noticeNo);
+	}
+	
+	public Notice selectNotice(SqlSessionTemplate sqlSession, int noticeNo) {
+		return sqlSession.selectOne("adminMapper.selectNotice", noticeNo);
+	}
+	
+	public int updateNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.update("adminMapper.updateNotice", n);
 	}
 }

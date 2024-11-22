@@ -8,5 +8,13 @@ import com.kh.hkid.common.vo.PageInfo;
 public interface AdminService {
 	int noticeCount();
 	
-	ArrayList<Notice> selectNotice(PageInfo pi);
+	ArrayList<Notice> selectNoticeList(PageInfo pi);
+	
+	int insertNotice(Notice n);
+	
+	int deleteNotice(int noticeNo);
+	
+	Notice selectNotice(int noticeNo);
+	
+	int updateNotice(Notice n);
 }

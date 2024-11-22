@@ -30,7 +30,33 @@ public class AdminServiceImpl implements AdminService{
 
 
 	@Override
-	public ArrayList<Notice> selectNotice(PageInfo pi) {
-		return adminDao.selectNotice(sqlSession, pi);
+	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
+		return adminDao.selectNoticeList(sqlSession, pi);
 	}
+
+
+	@Override
+	public int insertNotice(Notice n) {
+		return adminDao.insertNotice(sqlSession, n);
+	}
+
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return adminDao.deleteNotice(sqlSession, noticeNo);
+	}
+
+
+	@Override
+	public Notice selectNotice(int noticeNo) {
+		return adminDao.selectNotice(sqlSession, noticeNo);
+	}
+
+
+	@Override
+	public int updateNotice(Notice n) {
+		return adminDao.updateNotice(sqlSession, n);
+	}
+	
+	
 }

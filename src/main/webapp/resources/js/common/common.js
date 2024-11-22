@@ -48,12 +48,15 @@ function copyLink(text, successMsg, errorMsg){
 function postFormSubmit(type, url) {
     const formEl = $("#postForm");
     switch(type) {
-        case "edit": {
+        case "edit": 
             $(formEl).attr("action", url)
-        } break;
-        case "delete": {
+            break;
+        case "delete":
             $(formEl).attr("action", url)
-        } break;
+            break;
+        case "report":
+            $(formEl).attr("action", "report.bo");
+            break;
     }
 
     $(formEl).submit();
