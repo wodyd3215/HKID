@@ -1,6 +1,12 @@
 function init(contextPath, pageName, optional) {
     initWidth()
-    initSummerNote()
+    
+    switch(pageName) {
+        case "nEnroll":
+            initEnroll(contextPath, optional);
+        break;
+    }
+    
 }
 
 // 테이블 th의 크기를 dataset을 통해서 자동으로 적용시킴
