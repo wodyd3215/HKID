@@ -61,21 +61,7 @@ public class DiaryController {
     public String diaryEnroll() {
     	return "diary/myDiaryEnroll";
     }
-    
-    // summernote로 추가한 이미지 서버에 저장
-    @ResponseBody
-    @PostMapping("insertImgAjax.di")
-    public String insertDiaryImgAjax(List<MultipartFile> fileList, HttpSession session) {
-    	ArrayList<String> imgList = new ArrayList<>();
-    	
-    	for(MultipartFile f : fileList) {	
-    		imgList.add(Template.saveFile(f, session, "/resources/image/diary/"));
-    	}
-    	
-    	return new Gson().toJson(imgList);
-
-    }
-    
+        
     // 일기 등록
     @PostMapping("insertDiary.di")
     public String insertDiary(Diary d, HttpSession session) {

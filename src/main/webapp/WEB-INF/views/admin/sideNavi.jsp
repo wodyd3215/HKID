@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,13 +26,24 @@
     <link href="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.css" rel="stylesheet">
     <script src="${pageContext.servletContext.contextPath}/resources/summernote/summernote-bs5.js"></script>
 
+    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sideNavi.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
+
+    <script src="${pageContext.request.contextPath}/resources/js/common/common.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/common.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </head>
-<body onload="init('${pageContext.request.contextPath}', '${pageName}', '${optional}')">
+<body onload="init('${pageContext.request.contextPath}', '${pageName}', '${fn:escapeXml(optional)}')">
+    <c:if test="${ not empty alertMsg}">
+        <script>
+            alert("${alertMsg}");
+        </script>
+        <c:remove var="alertMsg" scope="session"/>
+    </c:if> 
     <div class="sideNavi">
         <div id="logo">
             <a href="">대충 로고</a>

@@ -11,10 +11,10 @@ function init(contextPath, diaryContent) {
             ['table', ['table']],
             ['insert', ['link', 'picture']],
         ],
-        url : "insertImgAjax.di",
+        setRoot: "diary/",
     }
     
-    initSummerNote(setting, contextPath)
+    initSummernote(setting, contextPath)
 
     if(diaryContent) {
         initUpdateSummernote(diaryContent)

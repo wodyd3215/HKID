@@ -20,7 +20,8 @@
 
 			<br>
 
-			<form action="">
+			<!-- 구매자 정보 -->
+			<form action="phaseInfo.li" method="GET">
 				<div class="byerInfo-title">
 					<p>구매자 정보</p>
 				</div>
@@ -30,19 +31,19 @@
 						<tbody>
 							<tr>
 								<th>이름</th>
-								<td>김철수</td>
+								<td><input type="text" readonly name="userName" value="${p.name}"></td>
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td>ironwater@naver.com</td>
+								<td><input type="text" readonly name="userEmail" value="${p.email}"></td>
 							</tr>
 							<tr>
 								<th>연락처</th>
-								<td>010-1234-5678</td>
+								<td><input type="text" readonly name="userPhone" value="${p.phone}"></td>
 							</tr>
 							<tr>
 								<th>배송주소</th>
-								<td>서울시 강남구 구구구구</td>
+								<td><input type="text" readonly name="userAddress" value="${p.address}"></td>
 							</tr>
 							<tr>
 								<th>배송 요청사항</th>
@@ -54,6 +55,7 @@
 
 				<br><br><br>
 
+				<!-- 금액 -->
 				<div class="paymentInfo-title">
 					<p>결제 정보</p>
 				</div>
@@ -71,7 +73,7 @@
 							</tr>
 							<tr>
 								<th>총 결제금액</th>
-								<td>24,500원</td>
+								<td id="totalAmount"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -79,7 +81,7 @@
 
 				<br><br>
 				<div class="pay-btn">
-					<button type="submit">결제하기</button>
+					<button type="submit"><a href="${phase.in}">결제하기</a></button>
 				</div>
 			</form>
 		

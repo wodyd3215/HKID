@@ -50,7 +50,7 @@
 					</ol>
 				</div>
 				<div id="exerIcon">
-					<button type="button" onclick="addToSwiper('${e.exerciseImg}')">
+					<button type="button" onclick="addToSwiper('${e.exerciseImg}','${e.exerciseName}')">
 						<img src="./resources/img/buy.png" class="like(this)" onclick="buy()">
 					</button>
 				</div>
@@ -60,7 +60,7 @@
 
 		<div class="flootbox">
 			<div>
-				<p><img src="./resources/img/buy.png" alt="없음">
+				<p id="instruction" class="instruction"><img src="./resources/img/buy.png" alt="없음">
 					를 눌러 운동을 담아보세요!
 				</p>
 			</div>

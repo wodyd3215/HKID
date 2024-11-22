@@ -36,7 +36,13 @@ public interface BoardService {
 	//게시글 삭제
 	int deleteboard(int bno);
 	
+	//신고당한 게시글의 userNo찾기
+	int selectReportedUserNo(int bno);
+	
 	//게시글 신고
-	int insertReport(int bno);
+	int insertReport(HashMap<String, Object> map);
+	
+	//게시글 추가
+	int insertBoard(int bno);
 }
 
