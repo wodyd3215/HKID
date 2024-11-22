@@ -17,7 +17,6 @@ function postFormSubmit(type){
             $formEl.attr("action", "updateForm.bo");
             console.log("게시글 수정요청 전달 성공!")
             break;
-        
         // 게시글 삭제
         case "delete":
             $formEl.attr("action", "boardDelete.bo");

@@ -1,4 +1,4 @@
-function init(contextPath, diaryContent) {
+function initEnroll(contextPath, noticeContent) {
     const setting = {
         placeholder: "오늘 하루는 어떠셨나요?",
         height: 578,
@@ -11,12 +11,12 @@ function init(contextPath, diaryContent) {
             ['table', ['table']],
             ['insert', ['link', 'picture']],
         ],
-        setRoot: "diary/",
+        setRoot: 'notice/',
     }
-    
+
     initSummernote(setting, contextPath)
 
-    if(diaryContent) {
-        initUpdateSummernote(diaryContent)
+    if(noticeContent) {
+        initUpdateSummernote(noticeContent)
     }
 }

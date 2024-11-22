@@ -16,19 +16,16 @@
     <jsp:include page="sideNavi.jsp" />
     <div class="wrapper">
         <div class="managementTitle">
-            공지 등록
+            공지 수정
         </div>
         <div class="content">
-            <form id="write-wrapper" action="insertNotice" method="post">
-                <select name="noticeType" id="search-category">
-                    <option value="1">게시판</option>
-                    <option value="2">챌린지</option>
-                </select>
-                <input type="text" name="noticeTitle" id="board-title" placeholder="제목을 입력해주세요">
+            <form id="write-wrapper" action="updateNotice?noticeNo=${notice.noticeNo}" method="post">
+                <input type="text" name="noticeTypeName" id="search-category" value="${notice.noticeTypeName}" readonly>
+                <input type="text" name="noticeTitle" id="board-title" placeholder="제목을 입력해주세요" value="${notice.noticeTitle}">
                 <textarea id="content" name="noticeContent" required></textarea>
             
                 <div id="submit-btn-wrapper">
-                    <button id="submit-btn" type="submit">게시글 등록</button>
+                    <button id="submit-btn" type="submit">수정 완료</button>
                 </div>
             </form>
         </div>
