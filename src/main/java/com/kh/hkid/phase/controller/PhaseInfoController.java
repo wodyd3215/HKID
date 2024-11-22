@@ -39,13 +39,13 @@ public class PhaseInfoController {
 			session.setAttribute("alertMsg","로그인 이후 이용 가능한 서비스입니다.");
 		}		
 		
-		HashMap<String, Object> order1= new HashMap<>();
-		order1.put("memberNo", (m));
-		order1.put("productNo", session.getAttribute("productNo"));
-		 
-		ArrayList<Phase> order = phaseService.selectList(order1);		 
-		 
-		model.addAttribute("order",order);
+//		HashMap<String, Object> order1= new HashMap<>();
+//		order1.put("memberNo", (m));
+//		order1.put("productNo", session.getAttribute("productNo"));
+//		 
+//		ArrayList<Phase> order = phaseService.selectList(order1);		 
+//		 
+//		model.addAttribute("order",order);
 		
 		return "order/orderInfo";
 	}

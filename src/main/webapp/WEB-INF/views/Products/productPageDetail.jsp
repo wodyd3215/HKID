@@ -43,41 +43,47 @@
                 </div>
             </div>            
             
+            <form action="" method="">
+                <input type="hidden" name="" value="${p.productNo}">
+            </form>
+                <div class="productContent"> <!-- 상품 버튼-->
+                    <!-- 상품 위치 -->
+                    <div class="productLocation"> 상품 > ${p.category}</div>
+        
+                    <!-- 상품 이름 및 평점 -->
+                    <div class="productDetail">
+                         <!-- 상품 이름 -->
+                        <div> ${p.productName}</div>
     
-
-            <div class="productContent"> <!-- 상품 버튼-->
-                <!-- 상품 위치 -->
-                <div class="productLocation"> 상품 > ${p.category}</div>
-    
-                <!-- 상품 이름 및 평점 -->
-                <div class="productDetail">
-                     <!-- 상품 이름 -->
-                    <div> ${p.productName}</div>
-
-                    <!-- 평점 -->
-                    <div class="assess">${r.rate}</div> 
-                </div>            
-    
-                <!-- 수량 버튼 -->
-                <div class="BtnPrice">
-                    <div class="quantityBtn" data-max-quantity="${p.quantity}">
-                        <button class="Btnmin" onclick="decreaseQuantity()">-</button>
-                        <span class="quanText">1</span>
-                        <button class="Btnpls" onclick="increaseQuantity()">+</button>
-                    </div>                                       
-                    <div class="priceText" data-price="${p.price}">                         
-                        ${p.price} 원
+                        <!-- 평점 -->
+                        <div class="assess">${r.rate}</div> 
+                    </div>            
+        
+                    <!-- 수량 버튼 -->
+                    <div class="BtnPrice">
+                        <div class="quantityBtn" data-max-quantity="${p.quantity}">
+                            <button class="Btnmin" onclick="decreaseQuantity()">-</button>
+                            <span class="quanText">1</span>
+                            <button class="Btnpls" onclick="increaseQuantity()">+</button>
+                        </div>                                       
+                        <div class="priceText" data-price="${p.price}">                         
+                            ${p.price} 원
+                        </div>
                     </div>
+
+                        <!-- 구매 및 장바구니 버튼 -->
+                    <div class="phaseCartBtn">
+                        <button type="submit" class="phaseBtn"> <a href="phaseInfo.li"> 구매 </a></button>
+                        <button class="cartBtn"> <a href="addCart.c">장바구니</a> </button> 
+                        <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
+                    </div>                
                 </div>
+            
+
+           
     
 
-                <!-- 구매 및 장바구니 버튼 -->
-                <div class="phaseCartBtn">
-                    <button type="submit" class="phaseBtn"> <a href="phaseInfo.li"> 구매 </a></button>
-                    <button class="cartBtn"> 장바구니 </button> 
-                    <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
-                </div>                
-            </div>
+                
         </div>     
 
 

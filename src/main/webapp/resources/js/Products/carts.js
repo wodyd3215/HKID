@@ -6,18 +6,23 @@ function selectAll(selectAll){
         checkbox.checked = selectAll.checked
     })
 }
+function addItem(){
+    //const productNo = ${};
+    const memberNo = "${loginUser.userNo}";
+    const productQuantity = document.querySelector(".quantityBtnText").value;
 
-// 장바구니가 insert 되었을 시 그려주는 코드
-function drawCart(tbody, cartList){
-    $(tbody).empty();
-    
-    for(const carts of cartList){
-        const cartsRow = document.createElement('tr');
-        
-    }
+    addAjaxItem
 }
 
-
+function addAjaxItem(data, callback){
+    $.ajax({
+        url:'addCart.c',
+        data:data,
+        success:function(res){
+            callback(res)
+        }
+    })
+}
 
 
 
