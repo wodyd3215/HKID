@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.hkid.admin.model.dao.AdminDao;
+import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.dto.Community;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +30,33 @@ public class AdminServiceImpl implements AdminService{
 
 
 	@Override
-	public ArrayList<Community> selectNotice(PageInfo pi) {
-		return adminDao.selectNotice(sqlSession, pi);
+	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
+		return adminDao.selectNoticeList(sqlSession, pi);
 	}
+
+
+	@Override
+	public int insertNotice(Notice n) {
+		return adminDao.insertNotice(sqlSession, n);
+	}
+
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return adminDao.deleteNotice(sqlSession, noticeNo);
+	}
+
+
+	@Override
+	public Notice selectNotice(int noticeNo) {
+		return adminDao.selectNotice(sqlSession, noticeNo);
+	}
+
+
+	@Override
+	public int updateNotice(Notice n) {
+		return adminDao.updateNotice(sqlSession, n);
+	}
+	
+	
 }
