@@ -126,4 +126,4 @@ function saveDietInfo(){
     const fat = document.querySelector(".total-fat").innerText;
     
     location.href = `saveDietInfo.ca?totalKcal=${Number(kcal)}&totalCarbo=${Number(carbo)}&totalProtein=${Number(protein)}&totalFat=${Number(fat)}`;
-}
+} 

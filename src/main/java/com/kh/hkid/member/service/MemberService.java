@@ -1,6 +1,7 @@
 package com.kh.hkid.member.service;
 
-import com.google.gson.JsonObject;
+import java.util.ArrayList;
+
 import com.kh.hkid.member.model.vo.Member;
 
 public interface MemberService {
@@ -46,4 +47,7 @@ public interface MemberService {
 	
 	// 소셜회원가입
 	int insertSocialMember(Member m);
+	
+	// 유저 닉네임 조회
+	ArrayList<Member> searchNickName(String nickName);
 }

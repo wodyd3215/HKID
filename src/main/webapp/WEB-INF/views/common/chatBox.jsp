@@ -39,21 +39,7 @@
                     </div>
                     <!-- 중고판매유저 -->
                     <div id="chat-trade-user" class="hide">
-                        <div>
-                            <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
-                            <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content')">개떡도지</button>
-                            <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
-                        </div>
-                        <div>
-                            <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
-                            <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content')">개떡도지</button>
-                            <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
-                        </div>
-                        <div>
-                            <img class="delete-btn" src="${pageContext.request.contextPath}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
-                            <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content')">무지개</button>
-                            <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${pageContext.request.contextPath}/resources/image/trash2.png"></button>
-                        </div>
+                        
                     </div>
                     
                 </div>
@@ -108,25 +94,15 @@
                     <!-- 유저 검색 컨텐츠 -->
                     <div id="chat-search" class="hide">
                         <div id="searchbar-div">
-                            <input type="search" name="" id="chat-search-bar" placeholder="닉네임을 입력해주세요.">
-                            <button id="search-btn" type="submit">
+                            <input type="search" id="chat-search-bar" placeholder="닉네임을 입력해주세요.">
+                            <button id="search-btn" onclick="searchNickName('${pageContext.request.contextPath}')">
                                 <img id="searchIcon" src="resources/image/searchIcon.png">
                             </button>
                         </div>
-                        <!-- 채팅 추가 JS미구현! -->
+
+                        <!-- 검색한 유저 리스트 -->
                         <div class="search-users">
-                            <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
-                            <p>개떡도지</p>
-                            <button onclick="addChattingRoom('${pageContext.request.contextPath}', this)">
-                                <img src="${pageContext.request.contextPath}/resources/image/chat_bubble.png">
-                            </button>
-                        </div>
-                        <div class="search-users">
-                            <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
-                            <p>개벌레</p>
-                            <button onclick="addChattingRoom('${pageContext.request.contextPath}', this)">
-                                <img src="${pageContext.request.contextPath}/resources/image/chat_bubble.png">
-                            </button>
+
                         </div>
                     </div>
                 </div>
