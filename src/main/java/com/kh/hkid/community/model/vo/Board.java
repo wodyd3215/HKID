@@ -13,4 +13,6 @@ public class Board {
 	private int memberNo;
 	private String nickName;
 	private String content;
+	private String originName;
+	private String changeName;
 }

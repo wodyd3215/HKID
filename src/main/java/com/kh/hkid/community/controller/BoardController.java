@@ -28,6 +28,7 @@ import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.community.model.vo.Reply;
 import com.kh.hkid.community.service.BoardService;
+import com.kh.hkid.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,18 +52,18 @@ public class BoardController {
 			Model model
 			) {
 		
-		int boardCount = boardService.selectListCount(); //게시글의 총 개수
-		System.out.println("게시글의 총 개수: " + boardCount);
-		PageInfo pi = Template.getPageInfo(boardCount, cpage, 10, choiceBoardCount); //페이징 처리
-		ArrayList<Community> list = boardService.selectList(pi); //전체 게시글
-		System.out.println("게시글 리스트: " + list);
-		
+		int boardCount;
+		ArrayList<Community> list;
+		PageInfo pi;
 		//카테고리 선택 시
 		if(!category.equals("전체")) { //카테고리 선택이 안 됐으면 전체 게시글
 			boardCount = boardService.selectCategoryListCount(category); //카테고리 게시글 개수
 			pi = Template.getPageInfo(boardCount, cpage, 10, choiceBoardCount); //페이징 처리
 			list = boardService.selectCategoryList(pi, category);	//게시글 리스트
-			System.out.println("카테고리 게시글 리스트: " + list);
+		}else { //전체일 경우
+			boardCount = boardService.selectListCount(); //게시글의 총 개수
+			pi = Template.getPageInfo(boardCount, cpage, 10, choiceBoardCount); //페이징 처리
+			list = boardService.selectList(pi); //전체 게시글
 		}
 		
 		/*	[pageInfo] 
@@ -98,6 +99,7 @@ public class BoardController {
 		System.out.println("검색한 게시글 목록 >>>" + list);
 		System.out.println("검색한 게시글의 개수 >>>" + searchCount);
 		
+		
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("category", category);
@@ -123,7 +125,6 @@ public class BoardController {
 	//게시글 삭제
 	@PostMapping("boardDelete.bo")
 	public String boardDelete(int bno, HttpSession session, Model model) {
-
 		if(boardService.deleteboard(bno) > 0) { //성공 시	
 			session.setAttribute("alertMsg", "게시글 삭제 완료");
 			return "redirect:/list.bo";
@@ -131,27 +132,75 @@ public class BoardController {
 			session.setAttribute("alertMsg", "게시글 삭제 실패");
 			return "redirect:/boardDetail.bo?bno=" + bno;
 		}
-		
-		
-		
 	}
 	
 	//게시글 작성
-	@GetMapping("boardWrite.bo")
+	@GetMapping("enrollForm.bo")
 	public String boardWrite() {
-		
 		return "community/boardWrite";
+	}
+	
+	//게시글 추가
+	@PostMapping("insert.bo")
+	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model m) {
+		
+		//전달된 파일이 있을 경우
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = Template.saveFile(upfile, session, "/resources/uploadFile/");
+			
+			b.setChangeName("/resources/uploadFile/" + changeName);
+			b.setOriginName(upfile.getOriginalFilename());
+			}
+		
+		//
+		int result = boardService.insertBoard(b);
+		
+		
+		
+		
+		if(result > 0) { //성공 -> list페이지로 이동
+			session.setAttribute("alertMsg", "게시글 작성 성공");
+			return "redirect: /community/boardList";
+		} else { //실패 -> 에러페이지
+			m.addAttribute("errorMsg", "게시글 작성 실패");
+			return "redirect: /community/boardList";
+		}
 	}
 	
 	//게시글 수정
 	@PostMapping("updateForm.bo")
 	public String updateForm() {
-		
 		return "community/boardDetail"; 
 	}
 	
 	
 
+	//신고
+	@PostMapping("report.bo")
+	public String insertReport(int bno, int reportTypeNo, String reportDetailContent, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		int reportedUserNo = boardService.selectReportedUserNo(bno); //신고당한 사람
+		
+		map.put("boardNo", bno);
+		map.put("TypeNo", reportTypeNo);
+		map.put("detailContent", reportDetailContent);
+		map.put("memberNo", memberNo);
+		map.put("reportedMemberNo", reportedUserNo);
+		
+		if(boardService.insertReport(map) > 0) {
+			System.out.println("신고 INSERT 성공");
+			session.setAttribute("alertMsg", "신고 완료");
+		}else {
+			System.out.println("신고 INSERT 실패");
+			session.setAttribute("alertMsg", "신고 실패");
+		}
+		
+		session.setAttribute("alertMsg", "신고 완료");
+		return "redirect:/boardDetail.bo?bno=" + bno;
+	}
+		
 	
 	
 //	--------------- 댓글 기능 -------------------------
@@ -203,21 +252,7 @@ public class BoardController {
 		System.out.println("update댓글 컨트롤러 실행");
 		return "redirect: /community/boardDetail";
 	}
-	
-	//신고요청
-	@PostMapping("report.bo")
-	public String insertReport(int bno) {
-		
-		//신고
-		int result = boardService.insertReport(bno);
-		
-		System.out.println("신고컨트롤러에서 받음");
-		return "community/boardDetail"; // 임시로 설정
-	}
-	
-	
 
-	
 	//-------------------------summernote----------------------------
 	
 	//ajax로 파일 업로드
