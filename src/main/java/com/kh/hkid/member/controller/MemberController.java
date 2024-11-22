@@ -1,11 +1,10 @@
 package com.kh.hkid.member.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.hkid.common.template.Template;
@@ -385,4 +385,18 @@ public class MemberController {
     	return "redirect:/";
     }
     
+    
+    // 유저 닉네임 조회
+    @ResponseBody
+    @GetMapping(value="search.me", produces = "application/json; charset = UTF-8")
+    public String searchNickName(String nickName) {
+    	log.info("유저 닉네임 조회 시작!");
+    	ArrayList<Member> nickArr = memberService.searchNickName(nickName);
+    	log.info("유저 닉네임 조회 시작!" + nickArr);
+    	if(nickArr == null) {
+    		return null;
+    	} else {
+    		return new Gson().toJson(nickArr);
+    	}
+    }
 }

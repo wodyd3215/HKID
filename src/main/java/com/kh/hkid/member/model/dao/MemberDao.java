@@ -1,9 +1,10 @@
 package com.kh.hkid.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.google.gson.JsonObject;
 import com.kh.hkid.member.model.vo.Member;
 
 @Repository
@@ -75,5 +76,12 @@ public class MemberDao {
 	// 소셜 회원가입
 	public int insertSocialMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.insert("memberMapper.insertSocialMember", m);
+	}
+	
+	// 유저 닉네임 조회
+	public ArrayList<Member> searchNickName(SqlSessionTemplate sqlSession, String nickName) {
+		ArrayList<Member> result = (ArrayList)sqlSession.selectList("memberMapper.searchNickName", nickName);
+		System.out.println("Dao의 result : " + result);
+		return result;
 	}
 }
