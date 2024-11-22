@@ -7,7 +7,7 @@ const chatOutput = document.getElementById("chatOutput");
 sendButton.onclick = function () {
     const message = userInput.value;
 
-    // 서버로 메시지 전송
+    // 서버로 메시지 전송1234
     fetch("chat/message", {
         method: "POST",
         headers: {

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<h1>OpenAI 챗봇</h1>
+	<h1>OpenAI 챗봇1</h1>
 	    <div>
 	        <textarea id="userInput" placeholder="메시지를 입력하세요"></textarea>
 	        <button id="sendButton">전송</button>

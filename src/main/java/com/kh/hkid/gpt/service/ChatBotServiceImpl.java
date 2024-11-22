@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 //ChatService 구현체
 @Service
-public class ChatBotServiceImpl implements ChatbotService{
+public class ChatBotServiceImpl implements ChatbotService{//1234
 	
 	private static final String OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 	

@@ -19,7 +19,7 @@ public class ExGptController {
     // 채팅 페이지 반환
     @GetMapping("chat.ex")
     public String getChatPage() {
-        return "common/exGpt"; // /WEB-INF/views/chat.jsp를 반환
+        return "common/exGpt"; // /WEB-INF/views/chat.jsp를 반환 2134
     }
 
     // OpenAI API를 통해 메시지 응답 처리
