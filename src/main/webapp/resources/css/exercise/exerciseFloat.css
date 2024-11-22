@@ -183,3 +183,7 @@ outline: none;
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+.instruction > a {
+  margin-left: 45px;
+}
