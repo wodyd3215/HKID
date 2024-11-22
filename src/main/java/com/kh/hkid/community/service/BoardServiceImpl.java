@@ -82,6 +82,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.insertReport(sqlSession, map);
 	}
 
+	@Override
+	public int insertBoard(int bno) {
+		return boardDao.insertBoard(sqlSession, bno);
+	}
+
 	
 	
 

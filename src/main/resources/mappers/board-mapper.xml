@@ -15,6 +15,8 @@
   	<result column="COMMUNITY_NO" property="communityNo"/>
   	<result column="MEMBER_NO" property="memberNo"/>
   	<result column="NICKNAME" property="nickName"/>
+  	<result column="ORIGIN_NAME" property="originName"/>
+  	<result column="CHANGE_NAME" property="changeName"/>
   </resultMap>
   
   <resultMap id="commmunityResultSet" type="Community">
@@ -202,6 +204,10 @@
 				#{boardNo}
 		  	)
   </insert>
+  
+
+
+
 
 </mapper>
 

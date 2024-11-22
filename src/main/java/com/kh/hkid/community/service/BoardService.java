@@ -41,5 +41,8 @@ public interface BoardService {
 	
 	//게시글 신고
 	int insertReport(HashMap<String, Object> map);
+	
+	//게시글 추가
+	int insertBoard(int bno);
 }
 

@@ -78,6 +78,10 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertReport", map);
 	}
 	
+	//게시글 추가
+	public int insertBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.insert("boardMapper.insertBoard", boardNo);
+	}
 	
 	
 }
