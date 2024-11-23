@@ -33,22 +33,22 @@
                 <tbody>
                     <c:forEach var="n" items="${list}">
                         <tr id="common-table-body">
-                            <td>${n.communityName}</td>
-                            <td>${n.boardName}</td>
-                            <td>${n.userName}</td>
-                            <td>${n.boardDate}</td>
-                            <td>${n.boardViewCount}</td>
+                            <td>${n.noticeTypeName}</td>
+                            <td>${n.noticeTitle}</td>
+                            <td>${n.nickName}</td>
+                            <td>${n.noticeDate}</td>
+                            <td>${n.viewCount}</td>
                             <td>
                                 <div class="management">
-                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
+                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit', 'editNotice')">
                                         edit
                                     </button>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete', 'deleteNotice')">
                                         delete
                                     </button>
         
                                     <form action="" method="POST" id="postForm">
-                                        <input type="text" hidden name="pno" value="">
+                                        <input type="hidden"  name="noticeNo" value="${n.noticeNo}">
                                     </form>
                                 </div>
                             </td>
@@ -76,33 +76,16 @@
                         <a class="page-btn disabled startEnd-btn" href=""></a> <!-- 비활성화 -->
                     </c:when>
                     <c:otherwise>
-                        <c:choose>
-                            <c:when test="${empty condition}">
-                                <a class="page-btn startEnd-btn" href="list.bo?cpage=${pi.currentPage - 1}&category=${category}&boardLimit=${pi.boardLimit}">&nbsp;[이전]</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="page-btn startEnd-btn" href="searchBoard.bo?cpage=${pi.currentPage - 1}&condition=${condition}&keyword=${keyword}&category=${category}&boardLimit=${pi.boardLimit}">&nbsp;[이전]</a>
-                            </c:otherwise>
-                        </c:choose>
+                        <a class="page-btn startEnd-btn" href="notice.ad?cpage=${pi.currentPage - 1}">&nbsp;[이전]</a>
                     </c:otherwise>
                 </c:choose>
             
                 <!-- 1~5 페이지 -->
                 <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
-                    <c:choose>
-                        <c:when test="${empty condition}">
-                            <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
-                               href="list.bo?cpage=${p}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">
-                               ${p}
-                            </a>
-                        </c:when>
-                        <c:otherwise>
-                            <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
-                               href="searchBoard.bo?cpage=${p}&condition=${condition}&keyword=${keyword}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">
-                               ${p}
-                            </a>
-                        </c:otherwise>
-                    </c:choose>
+                    <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
+                        href="notice.ad?cpage=${p}">
+                        ${p}
+                    </a>
                 </c:forEach>
             
                 <!-- 다음 페이지 버튼 -->
@@ -111,14 +94,7 @@
                         <a class="page-btn disabled" href=""></a> <!-- 비활성화 -->
                     </c:when>
                     <c:otherwise>
-                        <c:choose>
-                            <c:when test="${empty condition}">
-                                <a class="page-btn startEnd-btn" href="list.bo?cpage=${pi.currentPage + 1}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">&nbsp;[다음]</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="page-btn startEnd-btn" href="searchBoard.bo?cpage=${pi.currentPage + 1}&condition=${condition}&keyword=${keyword}&category=${category}&listCount=${pi.listCount}&choiceBoardCount=${pi.boardLimit}">&nbsp;[다음]</a>
-                            </c:otherwise>
-                        </c:choose>
+                        <a class="page-btn startEnd-btn" href="notice.ad?cpage=${pi.currentPage + 1}">&nbsp;[다음]</a>
                     </c:otherwise>
                 </c:choose>
             </div>

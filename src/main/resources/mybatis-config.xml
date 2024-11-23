@@ -22,6 +22,8 @@
 		<typeAlias type="com.kh.hkid.favorite.model.vo.Favorite" alias="Favorite"/>
 		<typeAlias type="com.kh.hkid.diet.model.vo.Diet" alias="Diet"/>
 		<typeAlias type="com.kh.hkid.phase.model.vo.Phase" alias="Phase"/>
+		<typeAlias type="com.kh.hkid.admin.model.vo.Notice" alias="Notice"/>
+
  	</typeAliases>
  	
  	<mappers>
@@ -34,6 +36,8 @@
  		<mapper resource="mappers/favorite-mapper.xml"/>
  		<mapper resource="mappers/diet-mapper.xml"/>
  		<mapper resource="mappers/phase-mapper.xml"/>
+ 		<mapper resource="mappers/admin-mapper.xml"/>
+
  	</mappers>
 
  	

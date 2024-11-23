@@ -113,7 +113,9 @@
                 </select>
             </form>
             <!-- 글쓰기  -->
-            <button id="write-btn" data-target="login-modal" onclick="openModal(event)">글쓰기</button>
+            <c:if test="${not empty loginMember}">
+        	    <a class="btn" id="write-btn" href="enrollForm.bo">글쓰기</a>
+            </c:if> 
         </div>
 
         <!-------------------------- 검색 바 -------------------------->

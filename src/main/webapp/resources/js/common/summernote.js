@@ -6,7 +6,7 @@
     setting: summernote를 설정이 다 다르기 때문에 페이지 로드 시,
              각자 원하는 세팅을 키-값 형태로 만들어 주면 됨
 */
-function initSummerNote(setting, contextPath) {
+function initSummernote(setting, contextPath) {
     $('#content').summernote({ 
         placeholder: setting.placeholder, 
         tabsize: 2,
@@ -15,7 +15,7 @@ function initSummerNote(setting, contextPath) {
         disableResizeEditor: true,
         toolbar: setting.toolbar,
         callbacks: {
-            onImageUpload: (files) => {fileUpload(files, contextPath, setting.url)},
+            onImageUpload: (files) => {fileUpload(files, contextPath, setting.setRoot)},
             // target[0]: target에서 첫 번째 돔 요소를 가져오는 방식
             // onMediaDelete: (target) => {deleteFile($(target[0]), setting.url)},
         }
@@ -28,27 +28,25 @@ function initUpdateSummernote(Content) {
 }
 
 //썸머노트에 이미지업로드가 발생하였을 때 동작하는 함수
-function fileUpload(files, contextPath, url){
+function fileUpload(files, contextPath, root){
    const fd = new FormData();
    for(let file of files) {
        fd.append("fileList", file);
    }
+   fd.append("root", root)
 
-   insertFile(fd, url, function(res){
-    if(res !== 'error') {
+    insertFile(fd, function(res){
         for(let img of res){
-            $("#content").summernote("insertImage", contextPath + "/resources/image/diary/" + img);
+            $("#content").summernote("insertImage", contextPath + "/resources/image/" + root + img);
         }
-    } else {
-        alert('이미지 불러오기 실패')
-    }  
+
    })
 }
 
-function insertFile(data, url, callback){
+function insertFile(data, callback){
    $.ajax({
-       url: url,
-       type: "POST",
+       url: 'insertImgAjax',
+       type: 'POST',
        data: data,
        processData: false, //기본이 true -> 전송하는 data를 string으로 변환해서 요청
        contentType: false,  // 요청할 때 타입 -> false -> multipart/form-data 형식

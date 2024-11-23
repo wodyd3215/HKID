@@ -112,4 +112,10 @@ public class MemberServiceImpl implements MemberService {
 	public int insertSocialMember(Member m) {
 		return memberDao.insertSocialMember(sqlSession, m);
 	}
+
+	// 유저 닉네임 조회
+	@Override
+	public ArrayList<Member> searchNickName(String nickName) {
+		return memberDao.searchNickName(sqlSession, nickName);
+	}
 }

@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardWrite.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/nEnroll.css">
+
+    <script src="${pageContext.request.contextPath}/resources/js/admin/nEnroll.js"></script>
 </head>
 <body>
     <jsp:include page="sideNavi.jsp" />
@@ -17,20 +19,18 @@
             공지 등록
         </div>
         <div class="content">
-            <form id="write-wrapper" action="" method="post">
-                <select name="search-category" id="search-category">
-                    <option value="board">게시판</option>
-                    <option value="challenge">챌린지</option>
+            <form id="write-wrapper" action="insertNotice" method="post">
+                <select name="noticeType" id="search-category">
+                    <option value="1">게시판</option>
+                    <option value="2">챌린지</option>
                 </select>
-                <input type="text" name="boardTitle" id="board-title" placeholder="제목을 입력해주세요">
-                
-                <textarea id="content" name="boardContent" required></textarea>
+                <input type="text" name="noticeTitle" id="board-title" placeholder="제목을 입력해주세요">
+                <textarea id="content" name="noticeContent" required></textarea>
             
                 <div id="submit-btn-wrapper">
                     <button id="submit-btn" type="submit">게시글 등록</button>
                 </div>
             </form>
         </div>
-    <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </body>
 </html>
