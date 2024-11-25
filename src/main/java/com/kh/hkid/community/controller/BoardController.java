@@ -140,32 +140,32 @@ public class BoardController {
 		return "community/boardWrite";
 	}
 	
-	//게시글 추가
-	@PostMapping("insert.bo")
-	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model m) {
-		
-		//전달된 파일이 있을 경우
-		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = Template.saveFile(upfile, session, "/resources/uploadFile/");
-			
-			b.setChangeName("/resources/uploadFile/" + changeName);
-			b.setOriginName(upfile.getOriginalFilename());
-			}
-		
-		//
-		int result = boardService.insertBoard(b);
-		
-		
-		
-		
-		if(result > 0) { //성공 -> list페이지로 이동
-			session.setAttribute("alertMsg", "게시글 작성 성공");
-			return "redirect: /community/boardList";
-		} else { //실패 -> 에러페이지
-			m.addAttribute("errorMsg", "게시글 작성 실패");
-			return "redirect: /community/boardList";
-		}
-	}
+//	//게시글 추가
+//	@PostMapping("insert.bo")
+//	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model m) {
+//		
+//		//전달된 파일이 있을 경우
+//		if(!upfile.getOriginalFilename().equals("")) {
+//			String changeName = Template.saveFile(upfile, session, "/resources/uploadFile/");
+//			
+//			b.setChangeName("/resources/uploadFile/" + changeName);
+//			b.setOriginName(upfile.getOriginalFilename());
+//			}
+//		
+//		//
+//		int result = boardService.insertBoard(b);
+//		
+//		
+//		
+//		
+//		if(result > 0) { //성공 -> list페이지로 이동
+//			session.setAttribute("alertMsg", "게시글 작성 성공");
+//			return "redirect: /community/boardList";
+//		} else { //실패 -> 에러페이지
+//			m.addAttribute("errorMsg", "게시글 작성 실패");
+//			return "redirect: /community/boardList";
+//		}
+//	}
 	
 	//게시글 수정
 	@PostMapping("updateForm.bo")

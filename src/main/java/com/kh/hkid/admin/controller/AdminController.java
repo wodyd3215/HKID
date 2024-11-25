@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.hkid.admin.model.vo.Notice;
+import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.service.AdminService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
@@ -35,7 +36,18 @@ public class AdminController {
 	}
 	
 	@GetMapping("reportedBoard.ad")
-	public String reportedBoard() {
+	public String reportedBoard(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		int rCount = adminService.reportCount("board");
+		
+		PageInfo pi = Template.getPageInfo(rCount, currentPage, 10, 10);
+		
+		ArrayList<Report> list = adminService.selectReportList(pi, "board");
+		log.info("list: " + list);
+		log.info("pi: " + pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
 		return "admin/reportedBoard";
 	}
 	
@@ -50,7 +62,18 @@ public class AdminController {
 	}
 	
 	@GetMapping("reportedReply.ad")
-	public String reportedReply() {
+	public String reportedReply(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		int rCount = adminService.reportCount("reply");
+		
+		PageInfo pi = Template.getPageInfo(rCount, currentPage, 10, 10);
+		
+		ArrayList<Report> list = adminService.selectReportList(pi, "reply");
+		log.info("list: " + list);
+		log.info("pi: " + pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
 		return "admin/reportedReply";
 	}
 	
@@ -131,5 +154,31 @@ public class AdminController {
 			session.setAttribute("alertMsg", "공지 수정 실패");
 			return "redirect:/editNotice";
 		}
+	}
+	
+	@PostMapping("deleteReportB")
+	public String deleteReportB(Report r, HttpSession session) {
+		int result = adminService.deleteReport(r);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "신고 게시물 삭제 완료");
+		} else {
+			session.setAttribute("alertMsg", "신고 게시물 삭제 실패");
+		}
+		
+		return "redirect:/reportedBoard.ad";
+	}
+	
+	@PostMapping("deleteReportR")
+	public String deleteReportR(Report r, HttpSession session) {
+		int result = adminService.deleteReport(r);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "신고 댓글 삭제 완료");
+		} else {
+			session.setAttribute("alertMsg", "신고 댓글 삭제 실패");
+		}
+		
+		return "redirect:/reportedReply.ad";
 	}
 }

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.admin.model.vo.Notice;
+import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.common.vo.PageInfo;
 
 @Repository
@@ -36,5 +37,24 @@ public class AdminDao {
 	
 	public int updateNotice(SqlSessionTemplate sqlSession, Notice n) {
 		return sqlSession.update("adminMapper.updateNotice", n);
+	}
+	
+	public int reportCount(SqlSessionTemplate sqlSession, String category) {
+		return sqlSession.selectOne("adminMapper.reportCount", category);
+	}
+	
+	public ArrayList<Report> selectReportList(SqlSessionTemplate sqlSession, PageInfo pi, String categoty) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("adminMapper.selectReportList", categoty, rowBounds);
+	}
+	
+	public int deleteReport(SqlSessionTemplate sqlSession, Report r) {
+		return sqlSession.delete("adminMapper.deleteReport", r);
+	}
+	
+	public int deleteReportTarget(SqlSessionTemplate sqlSession, Report r) {
+		return sqlSession.delete("adminMapper.deleteReportTarget", r);
 	}
 }
