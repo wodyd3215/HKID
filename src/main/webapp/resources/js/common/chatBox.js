@@ -11,6 +11,7 @@ function changeElement(selector, searchUser, selectChat) {
         selector.style.backgroundColor = "rgba(132, 213, 255, 1)";
     }
     
+    // 채팅창 보여주기
     showChat(searchUser, selectChat);
 }
 
@@ -52,23 +53,114 @@ function showChat(searchUser, selectChat){
     }
 }
 
+// 유저 닉네임 조회
+function searchNickName(path){
+    const nickList = document.querySelector(".search-users");
+
+    $.ajax({
+        url : "search.me",
+        data : {nickName : $("#chat-search-bar").val()},
+        success : function(result) {
+            console.log("유저정보 조회 성공")
+            console.log(result);
+
+            for(let m of result) {
+                nickList.innerHTML += `
+                                <div>
+                                    <img src="${path}/resources/image/profileImg/${m.profileImg}">
+                                    <p>${m.nickName}</p>
+                                    <button onclick="addChattingRoom('${path}', this)">
+                                        <img src="${path}/resources/image/chat_bubble.png">
+                                    </button>
+                                </div>
+                                `
+                            }
+        },
+        error : function(){
+            console.log("유저정보 조회 AJAX 실패")
+        }
+    })
+}
+
+
+
 // 채팅방 추가
-function addChattingRoom(path, _this){
+function addChattingRoom(path, _this) {
     const newChat = document.createElement("div");
-    const newUser = _this.closest('.search-users').querySelector('p').innerText;
-    
+    const newUser = _this.closest('div').querySelector('p').innerText;  // 새로운 사용자 닉네임 (공백 제거)
+    const chatList = document.querySelectorAll("#chat-trade-user button[name='chat-name']");
+
+    // 이미 존재하는 닉네임이 있으면 채팅방을 추가하지 않음
+    for (const c of chatList) {
+        if (c.innerText === newUser) {
+            console.log('이미 채팅방에 추가된 사용자입니다.');
+            return false;  // 이미 닉네임이 있으면 함수를 종료
+        }
+    }
+
+    // 새로운 채팅방 추가
     newChat.innerHTML = `
         <img class="delete-btn" src="${path}/resources/image/dogdduck.png" onclick="nickToDelete(this)">
         <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content')">${newUser}</button>
-        <button class="delete-chat hide" onclick="deleteChat(this)"><img src="${path}/resources/image/trash2.png"></button>
-    `
+        <button class="delete-chat hide" onclick="deleteChat(this)">
+            <img src="${path}/resources/image/trash2.png">
+        </button>
+    `;
 
+    // 채팅방 리스트에 새로운 채팅방을 추가
     const tradeUser = document.querySelector("#chat-trade-user");
     tradeUser.appendChild(newChat);
 }
 
+
+
+
+
+
+
+
+
+// socket객체와 session이 스트림을 공유(연결)하여 데이터를 서로 전송할 수 있게 됨
+// websocket요청이긴 하지만 http와 같은 양식으로 전달됨
+// /server로 요청이 가면 interceptor가 해당 요청을 http요청에서 websocket요청으로 변환해줌
+const socket = new WebSocket("ws://localhost:7777/hkid/server"); 
+
+socket.onopen = function(){
+    console.log("연결성공...")
+}
+
+socket.onclose = function(){
+    console.log("연결끊어짐...")
+}
+
+socket.onerror = function(){
+    console.log("연결실패...")
+}
+
+// socket연결로부터 데이터가 도착했을 때 실행하는 이벤트
+socket.onmessage = function(ev){
+    const receive = JSON.parse(ev.data) // 서버에서 보내준 data를 Json객체로 사용하기위해 파싱
+
+    const msgContainer = document.querySelector("#chat-log-area > div");
+    // 나에게 맞게 수정
+    msgContainer.innerHTML += (receive.nick + "(" + receive.time + ") <br>" + receive.msg + "<br>");
+
+}
+
 // 채팅 입력 시 채팅창에 로딩
 function inputChatting(path) {
+    
+    const msgData = {
+        message : document.querySelector("#input-chat-text").value,
+        target : document.querySelector
+    }
+
+    // send할 때는 string으로 보내야해서 stringify로 문자열로 변경해서 보낸다.
+    socket.send(JSON.stringify(msgData));
+    
+
+
+    
     const chatText = document.querySelector("#input-chat-text");
 
     // 채팅 내용이 비어 있지 않으면

@@ -70,7 +70,6 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    overflow-y: auto;
 }
 
 .chat-box-left > div {
@@ -101,6 +100,14 @@
 
 #chat-trade > button > img {
     width: 20px;
+}
+
+#chat-trade-user{
+    overflow-y: auto;
+}
+
+#chat-trade-user::-webkit-scrollbar {
+    display: none;
 }
 
 #chat-trade-user > div{
@@ -283,31 +290,34 @@
 }
 
 .search-users {
-    width: 273px;
-    height: 35px;
+    overflow-y: auto;
+}
+
+.search-users > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 273px;
+    height: 35px;
     border-radius: 9px;
     background-color: white;
     margin: auto;
     margin-bottom: 10px;
     padding: 0 10px 0 4px;
-    overflow-y: auto;
 }
 
-.search-users > img {
+.search-users > div > img {
     width: 30px;
     height: 30px;
 }
 
-.search-users > p {
+.search-users p {
     margin: 0px;
     text-align: start;
     width: 150px;
 }
 
-.search-users > button {
+.search-users button {
     border: none;
     background-color: white;
     width: 25px;
