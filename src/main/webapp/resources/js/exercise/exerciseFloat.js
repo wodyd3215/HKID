@@ -34,41 +34,6 @@ var swiper = new Swiper(".mySwiper", {
   }
 
 
-//   // Swiper에 이미지를 추가하는 함수
-//   function addToSwiper(imageSrc) {
-//     const swiperWrapper = document.querySelector('.swiper-wrapper');
-
-//     // 새로운 li 요소 생성
-//     const newSlide = document.createElement('li');
-//     newSlide.classList.add('swiper-slide', 'box-size');
-
-//      // 새로운 img 요소 생성
-//     const imgElement = document.createElement('img');
-//     imgElement.src = `./resources/image/exerciseImages/${imageSrc}`;
-//     imgElement.alt = '새 운동 이미지';
-//     imgElement.onclick = function () {
-//       removeFromSwiper(newSlide); // 이미지 클릭 시 삭제
-//   };
-
-//    // li에 img 추가
-//     newSlide.appendChild(imgElement);
-//     swiperWrapper.appendChild(newSlide);
-
-//     // Swiper 업데이트
-//     const swiperInstance = document.querySelector('.mySwiper').swiper;
-//     swiperInstance.update();
-// }
-
-// // Swiper에서 이미지를 제거하는 함수
-// function removeFromSwiper(slideElement) {
-//   slideElement.remove(); // UI에서 해당 슬라이드 제거
-
-//   // Swiper 업데이트
-//   const swiperInstance = document.querySelector('.mySwiper').swiper;
-//   swiperInstance.update();
-// }
-
-
 // Swiper 초기화 및 LocalStorage에서 데이터 로드
 (function initializeSwiper() {
   // LocalStorage에서 이미지 리스트 불러오기
@@ -158,6 +123,12 @@ function changeText(newContent) {
 
     // 변경 효과
     instructionElement.innerHTML = newContent;
+
+    // a 태그에 클릭 이벤트 연결
+    const linkElement = instructionElement.querySelector('a');
+    if (linkElement) {
+        linkElement.setAttribute("onclick", "handleLinkClick(event)"); // 직접 onclick 속성 설정
+    }
 }
 
 // 초기 상태 설정 함수
@@ -170,6 +141,12 @@ function initializeContent() {
     } else {
         // 저장된 상태가 없으면 기본값 사용
         instructionElement.innerHTML = initialContent;
+    }
+
+    // a 태그에 클릭 이벤트 연결
+    const linkElement = instructionElement.querySelector('a');
+    if (linkElement) {
+        linkElement.setAttribute("onclick", "handleLinkClick(event)"); // 직접 onclick 속성 설정
     }
 }
 
@@ -190,4 +167,48 @@ if (instructionElement && ulElement) {
     observer.observe(ulElement, { childList: true });
 } else {
     console.error("필수 요소를 찾을 수 없습니다.");
+}
+
+// a 태그 클릭 시 동작
+async function handleLinkClick(event) {
+  event.preventDefault(); // 기본 동작 방지
+
+  // LocalStorage에서 exNames 값 가져오기
+  const exNames = JSON.parse(localStorage.getItem('exNames')) || [];
+
+  if (exNames.length === 0) {
+      alert("선택된 운동이 없습니다.");
+      return;
+  }
+
+  // 서버로 데이터 전송
+  const response = await fetch("chat/message", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: exNames.join(", ") }), // 운동 이름 목록을 문자열로 전송
+  });
+
+  // 응답 처리
+  if (response.ok) {
+      const data = await response.json();
+      displayChatbotResponse(data.response);
+  } else {
+      console.error("서버 응답 실패:", response.statusText);
+      alert("챗봇 응답을 가져오지 못했습니다. 다시 시도해주세요.");
+  }
+}
+
+// 챗봇 응답 출력 함수
+function displayChatbotResponse(responseMessage) {
+  const chatOutput = document.getElementById("chatOutput");
+
+  if (chatOutput) {
+      const responseElement = document.createElement("p");
+      responseElement.textContent = "AI 추천 루틴: " + responseMessage;
+      chatOutput.appendChild(responseElement);
+  } else {
+      alert("챗봇 응답을 출력할 요소를 찾을 수 없습니다.");
+  }
 }

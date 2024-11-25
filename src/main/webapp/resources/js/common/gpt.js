@@ -7,7 +7,7 @@ const chatOutput = document.getElementById("chatOutput");
 sendButton.onclick = function () {
     const message = userInput.value;
 
-    // 서버로 메시지 전송1234
+    // 서버로 메시지 전송
     fetch("chat/message", {
         method: "POST",
         headers: {
@@ -18,8 +18,12 @@ sendButton.onclick = function () {
         .then((response) => response.json())  // JSON 응답 처리
         .then((data) => {
             // 챗봇 응답 출력
+            const userMessageElement  = document.createElement("p");
+            userMessageElement.textContent = "GPT: " + data.response;  // response 키 사용
+            chatOutput.appendChild(responseElement);
+
             const responseElement = document.createElement("p");
-            responseElement.textContent = "GPT: " + data.response;  // response 키 사용
+            responseElement.textContent = "GPT: " + data.response;
             chatOutput.appendChild(responseElement);
 
             // 입력 필드 초기화
