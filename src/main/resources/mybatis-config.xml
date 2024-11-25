@@ -22,6 +22,7 @@
 		<typeAlias type="com.kh.hkid.favorite.model.vo.Favorite" alias="Favorite"/>
 		<typeAlias type="com.kh.hkid.diet.model.vo.Diet" alias="Diet"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.hkid.admin.model.vo.Report" alias="Report"/>
  	</typeAliases>
  	
  	<mappers>
