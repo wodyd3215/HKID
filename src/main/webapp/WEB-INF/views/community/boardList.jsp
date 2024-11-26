@@ -15,7 +15,8 @@
      
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--favicon.ico:1 에러 해결용-->
-<body onload="defaultCategory('${category}')">
+
+<body onload="init('${pageName}', '${optional}')"></body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     
 
