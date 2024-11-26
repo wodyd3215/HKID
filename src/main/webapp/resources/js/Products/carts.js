@@ -6,19 +6,28 @@ function selectAll(selectAll){
         checkbox.checked = selectAll.checked
     })
 }
-function addItem(){
-    //const productNo = ${};
-    const memberNo = "${loginUser.userNo}";
+
+function addItem(loginMember){
+    const productNo = document.querySelector(".productNo").value;
     const productQuantity = document.querySelector(".quantityBtnText").value;
 
-    addAjaxItem
+    const data = {
+        memberNo: loginMember,
+        productNo : productNo,
+        quantity: productQuantity
+    };
+
+    addAjaxItem(data, function(res){
+    })
 }
 
 function addAjaxItem(data, callback){
     $.ajax({
         url:'addCart.c',
+        type: 'POST',
         data:data,
         success:function(res){
+            alert("장바구니에 담겨졌습니다.");
             callback(res)
         }
     })

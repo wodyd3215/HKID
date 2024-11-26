@@ -30,6 +30,7 @@ public class CartController {
 	@ResponseBody
 	@RequestMapping(value="addCart.c", produces="application/json; chatset-UTF-8")
 	public int addCart(Cart c) {
+		
 		return cartService.addCart(c)/* > 0 ? "success" : "fail"*/;
 	}
 	

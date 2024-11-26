@@ -142,7 +142,34 @@
 		 AND TYPE = #{rbtn}
 		 ORDER BY p.PRODUCT_NO DESC
 	</select>
-		
+	
+	<select id="searchList" resultMap="productResultSet">
+		SELECT p.PRODUCT_NO productNo,
+			   p.PRODUCT_NAME productName,
+			   p.CATEGORY category,
+			   p.PRICE price,
+			   p.TYPE type
+		  FROM PRODUCT p
+		  JOIN (
+		  	SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
+		  		FROM REVIEW
+		  		GROUP BY PRODUCT_NO
+		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
+		  WHERE p.TYPE = '1'
+		  <choose>
+		  	<when test="searchCategory == '식품'">
+		  		AND CATEGORY = '식품'
+		  	</when>
+		  	<when test="searchCategory == '의류'">
+		  		AND CATEGORY = '의류'
+		  	</when>
+		  	<when test="searchCategory == '기구'">
+		  		AND CATEGORY = '기구'
+		  	</when>
+		  </choose>
+		  LIKE '%' || #{keyword} || '%'
+		  ORDER BY PRODUCT_NO DESC
+	</select>
  
  
    
