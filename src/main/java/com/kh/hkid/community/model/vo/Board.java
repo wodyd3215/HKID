@@ -15,4 +15,5 @@ public class Board {
 	private String content;
 	private String originName;
 	private String changeName;
+	private String file_path;
 }

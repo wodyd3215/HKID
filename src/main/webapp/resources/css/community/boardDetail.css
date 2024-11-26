@@ -419,6 +419,10 @@ table {
     font-weight: 600 !important;
 }
 
+.btn:hover{
+    text-decoration: none;
+}
+
 #boCount-wirte-div {
     width: 100%;
     display: flex;

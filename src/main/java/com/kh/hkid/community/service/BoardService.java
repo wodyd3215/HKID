@@ -43,6 +43,6 @@ public interface BoardService {
 	int insertReport(HashMap<String, Object> map);
 	
 	//게시글 추가
-	int insertBoard(int bno);
+	int insertBoard(Board b);
 }
 

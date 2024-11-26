@@ -63,6 +63,11 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 	}
 	
+	//조회수 증가
+	public int increaseView(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.increaseView", boardNo);
+	}
+	
 	//게시글 삭제
 	public int deleteboard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteboard", boardNo);
@@ -79,9 +84,13 @@ public class BoardDao {
 	}
 	
 	//게시글 추가
-	public int insertBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.insert("boardMapper.insertBoard", boardNo);
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 	
+	//추가한 게시글에 파일 첨부
+	public int insertBoardFile(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoardFile", b);
+	}
 	
 }
