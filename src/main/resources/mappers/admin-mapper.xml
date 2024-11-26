@@ -18,6 +18,24 @@
 	  	<result column="CATEGOTY_NAME" property="noticeTypeName"/>
 	</resultMap>
 	
+	<resultMap id="reportResultSet" type="Report">
+		<result column="REPORT_NO" property="reportNo"/>
+	  	<result column="TYPE_NO" property="typeNo"/>
+	  	<result column="REPORT_DATE" property="reportDate"/>
+	  	<result column="DETAIL_CONTENT" property="detailContent"/>
+	  	<result column="MEMBER_NO" property="memberNo"/>
+	  	<result column="REPORTED_MEMBER_NO" property="reportedMemberNo"/>
+	  	<result column="REPLY_NO" property="replyNo"/>
+	  	<result column="BOARD_NO" property="boardNo"/>
+	  	<result column="REVIEW_NO" property="reviewNo"/>
+	  	<result column="TYPE_CONTENT" property="typeContent"/>
+	  	<result column="NICKNAME" property="nickname"/>
+	  	<result column="REPLY_CONTENT" property="replyContent"/>
+	  	<result column="BOARD_TITLE" property="boardTitle"/>
+	  	<result column="REVIEW_CONTENT" property="reviewContent"/>
+	</resultMap>
+	
+	<!-- 공지 -->
 	<select id="noticeCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM NOTICE
@@ -78,4 +96,72 @@
 		       NOTICE_CONTENT = #{noticeContent}
 		 WHERE NOTICE_NO = #{noticeNo}
 	</update>
+	
+	<!-- 신고 게시글 -->
+	<select id="reportCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM REPORT
+		 WHERE
+		  <choose>
+		  	<when test="category == 'board'">
+		  		BOARD_NO 
+		  	</when>
+		  	<when test="category == 'reply'">
+		  		REPLY_NO
+		  	</when>
+		  </choose>
+		 IS NOT NULL
+	</select>
+	
+	<select id="selectReportList" resultMap="reportResultSet">
+		SELECT REPORT_NO,
+			   TYPE_CONTENT,
+			   REPORT_DATE,
+			   DETAIL_CONTENT,
+			   NICKNAME,
+			   <choose>
+			   	<when test="category == 'board'">
+			   		BOARD_NO,
+			   		BOARD_TITLE
+			   	</when>
+			   	<when test="category == 'reply'">
+			   		REPLY_NO,
+			   		REPLY_CONTENT
+			   	</when>
+			   </choose>
+		  FROM REPORT
+		  JOIN MEMBER USING (MEMBER_NO)
+		  JOIN REPORT_TYPE USING (TYPE_NO)
+		  <choose>
+		  	<when test="category == 'board'">
+		  		JOIN COMMUNITY USING (BOARD_NO)
+		  	</when>
+		  	<when test="category == 'reply'">
+		  		JOIN REPLY USING (REPLY_NO)
+		  	</when>
+		  </choose>
+		 ORDER BY REPORT_NO DESC
+	</select>
+	
+	<delete id="deleteReport">
+		DELETE FROM REPORT
+		 WHERE REPORT_NO = #{reportNo}
+	</delete>
+	
+	<delete id="deleteReportTarget">
+		DELETE FROM 
+		<choose>
+		 	<when test="boardNo != 0">
+				COMMUNITY
+		 		WHERE 
+		 		BOARD_NO = #{boardNo}
+		 	</when>
+		 	<when test="replyNo != 0">
+		 		REPLY
+		 		WHERE
+		 		REPLY_NO= #{replyNo}
+		 	</when>
+		 </choose>
+		 
+	</delete>
 </mapper> 

@@ -192,4 +192,13 @@
   		'Y'
   	)
   </insert>
+  
+  <select id="searchNickName" resultMap="memberResultSet">
+  	SELECT MEMBER_NO,
+  		   NICKNAME,
+  		   PROFILE_IMG
+  	  FROM MEMBER
+  	 WHERE NICKNAME LIKE '%' || #{nickName} || '%'
+  	   AND STATUS = 'Y'
+  </select>
 </mapper>

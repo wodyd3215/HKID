@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,26 +30,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="common-table-body">
-                        <td>욕설</td>
-                        <td>개떡도지</td>
-                        <td>이딴걸 글이라고 쓰고 있냐 **아</td>
-                        <td>
-                            <div class="management">
-                                <button class="btn btn-primary custom-btn" data-target="reportDetail">확인하기</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="management">
-                                <form action="">
-                                    <input type="text" name="bno" value="" hidden>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" >
-                                        delete
-                                    </button>
-                                </form>
-                            </div> 
-                        </td>
-                    </tr>
+                    <c:forEach var="r" items="${list}">
+                        <tr id="common-table-body">
+                            <td>${r.typeContent}</td>
+                            <td>${r.nickname}</td>
+                            <td>${r.replyContent}</td>
+                            <td>
+                                <div class="management">
+                                    <button class="btn btn-primary custom-btn" data-target="report-detail" onclick="openfunction(event, ['${r.nickname}', '${r.replyContent}', '${r.typeContent}', '${r.detailContent}'])">확인하기</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="management">
+                                    <form action="deleteReportR?reportNo=${r.reportNo}&replyNo=${r.replyNo}" method="post">
+                                        <button class="material-symbols-outlined btn btn-danger custom-btn" >
+                                            delete
+                                        </button>
+                                    </form>
+                                </div> 
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
             <jsp:include page="detailModal.jsp" />
@@ -62,16 +64,37 @@
 
         <!-- 페이지 버튼 -->
         <div id="paging-div">
-            <button class="page-btn">&lt;</button>
-            <button class="page-btn">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">4</button>
-            <button class="page-btn">5</button>
-            <button class="page-btn">&gt;</button>
+            <div id="paging-div">
+                <!-- 이전 페이지 버튼 -->
+                <c:choose>
+                    <c:when test="${pi.currentPage eq 1}">
+                        <a class="page-btn disabled startEnd-btn" href=""></a> <!-- 비활성화 -->
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-btn startEnd-btn" href="notice.ad?cpage=${pi.currentPage - 1}">&nbsp;[이전]</a>
+                    </c:otherwise>
+                </c:choose>
+            
+                <!-- 1~5 페이지 -->
+                <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+                    <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
+                        href="notice.ad?cpage=${p}">
+                        ${p}
+                    </a>
+                </c:forEach>
+            
+                <!-- 다음 페이지 버튼 -->
+                <c:choose>
+                    <c:when test="${pi.currentPage eq pi.maxPage}">
+                        <a class="page-btn disabled" href=""></a> <!-- 비활성화 -->
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-btn startEnd-btn" href="notice.ad?cpage=${pi.currentPage + 1}">&nbsp;[다음]</a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
     </div>
-
-
+    </div>
 </body>
 </html>

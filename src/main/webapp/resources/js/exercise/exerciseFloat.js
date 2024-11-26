@@ -34,64 +34,40 @@ var swiper = new Swiper(".mySwiper", {
   }
 
 
-//   // Swiper에 이미지를 추가하는 함수
-//   function addToSwiper(imageSrc) {
-//     const swiperWrapper = document.querySelector('.swiper-wrapper');
-
-//     // 새로운 li 요소 생성
-//     const newSlide = document.createElement('li');
-//     newSlide.classList.add('swiper-slide', 'box-size');
-
-//      // 새로운 img 요소 생성
-//     const imgElement = document.createElement('img');
-//     imgElement.src = `./resources/image/exerciseImages/${imageSrc}`;
-//     imgElement.alt = '새 운동 이미지';
-//     imgElement.onclick = function () {
-//       removeFromSwiper(newSlide); // 이미지 클릭 시 삭제
-//   };
-
-//    // li에 img 추가
-//     newSlide.appendChild(imgElement);
-//     swiperWrapper.appendChild(newSlide);
-
-//     // Swiper 업데이트
-//     const swiperInstance = document.querySelector('.mySwiper').swiper;
-//     swiperInstance.update();
-// }
-
-// // Swiper에서 이미지를 제거하는 함수
-// function removeFromSwiper(slideElement) {
-//   slideElement.remove(); // UI에서 해당 슬라이드 제거
-
-//   // Swiper 업데이트
-//   const swiperInstance = document.querySelector('.mySwiper').swiper;
-//   swiperInstance.update();
-// }
-
-
 // Swiper 초기화 및 LocalStorage에서 데이터 로드
 (function initializeSwiper() {
   // LocalStorage에서 이미지 리스트 불러오기
   const savedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
-  savedImages.forEach((image) => addImageToSwiper(image));
+  const savedNames = JSON.parse(localStorage.getItem("exNames")) || [];
+
+  savedImages.forEach((image, index) => {
+    addImageToSwiper(image, savedNames[index]); // 이미지와 운동 이름을 함께 추가
+  });
   swiper.update(); // Swiper 업데이트
 })();
 
-// Swiper에 이미지를 추가하는 함수
-function addToSwiper(imageSrc) {
+function addToSwiper(imageSrc, exName) {
   // Swiper에 이미지 추가
-  addImageToSwiper(imageSrc);
+  addImageToSwiper(imageSrc, exName);
 
-  // LocalStorage에 이미지 추가
-  const savedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
-  if (!savedImages.includes(imageSrc)) {
-      savedImages.push(imageSrc);
-      localStorage.setItem("selectedImages", JSON.stringify(savedImages));
+  // 운동 이름 및 이미지 저장
+  saveToLocalStorage("selectedImages", imageSrc);
+  saveToLocalStorage("exNames", exName);
+
+  console.log(exName);
+}
+
+// LocalStorage에 데이터를 저장하는 함수
+function saveToLocalStorage(key, value) {
+  const savedData = JSON.parse(localStorage.getItem(key)) || [];
+  if (!savedData.includes(value)) {
+    savedData.push(value);
+    localStorage.setItem(key, JSON.stringify(savedData));
   }
 }
 
 // Swiper에 이미지를 추가하는 함수 (DOM 업데이트)
-function addImageToSwiper(imageSrc) {
+function addImageToSwiper(imageSrc, exName) {
   const swiperWrapper = document.querySelector('.swiper-wrapper');
 
   // 새로운 li 요소 생성
@@ -101,8 +77,8 @@ function addImageToSwiper(imageSrc) {
   // 새로운 img 요소 생성
   const imgElement = document.createElement('img');
   imgElement.src = `./resources/image/exerciseImages/${imageSrc}`;
-  imgElement.alt = '추가된 운동 이미지';
-  imgElement.setAttribute("onclick", `removeFromSwiper('${imageSrc}')`); // 삭제 동작 연결
+  imgElement.alt = exName;
+  imgElement.setAttribute("onclick", `removeFromSwiper('${imageSrc}', '${exName}')`); // 삭제 동작 연결
 
   newSlide.appendChild(imgElement);
   swiperWrapper.appendChild(newSlide);
@@ -112,11 +88,16 @@ function addImageToSwiper(imageSrc) {
 }
 
 // Swiper에서 이미지를 제거하는 함수
-function removeFromSwiper(imageSrc) {
+function removeFromSwiper(imageSrc, exName) {
   // LocalStorage에서 이미지 제거
   const savedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
+  const savedNames = JSON.parse(localStorage.getItem("exNames")) || [];
+
   const updatedImages = savedImages.filter((img) => img !== imageSrc);
+  const updatedNames = savedNames.filter((name) => name !== exName);
+
   localStorage.setItem("selectedImages", JSON.stringify(updatedImages));
+  localStorage.setItem("exNames", JSON.stringify(updatedNames));
 
   // UI에서 슬라이드 제거
   const swiperWrapper = document.querySelector('.swiper-wrapper');
@@ -125,4 +106,109 @@ function removeFromSwiper(imageSrc) {
 
   // Swiper 업데이트
   swiper.update(); // Swiper에서 제거된 슬라이드를 반영
+}
+
+
+// DOM 요소 가져오기
+const ulElement = document.querySelector('.swiper-wrapper');
+const instructionElement = document.getElementById('instruction');
+
+// 초기 상태의 <p> 내용 저장
+const initialContent = instructionElement.innerHTML;
+
+// 텍스트 변경 함수
+function changeText(newContent) {
+    // 상태 저장
+    localStorage.setItem('instructionContent', newContent);
+
+    // 변경 효과
+    instructionElement.innerHTML = newContent;
+
+    // a 태그에 클릭 이벤트 연결
+    const linkElement = instructionElement.querySelector('a');
+    if (linkElement) {
+        linkElement.setAttribute("onclick", "handleLinkClick(event)"); // 직접 onclick 속성 설정
+    }
+}
+
+// 초기 상태 설정 함수
+function initializeContent() {
+    const savedContent = localStorage.getItem('instructionContent');
+
+    if (savedContent) {
+        // 저장된 상태가 있으면 적용
+        instructionElement.innerHTML = savedContent;
+    } else {
+        // 저장된 상태가 없으면 기본값 사용
+        instructionElement.innerHTML = initialContent;
+    }
+
+    // a 태그에 클릭 이벤트 연결
+    const linkElement = instructionElement.querySelector('a');
+    if (linkElement) {
+        linkElement.setAttribute("onclick", "handleLinkClick(event)"); // 직접 onclick 속성 설정
+    }
+}
+
+// MutationObserver 설정
+if (instructionElement && ulElement) {
+    // 초기 상태 설정
+    initializeContent();
+
+    const observer = new MutationObserver(() => {
+        if (ulElement.children.length > 0) {
+            changeText(`<a href="#">AI가 짜주는 운동루틴!</a>`);
+        } else {
+            changeText(initialContent);
+        }
+    });
+
+    // <ul> 요소에 MutationObserver 연결
+    observer.observe(ulElement, { childList: true });
+} else {
+    console.error("필수 요소를 찾을 수 없습니다.");
+}
+
+// a 태그 클릭 시 동작
+async function handleLinkClick(event) {
+  event.preventDefault(); // 기본 동작 방지
+
+  // LocalStorage에서 exNames 값 가져오기
+  const exNames = JSON.parse(localStorage.getItem('exNames')) || [];
+
+  if (exNames.length === 0) {
+      alert("선택된 운동이 없습니다.");
+      return;
+  }
+
+  // 서버로 데이터 전송
+  const response = await fetch("chat/message", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: exNames.join(", ") }), // 운동 이름 목록을 문자열로 전송
+  });
+
+  // 응답 처리
+  if (response.ok) {
+      const data = await response.json();
+      displayChatbotResponse(data.response);
+  } else {
+      console.error("서버 응답 실패:", response.statusText);
+      alert("챗봇 응답을 가져오지 못했습니다. 다시 시도해주세요.");
+  }
+}
+
+// 챗봇 응답 출력 함수
+function displayChatbotResponse(responseMessage) {
+  const chatOutput = document.getElementById("chatOutput");
+
+  if (chatOutput) {
+      const responseElement = document.createElement("p");
+      responseElement.textContent = "AI 추천 루틴: " + responseMessage;
+      chatOutput.appendChild(responseElement);
+  } else {
+      alert("챗봇 응답을 출력할 요소를 찾을 수 없습니다.");
+  }
 }

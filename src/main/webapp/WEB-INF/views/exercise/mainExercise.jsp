@@ -88,7 +88,7 @@
 							<br>
 							<div id="under-area">
 								<p class="list-text2">${e.exerciseDifficulty}</p>
-								<button type="button" onclick="addToSwiper('${e.exerciseImg}')">
+								<button type="button" onclick="addToSwiper('${e.exerciseImg}','${e.exerciseName}')">
 									<img src="./resources/img/buy.png" class="like(this)" onclick="buy()">
 								</button>
 							</div>
@@ -149,7 +149,7 @@
 
 		<div class="flootbox">
 			<div>
-				<p><img src="./resources/img/buy.png" alt="없음">
+				<p id="instruction" class="instruction"><img src="./resources/img/buy.png" alt="없음">
 					를 눌러 운동을 담아보세요!
 				</p>
 			</div>
@@ -161,6 +161,7 @@
 			  </ul>
 			</div>
 			<div class="slider__next"></div>
+			<div id="chatOutput"></div>
 		</div>
 
 	</div>	

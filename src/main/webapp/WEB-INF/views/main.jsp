@@ -266,6 +266,7 @@
 			</table>
 		</div>	
 	</div>
+	<a href="chat.ex">gpt랍니다</a>
 	<jsp:include page="common/footer.jsp" />
 	<script src="${pageContext.servletContext.contextPath}/resources/js/main/main.js"></script>
 </body>
