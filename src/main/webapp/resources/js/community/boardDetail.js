@@ -7,29 +7,6 @@ function detailOnload(){ //DOM이 로드된 후 자동실행
     getReplyList(sendData, setReplyData)
 }
 
-// 매개변수 받아서 게시글 수정/삭제/신고 기능
-function postFormSubmit(type){
-    const $formEl = $(".postForm"); //요소 선택.
-
-    switch(type){ 
-        // 게시글 수정
-        case "edit": 
-            $formEl.attr("action", "updateForm.bo");
-            console.log("게시글 수정요청 전달 성공!")
-            break;
-        // 게시글 삭제
-        case "delete":
-            $formEl.attr("action", "boardDelete.bo");
-            console.log("게시글 삭제요청 전달 성공!")
-            break;
-        //신고 요청
-        case "report":
-            $formEl.attr("action", "report.bo");
-            console.log("신고요청 전달 성공!")
-    }
-    $formEl.submit(); //공통기능
-}
-
 //댓글 갯수 및 목록 초기화
 function setReplyData(commentsList){
     $("#reply-count").html(commentsList.length);

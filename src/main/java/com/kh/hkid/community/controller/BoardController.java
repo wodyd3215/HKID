@@ -56,7 +56,7 @@ public class BoardController {
 		ArrayList<Community> list;
 		PageInfo pi;
 		//카테고리 선택 시
-		if(!category.equals("전체")) { //카테고리 선택이 안 됐으면 전체 게시글
+		if(!category.equals("전체")) { //카테고리가 "전체"가 아니면 모든 카테고리별 게시글 출력
 			boardCount = boardService.selectCategoryListCount(category); //카테고리 게시글 개수
 			pi = Template.getPageInfo(boardCount, cpage, 10, choiceBoardCount); //페이징 처리
 			list = boardService.selectCategoryList(pi, category);	//게시글 리스트
@@ -69,7 +69,8 @@ public class BoardController {
 		/*	[pageInfo] 
 		 	pageInfo(현재 총 게시글 수, 사용자가 요청한 페이지, 페이징바의 개수, 보여질 게시글의 최대개수)
 		*/
-		
+		model.addAttribute("pageName", "boardList");
+		model.addAttribute("optional", category);
 		model.addAttribute("category", category); //선택한 카테고리 띄울 때 필요함
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -99,7 +100,6 @@ public class BoardController {
 		System.out.println("검색한 게시글 목록 >>>" + list);
 		System.out.println("검색한 게시글의 개수 >>>" + searchCount);
 		
-		
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("category", category);
@@ -111,10 +111,11 @@ public class BoardController {
 	
 	
 	//게시글 디테일
-	@GetMapping("boardDetail.bo")
+//	@GetMapping("boardDetail.bo")
+	@RequestMapping("boardDetail.bo")
 	public String selectDetailBoard(Model model, int bno) {
 		
-		//게시글 조회
+		//게시글 조회 + 조회수 증가
 		Board b = boardService.selectBoard(bno);
 	
 		model.addAttribute("b", b);
@@ -132,6 +133,7 @@ public class BoardController {
 			session.setAttribute("alertMsg", "게시글 삭제 실패");
 			return "redirect:/boardDetail.bo?bno=" + bno;
 		}
+		//첨부파일 삭제도 추가
 	}
 	
 	//게시글 작성
@@ -140,39 +142,52 @@ public class BoardController {
 		return "community/boardWrite";
 	}
 	
-//	//게시글 추가
-//	@PostMapping("insert.bo")
-//	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model m) {
-//		
-//		//전달된 파일이 있을 경우
-//		if(!upfile.getOriginalFilename().equals("")) {
-//			String changeName = Template.saveFile(upfile, session, "/resources/uploadFile/");
-//			
-//			b.setChangeName("/resources/uploadFile/" + changeName);
-//			b.setOriginName(upfile.getOriginalFilename());
-//			}
-//		
-//		//
-//		int result = boardService.insertBoard(b);
-//		
-//		
-//		
-//		
-//		if(result > 0) { //성공 -> list페이지로 이동
-//			session.setAttribute("alertMsg", "게시글 작성 성공");
-//			return "redirect: /community/boardList";
-//		} else { //실패 -> 에러페이지
-//			m.addAttribute("errorMsg", "게시글 작성 실패");
-//			return "redirect: /community/boardList";
-//		}
-//	}
 	
-	//게시글 수정
-	@PostMapping("updateForm.bo")
-	public String updateForm() {
-		return "community/boardDetail"; 
+	//게시글 추가
+	@PostMapping("insert.bo")
+	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model m) {
+		
+		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		b.setMemberNo(memberNo);
+		
+		//전달된 파일이 있을 경우
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = Template.saveFile(upfile, session, "/resources/uploadFile/");
+			b.setChangeName("/resources/uploadFile/" + changeName);
+			b.setOriginName(upfile.getOriginalFilename());
+			}
+		
+		if(boardService.insertBoard(b) > 0) { //성공 -> list페이지로 이동
+			session.setAttribute("alertMsg", "게시글 작성 성공");
+		} else { //실패 -> 에러페이지
+			m.addAttribute("errorMsg", "게시글 작성 실패");
+		}
+		return "redirect:/list.bo";
 	}
 	
+	
+	
+	//게시글 수정Form
+	@RequestMapping("updateForm.bo")
+	public String updateForm(int bno, Model model) {
+		//게시글 조회
+		Board b = boardService.selectBoard(bno);
+	
+		model.addAttribute("b", b);
+		model.addAttribute("pageName", "boardUpdate");
+		model.addAttribute("optional", "팁");
+		System.out.println("카테고리 체크"+b.getCommunityNo());
+		return "community/boardUpdate"; 
+	}
+	
+	//게시글 수정
+	@RequestMapping("update.bo")
+	public String updateBoard(Board b, Model model) {
+		
+	
+		
+		return "community/boardUpdate"; 
+	}
 	
 
 	//신고
@@ -183,6 +198,7 @@ public class BoardController {
 		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 		int reportedUserNo = boardService.selectReportedUserNo(bno); //신고당한 사람
 		
+		// Report vo 만들어서 하기 (수정필요)
 		map.put("boardNo", bno);
 		map.put("TypeNo", reportTypeNo);
 		map.put("detailContent", reportDetailContent);
