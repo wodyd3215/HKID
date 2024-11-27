@@ -17,6 +17,8 @@
   	<result column="NICKNAME" property="nickName"/>
   	<result column="ORIGIN_NAME" property="originName"/>
   	<result column="CHANGE_NAME" property="changeName"/>
+  	<result column="FILE_PATH" property="file_path"/>
+  	
   </resultMap>
   
   <resultMap id="commmunityResultSet" type="Community">
@@ -57,8 +59,7 @@
 	   FROM COMMUNITY
        JOIN COMMUNITY_CATEGORY USING(COMMUNITY_NO)
        JOIN MEMBER USING(MEMBER_NO)
-	  WHERE BOARD_STATUS = 'Y' AND
-  	 	   COMMUNITY_NO != 1
+	  WHERE BOARD_STATUS = 'Y'
    ORDER BY BOARD_NO DESC
   </select>
   
@@ -171,6 +172,14 @@
 	  	AND	BOARD_NO = #{boardNo}
   </select>
   
+  <!-- 조회수 증가 -->
+  <update id="increaseView">
+  	UPDATE COMMUNITY
+  	   SET BOARD_VIEW_COUNT = BOARD_VIEW_COUNT + 1
+  	 WHERE BOARD_NO = #{boardNo}
+  	   AND BOARD_STATUS = 'Y'
+  </update>
+  
   <update id="deleteboard">
   	 UPDATE COMMUNITY
   	 	SET BOARD_STATUS = 'N'
@@ -205,9 +214,40 @@
 		  	)
   </insert>
   
-
-
-
+  <insert id="insertBoard">
+  	INSERT INTO COMMUNITY(
+	  				BOARD_NO,
+					BOARD_TITLE,
+					BOARD_CONTENT,
+					COMMUNITY_NO,
+					MEMBER_NO
+  					)
+  					VALUES(
+  					SEQ_BOARD_NO.NEXTVAL,
+  					#{boardTitle},
+  					#{content},
+  					#{communityNo},
+  					#{memberNo}
+  					)
+  </insert>
+  
+  
+  <insert id="insertBoardFile">
+  	INSERT INTO TOTAL_ATTACHMENT(
+  					FILE_NO,
+	  				ORIGIN_NAME,
+	  				CHANGE_NAME,
+	  				FILE_PATH,
+	  				BOARD_NO
+  					)
+  					VALUES(
+  					SEQ_FILE_NO.nextval,
+  					#{originName},
+  					#{changeName},
+  					#{file_path},
+  					SEQ_BOARD_NO.CURRVAL
+  					)
+  </insert>
 
 </mapper>
 

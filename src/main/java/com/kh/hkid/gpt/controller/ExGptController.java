@@ -27,7 +27,7 @@ public class ExGptController {
     @PostMapping("chat/message")
     public Map<String, String> getChatbotResponse(@RequestBody Map<String, String> userInput) {
         String userMessage = userInput.get("message");
-        String responseMessage = chatbotService.getChatbotResponse(userMessage);
+        String responseMessage = chatbotService.getChatbotResponse("다음 운동으로 AI 추천 루틴을 생성하세요: " + userMessage);
 
         // 응답을 HashMap을 사용하여 반환
         Map<String, String> responseMap = new HashMap<>();
