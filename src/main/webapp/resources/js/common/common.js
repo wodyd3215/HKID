@@ -60,6 +60,9 @@ function postFormSubmit(type, url) {
         case "insert":
             $(formEl).attr("action", url);
             break;
+        case "update":
+            $(formEl).attr("action", url)
+            break;
     }
 
     $(formEl).submit();

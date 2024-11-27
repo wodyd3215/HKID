@@ -13,9 +13,14 @@ function init(contextPath, memberNo, pageName, optional) {
         case "boardDetail":
             detailOnload()
             break;
-        // case "boardUpdate":
-        //     defaultCategory2(optional)
-        //     break;
+        case "enrollForm":
+            boardInit(contextPath)
+            break;
+        case "updateForm":
+            boardInit(contextPath, optional)
+            btnDisable()
+            changeHeart()
+            break;
         case "myDiaryList":
             initDiaryPage(optional)
             break;
