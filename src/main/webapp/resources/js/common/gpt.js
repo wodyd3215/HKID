@@ -53,7 +53,7 @@ if (exNames.length > 0) {
                 const botMessageElement = document.createElement("div");
                 botMessageElement.className = "bot-message"; // 클래스명 변경
                 botMessageElement.innerHTML = `
-                    <p>${data.response}</p>
+                    <pre>${data.response}</pre>
                 `;
                 chatOutput.appendChild(botMessageElement);
 
@@ -98,6 +98,7 @@ sendButton.onclick = function () {
         body: JSON.stringify({ message })
     })
     .then((response) => {
+        removeLoadingMessage()
         if (!response.ok) {
             throw new Error("서버 응답이 올바르지 않습니다.");
         }
