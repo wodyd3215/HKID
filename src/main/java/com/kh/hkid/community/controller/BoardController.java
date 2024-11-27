@@ -185,7 +185,6 @@ public class BoardController {
 	//게시글 수정
 	@RequestMapping("update.bo")
 	public String updateBoard(Board b, MultipartFile reupfile, HttpSession session, Model m) {
-		System.out.println("보드번호: "+b);
 		//수정 할 첨부파일이 있을 경우
 		if(!reupfile.getOriginalFilename().equals("")) {
 			//기존 첨부파일이 있다 -> 기존파일을 삭제
@@ -198,6 +197,7 @@ public class BoardController {
 			b.setOriginName(reupfile.getOriginalFilename());
 			b.setChangeName( "/resources/uploadFile/" + changeName);
 		}
+		
 		//수정된 게시글 update
 		if(boardService.updateBoard(b) > 0) {
 			session.setAttribute("alertMsg", "게시글 수정 성공");
