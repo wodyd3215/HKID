@@ -88,9 +88,19 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 	
-	//추가한 게시글에 파일 첨부
+	//게시글 추가(파일)
 	public int insertBoardFile(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.insert("boardMapper.insertBoardFile", b);
+	}
+	
+	//게시글 수정
+	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateBoard", b);
+	}
+	
+	//게시글 수정(파일)
+	public int updateBoardFile(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateBoardFile", b);
 	}
 	
 }

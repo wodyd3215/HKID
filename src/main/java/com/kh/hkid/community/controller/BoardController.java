@@ -138,7 +138,9 @@ public class BoardController {
 	
 	//게시글 작성
 	@GetMapping("enrollForm.bo")
-	public String boardWrite() {
+	public String boardWrite(Model model) {
+		
+		model.addAttribute("pageName", "enrollForm");
 		return "community/boardWrite";
 	}
 	
@@ -160,7 +162,7 @@ public class BoardController {
 		if(boardService.insertBoard(b) > 0) { //성공 -> list페이지로 이동
 			session.setAttribute("alertMsg", "게시글 작성 성공");
 		} else { //실패 -> 에러페이지
-			m.addAttribute("errorMsg", "게시글 작성 실패");
+			session.setAttribute("alertMsg", "게시글 작성 실패");
 		}
 		return "redirect:/list.bo";
 	}
@@ -174,19 +176,35 @@ public class BoardController {
 		Board b = boardService.selectBoard(bno);
 	
 		model.addAttribute("b", b);
-		model.addAttribute("pageName", "boardUpdate");
-		model.addAttribute("optional", "팁");
+		model.addAttribute("pageName", "updateForm");
+		model.addAttribute("optional", b.getContent());
 		System.out.println("카테고리 체크"+b.getCommunityNo());
 		return "community/boardUpdate"; 
 	}
 	
 	//게시글 수정
 	@RequestMapping("update.bo")
-	public String updateBoard(Board b, Model model) {
-		
-	
-		
-		return "community/boardUpdate"; 
+	public String updateBoard(Board b, MultipartFile reupfile, HttpSession session, Model m) {
+		System.out.println("보드번호: "+b);
+		//수정 할 첨부파일이 있을 경우
+		if(!reupfile.getOriginalFilename().equals("")) {
+			//기존 첨부파일이 있다 -> 기존파일을 삭제
+			if(b.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
+			}
+			//새로운 첨부파일을 서버에 업로드하기
+			String changeName = Template.saveFile(reupfile, session, "/resources/uploadFile/");
+			
+			b.setOriginName(reupfile.getOriginalFilename());
+			b.setChangeName( "/resources/uploadFile/" + changeName);
+		}
+		//수정된 게시글 update
+		if(boardService.updateBoard(b) > 0) {
+			session.setAttribute("alertMsg", "게시글 수정 성공");
+		}else {
+			session.setAttribute("alertMsg", "게시글 수정 실패");
+		}
+		return "redirect:/boardDetail.bo?bno=" + b.getBoardNo(); 
 	}
 	
 
