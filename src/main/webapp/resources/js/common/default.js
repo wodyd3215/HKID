@@ -1,6 +1,6 @@
-function init(pageName, optional) {
+function init(contextPath, memberNo, pageName, optional) {
     // initDiaryEnroll()
-    // 
+    initChatBox(contextPath, memberNo);
 
     switch(pageName) {
         // case "ex":
