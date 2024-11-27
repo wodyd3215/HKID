@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +11,12 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardWrite.css">
-    
+
+    <script src="${pageContext.request.contextPath}/resources/js/community/board.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
+
+
+
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>

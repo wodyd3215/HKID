@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardUpdate.css">
     
+    <script src="${pageContext.request.contextPath}/resources/js/community/board.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/community/boardUpdate.js"></script>
     HKID/src/main/webapp/WEB-INF/views/community
@@ -18,13 +19,12 @@
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div id="space"></div>
     <div class="wrapper">
-        <h3>게시글 작성</h3>
+        <h3>게시글 수정</h3>
         <hr class="board-Write-hr">
         <form id="postForm" class="postForm" action="" method="post" enctype="multipart/form-data">
             <input type="hidden" name="boardNo" value="${b.boardNo}">
-            <select name="communityNo" id="search-category">
+            <select name="communityNo" id="search-category" onchange="btnDisable()" required>
                 <option value="" selected disabled hidden>게시판 선택</option>
-                <option value="">전체</option>
                 <option value="1">질문</option>
                 <option value="2">팁</option>
                 <option value="3">자랑</option>
@@ -35,7 +35,7 @@
             <textarea id="content" rows="10" name="content" required>${b.content}</textarea>
             <p id="can-file-types">첨부파일 'png', 'gif', 'jpg', 'jpeg' 파일만 업로드가 가능합니다.</p>
             <div id="att-files">
-                <input type="file" class="add-file" name="upfile">
+                <input type="file" class="add-file" name="reupfile">
             </div>
 
             <button id="att-add-btn">첨부파일 추가</button>

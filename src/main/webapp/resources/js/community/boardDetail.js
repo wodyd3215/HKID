@@ -7,6 +7,23 @@ function detailOnload(){ //DOM이 로드된 후 자동실행
     getReplyList(sendData, setReplyData)
 }
 
+
+//하트 ON / OFF
+let isHeartOn = false;
+function changeHeart(_this){
+        if (!isHeartOn){
+            $(_this).attr("src", "resources/image/heartOn.png");
+            isHeartOn = true;
+            console.log("하트 on")
+        }else{
+            $(_this).attr("src", "resources/image/heart.png");
+            isHeartOn = false;
+            console.log("하트 off")
+            
+            
+        }
+}
+
 //댓글 갯수 및 목록 초기화
 function setReplyData(commentsList){
     $("#reply-count").html(commentsList.length);
