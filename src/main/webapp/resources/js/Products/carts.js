@@ -7,17 +7,31 @@ function selectAll(selectAll){
     })
 }
 
-// 장바구니가 insert 되었을 시 그려주는 코드
-function drawCart(tbody, cartList){
-    $(tbody).empty();
-    
-    for(const carts of cartList){
-        const cartsRow = document.createElement('tr');
-        
-    }
+function addItem(loginMember){
+    const productNo = document.querySelector(".productNo").value;
+    const productQuantity = document.querySelector(".quantityBtnText").value;
+
+    const data = {
+        memberNo: loginMember,
+        productNo : productNo,
+        quantity: productQuantity
+    };
+
+    addAjaxItem(data, function(res){
+    })
 }
 
-
+function addAjaxItem(data, callback){
+    $.ajax({
+        url:'addCart.c',
+        type: 'POST',
+        data:data,
+        success:function(res){
+            alert("장바구니에 담겨졌습니다.");
+            callback(res)
+        }
+    })
+}
 
 
 

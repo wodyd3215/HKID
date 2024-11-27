@@ -14,6 +14,7 @@
 
     <!-- js -->
     <script src="${pageContext.request.contextPath }/resources/js/Products/carts.js" defer></script>
+    
 </head>
 <body>
     

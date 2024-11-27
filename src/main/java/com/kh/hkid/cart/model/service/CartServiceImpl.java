@@ -35,6 +35,11 @@ public class CartServiceImpl implements CartService{
 		return cartDao.deleteOne(sqlSession, c);
 	}
 
+	@Override
+	public int addCart(Cart c) {
+		return cartDao.addCart(sqlSession, c);
+	}
+
 	
 
 	
