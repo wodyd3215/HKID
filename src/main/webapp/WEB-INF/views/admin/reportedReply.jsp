@@ -16,7 +16,7 @@
     <jsp:include page="sideNavi.jsp" />
     <div class="wrapper">
         <div class="managementTitle">
-            신고 게시글
+            신고 댓글
         </div>
         <div class="content">
             <table>
@@ -37,12 +37,12 @@
                             <td>${r.replyContent}</td>
                             <td>
                                 <div class="management">
-                                    <button class="btn btn-primary custom-btn" data-target="report-detail" onclick="openfunction(event, ['${r.nickname}', '${r.replyContent}', '${r.typeContent}', '${r.detailContent}'])">확인하기</button>
+                                    <button class="btn btn-primary custom-btn" data-target="report-detail" onclick="inputDetailData(['${r.nickname}', '${r.replyContent}', '${r.typeContent}', '${r.detailContent}']), openModal(event)">확인하기</button>
                                 </div>
                             </td>
                             <td>
                                 <div class="management">
-                                    <form action="deleteReportR?reportNo=${r.reportNo}&replyNo=${r.replyNo}" method="post">
+                                    <form action="deleteReportR?replyNo=${r.replyNo}" method="post">
                                         <button class="material-symbols-outlined btn btn-danger custom-btn" >
                                             delete
                                         </button>
