@@ -24,29 +24,26 @@
 }
 
 .gpt-content > div > div {
-    display: flex;
-    align-items: start;
     margin-bottom: 15px;
 }
 
 .gpt-content p {
     border: 1px solid rgb(214, 214, 214);
     border-radius: 10px;
-    margin: 0;
     word-wrap: break-word;
     margin: 0px 5px;
     padding: 6px 8px;
 }
 
+.user-message p{
+    background: aliceblue;
+}
 
 .gpt-conten img {
     width: 30px;
     height: 30px;
 }
 
-#chatOutput {
-    float: left;
-}
 
 .user {
     float: right;
@@ -83,25 +80,21 @@
     height: 40px;
 }
 
-/* 챗봇 메시지 */
-.bot {
+.user-message{
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0;
+    margin-bottom: 30px;
+
+}.bot-message{
+    margin-bottom: 30px;
 }
 
-.bot img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+#loadingMessage {
+    font-style: italic;
+    color: gray;
 }
 
-.bot p {
-    background-color: #e0f7fa;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 14px;
-    max-width: 70%;
-    word-wrap: break-word;
+.bot-message{
+    overflow-y: hidden;
 }
