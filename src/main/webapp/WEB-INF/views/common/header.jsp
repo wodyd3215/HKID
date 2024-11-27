@@ -29,7 +29,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </head>
-<body onload="init('${pageContext.request.contextPath}', '${loginMember.memberNo}', '${pageName}', '${optional}')">
+<body onload="init('${pageContext.request.contextPath}', '${loginMember.memberNo}', '${pageName}', '${fn:escapeXml(optional)}')">
     <c:if test="${ not empty alertMsg}">
         <script>
             alert("${alertMsg}");
