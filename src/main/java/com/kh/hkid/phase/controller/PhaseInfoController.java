@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.phase.model.vo.Phase;
 import com.kh.hkid.phase.service.PhaseService;
+import com.kh.hkid.product.model.vo.Review;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -64,4 +65,17 @@ public class PhaseInfoController {
 //		session.setAttribute("",p);
 //		return "order/orderComplete";
 //	}
+	
+	@GetMapping("review/{memberNo}")
+	public String reviewScreen(@RequestParam(value="memberNo") int memberNo,
+								@RequestParam(value="productNo")int productNo,
+								Model model) {
+		//Member m = ;
+		Review r = phaseService.writeReview(productNo) ;
+		model.addAttribute("memberNo", memberNo);
+		model.addAttribute("productNo", productNo);
+		return "Product/reviewScreen";
+	}
+	
+	
 }
