@@ -23,7 +23,12 @@
 		<typeAlias type="com.kh.hkid.diet.model.vo.Diet" alias="Diet"/>
 		<typeAlias type="com.kh.hkid.phase.model.vo.Phase" alias="Phase"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.hkid.chatting.model.vo.Chat" alias="Chat"/>
+		<typeAlias type="com.kh.hkid.chatting.model.dto.ChatRoom" alias="ChatRoom"/>
+		<typeAlias type="com.kh.hkid.chatting.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.kh.hkid.chatting.model.dto.MessageLog" alias="MessageLog"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.Report" alias="Report"/>
+		<typeAlias type="com.kh.hkid.admin.model.vo.SuspensionMember" alias="SuspensionMember"/>
  	</typeAliases>
  	
  	<mappers>
@@ -37,6 +42,7 @@
  		<mapper resource="mappers/diet-mapper.xml"/>
  		<mapper resource="mappers/phase-mapper.xml"/>
  		<mapper resource="mappers/admin-mapper.xml"/>
+ 		<mapper resource="mappers/chat-mapper.xml"/>
 
  	</mappers>
 

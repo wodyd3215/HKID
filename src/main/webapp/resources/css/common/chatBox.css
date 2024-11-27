@@ -195,8 +195,20 @@
     float: right;
 }
 
+.right-log > div > div {
+    font-size: 12px;
+    text-align: end;
+    margin: 3px 6px 3px 0px;
+}
+
 .left-log {
     float: left;
+}
+
+.left-log > div > div {
+    font-size: 12px;
+    text-align: start;
+    margin: 3px 0px 3px 6px;
 }
 
 /* 채팅 입력 */

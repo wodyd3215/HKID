@@ -19,7 +19,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    b = ${b}
+    <!-- b = ${b} -->
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -52,8 +52,8 @@
                 <div id="etc-reply-wrapper">
                     <div id="etc-menu">
                         <div> 
-                            <div class="heart-div">
-                                <img src="resources/image/heart.png" alt="">
+                            <div class="heart-div" id="heart-div">
+                                <img id="heart-img" src="resources/image/heart.png" alt="하트" onclick="changeHeart(this)">
                                 <p class="ptext">하트 개수</p>
                             </div>
                             

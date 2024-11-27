@@ -390,9 +390,7 @@ public class MemberController {
     @ResponseBody
     @GetMapping(value="search.me", produces = "application/json; charset = UTF-8")
     public String searchNickName(String nickName) {
-    	log.info("유저 닉네임 조회 시작!");
     	ArrayList<Member> nickArr = memberService.searchNickName(nickName);
-    	log.info("유저 닉네임 조회 시작!" + nickArr);
     	if(nickArr == null) {
     		return null;
     	} else {

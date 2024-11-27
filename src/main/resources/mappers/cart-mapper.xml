@@ -46,4 +46,21 @@
 	 	 WHERE MEMBER_NO = #{memberNo} 
 	 	   AND PRODUCT_NO = #{productNo}
 	 </delete>
+	 
+	 <insert id="insertCart">
+	 	INSERT 
+	 	INTO BUCKEY_LIST(
+	 		BUCKEY_LIST,
+	 		MEMBER_NO,
+	 		PRODUCT_NO,
+	 		PRODUCT_QUANTITY
+	 	)
+	 	VALUES(
+	 		SEQ_CNO.NEXTVAL,
+	 		#{memberNo},
+	 		#{productNo},
+	 		#{productQuantity}
+	 	)
+	 
+	 </insert>
 </mapper>

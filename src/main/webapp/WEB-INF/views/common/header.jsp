@@ -4,6 +4,7 @@
 <%
    String contextPath = request.getContextPath();
 %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </head>
-<body onload="init('${pageName}', '${optional}')">
+<body onload="init('${pageContext.request.contextPath}', '${loginMember.memberNo}', '${pageName}', '${optional}')">
     <c:if test="${ not empty alertMsg}">
         <script>
             alert("${alertMsg}");

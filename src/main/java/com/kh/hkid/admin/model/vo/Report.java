@@ -15,6 +15,7 @@ public class Report {
 	private int reviewNo;
 	private String typeContent;
 	private String nickname;
+	private String reportedNickname;
 	private String replyContent;
 	private String boardTitle;
 	private String reviewContent;

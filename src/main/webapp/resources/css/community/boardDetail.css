@@ -92,6 +92,13 @@ hr{
     padding-top: 25px;
 }
 
+#heart-div button{
+    border: none;
+    background-color: white;
+    width: 43px;    
+}
+
+
 .ptext{
     font-size: 14px;
     font-weight: 600;

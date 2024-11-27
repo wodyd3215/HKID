@@ -27,8 +27,17 @@ public class CartController {
 		this.cartService = cartService;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="addCart.c", produces="application/json; chatset-UTF-8")
+	public int addCart(Cart c) {
+		
+		
+		return cartService.addCart(c);
+	}
+	
 	@RequestMapping("cartlist.li")
 	public String cartPage(int memberNo, Model model) {
+		
 		
 		ArrayList<Cart> list = cartService.selectCart(memberNo);
 		
