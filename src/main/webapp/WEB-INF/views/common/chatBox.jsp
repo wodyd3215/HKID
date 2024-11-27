@@ -26,14 +26,11 @@
             </div>
             <div class="chat-box-content">
                 <div class="chat-box-left">
-                    <div id="chat-bot">
-                        <button name="chat-name" onclick="changeElement(this, '#chat-search', '#chat-content')">챗봇</button>
-                    </div>
                     <div id="chat-admin">
                         <button name="chat-name" onclick="changeElement(this, '#chat-search', '#chat-content')">관리자</button>
                     </div>
                     <div id="chat-trade">
-                        <button onclick="showAndHideElement('#chat-trade-user')">중고거래&nbsp;
+                        <button onclick="showAndHideElement('#chat-trade-user')">내 채팅방&nbsp;
                             <img src="${pageContext.request.contextPath}/resources/image/down.png">
                         </button>
                     </div>

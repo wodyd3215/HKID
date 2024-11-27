@@ -170,6 +170,8 @@ int rCount = adminService.reportCount("user");
 		}
 	}
 	
+	
+	// 신고
 	@PostMapping("deleteReportB")
 	public String deleteReportB(Report r, HttpSession session) {
 		int result = adminService.deleteReportTarget(r);
