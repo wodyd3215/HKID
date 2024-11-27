@@ -10,9 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
+import com.kh.hkid.admin.model.vo.SuspensionMember;
 import com.kh.hkid.admin.service.AdminService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
@@ -52,7 +55,18 @@ public class AdminController {
 	}
 	
 	@GetMapping("reportedUser.ad")
-	public String reportedUser() {
+	public String reportedUser(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+int rCount = adminService.reportCount("user");
+		
+		PageInfo pi = Template.getPageInfo(rCount, currentPage, 10, 10);
+		
+		ArrayList<Report> list = adminService.selectReportList(pi, "user");
+		log.info("list: " + list);
+		log.info("pi: " + pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
 		return "admin/reportedUser";
 	}
 	
@@ -158,7 +172,7 @@ public class AdminController {
 	
 	@PostMapping("deleteReportB")
 	public String deleteReportB(Report r, HttpSession session) {
-		int result = adminService.deleteReport(r);
+		int result = adminService.deleteReportTarget(r);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "신고 게시물 삭제 완료");
@@ -171,7 +185,7 @@ public class AdminController {
 	
 	@PostMapping("deleteReportR")
 	public String deleteReportR(Report r, HttpSession session) {
-		int result = adminService.deleteReport(r);
+		int result = adminService.deleteReportTarget(r);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "신고 댓글 삭제 완료");
@@ -181,4 +195,28 @@ public class AdminController {
 		
 		return "redirect:/reportedReply.ad";
 	}
+	
+	
+	@SuppressWarnings("finally") // 자바 컴파일러가 finally 블록 관련 경고를 무시하도록 지시하는 주석 
+	@PostMapping("suspensionMember")
+	public String insertsuspension(SuspensionMember sm, int reportNo, HttpSession session) {
+		sm.setSuspensionComment("그냥 정지당해라");
+		
+		try {
+			adminService.insertsuspension(sm, reportNo);
+			session.setAttribute("alertMsg", "유저 정지 성공");
+		} catch(RuntimeException e) {
+			session.setAttribute("alertMsg", "유저 정지 실패");
+		} finally {
+			return "redirect:/reportedUser.ad";
+		}
+	}
+	
+//	@ResponseBody
+//	@PostMapping(value="loadBoardAjax",  produces="application/json; charset=UTF-8")
+//	public String loadBoardAjax(int boardNo, Model model) {
+//		
+//		
+//		return new Gson().toJson(adminService.loadBoardAjax(boardNo));
+//	}
 }

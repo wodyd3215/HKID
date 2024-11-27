@@ -33,6 +33,16 @@
 	  	<result column="REPLY_CONTENT" property="replyContent"/>
 	  	<result column="BOARD_TITLE" property="boardTitle"/>
 	  	<result column="REVIEW_CONTENT" property="reviewContent"/>
+	  	<result column="REPORTED_NICKNAME" property="reportedNickname"/>
+	</resultMap>
+	
+	<resultMap id="suspensionResultSet" type="SuspensionMember">
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="SUSPENSION_DATE" property="suspensionDate"/>
+		<result column="UNSUSPENSION_DATE" property="unSuspensionDate"/>
+		<result column="SUSPENSION_COMMENT" property="suspensionComment"/>
+		<result column="NICKNAME" property="nickname"/>
+		
 	</resultMap>
 	
 	<!-- 공지 -->
@@ -109,6 +119,9 @@
 		  	<when test="category == 'reply'">
 		  		REPLY_NO
 		  	</when>
+		  	<when test="category == 'user'">
+		  		REPORTED_MEMBER_NO
+		  	</when>
 		  </choose>
 		 IS NOT NULL
 	</select>
@@ -118,7 +131,7 @@
 			   TYPE_CONTENT,
 			   REPORT_DATE,
 			   DETAIL_CONTENT,
-			   NICKNAME,
+			   M.NICKNAME AS NICKNAME,
 			   <choose>
 			   	<when test="category == 'board'">
 			   		BOARD_NO,
@@ -128,10 +141,14 @@
 			   		REPLY_NO,
 			   		REPLY_CONTENT
 			   	</when>
+			   	<when test="category == 'user'">
+			   		REPORTED_MEMBER_NO,
+			   		RM.NICKNAME AS REPORTED_NICKNAME
+			   	</when>
 			   </choose>
-		  FROM REPORT
-		  JOIN MEMBER USING (MEMBER_NO)
+		  FROM REPORT R
 		  JOIN REPORT_TYPE USING (TYPE_NO)
+		  JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
 		  <choose>
 		  	<when test="category == 'board'">
 		  		JOIN COMMUNITY USING (BOARD_NO)
@@ -139,15 +156,13 @@
 		  	<when test="category == 'reply'">
 		  		JOIN REPLY USING (REPLY_NO)
 		  	</when>
+		  	<when test="category == 'user'">
+		  		JOIN MEMBER RM ON R.REPORTED_MEMBER_NO = RM.MEMBER_NO
+		  	</when>
 		  </choose>
 		 ORDER BY REPORT_NO DESC
 	</select>
-	
-	<delete id="deleteReport">
-		DELETE FROM REPORT
-		 WHERE REPORT_NO = #{reportNo}
-	</delete>
-	
+		
 	<delete id="deleteReportTarget">
 		DELETE FROM 
 		<choose>
@@ -162,6 +177,30 @@
 		 		REPLY_NO= #{replyNo}
 		 	</when>
 		 </choose>
-		 
+	</delete>
+	
+	<!-- 유저 정지 -->
+	<insert id="insertsuspension">
+		INSERT INTO ACCOUNT_SUSPENSION (
+										MEMBER_NO, 
+										UNSUSPENSION_DATE, 
+										SUSPENSION_COMMENT
+									   )
+								VALUES (
+										#{memberNo},
+										SYSDATE + #{suspension},
+										#{suspensionComment}
+									   ) 
+	</insert>
+	
+	<update id="updateSuspension">
+		UPDATE MEMBER
+		   SET STATUS = 'N'
+		 WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="deleteReport">
+		DELETE FROM REPORT
+		 WHERE REPORT_NO = #{reportNo}
 	</delete>
 </mapper> 
