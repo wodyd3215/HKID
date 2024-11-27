@@ -1,6 +1,7 @@
 package com.kh.hkid.product.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -57,6 +58,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<Product> selectProductCategoryList(PageInfo pi, String category) {
 		return productDao.selectProductCategoryList(sqlSession, pi, category);
+	}
+
+	@Override
+	public ArrayList<Product> searchList(HashMap<String, String> map, PageInfo pi) {
+		return productDao.searchList(sqlSession, map, pi);
 	}
 
 }

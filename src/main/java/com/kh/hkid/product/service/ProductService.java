@@ -1,6 +1,7 @@
 package com.kh.hkid.product.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.Community;
@@ -28,6 +29,9 @@ public interface ProductService {
 
 	// ajax 를 활용하여 상품/중고 페이지 이동
 	ArrayList<Product> ajaxTabBtn(String rbtn);
+
+	// 검색 바
+	ArrayList<Product> searchList(HashMap<String, String> map, PageInfo pi);
 
 
 	

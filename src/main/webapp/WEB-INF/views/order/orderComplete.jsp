@@ -70,11 +70,7 @@
 					<p>결제 정보</p>
 					<div class="payInfo-content">
 						<table>
-							<tbody>
-								<tr>
-									<th>운송장 번호</th>
-									<td>A91LA88K</td>
-								</tr>
+							<tbody>								
 								<tr>
 									<th>상품명</th>
 									<td>덤벨 3kg</td>

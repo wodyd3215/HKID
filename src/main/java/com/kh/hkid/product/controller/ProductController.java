@@ -1,6 +1,7 @@
 package com.kh.hkid.product.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,8 @@ public class ProductController {
 	
 	// 카테고리에 맞는 상품 목록을 반환하는 API
     @GetMapping("product.se")
-    public String selectProductCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model, String category) {
+    public String selectProductCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, 
+    										Model model, String category) {
     	int productCount = productService.selectProductCategoryListCount(category);
     	
     	PageInfo pi = Template.getPageInfo(productCount, currentPage, 5, 9);
@@ -83,9 +85,27 @@ public class ProductController {
 		return new Gson().toJson(selectedRbtn);
 	}
 	
-	
-	public String searchItemKey(String keyword) { 
-		return "";
+	// 검색바
+	@GetMapping
+	public String searchItemKey(@RequestParam(value="pPage", defaultValue="1") int pPage,
+			Model model,String keyword, @RequestParam(value="searchCategory", defaultValue="전체")String searchCategory) {
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("category", searchCategory);
+		
+		int searchCount = productService.selectProductCategoryListCount(searchCategory);
+		
+		PageInfo pi = Template.getPageInfo(searchCount, pPage, 5, 9);
+		
+		ArrayList<Product> list = productService.searchList(map, pi);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		model.addAttribute("category", searchCategory);
+		model.addAttribute("keyword", keyword);
+		return "Product/productPage";
 	}
 	
 //	@GetMapping("/products/productPage")
