@@ -157,7 +157,7 @@ if (instructionElement && ulElement) {
 
     const observer = new MutationObserver(() => {
         if (ulElement.children.length > 0) {
-            changeText(`<a href="#">AI가 짜주는 운동루틴!</a>`);
+            changeText(`<a href="chat.ex">AI가 짜주는 운동루틴!</a>`);
         } else {
             changeText(initialContent);
         }
@@ -170,8 +170,7 @@ if (instructionElement && ulElement) {
 }
 
 // a 태그 클릭 시 동작
-async function handleLinkClick(event) {
-  event.preventDefault(); // 기본 동작 방지
+async function handleLinkClick() {
 
   // LocalStorage에서 exNames 값 가져오기
   const exNames = JSON.parse(localStorage.getItem('exNames')) || [];
@@ -180,35 +179,36 @@ async function handleLinkClick(event) {
       alert("선택된 운동이 없습니다.");
       return;
   }
-
-  // 서버로 데이터 전송
-  const response = await fetch("chat/message", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: exNames.join(", ") }), // 운동 이름 목록을 문자열로 전송
-  });
-
-  // 응답 처리
-  if (response.ok) {
-      const data = await response.json();
-      displayChatbotResponse(data.response);
-  } else {
-      console.error("서버 응답 실패:", response.statusText);
-      alert("챗봇 응답을 가져오지 못했습니다. 다시 시도해주세요.");
-  }
 }
 
-// 챗봇 응답 출력 함수
-function displayChatbotResponse(responseMessage) {
-  const chatOutput = document.getElementById("chatOutput");
+//   // 서버로 데이터 전송
+//   const response = await fetch("chat/message", {
+//       method: "POST",
+//       headers: {
+//           "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ message: exNames.join(", ") }), // 운동 이름 목록을 문자열로 전송
+//   });
 
-  if (chatOutput) {
-      const responseElement = document.createElement("p");
-      responseElement.textContent = "AI 추천 루틴: " + responseMessage;
-      chatOutput.appendChild(responseElement);
-  } else {
-      alert("챗봇 응답을 출력할 요소를 찾을 수 없습니다.");
-  }
-}
+//   // 응답 처리
+//   if (response.ok) {
+//       const data = await response.json();
+//       displayChatbotResponse(data.response);
+//   } else {
+//       console.error("서버 응답 실패:", response.statusText);
+//       alert("챗봇 응답을 가져오지 못했습니다. 다시 시도해주세요.");
+//   }
+// }
+
+// // 챗봇 응답 출력 함수
+// function displayChatbotResponse(responseMessage) {
+//   const chatOutput = document.getElementById("chatOutput");
+
+//   if (chatOutput) {
+//       const responseElement = document.createElement("p");
+//       responseElement.textContent = "AI 추천 루틴: " + responseMessage;
+//       chatOutput.appendChild(responseElement);
+//   } else {
+//       alert("챗봇 응답을 출력할 요소를 찾을 수 없습니다.");
+//   }
+// }
