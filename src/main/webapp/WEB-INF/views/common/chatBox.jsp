@@ -73,7 +73,7 @@
                                 <textarea id="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
                                           oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, '${pageContext.request.contextPath}')"></textarea>
                                 <div>
-                                    <button id="send-chat-btn" onclick="inputChatting('${pageContext.request.contextPath}')" disabled>
+                                    <button id="send-chat-btn" onclick="inputChatting('${pageContext.request.contextPath}', '${loginMember.memberId}')" disabled>
                                         <img src="${pageContext.request.contextPath}/resources/image/Corner-down-right.png">
                                     </button>
                                 </div>

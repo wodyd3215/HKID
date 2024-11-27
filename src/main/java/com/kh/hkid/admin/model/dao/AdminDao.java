@@ -7,7 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.admin.model.vo.Notice;
+import com.kh.hkid.admin.model.vo.Report;
+import com.kh.hkid.admin.model.vo.SuspensionMember;
 import com.kh.hkid.common.vo.PageInfo;
+import com.kh.hkid.community.model.dto.BoardInfo;
 
 @Repository
 public class AdminDao {
@@ -36,5 +39,36 @@ public class AdminDao {
 	
 	public int updateNotice(SqlSessionTemplate sqlSession, Notice n) {
 		return sqlSession.update("adminMapper.updateNotice", n);
+	}
+	
+	public int reportCount(SqlSessionTemplate sqlSession, String category) {
+		return sqlSession.selectOne("adminMapper.reportCount", category);
+	}
+	
+	public ArrayList<Report> selectReportList(SqlSessionTemplate sqlSession, PageInfo pi, String categoty) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("adminMapper.selectReportList", categoty, rowBounds);
+	}
+		
+	public int deleteReportTarget(SqlSessionTemplate sqlSession, Report r) {
+		return sqlSession.delete("adminMapper.deleteReportTarget", r);
+	}
+	
+	public BoardInfo loadBoardAjax(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("adminMapper.loadBoardAjax");
+	}
+	
+	public int insertsuspension(SqlSessionTemplate sqlSession, SuspensionMember sm) {
+		return sqlSession.insert("adminMapper.insertsuspension", sm);
+	}
+	
+	public int updateStatus(SqlSessionTemplate sqlSession, SuspensionMember sm) {
+		return sqlSession.update("adminMapper.updateSuspension", sm);
+	}
+	
+	public int deleteReport(SqlSessionTemplate sqlSession, int reportNo) {
+		return 0; //sqlSession.delete("adminMapper.deleteReport", reportNo);
 	}
 }

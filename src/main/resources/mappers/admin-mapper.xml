@@ -18,6 +18,34 @@
 	  	<result column="CATEGOTY_NAME" property="noticeTypeName"/>
 	</resultMap>
 	
+	<resultMap id="reportResultSet" type="Report">
+		<result column="REPORT_NO" property="reportNo"/>
+	  	<result column="TYPE_NO" property="typeNo"/>
+	  	<result column="REPORT_DATE" property="reportDate"/>
+	  	<result column="DETAIL_CONTENT" property="detailContent"/>
+	  	<result column="MEMBER_NO" property="memberNo"/>
+	  	<result column="REPORTED_MEMBER_NO" property="reportedMemberNo"/>
+	  	<result column="REPLY_NO" property="replyNo"/>
+	  	<result column="BOARD_NO" property="boardNo"/>
+	  	<result column="REVIEW_NO" property="reviewNo"/>
+	  	<result column="TYPE_CONTENT" property="typeContent"/>
+	  	<result column="NICKNAME" property="nickname"/>
+	  	<result column="REPLY_CONTENT" property="replyContent"/>
+	  	<result column="BOARD_TITLE" property="boardTitle"/>
+	  	<result column="REVIEW_CONTENT" property="reviewContent"/>
+	  	<result column="REPORTED_NICKNAME" property="reportedNickname"/>
+	</resultMap>
+	
+	<resultMap id="suspensionResultSet" type="SuspensionMember">
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="SUSPENSION_DATE" property="suspensionDate"/>
+		<result column="UNSUSPENSION_DATE" property="unSuspensionDate"/>
+		<result column="SUSPENSION_COMMENT" property="suspensionComment"/>
+		<result column="NICKNAME" property="nickname"/>
+		
+	</resultMap>
+	
+	<!-- 공지 -->
 	<select id="noticeCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM NOTICE
@@ -78,4 +106,101 @@
 		       NOTICE_CONTENT = #{noticeContent}
 		 WHERE NOTICE_NO = #{noticeNo}
 	</update>
+	
+	<!-- 신고 게시글 -->
+	<select id="reportCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM REPORT
+		 WHERE
+		  <choose>
+		  	<when test="category == 'board'">
+		  		BOARD_NO 
+		  	</when>
+		  	<when test="category == 'reply'">
+		  		REPLY_NO
+		  	</when>
+		  	<when test="category == 'user'">
+		  		REPORTED_MEMBER_NO
+		  	</when>
+		  </choose>
+		 IS NOT NULL
+	</select>
+	
+	<select id="selectReportList" resultMap="reportResultSet">
+		SELECT REPORT_NO,
+			   TYPE_CONTENT,
+			   REPORT_DATE,
+			   DETAIL_CONTENT,
+			   M.NICKNAME AS NICKNAME,
+			   <choose>
+			   	<when test="category == 'board'">
+			   		BOARD_NO,
+			   		BOARD_TITLE
+			   	</when>
+			   	<when test="category == 'reply'">
+			   		REPLY_NO,
+			   		REPLY_CONTENT
+			   	</when>
+			   	<when test="category == 'user'">
+			   		REPORTED_MEMBER_NO,
+			   		RM.NICKNAME AS REPORTED_NICKNAME
+			   	</when>
+			   </choose>
+		  FROM REPORT R
+		  JOIN REPORT_TYPE USING (TYPE_NO)
+		  JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
+		  <choose>
+		  	<when test="category == 'board'">
+		  		JOIN COMMUNITY USING (BOARD_NO)
+		  	</when>
+		  	<when test="category == 'reply'">
+		  		JOIN REPLY USING (REPLY_NO)
+		  	</when>
+		  	<when test="category == 'user'">
+		  		JOIN MEMBER RM ON R.REPORTED_MEMBER_NO = RM.MEMBER_NO
+		  	</when>
+		  </choose>
+		 ORDER BY REPORT_NO DESC
+	</select>
+		
+	<delete id="deleteReportTarget">
+		DELETE FROM 
+		<choose>
+		 	<when test="boardNo != 0">
+				COMMUNITY
+		 		WHERE 
+		 		BOARD_NO = #{boardNo}
+		 	</when>
+		 	<when test="replyNo != 0">
+		 		REPLY
+		 		WHERE
+		 		REPLY_NO= #{replyNo}
+		 	</when>
+		 </choose>
+	</delete>
+	
+	<!-- 유저 정지 -->
+	<insert id="insertsuspension">
+		INSERT INTO ACCOUNT_SUSPENSION (
+										MEMBER_NO, 
+										UNSUSPENSION_DATE, 
+										SUSPENSION_COMMENT
+									   )
+								VALUES (
+										#{memberNo},
+										SYSDATE + #{suspension},
+										#{suspensionComment}
+									   ) 
+	</insert>
+	
+	<update id="updateSuspension">
+		UPDATE MEMBER
+		   SET STATUS = 'N'
+		 WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="deleteReport">
+		DELETE FROM REPORT
+		 WHERE REPORT_NO = #{reportNo}
+	</delete>
 </mapper> 

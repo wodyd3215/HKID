@@ -62,7 +62,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board selectBoard(int bno) {
-		return boardDao.selectBoard(sqlSession, bno); //해당 게시글 가져오기;
+		Board b = boardDao.selectBoard(sqlSession, bno);
+		if(b != null) {
+			boardDao.increaseView(sqlSession, bno);
+		}
+		return b; //해당 게시글 가져오기;
 	}
 
 	@Override
@@ -83,8 +87,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertBoard(int bno) {
-		return boardDao.insertBoard(sqlSession, bno);
+	public int insertBoard(Board b) {
+		int result = 0;
+		if(boardDao.insertBoard(sqlSession, b) > 0) {
+			result = boardDao.insertBoardFile(sqlSession, b);
+		}
+		return result;
 	}
 
 	

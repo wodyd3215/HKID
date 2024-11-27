@@ -35,9 +35,8 @@
                         <div>${b.boardDate}</div>
                     </div>
                     <div class="btn-div">
-                        <form class="postForm" method="post" action="">
-                            <button class="btn" onclick = "postFormSubmit('edit', 'updateForm.bo')">수정</button>
-                        </form>
+                        <!-- <button class="btn" onclick = "postFormSubmit('update', 'updateForm.bo')">수정</button> -->
+                        <a class="btn" href="updateForm.bo?bno=${b.boardNo}">수정</a>
                         <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
                     </div>
                 </div>
@@ -250,7 +249,7 @@
                 <input type="hidden" name="bno" value="${b.boardNo}">
                 <div class="custom-modal-header">
                     <div class="custom-modal-title"><h3>신고</h3></div>
-                    <button class="material-symbols-outlined close-btn " onclick="closeModal()">x</button>
+                    <button class="material-symbols-outlined close-btn" onclick="closeModal()">x</button>
                 </div>
                 <hr class="report-h3">
                 <div id="model-middle">
@@ -278,16 +277,7 @@
                 
 
                 <div class="custom-modal-content">
-
-                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report')">제출</button>
-                
-                    <!-- <form class="postForm" method="post" action="">
-                        <input type="hidden" name="bno" value="${boardNo}">
-                        
-                        <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
-                    </form>
-                    
-                    <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button> -->
+                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report', 'report.bo')">제출</button>
                 </div>
             </form>
         </div>

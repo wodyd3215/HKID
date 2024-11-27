@@ -161,6 +161,7 @@
 			  </ul>
 			</div>
 			<div class="slider__next"></div>
+			<div id="chatOutput"></div>
 		</div>
 
 	</div>	
