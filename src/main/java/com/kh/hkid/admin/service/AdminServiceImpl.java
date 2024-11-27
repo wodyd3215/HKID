@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.hkid.admin.model.dao.AdminDao;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
+import com.kh.hkid.admin.model.vo.SuspensionMember;
 import com.kh.hkid.common.vo.PageInfo;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,9 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private final SqlSessionTemplate sqlSession;
 
+	@Autowired
+	private final DataSourceTransactionManager transactionManager;
+	
 	@Autowired
 	private final AdminDao adminDao;
 
@@ -45,7 +49,6 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.deleteNotice(sqlSession, noticeNo);
 	}
 
-	@Transactional
 	@Override
 	public Notice selectNotice(int noticeNo) {
 		return adminDao.selectNotice(sqlSession, noticeNo);
@@ -67,13 +70,23 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int deleteReport(Report r){
-		if(adminDao.deleteReport(sqlSession, r) > 0) {
-			return adminDao.deleteReportTarget(sqlSession, r);
-		}
-
-		return 0;
+	public int deleteReportTarget(Report r){
+		return adminDao.deleteReportTarget(sqlSession, r);
 	}
 	
-	
+	@Transactional(rollbackFor = {Exception.class})
+	@Override
+	public void insertsuspension(SuspensionMember sm, int reportNo) {
+		int result = adminDao.insertsuspension(sqlSession, sm);
+		if(result == 0)
+			throw new RuntimeException("리스트에 정상적으로 insert되지 않았습니다.");
+		
+		result = adminDao.updateStatus(sqlSession, sm);
+		if(result == 0)
+			throw new RuntimeException("유저정보가 정상적으로 update되지 않았습니다.");
+		
+		result = adminDao.deleteReport(sqlSession, reportNo);
+		if(result == 0) 
+			throw new RuntimeException("신고 정보가 정상적으로 delete되지 않았습니다");
+	}	
 }

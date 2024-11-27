@@ -32,15 +32,15 @@
                         <tr id="common-table-body">
                             <td>${r.typeContent}</td>
                             <td>${r.nickname}</td>
-                            <td>${r.boardTitle}</td>
+                            <td data-target="content-detail" onclick="loadContent('${r.boardNo}'), openModal(event)">${r.boardTitle}</td>
                             <td>
                                 <div class="management">
-                                    <button class="btn btn-primary custom-btn" data-target="report-detail" onclick="openfunction(event, ['${r.nickname}', '${r.boardTitle}', '${r.typeContent}', '${r.detailContent}'])">확인하기</button>
+                                    <button class="btn btn-primary custom-btn" data-target="report-detail" onclick="inputDetailData(['${r.nickname}', '${r.boardTitle}', '${r.typeContent}', '${r.detailContent}']), openModal(event)">확인하기</button>
                                 </div>
                             </td>
                             <td>
                                 <div class="management">
-                                    <form action="deleteReportB?reportNo=${r.reportNo}&boardNo=${r.boardNo}" method="post">
+                                    <form action="deleteReportB?boardNo=${r.boardNo}" method="post">
                                         <button class="material-symbols-outlined btn btn-danger custom-btn">
                                             delete
                                         </button>

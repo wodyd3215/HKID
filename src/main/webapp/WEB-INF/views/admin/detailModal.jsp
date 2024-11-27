@@ -35,12 +35,23 @@
                         </tr>
                     </table>
                 </div>
-                <div id="report-detail">
+                <div id="detail">
                     <div>상세내용</div>
-                     <textarea value="" readonly></textarea>
+                     <textarea readonly></textarea>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+
+    <div class="modal" id="content-detail" onclick="closeModal()">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title"></div>
+                <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
+            </div>
+            <div class="custom-modal-content">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
