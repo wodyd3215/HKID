@@ -70,7 +70,7 @@ if (exNames.length > 0) {
 } 
 
 // 버튼 클릭 이벤트
-sendButton.onclick = function () {
+sendButton.onclick = async function () {
     const message = userInput.value.trim();
 
     if (!message) {
@@ -78,12 +78,29 @@ sendButton.onclick = function () {
         return;
     }
 
+    // 로그인 사용자 정보 가져오기
+    let profileImgPath = "./resources/image/profileImg/guest-icon.png"; // 기본 이미지
+    try {
+        const response = await fetch('getLoginMemberInfo', { method: 'GET' });
+
+        if (response.ok) {
+            const loginMember = await response.json();
+            if (loginMember && loginMember.profileImg) {
+                profileImgPath = `./${loginMember.profileImg}`;
+            }
+        } else {
+            console.warn("로그인 정보를 가져올 수 없습니다. 기본 이미지를 사용합니다.");
+        }
+    } catch (error) {
+        console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+    }
+
     // 사용자의 메시지 출력
     const userMessageElement = document.createElement("div");
     userMessageElement.className = "user-message"; // 클래스명 변경
     userMessageElement.innerHTML = `
         <p>${message}</p>
-        <img src="./resources/image/dogdduck.png" alt="user">
+        <img src="${profileImgPath}" alt="user">
     `;
     chatOutput.appendChild(userMessageElement);
 

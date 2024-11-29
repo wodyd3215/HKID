@@ -87,6 +87,10 @@
 
 }
 
+.user-message > img{
+    height: 30px;
+}
+
 .bot-message{
     margin-bottom: 30px;
 }
