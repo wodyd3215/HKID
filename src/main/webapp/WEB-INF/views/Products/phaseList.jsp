@@ -62,6 +62,7 @@
                             <button onclick=""> 리뷰 작성 </button>
                         </td>
                     </c:if>
+                    
                 </tr>                
             </tbody>
 

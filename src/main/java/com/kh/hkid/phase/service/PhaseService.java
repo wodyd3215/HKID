@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.hkid.phase.model.vo.Phase;
+import com.kh.hkid.product.model.vo.Review;
 
 public interface PhaseService {
 
@@ -13,6 +14,9 @@ public interface PhaseService {
 
 	// 결제하기 버튼 클릭 시 insert
 	int insertPhase(Phase p);
+
+	// 리뷰 등록
+	int addReview(Review r);
 
 	
 

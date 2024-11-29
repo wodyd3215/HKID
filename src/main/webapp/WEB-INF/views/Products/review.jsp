@@ -19,11 +19,18 @@
             ​​<span class="star" value="4"> </span>
             ​​<span class="star" value="5"> </span>
         </div>
-        <input type="hidden" value="">
-        <input type="hidden" value="">
+        <input type="hidden" value="${m.loginMember}">
+        <input type="hidden" value="${p.productNo}">
         <div>
             <textarea name="" id="" placeholder="리뷰 내용을 작성해주세요."></textarea>
         </div>
+        <!-- <div>
+            <input type="file" id="upfile" class="form-controll-file border" name="upfile">
+            <c:if test="${not empty}">
+                현재 업로드 된 사진 : 
+                <a href=""></a>
+            </c:if>
+        </div> -->
         <div>
             <input type="submit" value="리뷰등록">
         </div>

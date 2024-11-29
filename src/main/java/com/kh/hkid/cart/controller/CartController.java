@@ -2,6 +2,10 @@ package com.kh.hkid.cart.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +32,16 @@ public class CartController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="addCart.c", produces="application/json; chatset-UTF-8")
+	@PostMapping(value="addCart.c", produces="application/json; chatset-UTF-8")
 	public int addCart(Cart c) {
 		
 		
 		return cartService.addCart(c);
 	}
+	
+	
+	
+	
 	
 	@RequestMapping("cartlist.li")
 	public String cartPage(int memberNo, Model model) {
@@ -54,10 +62,10 @@ public class CartController {
 	
 	
 	@ResponseBody
-	@RequestMapping("/deleteOne")
-	public int deleteOne(Cart c) {
-		int result = cartService.deleteOne(c);
+	@PostMapping(value="delete.c", produces="application/json; chatset-UTF-8")
+	public int deleteOne(@RequestParam(value="deCart")Cart c, HttpServletRequest request, HttpSession session) {
 		
+		int result = cartService.deleteCart(c);
 		return result;
 	}
 

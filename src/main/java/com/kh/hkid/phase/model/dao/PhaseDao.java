@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.phase.model.vo.Phase;
+import com.kh.hkid.product.model.vo.Review;
 
 @Repository
 public class PhaseDao {
@@ -19,6 +20,8 @@ public class PhaseDao {
 	public int insertPhase(SqlSessionTemplate sqlSession, Phase p) {
 		return sqlSession.insert("phaseMapper", p);
 	}
+
+	
 
 	
 

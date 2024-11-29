@@ -5,10 +5,12 @@ function reviewBtn(){
 
     const memberNo = '${member.memberId}';
     const productNo = '${product.productNo}';
+    const content='${reviewContent}';       
 
     let popUrl = "Product/review" + memberNo + "?productNo=" + productNo;
-    console.log(popUrl);
-    let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+    console.log(popUrl); 
+    let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes"; 
+    // top, left 는 창 위치 설정 
 
     window.open(popUrl, "리뷰 작성", popOption); // 팝업 주소, 팝업창 이름, 팝업창 설정
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hkid.phase.model.dao.PhaseDao;
 import com.kh.hkid.phase.model.vo.Phase;
+import com.kh.hkid.product.model.vo.Review;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +21,7 @@ public class PhaseServiceImpl implements PhaseService{
 	private final SqlSessionTemplate sqlSession;
 	
 	@Autowired
-	private final PhaseDao phaseDao;
+	private final PhaseDao phaseDao;	
 
 	@Override
 	public ArrayList<Phase> selectList(HashMap<String, Object> order1) {
@@ -31,10 +32,5 @@ public class PhaseServiceImpl implements PhaseService{
 	public int insertPhase(Phase p) {
 		return phaseDao.insertPhase(sqlSession, p);
 	}
-
-
-	
-	
-	
 
 }
