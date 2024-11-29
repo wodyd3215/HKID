@@ -2,6 +2,7 @@ package com.kh.hkid.member.service;
 
 import java.util.ArrayList;
 
+import com.kh.hkid.chatting.model.vo.Message;
 import com.kh.hkid.member.model.vo.Member;
 
 public interface MemberService {
@@ -50,4 +51,8 @@ public interface MemberService {
 	
 	// 유저 닉네임 조회
 	ArrayList<Member> searchNickName(String nickName);
+	
+	// 발신자 정보
+	Member senderInfo(Message m);
+
 }

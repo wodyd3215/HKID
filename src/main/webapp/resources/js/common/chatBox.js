@@ -1,4 +1,4 @@
-function initChatBox(path, memberNo) {
+function initChatBox(memberNo) {
     console.log(memberNo);
     
     $.ajax({
@@ -15,10 +15,10 @@ function initChatBox(path, memberNo) {
             result.forEach(m => {
                 const chatItem = document.createElement("div");
                 chatItem.innerHTML = `
-                    <img class="delete-btn" src="${path}${m.profileImg}" onclick="nickToDelete(this)">
-                    <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content', ${memberNo}, ${m.chatId})">${m.nickName}</button>
-                    <button class="delete-chat hide" onclick="deleteChat(this, '${m.chatId}')">
-                        <img src="${path}/resources/image/trash2.png">
+                    <img class="delete-btn" src="${m.profileImg}" onclick="nickToDelete(this)">
+                    <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content', ${memberNo}, ${m.receiverNo})">${m.nickName}</button>
+                    <button class="delete-chat hide" onclick="deleteChat(this, ${memberNo}, ${m.receiverNo})">
+                        <img src="resources/image/trash2.png">
                     </button>
                 `;
                 tradeUserContainer.appendChild(chatItem);
@@ -30,25 +30,58 @@ function initChatBox(path, memberNo) {
     });
 }
 
-// 채팅창 삭제 기능
-function deleteChat(_this, chatId) {
-
+// 유저 닉네임 조회
+function searchNickName(memberNo){
+    const nickList = document.querySelector(".search-users");
+    nickList.innerHTML = "";
     $.ajax({
-        url : "deleteChat",
-        data : {chatId : chatId},
-        success : function() {
-            console.log("채팅방 삭제 ajax 성공")
+        url : "search.me",
+        data : {nickName : $("#chat-search-bar").val()},
+        success : function(result) {
+            console.log("유저정보 조회 성공")
+            for(let m of result) {
+                nickList.innerHTML += `
+                                <div>
+                                    <img src="${m.profileImg}">
+                                    <p>${m.nickName}</p>
+                                    <button onclick="addChattingRoom(this, ${memberNo}, ${m.memberNo}, '${m.nickName}', '${m.profileImg}')">
+                                        <img src="resources/image/chat_bubble.png">
+                                    </button>
+                                </div>
+                                `
+                            }
         },
         error : function(){
-            console.log("채팅방 삭제 ajax 실패")
+            console.log("유저정보 조회 AJAX 실패")
         }
     })
+}
 
-    // 클릭된 버튼의 부모 요소 (즉, 해당 채팅창의 div)를 찾습니다.
-    const chatDiv = _this.closest('div');  // button이 포함된 div 요소 찾기
-    
-    // 해당 채팅창(div)을 삭제합니다.
-    chatDiv.remove();
+// 채팅방 추가
+function addChattingRoom(_this, memberNo, receiverNo, nickName, profileImg) {
+    const newChat = document.createElement("div");
+    const newUser = _this.closest('div').querySelector('p').innerText;  // 새로운 사용자 닉네임 (공백 제거)
+    const chatList = document.querySelectorAll("#chat-trade-user button[name='chat-name']");
+
+    // 이미 존재하는 닉네임이 있으면 채팅방을 추가하지 않음
+    for (const c of chatList) {
+        if (c.innerText === newUser) {
+            console.log('이미 채팅방에 추가된 사용자입니다.');
+            return false;  // 이미 닉네임이있으면 함수를 종료
+        }
+    }
+
+    newChat.innerHTML = `
+        <img class="delete-btn" src="${profileImg}" onclick="nickToDelete(this)">
+        <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content', ${receiverNo})">${nickName}</button>
+        <button class="delete-chat hide" onclick="deleteChat(this, ${memberNo}, ${receiverNo})">
+            <img src="resources/image/trash2.png">
+        </button>
+        `;
+
+    // 채팅방 리스트에 새로운 채팅방을 추가
+    const tradeUser = document.querySelector("#chat-trade-user");
+    tradeUser.appendChild(newChat);
 }
 
 // 삭제버튼 보이기
@@ -65,7 +98,31 @@ function nickToDelete(element) {
     deleteButton.classList.toggle("hide");
 }
 
-function changeElement(_this, searchUser, selectChat, senderNo, chatId) {
+// 채팅창 삭제 기능
+function deleteChat(_this, memberNo, receiverNo) {
+
+    $.ajax({
+        url : "deleteChat",
+        data : {
+            memberNo : memberNo,
+            receiverNo : receiverNo
+        },
+        success : function() {
+            console.log("채팅방 삭제 ajax 성공")
+        },
+        error : function(){
+            console.log("채팅방 삭제 ajax 실패")
+        }
+    })
+
+    // 클릭된 버튼의 부모 요소 (즉, 해당 채팅창의 div)를 찾습니다.
+    const chatDiv = _this.closest('div');  // button이 포함된 div 요소 찾기
+    
+    // 해당 채팅창(div)을 삭제합니다.
+    chatDiv.remove();
+}
+
+function changeElement(_this, searchUser, selectChat, senderNo, receiverNo) {
     const otherEls = document.getElementsByName("chat-name"); // 여러 요소를 반환합니다.
     const chatNick = _this.innerText;
 
@@ -80,16 +137,18 @@ function changeElement(_this, searchUser, selectChat, senderNo, chatId) {
     }
     
     // 채팅창 보여주기
-    showChat(searchUser, selectChat, memberNo, chatId);
+    showChat(searchUser, selectChat, senderNo, receiverNo);
 }
 
 // 채팅창 보여주기
-function showChat(searchUser, selectChat, memberNo, chatId){
+function showChat(searchUser, selectChat, senderNo, receiverNo){
 
     // selector가 받은 클래스를 탐색
     const showAndHideEl = document.querySelector(searchUser);
     const showAndHideEl2 = document.querySelector(selectChat);
 
+    console.log(senderNo);
+    
     // classList 함수를 사용하여 해당 클래스에 hide클래스가 포함되어 있는지 탐색(있다면 true 없다면 false)
     if(showAndHideEl2.classList.contains("hide")){
         // if가 true라면 해당 클래스에서 hide클래스를 제거
@@ -99,85 +158,78 @@ function showChat(searchUser, selectChat, memberNo, chatId){
 
     $.ajax({
         url : "selectChatLog",
-        data : {chatId : chatId},
-        success : function(result) {
-            console.log("채팅방 로그 조회 ajax 성공");
+        data : {
+            senderNo : senderNo,
+            receiverNo : receiverNo
         },
+        success: function(result) {
+            console.log("채팅방 로그 조회 ajax 성공");
+        
+            // 채팅 로그를 표시할 영역            
+            const chatLogArea = document.querySelector("#chat-log-area > div");
+        
+            // chatLogArea 초기화
+            chatLogArea.innerHTML = '';
+        
+            // result 배열을 반복하여 각 메시지를 처리
+            result.forEach(m => {
+                // 내가 보낸 메시지인지 확인 (예: senderNo와 메시지의 senderNo가 같으면 내 메시지)
+                const isMyMessage = m.senderNo === senderNo;
+                console.log(m);
+                // 메시지 HTML을 동적으로 생성
+                let messageHTML = '';
+        
+                if (isMyMessage) {
+                    // 내 메시지일 경우
+                    messageHTML = `
+                        <div class="right-log">
+                            <div>
+                                <div>${m.nickName}</div>
+                                <p>${m.messageContent}</p>
+                            </div>
+                            <img src="${m.profileImg ? m.profileImg : '/resources/image/defaultProfile.png'}">
+                        </div>
+                    `;
+                } else {
+                    // 상대방 메시지일 경우
+                    messageHTML = `
+                        <div class="left-log">
+                            <img src="${m.profileImg ? m.profileImg : '/resources/image/defaultProfile.png'}">
+                            <div>
+                                <div>${m.nickName}</div>
+                                <p>${m.messageContent}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+        
+                // 동적으로 생성된 메시지를 chatLogArea에 추가
+                chatLogArea.innerHTML += messageHTML;
+            });
+        
+            // 채팅 입력 부분을 추가
+            const showAndHideEl2 = document.querySelector('#chat-content');
+            showAndHideEl2.innerHTML += `
+                <!-- 채팅 입력 -->
+                <div id="chat-input-area">
+                    <div>
+                        <textarea id="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
+                                  oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, ${senderNo}, ${receiverNo})"></textarea>
+                        <div>
+                            <button id="send-chat-btn" onclick="inputChatting(${senderNo}, ${receiverNo})" disabled>
+                                <img src="resources/image/Corner-down-right.png">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        ,
         error : function() {
             console.log("채팅방 로그 조회 ajax 실패");
         }
     })
 }
-
-// 유저 닉네임 조회
-function searchNickName(path){
-    const nickList = document.querySelector(".search-users");
-    nickList.innerHTML = "";
-    $.ajax({
-        url : "search.me",
-        data : {nickName : $("#chat-search-bar").val()},
-        success : function(result) {
-            console.log("유저정보 조회 성공")
-            for(let m of result) {
-                nickList.innerHTML += `
-                                <div>
-                                    <img src="${path}${m.profileImg}">
-                                    <p>${m.nickName}</p>
-                                    <button onclick="addChattingRoom('${path}', this, ${m.memberNo})">
-                                        <img src="${path}/resources/image/chat_bubble.png">
-                                    </button>
-                                </div>
-                                `
-                            }
-        },
-        error : function(){
-            console.log("유저정보 조회 AJAX 실패")
-        }
-    })
-}
-
-
-// 채팅방 추가
-function addChattingRoom(path, _this, memberNo) {
-    const newChat = document.createElement("div");
-    const newUser = _this.closest('div').querySelector('p').innerText;  // 새로운 사용자 닉네임 (공백 제거)
-    const chatList = document.querySelectorAll("#chat-trade-user button[name='chat-name']");
-
-    // 이미 존재하는 닉네임이 있으면 채팅방을 추가하지 않음
-    for (const c of chatList) {
-        if (c.innerText === newUser) {
-            console.log('이미 채팅방에 추가된 사용자입니다.');
-            return false;  // 이미 닉네임이있으면 함수를 종료
-        }
-    }
-
-    // location.href = `insertChat?receiverNo=${memberNo}`;
-
-    $.ajax({
-        url : "insertChat",
-        data : {receiverNo : memberNo},
-        success : function(result) {
-            console.log("채팅방 추가 ajax 성공");
-            newChat.innerHTML = `
-                <img class="delete-btn" src="${path}${result.profileImg}" onclick="nickToDelete(this)">
-                <button name="chat-name" class="trade-user-nick" onclick="changeElement(this, '#chat-search', '#chat-content', ${memberNo}, ${result.chatId})">${result.nickName}</button>
-                <button class="delete-chat hide" onclick="deleteChat(this, ${result.chatId})">
-                    <img src="${path}/resources/image/trash2.png">
-                </button>
-            `;
-
-            // 채팅방 리스트에 새로운 채팅방을 추가
-            const tradeUser = document.querySelector("#chat-trade-user");
-            tradeUser.appendChild(newChat);
-        },
-        error : function() {
-            console.log("채팅방 추가 ajax 실패");
-        }
-    })
-
-}
-
-
 
 
 
@@ -209,7 +261,7 @@ socket.onmessage = function(ev){
 }
 
 // 채팅 입력 시 채팅창에 로딩
-function inputChatting(path, senderNo) {
+function inputChatting(senderNo, receiverNo) {
     
     const chatText = document.querySelector("#input-chat-text");
     const chatUser = document.querySelector(".trade-user-nick");
@@ -218,18 +270,40 @@ function inputChatting(path, senderNo) {
     if (chatText.value.trim() === "") {
         return; // 비어 있으면 채팅을 보내지 않음
     }
-
+    console.log("채팅 입력 ajax 실행 전")
+    console.log(chatText.value);
+    console.log(senderNo);
     $.ajax({
         url : "inputChat",
         data : {
-            messageContent : chatText,
-            senderNo : senderNo
+            messageContent : chatText.value,
+            senderNo : senderNo,
+            receiverNo : receiverNo
         },
-        success : function(result) {
+        success : function(res) {
+            console.log("채팅 입력/저장 ajax 성공");
+            const myChat = document.createElement("div");
+            myChat.className = "right-log";
 
+            myChat.innerHTML = `
+                <div>
+                    <div>${res.nickName}</div>
+                    <p>${chatText.value}</p>
+                </div>
+                <img src="${res.profileImg}"></img>
+            `;
+
+            const chatLog = document.querySelector("#chat-log-area > div");
+            chatLog.appendChild(myChat);
+
+            const chatLogHeight = chatLog.scrollHeight; // 전체 채팅 내용의 높이
+            chatLog.scrollTop = chatLogHeight;
+        
+            chatText.value = ""; // 채팅 입력창 초기화
+            useChatBtn(chatText); // 입력창을 비우면 버튼 비활성화
         },
         error : function() {
-
+            console.log("채팅 입력/저장 ajax 실패");
         }
     })
 
@@ -237,28 +311,9 @@ function inputChatting(path, senderNo) {
         message : chatText.value,
         target : chatUser.innerText
     }
-
+    console.log("메세지 전송");
     // send할 때는 string으로 보내야해서 stringify로 문자열로 변경해서 보낸다.
     socket.send(JSON.stringify(msgData));
-
-
-
-    const myChat = document.createElement("div");
-    myChat.className = "right-log";
-
-    myChat.innerHTML = `
-        <p>${chatText.value}</p>
-        <img src="${path}/resources/image/dogdduck.png">
-    `;
-
-    const chatLog = document.querySelector("#chat-log-area > div");
-    chatLog.appendChild(myChat);
-
-    const chatLogHeight = chatLog.scrollHeight; // 전체 채팅 내용의 높이
-    chatLog.scrollTop = chatLogHeight;
-
-    chatText.value = ""; // 채팅 입력창 초기화
-    useChatBtn(chatText); // 입력창을 비우면 버튼 비활성화
 }
 
 // 채팅 입력창에 값이 있을 때 버튼을 활성화하고, 없으면 비활성화
@@ -273,7 +328,7 @@ function useChatBtn(_this) {
 }
 
 // Enter 키를 눌렀을 때 채팅을 보내고, Shift + Enter는 줄바꿈을 허용하는 함수
-function handleEnterKey(event, path) {
+function handleEnterKey(event, senderNo, receiverNo) {
     const chatText = document.querySelector("#input-chat-text");
 
     if (event.key === "Enter") {
@@ -284,7 +339,7 @@ function handleEnterKey(event, path) {
             // Enter만 누른 경우: 채팅 전송
             event.preventDefault(); // 기본 줄바꿈 방지
             if (chatText.value.trim() !== "") {
-                inputChatting(path);
+                inputChatting(senderNo, receiverNo);
             }
         }
     }

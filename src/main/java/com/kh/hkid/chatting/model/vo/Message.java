@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class Message {
 	private String messageId;
-	private String chatId;
 	private int senderNo;
+	private int receiverNo;
 	private String messageContent;
 	private Date sendTime;
 }

@@ -48,7 +48,7 @@
                         <div id="chat-log-area">
                             <div>
                                 <!-- ajax로 list 요청 후 for,if -->
-                                <div class="right-log">
+                                <!-- <div class="right-log">
                                     <div>
                                         <div>닉네임</div>
                                         <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
@@ -61,11 +61,11 @@
                                         <div>닉네임</div>
                                         <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- 채팅 입력 -->
-                        <div id="chat-input-area">
+                        <!-- <div id="chat-input-area">
                             <div>
                                 <textarea id="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
                                           oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, '${pageContext.request.contextPath}')"></textarea>
@@ -75,14 +75,14 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                     </div>
                     <!-- 유저 검색 컨텐츠 -->
                     <div id="chat-search" class="hide">
                         <div id="searchbar-div">
                             <input type="search" id="chat-search-bar" placeholder="닉네임을 입력해주세요.">
-                            <button id="search-btn" onclick="searchNickName('${pageContext.request.contextPath}')">
+                            <button id="search-btn" onclick="searchNickName('${loginMember.memberNo}')">
                                 <img id="searchIcon" src="resources/image/searchIcon.png">
                             </button>
                         </div>
