@@ -199,7 +199,7 @@
 				BOARD_NO
 				) 
 				VALUES (
-				SEQ_REPORT_NO.nextval,
+				SEQ_RNO.nextval,
 				#{TypeNo},
 				#{detailContent},
 				#{memberNo},
@@ -217,7 +217,7 @@
 					MEMBER_NO
   					)
   					VALUES(
-  					SEQ_BOARD_NO.NEXTVAL,
+  					SEQ_BNO.NEXTVAL,
   					#{boardTitle},
   					#{content},
   					#{communityNo},
