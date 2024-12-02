@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="challengeMapper">
+  	<resultMap id="challengeResultSet" type="Challenge">
+  		<result column="CHE_RES_NO" property="challengeNo"/>
+  		<result column="CHE_TITLE" property="challengeTitle"/>
+  		<result column="START_DATE" property="startDate"/>
+  		<result column="END_DATE" property="endDate"/>
+  		<result column="THUMBNAIL" property="thumbnail"/>
+  	</resultMap>
+  	
+  	  <!-- 게시글 총 갯수 조회 -->
+  <select id="boardCount" resultType="_int">
+  	SELECT COUNT(*)
+   	  		FROM CHELLAGE_RES
+  </select>
+  
+  <select id="selectList" resultType="Challenge">
+      SELECT CHE_RES_NO challengeNo,
+            CHE_TITLE challengeTitle,
+            START_DATE startDate,
+            END_DATE endDate,
+            THUMBNAIL thumbnail
+        FROM CHELLAGE_RES
+       ORDER BY CHE_RES_NO ASC
+   </select>
+  </mapper>
