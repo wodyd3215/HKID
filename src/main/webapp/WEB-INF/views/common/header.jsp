@@ -88,8 +88,9 @@
                        	<a href="personal.me">개인설정</a>
                         <a href="myDiaryList.me">내 다이어리</a>
                         <hr>
-                        <a href="">찜목록</a>
-                        <a href="">구매목록</a>
+                        <a href="cartlist.li?memberNo=${loginMember.memberNo}">장바구니</a>
+                        <a href="favorite.li?memberNo=${loginMember.memberNo}">찜목록</a>
+                        <a href="phase.li?memberNo=${loginMember.memberNo}">구매목록</a>
                         <hr>
                         <a href="logout.me" id="logout-btn">로그아웃</a>
                     </div>

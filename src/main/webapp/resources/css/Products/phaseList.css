@@ -2,8 +2,13 @@
 .wrapper{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
+}
+
+button{
+    outline: none;
+    background: none;
 }
 
 
@@ -83,4 +88,23 @@ tr, td {
 
 .method-space{
     font-size: 14px;
+}
+
+.reviewInfo{
+    font-size: 14px;
+    color: #A3A3A3;
+    font-weight: 700;
+}
+
+/* 페이징 스타일 */
+span button{
+    border: none;
+    background: none;
+}
+
+/* 현재 페이지 스타일 */
+.paging-link.active {
+    color: #006494;
+    font-weight: bold;
+    pointer-events: none;
 }

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.hkid.common.template.Template;
+import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.phase.model.vo.Phase;
 import com.kh.hkid.phase.service.PhaseService;
@@ -76,6 +78,20 @@ public class PhaseInfoController {
 //		return "order/orderComplete";
 //	}
 	
+	// 구매 리스트 불러오기
+	@RequestMapping("phase.li")
+	public String phasepage(@RequestParam(value="cpage", defaultValue="1")int currentPage,int memberNo, Model model) {
+		int phaseCount = phaseService.selectListCount(memberNo);
+		
+		PageInfo pi = Template.getPageInfo(phaseCount, currentPage, 10, 10);
+		ArrayList<Phase> list = phaseService.phaseList(memberNo, pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "Products/phaseList";
+	}
+	
 	// 리뷰 등록
 	@ResponseBody
 	@PostMapping(value="", produces = "application/json; charset=UTF-8")
@@ -117,5 +133,10 @@ public class PhaseInfoController {
 		return "Product/reviewScreen";
 	}
 	
-	
+	@GetMapping("getReview")
+	public String getReview(Model model, HttpServletRequest request, Review r) {
+		String createDate = phaseService.selectDate(r);
+		model.addAttribute("createDate", createDate);
+		return "button";
+	}
 }

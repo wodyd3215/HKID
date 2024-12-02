@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +11,13 @@
      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Products/phaseList.css">
      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 
+     <!-- js -->
+     <script src="${pageContext.request.contextPath }/resources/js/order/phaseBtn.js" defer></script>
+
 </head>
-<body>
+<body onload="disableBtn()">
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
     <div class="wrapper">
 
 
@@ -38,38 +44,63 @@
 
   
             <tbody class="phaseTableBody">
-                <tr class="content-space">
+                <c:forEach var="cell" items="${list}" >
+                    <tr class="content-space">                    
                     
-                    
-                    <td class="img-space"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" class="product-image"></td>
-                    
-                    <td class="item-name"><div class="name-text"> 구매한 상품 </div></td>
-
-                    <td class="quantity-space"><div class="box">1</div></td>
-
-
-                    <td class="price-space">26,880 원</td>
-
-                    <td>
-                        <div class="date-space">
-                            <div class="date-text"> 9999.99.99  99:99:99 결제 </div>
-                            <div class="method-space">결제방식 : 토스페이</div>
-                        </div>                        
-                    </td>
-
-                    <c:if test="${}"> <!-- 작성했을 땐 숨기고, 작성하지 않았을 땐 뜸-->
+                        <td class="img-space"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" class="product-image"></td>
+                        
+                        <td class="item-name"><div class="name-text"> ${cell.productName} </div></td>
+    
+                        <td class="quantity-space"><div class="box">${cell.quantity}</div></td>
+    
+                        <td class="price-space">${cell.price} 원</td>
+    
                         <td>
-                            <button onclick=""> 리뷰 작성 </button>
+                            <div class="date-space">
+                                <div class="date-text"> ${cell.purchaseDate} </div>
+                                <div class="method-space">결제방식 : ${cell.bankName}</div>
+                            </div>                        
                         </td>
-                    </c:if>
-                    
-                </tr>                
+    
+                        
+                    </tr>
+                </c:forEach>                          
             </tbody>
 
+            <tfoot>
+                <tr>
+                    <div class="reviewInfo">
+                        리뷰는 결제 이후로부터 3일 이내에 작성이 가능합니다.
+                    </div> 
+                </tr>
+            </tfoot>
 
 
+        </table> 
 
-        </table>
+        <div class="pageBtn"> <!-- bottom -->
+            <c:choose>
+                <c:when test="${pi.currentPage eq 1}">
+                    <a class="leftBtn" href=""><button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button></a>
+                </c:when>
 
+                <c:otherwise>
+                    <a class="" href="phase.li?cpage=${pi.currentPage - 1}"><button><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg"></button></a>
+                </c:otherwise>
+            </c:choose>
+
+            <c:forEach var="p" begin ="${pi.startPage}" end="${pi.endPage}">
+                <a class="paging-link ${p == pi.currentPage ? 'active' : ''}" href="phase.li?cpage=${p}">${p}</a>
+            </c:forEach>
+
+            <c:choose>
+                <c:when test="${pi.currentPage eq pi.maxPage}">
+                    <a class="" href="#"><button><img src="${pageContext.request.contextPath}/resources/image/rightBtn.svg"></button></a>
+                </c:when>
+                <c:otherwise>
+                    <a class="" href="phase.li?cpage=${pi.currentPage + 1}"><button><img src="${pageContext.request.contextPath}/resources/image/rightBtn.svg"></button></a>
+                </c:otherwise>
+            </c:choose>
+        </div>
 </body>
 </html>

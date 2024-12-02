@@ -53,6 +53,30 @@
 		   AND PRODUCT_ID = #{productNo}
 	</select>
 	
+	<!-- 구매리스트 조회 -->
+	<select id="selectCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM PURCHASE		 
+	</select>
+	
+	<select id="phaseList" parameterType="_int" resultMap="phaseResultSet">
+		SELECT PURCHASE_NO purchaseNo,
+			   MEMBER_NO memberNo,
+			   PRODUCT_NO productNo,
+			   TOTAL_PURCHASE totalPurchase,
+			   QUANTITY quantity,
+			   PURCHASE_DATE purchaseDate,
+			   BANK_NAME bankName
+		  FROM PURCHASE
+		 WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="phase" resultType="Phase">
+	 	SELECT * 
+	 	FROM PURCHASE
+	 	WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 	<!-- 리뷰 추가 -->
 	 <insert id="insert" parameterType="Review">
 	 	INSERT INTO REVIEW
@@ -74,5 +98,11 @@
 	 		SYSDATE
 	 		)
 	 </insert>
-	 
+<!-- 	 
+	 <select id="">
+	 	SELECT REVIEW_DATE reviewDate
+	 	FROM REVIEW
+	 	WHERE = #{}
+	 </select>
+	  -->
 </mapper>

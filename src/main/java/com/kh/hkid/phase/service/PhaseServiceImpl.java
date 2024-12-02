@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.phase.model.dao.PhaseDao;
 import com.kh.hkid.phase.model.vo.Phase;
 import com.kh.hkid.product.model.vo.Review;
@@ -32,5 +33,26 @@ public class PhaseServiceImpl implements PhaseService{
 	public int insertPhase(Phase p) {
 		return phaseDao.insertPhase(sqlSession, p);
 	}
+
+	@Override
+	public int addReview(Review r) {
+		return phaseDao.insertReview(sqlSession, r);
+	}
+
+	@Override
+	public String selectDate(Review r) {
+		return phaseDao.selectReview(sqlSession, r);
+	}
+
+	@Override
+	public int selectListCount(int memberNo) {
+		return phaseDao.selectCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Phase> phaseList(int memberNo, PageInfo pi) {
+		return phaseDao.phaseList(sqlSession, memberNo, pi);
+	}
+
 
 }

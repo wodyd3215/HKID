@@ -48,7 +48,7 @@ public class CartController {
 		
 		
 		ArrayList<Cart> list = cartService.selectCart(memberNo);
-		
+		System.out.println(list);
 		
 		model.addAttribute("list", list);
 		return "Products/carts";
