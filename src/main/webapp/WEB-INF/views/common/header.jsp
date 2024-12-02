@@ -52,7 +52,7 @@
                     <a href="list.bo">게시판</a>
                     <ul>
                         <li><a href="list.bo">커뮤니티</a></li>
-                        <li><a href="">챌린지</a></li>
+                        <li><a href="ch.m">챌린지</a></li>
                     </ul>
                 </li>
                 <li id="product-drop-bar" class="content">
