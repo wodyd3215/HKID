@@ -20,7 +20,7 @@
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     
 
-    <!-- 게시글 = ${list}
+    게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
@@ -32,7 +32,7 @@
     <br><br>
     pi.boardLimit = ${pi.boardLimit}
     <br><br>
-    category = ${category} -->
+    category = ${category}
 
 
 
@@ -46,7 +46,6 @@
                 <h1>전체</h1>
             </c:otherwise>
         </c:choose>
-        
 
         <table id="common-table">
             <thead>
@@ -69,33 +68,18 @@
                     <th class="type-width8">조회수</th>
                 </tr>
             </thead>
+
             <tbody>
-                <!-- 공지 게시글 -->
-                 <!-- 현재페이지가 1일 경우 공지 출력 --> 
-                <!-- <c:choose>
-                    <c:when test="${pi.currentPage eq 1}">   
-                        <c:forEach var="n" items="${nList}">
-                            <tr id="common-table-body">
-                                <td>${n.communityName}</td>
-                                <td><a href="">${n.boardTitle}</a></td>
-                                <td>${n.userName}</td>
-                                <td>${n.boardDate}</td>
-                                <td>${n.boardViewCount}</td>
-                            </tr>
-                        </c:forEach>
-                    </c:when>
-                </c:choose> -->
                 <!-------------- 일반 게시글 --------------->
                 <c:forEach var="b" items="${list}">
                     <tr>
-                    <td class="board-category">${b.communityName}</td>
-                    <td><a href="boardDetail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
-                    <td>${b.userName}</td>
-                    <td>${b.boardDate}</td>
-                    <td>${b.boardViewCount}</td>
-                </tr>
+                        <td class="board-category">${b.communityName}</td>
+                        <td><a href="boardDetail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
+                        <td>${b.userName}</td>
+                        <td>${b.boardDate}</td>
+                        <td>${b.boardViewCount}</td>
+                    </tr>
                 </c:forEach>
-
             </tbody>
         </table>
         

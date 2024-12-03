@@ -28,6 +28,23 @@
   	<result column="NICKNAME" property="userName"/>
   </resultMap>
   
+  <resultMap id="GoodResultSet" type="Good">
+  	<result column="BOARD_NO" property="boardNo"/>
+  	<result column="MEMBER_NO" property="memberNo"/>
+  	<result column="GOOD_STATUS" property="GoodStatus"/>
+  </resultMap>
+  
+  <resultMap id="ReplyResultSet" type="CommentReply">
+  	<result column="BOARD_NO" property="boardNo"/>
+  	<result column="MEMBER_NO" property="memberNo"/>
+  	<result column="REPLY_NO" property="replyNo"/>
+  	<result column="REPLY_CONTENT" property="content"/>
+  	<result column="REPLY_DATE" property="date"/>
+  	<result column="RE_REPLY_NO" property="reReplyNo"/>
+  	<result column="NICKNAME" property="nickName"/>
+  </resultMap>
+  
+  
   <!-- 게시글 총 갯수 조회 -->
   <select id="selectListCount" resultType="_int">
   	SELECT COUNT(*) 
@@ -155,7 +172,6 @@
   	 SELECT BOARD_NO,
 			BOARD_TITLE,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') as BOARD_DATE,
-			SEQ_BOARD_VIEW_COUNT.nextval,
 			BOARD_STATUS,
 			COMMUNITY_NO,
 			MEMBER_NO,
@@ -257,7 +273,81 @@
  					FILE_PATH = #{file_path}
 			  WHERE BOARD_NO = #{boardNo}
 	</update>
+	
+	
+	<!-- 좋아요 유무체크 -->
+	<select id="checkGood" resultType="_int">
+		SELECT COUNT(*)
+		  FROM GOOD
+		 WHERE BOARD_NO = #{boardNo} AND
+		 	   MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 좋아요 상태 체크 -->
+	<select id="checkGoodStatus" resultType="java.lang.String">
+		SELECT GOOD_STATUS
+		  FROM GOOD
+		 WHERE BOARD_NO = #{boardNo} AND
+		 	   MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 좋아요 추가 -->
+	<insert id="insertGood">
+		INSERT INTO GOOD(
+			   BOARD_NO,
+			   MEMBER_NO)
+		VALUES
+			 (#{boardNo},
+			 #{memberNo})
+	</insert>
 
+	<!-- 좋아요 수정 -->
+	<update id="updateGood">
+		UPDATE GOOD
+		   SET GOOD_STATUS = #{GoodStatus}
+		 WHERE BOARD_NO = #{boardNo} AND
+		 	   MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 좋아요 개수 -->
+	<select id="countGood" resultType="_int">
+		SELECT COUNT(*)
+		FROM GOOD
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<!-- 댓글 리스트 -->
+	<select id="selectReplyList" resultMap="ReplyResultSet">
+		SELECT BOARD_NO, REPLY_NO, MEMBER_NO, NICKNAME, REPLY_CONTENT, TO_CHAR(REPLY_DATE, 'YYYY-MM-DD') AS REPLY_DATE
+		  FROM REPLY
+		  JOIN MEMBER USING (MEMBER_NO)
+		 WHERE BOARD_NO = #{boardNo}
+		 ORDER BY REPLY_NO DESC
+	</select>
+	
+	<!-- 댓글 추가 -->
+	<insert id="insertReply">
+		INSERT INTO REPLY(
+					REPLY_NO,
+					BOARD_NO,
+					MEMBER_NO,
+					REPLY_CONTENT
+					)VALUES(
+					SEQ_REPLY_NO.nextval,
+					#{boardNo},
+					#{memberNo},
+					#{replyContent}
+				)
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE FROM REPLY
+		WHERE REPLY_NO = #{replyNo} AND
+			  BOARD_NO = #{boardNo}
+	</delete>
+	
+	
 </mapper>
 
 

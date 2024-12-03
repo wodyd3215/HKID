@@ -11,8 +11,10 @@ function init(contextPath, memberNo, pageName, optional) {
             defaultCategory1(optional)
             break;
         case "boardDetail":
-            detailOnload()
+            detailOnload(optional)
             break;
+        case "checkGood":
+            checkGood(optional)
         case "enrollForm":
             boardInit(contextPath)
             break;
