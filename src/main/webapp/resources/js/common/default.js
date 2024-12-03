@@ -19,7 +19,7 @@ function init(contextPath, memberNo, pageName, optional) {
         case "updateForm":
             boardInit(contextPath, optional)
             btnDisable()
-            changeHeart()
+            // changeHeart()
             break;
         case "myDiaryList":
             initDiaryPage(optional)

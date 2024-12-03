@@ -60,6 +60,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
 
+	
 	@Override
 	public Board selectBoard(int bno) {
 		Board b = boardDao.selectBoard(sqlSession, bno);

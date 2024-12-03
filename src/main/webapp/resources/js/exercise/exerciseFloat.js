@@ -127,7 +127,7 @@ function changeText(newContent) {
     // a 태그에 클릭 이벤트 연결
     const linkElement = instructionElement.querySelector('a');
     if (linkElement) {
-        linkElement.setAttribute("onclick", "handleLinkClick(event)"); // 직접 onclick 속성 설정
+        linkElement.setAttribute("onclick", "handleLinkClick()"); // 직접 onclick 속성 설정
     }
 }
 
@@ -146,7 +146,7 @@ function initializeContent() {
     // a 태그에 클릭 이벤트 연결
     const linkElement = instructionElement.querySelector('a');
     if (linkElement) {
-        linkElement.setAttribute("onclick", "handleLinkClick(event)"); // 직접 onclick 속성 설정
+        linkElement.setAttribute("onclick", "handleLinkClick()"); // 직접 onclick 속성 설정
     }
 }
 
@@ -157,7 +157,7 @@ if (instructionElement && ulElement) {
 
     const observer = new MutationObserver(() => {
         if (ulElement.children.length > 0) {
-            changeText(`<a href="chat.ex">AI가 짜주는 운동루틴!</a>`);
+            changeText(`<a href="chat.ex;">AI가 짜주는 운동루틴!</a>`);
         } else {
             changeText(initialContent);
         }
@@ -171,15 +171,29 @@ if (instructionElement && ulElement) {
 
 // a 태그 클릭 시 동작
 async function handleLinkClick() {
+    try {
+      // 서버에 로그인 상태 요청
+      const response = await fetch('checkLoginStatus', { method: 'GET' });
 
-  // LocalStorage에서 exNames 값 가져오기
-  const exNames = JSON.parse(localStorage.getItem('exNames')) || [];
+      // 서버 응답이 JSON인지 확인
+      const isLoggedIn = await response.json();
 
-  if (exNames.length === 0) {
-      alert("선택된 운동이 없습니다.");
-      return;
+      if (!isLoggedIn) {
+          // 로그인되지 않은 경우 경고 메시지 출력 후 로그인 페이지로 이동
+          alert("로그인이 필요합니다.");
+          window.location.href = "loginForm.me";
+          return;
+      }
+
+      // 로그인된 상태에서 다른 동작 수행
+      window.location.href = "chat.ex";
+  } catch (error) {
+      console.error("로그인 상태 확인 중 오류:", error);
   }
+
 }
+
+
 
 //   // 서버로 데이터 전송
 //   const response = await fetch("chat/message", {
