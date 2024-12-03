@@ -8,7 +8,34 @@
     flex-direction: row; 
     justify-content: flex-start;
   }
-  .star_rating .star {
+
+  .rating__input {
+    display: none; /* 라디오버튼 hide */
+  }
+  
+  .rating__label .star-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    background-image: url("image/review/staricon.png");
+    background-repeat: no-repeat;
+  }
+
+  .rating__label {    
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .rating__label .star-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    position: relative;
+    left: 0;
+    background-image: url("image/review/staricon2.png");
+    background-repeat: no-repeat;
+  }
+
+  /* .star_rating .star {
     width: 25px; 
     height: 25px; 
     margin-right: 10px;
@@ -25,7 +52,7 @@
     background: url('image/review/staricon2.png') no-repeat;
     background-size: 100%; 
     box-sizing: border-box; 
-  }
+  } */
   
   .star_box {
     width: 400px;

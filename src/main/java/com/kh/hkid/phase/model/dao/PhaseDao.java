@@ -30,8 +30,8 @@ public class PhaseDao {
 		return sqlSession.selectOne("phaseMapper.selelctReview", r);
 	}
 
-	public int selectCount(SqlSessionTemplate sqlSession) {		
-		return sqlSession.selectOne("phaseMapper.selectCount");
+	public int selectCount(SqlSessionTemplate sqlSession, int memberNo) {		
+		return sqlSession.selectOne("phaseMapper.selectCount", memberNo);
 	}
 
 	public ArrayList<Phase> phaseList(SqlSessionTemplate sqlSession, int memberNo, PageInfo pi) {
@@ -39,14 +39,6 @@ public class PhaseDao {
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("phaseMapper.phaseList", memberNo, rowBounds);
-	}
-
-	public Phase phase(SqlSessionTemplate sqlSession, int memberNo) {
-		return sqlSession.selectOne("phaseMapper.phase",memberNo);
-	}
-
-	
-
-	
+	}	
 
 }

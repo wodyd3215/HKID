@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +13,11 @@
 
      <!-- js -->
      <script src="${pageContext.request.contextPath }/resources/js/order/phaseBtn.js" defer></script>
+     <script src="${pageContext.request.contextPath }/resources/js/Products/review.js" defer></script>
 
 </head>
 <body onload="disableBtn()">
-    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />   
 
     <div class="wrapper">
 
@@ -54,34 +55,39 @@
         
                             <td class="quantity-space"><div class="box">${cell.quantity}</div></td>
         
-                            <td class="price-space">${cell.price} 원</td>
+                            <td class="price-space"><div class="money">${cell.totalPurchase} 원</div></td>
         
                             <td>
                                 <div class="date-space">
                                     <div class="date-text"> ${cell.purchaseDate} </div>
                                     <div class="method-space">결제방식 : ${cell.bankName}</div>
                                 </div>                        
+                            </td> 
+
+                            <td>
+                                <button class="reviewBtn" data-member-id="${loginMember.memberId}"
+                                data-product-no="${product.productNo}" id="reviewBtn">리뷰 등록</button>                              
                             </td>
-        
-                            
                         </tr>
                     </c:forEach>  
                 </c:if>
                 <c:if test="${empty list}">
-                    <td colspan="5"> 조회된 데이터가 없거나 아예 없습니다.</td>
+                    <td colspan="5"> 조회되는 데이터가 없거나 아예 없습니다.</td>
                 </c:if>
             </tbody>
 
-            <tfoot>
+            <!-- <tfoot class="phaseFoot">
                 <tr>
-                    <div class="reviewInfo">
-                        리뷰는 결제 이후로부터 3일 이내에 작성이 가능합니다.
-                    </div> 
+                    <th colspan="6">
+                         
+                    </th>                    
                 </tr>
-            </tfoot>
-
-
+            </tfoot> -->
         </table> 
+
+        <div class="reviewInfo">
+            리뷰는 결제 이후로부터 3일 이내에 작성이 가능합니다.
+        </div>
 
         <div class="pageBtn"> <!-- bottom -->
             <c:choose>

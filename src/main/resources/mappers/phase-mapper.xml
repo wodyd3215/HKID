@@ -57,10 +57,11 @@
 	<!-- 구매리스트 조회 -->
 	<select id="selectCount" resultType="_int">
 		SELECT COUNT(*)
-		  FROM PURCHASE		 
+		  FROM PURCHASE
+		 WHERE MEMBER_NO = #{memberNo} 
 	</select>
 	
-	<select id="phaseList" parameterType="_int" resultMap="phaseResultSet">
+	<select id="phaseList" resultType="Phase">
 		SELECT p.PURCHASE_NO purchaseNo,
        		   p.MEMBER_NO memberNo,
        		   PRODUCT_NO productNo,
@@ -74,14 +75,21 @@
 		 WHERE P.MEMBER_NO = #{memberNo}
 	</select>
 	
-	<select id="phase" resultType="Phase">
-	 	SELECT * 
-	 	FROM PURCHASE
-	 	WHERE MEMBER_NO = #{memberNo}
+	<!-- 리뷰 조회 -->
+	<select id="selectReview" parameterType="Review">	
+		SELECT REVIEW_NO,
+			   PRODUCT_NO,
+			   MEMBER_NO,
+			   REVIEW_CONTENT,
+			   REVIEW_RATE,
+			   REVIEW_DATE
+		  FROM REVIEW
+		 WHERE MEMBER_NO = #{memberNo};
 	</select>
 	
+	
 	<!-- 리뷰 추가 -->
-	 <insert id="insert" parameterType="Review">
+	 <insert id="addReview" parameterType="Review">
 	 	INSERT INTO REVIEW
 	 		(
 	 		REVIEW_NO reviewNo,

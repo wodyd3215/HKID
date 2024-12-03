@@ -93,50 +93,27 @@ public class PhaseInfoController {
 			model.addAttribute("alertMsg", "사용자 정보를 불러 올 수 없습니다.");
 			return "redirect:/";
 		}
-		
+		System.out.println("Current Page: " + currentPage);
+		System.out.println("Member No: " + memberNo);
 		System.out.println(list);
 		return "Products/phaseList";
 	}
 	
-	// 리뷰 등록
+	// 리뷰 등록 및 해당 리뷰 조회
 	@ResponseBody
-	@PostMapping(value="", produces = "application/json; charset=UTF-8")
-	public String reviewScreen(int rvno, Review r, Product p,Model model, HttpSession session, HttpServletRequest request) {
-		int code = 0;
-		String resultCode;
-		String msg;		
-		
-		Member m = (Member)session.getAttribute("loginMember");
-		
-		if(m == null) {
-			session.setAttribute("alertMsg","로그인 이후 이용 가능한 서비스입니다.");
-			return "redirect:/loginForm.me";
-		}
-		r.setMemberNo(m.getMemberNo());
-		// 시퀸스가 아닌 UUID 를 사용하여 시퀸스에 의존하지 않음
-		r.setReviewNo(UUID.randomUUID().hashCode()); 
-				
-		model.addAttribute("productNo", p);
-		
-		try {
-			int result = phaseService.addReview(r);
-			if (result > 0) {
-				code = 1;
-				resultCode = "success";
-				msg = "리뷰가 성공적으로 등록되었습니다.";
-			} else {
-				code = -1;
-				resultCode = "fail";
-				msg = "리뷰 등록 중 오류가 발생했습니다.";
-			}
+	@PostMapping(value="addReview", produces = "application/json; charset=UTF-8")
+	public String reviewAdd(@RequestParam String memberNo,
+							   @RequestParam String productNo,
+							   @RequestParam String reviewContent,
+			 Model model) {
 			
-		}catch(Exception e) {
-			 code = -1;
-	        resultCode = "fail";
-	        msg = "예기치 못한 오류가 발생했습니다.";
-		}		
 		
-		return "Product/reviewScreen";
+		
+		// 시퀸스가 아닌 UUID 를 사용하여 시퀸스에 의존하지 않음
+		//setReviewNo(UUID.randomUUID().hashCode()); 
+				
+	
+		return "Products/reviewScreen";
 	}
 	
 	@GetMapping("getReview")

@@ -8,21 +8,44 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/Products/productDetail.css">
 
+    <!-- js -->
+    <script src="${pageContext.request.contextPath }/resources/js/Products/review.js" defer></script>
 <title>리뷰 작성</title>
 </head>
 <body>
-    <form action="" input="hidden" value="rate">
-        <div class="star+rating">
-            <span class="star on" value="1"></span>
-            <span class="star" value="2"> </span>
-            ​​<span class="star" value="3"> </span>
-            ​​<span class="star" value="4"> </span>
-            ​​<span class="star" value="5"> </span>
+    <form id="rate">
+        <input type="hidden" name="memberNo" value="${loginMember.memberNo}">
+        <input type="hidden" name="productNo" value="${product.productNo}">
+              
+        <div class="rating">
+            <label class="rating__label rating__label--full" for="star1">
+                <input type="radio" id="star1" class="rating__input" name="rating" value="">
+                <span class="star-icon"></span>
+            </label>
+
+            <label class="rating__label rating__label--full" for="star2">
+                <input type="radio" id="star2" class="rating__input" name="rating" value="">
+                <span class="star-icon"></span>
+            </label>
+
+            <label class="rating__label rating__label--full" for="star3">
+                <input type="radio" id="star3" class="rating__input" name="rating" value="">
+                <span class="star-icon"></span>
+            </label>
+
+            <label class="rating__label rating__label--full" for="star4">
+                <input type="radio" id="star4" class="rating__input" name="rating" value="">
+                <span class="star-icon"></span>
+            </label>
+
+            <label class="rating__label rating__label--full" for="star5">
+                <input type="radio" id="star5" class="rating__input" name="rating" value="">
+                <span class="star-icon"></span>
+            </label>
         </div>
-        <input type="hidden" value="${m.loginMember}">
-        <input type="hidden" value="${p.productNo}">
+        
         <div>
-            <textarea name="" id="" placeholder="리뷰 내용을 작성해주세요."></textarea>
+            <textarea name="reviewContent" placeholder="리뷰 내용을 작성해주세요."></textarea>
         </div>
         <!-- <div>
             <input type="file" id="upfile" class="form-controll-file border" name="upfile">

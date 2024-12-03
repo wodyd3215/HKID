@@ -46,7 +46,7 @@ public class PhaseServiceImpl implements PhaseService{
 
 	@Override
 	public int selectListCount(int memberNo) {
-		return phaseDao.selectCount(sqlSession);
+		return phaseDao.selectCount(sqlSession, memberNo);
 	}
 
 	@Override
