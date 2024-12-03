@@ -15,8 +15,7 @@
 
 .gpt-content > div{
     margin-top: 50px;
-    width: 600px;
-    height: 700px;
+    width: 950px;
     background-color: white;
     border-radius: 5px;
     padding: 10px 10px 0px;
@@ -86,7 +85,13 @@
     align-items: center;
     margin-bottom: 30px;
 
-}.bot-message{
+}
+
+.user-message > img{
+    height: 30px;
+}
+
+.bot-message{
     margin-bottom: 30px;
 }
 
@@ -95,6 +100,6 @@
     color: gray;
 }
 
-.bot-message{
+.bot-message > pre{
     overflow-y: hidden;
 }

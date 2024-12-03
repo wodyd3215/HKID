@@ -31,6 +31,7 @@
 		<typeAlias type="com.kh.hkid.admin.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.SuspensionMember" alias="SuspensionMember"/>
  		<typeAlias type="com.kh.hkid.community.model.dto.CommentReply" alias="CommentReply"/>
+		<typeAlias type="com.kh.hkid.challenge.model.vo.Challenge" alias="Challenge"/>
  	</typeAliases>
  	
  	<mappers>
@@ -45,6 +46,7 @@
  		<mapper resource="mappers/phase-mapper.xml"/>
  		<mapper resource="mappers/admin-mapper.xml"/>
  		<mapper resource="mappers/chat-mapper.xml"/>
+ 		<mapper resource="mappers/challenge-mapper.xml"/>
 
  	</mappers>
 
