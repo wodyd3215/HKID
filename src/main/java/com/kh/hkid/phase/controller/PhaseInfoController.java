@@ -89,6 +89,12 @@ public class PhaseInfoController {
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
+		if(memberNo == 0) {
+			model.addAttribute("alertMsg", "사용자 정보를 불러 올 수 없습니다.");
+			return "redirect:/";
+		}
+		
+		System.out.println(list);
 		return "Products/phaseList";
 	}
 	

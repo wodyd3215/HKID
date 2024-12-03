@@ -12,13 +12,14 @@
 		<result column="MEMBER_NO" property="memberNo" />
 		<result column="PRODUCT_NO" property="productNo" />
 		<result column="TOTAL_PURCHASE" property="totalPurchase" />
+		<result column="QUANTITY" property="quantity" />
 		<result column="REFUND" property="refund" />
 		<result column="PURCHASE_DATE" property="purchaseDate" />
 		<result column="REQUEST" property="request" />
 		<result column="PAYMENT_METHOD" property="paymentMethod" />
 		<result column="PAYMENT_STATUS" property="paymentStatus" />
-		<result column="BANK_CODE" property="backCode"/>
-		<result column="BANK_NAME" property="backName"/>
+		<result column="BANK_CODE" property="bankCode"/>
+		<result column="BANK_NAME" property="bankName"/>
 		<!-- member mapping -->
 		<result column="MEMBER_NAME" property="memberName" />
 		<result column="EMAIL" property="email" />
@@ -60,15 +61,17 @@
 	</select>
 	
 	<select id="phaseList" parameterType="_int" resultMap="phaseResultSet">
-		SELECT PURCHASE_NO purchaseNo,
-			   MEMBER_NO memberNo,
-			   PRODUCT_NO productNo,
-			   TOTAL_PURCHASE totalPurchase,
-			   QUANTITY quantity,
-			   PURCHASE_DATE purchaseDate,
-			   BANK_NAME bankName
-		  FROM PURCHASE
-		 WHERE MEMBER_NO = #{memberNo}
+		SELECT p.PURCHASE_NO purchaseNo,
+       		   p.MEMBER_NO memberNo,
+       		   PRODUCT_NO productNo,
+       		   PRODUCT.PRODUCT_NAME productName,
+       		   p.TOTAL_PURCHASE totalPurchase,
+       		   p.QUANTITY quantity,
+       		   p.PURCHASE_DATE purchaseDate,
+       	   	   p.BANK_NAME bankName
+  		  FROM PURCHASE p
+ 	 	  JOIN PRODUCT USING(PRODUCT_NO)
+		 WHERE P.MEMBER_NO = #{memberNo}
 	</select>
 	
 	<select id="phase" resultType="Phase">

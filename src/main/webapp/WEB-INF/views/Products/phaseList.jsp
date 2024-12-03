@@ -44,27 +44,32 @@
 
   
             <tbody class="phaseTableBody">
-                <c:forEach var="cell" items="${list}" >
-                    <tr class="content-space">                    
-                    
-                        <td class="img-space"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" class="product-image"></td>
+                <c:if test="${not empty list}">
+                    <c:forEach var="cell" items="${list}" >
+                        <tr class="content-space">                    
                         
-                        <td class="item-name"><div class="name-text"> ${cell.productName} </div></td>
-    
-                        <td class="quantity-space"><div class="box">${cell.quantity}</div></td>
-    
-                        <td class="price-space">${cell.price} 원</td>
-    
-                        <td>
-                            <div class="date-space">
-                                <div class="date-text"> ${cell.purchaseDate} </div>
-                                <div class="method-space">결제방식 : ${cell.bankName}</div>
-                            </div>                        
-                        </td>
-    
-                        
-                    </tr>
-                </c:forEach>                          
+                            <td class="img-space"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" class="product-image"></td>
+                            
+                            <td class="item-name"><div class="name-text"> ${cell.productName} </div></td>
+        
+                            <td class="quantity-space"><div class="box">${cell.quantity}</div></td>
+        
+                            <td class="price-space">${cell.price} 원</td>
+        
+                            <td>
+                                <div class="date-space">
+                                    <div class="date-text"> ${cell.purchaseDate} </div>
+                                    <div class="method-space">결제방식 : ${cell.bankName}</div>
+                                </div>                        
+                            </td>
+        
+                            
+                        </tr>
+                    </c:forEach>  
+                </c:if>
+                <c:if test="${empty list}">
+                    <td colspan="5"> 조회된 데이터가 없거나 아예 없습니다.</td>
+                </c:if>
             </tbody>
 
             <tfoot>
