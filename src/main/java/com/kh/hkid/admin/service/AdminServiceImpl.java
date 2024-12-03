@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.hkid.admin.model.dao.AdminDao;
+import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
 import com.kh.hkid.common.vo.PageInfo;
+import com.kh.hkid.product.model.vo.Product;
 
 import lombok.RequiredArgsConstructor;
 
@@ -88,5 +90,32 @@ public class AdminServiceImpl implements AdminService{
 		result = adminDao.deleteReport(sqlSession, reportNo);
 		if(result == 0) 
 			throw new RuntimeException("신고 정보가 정상적으로 delete되지 않았습니다");
-	}	
+	}
+
+	@Override
+	public int recoveryCount() {
+		return adminDao.recoveryCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<AccRecovery> selectRecoveryList(PageInfo pi) {
+		return adminDao.selectRecoveryList(sqlSession, pi);
+	}
+	
+	@Transactional(rollbackFor = {Exception.class})
+	@Override
+	public void recoveryAccount(int memberNo) {
+		int result = adminDao.recoveryAccount(sqlSession, memberNo);
+		if(result == 0)
+			throw new RuntimeException("계정 정보를 정상적으로 update하지 못하였습니다.");
+		
+		result = adminDao.deleteRecovery(sqlSession, memberNo);
+		if(result == 0)
+			throw new RuntimeException("신청서를 정상적으로 delete하지 못하였습니다.");
+	}
+
+	@Override
+	public int insertProduct(Product p) {
+		return adminDao.insertProduct(sqlSession, p);
+	}
 }

@@ -6,11 +6,13 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.BoardInfo;
+import com.kh.hkid.product.model.vo.Product;
 
 @Repository
 public class AdminDao {
@@ -69,6 +71,29 @@ public class AdminDao {
 	}
 	
 	public int deleteReport(SqlSessionTemplate sqlSession, int reportNo) {
-		return 0; //sqlSession.delete("adminMapper.deleteReport", reportNo);
+		return sqlSession.delete("adminMapper.deleteReport", reportNo);
+	}
+	
+	public int recoveryCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.recoveryCount");
+	}
+	
+	public ArrayList<AccRecovery> selectRecoveryList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("adminMapper.selectRecoveryList", null, rowBounds);
+	}
+	
+	public int recoveryAccount(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.update("adminMapper.recoveryAccount", memberNo);
+	}
+	
+	public int deleteRecovery(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.delete("adminMapper.deleteRecovery", memberNo);
+	}
+	
+	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
+		return sqlSession.insert("productMapper.insertProduct", p);
 	}
 }

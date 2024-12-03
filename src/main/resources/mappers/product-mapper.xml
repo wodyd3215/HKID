@@ -143,7 +143,26 @@
 		 ORDER BY p.PRODUCT_NO DESC
 	</select>
 		
- 
+ 	<insert id="insertProduct">
+ 		INSERT INTO PRODUCT (
+ 								PRODUCT_NO,
+ 								MEMBER_NO,
+ 								PRODUCT_NAME,
+ 								CONTENT,
+ 								QUANTITY,
+ 								PRICE,
+ 								CATEGORY
+ 							)
+ 					 VALUES (
+ 					 			SEQ_PNO.NEXTVAL,
+ 					 			#{memberNo},
+ 					 			#{productName},
+ 					 			#{content},
+ 					 			#{quantity},
+ 					 			#{price},
+ 					 			#{category}				 			
+ 					        )
+ 	</insert>
  
    
  </mapper>

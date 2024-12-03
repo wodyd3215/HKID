@@ -25,6 +25,7 @@
 		<typeAlias type="com.kh.hkid.admin.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.SuspensionMember" alias="SuspensionMember"/>
+		<typeAlias type="com.kh.hkid.admin.model.vo.AccRecovery" alias="AccRecovery"/>
  	</typeAliases>
  	
  	<mappers>
