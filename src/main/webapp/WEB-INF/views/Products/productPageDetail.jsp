@@ -19,6 +19,8 @@
 <title>상품 상세 페이지</title>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    
     <div class="wrapper">
         <div class="productDetailHeader" id="top"> <!-- 상품 맨 위 -->
 
@@ -213,7 +215,7 @@
             
         </div>
     </div>
-    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     <!-- js -->
     <script src="${pageContext.request.contextPath }/resources/js/Products/productDetail.js" defer></script>
 </body>

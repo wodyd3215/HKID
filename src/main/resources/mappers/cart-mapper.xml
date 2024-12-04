@@ -20,11 +20,11 @@
 	 -->
 	 
 	 <select id="selectCart" resultType="Cart">
-	 	SELECT B.BUCKEY_LIST buckList,
+	 	SELECT B.BUCKEY_LIST buckeyList,
 	 		   B.MEMBER_NO memberNo,
 	 		   PRODUCT_NO productNo,
-	 		   B.PRODUCT_QUANTITY quantity,
-	 		   P.PRODUCT_NAME
+	 		   B.PRODUCT_QUANTITY productQuantity,
+	 		   P.PRODUCT_NAME productName
 	 	  FROM BUCKEY_LIST B
 	 	  JOIN PRODUCT P
 	 	 USING (PRODUCT_NO)
