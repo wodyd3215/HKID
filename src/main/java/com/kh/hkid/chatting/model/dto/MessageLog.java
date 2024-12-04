@@ -8,8 +8,8 @@ import lombok.Data;
 public class MessageLog {
 	private String messageId;
 	private String messageContent;
-	private String chatId;
 	private int senderNo;
+	private int receiverNo;
 	private String nickName;
 	private String profileImg;
 	private Date sendTime;

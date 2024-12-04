@@ -201,4 +201,14 @@
   	 WHERE NICKNAME LIKE '%' || #{nickName} || '%'
   	   AND STATUS = 'Y'
   </select>
+  
+  <!-- 발신자 정보 -->
+  <select id="senderInfo" resultMap="memberResultSet">
+	SELECT DISTINCT
+           NICKNAME,
+  		   PROFILE_IMG
+  	  FROM MEMBER
+  	  JOIN MESSAGE ON (MEMBER_NO = SENDER_NO)
+  	 WHERE MEMBER_NO =  #{senderNo}
+  </select>
 </mapper>

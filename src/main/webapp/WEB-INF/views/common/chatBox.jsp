@@ -26,14 +26,11 @@
             </div>
             <div class="chat-box-content">
                 <div class="chat-box-left">
-                    <div id="chat-bot">
-                        <button name="chat-name" onclick="changeElement(this, '#chat-search', '#chat-content')">챗봇</button>
-                    </div>
                     <div id="chat-admin">
-                        <button name="chat-name" onclick="changeElement(this, '#chat-search', '#chat-content')">관리자</button>
+                        <button name="chat-name" onclick="changeElement('${pageContext.request.contextPath}', this, '#chat-search', '#chat-content')">관리자</button>
                     </div>
                     <div id="chat-trade">
-                        <button onclick="showAndHideElement('#chat-trade-user')">중고거래&nbsp;
+                        <button onclick="showAndHideElement('#chat-trade-user')">내 채팅방&nbsp;
                             <img src="${pageContext.request.contextPath}/resources/image/down.png">
                         </button>
                     </div>
@@ -51,7 +48,7 @@
                         <div id="chat-log-area">
                             <div>
                                 <!-- ajax로 list 요청 후 for,if -->
-                                <div class="right-log">
+                                <!-- <div class="right-log">
                                     <div>
                                         <div>닉네임</div>
                                         <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
@@ -64,11 +61,11 @@
                                         <div>닉네임</div>
                                         <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- 채팅 입력 -->
-                        <div id="chat-input-area">
+                        <!-- <div id="chat-input-area">
                             <div>
                                 <textarea id="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
                                           oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, '${pageContext.request.contextPath}')"></textarea>
@@ -78,14 +75,14 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                     </div>
                     <!-- 유저 검색 컨텐츠 -->
                     <div id="chat-search" class="hide">
                         <div id="searchbar-div">
                             <input type="search" id="chat-search-bar" placeholder="닉네임을 입력해주세요.">
-                            <button id="search-btn" onclick="searchNickName('${pageContext.request.contextPath}')">
+                            <button id="search-btn" onclick="searchNickName('${pageContext.request.contextPath}', '${loginMember.memberNo}')">
                                 <img id="searchIcon" src="resources/image/searchIcon.png">
                             </button>
                         </div>

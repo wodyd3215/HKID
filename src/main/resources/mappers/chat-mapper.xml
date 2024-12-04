@@ -21,8 +21,8 @@
   
   <resultMap type="Message" id="MessageResultSet">
   	<result column="MESSAGE_ID" property="messageId"/>
-  	<result column="CHAT_ID" property="chatId"/>
   	<result column="SENDER_NO" property="senderNo"/>
+  	<result column="RECEIVER_NO" property="receiverNo"/>
   	<result column="MESSAGE_CONTENT" property="messageContent"/>
   	<result column="SEND_TIME" property="sendTime"/>
   </resultMap>
@@ -30,59 +30,71 @@
   <resultMap type="MessageLog" id="MessageLogResultSet">
   	<result column="MESSAGE_ID" property="messageId"/>
   	<result column="MESSAGE_CONTENT" property="messageContent"/>
-  	<result column="CHAT_ID" property="chatId"/>
   	<result column="SENDER_NO" property="senderNo"/>
+  	<result column="RECEIVER_NO" property="receiverNo"/>
   	<result column="NICKNAME" property="nickName"/>
   	<result column="PROFILE_IMG" property="profileImg"/>
   	<result column="SEND_TIME" property="sendTime"/>
   </resultMap>
+
+  <!-- 채팅방 조회 -->
+  <select id="chatList" resultMap="MessageLogResultSet">
+	SELECT DISTINCT
+		   SENDER_NO,
+		   RECEIVER_NO,
+		   NICKNAME,
+		   PROFILE_IMG
+	  FROM MESSAGE
+	  JOIN MEMBER ON (MEMBER_NO = RECEIVER_NO)
+	 WHERE SENDER_NO = #{senderNo}
+		
+	 UNION
+		
+	SELECT DISTINCT
+		   SENDER_NO,
+		   RECEIVER_NO,
+		   NICKNAME,
+		   PROFILE_IMG
+	  FROM MESSAGE
+	  JOIN MEMBER ON (MEMBER_NO = SENDER_NO)
+	 WHERE RECEIVER_NO = #{senderNo}
+  </select>
   
-  <!-- 채팅방 추가 -->
-  <insert id="insertChat">
-  	INSERT INTO CHAT_ROOM(
-  		CHAT_ID,
-  		SENDER_NO,
-  		RECEIVER_NO
-  	) VALUES (
-  		SEQ_CHAT_NO.NEXTVAL,
-  		#{senderNo},
-  		#{receiverNo}
-  	)
-  </insert>
-  
-  <!-- 추가한 채팅방 정보 조회 -->
-  <select id="selectChatInfo" resultMap="chatRoomResultSet">
-  	SELECT CHAT_ID,
-  		   SENDER_NO,
-  		   RECEIVER_NO,
-  		   NICKNAME,
-  		   PROFILE_IMG
-  	  FROM CHAT_ROOM
-  	  JOIN MEMBER ON (MEMBER_NO = RECEIVER_NO)
+  <!-- 채팅 삭제 -->
+  <delete id="deleteChat">
+  	DELETE FROM Message
   	 WHERE SENDER_NO = #{senderNo}
   	   AND RECEIVER_NO = #{receiverNo}
-  </select>
+  </delete>
   
-  <!-- 채팅방 조회 -->
-  <select id="chatList" resultMap="chatRoomResultSet">
-  	SELECT CHAT_ID,
+  <!-- 채팅 로그 조회 -->
+  <select id="selectChatLog" resultMap="MessageLogResultSet">
+  	SELECT MESSAGE_ID,
+  		   MESSAGE_CONTENT,
   		   SENDER_NO,
   		   RECEIVER_NO,
   		   NICKNAME,
-  		   PROFILE_IMG
-  	  FROM CHAT_ROOM
-  	  JOIN MEMBER ON (MEMBER_NO = RECEIVER_NO)
-  	 WHERE SENDER_NO = #{senderNo}
+  		   PROFILE_IMG,
+  		   SEND_TIME
+  	  FROM MESSAGE
+  	  JOIN MEMBER ON (SENDER_NO = MEMBER_NO)
+  	 WHERE (SENDER_NO = #{senderNo} AND RECEIVER_NO = #{receiverNo})
+  	    OR (SENDER_NO = #{receiverNo} AND RECEIVER_NO = #{senderNo})
+  	 ORDER BY SEND_TIME
   </select>
   
-  <!-- 채팅방 삭제 -->
-  <delete id="deleteChat">
-  	DELETE FROM CHAT_ROOM
-  	 WHERE CHAT_ID = #{chatId}
-  </delete>
-  
-  <!-- 채팅방 로그 조회 -->
-  <select id="selectChatLog" resultMap="MessageLogResultSet">
-  	
-  </select>
+  <!-- 입력한 채팅 저장 -->
+  <insert id="inputChat">
+  	INSERT INTO MESSAGE(
+  		MESSAGE_ID,
+  		SENDER_NO,
+  		RECEIVER_NO,
+  		MESSAGE_CONTENT
+  	) VALUES (
+  		SEQ_MID_NO.NEXTVAL,
+  		#{senderNo},
+  		#{receiverNo},
+  		#{messageContent}
+  	)
+  </insert>
 </mapper>
