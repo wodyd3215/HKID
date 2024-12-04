@@ -32,6 +32,7 @@
 		<typeAlias type="com.kh.hkid.admin.model.vo.SuspensionMember" alias="SuspensionMember"/>
  		<typeAlias type="com.kh.hkid.community.model.dto.CommentReply" alias="CommentReply"/>
 		<typeAlias type="com.kh.hkid.challenge.model.vo.Challenge" alias="Challenge"/>
+		<typeAlias type="com.kh.hkid.challenge.model.vo.ChallengeBoard" alias="ChallengeBoard"/>
  	</typeAliases>
  	
  	<mappers>
