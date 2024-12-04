@@ -8,4 +8,5 @@ public class Cart {
 	private int memberNo;
 	private int productNo;
 	private int productQuantity;
+	private String productName;
 }

@@ -23,4 +23,10 @@ public class Phase {
 	private String email;
 	private String productName;
 	private int price;
+	
+	private int reviewNo;
+	private int productNo;
+	private String reviewContent;
+	private double reviewRate;
+	private Date reviewDate;
 }

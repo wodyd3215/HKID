@@ -81,38 +81,49 @@ function updateQuantity(productId, change){
 // };
 
 // 한 개의 상품 삭제 (맨 오른쪽 삭제 버튼 클릭할 시)
-function deleteOne(){
-    $('.delete-button').on('click', function(){
-        let $checked = $('table input[type=checkbox]:checked');
-
-        if($checked.length < 1){
-            alert('선택된 상품이 없습니다 !');
-            return false;
-        }
-        
-        let selected = [];
-
-        $.each($checked, function(){
-            selected.push($(this).val());
-        });
-
+function deleteCart(deCart){ 
         $.ajax({
-            url: '/deleteOne',
+            url: '/deleteCart',
             type: 'POST',
-            data: { items: selected }, // 'items'라는 이름으로 배열을 전송
-            traditional: true, // 배열을 기본적인 방식으로 전송
+            data: { items: selected }, 
+            
             success: function(response) {
                 console.log("삭제 요청 성공:", response);
                 //alert("선택된 상품이 삭제되었습니다.");
                 // 페이지를 다시 로드하거나 특정 요소를 업데이트할 수 있습니다.
                 callback(response)
             },
-            error: function() {
+            error: function(error) {
                 console.log("삭제 요청 실패");
                 //alert("삭제 중 문제가 발생했습니다.");
             }
         });
-       
+}
+
+function deleteAll(){
+    checkCounts = document.querySelectorAll(".check");
+    let lis;
+
+    checkNone(deleteList);
+
+    checkCounts.forEach(check => {
+        lis = document.querySelector(""+check.value);
+        lis.closest("").remove();
     });
 
 }
+
+$(function(){
+    $("checkAll").click(function(){
+        $(".check").prop("checked", this.checked);
+        // 첫 화면 들어오자마다 모두 체크 되어 있는 상태
+        if(this.checked){
+            checkCounts.forEach((check,index) => {
+                pushList(checkList, check.value);
+                pushList(deleteList, check.value);
+            });
+        } else {
+
+        }
+    })
+})
