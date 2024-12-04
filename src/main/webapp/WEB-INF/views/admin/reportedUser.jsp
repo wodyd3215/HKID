@@ -51,7 +51,7 @@
                                             <option value="7">7일</option>
                                             <option value="15">15일</option>
                                             <option value="30">30일</option>
-                                            <option value="1">1년</option>
+                                            <option value="365">1년</option>
                                             <option value="0">무기한</option>
                                         </select>
                                         <button type="submit" class="material-symbols-outlined suspension-btn">check</button>

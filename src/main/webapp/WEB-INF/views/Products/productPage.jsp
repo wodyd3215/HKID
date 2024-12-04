@@ -201,7 +201,7 @@
             </form>
         </div>
     </div>
-    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
      <!-- js -->
      <script src="${pageContext.request.contextPath }/resources/js/Products/productPage.js" defer></script>
 </body>

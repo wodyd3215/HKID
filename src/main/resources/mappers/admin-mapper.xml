@@ -42,7 +42,12 @@
 		<result column="UNSUSPENSION_DATE" property="unSuspensionDate"/>
 		<result column="SUSPENSION_COMMENT" property="suspensionComment"/>
 		<result column="NICKNAME" property="nickname"/>
-		
+	</resultMap>
+	
+	<resultMap id="recoveryResultSet" type="AccRecovery">
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="APPLICATION_DATE" property="applicationDate"/>
 	</resultMap>
 	
 	<!-- 공지 -->
@@ -182,13 +187,17 @@
 	<!-- 유저 정지 -->
 	<insert id="insertsuspension">
 		INSERT INTO ACCOUNT_SUSPENSION (
-										MEMBER_NO, 
-										UNSUSPENSION_DATE, 
+										MEMBER_NO,
+										<if test="suspension != 0">
+											UNSUSPENSION_DATE, 
+										</if>
 										SUSPENSION_COMMENT
 									   )
 								VALUES (
 										#{memberNo},
-										SYSDATE + #{suspension},
+										<if test="suspension != 0">
+											SYSDATE + #{suspension},
+										</if>
 										#{suspensionComment}
 									   ) 
 	</insert>
@@ -202,5 +211,30 @@
 	<delete id="deleteReport">
 		DELETE FROM REPORT
 		 WHERE REPORT_NO = #{reportNo}
+	</delete>
+	
+	<!-- 계정 복구 -->
+	<select id="recoveryCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM RECOVER_ACCOUNT
+	</select>
+	
+	<select id="selectRecoveryList" resultMap="recoveryResultSet">
+		SELECT MEMBER_NO,
+		       NICKNAME,
+		       TO_CHAR(APPLICATION_DATE, 'YYYY-MM-DD') AS APPLICATION_DATE
+		  FROM RECOVER_ACCOUNT
+		  JOIN MEMBER USING (MEMBER_NO)
+	</select>
+	
+	<update id="recoveryAccount">
+		UPDATE MEMBER
+		   SET STATUS = 'Y'
+		 WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="deleteRecovery">
+		DELETE FROM RECOVER_ACCOUNT
+		 WHERE MEMBER_NO = #{memberNo}
 	</delete>
 </mapper> 

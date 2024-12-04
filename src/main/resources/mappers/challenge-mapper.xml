@@ -12,6 +12,14 @@
   		<result column="THUMBNAIL" property="thumbnail"/>
   	</resultMap>
   	
+  	<resultMap id="challengeBoardResultSet" type="ChallengeBoard">
+  		<result column="CHELLANGE_NO" property="challengeBoardNo"/>
+  		<result column="MEMBER_NO" property="memberNo"/>
+  		<result column="CHE_TITLE" property="chaTitle"/>
+  	</resultMap>
+  	
+  	
+  	
   	  <!-- 게시글 총 갯수 조회 -->
   <select id="boardCount" resultType="_int">
   	SELECT COUNT(*)
@@ -19,12 +27,49 @@
   </select>
   
   <select id="selectList" resultType="Challenge">
-      SELECT CHE_RES_NO challengeNo,
-            CHE_TITLE challengeTitle,
-            START_DATE startDate,
-            END_DATE endDate,
-            THUMBNAIL thumbnail
-        FROM CHELLAGE_RES
-       ORDER BY CHE_RES_NO ASC
+		SELECT CHE_RES_NO AS challengeNo,
+		       CHE_TITLE AS challengeTitle,
+		       TO_CHAR(START_DATE, 'YYYY-MM-DD') AS startDate,
+		       TO_CHAR(END_DATE, 'YYYY-MM-DD') AS endDate,
+		       THUMBNAIL AS thumbnail
+		FROM CHELLAGE_RES
+		ORDER BY ABS(TRUNC(END_DATE) - TRUNC(SYSDATE)) ASC
    </select>
+   
+   <!-- CHE_RES_NO로 CHELLANGE_NO조회 -->
+   <select id="challengeSelect" resultMap="challengeResultSet">
+	   	SELECT cb.CHELLANGE_NO,
+	        cb.MEMBER_NO,
+	        cr.CHE_RES_NO,
+	        cb.CHE_TITLE,
+	        cb.CHE_CONTENT,
+	        cb.CHE_DATE,
+	        cb.COMMENT_COUNT
+	FROM CHELLAGE_RES cr
+	JOIN CHELLAGE_BOARD cb on cr.CHE_RES_NO = cb.CHE_RES_NO 
+	WHERE cr.CHE_RES_NO = #{cno}
+   </select>
+   
+   <!-- 챌린지보드 갯수 -->
+   <select id="challengeBoardCount" resultType="_int">
+   		SELECT COUNT(*)
+		FROM CHELLAGE_RES cr
+		JOIN CHELLAGE_BOARD cb on cr.CHE_RES_NO = cb.CHE_RES_NO 
+		WHERE cr.che_res_no=#{cno}
+   </select>
+   
+   <select id="selectChallenge" resultMap="challengeResultSet">
+	   SELECT cb.CHELLANGE_NO,
+		        cb.MEMBER_NO,
+		        cr.CHE_RES_NO,
+		        cb.CHE_TITLE,
+		        cb.CHE_CONTENT,
+		        cb.CHE_DATE,
+		        cb.COMMENT_COUNT
+		FROM CHELLAGE_RES cr
+		JOIN CHELLAGE_BOARD cb on cr.CHE_RES_NO = cb.CHE_RES_NO 
+		WHERE cr.CHE_RES_NO = #{cno}
+   </select>
+   
+ 
   </mapper>

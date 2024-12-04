@@ -17,6 +17,7 @@
     
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />  
     
     <div class="wrapper">
 
@@ -44,12 +45,12 @@
     
                 <tbody class="cartTableBody">
                     <c:choose>
-                    <c:when test="${empty item}">
+                    <c:when test="${empty list}">
                         <div class="cartListNone"> 장바구니에 담긴 상품이 없어요 ! </div>
                     </c:when>
                     <c:otherwise>
 
-                    <c:forEach var="items" items="${list}">
+                    <c:forEach var="item" items="${list}">
                         <tr class="content-space">
                             <td>
                                 <input type="checkbox" class="selectCart" name="selectBox">
@@ -59,15 +60,15 @@
                                     <img src="${pageContext.request.contextPath}/resources/image/${entry.key}.jpg" alt="${entry.key}" class="product-image">
                                 </c:if> -->
                             </td>
-                            <td class="cartItemName">${list.name}</td>
+                            <td class="cartItemName">${item.productName}</td>
                             <td>
                                 <div class="cartQuantity">
                                     <button class="decreaseBtn" >-</button>
-                                    <div class="quantityBtnText">${list.Quantity}</div>
+                                    <div class="quantityBtnText">${item.productQuantity}</div>
                                     <button class="increaseBtn">+</button>
                                 </div>
                             </td>
-                            <td class="productPrice">${list.price}</td>
+                            <td class="productPrice">1000</td>
                             <td>
                                 <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
                             </td>
@@ -97,5 +98,7 @@
             </tfoot>
         </table>
     </div>
+
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

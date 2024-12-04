@@ -12,13 +12,14 @@
 		<result column="MEMBER_NO" property="memberNo" />
 		<result column="PRODUCT_NO" property="productNo" />
 		<result column="TOTAL_PURCHASE" property="totalPurchase" />
+		<result column="QUANTITY" property="quantity" />
 		<result column="REFUND" property="refund" />
 		<result column="PURCHASE_DATE" property="purchaseDate" />
 		<result column="REQUEST" property="request" />
 		<result column="PAYMENT_METHOD" property="paymentMethod" />
 		<result column="PAYMENT_STATUS" property="paymentStatus" />
-		<result column="BANK_CODE" property="backCode"/>
-		<result column="BANK_NAME" property="backName"/>
+		<result column="BANK_CODE" property="bankCode"/>
+		<result column="BANK_NAME" property="bankName"/>
 		<!-- member mapping -->
 		<result column="MEMBER_NAME" property="memberName" />
 		<result column="EMAIL" property="email" />
@@ -27,6 +28,16 @@
 		<!-- product mapping -->
 		<result column="PRODUCT_NAME" property="productName" />
 		<result column="PRICE" property="price" />
+	</resultMap>
+	
+	<!-- review mapping -->
+	<resultMap type="Review" id="reviewResultSet">
+		<result column="REVIEW_NO" property="reviewNo" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="REVIEW_CONTENT" property="reviewContent" />
+		<result column="REVIEW_RATE" property="reviewRate" />
+		<result column="REVIEW_DATE" property="reviewDate" />	
 	</resultMap>
 	 
 	<select id="selectList" parameterType="Phase" resultMap="phaseResultSet">
@@ -43,6 +54,70 @@
 		   AND PRODUCT_ID = #{productNo}
 	</select>
 	
+	<!-- 구매리스트 조회 -->
+	<select id="selectCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM PURCHASE
+		 WHERE MEMBER_NO = #{memberNo} 
+	</select>
+	
+	<select id="phaseList" resultType="Phase">
+		SELECT p.PURCHASE_NO purchaseNo,
+       		   p.MEMBER_NO memberNo,
+       		   PRODUCT_NO productNo,
+       		   PRODUCT.PRODUCT_NAME productName,
+       		   p.TOTAL_PURCHASE totalPurchase,
+       		   p.QUANTITY quantity,
+       		   p.PURCHASE_DATE purchaseDate,
+       	   	   p.BANK_NAME bankName
+  		  FROM PURCHASE p
+ 	 	  JOIN PRODUCT USING(PRODUCT_NO)
+		 WHERE P.MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 리뷰 조회 -->
+	<select id="selectReview" parameterType="Review">	
+		SELECT REVIEW_NO,
+			   PRODUCT_NO,
+			   MEMBER_NO,
+			   REVIEW_CONTENT,
+			   REVIEW_RATE,
+			   REVIEW_DATE
+		  FROM REVIEW
+		 WHERE MEMBER_NO = #{memberNo};
+	</select>
+	
+	<!-- 리뷰 추가 -->
+	 <insert id="addReview" parameterType="Review">
+	 	INSERT INTO REVIEW
+	 		(
+	 		REVIEW_NO reviewNo,
+	 		PRODUCT_NO productNo,
+	 		MEMBER_NO memberNo,
+	 		REVIEW_CONTENT reviewContent,
+	 		REVIEW_RATE reviewRate,
+	 		REVIEW_DATE reviewDate
+	 		)
+	 		VALUES
+	 		(
+	 		#{reviewNo}
+	 		#{productNo},
+	 		#{memberNo},
+	 		#{reviewContent},
+	 		#{reviewRate},
+	 		SYSDATE
+	 		)
+	 </insert>
 	 
-	 
+	 <!-- 리뷰 수정 -->
+	 <update id="updateReview" parameterType="Review">
+	 	UPDATE 
+	 </update>
+<!-- 	 
+	 <select id="">
+	 	SELECT REVIEW_DATE reviewDate
+	 	FROM REVIEW
+	 	WHERE = #{}
+	 </select>
+	  -->
 </mapper>

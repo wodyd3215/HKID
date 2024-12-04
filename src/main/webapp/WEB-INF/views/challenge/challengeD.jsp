@@ -27,33 +27,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="b" items="${list}">
+				<c:forEach var="c" items="${list}">
                 <tr class="notice">
                     <td class="board-category">공지</td>
                     <td>
-						<a href="boardDetail.bo?bno=${b.boardNo}">제 1회 챌린지 이벤트 개최 안내입니다.
-							<img src="./resources/img/file.png" alt="없음">
-						</a>
-					</td>
-                    <td>꾸준히운동</td>
-                    <td>2024-10-22</td>
-                    <td>2</td>
-                </tr>
-				<tr>
-                    <td class="board-category">1</td>
-                    <td>
-						<a href="boardDetail.bo?bno=${b.boardNo}">제 1회 챌린지 이벤트 개최 안내입니다.
-							<img src="./resources/img/file.png" alt="없음">
-						</a>
-					</td>
-                    <td>꾸준히운동</td>
-                    <td>2024-10-22</td>
-                    <td>2</td>
-                </tr>
-				<tr>
-                    <td class="board-category">2</td>
-                    <td>
-						<a href="boardDetail.bo?bno=${b.boardNo}">제 1회 챌린지 이벤트 개최 안내입니다.
+						<a href="boardDetail.bo?bno=${b.boardNo}">${c.challengeTitle}
 							<img src="./resources/img/file.png" alt="없음">
 						</a>
 					</td>

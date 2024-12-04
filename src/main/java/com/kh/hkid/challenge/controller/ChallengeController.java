@@ -1,11 +1,11 @@
 package com.kh.hkid.challenge.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,14 +31,28 @@ public class ChallengeController {
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 6);
 		
 		ArrayList<Challenge> list = challengeService.selectList(pi);
-		
+		System.out.println("list" + list);
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "challenge/challengeM";
 	}
 	
-	@GetMapping("ch.b")
-	public String challengeBoard() {
+	@RequestMapping("ch.b")
+	public String challengeBoard(@RequestParam(value="cpage", defaultValue="1") Integer currentPage, int cno, Model model) {
+		int challengeBoardCount = challengeService.challengeBoardCount();
+		
+		List<Challenge> c = challengeService.selectChallenge(cno);
+		
+		PageInfo pi = Template.getPageInfo(challengeBoardCount, currentPage, 5, 10);
+		
+		ArrayList<Challenge> list = challengeService.chBoardselectList(cno, pi);
+
+		System.out.println("c" + c);
+		System.out.println("list" + list);
+		System.out.println("pi" + pi);
+		model.addAttribute("c", c);
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "challenge/challengeD";
 	}
 
