@@ -26,37 +26,38 @@ function initChatBox(path, memberNo) {
 
         const chatLog = document.querySelector("#chat-log-area > div");
 
-        const receivedChat = document.createElement("div");
-
         console.log(typeof receive.senderNo);
         console.log(typeof memberNo);
 
-        
+        let messageHTML = '';
+
         if (parseInt(receive.senderNo) === parseInt(memberNo)) {
             console.log("오른쪽")
-            receivedChat.className = "right-log"; // 내 메시지는 오른쪽
-            receivedChat.innerHTML = `
-                <div>
-                    <div>${receive.nick}</div>
-                    <p>${receive.msg}</p>
+            messageHTML = `
+                <div class="right-log">
+                    <div>
+                        <div>${receive.nick}</div>
+                        <p>${receive.msg}</p>
+                    </div>
+                    <img src="${path}${receive.profileImg}"></img>
                 </div>
-                <img src="${path}${receive.profileImg}"></img>
             `;
         } else {
             console.log("왼쪽")
-            receivedChat.className = "left-log"; // 상대방의 메시지는 왼쪽
-            receivedChat.innerHTML = `
-                <img src="${path}${receive.profileImg}"></img>
-                <div>
-                    <div>${receive.nick}</div>
-                    <p>${receive.msg}</p>
+            messageHTML = `
+                <div class="left-log">
+                    <img src="${path}${receive.profileImg}"></img>
+                    <div>
+                        <div>${receive.nick}</div>
+                        <p>${receive.msg}</p>
+                    </div>
                 </div>
             `;
         }
 
         // 수신된 채팅 메시지에 대해 HTML을 구성
 
-        chatLog.appendChild(receivedChat);
+        chatLog.insertAdjacentHTML('beforeend', messageHTML);
 
         const chatLogHeight = chatLog.scrollHeight;
         chatLog.scrollTop = chatLogHeight;
@@ -251,6 +252,8 @@ function showChat(path, searchUser, selectChat, memberNo, receiverNo, senderNo) 
 
             // result 배열을 반복하여 각 메시지를 처리
             result.forEach(m => {
+                chatLogArea.id = `${m.senderNo}${m.receiverNo}`;
+
                 // 내가 보낸 메시지인지 확인 (예: senderNo와 메시지의 senderNo가 같으면 내 메시지)
                 const isMyMessage = m.senderNo === memberNo;
                 // 메시지 HTML을 동적으로 생성
@@ -316,6 +319,9 @@ function inputChatting(memberNo, receiverNo, senderNo) {
 
     const chatText = document.querySelector("#input-chat-text");
     const chatUser = document.querySelector(".trade-user-nick");
+    console.log(senderNo);
+    console.log(receiverNo);
+
     // 채팅 내용이 비어 있지 않으면
     if (chatText.value.trim() === "") {
         return; // 비어 있으면 채팅을 보내지 않음
@@ -359,7 +365,7 @@ function inputChatting(memberNo, receiverNo, senderNo) {
 
     const msgData = {
         message: chatText.value,
-        target: chatUser.innerText
+        target: chatUser.innerText,
     }
     // send할 때는 string으로 보내야해서 stringify로 문자열로 변경해서 보낸다.
     socket.send(JSON.stringify(msgData));
