@@ -99,27 +99,34 @@ public class PhaseInfoController {
 		return "Products/phaseList";
 	}
 	
-	// 리뷰 등록 및 해당 리뷰 조회
+	// 리뷰
+	@GetMapping("selectReview.r")
+	public String selectReview(@RequestParam(required = false) int memberNo, Model model) {
+		if(memberNo != 0) {
+			Review r = phaseService.selectReview(memberNo);
+			model.addAttribute("r", r);
+		}
+		return "Products/review";
+	}
+	
+	// 리뷰 등록
 	@ResponseBody
-	@PostMapping(value="addReview", produces = "application/json; charset=UTF-8")
-	public String reviewAdd(@RequestParam String memberNo,
-							   @RequestParam String productNo,
+	@PostMapping(value="addReview.r", produces = "application/json; charset=UTF-8")
+	public String reviewAdd(@RequestParam int memberNo,
+							   @RequestParam int productNo,
 							   @RequestParam String reviewContent,
-			 Model model) {
+							   Review r, Model model) {
 			
-		
+		if(r.getReviewNo() == 0) {
+			
+			phaseService.addReview(r);
+			return "정보가 새로 저장되었습니다.";
+		}
 		
 		// 시퀸스가 아닌 UUID 를 사용하여 시퀸스에 의존하지 않음
 		//setReviewNo(UUID.randomUUID().hashCode()); 
 				
 	
-		return "Products/reviewScreen";
-	}
-	
-	@GetMapping("getReview")
-	public String getReview(Model model, HttpServletRequest request, Review r) {
-		String createDate = phaseService.selectDate(r);
-		model.addAttribute("createDate", createDate);
-		return "button";
+		return "Products/review";
 	}
 }

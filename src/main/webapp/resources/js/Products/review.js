@@ -1,13 +1,17 @@
-function reviewBtn(){
-    let url="";
-    let windowTargetName="targetName";
-    let features = "scrollbars=yes, width=300, height=300, location=no, resizable=yes";
-    window.open(url, windowTargetName, features);
+// 새 창 열기
+function readReviewBtn(){
+    const button = document.getElementById('readReviewBtn');
+    const memberNo = button.getAttribute('data-memberNo');
+    const productNo = button.getAttribute('data-productNo');
+    
+    const url = `selectReview?memberNo=${loginMember.memberNo}&productNo=${product.productNo}`;
+    const options = "width=500m height=500, resizable=yes, scrollbars=yes";
 
+    window.open(url, "_blank", options);
 }
 
 
-
+// ajax 로 데이터 받기
 function ajaxBtn(){
     $.ajax({
       url : "addReview"  

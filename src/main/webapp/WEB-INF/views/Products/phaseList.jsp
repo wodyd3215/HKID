@@ -65,8 +65,8 @@
                             </td> 
 
                             <td>
-                                <button class="reviewBtn" data-member-id="${loginMember.memberId}"
-                                data-product-no="${product.productNo}" id="reviewBtn">리뷰 등록</button>                              
+                                <button class="reviewBtn" id="readReviewBtn" onclick="readReviewBtn()" data-memberNo="${loginMember.memberNo}"
+                                data-productNo="${product.productNo}" id="reviewBtn">리뷰 등록</button>                              
                             </td>
                         </tr>
                     </c:forEach>  
@@ -113,5 +113,7 @@
                 </c:otherwise>
             </c:choose>
         </div>
+
+<jsp:include page="common/footer.jsp" />
 </body>
 </html>

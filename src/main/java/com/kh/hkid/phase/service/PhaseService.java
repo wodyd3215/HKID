@@ -28,4 +28,7 @@ public interface PhaseService {
 	// 구매내역 리스트
 	ArrayList<Phase> phaseList(int memberNo, PageInfo pi);
 
+	// 리뷰 내용 가져오기
+	Review selectReview(int memberNo);
+
 }

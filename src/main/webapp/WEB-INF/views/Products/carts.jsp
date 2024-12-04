@@ -17,6 +17,7 @@
     
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />  
     
     <div class="wrapper">
 
@@ -97,5 +98,7 @@
             </tfoot>
         </table>
     </div>
+
+    <jsp:include page="common/footer.jsp" />
 </body>
 </html>

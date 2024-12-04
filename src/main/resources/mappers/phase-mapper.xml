@@ -87,7 +87,6 @@
 		 WHERE MEMBER_NO = #{memberNo};
 	</select>
 	
-	
 	<!-- 리뷰 추가 -->
 	 <insert id="addReview" parameterType="Review">
 	 	INSERT INTO REVIEW
@@ -109,6 +108,11 @@
 	 		SYSDATE
 	 		)
 	 </insert>
+	 
+	 <!-- 리뷰 수정 -->
+	 <update id="updateReview" parameterType="Review">
+	 	UPDATE 
+	 </update>
 <!-- 	 
 	 <select id="">
 	 	SELECT REVIEW_DATE reviewDate
