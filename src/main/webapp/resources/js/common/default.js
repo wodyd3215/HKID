@@ -1,6 +1,6 @@
-function init(pageName, optional) {
+function init(contextPath, memberNo, pageName, optional) {
     // initDiaryEnroll()
-    // 
+    initChatBox(contextPath, memberNo);
 
     switch(pageName) {
         // case "ex":
@@ -11,11 +11,18 @@ function init(pageName, optional) {
             defaultCategory1(optional)
             break;
         case "boardDetail":
-            detailOnload()
+            detailOnload(optional)
             break;
-        // case "boardUpdate":
-        //     defaultCategory2(optional)
-        //     break;
+        case "checkGood":
+            checkGood(optional)
+        case "enrollForm":
+            boardInit(contextPath)
+            break;
+        case "updateForm":
+            boardInit(contextPath, optional)
+            btnDisable()
+            // changeHeart()
+            break;
         case "myDiaryList":
             initDiaryPage(optional)
             break;

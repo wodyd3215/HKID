@@ -16,7 +16,6 @@
 h1{
     height: 150px;
     width: 100%;
-
     text-align:center;
     padding-top: 55px;
 
@@ -44,11 +43,6 @@ table td:nth-child(1) { /* 1번째 td */
 
 table tr:nth-child(1) { /* 1번째 tr */
     width: 8%;
-}
-
-#main-table{
-    border-top: 3px solid black;
-    border-bottom: 3px solid rgb(212, 210, 210);
 }
 
 #common-table-body{

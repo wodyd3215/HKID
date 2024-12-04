@@ -17,9 +17,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
 
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    b = ${b}
+    <!-- b = ${b} -->
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -47,22 +48,21 @@
             <!--댓글작성-->
             <div id="second-div">
                 <div id="content" name="boardContent" required>${b.content}</div>
-                    
-                
+
                 <div id="etc-reply-wrapper">
-                    <div id="etc-menu">
+                    <div id="etc-menu"> 
                         <div> 
-                            <div class="heart-div">
-                                <img src="resources/image/heart.png" alt="">
-                                <p class="ptext">하트 개수</p>
+                            <div class="heart-div" id="heart-div">
+                                <img id="heart-img" src="" alt="하트" onclick="changeHeart(this, '${b.boardNo}', '${loginMember.memberNo}')">
+                                <p class="ptext" id="count-good">하트 개수</p>
                             </div>
                             
                             <div class="heart-div">
                                 <img src="resources/image/talk.png" alt="">
                                 <p id="reply-count" class="ptext">${replyCount}</p>
                             </div>
-                            
                         </div>
+
                         <div id="copy-siren">
                             <button id="URLcopy-btn" class=".img-button">
                                 <img id="link-img" onclick="copyLink(window.location.href, '클립보드에 현재 url이 복사되었습니다.', '복사에 실패했습니다. 다시 시도해주세요.')" 
@@ -71,7 +71,6 @@
                             <button id=siren-btn class=".img-button">
                                 <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal" onclick="openModal(event)">
                             </button>
-                            
                         </div>
                     </div>
                         
@@ -80,7 +79,7 @@
                         <p class="user-name">개떡도지</p>
                         <textarea name="replyContent" id="write-comment" placeholder="댓글을 작성하세요"></textarea>
                         <div>
-                            <button name="" id="submit-btn" onclick="addReply()">등록</button>
+                            <button name="" id="submit-btn" onclick="addReply('${b.boardNo}', '${b.memberNo}')">등록</button>
                         </div>
                     </div>
                     
@@ -118,7 +117,7 @@
                                 <div class="comment-middle">${c.content}</div>
                                 <div class="comment-right">
                                     <button class="reply-update-btn">수정</button>
-                                    <button class="reply-delete-btn">삭제</button>
+                                    <button class="reply-delete-btn" onclick="deleteReply('${b.boardNo}', '${b.memberNo}')">삭제</button>
                                 </div>
                             </div>
                         </div>

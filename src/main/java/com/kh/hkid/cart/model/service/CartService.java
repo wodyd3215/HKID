@@ -14,6 +14,9 @@ public interface CartService {
 
 	// ajax 에서 받은 데이터 삭제
 	int deleteOne(Cart c);
+
+	// ajax 로 받은 데이터 추가
+	int addCart(Cart c);
 	
 	
 

@@ -113,15 +113,33 @@ public class BoardController {
 	//게시글 디테일
 //	@GetMapping("boardDetail.bo")
 	@RequestMapping("boardDetail.bo")
-	public String selectDetailBoard(Model model, int bno) {
+	public String selectDetailBoard(Model model, int bno, HttpSession session) {
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		// 로그인을 했을 때만 좋아요 검사
+		if(((Member)session.getAttribute("loginMember")) != null) {
+			int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+			map.put("memberNo", memberNo);
+			
+		}else { //로그인을 안 했으면
+			
+		}
+		
+		Integer bNo = (Integer)bno;
+		map.put("boardNo", bNo);
+		
+		// JSON타입으로 변환해서 전달
+		String jsonMap = new Gson().toJson(map);
+		model.addAttribute("optional", jsonMap);
 		
 		//게시글 조회 + 조회수 증가
 		Board b = boardService.selectBoard(bno);
-	
 		model.addAttribute("b", b);
 		model.addAttribute("pageName", "boardDetail");
+		
 		return "community/boardDetail";
 	}
+	
 	
 	//게시글 삭제
 	@PostMapping("boardDelete.bo")
@@ -138,7 +156,9 @@ public class BoardController {
 	
 	//게시글 작성
 	@GetMapping("enrollForm.bo")
-	public String boardWrite() {
+	public String boardWrite(Model model) {
+		
+		model.addAttribute("pageName", "enrollForm");
 		return "community/boardWrite";
 	}
 	
@@ -160,7 +180,7 @@ public class BoardController {
 		if(boardService.insertBoard(b) > 0) { //성공 -> list페이지로 이동
 			session.setAttribute("alertMsg", "게시글 작성 성공");
 		} else { //실패 -> 에러페이지
-			m.addAttribute("errorMsg", "게시글 작성 실패");
+			session.setAttribute("alertMsg", "게시글 작성 실패");
 		}
 		return "redirect:/list.bo";
 	}
@@ -174,19 +194,35 @@ public class BoardController {
 		Board b = boardService.selectBoard(bno);
 	
 		model.addAttribute("b", b);
-		model.addAttribute("pageName", "boardUpdate");
-		model.addAttribute("optional", "팁");
+		model.addAttribute("pageName", "updateForm");
+		model.addAttribute("optional", b.getContent());
 		System.out.println("카테고리 체크"+b.getCommunityNo());
 		return "community/boardUpdate"; 
 	}
 	
 	//게시글 수정
 	@RequestMapping("update.bo")
-	public String updateBoard(Board b, Model model) {
+	public String updateBoard(Board b, MultipartFile reupfile, HttpSession session, Model m) {
+		//수정 할 첨부파일이 있을 경우
+		if(!reupfile.getOriginalFilename().equals("")) {
+			//기존 첨부파일이 있다 -> 기존파일을 삭제
+			if(b.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
+			}
+			//새로운 첨부파일을 서버에 업로드하기
+			String changeName = Template.saveFile(reupfile, session, "/resources/uploadFile/");
+			
+			b.setOriginName(reupfile.getOriginalFilename());
+			b.setChangeName( "/resources/uploadFile/" + changeName);
+		}
 		
-	
-		
-		return "community/boardUpdate"; 
+		//수정된 게시글 update
+		if(boardService.updateBoard(b) > 0) {
+			session.setAttribute("alertMsg", "게시글 수정 성공");
+		}else {
+			session.setAttribute("alertMsg", "게시글 수정 실패");
+		}
+		return "redirect:/boardDetail.bo?bno=" + b.getBoardNo(); 
 	}
 	
 
@@ -212,60 +248,139 @@ public class BoardController {
 			System.out.println("신고 INSERT 실패");
 			session.setAttribute("alertMsg", "신고 실패");
 		}
-		
 		session.setAttribute("alertMsg", "신고 완료");
 		return "redirect:/boardDetail.bo?bno=" + bno;
 	}
 		
+	//=================[좋아요]================
+	//좋아요 확인
+	@ResponseBody
+	@RequestMapping(value="checkGood", produces = "application/json; charset = UTF-8")
+	public int ajaxcheckGood(int boardNo, Integer memberNo) {
+		// 로그인을 하지 않았을 경우 0 리턴
+		if(memberNo == null) {
+			return 0;
+		}
+		HashMap<String, Integer> map = new HashMap<>();
+		
+//		System.out.println("boardNo의 값: "+ boardNo);
+//		System.out.println("memberNo의 값: "+ memberNo);
+		
+		map.put("boardNo", boardNo);
+		map.put("memberNo", memberNo);
+		// 좋아요의 유무 체크 (있으면 1 / 없으면 0)
+		int result = boardService.checkGood(map);
+		System.out.println("checkGood의 결과: "+result);
+		return result;
+	}
 	
 	
-//	--------------- 댓글 기능 -------------------------
+	//좋아요 생성(insert)
+	@ResponseBody
+	@RequestMapping("insertGood")
+	public int ajaxInsertGood(int boardNo, int memberNo) {
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("boardNo", boardNo);
+		map.put("memberNo", memberNo);
+		
+		int result = boardService.insertGood(map);
+		System.out.println("result의 결과값: " + result);
+		return result;
+	}
+	
+	//좋아요 수정(update)
+	@ResponseBody
+	@RequestMapping(value="updateGood", produces = "application/json; charset = UTF-8")
+	public void ajaxupdateGood(int boardNo, int memberNo, boolean heartStatus) {
+		
+		System.out.println("boardNo: " + boardNo);
+		System.out.println("memberNo: " + memberNo);
+		System.out.println("heartStatus: " + heartStatus);
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("boardNo", boardNo);
+		map.put("memberNo", memberNo);
+		// 좋아요 true/false
+		if(heartStatus == true) {
+			map.put("GoodStatus", 'Y');
+		}else if(heartStatus == false) {
+			map.put("GoodStatus", 'N');
+		}else {
+			System.out.println("goodStatus가 Boolean형식이 아닙니다");
+		}
+		boardService.updateGood(map);
+	}
+	
+	//게시글의 좋아요 개수
+	@ResponseBody
+	@RequestMapping(value="countGood", produces="application/json; charset=UTF-8")
+	public int countGood(int boardNo) {
+//		System.out.println("보드번호: " + boardNo);
+//		System.out.println("좋아요 개수: "+boardService.countGood(boardNo));
+		return boardService.countGood(boardNo);
+	}
+	
+	
+//	----------------------- 댓글 기능 -------------------------
 	
 	//댓글추가
 	@ResponseBody
 	@RequestMapping("insertReply.bo")
-//	@PostMapping(value="insertReply.bo", produces="application/json; charset-UTF-8")
-	public String ajaxInsertReply(Reply r) {
-	    // 처리 후 JSON 형식의 응답 반환
-	    return "success";
+	public int insertReply(Reply r) {
+//		System.out.println("넘어온 보드 번호: "+r.getBoardNo());
+//		System.out.println("넘어온 멤버 번호: "+r.getMemberNo());
+//		System.out.println("넘어온 Content 내용: "+r.getReplyContent());
+		
+		int result = boardService.insertReply(r);
+		
+		if(result > 0) {
+			System.out.println("댓글 INSERT 완료!");
+		}else {
+			System.out.println("댓글 INSERT 실패!");
+		}
+	    return result;
 	}
-	
-	//처음 댓글 목록 출력
 
 	//ajax 댓글목록 select
 	@ResponseBody
 	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"
-	public String ajaxSelectReplyList(int bno) {
-		//DB들어가면 사용 ㄱㄱ
+	public String ajaxSelectReplyList(int boardNo) {
+//		System.out.println();
+		
+		//BNO에 해당하는 댓글 리스트 가져오기
 		ArrayList<CommentReply> list = new ArrayList<>();
-		
-		//DB 들어가기 전까지만 사용!!
-		CommentReply commentList1 = new CommentReply();
-		commentList1.setContent("댓글 더미데이터입니다");
-		commentList1.setDate("2024.11.08");
-		commentList1.setUserName("안재휘");
-		
-		CommentReply commentList2 = new CommentReply();
-		commentList2.setContent("댓글 더미데이터입니다");
-		commentList2.setDate("2024.11.08");
-		commentList2.setUserName("안재휘");
-		
-		CommentReply commentList3 = new CommentReply();
-		commentList3.setContent("댓글 더미데이터입니다");
-		commentList3.setDate("2024.11.08");
-		commentList3.setUserName("안재휘");
-		
-		list.add(commentList1);
-		list.add(commentList2);
-		list.add(commentList3);
+//		System.out.println("게시글 목록 DB에서 가져오기 전");
+		list = boardService.selectReplyList(boardNo);
+		System.out.println("DB에서 가져온 댓글 목록: " + list);
 		
 		return new Gson().toJson(list); //list를 JSON(문자열)으로 변환해서 리턴 
+	}
+	
+	//댓글삭제
+	@ResponseBody
+	@RequestMapping(value="deleteReply", produces = "application/json; charset = UTF-8")
+	public int deleteReply(int boardNo, int replyNo) {
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("boardNo", boardNo);
+		map.put("replyNo", replyNo);
+		
+		System.out.println("boardNo: "+boardNo);
+		System.out.println("replyNo: "+replyNo);
+		int result = boardService.deleteReply(map);
+		System.out.println("result = "+result);
+		
+		if(result > 0) {
+			System.out.println("댓글 DELETE 완료!");
+		}else {
+			System.out.println("댓글 DELETE 실패!");
+		}
+	    return result;
 	}
 	
 	//댓글 수정
 	@PostMapping("updateReply.bo")
 	public String updateReply() {
-		System.out.println("update댓글 컨트롤러 실행");
+		
 		return "redirect: /community/boardDetail";
 	}
 

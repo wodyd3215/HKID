@@ -16,12 +16,7 @@
 		</div>
 		<div class="gpt-content">
 			<div class="chatting">
-				<div id="chatOutput">
-					
-				</div>
-				<div class="user">
-					
-				</div>
+				<div id="chatOutput" class="chatting-content"></div>
 			</div>
 		</div>
 		<div id="chat-input">

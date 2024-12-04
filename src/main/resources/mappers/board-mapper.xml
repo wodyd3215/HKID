@@ -4,7 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="boardMapper">
-  
   <resultMap id="boardResultSet" type="Board">
   	<result column="BOARD_NO" property="boardNo"/>
   	<result column="BOARD_TITLE" property="boardTitle"/>
@@ -18,7 +17,6 @@
   	<result column="ORIGIN_NAME" property="originName"/>
   	<result column="CHANGE_NAME" property="changeName"/>
   	<result column="FILE_PATH" property="file_path"/>
-  	
   </resultMap>
   
   <resultMap id="commmunityResultSet" type="Community">
@@ -30,13 +28,29 @@
   	<result column="NICKNAME" property="userName"/>
   </resultMap>
   
+  <resultMap id="GoodResultSet" type="Good">
+  	<result column="BOARD_NO" property="boardNo"/>
+  	<result column="MEMBER_NO" property="memberNo"/>
+  	<result column="GOOD_STATUS" property="GoodStatus"/>
+  </resultMap>
+  
+  <resultMap id="ReplyResultSet" type="CommentReply">
+  	<result column="BOARD_NO" property="boardNo"/>
+  	<result column="MEMBER_NO" property="memberNo"/>
+  	<result column="REPLY_NO" property="replyNo"/>
+  	<result column="REPLY_CONTENT" property="content"/>
+  	<result column="REPLY_DATE" property="date"/>
+  	<result column="RE_REPLY_NO" property="reReplyNo"/>
+  	<result column="NICKNAME" property="nickName"/>
+  </resultMap>
+  
+  
   <!-- 게시글 총 갯수 조회 -->
   <select id="selectListCount" resultType="_int">
   	SELECT COUNT(*) 
   	  FROM COMMUNITY
   	 WHERE BOARD_STATUS = 'Y' AND
   	 	   COMMUNITY_NO != 1 <!-- 공지 제외 -->
-  	 
   </select>
   
   <!-- 카테고리 게시글의 개수 조회 -->
@@ -120,7 +134,6 @@
 	 	 AND COMMUNITY_NAME 
 	 	LIKE '%' || #{category} || '%'
 	 </if>
-	 
 	</select>
 	 
 	<!-- 검색 게시글 목록 -->
@@ -154,13 +167,11 @@
   		 	ORDER BY BOARD_NO DESC
   </select>
  
-  	
   	<!-- 게시글 상세 -->
   	<select id="selectBoard" resultMap="boardResultSet">
   	 SELECT BOARD_NO,
 			BOARD_TITLE,
 			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') as BOARD_DATE,
-			SEQ_BOARD_VIEW_COUNT.nextval,
 			BOARD_STATUS,
 			COMMUNITY_NO,
 			MEMBER_NO,
@@ -193,7 +204,6 @@
   		WHERE BOARD_NO = #{boardNo}
   	</select>
   
-  
   <!-- 신고기능 -->
   <insert id="insertReport">
   	INSERT INTO REPORT(
@@ -205,7 +215,7 @@
 				BOARD_NO
 				) 
 				VALUES (
-				SEQ_REPORT_NO.nextval,
+				SEQ_RNO.nextval,
 				#{TypeNo},
 				#{detailContent},
 				#{memberNo},
@@ -223,14 +233,13 @@
 					MEMBER_NO
   					)
   					VALUES(
-  					SEQ_BOARD_NO.NEXTVAL,
+  					SEQ_BNO.NEXTVAL,
   					#{boardTitle},
   					#{content},
   					#{communityNo},
   					#{memberNo}
   					)
   </insert>
-  
   
   <insert id="insertBoardFile">
   	INSERT INTO TOTAL_ATTACHMENT(
@@ -249,6 +258,96 @@
   					)
   </insert>
 
+	<update id="updateBoard">
+		UPDATE COMMUNITY
+  	 	   SET BOARD_TITLE = #{boardTitle},
+			   BOARD_CONTENT = #{content},
+			   COMMUNITY_NO = #{communityNo}
+	  	 WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<update id="updateBoardFile">
+			 UPDATE TOTAL_ATTACHMENT
+			    SET ORIGIN_NAME = #{originName},
+ 					CHANGE_NAME = #{changeName},
+ 					FILE_PATH = #{file_path}
+			  WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
+	<!-- 좋아요 유무체크 -->
+	<select id="checkGood" resultType="_int">
+		SELECT COUNT(*)
+		  FROM GOOD
+		 WHERE BOARD_NO = #{boardNo} AND
+		 	   MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 좋아요 상태 체크 -->
+	<select id="checkGoodStatus" resultType="java.lang.String">
+		SELECT GOOD_STATUS
+		  FROM GOOD
+		 WHERE BOARD_NO = #{boardNo} AND
+		 	   MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 좋아요 추가 -->
+	<insert id="insertGood">
+		INSERT INTO GOOD(
+			   BOARD_NO,
+			   MEMBER_NO)
+		VALUES
+			 (#{boardNo},
+			 #{memberNo})
+	</insert>
+
+	<!-- 좋아요 수정 -->
+	<update id="updateGood">
+		UPDATE GOOD
+		   SET GOOD_STATUS = #{GoodStatus}
+		 WHERE BOARD_NO = #{boardNo} AND
+		 	   MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 좋아요 개수 -->
+	<select id="countGood" resultType="_int">
+		SELECT COUNT(*)
+		FROM GOOD
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<!-- 댓글 리스트 -->
+	<select id="selectReplyList" resultMap="ReplyResultSet">
+		SELECT BOARD_NO, REPLY_NO, MEMBER_NO, NICKNAME, REPLY_CONTENT, TO_CHAR(REPLY_DATE, 'YYYY-MM-DD') AS REPLY_DATE
+		  FROM REPLY
+		  JOIN MEMBER USING (MEMBER_NO)
+		 WHERE BOARD_NO = #{boardNo}
+		 ORDER BY REPLY_NO DESC
+	</select>
+	
+	<!-- 댓글 추가 -->
+	<insert id="insertReply">
+		INSERT INTO REPLY(
+					REPLY_NO,
+					BOARD_NO,
+					MEMBER_NO,
+					REPLY_CONTENT
+					)VALUES(
+					SEQ_REPLY_NO.nextval,
+					#{boardNo},
+					#{memberNo},
+					#{replyContent}
+				)
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE FROM REPLY
+		WHERE REPLY_NO = #{replyNo} AND
+			  BOARD_NO = #{boardNo}
+	</delete>
+	
+	
 </mapper>
 
 

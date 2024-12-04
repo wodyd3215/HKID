@@ -6,7 +6,7 @@
 <!-- namespace : 해당 mapper파일의 고유한 별칭 -->
 
 <mapper namespace="phaseMapper">
-	<resultMap type="Phase" id="PhaseResultSet">
+	<resultMap type="Phase" id="phaseResultSet">
 		<!-- <result column="테이블 컬럼명" property="객체의 필드명"/> -->
 		<result column="PURCHASE_NO" property="purchaseNo" />
 		<result column="MEMBER_NO" property="memberNo" />
@@ -28,21 +28,21 @@
 		<result column="PRODUCT_NAME" property="productName" />
 		<result column="PRICE" property="price" />
 	</resultMap>
-	<!-- 
-	<select id="selectList" resultMap="PhaseResult">
+	 
+	<select id="selectList" parameterType="Phase" resultMap="phaseResultSet">
 		SELECT MEMBR_NAME memberName,
 			   EMAIL email,
 			   ADDRESS address,
 			   PHONE phone,
-			   PRODUCT_NAME productName,
+			   PRODUCT_NAME productName,			   
 			   SYSDATE
 		  FROM PURCHASE
 		  JOIN MEMBER USING (MEMBER_NO)
 		  JOIN PRODUCT USING (PRODUCT_NO)
 		 WHERE MEMBER_ID = #{memberNo}
-		   AND PRODUCT_ID = #{productId}
+		   AND PRODUCT_ID = #{productNo}
 	</select>
-	 -->
+	
 	 
 	 
 </mapper>

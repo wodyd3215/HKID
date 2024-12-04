@@ -37,7 +37,7 @@
                             <img src="${pageContext.request.contextPath}/resources/image/down.png">
                         </button>
                     </div>
-                    <!-- 중고판매유저 -->
+                    <!-- 채팅유저 -->
                     <div id="chat-trade-user" class="hide">
                         
                     </div>
@@ -52,28 +52,18 @@
                             <div>
                                 <!-- ajax로 list 요청 후 for,if -->
                                 <div class="right-log">
-                                    <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
+                                    <div>
+                                        <div>닉네임</div>
+                                        <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
+                                    </div>
                                     <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
                                 </div>
                                 <div class="left-log">
                                     <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
-                                    <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
-                                </div>
-                                <div class="right-log">
-                                    <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
-                                    <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
-                                </div>
-                                <div class="left-log">
-                                    <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
-                                    <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
-                                </div>
-                                <div class="right-log">
-                                    <p>sadfasdfsa;djlkfjas;dklfj;aslkfj;ldakfj;sadlkfj;adkfjsda;lkfjsa;dlkfj;aldfkj</p>
-                                    <img src="${pageContext.request.contextPath}/resources/image/dogdduck.png">
-                                </div>
-                                <div class="left-log">
-                                    <img src="${pageContext.request.contextPath}/resources/image/chat-bot.png">
-                                    <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
+                                    <div>
+                                        <div>닉네임</div>
+                                        <p>dsafkl;jasdfdksjf;lkdsajf;ldkasjf;ljaskdf;lkjadf;lakjf;asdlkfj;salkfj;aslkdfj;aksjdf;lasjkf;ajfk;sadljkf</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +73,7 @@
                                 <textarea id="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
                                           oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, '${pageContext.request.contextPath}')"></textarea>
                                 <div>
-                                    <button id="send-chat-btn" onclick="inputChatting('${pageContext.request.contextPath}')" disabled>
+                                    <button id="send-chat-btn" onclick="inputChatting('${pageContext.request.contextPath}', '${loginMember.memberId}')" disabled>
                                         <img src="${pageContext.request.contextPath}/resources/image/Corner-down-right.png">
                                     </button>
                                 </div>

@@ -17,15 +17,22 @@
  		<typeAlias type="com.kh.hkid.member.model.vo.Member" alias="Member"/>
  		<typeAlias type="com.kh.hkid.diary.model.vo.Diary" alias="Diary"/>
  		<typeAlias type="com.kh.hkid.community.model.vo.Board" alias="Board"/>
+ 		<typeAlias type="com.kh.hkid.community.model.vo.Good" alias="Good"/>
  		<typeAlias type="com.kh.hkid.community.model.dto.Community" alias="Community"/>
  		<typeAlias type="com.kh.hkid.cart.model.vo.Cart" alias="Cart"/>
 		<typeAlias type="com.kh.hkid.favorite.model.vo.Favorite" alias="Favorite"/>
 		<typeAlias type="com.kh.hkid.diet.model.vo.Diet" alias="Diet"/>
 		<typeAlias type="com.kh.hkid.phase.model.vo.Phase" alias="Phase"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.hkid.chatting.model.vo.Chat" alias="Chat"/>
+		<typeAlias type="com.kh.hkid.chatting.model.dto.ChatRoom" alias="ChatRoom"/>
+		<typeAlias type="com.kh.hkid.chatting.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.kh.hkid.chatting.model.dto.MessageLog" alias="MessageLog"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.SuspensionMember" alias="SuspensionMember"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.AccRecovery" alias="AccRecovery"/>
+ 		<typeAlias type="com.kh.hkid.community.model.dto.CommentReply" alias="CommentReply"/>
+		<typeAlias type="com.kh.hkid.challenge.model.vo.Challenge" alias="Challenge"/>
  	</typeAliases>
  	
  	<mappers>
@@ -39,6 +46,8 @@
  		<mapper resource="mappers/diet-mapper.xml"/>
  		<mapper resource="mappers/phase-mapper.xml"/>
  		<mapper resource="mappers/admin-mapper.xml"/>
+ 		<mapper resource="mappers/chat-mapper.xml"/>
+ 		<mapper resource="mappers/challenge-mapper.xml"/>
 
  	</mappers>
 

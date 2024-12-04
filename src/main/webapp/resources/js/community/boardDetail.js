@@ -1,65 +1,110 @@
 // 처음 실행
-function detailOnload(){ //DOM이 로드된 후 자동실행
-    const sendData = {
-        bno: 1 // ${list.boardNo}
-    }
+function detailOnload(bnoMno){ //DOM이 로드된 후 자동실행
+    // console.log("detailOnload의 매개변수: "+bnoMno)
+
+    checkGood(bnoMno)   //좋아요 상태를 확인
+    const boardData = JSON.parse(bnoMno);   //String으로 온 데이터를 JSON으로 파싱
+    countGood(boardData, drawCountGood);
+
     //댓글 목록 가져오기
-    getReplyList(sendData, setReplyData)
+    getReplyList(boardData.boardNo, setReplyData)
 }
 
+//하트 ON / OFF
+let isHeartOnOff;
+
+function changeHeart(_this, boardNo, memberNo){
+    if (($("#heart-img").attr('src')) === 'resources/image/board/heart.png'){
+        isHeartOnOff = true;
+    }else{
+        isHeartOnOff = false;
+    }
+
+    // 좋아요 insert ajax
+    insertGood({ boardNo, memberNo });
+    if(!isHeartOnOff){
+        $(_this).attr("src", "resources/image/board/heart.png");
+        isHeartOnOff = true;
+        console.log("하트 on")
+    }else{
+        $(_this).attr("src", "resources/image/board/emptyHeart.png");
+        isHeartOnOff = false;
+        console.log("하트 off")
+    }
+    updateGood({
+            isHeartOnOff,
+            boardNo,
+            memberNo
+    });
+}
+
+// 좋아요 개수 그려주는 함수
+function drawCountGood(count){
+    $("#count-good").html(count);
+}
+
+/****************************  댓글   ****************************/
 //댓글 갯수 및 목록 초기화
 function setReplyData(commentsList){
-    $("#reply-count").html(commentsList.length);
-    drawReplyList(document.querySelector("#all-reply-wrapper"), commentsList);
+        $("#reply-count").html(commentsList.length); //댓글 개수를 List의 길이만큼
+        drawReplyList(document.querySelector("#all-reply-wrapper"), commentsList);
 }
 
-
-//댓글 그려주는 함수
 function drawReplyList(tbody, commentsList) {
     tbody.innerHTML = ""; // 기존 내용을 초기화
 
     let str = "";
-    for(const comment of commentsList) { // 반복문 시작
-        str +="<hr>\n" + 
-        "<div class=\"comments-body\">\n" +
-        "<div class=\"main-comment\">\n" +
-        "<div id=\"comment-left\">\n"+
-        "<p class=\"user-name\">" + comment.userName + "</p>\n"+
-        "</p>" + comment.date + "&nbsp;</p>\n"+
-        "<button class=\"add-sub-comment\">답글쓰기</button>\n"+
-        "</div>\n"+
-        "<div class=\"comment-middle\" id='comment-area'>" + comment.content + "</div>\n"+
-        "<div class=\"comment-right\">\n"+
-        "<button class=\"reply-update-btn\" data-target=\"updateReply\" onclick=\"updateReply()\">수정</button>\n" +
-        "<button class=\"reply-delete-btn\">삭제</button>\n" +
-        "</div>\n"+
-        "</div>\n"+
-        "</div>\n";
+    for (const comment of commentsList) {
+        str += `
+        <hr>
+        <div class="comments-body">
+            <div class="main-comment">
+                <div id="comment-left">
+                    <p class="user-name">${comment.nickName}</p>
+                    <p>${comment.date}&nbsp;</p>
+                    <button class="add-sub-comment">답글쓰기</button>
+                </div>
+                <div class="comment-middle" id="comment-area">${comment.content}</div>
+                <div class="comment-right">
+                    <button class="reply-update-btn" data-target="updateReply" onclick="updateReply()">수정</button>
+                    <button class="reply-delete-btn" onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
+                </div>
+            </div>
+        </div>
+        `;
     }
     tbody.innerHTML += str;
 }
 
+
+
 //댓글 등록
-function addReply(){
-    const boardNo = 1 //${list.boardNo}
-    const memberNo = "1"
-    const replyContent = $("#content").val();
-    const replyDate = "2024.11.07"//${list.replyDate}
-    
+function addReply(boardNo, memberNo){
+    const replyContent = $("#write-comment").val();
+    boardNo = parseInt(boardNo); //혹시 몰라서 형변환
+
     addReplyAjax({
         boardNo: boardNo,
-        //replyNo: replyNo,
-        //replyDate,
         memberNo: memberNo,
-        replyContent: replyContent,
-        
-    }, function(res){
-        $("#content").val(""); // div 비우고
-        getReplyList({bno: boardNo}, setReplyData);
+        replyContent: replyContent
+    }, function(){
+        $("#write-comment").val(""); // div 비우고
+
+        getReplyList(boardNo, setReplyData);
     })
 }
 
-             /*********** 댓글수정 ***********/
+//댓글 삭제
+function deleteReply(boardNo, replyNo){
+    deldeteReplyAjax({
+        boardNo: boardNo,
+        replyNo: replyNo
+    }, function(){
+        getReplyList(boardNo, setReplyData);
+    }
+)}
+
+
 //댓글 수정
 function updateReply(){
     
@@ -78,11 +123,9 @@ function updateReply(){
     innerTextarea.setAttribute("height", "100%"); //세로 100%
     console.log("여기까지3")
   
-
     commentMiddle.appendChild(innerTextarea); // Textarea 삽입
 
     $("#comment-middle-input").innerText(beforeContent); // 기존 내용삽입
-
 }
 
 
