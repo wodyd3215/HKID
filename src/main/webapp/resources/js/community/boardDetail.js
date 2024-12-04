@@ -58,15 +58,15 @@ function drawReplyList(tbody, commentsList) {
         str += `
         <hr>
         <div class="comments-body">
-            <div class="main-comment">
-                <div id="comment-left">
+            <div class="main-comment" id="main-comment${comment.replyNo}">
+                <div class="comment-left">
                     <p class="user-name">${comment.nickName}</p>
                     <p>${comment.date}&nbsp;</p>
                     <button class="add-sub-comment">답글쓰기</button>
                 </div>
-                <div class="comment-middle" id="comment-area">${comment.content}</div>
+                <div class="comment-middle"">${comment.content}</div>
                 <div class="comment-right">
-                    <button class="reply-update-btn" data-target="updateReply" onclick="updateReply()">수정</button>
+                    <button class="reply-update-btn" data-target="updateReply" onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
                     <button class="reply-delete-btn" onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
                 </div>
             </div>
@@ -75,8 +75,6 @@ function drawReplyList(tbody, commentsList) {
     }
     tbody.innerHTML += str;
 }
-
-
 
 //댓글 등록
 function addReply(boardNo, memberNo){
@@ -89,7 +87,6 @@ function addReply(boardNo, memberNo){
         replyContent: replyContent
     }, function(){
         $("#write-comment").val(""); // div 비우고
-
         getReplyList(boardNo, setReplyData);
     })
 }
@@ -105,27 +102,71 @@ function deleteReply(boardNo, replyNo){
 )}
 
 
-//댓글 수정
-function updateReply(){
-    
-    const commentMiddle = document.getElementsByClassName("comment-middle"); // 넣을 div
-    const beforeContent = $(".comment-middle").val(); //기존 댓글내용
 
-    // const commentMiddle2 = document.getElementsByClassName("comment-middle").innerHTML
+/************************* 댓글 수정 *************************/
+// [수정] 누르면 -> [수정완료] 변환함수
+function changeUpdate(replyNo, boardNo, memberNo) {
 
-    const innerTextarea = document.createElement("textarea"); //textarea 생성
+    // console.log("this: " + this)
+    // 클릭된 버튼 기준으로 부모 요소 탐색
 
-    commentMiddle.innerText="."; //div안쪽 제거
-    console.log("여기까지1")
-    innerTextarea.setAttribute("id", "comment-middle-input"); //textarea id 추가
-    console.log("여기까지2")
-    innerTextarea.setAttribute("width", "100%"); //가로 100%
-    innerTextarea.setAttribute("height", "100%"); //세로 100%
-    console.log("여기까지3")
-  
-    commentMiddle.appendChild(innerTextarea); // Textarea 삽입
+    // const mainComment = button.closest(".main-comment"); // 강사님:"closest()는 바뀌는 경우가 있을 수 있어서 현업에서 안 씁니다"
+    const mainComment = document.querySelector("#main-comment"+replyNo); //replyNo를 id에 넣어서 특정시킬 수 있게 함
+    console.log("mainComment: " + mainComment)
 
-    $("#comment-middle-input").innerText(beforeContent); // 기존 내용삽입
+    const commentMiddle = mainComment.querySelector(".comment-middle"); // 댓글 내용 영역
+    const beforeContent = commentMiddle.innerText; // 기존 댓글 내용 가져오기
+
+    // textarea 생성
+    const innerTextarea = document.createElement("textarea");
+    innerTextarea.setAttribute("class", "comment-middle-input");
+    innerTextarea.style.width = "100%";
+    innerTextarea.style.height = "100%";
+    innerTextarea.style.border = "1px solid black";
+    innerTextarea.style.resize = "none";
+    innerTextarea.style.lineHeight = "20px";
+
+
+    innerTextarea.value = beforeContent; // 기존 댓글 내용을 textarea에 삽입
+
+    // 기존 댓글 내용을 textarea로 교체
+    commentMiddle.innerHTML = ""; // 기존 댓글 내용 제거
+    commentMiddle.appendChild(innerTextarea); // textarea 삽입
+
+    const btnDiv = document.querySelector(".comment-right"); //수정, 삭제 버튼 div
+    btnDiv.innerHTML=""; // 내용 지우기
+
+    //수정완료 버튼
+    const commentRight = mainComment.querySelector(".comment-right");
+    const replyUpdateComplate = document.createElement("button");  //[수정완료] 버튼 생성
+    replyUpdateComplate.setAttribute("class", "update-btn");    //class 생성
+    replyUpdateComplate.innerText = "수정 완료";
+    replyUpdateComplate.setAttribute(
+        "onclick", 
+        `updateReply(${replyNo}, ${boardNo}, ${memberNo})`);    //여기까지@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    commentRight.appendChild(replyUpdateComplate); // div에 [수정완료] 삽입
 }
 
+// [수정완료] 기능
+function updateReply(replyNo, boardNo, memberNo){
+    /*
+        수정완료를 누르면 해당 댓글의 replyNo, boardNo, content, memberNo(혹시모르니까) 
+        ajax전송
+    */
+    const updateBtn = document.querySelector(".update-btn")
+    console.log("updateBtn 버튼 잘 가져왔나? >> " + updateBtn);
+    
+    updateBtn.setAttribute(
+        "onclick",
+        `updateReply(${boardNo}, ${replyNo})`   //onclick 주고
 
+        //updateReply 함수 만들기
+    );
+
+        // textarea의 값 가져오기
+        const content = $(".comment-middle-input").val();
+
+        //ajax에 data로 보내기
+        updateReplyAjax(boardNo, replyNo, content);
+    }

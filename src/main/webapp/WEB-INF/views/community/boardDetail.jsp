@@ -36,16 +36,15 @@
                         <div>${b.boardDate}</div>
                     </div>
                     <div class="btn-div">
-                        <!-- <button class="btn" onclick = "postFormSubmit('update', 'updateForm.bo')">수정</button> -->
                         <a class="btn" href="updateForm.bo?bno=${b.boardNo}">수정</a>
                         <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
                     </div>
                 </div>
             </div>
         </div>
+
         <hr>
             
-            <!--댓글작성-->
             <div id="second-div">
                 <div id="content" name="boardContent" required>${b.content}</div>
 
@@ -74,9 +73,9 @@
                         </div>
                     </div>
                         
-                    <!-- 댓글 작성?? -->
+                    <!-- 댓글 작성 -->
                     <div id="comment">
-                        <p class="user-name">개떡도지</p>
+                        <p class="user-name">${b.nickName}</p>
                         <textarea name="replyContent" id="write-comment" placeholder="댓글을 작성하세요"></textarea>
                         <div>
                             <button name="" id="submit-btn" onclick="addReply('${b.boardNo}', '${b.memberNo}')">등록</button>
@@ -88,23 +87,6 @@
 
             <!-- 댓글리스트 -->
             <div id="all-reply-wrapper">
-                <!-- 댓글 목록 요소1 -->
-                <div class="comments-body">
-                    <div class="main-comment">
-                        <div id="comment-left">
-                            <p class="user-name"> 안재휘 <!-- ${c.userName} --></p>
-                            <p>2024.11.11<!-- ${c.date} --> &nbsp;</p>
-                            <button class="add-sub-comment">답글쓰기</button>
-                        </div>
-                        <div class="comment-middle"> 나를 쏘고가라</div>
-                        <div class="comment-right">
-                            <button class="reply-update-btn" onclick="updateReply()">수정</button>
-                            <button class="reply-delete-btn">삭제</button>
-                        </div>
-                    </div>
-                </div>
-                <!--  -->
-
                 <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 -->
                     <hr>     
                         <div class="comments-body">
