@@ -2,12 +2,12 @@ package com.kh.hkid.community.model.vo;
 
 import lombok.Data;
 
-@Data // vo¿¡ ÇÊ¿äÇÑ °ÍµéÀ» ¸ğ¾ÆµĞ @¾î³ëÅ×ÀÌ¼Ç
+@Data // voì— í•„ìš”í•œ ê²ƒë“¤ì„ ëª¨ì•„ë‘” @ì–´ë…¸í…Œì´ì…˜
 public class Reply {
-	private String replyNo;		//´ñ±Û¹øÈ£
-	private String boardNo;		//°Ô½Ã±Û ¹øÈ£
-	private String memberNo;	//È¸¿ø ¹øÈ£
-	private String replyContent;//´ñ±Û ³»¿ë
-	private String replyDate;	//´ñ±Û ÀÛ¼ºÀÏ
-	private String reReplyNo;	//ºÎ¸ğ´ñ±Û ¹øÈ£
+	private int boardNo;		//ê²Œì‹œê¸€ ë²ˆí˜¸
+	private int memberNo;		//íšŒì› ë²ˆí˜¸
+	private int replyNo;		//ëŒ“ê¸€ë²ˆí˜¸
+	private String replyContent;//ëŒ“ê¸€ ë‚´ìš©
+	private String replyDate;	//ëŒ“ê¸€ ì‘ì„±ì¼
+	private int reReplyNo;	//ë¶€ëª¨ëŒ“ê¸€ ë²ˆí˜¸
 }

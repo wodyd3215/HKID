@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.hkid.common.vo.PageInfo;
+import com.kh.hkid.community.model.dto.CommentReply;
 import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.vo.Reply;
 
 public interface BoardService {
 	
@@ -47,5 +49,27 @@ public interface BoardService {
 	
 	//게시글 수정
 	int updateBoard(Board b);
+	
+	//좋아요 체크
+	int checkGood(HashMap<String, Integer> map);
+	
+	//좋아요 생성
+	int insertGood(HashMap<String, Integer> map);
+	
+	//좋아요 수정
+	int updateGood(HashMap<String, Object> map);
+	
+	//좋아요 개수
+	int countGood(int boardNo);
+	
+	//댓글 리스트
+	ArrayList<CommentReply> selectReplyList(int bno);
+	
+	//댓글 추가
+	int insertReply(Reply r);
+	
+	//댓글 삭제
+	int deleteReply(HashMap<String, Integer> map);
+	
 }
 
