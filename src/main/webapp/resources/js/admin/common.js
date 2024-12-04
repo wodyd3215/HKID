@@ -3,7 +3,11 @@ function init(contextPath, pageName, optional) {
     
     switch(pageName) {
         case "nEnroll":
-            initEnroll(contextPath, optional);
+            initNoticeEnroll(contextPath, optional);
+        break;
+        case "pEnroll":
+            initProductEnroll(contextPath, optional);
+            initFile();
         break;
     }
     

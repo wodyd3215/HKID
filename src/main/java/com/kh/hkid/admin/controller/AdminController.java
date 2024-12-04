@@ -1,6 +1,7 @@
 package com.kh.hkid.admin.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
+import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
@@ -20,6 +23,7 @@ import com.kh.hkid.admin.service.AdminService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.member.model.vo.Member;
+import com.kh.hkid.product.model.vo.Product;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +37,7 @@ public class AdminController {
 		this.adminService = adminService;
 	}
 	
-	@GetMapping("product.ad")
+	@RequestMapping("product.ad")
 	public String product() {
 		return "admin/productManagement";
 	}
@@ -56,7 +60,7 @@ public class AdminController {
 	
 	@GetMapping("reportedUser.ad")
 	public String reportedUser(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-int rCount = adminService.reportCount("user");
+		int rCount = adminService.reportCount("user");
 		
 		PageInfo pi = Template.getPageInfo(rCount, currentPage, 10, 10);
 		
@@ -71,7 +75,16 @@ int rCount = adminService.reportCount("user");
 	}
 	
 	@GetMapping("accRecovery.ad")
-	public String accRecovery() {
+	public String accRecovery(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		int count = adminService.recoveryCount();
+		
+		PageInfo pi = Template.getPageInfo(count, currentPage, 10, 10);
+		
+		ArrayList<AccRecovery> list = adminService.selectRecoveryList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
 		return "admin/accRecovery";
 	}
 	
@@ -105,7 +118,9 @@ int rCount = adminService.reportCount("user");
 	
 	//상품 등록
 	@GetMapping("pEnroll.ad")
-	public String productEnroll() {
+	public String productEnroll(Model model) {
+		model.addAttribute("pageName", "pEnroll");
+		
 		return "admin/productEnroll";
 	}
 	
@@ -206,10 +221,54 @@ int rCount = adminService.reportCount("user");
 			adminService.insertsuspension(sm, reportNo);
 			session.setAttribute("alertMsg", "유저 정지 성공");
 		} catch(RuntimeException e) {
+			e.printStackTrace();
 			session.setAttribute("alertMsg", "유저 정지 실패");
 		} finally {
 			return "redirect:/reportedUser.ad";
 		}
+	}
+	
+	@SuppressWarnings("finally")
+	@PostMapping("recoveryAccount.ad")
+	public String recoveryAccount(int memberNo, HttpSession session) {
+		try {
+			adminService.recoveryAccount(memberNo);
+			session.setAttribute("alertMsg", "계정 복구 성공");
+		} catch(RuntimeException e) {
+			e.printStackTrace();
+			session.setAttribute("alertMsg", "계정 복구 실패");
+		} finally {
+			return "redirect:/accRecovery.ad";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("insertProduct")
+	public String insertProduct(Product p, List<MultipartFile> fileList, HttpSession session) {
+		p.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+		
+		ArrayList<String> list = new ArrayList<>();
+		
+		for(MultipartFile file : fileList) {
+			String changeName = Template.saveFile(file, session, "/resources/image/product/");
+			
+			list.add(changeName);
+		}
+		
+		String files = String.join(",", list);
+		
+		log.info(files);
+		
+		try {
+			adminService.insertProduct(p, files);
+			
+			return "success";
+		} catch(RuntimeException e) {
+			e.printStackTrace();
+			return "fail";
+		}
+		
+		
 	}
 	
 //	@ResponseBody

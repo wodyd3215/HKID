@@ -30,6 +30,7 @@
 		<typeAlias type="com.kh.hkid.chatting.model.dto.MessageLog" alias="MessageLog"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.hkid.admin.model.vo.SuspensionMember" alias="SuspensionMember"/>
+		<typeAlias type="com.kh.hkid.admin.model.vo.AccRecovery" alias="AccRecovery"/>
  		<typeAlias type="com.kh.hkid.community.model.dto.CommentReply" alias="CommentReply"/>
 		<typeAlias type="com.kh.hkid.challenge.model.vo.Challenge" alias="Challenge"/>
  	</typeAliases>

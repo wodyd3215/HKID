@@ -1,4 +1,4 @@
-function initEnroll(contextPath, noticeContent) {
+function initNoticeEnroll(contextPath, noticeContent) {
     const setting = {
         placeholder: "오늘 하루는 어떠셨나요?",
         height: 578,
