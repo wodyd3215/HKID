@@ -17,17 +17,16 @@
         <div class="managementTitle">
             상품 등록
         </div>
-        <form action="insertProduct" method="post" class="content" enctype="multipart/form-data">
             <div class="enroll-body">
                 <table>
                     <tr>
                         <th>상품명</th>
-                        <td><input type="text" placeholder="입력" name="productName" required></td>
+                        <td><input type="text" placeholder="입력" class="productName" required></td>
                     </tr>
                     <tr>
                         <th>카테고리</th>
                         <td>
-                            <select name="category">
+                            <select class="category">
                                 <option>식품</option>
                                 <option>의류</option>
                                 <option>기구</option>
@@ -36,15 +35,15 @@
                     </tr>
                     <tr>
                         <th>상품 수량</th>
-                        <td><input type="text" placeholder="입력" name="quantity" required></td>
+                        <td><input type="nunber" placeholder="입력" class="quantity" required></td>
                     </tr>
                     <tr>
                         <th>상품 가격</th>
-                        <td><input type="number" placeholder="입력" name="price" required></td>
+                        <td><input type="number" placeholder="입력" class="price" required></td>
                     </tr>
                     <tr>
                         <th class="he-50" id="sumHe" data-he="308">상세내용</th>
-                        <td id="detail-area"><textarea id="content" name="content"></textarea></td>
+                        <td id="detail-area"><textarea id="content" class="content"></textarea></td>
                     </tr>
                     <tr>
                         <th class="he-20">대표 이미지 추가</th>
@@ -55,11 +54,10 @@
                     </tr>
                 </table>
                 <div>
-                    <button type="submit" class="btn btn-primary custom-btn">등록하기</button>
+                    <button class="btn btn-primary custom-btn submit-btn">등록하기</button>
                     <button class="btn btn-danger custom-btn" data-target="cancel">취소하기</button>
                 </div>
             </div>
-        </form>
     </div>
 </body>
 </html>

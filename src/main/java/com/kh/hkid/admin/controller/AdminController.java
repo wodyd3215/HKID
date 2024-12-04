@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.hkid.admin.model.vo.AccRecovery;
@@ -238,23 +239,22 @@ public class AdminController {
 		}
 	}
 	
+	@ResponseBody
 	@PostMapping("insertProduct")
-	public String insertProduct(Product p, MultipartFile[] fileList, HttpSession session) {
+	public String insertProduct(Product p, List<MultipartFile> fileList, HttpSession session) {
 		p.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
 		
-		// 배열의 내용을 확인하기 위해 반복문 사용
-	    for (MultipartFile file : fileList) {
-	        if (!file.isEmpty()) {
-	            // 파일 이름 출력
-	            System.out.println("파일 이름: " + file.getOriginalFilename());
-	            // 파일 크기 출력
-	            System.out.println("파일 크기: " + file.getSize());
-	            // 기타 필요한 정보 출력
-	        }
-	    }
-//		int result = adminService.insertProduct(p);
+		for(MultipartFile file : fileList) {
+			String changeName = 
+		}
 		
-		return "redirect:/pEnroll.ad";
+		try {
+			adminService.insertProduct(p);
+			
+			return "success";
+		} catch(RuntimeException e) {
+			return "false";
+		}
 	}
 	
 //	@ResponseBody

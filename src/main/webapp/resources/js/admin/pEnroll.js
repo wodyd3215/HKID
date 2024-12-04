@@ -30,15 +30,15 @@ function initFile() {
 
     // 파일 입력 요소 가져오기
     const include = document.querySelector('.include-img');
-    const form = document.querySelector('.content')
+    const form = document.querySelector('.submit-btn')
 
     // 첨부 파일 누적 저장
     include.onchange = () => {
          addFiles(fileInfo, include) 
     };
 
-    form.onsubmit = () => {
-        submitFile(fileInfo)
+    form.onclick = () => {
+        submitFile(fileInfo.filesArr)
     }
 }
 
@@ -56,6 +56,7 @@ function addFiles(fileInfo, include) {
             return;
         }
 
+        // Math.min(): 두 값을 비교하여 더 작은 값을 반환
         for (let cnt = 0; cnt < Math.min(currFileCnt, remainFileCnt); cnt++) {
             const file = include.files[cnt];
 
@@ -129,5 +130,37 @@ function excludeFile(filesArr, index) {
 }
 
 function submitFile(fileArr) {
+    const fd = new FormData()
 
+    fd.append("productName", $('.productName').val())
+    fd.append("category", $('.category').val())
+    fd.append("quantity", $('.quantity').val())
+    fd.append("price", $('.price').val())
+    fd.append("content", $('.content').val())
+
+    for(const file of fileArr) {
+        fd.append("fileList", file)
+    }
+
+    insertProduct(fd, function(res) {
+        if(res === 'success') {
+            alert("상품 등록 성공")
+        } else {
+            alert("상품 등록 실패")
+        }
+    })
+}
+
+function insertProduct(data, callback) {
+    $.ajax({
+        url: 'insertProduct',
+        type: 'POST',
+        data: data,
+        processData: false, //기본이 true -> 전송하는 data를 string으로 변환해서 요청
+        contentType: false,  // 요청할 때 타입 -> false -> multipart/form-data 형식
+        success: callback,
+        error: () => {
+            console.log("ajax 실패")
+        },
+    })
 }

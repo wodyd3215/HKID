@@ -41,5 +41,5 @@ public interface AdminService {
 	void recoveryAccount(int memberNo);
 	
 // ======================= 상품 =======================
-	int insertProduct(Product p);
+	void insertProduct(Product p);
 }

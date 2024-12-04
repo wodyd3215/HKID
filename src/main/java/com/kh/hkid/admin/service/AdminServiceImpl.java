@@ -115,7 +115,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int insertProduct(Product p) {
-		return adminDao.insertProduct(sqlSession, p);
+	public void insertProduct(Product p) {
+		int result = adminDao.insertProduct(sqlSession, p);
+		if(result == 0)
+			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
+		
+		result = adminDao.insertAttachment(sqlSession)
 	}
 }
