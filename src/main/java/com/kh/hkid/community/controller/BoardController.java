@@ -120,9 +120,7 @@ public class BoardController {
 		if(((Member)session.getAttribute("loginMember")) != null) {
 			int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 			map.put("memberNo", memberNo);
-			
 		}else { //로그인을 안 했으면
-			
 		}
 		
 		Integer bNo = (Integer)bno;
@@ -321,7 +319,7 @@ public class BoardController {
 	}
 	
 	
-//	----------------------- 댓글 기능 -------------------------
+//	----------------------- [댓글 기능] -------------------------
 	
 	//댓글추가
 	@ResponseBody
@@ -345,13 +343,11 @@ public class BoardController {
 	@ResponseBody
 	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"
 	public String ajaxSelectReplyList(int boardNo) {
-//		System.out.println();
 		
 		//BNO에 해당하는 댓글 리스트 가져오기
 		ArrayList<CommentReply> list = new ArrayList<>();
-//		System.out.println("게시글 목록 DB에서 가져오기 전");
 		list = boardService.selectReplyList(boardNo);
-		System.out.println("DB에서 가져온 댓글 목록: " + list);
+//		System.out.println("DB에서 가져온 댓글 목록: " + list);
 		
 		return new Gson().toJson(list); //list를 JSON(문자열)으로 변환해서 리턴 
 	}
