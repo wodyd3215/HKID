@@ -31,7 +31,7 @@ function initChatBox(path, memberNo) {
         console.log(typeof receive.senderNo);
         console.log(typeof memberNo);
 
-        if()
+        
         if (parseInt(receive.senderNo) === parseInt(memberNo)) {
             console.log("오른쪽")
             receivedChat.className = "right-log"; // 내 메시지는 오른쪽
@@ -55,7 +55,6 @@ function initChatBox(path, memberNo) {
         }
 
         // 수신된 채팅 메시지에 대해 HTML을 구성
-        
 
         chatLog.appendChild(receivedChat);
 
@@ -101,8 +100,6 @@ function chatList(path, memberNo) {
                     </button>
                 `;
                 tradeUserContainer.appendChild(chatItem);
-
-                
             });
         },
         error: function () {
