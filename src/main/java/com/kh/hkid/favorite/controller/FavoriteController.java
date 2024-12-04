@@ -23,8 +23,8 @@ public class FavoriteController {
 	}
 	
 	@GetMapping("favorite.li")
-	public String selectList(Model model, HttpSession session) {
-		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+	public String selectList(Model model, HttpSession session, int memberNo) {
+		
 		ArrayList<Favorite> flist = favoriteService.selectList(memberNo);
 		
 		model.addAttribute("list",flist);

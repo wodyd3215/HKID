@@ -85,9 +85,9 @@
             </tfoot> -->
         </table> 
 
-        <div class="reviewInfo">
+        <!-- <div class="reviewInfo">
             리뷰는 결제 이후로부터 3일 이내에 작성이 가능합니다.
-        </div>
+        </div> -->
 
         <div class="pageBtn"> <!-- bottom -->
             <c:choose>
