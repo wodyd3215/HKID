@@ -6,6 +6,7 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
+import com.kh.hkid.common.vo.Attachment;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.BoardInfo;
 import com.kh.hkid.product.model.vo.Product;
@@ -41,5 +42,5 @@ public interface AdminService {
 	void recoveryAccount(int memberNo);
 	
 // ======================= 상품 =======================
-	void insertProduct(Product p);
+	void insertProduct(Product p, String files);
 }

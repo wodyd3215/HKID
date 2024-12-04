@@ -13,6 +13,7 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
+import com.kh.hkid.common.vo.Attachment;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.product.model.vo.Product;
 
@@ -113,13 +114,16 @@ public class AdminServiceImpl implements AdminService{
 		if(result == 0)
 			throw new RuntimeException("신청서를 정상적으로 delete하지 못하였습니다.");
 	}
-
+	
+	@Transactional(rollbackFor = {Exception.class})
 	@Override
-	public void insertProduct(Product p) {
+	public void insertProduct(Product p, String files) {
 		int result = adminDao.insertProduct(sqlSession, p);
 		if(result == 0)
 			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
 		
-		result = adminDao.insertAttachment(sqlSession)
+		result = adminDao.insertAttachment(sqlSession, files);
+		if(result == 0)
+			throw new RuntimeException("이미지를 정상적으로 insert하지 못하였습니다.");
 	}
 }

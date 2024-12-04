@@ -145,6 +145,8 @@ function submitFile(fileArr) {
     insertProduct(fd, function(res) {
         if(res === 'success') {
             alert("상품 등록 성공")
+
+            window.location.href = 'product.ad';
         } else {
             alert("상품 등록 실패")
         }

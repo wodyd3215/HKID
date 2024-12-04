@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +37,7 @@ public class AdminController {
 		this.adminService = adminService;
 	}
 	
-	@GetMapping("product.ad")
+	@RequestMapping("product.ad")
 	public String product() {
 		return "admin/productManagement";
 	}
@@ -220,6 +221,7 @@ public class AdminController {
 			adminService.insertsuspension(sm, reportNo);
 			session.setAttribute("alertMsg", "유저 정지 성공");
 		} catch(RuntimeException e) {
+			e.printStackTrace();
 			session.setAttribute("alertMsg", "유저 정지 실패");
 		} finally {
 			return "redirect:/reportedUser.ad";
@@ -233,6 +235,7 @@ public class AdminController {
 			adminService.recoveryAccount(memberNo);
 			session.setAttribute("alertMsg", "계정 복구 성공");
 		} catch(RuntimeException e) {
+			e.printStackTrace();
 			session.setAttribute("alertMsg", "계정 복구 실패");
 		} finally {
 			return "redirect:/accRecovery.ad";
@@ -244,17 +247,28 @@ public class AdminController {
 	public String insertProduct(Product p, List<MultipartFile> fileList, HttpSession session) {
 		p.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
 		
+		ArrayList<String> list = new ArrayList<>();
+		
 		for(MultipartFile file : fileList) {
-			String changeName = 
+			String changeName = Template.saveFile(file, session, "/resources/image/product/");
+			
+			list.add(changeName);
 		}
 		
+		String files = String.join(",", list);
+		
+		log.info(files);
+		
 		try {
-			adminService.insertProduct(p);
+			adminService.insertProduct(p, files);
 			
 			return "success";
 		} catch(RuntimeException e) {
-			return "false";
+			e.printStackTrace();
+			return "fail";
 		}
+		
+		
 	}
 	
 //	@ResponseBody

@@ -164,6 +164,19 @@
  					        )
  	</insert>
 	
+	<insert id="insertAttachment">
+		INSERT INTO TOTAL_ATTACHMENT (
+										FILE_NO,
+										CHANGE_NAME,
+										PRODUCT_NO
+									 )
+							  VALUES (
+							  			SEQ_FNO.NEXTVAL,
+							  			#{files},
+							  			SEQ_PNO.CURRVAL
+							  		 )					
+	</insert>
+	
 	<select id="searchList" resultMap="productResultSet">
 		SELECT p.PRODUCT_NO productNo,
 			   p.PRODUCT_NAME productName,
@@ -191,7 +204,4 @@
 		  LIKE '%' || #{keyword} || '%'
 		  ORDER BY PRODUCT_NO DESC
 	</select>
- 
- 
-   
  </mapper>
