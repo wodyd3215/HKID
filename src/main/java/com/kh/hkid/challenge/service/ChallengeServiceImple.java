@@ -1,6 +1,7 @@
 package com.kh.hkid.challenge.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,23 @@ public class ChallengeServiceImple implements ChallengeService {
 
 	@Override
 	public ArrayList<Challenge> selectList(PageInfo pi) {
-		
 		return challengeDao.selectList(sqlSession, pi);
 	}
+
+	@Override
+	public int challengeBoardCount() {
+		return challengeDao.challengeBoardCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Challenge> chBoardselectList(int cno, PageInfo pi) {
+		return challengeDao.challengeBoardList(sqlSession, pi, cno);
+	}
+
+	@Override
+	public List<Challenge> selectChallenge(int cno) {
+		return challengeDao.selectChallenge(sqlSession, cno);
+	}
+
 
 }

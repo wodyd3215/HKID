@@ -52,6 +52,7 @@
 .challengeName > p {
     font-size: 15px;
     margin-left: 8px;
+    font-weight: bolder;
 }
 
 .challengeStatus{
@@ -70,5 +71,11 @@
     border-radius: 10px;
     width: 70px;
     height: 25px;
+}
 
+#paging-area{
+    margin-left: 550px;
+    font-size: large;
+    font-weight: 600;
+    padding-block: 50px;
 }
