@@ -18,7 +18,7 @@ public class CartDao {
 		return sqlSession.update("cartMapper.changeQuantity", c);
 	}
 
-	public int deleteOne(SqlSessionTemplate sqlSession, Cart c) {		
+	public int deleteCart(SqlSessionTemplate sqlSession, Cart c) {		
 		return sqlSession.delete("cartMapper.deleteCart", c);
 	}
 

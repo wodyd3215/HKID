@@ -52,11 +52,7 @@
         <div id="nav">
             <ul>
                 <li>
-                    유저관리
-                    <ul>
-                        <li><a href="">정지 유저</a></li>
-                        <li><a href="accRecovery.ad">계정복구</a></li>
-                    </ul>
+                    <a href="accRecovery.ad">계정복구</a>
                 </li>
                 <li><a href="product.ad">상품관리</a></li>
                 <li>

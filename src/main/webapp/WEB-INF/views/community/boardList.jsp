@@ -17,10 +17,9 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--favicon.ico:1 에러 해결용-->
 
 <body onload="init('${pageName}', '${optional}')"></body>
-    <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    
+    <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
-    게시글 = ${list}
+    <!-- 게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
@@ -32,7 +31,7 @@
     <br><br>
     pi.boardLimit = ${pi.boardLimit}
     <br><br>
-    category = ${category}
+    category = ${category} -->
 
 
 

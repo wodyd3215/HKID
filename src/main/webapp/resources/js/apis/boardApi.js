@@ -153,3 +153,22 @@ function deldeteReplyAjax(data, callback) {
         }
     })
 }
+
+//댓글 수정완료
+function updateReplyAjax2(data, callback){
+    console.log("data: " + data)
+    $.ajax({
+        url: "updateReply",
+        type: "POST",
+        data:{
+            boardMo : data.boardNo,
+            replyNo : data.replyNo,
+            content: data.content
+        }, 
+        success: function () {
+            // callback();
+        },
+        error: function () {
+        }
+    })
+}
