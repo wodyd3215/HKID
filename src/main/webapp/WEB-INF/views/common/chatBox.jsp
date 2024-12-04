@@ -27,7 +27,7 @@
             <div class="chat-box-content">
                 <div class="chat-box-left">
                     <div id="chat-admin">
-                        <button name="chat-name" onclick="changeElement(this, '#chat-search', '#chat-content')">관리자</button>
+                        <button name="chat-name" onclick="changeElement('${pageContext.request.contextPath}', this, '#chat-search', '#chat-content')">관리자</button>
                     </div>
                     <div id="chat-trade">
                         <button onclick="showAndHideElement('#chat-trade-user')">내 채팅방&nbsp;
@@ -82,7 +82,7 @@
                     <div id="chat-search" class="hide">
                         <div id="searchbar-div">
                             <input type="search" id="chat-search-bar" placeholder="닉네임을 입력해주세요.">
-                            <button id="search-btn" onclick="searchNickName('${loginMember.memberNo}')">
+                            <button id="search-btn" onclick="searchNickName('${pageContext.request.contextPath}', '${loginMember.memberNo}')">
                                 <img id="searchIcon" src="resources/image/searchIcon.png">
                             </button>
                         </div>

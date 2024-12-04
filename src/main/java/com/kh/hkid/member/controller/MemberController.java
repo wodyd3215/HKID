@@ -421,6 +421,7 @@ public class MemberController {
     @GetMapping(value="search.me", produces = "application/json; charset = UTF-8")
     public String searchNickName(String nickName) {
     	ArrayList<Member> nickArr = memberService.searchNickName(nickName);
+    	System.out.println("유저 조회 : " + nickArr);
     	if(nickArr == null) {
     		return null;
     	} else {

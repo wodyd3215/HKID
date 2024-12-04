@@ -9,7 +9,7 @@ public class MessageLog {
 	private String messageId;
 	private String messageContent;
 	private int senderNo;
-	private int recieverNo;
+	private int receiverNo;
 	private String nickName;
 	private String profileImg;
 	private Date sendTime;

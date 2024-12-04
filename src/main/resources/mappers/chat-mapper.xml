@@ -39,16 +39,25 @@
 
   <!-- 채팅방 조회 -->
   <select id="chatList" resultMap="MessageLogResultSet">
-  	SELECT MESSAGE_ID,
-  		   MESSAGE_CONTENT,
-  		   SENDER_NO,
-  		   RECEIVER_NO,
-  		   NICKNAME,
-  		   PROFILE_IMG,
-  		   SEND_TIME
-  	  FROM MESSAGE
-  	  JOIN MEMBER ON (MEMBER_NO = RECEIVER_NO)
-  	 WHERE SENDER_NO = #{senderNo}
+	SELECT DISTINCT
+		   SENDER_NO,
+		   RECEIVER_NO,
+		   NICKNAME,
+		   PROFILE_IMG
+	  FROM MESSAGE
+	  JOIN MEMBER ON (MEMBER_NO = RECEIVER_NO)
+	 WHERE SENDER_NO = #{senderNo}
+		
+	 UNION
+		
+	SELECT DISTINCT
+		   SENDER_NO,
+		   RECEIVER_NO,
+		   NICKNAME,
+		   PROFILE_IMG
+	  FROM MESSAGE
+	  JOIN MEMBER ON (MEMBER_NO = SENDER_NO)
+	 WHERE RECEIVER_NO = #{senderNo}
   </select>
   
   <!-- 채팅 삭제 -->
@@ -69,8 +78,9 @@
   		   SEND_TIME
   	  FROM MESSAGE
   	  JOIN MEMBER ON (SENDER_NO = MEMBER_NO)
-  	 WHERE (SENDER_NO = #{senderNo} OR RECEIVER_NO = #{receiverNo})
-  	   AND (SENDER_NO = #{receiverNo} OR RECEIVER_NO = #{senderNo})
+  	 WHERE (SENDER_NO = #{senderNo} AND RECEIVER_NO = #{receiverNo})
+  	    OR (SENDER_NO = #{receiverNo} AND RECEIVER_NO = #{senderNo})
+  	 ORDER BY SEND_TIME
   </select>
   
   <!-- 입력한 채팅 저장 -->

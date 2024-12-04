@@ -45,4 +45,5 @@ public class ChattingServiceImpl implements ChattingService {
 	public void inputChat(Message m) {
 		chattingDao.inputChat(sqlSession, m);
 	}
+
 }
