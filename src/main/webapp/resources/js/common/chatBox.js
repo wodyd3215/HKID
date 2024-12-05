@@ -24,14 +24,21 @@ function initChatBox(path, memberNo) {
     socket.onmessage = function (ev) {
         const receive = JSON.parse(ev.data); // 서버에서 보내준 data를 JSON 객체로 파싱
 
-        const chatLog = document.querySelector("#chat-log-area > div");
+        console.log(parseInt(memberNo));
+        console.log(parseInt(receive.senderNo));
+        console.log(`${receive.receiverNo}${receive.senderNo}`);
+        
 
+        const chatLog = document.querySelector(`#chat-log-area > div[class="${receive.senderNo}${receive.receiverNo}"]`);
+
+
+        console.log(chatLog);
         console.log(typeof receive.senderNo);
         console.log(typeof memberNo);
 
         let messageHTML = '';
-
-        if (parseInt(receive.senderNo) === parseInt(memberNo)) {
+        
+        if (parseInt(receive.mSenderNo) === parseInt(memberNo)) {
             console.log("오른쪽")
             messageHTML = `
                 <div class="right-log">
@@ -57,7 +64,7 @@ function initChatBox(path, memberNo) {
 
         // 수신된 채팅 메시지에 대해 HTML을 구성
 
-        chatLog.insertAdjacentHTML('beforeend', messageHTML);
+        chatLog.innerHTML += messageHTML;
 
         const chatLogHeight = chatLog.scrollHeight;
         chatLog.scrollTop = chatLogHeight;
@@ -225,8 +232,8 @@ function changeElement(path, _this, searchUser, selectChat, memberNo, receiverNo
 function showChat(path, searchUser, selectChat, memberNo, receiverNo, senderNo) {
 
     // selector가 받은 클래스를 탐색
-    const showAndHideEl = document.querySelector(searchUser);
-    const showAndHideEl2 = document.querySelector(selectChat);
+    let showAndHideEl = document.querySelector(searchUser);
+    let showAndHideEl2 = document.querySelector(selectChat);
 
     // classList 함수를 사용하여 해당 클래스에 hide클래스가 포함되어 있는지 탐색(있다면 true 없다면 false)
     if (showAndHideEl2.classList.contains("hide")) {
@@ -246,14 +253,13 @@ function showChat(path, searchUser, selectChat, memberNo, receiverNo, senderNo) 
 
             // 채팅 로그를 표시할 영역
             const chatLogArea = document.querySelector("#chat-log-area > div");
-
+            chatLogArea.className = `${senderNo}${receiverNo}`;
+            console.log(chatLogArea.id);
             // chatLogArea 초기화
             chatLogArea.innerHTML = '';
 
             // result 배열을 반복하여 각 메시지를 처리
-            result.forEach(m => {
-                chatLogArea.id = `${m.senderNo}${m.receiverNo}`;
-
+            result.forEach(m => {    
                 // 내가 보낸 메시지인지 확인 (예: senderNo와 메시지의 senderNo가 같으면 내 메시지)
                 const isMyMessage = m.senderNo === memberNo;
                 // 메시지 HTML을 동적으로 생성
@@ -286,22 +292,23 @@ function showChat(path, searchUser, selectChat, memberNo, receiverNo, senderNo) 
                 chatLogArea.innerHTML += messageHTML;
             });
 
+            const chatInput = document.querySelector("#chat-input-area");
+
+            chatInput.className = `${senderNo}${receiverNo}`;
             // 채팅 입력 부분을 추가
-            const showAndHideEl2 = document.querySelector('#chat-content');
-            showAndHideEl2.innerHTML += `
-                <!-- 채팅 입력 -->
-                <div id="chat-input-area">
+            chatInput.innerHTML = `
+                <div>
+                    <textarea class="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
+                                oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, ${memberNo}, ${receiverNo}, ${senderNo})"></textarea>
                     <div>
-                        <textarea id="input-chat-text" name="input-chatting" placeholder="채팅 입력" 
-                                  oninput="useChatBtn(this)" onkeydown="handleEnterKey(event, ${memberNo}, ${receiverNo}, ${senderNo})"></textarea>
-                        <div>
-                            <button id="send-chat-btn" onclick="inputChatting(${memberNo}, ${receiverNo}, ${senderNo})" disabled>
-                                <img src="resources/image/Corner-down-right.png">
-                            </button>
-                        </div>
+                        <button class="send-chat-btn" onclick="inputChatting(${memberNo}, ${receiverNo}, ${senderNo})" disabled>
+                            <img src="resources/image/Corner-down-right.png">
+                        </button>
                     </div>
                 </div>
             `;
+
+            showAndHideEl2.appendChild(chatInput);
         }
         ,
         error: function () {
@@ -317,10 +324,9 @@ function showChat(path, searchUser, selectChat, memberNo, receiverNo, senderNo) 
 // 채팅 입력 저장/전달
 function inputChatting(memberNo, receiverNo, senderNo) {
 
-    const chatText = document.querySelector("#input-chat-text");
+    const chatText = document.querySelector(".input-chat-text");
     const chatUser = document.querySelector(".trade-user-nick");
-    console.log(senderNo);
-    console.log(receiverNo);
+
 
     // 채팅 내용이 비어 있지 않으면
     if (chatText.value.trim() === "") {
@@ -363,18 +369,22 @@ function inputChatting(memberNo, receiverNo, senderNo) {
         }
     })
 
+    console.log("저장 성공 후에")
     const msgData = {
         message: chatText.value,
         target: chatUser.innerText,
+        senderNo : senderNo,
+        receiverNo : receiverNo
     }
     // send할 때는 string으로 보내야해서 stringify로 문자열로 변경해서 보낸다.
+    console.log("소켓 통신을 통한 메세지 보내기 전")
     socket.send(JSON.stringify(msgData));
     console.log("메세지 전송");
 }
 
 // 채팅 입력창에 값이 있을 때 버튼을 활성화하고, 없으면 비활성화
 function useChatBtn(_this) {
-    const sendBtn = document.querySelector("#send-chat-btn");
+    const sendBtn = document.querySelector(".send-chat-btn");
 
     if (_this.value.trim() === "") {
         sendBtn.disabled = true;  // 입력값이 없으면 비활성화
@@ -385,7 +395,7 @@ function useChatBtn(_this) {
 
 // Enter 키를 눌렀을 때 채팅을 보내고, Shift + Enter는 줄바꿈을 허용하는 함수
 function handleEnterKey(event, memberNo, receiverNo, senderNo) {
-    const chatText = document.querySelector("#input-chat-text");
+    const chatText = document.querySelector(".input-chat-text");
 
     if (event.key === "Enter") {
         if (event.shiftKey) {
