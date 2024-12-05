@@ -1,11 +1,69 @@
 // 클릭 시 모든 체크박스 버튼이 눌림
 function selectAll(selectAll){
-    const checkboxes = document.querySelectorAll('input[type="checkBox"]');
+    checked = selectAll.checked;
 
-    checkboxes.forEach((checkbox) =>{
-        checkbox.checked = selectAll.checked
-    })
+    const selectAllBox = document.getElementsByName("selectBox");
+
+    let str = "";
+    for (let box of selectAllBox){
+        box.checked = checked;
+    }
 }
+
+
+function boxChecked(){
+    const selectAllBox = document.getElementsByName("selectBox");
+
+    for (let box of selectAllBox){
+        if(!box.checked){
+            return false;
+        }
+    }
+
+    return true;
+}
+
+const selectAllBox = document.getElementsByName("selectBox");
+for(let box of selectAllBox){
+    box.onchange = function(){
+        const allCheckBox = document.getElementsByClassName("selectCart");
+        allCheckBox.checked = boxChecked();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function addItem(loginMember){
     const productNo = document.querySelector(".productNo").value;
