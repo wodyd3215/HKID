@@ -15,7 +15,13 @@
   	<resultMap id="challengeBoardResultSet" type="ChallengeBoard">
   		<result column="CHELLANGE_NO" property="challengeBoardNo"/>
   		<result column="MEMBER_NO" property="memberNo"/>
+  		<result column="CHE_RES_NO" property="challengeNo"/>
   		<result column="CHE_TITLE" property="chaTitle"/>
+  		<result column="CHE_CONTENT" property="chaContent"/>
+  		<result column="CHE_DATE" property="chaDate"/>
+  		<result column="COMMENT_COUNT" property="commentCount"/>
+  		<result column="NICKNAME" property="nickName"/>
+  		<result column="RES_CHE_TITLE" property="challengeTitle"/>
   	</resultMap>
   	
   	
@@ -36,18 +42,27 @@
 		ORDER BY ABS(TRUNC(END_DATE) - TRUNC(SYSDATE)) ASC
    </select>
    
+   <select id="selectName" resultMap="challengeResultSet">
+   		SELECT CHE_TITLE
+        FROM CHELLAGE_RES
+        WHERE CHE_RES_NO = #{cno}
+   </select>
+   
    <!-- CHE_RES_NO로 CHELLANGE_NO조회 -->
-   <select id="challengeSelect" resultMap="challengeResultSet">
-	   	SELECT cb.CHELLANGE_NO,
+   <select id="challengeSelect" resultMap="challengeBoardResultSet">
+		SELECT cb.CHELLANGE_NO,
 	        cb.MEMBER_NO,
 	        cr.CHE_RES_NO,
+            cr.CHE_TITLE RES_CHE_TITLE,
 	        cb.CHE_TITLE,
 	        cb.CHE_CONTENT,
-	        cb.CHE_DATE,
-	        cb.COMMENT_COUNT
-	FROM CHELLAGE_RES cr
-	JOIN CHELLAGE_BOARD cb on cr.CHE_RES_NO = cb.CHE_RES_NO 
-	WHERE cr.CHE_RES_NO = #{cno}
+	       TO_CHAR(cb.CHE_DATE,'YYYY-MM-DD') CHE_DATE,
+	        cb.COMMENT_COUNT,
+            m.NICKNAME
+        FROM CHELLAGE_BOARD cb
+        JOIN CHELLAGE_RES cr on cr.CHE_RES_NO = cb.CHE_RES_NO 
+        JOIN MEMBER m on cb.MEMBER_NO = m.MEMBER_NO
+        WHERE cr.CHE_RES_NO = #{cno}
    </select>
    
    <!-- 챌린지보드 갯수 -->
@@ -55,20 +70,7 @@
    		SELECT COUNT(*)
 		FROM CHELLAGE_RES cr
 		JOIN CHELLAGE_BOARD cb on cr.CHE_RES_NO = cb.CHE_RES_NO 
-		WHERE cr.che_res_no=#{cno}
-   </select>
-   
-   <select id="selectChallenge" resultMap="challengeResultSet">
-	   SELECT cb.CHELLANGE_NO,
-		        cb.MEMBER_NO,
-		        cr.CHE_RES_NO,
-		        cb.CHE_TITLE,
-		        cb.CHE_CONTENT,
-		        cb.CHE_DATE,
-		        cb.COMMENT_COUNT
-		FROM CHELLAGE_RES cr
-		JOIN CHELLAGE_BOARD cb on cr.CHE_RES_NO = cb.CHE_RES_NO 
-		WHERE cr.CHE_RES_NO = #{cno}
+		WHERE cr.che_res_no = #{cno}
    </select>
    
  

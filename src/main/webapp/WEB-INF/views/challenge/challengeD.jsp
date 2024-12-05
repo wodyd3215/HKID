@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <% String contextPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +16,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="wrapper">
 		<div class="challengeDtitle">
-			<p>푸쉬업 챌린지</p>
+			<p>${c.challengeTitle}</p>
 		</div>
 		<table id="common-table">
 			<thead>
@@ -27,17 +29,28 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="c" items="${list}">
                 <tr class="notice">
                     <td class="board-category">공지</td>
                     <td>
-						<a href="boardDetail.bo?bno=${b.boardNo}">${c.challengeTitle}
+						<a href="">게시글 작성 시 지켜야할 규칙 [필독]
 							<img src="./resources/img/file.png" alt="없음">
 						</a>
 					</td>
                     <td>꾸준히운동</td>
                     <td>2024-10-22</td>
                     <td>2</td>
+                </tr>
+				<c:forEach var="c" items="${list}" varStatus="status">
+                <tr class="">
+                    <td class="board-category">${status.index + 1}</td>
+                    <td>
+						<a href="">${c.chaTitle}
+							<img src="./resources/img/file.png" alt="없음">
+						</a>
+					</td>
+                    <td>${c.nickName}</td>
+                    <td>${c.chaDate}</td>
+                    <td>${c.commentCount}</td>
                 </tr>
                 </c:forEach>
 			</tbody>

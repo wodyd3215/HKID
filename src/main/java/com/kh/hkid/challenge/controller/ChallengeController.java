@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.hkid.challenge.model.vo.Challenge;
+import com.kh.hkid.challenge.model.vo.ChallengeBoard;
 import com.kh.hkid.challenge.service.ChallengeService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
@@ -31,7 +32,6 @@ public class ChallengeController {
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 6);
 		
 		ArrayList<Challenge> list = challengeService.selectList(pi);
-		System.out.println("list" + list);
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "challenge/challengeM";
@@ -39,17 +39,17 @@ public class ChallengeController {
 	
 	@RequestMapping("ch.b")
 	public String challengeBoard(@RequestParam(value="cpage", defaultValue="1") Integer currentPage, int cno, Model model) {
-		int challengeBoardCount = challengeService.challengeBoardCount();
+		int challengeBoardCount = challengeService.challengeBoardCount(cno);
 		
-		List<Challenge> c = challengeService.selectChallenge(cno);
+		Challenge c = challengeService.selectName(cno);
 		
 		PageInfo pi = Template.getPageInfo(challengeBoardCount, currentPage, 5, 10);
 		
-		ArrayList<Challenge> list = challengeService.chBoardselectList(cno, pi);
+		ArrayList<ChallengeBoard> list = challengeService.chBoardselectList(cno, pi);
 
-		System.out.println("c" + c);
 		System.out.println("list" + list);
 		System.out.println("pi" + pi);
+		System.out.println("c" + c);
 		model.addAttribute("c", c);
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
