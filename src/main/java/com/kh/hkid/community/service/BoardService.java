@@ -50,7 +50,10 @@ public interface BoardService {
 	//게시글 수정
 	int updateBoard(Board b);
 	
-	//좋아요 체크
+	//좋아요 존재 유무
+	int selectExistGood(HashMap<String, Integer> map);
+	
+	//좋아요 on/off확인
 	int checkGood(HashMap<String, Integer> map);
 	
 	//좋아요 생성

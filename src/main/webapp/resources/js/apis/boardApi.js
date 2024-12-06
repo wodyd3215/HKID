@@ -35,6 +35,21 @@ function checkGood(data, callback){
     })
 }
 
+//좋아요 존재 여부만을 확인
+function ExistGood(data, callback){
+    console.log("ExistGood의 데이터: " + data.boardNo)
+    $.ajax({
+        url: "ExistGood",
+        data: {
+            boardNo: data.boardNo,
+            memberNo: data.memberNo
+        },
+        success: function (res) {
+            callback(res)
+        }
+    })
+}
+
 // 좋아요 추가 ajax
 function insertGood(data, callback){
     $.ajax({

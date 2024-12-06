@@ -251,7 +251,27 @@ public class BoardController {
 	}
 		
 	//=================[좋아요]================
-	//좋아요 확인
+	@ResponseBody
+	@RequestMapping(value="ExistGood", produces = "application/json; charset = UTF-8")
+	public int ajaxExistGood(int boardNo, Integer memberNo) {
+		if(memberNo == null) {
+			return 0;
+		}
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("boardNo", boardNo);
+		map.put("memberNo", memberNo);
+		int result = boardService.selectExistGood(map);
+		System.out.println("결과: "+result);
+		if(result == 1) {
+			System.out.println("기존에 좋아요를 눌렀습니다");
+		}else {
+			System.out.println("좋아요를 누른 적이 없습니다");
+		}
+		return result;
+	}
+	
+	
+	//좋아요 ON/OFF 체크
 	@ResponseBody
 	@RequestMapping(value="checkGood", produces = "application/json; charset = UTF-8")
 	public int ajaxcheckGood(int boardNo, Integer memberNo) {

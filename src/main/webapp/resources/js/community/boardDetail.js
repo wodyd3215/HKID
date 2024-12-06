@@ -1,10 +1,8 @@
-let nowGoodExist;
-
 // 처음 실행
 function detailOnload(bnoMno){ //DOM이 로드된 후 자동실행
     // console.log("detailOnload의 매개변수: "+bnoMno)
 
-    nowGoodExist = checkGood(bnoMno)   //좋아요 상태를 확인
+    checkGood(bnoMno)   //좋아요 상태를 확인
     const boardData = JSON.parse(bnoMno);   //String으로 온 데이터를 JSON으로 파싱
     countGood(boardData, drawCountGood);
 
@@ -22,13 +20,25 @@ function changeHeart(_this, boardNo, memberNo){
         isHeartOnOff = false;
     }
 
+    // 좋아요를 누른 적이 있는지 체크(=INSERT 중복 제외)
+    let existGood = null;
+    ExistGood({
+        boardNo, 
+        memberNo 
+    }, function(res){
+        existGood = res;
+        console.log("existGood: " + existGood)
+    }
+);
+    // console.log("existGood: " + existGood)
+
 
     if(!isHeartOnOff){
         $(_this).attr("src", "resources/image/board/heart.png");
         isHeartOnOff = true;
         console.log("하트 on")
-        if (!nowGoodExist) { //좋아요가 없으면 INSERT
-            insertGood({ boardNo, memberNo });
+        if (!existGood){ //좋아요를 처음 눌렀을 경우
+            insertGood({ boardNo, memberNo })
         }
     }else{
         $(_this).attr("src", "resources/image/board/emptyHeart.png");

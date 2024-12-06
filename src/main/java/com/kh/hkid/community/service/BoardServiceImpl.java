@@ -107,6 +107,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		return boardDao.updateBoard(sqlSession, b);
 	}
+	
+	@Override
+	public int selectExistGood(HashMap<String, Integer> map) {
+		return boardDao.checkGood(sqlSession, map); // 공통기능인 checkGood()사용
+	}
+
 
 	//좋아요 생성
 	@Override
@@ -123,7 +129,6 @@ public class BoardServiceImpl implements BoardService {
 		if((map.get("memberNo")) == null){
 			return 0;
 		}
-		System.out.println("boardDao.checkGood(sqlSession, map) => " + boardDao.checkGood(sqlSession, map));
 		//좋아요를 클릭했던 적이 있으면 1
 		if(boardDao.checkGood(sqlSession, map) > 0) {
 			if(boardDao.checkGoodStatus(sqlSession, map) == 'Y') {
@@ -163,7 +168,6 @@ public class BoardServiceImpl implements BoardService {
 	public int updateReply(Reply r) {
 		return boardDao.updateReply(sqlSession, r);
 	}
-
 	
 	
 
