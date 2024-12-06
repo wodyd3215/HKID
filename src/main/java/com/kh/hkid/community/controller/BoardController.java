@@ -374,10 +374,10 @@ public class BoardController {
 	}
 	
 	//댓글 수정
+	@ResponseBody
 	@PostMapping("updateReply.bo")
-	public String updateReply() {
-		
-		return "redirect: /community/boardDetail";
+	public void updateReply(Reply r) {
+		boardService.updateReply(r);
 	}
 
 	//-------------------------summernote----------------------------

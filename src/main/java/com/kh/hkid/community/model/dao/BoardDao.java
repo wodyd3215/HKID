@@ -112,7 +112,6 @@ public class BoardDao {
 	
 	//좋아요 상태 체크
 	public char checkGoodStatus(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
-		System.out.println("테스트 before입니다");
 		String result = sqlSession.selectOne("boardMapper.checkGoodStatus", map);
 		
 		if (result != null && !result.isEmpty()) {
@@ -152,7 +151,10 @@ public class BoardDao {
 		return sqlSession.delete("boardMapper.deleteReply", map);
 	}
 	
-	
+	//댓글 수정
+	public int updateReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.update("boardMapper.updateReply", r);
+	}
 	
 	
 	

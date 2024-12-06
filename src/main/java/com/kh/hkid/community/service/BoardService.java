@@ -71,5 +71,8 @@ public interface BoardService {
 	//댓글 삭제
 	int deleteReply(HashMap<String, Integer> map);
 	
+	//댓글 수정
+	int updateReply(Reply r);
+	
 }
 

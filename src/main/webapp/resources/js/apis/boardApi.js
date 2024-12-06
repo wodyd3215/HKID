@@ -19,10 +19,12 @@ function checkGood(data, callback){
                 // 빨간 하트 선택
                 // console.log("빨간하트 출력!")
                 $("#heart-img").attr("src", "resources/image/board/heart.png")
+                return true;
             } else if (res === 0){
                 // 텅 빈 하트 선택
                 // console.log("빈 하트 출력!")
                 $("#heart-img").attr("src", "resources/image/board/emptyHeart.png")
+                return false;
             }else{
                 console.log("checkGood AJAX 실패!!!!")
             }
@@ -96,10 +98,14 @@ function updateReplyAjax(data, callback){
     $.ajax({
         type: "POST",
         url: "updateReply.bo",
-        data: data,
-        success: function(res){
+        data: {
+            boardNo : data.boardNo,
+            replyNo : data.replyNo,
+            replyContent : data.content
+        },
+        success: function(){
             console.log("댓글 수정ajxa통신 성공")
-            callback(res)
+            callback()
         },
         error: console.log("댓글 수정 ajax 통신 실패ㅠㅠ")
     })
