@@ -42,8 +42,7 @@ public class CartController {
 		return "Products/carts";
 	}
 	
-	@ResponseBody
-	@PostMapping(value="addCart.c", produces="application/json; chatset-UTF-8")
+	@PostMapping("addCart.c")
 	public int addCart(Cart c) {
 		//ArrayList<Cart> = 
 		
@@ -53,7 +52,9 @@ public class CartController {
 	
 	@ResponseBody
 	@RequestMapping("/qchange")
-	public int quantityChange(Cart c) {		
+	public int quantityChange(Cart c, int memberNo, String productNo, int productQuantity, Model model) {
+		
+		
 		return cartService.changeQuantity(c);
 	}
 	
