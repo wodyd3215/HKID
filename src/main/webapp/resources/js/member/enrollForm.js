@@ -83,3 +83,20 @@ function enrollNickCheck() {
     })
 }
 
+// 인증번호 확인
+function checkCertify() {
+    const certifyNo = $("#certifyNo").val();
+    const receiveCertifyNo = $("#receiveCertifyNo").val();
+
+    if(certifyNo === receiveCertifyNo) {
+        $("#certifyArea > div").css("color", "blue");
+        $("#certifyArea > div").text("인증번호가 일치합니다.")
+        $("#enroll-enter").attr("disabled", false);
+        $("#certifyNo").attr("readonly", true);
+    } else {
+        $("#certifyArea > div").css("color", "red");
+        $("#certifyArea > div").text("인증번호가 일치하지 않습니다.")
+        $("#enroll-enter").attr("disabled", true);
+        $("#certifyNo").attr("readonly", false);
+    }
+}

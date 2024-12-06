@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/enrollForm.css">
     <script src="${pageContext.request.contextPath}/resources/js/member/enrollForm.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/apis/findAddressAPI.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/apis/sendMailApi.js"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Insert title here</title>
@@ -87,17 +88,18 @@
                     <h3 class="enroll-input-title">*이메일</h3>
                     <div class="enroll-input-area">
                         <input id="email-input1" type="text" name="email" placeholder="이메일 입력" required>
-                        <div class="all-btn" id="email-certify">이메일 인증</div>
+                        <div class="all-btn" id="email-certify" onclick="certifyEmail()">이메일 인증</div>
                     </div>
                 </div>
                 <div id="enroll-certify">
                     <div id="certifyArea">
                         <h3 class="enroll-input-title">*인증번호&nbsp;</h3>
-                        <div>인증번호가 일치하지 않습니다.</div>
+                        <div></div>
                     </div>
-                    <div class="enroll-input-area">
-                        <input type="text" id="certifyNo" name="certifyNo" placeholder="인증번호 입력" required readonly>
-                        <div class="all-btn">인증</div>
+                    <div id="certifyClick" class="enroll-input-area">
+                        <input type="text" id="certifyNo" name="certifyNo" placeholder="인증번호 입력" required>
+                        <input type="text" id="receiveCertifyNo" hidden>
+                        <div class="all-btn" onclick="checkCertify()">인증</div>
                     </div>
                 </div>
             </div>
