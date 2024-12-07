@@ -8,8 +8,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.common.vo.PageInfo;
+import com.kh.hkid.community.model.dto.CommentReply;
 import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.community.model.vo.Board;
+import com.kh.hkid.community.model.vo.Reply;
 
 @Repository
 public class BoardDao {
@@ -63,6 +65,11 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 	}
 	
+	//조회수 증가
+	public int increaseView(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.increaseView", boardNo);
+	}
+	
 	//게시글 삭제
 	public int deleteboard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteboard", boardNo);
@@ -79,9 +86,75 @@ public class BoardDao {
 	}
 	
 	//게시글 추가
-	public int insertBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.insert("boardMapper.insertBoard", boardNo);
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
+	
+	//게시글 추가(파일)
+	public int insertBoardFile(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoardFile", b);
+	}
+	
+	//게시글 수정
+	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateBoard", b);
+	}
+	
+	//게시글 수정(파일)
+	public int updateBoardFile(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateBoardFile", b);
+	}
+	
+	//좋아요 유무체크
+	public int checkGood(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.selectOne("boardMapper.checkGood", map);
+	}
+	
+	//좋아요 상태 체크
+	public char checkGoodStatus(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
+		System.out.println("테스트 before입니다");
+		String result = sqlSession.selectOne("boardMapper.checkGoodStatus", map);
+		
+		if (result != null && !result.isEmpty()) {
+	        return result.charAt(0); //char로 형변환
+	    } else {
+	        throw new IllegalStateException("쿼리 결과가 null이거나 비어 있습니다.");
+	    }
+	}
+	
+	//좋아요 생성
+	public int insertGood(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.insert("boardMapper.insertGood", map);
+	}
+	
+	//좋아요 수정
+	public int updateGood(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.insert("boardMapper.updateGood", map);
+	}
+	
+	//좋아요 개수
+	public int countGood(SqlSessionTemplate sqlSession,int boardNo) {
+		return sqlSession.selectOne("boardMapper.countGood", boardNo);
+	}
+	
+	//댓글 목록
+	public ArrayList<CommentReply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList", boardNo);
+	}
+	
+	//댓글 추가 
+	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertReply", r);
+	}
+	
+	//댓글 삭제
+	public int deleteReply(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.delete("boardMapper.deleteReply", map);
+	}
+	
+	
+	
+	
 	
 	
 }

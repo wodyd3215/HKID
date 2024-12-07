@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.JsonObject;
-import com.kh.hkid.diary.model.vo.Diary;
+import com.kh.hkid.chatting.model.vo.Message;
 import com.kh.hkid.member.model.dao.MemberDao;
 import com.kh.hkid.member.model.vo.Member;
 
@@ -117,5 +116,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<Member> searchNickName(String nickName) {
 		return memberDao.searchNickName(sqlSession, nickName);
+	}
+	
+	// 발신자 정보
+	@Override
+	public Member senderInfo(Message m) {
+		return memberDao.senderInfo(sqlSession, m);
 	}
 }

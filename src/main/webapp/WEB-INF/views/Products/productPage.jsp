@@ -183,8 +183,10 @@
 
             <!-- 검색 바 -->
             <form action="product.se">
-                <div class="produBottom">                    
-                    <select name="category" id="produCategory">
+                <div class="produBottom">
+                    <input type="hidden" name="pPage" value="1"> 
+                    <input type="hidden" name="">                  
+                    <select name="searchCategory" id="produCategory">
                         <option value="전체">전체</option>
                         <option value="식품">식품</option>
                         <option value="의류">의류</option>
@@ -192,14 +194,14 @@
                     </select>
                         
                     <div class="produSearch">
-                        <input type="text" class="produSearchCan" name="keyword" placeholder="검색어를 입력하세요.">
+                        <input type="text" class="produSearchCan" name="keyword" value="${keyword}" placeholder="검색어를 입력하세요.">
                         <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
                     </div>                        
                 </div>
             </form>
         </div>
     </div>
-    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
      <!-- js -->
      <script src="${pageContext.request.contextPath }/resources/js/Products/productPage.js" defer></script>
 </body>

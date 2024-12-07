@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hkid.chatting.model.dto.MessageLog;
+import com.kh.hkid.chatting.model.vo.Message;
 import com.kh.hkid.member.model.vo.Member;
 
 @Repository
@@ -80,8 +82,11 @@ public class MemberDao {
 	
 	// 유저 닉네임 조회
 	public ArrayList<Member> searchNickName(SqlSessionTemplate sqlSession, String nickName) {
-		ArrayList<Member> result = (ArrayList)sqlSession.selectList("memberMapper.searchNickName", nickName);
-		System.out.println("Dao의 result : " + result);
-		return result;
+		return (ArrayList)sqlSession.selectList("memberMapper.searchNickName", nickName);
+	}
+	
+	// 발신자 정보
+	public Member senderInfo(SqlSessionTemplate sqlSession, Message m) {
+		return sqlSession.selectOne("memberMapper.senderInfo", m);
 	}
 }

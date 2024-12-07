@@ -15,9 +15,9 @@
      
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--favicon.ico:1 에러 해결용-->
-<body onload="defaultCategory('${category}')">
-    <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    
+
+<body onload="init('${pageName}', '${optional}')"></body>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
     <!-- 게시글 = ${list}
     <br><br><br>
@@ -45,7 +45,6 @@
                 <h1>전체</h1>
             </c:otherwise>
         </c:choose>
-        
 
         <table id="common-table">
             <thead>
@@ -68,33 +67,18 @@
                     <th class="type-width8">조회수</th>
                 </tr>
             </thead>
+
             <tbody>
-                <!-- 공지 게시글 -->
-                 <!-- 현재페이지가 1일 경우 공지 출력 --> 
-                <!-- <c:choose>
-                    <c:when test="${pi.currentPage eq 1}">   
-                        <c:forEach var="n" items="${nList}">
-                            <tr id="common-table-body">
-                                <td>${n.communityName}</td>
-                                <td><a href="">${n.boardTitle}</a></td>
-                                <td>${n.userName}</td>
-                                <td>${n.boardDate}</td>
-                                <td>${n.boardViewCount}</td>
-                            </tr>
-                        </c:forEach>
-                    </c:when>
-                </c:choose> -->
                 <!-------------- 일반 게시글 --------------->
                 <c:forEach var="b" items="${list}">
                     <tr>
-                    <td class="board-category">${b.communityName}</td>
-                    <td><a href="boardDetail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
-                    <td>${b.userName}</td>
-                    <td>${b.boardDate}</td>
-                    <td>${b.boardViewCount}</td>
-                </tr>
+                        <td class="board-category">${b.communityName}</td>
+                        <td><a href="boardDetail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
+                        <td>${b.userName}</td>
+                        <td>${b.boardDate}</td>
+                        <td>${b.boardViewCount}</td>
+                    </tr>
                 </c:forEach>
-
             </tbody>
         </table>
         

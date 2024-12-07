@@ -19,6 +19,8 @@
 <title>상품 상세 페이지</title>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    
     <div class="wrapper">
         <div class="productDetailHeader" id="top"> <!-- 상품 맨 위 -->
 
@@ -43,41 +45,44 @@
                 </div>
             </div>            
             
+            <form action="" method="">
+                <input type="hidden" name="memberNo" value="${p.memberNo}">
+                <input type="hidden" name="productNo" value="${p.productNo}">
+            </form>
+                <div class="productContent"> <!-- 상품 버튼-->
+                    <!-- 상품 위치 -->
+                    <div class="productLocation"> 상품 > ${p.category}</div>
+        
+                    <!-- 상품 이름 및 평점 -->
+                    <div class="productDetail">
+                         <!-- 상품 이름 -->
+                        <div> ${p.productName}</div>
     
-
-            <div class="productContent"> <!-- 상품 버튼-->
-                <!-- 상품 위치 -->
-                <div class="productLocation"> 상품 > ${p.category}</div>
-    
-                <!-- 상품 이름 및 평점 -->
-                <div class="productDetail">
-                     <!-- 상품 이름 -->
-                    <div> ${p.productName}</div>
-
-                    <!-- 평점 -->
-                    <div class="assess">${r.rate}</div> 
-                </div>            
-    
-                <!-- 수량 버튼 -->
-                <div class="BtnPrice">
-                    <div class="quantityBtn" data-max-quantity="${p.quantity}">
-                        <button class="Btnmin" onclick="decreaseQuantity()">-</button>
-                        <span class="quanText">1</span>
-                        <button class="Btnpls" onclick="increaseQuantity()">+</button>
-                    </div>                                       
-                    <div class="priceText" data-price="${p.price}">                         
-                        ${p.price} 원
+                        <!-- 평점 -->
+                        <div class="assess">${r.rate}</div> 
+                    </div>            
+        
+                    <!-- 수량 버튼 -->
+                    <div class="BtnPrice">
+                        <div class="quantityBtn" data-max-quantity="${p.quantity}">
+                            <button class="Btnmin" onclick="decreaseQuantity()">-</button>
+                            <span class="quanText">1</span>
+                            <button class="Btnpls" onclick="increaseQuantity()">+</button>
+                        </div>                                       
+                        <div class="priceText" data-price="${p.price}">                         
+                            ${p.price} 원
+                        </div>
                     </div>
-                </div>
-    
 
-                <!-- 구매 및 장바구니 버튼 -->
-                <div class="phaseCartBtn">
-                    <button class="phaseBtn"> 구매 </button>
-                    <button class="cartBtn"> 장바구니 </button> 
-                    <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
-                </div>                
-            </div>
+                        <!-- 구매 및 장바구니 버튼 -->
+                    <div class="phaseCartBtn">
+                        <button type="submit" class="phaseBtn"> <a href="phaseInfo.li"> 구매 </a></button>
+                        <button class="cartBtn" onclick="addItem('${loginMember.memberNo}')"> 장바구니 </button> 
+                        <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
+                    </div>                
+                </div>
+
+                
         </div>     
 
 
@@ -210,7 +215,7 @@
             
         </div>
     </div>
-    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     <!-- js -->
     <script src="${pageContext.request.contextPath }/resources/js/Products/productDetail.js" defer></script>
 </body>

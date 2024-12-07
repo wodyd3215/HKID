@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -122,6 +124,34 @@ public class MemberController {
     		}
     		
     	}
+    }
+    
+    //로그인 상태 확인
+    @GetMapping("checkLoginStatus")
+    @ResponseBody
+    public boolean checkLoginStatus(HttpSession session) {
+        // 세션에 "loginMember"가 존재하면 true 반환, 없으면 false 반환
+        return session.getAttribute("loginMember") != null;
+    }
+    
+    
+    @GetMapping("getLoginMemberInfo")
+    @ResponseBody
+    public Map<String, String> getLoginMemberInfo(HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+
+        if (loginMember == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인되지 않은 사용자입니다.");
+        }
+
+        // 기본 이미지 처리
+        String profileImg = loginMember.getProfileImg() != null ? loginMember.getProfileImg() : "guest-icon.png";
+
+        // 사용자 정보 반환
+        Map<String, String> userInfo = new HashMap<>();
+        userInfo.put("memberId", loginMember.getMemberId());
+        userInfo.put("profileImg", profileImg);
+        return userInfo;
     }
     
     // 로그아웃
@@ -390,9 +420,8 @@ public class MemberController {
     @ResponseBody
     @GetMapping(value="search.me", produces = "application/json; charset = UTF-8")
     public String searchNickName(String nickName) {
-    	log.info("유저 닉네임 조회 시작!");
     	ArrayList<Member> nickArr = memberService.searchNickName(nickName);
-    	log.info("유저 닉네임 조회 시작!" + nickArr);
+    	System.out.println("유저 조회 : " + nickArr);
     	if(nickArr == null) {
     		return null;
     	} else {
