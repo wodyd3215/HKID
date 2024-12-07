@@ -19,6 +19,8 @@
 <title>상품 상세 페이지</title>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    
     <div class="wrapper">
         <div class="productDetailHeader" id="top"> <!-- 상품 맨 위 -->
 
@@ -44,7 +46,8 @@
             </div>            
             
             <form action="" method="">
-                <input type="hidden" name="" value="${p.productNo}">
+                <input type="hidden" name="memberNo" value="${p.memberNo}">
+                <input type="hidden" name="productNo" value="${p.productNo}">
             </form>
                 <div class="productContent"> <!-- 상품 버튼-->
                     <!-- 상품 위치 -->
@@ -74,14 +77,10 @@
                         <!-- 구매 및 장바구니 버튼 -->
                     <div class="phaseCartBtn">
                         <button type="submit" class="phaseBtn"> <a href="phaseInfo.li"> 구매 </a></button>
-                        <button class="cartBtn"> <a href="addCart.c">장바구니</a> </button> 
+                        <button class="cartBtn" onclick="addItem('${loginMember.memberNo}')"> 장바구니 </button> 
                         <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
                     </div>                
                 </div>
-            
-
-           
-    
 
                 
         </div>     
@@ -216,7 +215,7 @@
             
         </div>
     </div>
-    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     <!-- js -->
     <script src="${pageContext.request.contextPath }/resources/js/Products/productDetail.js" defer></script>
 </body>

@@ -17,9 +17,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/community/boardDetail.js"></script>
 
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    b = ${b}
+    <!-- b = ${b} -->
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -35,35 +36,32 @@
                         <div>${b.boardDate}</div>
                     </div>
                     <div class="btn-div">
-                        <form class="postForm" method="post" action="">
-                            <button class="btn" onclick = "postFormSubmit('edit', 'updateForm.bo')">수정</button>
-                        </form>
+                        <a class="btn" href="updateForm.bo?bno=${b.boardNo}">수정</a>
                         <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
                     </div>
                 </div>
             </div>
         </div>
+
         <hr>
             
-            <!--댓글작성-->
             <div id="second-div">
                 <div id="content" name="boardContent" required>${b.content}</div>
-                    
-                
+
                 <div id="etc-reply-wrapper">
-                    <div id="etc-menu">
+                    <div id="etc-menu"> 
                         <div> 
-                            <div class="heart-div">
-                                <img src="resources/image/heart.png" alt="">
-                                <p class="ptext">하트 개수</p>
+                            <div class="heart-div" id="heart-div">
+                                <img id="heart-img" src="" alt="하트" onclick="changeHeart(this, '${b.boardNo}', '${loginMember.memberNo}')">
+                                <p class="ptext" id="count-good">하트 개수</p>
                             </div>
                             
                             <div class="heart-div">
                                 <img src="resources/image/talk.png" alt="">
                                 <p id="reply-count" class="ptext">${replyCount}</p>
                             </div>
-                            
                         </div>
+
                         <div id="copy-siren">
                             <button id="URLcopy-btn" class=".img-button">
                                 <img id="link-img" onclick="copyLink(window.location.href, '클립보드에 현재 url이 복사되었습니다.', '복사에 실패했습니다. 다시 시도해주세요.')" 
@@ -72,16 +70,15 @@
                             <button id=siren-btn class=".img-button">
                                 <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal" onclick="openModal(event)">
                             </button>
-                            
                         </div>
                     </div>
                         
-                    <!-- 댓글 작성?? -->
+                    <!-- 댓글 작성 -->
                     <div id="comment">
-                        <p class="user-name">개떡도지</p>
+                        <p class="user-name">${b.nickName}</p>
                         <textarea name="replyContent" id="write-comment" placeholder="댓글을 작성하세요"></textarea>
                         <div>
-                            <button name="" id="submit-btn" onclick="addReply()">등록</button>
+                            <button name="" id="submit-btn" onclick="addReply('${b.boardNo}', '${b.memberNo}')">등록</button>
                         </div>
                     </div>
                     
@@ -90,23 +87,6 @@
 
             <!-- 댓글리스트 -->
             <div id="all-reply-wrapper">
-                <!-- 댓글 목록 요소1 -->
-                <div class="comments-body">
-                    <div class="main-comment">
-                        <div id="comment-left">
-                            <p class="user-name"> 안재휘 <!-- ${c.userName} --></p>
-                            <p>2024.11.11<!-- ${c.date} --> &nbsp;</p>
-                            <button class="add-sub-comment">답글쓰기</button>
-                        </div>
-                        <div class="comment-middle"> 나를 쏘고가라</div>
-                        <div class="comment-right">
-                            <button class="reply-update-btn" onclick="updateReply()">수정</button>
-                            <button class="reply-delete-btn">삭제</button>
-                        </div>
-                    </div>
-                </div>
-                <!--  -->
-
                 <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 -->
                     <hr>     
                         <div class="comments-body">
@@ -119,7 +99,7 @@
                                 <div class="comment-middle">${c.content}</div>
                                 <div class="comment-right">
                                     <button class="reply-update-btn">수정</button>
-                                    <button class="reply-delete-btn">삭제</button>
+                                    <button class="reply-delete-btn" onclick="deleteReply('${b.boardNo}', '${b.memberNo}')">삭제</button>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +230,7 @@
                 <input type="hidden" name="bno" value="${b.boardNo}">
                 <div class="custom-modal-header">
                     <div class="custom-modal-title"><h3>신고</h3></div>
-                    <button class="material-symbols-outlined close-btn " onclick="closeModal()">x</button>
+                    <button class="material-symbols-outlined close-btn" onclick="closeModal()">x</button>
                 </div>
                 <hr class="report-h3">
                 <div id="model-middle">
@@ -278,16 +258,7 @@
                 
 
                 <div class="custom-modal-content">
-
-                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report')">제출</button>
-                
-                    <!-- <form class="postForm" method="post" action="">
-                        <input type="hidden" name="bno" value="${boardNo}">
-                        
-                        <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('report')">예</button>
-                    </form>
-                    
-                    <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button> -->
+                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report', 'report.bo')">제출</button>
                 </div>
             </form>
         </div>

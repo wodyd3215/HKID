@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,14 +28,15 @@
 
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/modal.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sideNavi.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/common.css">
 
     <script src="${pageContext.request.contextPath}/resources/js/common/common.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/admin/common.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 </head>
 <body onload="init('${pageContext.request.contextPath}', '${pageName}', '${fn:escapeXml(optional)}')">
     <c:if test="${ not empty alertMsg}">
@@ -51,11 +52,7 @@
         <div id="nav">
             <ul>
                 <li>
-                    유저관리
-                    <ul>
-                        <li><a href="">정지 유저</a></li>
-                        <li><a href="accRecovery.ad">계정복구</a></li>
-                    </ul>
+                    <a href="accRecovery.ad">계정복구</a>
                 </li>
                 <li><a href="product.ad">상품관리</a></li>
                 <li>

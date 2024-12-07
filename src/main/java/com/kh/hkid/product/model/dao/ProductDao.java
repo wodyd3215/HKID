@@ -1,6 +1,7 @@
 package com.kh.hkid.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -48,6 +49,14 @@ public class ProductDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("productMapper.selectProductCategoryList", category, rowBounds);
+	}
+
+	public ArrayList<Product> searchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("productMapper.searchList", map, rowBounds);
 	}
 
 

@@ -1,4 +1,4 @@
-function defaultCategory(cate) {
+function defaultCategory1(cate) {
     cate = cate || '전체';
 
     const opt = document.querySelector(`.table-category option[value=${cate}]`);

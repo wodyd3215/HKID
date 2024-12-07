@@ -4,6 +4,7 @@
 <%
    String contextPath = request.getContextPath();
 %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/summernote.js"></script>
 </head>
-<body onload="init('${pageName}', '${optional}')">
+<body onload="init('${pageContext.request.contextPath}', '${loginMember.memberNo}', '${pageName}', '${fn:escapeXml(optional)}')">
     <c:if test="${ not empty alertMsg}">
         <script>
             alert("${alertMsg}");
@@ -51,7 +52,7 @@
                     <a href="list.bo">게시판</a>
                     <ul>
                         <li><a href="list.bo">커뮤니티</a></li>
-                        <li><a href="">챌린지</a></li>
+                        <li><a href="ch.m">챌린지</a></li>
                     </ul>
                 </li>
                 <li id="product-drop-bar" class="content">
@@ -87,8 +88,9 @@
                        	<a href="personal.me">개인설정</a>
                         <a href="myDiaryList.me">내 다이어리</a>
                         <hr>
-                        <a href="">찜목록</a>
-                        <a href="">구매목록</a>
+                        <a href="cartlist.li?memberNo=${loginMember.memberNo}">장바구니</a>
+                        <a href="favorite.li?memberNo=${loginMember.memberNo}">찜목록</a>
+                        <a href="phase.li?memberNo=${loginMember.memberNo}">구매목록</a>
                         <hr>
                         <a href="logout.me" id="logout-btn">로그아웃</a>
                     </div>

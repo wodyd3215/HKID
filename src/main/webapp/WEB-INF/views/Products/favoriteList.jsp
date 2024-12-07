@@ -15,7 +15,7 @@
     <script src="${pageContext.request.contextPath }/resources/js/Products/carts.js" defer></script>
 </head>
 <body>
-    
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
     <div class="wrapper">
 
@@ -78,5 +78,7 @@
 
         </table>
     </div>
+
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
