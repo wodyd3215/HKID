@@ -82,8 +82,6 @@ function searchNickName(path){
     })
 }
 
-
-
 // 채팅방 추가
 function addChattingRoom(path, _this) {
     const newChat = document.createElement("div");
@@ -158,6 +156,8 @@ function inputChatting(path) {
     // send할 때는 string으로 보내야해서 stringify로 문자열로 변경해서 보낸다.
     socket.send(JSON.stringify(msgData));
     
+
+
 
 
     
