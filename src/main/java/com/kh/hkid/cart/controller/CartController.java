@@ -31,18 +31,6 @@ public class CartController {
 		this.cartService = cartService;
 	}
 	
-	@ResponseBody
-	@PostMapping(value="addCart.c", produces="application/json; chatset-UTF-8")
-	public int addCart(Cart c) {
-		
-		
-		return cartService.addCart(c);
-	}
-	
-	
-	
-	
-	
 	@RequestMapping("cartlist.li")
 	public String cartPage(int memberNo, Model model) {
 		
@@ -54,9 +42,19 @@ public class CartController {
 		return "Products/carts";
 	}
 	
+	@PostMapping("addCart.c")
+	public int addCart(Cart c) {
+		//ArrayList<Cart> = 
+		
+		return cartService.addCart(c);
+	}	
+	
+	
 	@ResponseBody
 	@RequestMapping("/qchange")
-	public int quantityChange(Cart c) {		
+	public int quantityChange(Cart c, int memberNo, String productNo, int productQuantity, Model model) {
+		
+		
 		return cartService.changeQuantity(c);
 	}
 	

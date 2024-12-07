@@ -31,7 +31,7 @@
                 <thead class="cartTableHead">
                     <tr>
                         <th class="check-space">
-                           <input type="checkbox" class="selectCart" onclick="selectAll(this)">
+                           <input type="checkbox" class="selectCart" name="selectBox" onclick="selectAll(this)">
                         </th>
                         <th class="img-space"></th> <!-- 상품이미지 영역 -->
                         <th class="name-space">상품명</th>
@@ -49,38 +49,50 @@
                         <div class="cartListNone"> 장바구니에 담긴 상품이 없어요 ! </div>
                     </c:when>
                     <c:otherwise>
-
+                    
+                    
+                    <form action="">
+                        
                     <c:forEach var="item" items="${list}">
-                        <tr class="content-space">
-                            <td>
-                                <input type="checkbox" class="selectCart" name="selectBox">
-                            </td>
-                            <td>
-                                <!-- <c:if test="${}">
-                                    <img src="${pageContext.request.contextPath}/resources/image/${entry.key}.jpg" alt="${entry.key}" class="product-image">
-                                </c:if> -->
-                            </td>
-                            <td class="cartItemName">${item.productName}</td>
-                            <td>
-                                <div class="cartQuantity">
-                                    <button class="decreaseBtn" >-</button>
-                                    <div class="quantityBtnText">${item.productQuantity}</div>
-                                    <button class="increaseBtn">+</button>
-                                </div>
-                            </td>
-                            <td class="productPrice">1000</td>
-                            <td>
-                                <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                        
+                    <tr class="content-space">
+                        <td>
+                            <input type="checkbox" class="selectCart" name="selectBox" onclick="checkSelectAll()">
+                        </td>
+                        
+                        <td>
+                            <!-- <c:if test="${}">
+                                <img src="${pageContext.request.contextPath}/resources/image/${entry.key}.jpg" alt="${entry.key}" class="product-image">
+                            </c:if> -->
+                        </td>
+                        
+                        <td class="cartItemName">
+                            <input type="hidden" value="${item.productNo}">
+                            ${item.productName}
+                        </td>
+                        
+                        <td>
+                            <div class="cartQuantity" data-product-no="${item.productNo}" data-member-no="${loginMember.memberNo}">
+                                <button class="decreaseBtn" >-</button>
+                                <div class="quantityBtnText">${item.productQuantity}</div>
+                                <button class="increaseBtn">+</button>
+                            </div>
+                        </td>
+                        <td class="productPrice">${item.price}</td>
+                        <td>
+                            <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                    </form>
+
                 </tbody>
         </c:otherwise>
     </c:choose>        
             <tfoot class="cartTableFoot">
                 <tr>
                     <th>
-                        <input type="checkbox" class="selectCart" id="selectAll" onclick="selectAll(this)">
+                        <input type="checkbox" class="selectCart" name="selectBox" onclick="selectAll(this)">
                     </th>
                     
                     <td>총</td>

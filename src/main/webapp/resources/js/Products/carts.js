@@ -1,11 +1,56 @@
 // 클릭 시 모든 체크박스 버튼이 눌림
-function selectAll(selectAll){
-    const checkboxes = document.querySelectorAll('input[type="checkBox"]');
+function selectAll(){
 
-    checkboxes.forEach((checkbox) =>{
-        checkbox.checked = selectAll.checked
-    })
+    const selectAllBox = document.querySelectorAll('input[name="selectbox"]');
+
+    const checked = document.querySelectorAll('input[name="selectBox"]:checked');
+
+    const selectAll = document.querySelector('input[name="selectAll"]');
+
+    if(checkboxes.length === checked.length) {
+        selectAll.checked = true;
+    }else{
+        selectAll.checked = false;
+    }
+
 }
+
+
+function selectAll(selectAll)  {
+    const checkboxes 
+       = document.getElementsByName('selectBox');
+    
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = selectAll.checked
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function addItem(loginMember){
     const productNo = document.querySelector(".productNo").value;
@@ -38,27 +83,30 @@ function addAjaxItem(data, callback){
 
 // 수량 증가 및 감소 버튼
 $('.increaseBtn').click(function() {
-    let productId = $(this).closest('.cartQuantity').data('productId');
-    updateQuantity(productId, 1); // 1은 수량 증가
+    let productNo = $(this).closest('.cartQuantity').data('productNo');
+    let memberNo = $(this).closest('.cartQuantity').data('memberNo');
+    updateQuantity(memberNo, productNo, 1); // 1은 수량 증가
 });
 
 $('.decreaseBtn').click(function() {
-    let productId = $(this).closest('.cartQuantity').data('productId');
-    updateQuantity(productId, -1); // -1은 수량 감소
+    let productNo = $(this).closest('.cartQuantity').data('productNo');
+    let memberNo = $(this).closest('.cartQuantity').data('memberNo');
+    updateQuantity(memberNo, productNo, -1); // -1은 수량 감소
 });
 
-function updateQuantity(productId, change){    
+function updateQuantity(memberNo, productNo, change){    
     $.ajax({
         url:'/qchange',
         type:'POST',
         data:{
-            productId: productId,
+            memberNo : memberNo,
+            productNo: productNo,
             change : change
         },
         success: function(response){
             if (response.success) {
                 // 수량 업데이트
-                $('#quantity-' + productId).text(response.newQuantity);
+                $('#quantity' + productNo).text(response.newQuantity);
 
                 // 총 금액 업데이트
                 $('#totalPrice').text(response.totalPrice);
