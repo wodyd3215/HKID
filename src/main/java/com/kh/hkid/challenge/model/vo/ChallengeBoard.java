@@ -12,11 +12,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ChallengeBoard {
-	private int challengeBoardNO;
+	private int challengeBoardNo;
 	private int memberNo;
 	private int challengeNo;
 	private String chaTitle;
 	private String chaContent;
-	private String date;
+	private String chaDate;
 	private int commentCount;
+	private String nickName;
+	private String challengeTitle;
 }
