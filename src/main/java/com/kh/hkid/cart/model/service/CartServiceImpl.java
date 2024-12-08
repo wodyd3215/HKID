@@ -1,6 +1,7 @@
 package com.kh.hkid.cart.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public int changeQuantity(Cart c) {
-		return cartDao.changeQuantity(sqlSession, c);
+	public int changeQuantity(HashMap<Object, Integer> map) {
+		return cartDao.changeQuantity(sqlSession, map);
 	}
 
 	@Override
@@ -40,8 +41,10 @@ public class CartServiceImpl implements CartService{
 		return cartDao.addCart(sqlSession, c);
 	}
 
-	
+	@Override
+	public String deleteCart(HashMap<Object, Integer> de) {
+		return cartDao.deleteCart(sqlSession, de);
+	}
 
-	
 
 }
