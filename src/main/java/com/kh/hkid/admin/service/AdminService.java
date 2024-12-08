@@ -43,4 +43,10 @@ public interface AdminService {
 	
 // ======================= 상품 =======================
 	void insertProduct(Product p, String files);
+	
+	Product editProduct(int productNo);
+	
+	int deactivateProduct(int productNo);
+	
+	void updateProduct(Product p, String files);
 }

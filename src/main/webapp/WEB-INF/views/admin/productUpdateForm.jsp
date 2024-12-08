@@ -15,13 +15,13 @@
     <jsp:include page="sideNavi.jsp" />
     <div class="wrapper">
         <div class="managementTitle">
-            상품 등록
+            상품 수정
         </div>
             <div class="enroll-body">
                 <table>
                     <tr>
                         <th>상품명</th>
-                        <td><input type="text" placeholder="입력" class="productName" required></td>
+                        <td><input type="text" placeholder="입력" class="productName" value="${p.productName}" required></td>
                     </tr>
                     <tr>
                         <th>카테고리</th>
@@ -35,11 +35,11 @@
                     </tr>
                     <tr>
                         <th>상품 수량</th>
-                        <td><input type="number" placeholder="입력" class="quantity" required></td>
+                        <td><input type="number" placeholder="입력" class="quantity" value="${p.quantity}" required></td>
                     </tr>
                     <tr>
                         <th>상품 가격</th>
-                        <td><input type="number" placeholder="입력" class="price" required></td>
+                        <td><input type="number" placeholder="입력" class="price" value="${p.price}" required></td>
                     </tr>
                     <tr>
                         <th class="he-50" id="sumHe" data-he="308">상세내용</th>
@@ -54,7 +54,8 @@
                     </tr>
                 </table>
                 <div>
-                    <button class="btn btn-primary custom-btn submit-btn" data-url="insertProduct">등록하기</button>
+                    <input type="hidden" class="productNo" name="productNo" value="${p.productNo}">
+                    <button class="btn btn-primary custom-btn submit-btn" data-url="updateProduct">등록하기</button>
                     <button class="btn btn-danger custom-btn" data-target="cancel">취소하기</button>
                 </div>
             </div>

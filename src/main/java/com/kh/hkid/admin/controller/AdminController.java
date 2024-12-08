@@ -1,6 +1,7 @@
 package com.kh.hkid.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
@@ -24,6 +26,7 @@ import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.product.model.vo.Product;
+import com.kh.hkid.product.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,14 +34,27 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AdminController {
 	private final AdminService adminService;
+	private final ProductService productService;
 	
 	@Autowired
-	public AdminController(AdminService adminService) {
+	public AdminController(AdminService adminService, ProductService productService) {
 		this.adminService = adminService;
+		this.productService = productService;
 	}
 	
 	@RequestMapping("product.ad")
-	public String product() {
+	public String product(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		int pCount = productService.selectListTotal();
+		
+		PageInfo pi = Template.getPageInfo(pCount, currentPage, 10, 10);
+		ArrayList<Product> list = productService.selectList(pi);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		log.info("list" + list);
+		log.info("pi" + pi);
+		
 		return "admin/productManagement";
 	}
 	
@@ -254,7 +270,7 @@ public class AdminController {
 		for(MultipartFile file : fileList) {
 			String changeName = Template.saveFile(file, session, "/resources/image/product/");
 			
-			list.add(changeName);
+			list.add("/resources/image/product/" + changeName);
 		}
 		
 		String files = String.join(",", list);
@@ -269,8 +285,78 @@ public class AdminController {
 			e.printStackTrace();
 			return "fail";
 		}
+	}
+	
+	@PostMapping("editProduct")
+	public String editProduct(int productNo, Model model) {
+		Product product = adminService.editProduct(productNo);
 		
+		model.addAttribute("product", product);
+		model.addAttribute("pageName", "pEnroll");
 		
+		HashMap<String, Object> pMap = new HashMap<>();
+		
+		pMap.put("content", product.getContent());
+		pMap.put("fileNo", product.getFileNo());
+		pMap.put("changeName", product.getChangeName());
+		pMap.put("category", product.getCategory());
+		
+		String pData = new Gson().toJson(pMap);
+		
+		model.addAttribute("p", product);
+		model.addAttribute("optional", pData);
+		
+		return "admin/productUpdateForm";
+	}
+	
+	@PostMapping("deleteProduct")
+	public String deleteProduct(int productNo, HttpSession session) {
+		int result = adminService.deactivateProduct(productNo);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "상품 비활성화 성공");
+		} else {
+			session.setAttribute("alertMsg", "상품 비활성화 실패");
+		}
+		
+		return "redirect:/product.ad";
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("updateProduct")
+	public String updateProduct(Product p, 
+								@RequestParam(value = "fileList", required = false)List<MultipartFile> fileList, 
+								@RequestParam(value = "srcList", required = false)List<String> srcList, 
+								HttpSession session) {
+		p.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+		
+		ArrayList<String> list = new ArrayList<>();
+		
+		if(srcList != null && !srcList.isEmpty()) {
+			for(String src : srcList) {
+				list.add(src);
+			}
+		}
+		
+		if(fileList != null && !fileList.isEmpty()) {
+			for(MultipartFile file : fileList) {
+				String changeName = Template.saveFile(file, session, "/resources/image/product/");
+				
+				list.add("/resources/image/product/" + changeName);
+			}
+		}
+
+		String files = String.join(",", list);
+		
+		try {
+			adminService.updateProduct(p, files);
+			
+			return "success";
+		} catch(RuntimeException e) {
+			e.printStackTrace();
+			return "fail";
+		}		
 	}
 	
 //	@ResponseBody

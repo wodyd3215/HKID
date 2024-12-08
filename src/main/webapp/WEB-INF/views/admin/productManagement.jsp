@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,31 +25,42 @@
                         <th class="type-width8">유형</th>
                         <th class="type-width50">상품명</th>
                         <th class="type-width6">재고</th>
-                        <th class="type-width18">등록일</th>
+                        <th class="type-width12">등록일</th>
+                        <th class="type-width6">상태</th>
                         <th class="type-width8">관리</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="common-table-body">
-                        <td>식품</td>
-                        <td>게시글 작성 시 지켜야할 규칙</td>
-                        <td>100</td>
-                        <td>2024-10-10</td>
-                        <td>
-                            <div class="management">
-                                <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit')">
-                                    edit
-                                </button>
-                                <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete')">
-                                    delete
-                                </button>
-    
-                                <form action="" method="POST" id="postForm">
-                                    <input type="text" hidden name="pno" value="">
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                    <c:forEach var="p" items="${list}">
+                        <tr id="common-table-body">
+                            <td>${p.productNo}</td>
+                            <td>${p.productName}</td>
+                            <td>${p.quantity}</td>
+                            <td>${p.registrationDate}</td>
+                            <c:choose>
+                                <c:when test="${p.status eq 'Y'}">
+                                    <td>활성</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>비활성</td>
+                                </c:otherwise>
+                            </c:choose>
+                            <td>
+                                <div class="management">
+                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('update', 'editProduct')">
+                                        edit
+                                    </button>
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete', 'deleteProduct')">
+                                        delete
+                                    </button>
+        
+                                    <form action="" method="POST" id="postForm">
+                                        <input type="hidden" name="productNo" value="${p.productNo}">
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -73,13 +85,35 @@
 
         <!-- 페이지 버튼 -->
         <div id="paging-div">
-            <button class="page-btn">&lt;</button>
-            <button class="page-btn">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">4</button>
-            <button class="page-btn">5</button>
-            <button class="page-btn">&gt;</button>
+            <div id="paging-div">
+                <!-- 이전 페이지 버튼 -->
+                <c:choose>
+                    <c:when test="${pi.currentPage eq 1}">
+                        <a class="page-btn disabled startEnd-btn" href=""></a> <!-- 비활성화 -->
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-btn startEnd-btn" href="product.ad?cpage=${pi.currentPage - 1}">&nbsp;[이전]</a>
+                    </c:otherwise>
+                </c:choose>
+            
+                <!-- 1~5 페이지 -->
+                <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+                    <a class="page-btn ${pi.currentPage ne p ? 'active' : 'nowpage'}" 
+                        href="product.ad?cpage=${p}">
+                        ${p}
+                    </a>
+                </c:forEach>
+            
+                <!-- 다음 페이지 버튼 -->
+                <c:choose>
+                    <c:when test="${pi.currentPage eq pi.maxPage}">
+                        <a class="page-btn disabled" href=""></a> <!-- 비활성화 -->
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-btn startEnd-btn" href="product.ad?cpage=${pi.currentPage + 1}">&nbsp;[다음]</a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
     </div>
 </body>

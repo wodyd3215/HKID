@@ -1,6 +1,7 @@
 package com.kh.hkid.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,7 +11,6 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
-import com.kh.hkid.common.vo.Attachment;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.BoardInfo;
 import com.kh.hkid.product.model.vo.Product;
@@ -100,5 +100,21 @@ public class AdminDao {
 	
 	public int insertAttachment(SqlSessionTemplate sqlSession, String files) {
 		return sqlSession.insert("productMapper.insertAttachment", files);
+	}
+	
+	public Product editProduct(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.selectOne("productMapper.selectEditProduct", productNo);
+	}
+	
+	public int deactivateProduct(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.update("productMapper.deactivateProduct", productNo);
+	}
+	
+	public int updateAttachment(SqlSessionTemplate sqlSession, HashMap<String, Object> aMap) {
+		return sqlSession.update("productMapper.updateAttachment", aMap);
+	}
+	
+	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
+		return sqlSession.update("productMapper.updateProduct", p); 
 	}
 }
