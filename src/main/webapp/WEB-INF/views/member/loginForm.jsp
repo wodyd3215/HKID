@@ -14,7 +14,7 @@
     <c:remove var="alertMsg" scope="session"/>
     <div class="wrapper"> 
     	<!-- <c:if test="${ not empty alertMsg}">
-			<script>
+			<script>c
 				alert("${alertMsg}");
 			</script>
 			<c:remove var="alertMsg" scope="session"/>

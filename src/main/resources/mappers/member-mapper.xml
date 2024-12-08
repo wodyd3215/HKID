@@ -23,6 +23,26 @@
   	<result column="ISADMIN" property="isAdmin"/>
   	<result column="IS_SOCIAL" property="isSocial"/>
   </resultMap>
+  <resultMap type="RecoveryMember" id="recoveryMemberResultSet">
+  <result column="MEMBER_NO" property="memberNo"/>
+  	<result column="MEMBER_ID" property="memberId"/>
+  	<result column="MEMBER_PWD" property="memberPwd"/>
+  	<result column="MEMBER_NAME" property="memberName"/>
+  	<result column="NICKNAME" property="nickName"/>
+  	<result column="PHONE" property="phone"/>
+  	<result column="EMAIL" property="email"/>
+  	<result column="ADDRESS" property="address"/>
+  	<result column="DETAIL_ADDRESS" property="detailAddress"/>
+  	<result column="POST_NO" property="postNo"/>
+  	<result column="POINT" property="point"/>
+  	<result column="ENROLL_DATE" property="enrollDate"/>
+  	<result column="STATUS" property="status"/>
+  	<result column="PROFILE_IMG" property="profileImg"/>
+  	<result column="ISADMIN" property="isAdmin"/>
+  	<result column="IS_SOCIAL" property="isSocial"/>
+  	<result column="SUSPENSION_DATE" property="suspensionDate"/>
+  	<result column="UNSUSPENSION_DATE" property="unsuspensionDate"/>
+  </resultMap>
   
   <!-- 회원가입 -->
   <insert id="insertMember">
@@ -52,7 +72,7 @@
   </insert>
   
   <!-- 로그인 -->
-  <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+  <select id="loginMember" parameterType="Member" resultMap="recoveryMemberResultSet">
   	SELECT MEMBER_NO,
   		   MEMBER_ID,
   		   MEMBER_PWD,
@@ -68,10 +88,12 @@
   		   STATUS,
   		   PROFILE_IMG,
   		   ISADMIN,
-  		   IS_SOCIAL
+  		   IS_SOCIAL,
+  		   SUSPENSION_DATE,
+  		   UNSUSPENSION_DATE
   	  FROM MEMBER
+  	  JOIN ACCOUNT_SUSPENSION USING (MEMBER_NO)
   	 WHERE MEMBER_ID = #{memberId}
-  	   AND STATUS = 'Y'
   </select>
   
   <!-- 아이디 중복 체크 -->
@@ -148,7 +170,7 @@
   </select>
   
   <!-- 소셜 로그인 -->
-  <select id="socialLoginMember" resultMap="memberResultSet">
+  <select id="socialLoginMember" resultMap="recoveryMemberResultSet">
     SELECT MEMBER_NO,
   		   MEMBER_ID,
   		   MEMBER_PWD,
@@ -164,10 +186,12 @@
   		   STATUS,
   		   PROFILE_IMG,
   		   ISADMIN,
-  		   IS_SOCIAL
+  		   IS_SOCIAL,
+  		   SUSPENSION_DATE,
+  		   UNSUSPENSION_DATE
   	  FROM MEMBER
+  	  JOIN ACCOUNT_SUSPENSION USING (MEMBER_NO)
   	 WHERE EMAIL = #{email}
-  	   AND STATUS = 'Y'
   </select>
   
   <!-- 소셜 회원가입 -->
@@ -211,4 +235,13 @@
   	  JOIN MESSAGE ON (MEMBER_NO = SENDER_NO)
   	 WHERE MEMBER_NO =  #{senderNo}
   </select>
+  
+  <!-- 계정 복구 신청 -->
+  <insert id="recoveryApply">
+  	INSERT INTO RECOVER_ACCOUNT (
+  		   MEMBER_NO
+  	)VALUES(
+  		   #{memberNo}
+  	)
+  </insert>
 </mapper>

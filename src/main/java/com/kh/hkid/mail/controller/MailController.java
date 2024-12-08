@@ -45,7 +45,7 @@ public class MailController {
 		String[] to = {email};
 		message.setTo(to);
 		
-		String[] cc = {"tjwodyd3215@gmail.com", "ajh990306@gmail.com", "dydwns036@gmail.com", "chococream_m@naver.com", "sskjj0000@gmail.com"};
+		String[] cc = {"tjwodyd3215@gmail.com"};
 		message.setCc(cc);
 		
 		System.out.println("메세지 정보" + message);
