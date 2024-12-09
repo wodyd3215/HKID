@@ -30,6 +30,8 @@
 		<result column="REVIEW_CONTENT" property="reviewContent" />
 		<result column="REVIEW_RATE" property="reviewRate" />
 		<result column="REVIEW_DATE" property="reviewDate" />
+		<result column="NICKNAME" property="nickname" />
+		<result column="PRODUCT_NAME" property="productName" />
 	</resultMap>
 	<!-- 
 		* SELECT문 전송 시
@@ -94,7 +96,7 @@
     	</if>
 	</select>
 	
-	<!-- 상품 상세 페이지 -->
+	<!-- 상품 상세 페이지 
 	<select id="selectProduct" resultType="Product">
 		SELECT p.PRODUCT_NO,
            	   p.PRODUCT_NAME productName,
@@ -111,6 +113,7 @@
       ) r ON p.PRODUCT_NO = r.PRODUCT_NO
      WHERE p.PRODUCT_NO = #{pno}
 	</select>
+	-->
 	
 	<!-- 상품 왼쪽 사이드바 -->
 	<select id="choseNav" resultType="Product">
@@ -249,4 +252,24 @@
 		 WHERE PRODUCT_NO = #{productNo}
 			  
 	</update>
+	
+	<select id="reviewCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM REVIEW
+		 WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<select id="selectReviewList" resultMap="reviewResultSet">
+		SELECT REVIEW_NO,
+			   PRODUCT_NAME,
+			   NICKNAME,
+			   REVIEW_CONTENT,
+			   REVIEW_RATE,
+			   TO_CHAR(REVIEW_DATE, 'YYYY-MM-DD') AS REVIEW_DATE
+		  FROM REVIEW
+		  JOIN MEMBER USING (MEMBER_NO)
+		  JOIN PRODUCT USING (PRODUCT_NO)
+		 WHERE PRODUCT_NO = #{productNo}
+		 ORDER BY REVIEW_NO DESC 
+	</select>
  </mapper>
