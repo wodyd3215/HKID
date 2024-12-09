@@ -48,9 +48,6 @@ function copyLink(text, successMsg, errorMsg){
 function postFormSubmit(type, url) {
     const formEl = $("#postForm");
     switch(type) {
-        // case "update": 
-        //     $(formEl).attr("action", url)
-        //     break;
         case "delete":
             $(formEl).attr("action", url)
             break;

@@ -121,7 +121,11 @@ public class BoardController {
 			int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 			map.put("memberNo", memberNo);
 		}else { //로그인을 안 했으면
+			
 		}
+		
+		Member m = (Member)session.getAttribute("loginMember");
+		
 		
 		Integer bNo = (Integer)bno;
 		map.put("boardNo", bNo);
@@ -134,6 +138,7 @@ public class BoardController {
 		Board b = boardService.selectBoard(bno);
 		model.addAttribute("b", b);
 		model.addAttribute("pageName", "boardDetail");
+		model.addAttribute("m", m);
 		
 		return "community/boardDetail";
 	}
@@ -251,7 +256,7 @@ public class BoardController {
 	}
 		
 	//=================[좋아요]================
-	//좋아요 확인
+	//좋아요 유무 체크
 	@ResponseBody
 	@RequestMapping(value="checkGood", produces = "application/json; charset = UTF-8")
 	public int ajaxcheckGood(int boardNo, Integer memberNo) {
@@ -272,41 +277,18 @@ public class BoardController {
 		return result;
 	}
 	
-	
-	//좋아요 생성(insert)
+	//좋아요 on off
 	@ResponseBody
-	@RequestMapping("insertGood")
-	public int ajaxInsertGood(int boardNo, int memberNo) {
-		HashMap<String, Integer> map = new HashMap<>();
-		map.put("boardNo", boardNo);
-		map.put("memberNo", memberNo);
-		
-		int result = boardService.insertGood(map);
-		System.out.println("result의 결과값: " + result);
-		return result;
-	}
-	
-	//좋아요 수정(update)
-	@ResponseBody
-	@RequestMapping(value="updateGood", produces = "application/json; charset = UTF-8")
-	public void ajaxupdateGood(int boardNo, int memberNo, boolean heartStatus) {
-		
-		System.out.println("boardNo: " + boardNo);
-		System.out.println("memberNo: " + memberNo);
-		System.out.println("heartStatus: " + heartStatus);
-		
+	@RequestMapping(value="goodOnOff", produces="application/json; charset=UTF-8")
+	public int goodOnOff(int boardNo, int memberNo, boolean isHeartOnOff) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("boardNo", boardNo);
 		map.put("memberNo", memberNo);
-		// 좋아요 true/false
-		if(heartStatus == true) {
-			map.put("GoodStatus", 'Y');
-		}else if(heartStatus == false) {
-			map.put("GoodStatus", 'N');
-		}else {
-			System.out.println("goodStatus가 Boolean형식이 아닙니다");
-		}
-		boardService.updateGood(map);
+		map.put("isHeartOnOff", isHeartOnOff);
+		
+		log.info("isHeartOnOff: " + isHeartOnOff);
+		
+		return boardService.updateGood(map);
 	}
 	
 	//게시글의 좋아요 개수
@@ -342,14 +324,24 @@ public class BoardController {
 	//ajax 댓글목록 select
 	@ResponseBody
 	@GetMapping(value="replyList.bo", produces = "application/json; charset = UTF-8") //produces="타입/서브타입"
-	public String ajaxSelectReplyList(int boardNo) {
+	public String ajaxSelectReplyList(int boardNo, HttpSession session) {
 		
+		// 로그인하지 않았으면 0으로 설정
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		int memberNo = (loginMember != null) ? loginMember.getMemberNo() : 0;
+		
+		System.out.println("memberNo: "+memberNo);
 		//BNO에 해당하는 댓글 리스트 가져오기
 		ArrayList<CommentReply> list = new ArrayList<>();
 		list = boardService.selectReplyList(boardNo);
-//		System.out.println("DB에서 가져온 댓글 목록: " + list);
+		HashMap <String, Object> map= new HashMap<>();
 		
-		return new Gson().toJson(list); //list를 JSON(문자열)으로 변환해서 리턴 
+
+		map.put("replyList", list);
+		map.put("loginMemberNo", memberNo);
+		
+		System.out.println(map);
+		return new Gson().toJson(map); //list를 JSON(문자열)으로 변환해서 리턴 
 	}
 	
 	//댓글삭제
@@ -374,10 +366,10 @@ public class BoardController {
 	}
 	
 	//댓글 수정
+	@ResponseBody
 	@PostMapping("updateReply.bo")
-	public String updateReply() {
-		
-		return "redirect: /community/boardDetail";
+	public void updateReply(Reply r) {
+		boardService.updateReply(r);
 	}
 
 	//-------------------------summernote----------------------------
