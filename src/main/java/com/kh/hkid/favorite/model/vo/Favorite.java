@@ -6,4 +6,7 @@ import lombok.Data;
 public class Favorite {
 	private int memberNo;
 	private int productNo;
+	private String productName;
+	private int price;
+	
 }

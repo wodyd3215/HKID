@@ -1,11 +1,48 @@
 // 클릭 시 모든 체크박스 버튼이 눌림
-function selectAll(selectAll){
-    const checkboxes = document.querySelectorAll('input[type="checkBox"]');
+function selectAll(checkbox){
 
-    checkboxes.forEach((checkbox) =>{
-        checkbox.checked = selectAll.checked
-    })
+    const selectall = document.querySelector('input[name="selectall"]');
+  
+  if(checkbox.checked === false)  {
+    selectall.checked = false;
+  }
+
 }
+
+
+function selectAll(selectAll)  {
+    const checkboxes = document.getElementsByName('selectBox');
+  
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = selectAll.checked
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function addItem(loginMember){
     const productNo = document.querySelector(".productNo").value;
@@ -38,33 +75,33 @@ function addAjaxItem(data, callback){
 
 // 수량 증가 및 감소 버튼
 $('.increaseBtn').click(function() {
-    let productId = $(this).closest('.cartQuantity').data('productId');
-    updateQuantity(productId, 1); // 1은 수량 증가
+    let productNo = $(this).closest('.cartQuantity').data('productNo');
+    let memberNo = $(this).closest('.cartQuantity').data('memberNo');
+    updateQuantity(memberNo, productNo, 1); // 1은 수량 증가
 });
 
 $('.decreaseBtn').click(function() {
-    let productId = $(this).closest('.cartQuantity').data('productId');
-    updateQuantity(productId, -1); // -1은 수량 감소
+    let productNo = $(this).closest('.cartQuantity').data('productNo');
+    let memberNo = $(this).closest('.cartQuantity').data('memberNo');
+    updateQuantity(memberNo, productNo, -1); // -1은 수량 감소
 });
 
-function updateQuantity(productId, change){    
+function updateQuantity(memberNo, productNo, productQuantity){    
     $.ajax({
         url:'/qchange',
         type:'POST',
         data:{
-            productId: productId,
-            change : change
+            memberNo : memberNo,
+            productNo: productNo,
+            productQuantity : productQuantity
         },
         success: function(response){
-            if (response.success) {
                 // 수량 업데이트
-                $('#quantity-' + productId).text(response.newQuantity);
+                $('#quantity' + productNo).text(response.newQuantity);
 
                 // 총 금액 업데이트
                 $('#totalPrice').text(response.totalPrice);
-            } else {
-                alert('수량 업데이트에 실패했습니다.');
-            }
+            
         }, error: function(){
             alert('서버 요청 중 오류가 발생하였습니다.');
         }
@@ -80,25 +117,38 @@ function updateQuantity(productId, change){
 //     return nstr;
 // };
 
-// 한 개의 상품 삭제 (맨 오른쪽 삭제 버튼 클릭할 시)
-function deleteCart(deCart){ 
+
+function bottomBtn(){
+    let valueArr = new Array();
+    let list = $("input[name='selectBox']");
+    for(let i=0; i<list.length; i++){
+        if(list[i].checked){
+            valueArr.push(list[i].value);
+        }
+    }
+
+    if(valueArr.length == 0){
+        alert("선택된 상품이 없습니다.");
+    } else{
+        let chk = confirm("");
         $.ajax({
-            url: '/deleteCart',
-            type: 'POST',
-            data: { items: selected }, 
-            
-            success: function(response) {
-                console.log("삭제 요청 성공:", response);
-                //alert("선택된 상품이 삭제되었습니다.");
-                // 페이지를 다시 로드하거나 특정 요소를 업데이트할 수 있습니다.
-                callback(response)
-            },
-            error: function(error) {
-                console.log("삭제 요청 실패");
-                //alert("삭제 중 문제가 발생했습니다.");
+            url:'delete.c',
+            type:'GET',
+            data:{valueArr : valueArr},
+            success:function(){
+               
             }
-        });
+        })
+    }
+
 }
+
+
+
+
+
+
+
 
 function deleteAll(){
     checkCounts = document.querySelectorAll(".check");

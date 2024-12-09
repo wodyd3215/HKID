@@ -14,7 +14,7 @@ function readReviewBtn(){
 // ajax 로 데이터 받기
 function ajaxBtn(){
     $.ajax({
-      url : "addReview"  
+      url : "addReview.r"  
     })
 }
 
