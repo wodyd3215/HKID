@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>​
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,29 +29,31 @@
                 </div>
             </div>
         </div>
-        <div id="my-cal-data-area">
-            <div id="today-ate-cal">오늘 섭취한 영양정보~</div>
-            <div id="today-ate-cal-info">
-                <table class="food-info-table">
-                    <thead>
-                        <tr id="food-title">
-                            <th id="food-kcal">칼로리(kcal)</th>
-                            <th id="food-carbo">탄수화물(g)</th>
-                            <th id="food-pro">단백질(g)</th>
-                            <th id="food-fat">지방(g)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="food-detail">
-                            <td class="kcal-figure"></td>
-                            <td class="carbo-figure"></td>
-                            <td class="pro-figure"></td>
-                            <td class="fat-figure"></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <c:if test="${not empty diet}">
+            <div id="my-cal-data-area">
+                <div id="today-ate-cal">오늘 섭취한 영양정보~</div>
+                <div id="today-ate-cal-info">
+                    <table class="food-info-table">
+                        <thead>
+                            <tr id="food-title">
+                                <th id="food-kcal">칼로리(kcal)</th>
+                                <th id="food-carbo">탄수화물(g)</th>
+                                <th id="food-pro">단백질(g)</th>
+                                <th id="food-fat">지방(g)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="food-detail">
+                                <td class="kcal-figure">${diet.totalKcal}</td>
+                                <td class="carbo-figure">${diet.totalCarbo}</td>
+                                <td class="pro-figure">${diet.totalProtein}</td>
+                                <td class="fat-figure">${diet.totalFat}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </c:if>
         <div id="diary-content">
             ${diary.diaryContent}
         </div>

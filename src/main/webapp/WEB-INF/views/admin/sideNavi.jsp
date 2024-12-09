@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +64,7 @@
                     </ul>
                 </li>
                 <li><a href="notice.ad">공지</a></li>
+                <li><a href="challenges">챌린지 관리</a></li>
             </ul>
         </div>
     </div>

@@ -50,3 +50,25 @@
     background: #d9d9d9;
     resize: none;
 }
+
+#content-detail .custom-modal {
+    width: 800px;
+    overflow: hidden;
+}
+
+#top-wrapper {
+    width: 95%;
+    border: none;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 15px 0 15px 20px;
+    margin-bottom: 20px;
+}
+
+#board-title {
+    margin-bottom: 20px;
+}
+
+#content {
+    margin-left: 20px;
+}

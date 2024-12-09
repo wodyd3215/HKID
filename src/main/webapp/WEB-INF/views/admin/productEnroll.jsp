@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <th>상품 수량</th>
-                        <td><input type="nunber" placeholder="입력" class="quantity" required></td>
+                        <td><input type="number" placeholder="입력" class="quantity" required></td>
                     </tr>
                     <tr>
                         <th>상품 가격</th>
@@ -54,7 +54,7 @@
                     </tr>
                 </table>
                 <div>
-                    <button class="btn btn-primary custom-btn submit-btn">등록하기</button>
+                    <button class="btn btn-primary custom-btn submit-btn" data-url="insertProduct">등록하기</button>
                     <button class="btn btn-danger custom-btn" data-target="cancel">취소하기</button>
                 </div>
             </div>
