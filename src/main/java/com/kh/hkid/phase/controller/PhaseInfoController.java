@@ -101,22 +101,20 @@ public class PhaseInfoController {
 	
 	// 리뷰
 	@GetMapping("selectReview.r")
-	public String selectReview(@RequestParam(required = false) int memberNo, Model model) {
-		if(memberNo != 0) {
-			Review r = phaseService.selectReview(memberNo);
-			model.addAttribute("r", r);
-		}
+	public String selectReview(int memberNo, Model model) {
+		
+		
+		Review r = phaseService.selectReview(memberNo);
+		model.addAttribute("r", r);
+		
 		return "Products/review";
 	}
 	
 	// 리뷰 등록
 	@ResponseBody
 	@PostMapping(value="addReview.r", produces = "application/json; charset=UTF-8")
-	public String reviewAdd(@RequestParam int memberNo,
-							   @RequestParam int productNo,
-							   @RequestParam String reviewContent,
-							   Review r, Model model) {
-			
+	public String reviewAdd(int memberNo, Review r, Model model) {
+		
 		if(r.getReviewNo() == 0) {
 			
 			phaseService.addReview(r);

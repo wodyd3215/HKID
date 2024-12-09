@@ -11,7 +11,10 @@
 		<result column="BUCKEY_LIST" property="buckeyList"/>
 		<result column="MEMBER_NO" property="memberNo" />
 		<result column="PRODUCT_NO" property="productNo" />
-		<result column="PRODUCT_QUANTITY" property="productQuantity" />			
+		<result column="PRODUCT_QUANTITY" property="productQuantity" />
+		
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRICE" property="price" />	
 	</resultMap>
 	<!-- 
 		* SELECT문 전송 시
@@ -24,7 +27,8 @@
 	 		   B.MEMBER_NO memberNo,
 	 		   PRODUCT_NO productNo,
 	 		   B.PRODUCT_QUANTITY productQuantity,
-	 		   P.PRODUCT_NAME productName
+	 		   P.PRODUCT_NAME productName,
+	 		   P.PRICE price
 	 	  FROM BUCKEY_LIST B
 	 	  JOIN PRODUCT P
 	 	 USING (PRODUCT_NO)
@@ -33,8 +37,9 @@
 	 
 	 <update id="changeQuantity">
 	 	UPDATE BUCKEY_LIST
-	 	   SET PRODUCT_QUANTITY = #{productId}
+	 	   SET PRODUCT_QUANTITY = #{productQuantity}
 	 	 WHERE MEMBER_NO = #{memberNo}
+	 	   AND PRODUCT_NO = #{productNo}
 	 </update>
 	 
 	 
