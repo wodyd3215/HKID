@@ -26,5 +26,8 @@ function init(contextPath, memberNo, pageName, optional) {
         case "myDiaryList":
             initDiaryPage(optional)
             break;
+        case "productDetail":
+            initProductDetail(contextPath, JSON.parse(optional));
+            break;
     }
 }

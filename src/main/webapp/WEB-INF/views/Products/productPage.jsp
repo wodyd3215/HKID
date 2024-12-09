@@ -71,7 +71,7 @@
                         <div class="productList" id="storeItemDiv">
                         <!-- 상품 이미지 -->
                             <div class="productImg" >
-                                <a href="deteilItem.li?pno=${p.productNo }">
+                                <a href="deteilItem.li?productNo=${p.productNo }">
                                     <img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="noting">
                                 </a>
                             </div>

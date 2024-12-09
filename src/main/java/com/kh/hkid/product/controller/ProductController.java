@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.hkid.common.template.Template;
+import com.kh.hkid.common.vo.Attachment;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.product.model.vo.Product;
@@ -61,9 +63,22 @@ public class ProductController {
     
 	
 	@GetMapping("deteilItem.li")
-	public String selectItem(int pno, Model model) {
-		Product p = productService.selectProduct(pno);
+	public String selectItem(int productNo, Model model) {
+		Product p = productService.selectProduct(productNo);
+
+		model.addAttribute("pageName", "productDetail");
 		model.addAttribute("p", p);
+		
+		HashMap<String, Object> pMap = new HashMap<>();
+		
+		pMap.put("content", p.getContent());
+		pMap.put("imgs", p.getChangeName());
+		pMap.put("productNo", p.getProductNo());
+		
+		String pData = new Gson().toJson(pMap);
+		
+		model.addAttribute("optional", pData);
+		
 		return "Products/productPageDetail";	
 	}
 	
@@ -106,6 +121,22 @@ public class ProductController {
 		model.addAttribute("category", searchCategory);
 		model.addAttribute("keyword", keyword);
 		return "Product/productPage";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="loadReviewAjax", produces="application/json; charset=UTF-8") 
+	public String loadReviewAjax(int productNo, int currentPage){
+		int reviewCount = productService.reviewCount(productNo);
+    	
+    	PageInfo pi = Template.getPageInfo(reviewCount, currentPage, 1, 3);
+    	ArrayList<Review> list = productService.selectReviewList(pi, productNo);
+		
+    	HashMap<String, Object> rMap = new HashMap<>();
+    	
+    	rMap.put("list", list);
+    	rMap.put("maxPage", pi.getMaxPage());
+    	
+		return new Gson().toJson(rMap);
 	}
 	
 //	@GetMapping("/products/productPage")
