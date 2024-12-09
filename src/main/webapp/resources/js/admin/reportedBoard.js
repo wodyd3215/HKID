@@ -15,11 +15,9 @@ function loadContent(optional) {
     const contentArea = $('#content-detail .custom-modal-content')
 
     loadBoardAjax({boardNo: optional}, (res) => {
-        const title = $('#board-title p').text(res.boardTitle)
-        const writer = $('#writer-date div').text(res.nickName)
-        const content = $('#content').html(res.content)
-
-        contentArea.append(title, writer, content)
+        $('#board-title p').text(res.boardTitle)
+        $('#writer-date div').text(res.nickName)
+        $('#content').html(res.content)
     })
 }
 

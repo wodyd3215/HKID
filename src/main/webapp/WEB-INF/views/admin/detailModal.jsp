@@ -58,17 +58,14 @@
                         </div>
                         <div id="writer-date--update-delete">
                             <div id="writer-date">
-                                <div></div> &nbsp;&nbsp;&nbsp;
+                                <div></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <hr>
-            
-            <div id="second-div">
-                <div id="content" name="boardContent" required></div>
+                <div id="second-div">
+                    <div id="content" name="boardContent" required></div>
+                </div>
             </div>
         </div>
     </div>

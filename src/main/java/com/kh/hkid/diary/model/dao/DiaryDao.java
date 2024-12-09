@@ -1,7 +1,6 @@
 package com.kh.hkid.diary.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.diary.model.vo.Diary;
+import com.kh.hkid.diet.model.vo.Diet;
 
 @Repository
 public class DiaryDao {
@@ -31,6 +31,10 @@ public class DiaryDao {
 	
 	public Diary detailDiary(SqlSessionTemplate sqlSession, Diary d) {
 		return sqlSession.selectOne("diaryMapper.detailDiary", d);
+	}
+	
+	public Diet selectMyDiet(SqlSessionTemplate sqlSession, int foodNo) {
+		return sqlSession.selectOne("dietMapper.selectMyDiet", foodNo);
 	}
 	
 	public int deleteDiary(SqlSessionTemplate sqlSession, Diary d) {
