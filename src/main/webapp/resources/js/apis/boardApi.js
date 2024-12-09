@@ -17,14 +17,12 @@ function checkGood(data, callback){
             //좋아요 있음
             if(res === 1){
                 // 빨간 하트 선택
-                // console.log("빨간하트 출력!")
                 $("#heart-img").attr("src", "resources/image/board/heart.png")
-                return true;
+                callback(true);
             } else if (res === 0){
                 // 텅 빈 하트 선택
-                // console.log("빈 하트 출력!")
                 $("#heart-img").attr("src", "resources/image/board/emptyHeart.png")
-                return false;
+                callback(false);
             }else{
                 console.log("checkGood AJAX 실패!!!!")
             }
@@ -35,57 +33,23 @@ function checkGood(data, callback){
     })
 }
 
-//좋아요 존재 여부만을 확인
-function ExistGood(data, callback){
-    console.log("ExistGood의 데이터: " + data.boardNo)
-    $.ajax({
-        url: "ExistGood",
-        data: {
-            boardNo: data.boardNo,
-            memberNo: data.memberNo
-        },
-        success: function (res) {
-            callback(res)
-        }
-    })
-}
 
-// 좋아요 추가 ajax
-function insertGood(data, callback){
+//하트 ON / OFF
+function changeHeart(data, callback){
+    console.log("data.boardNo: " + data.boardNo);
     $.ajax({
-        url: "insertGood",
-        data: {
-            boardNo: data.boardNo,
-            memberNo: data.memberNo
-        },
-        success: function (res) {
-            if(res === 1){
-                // console.log("좋아요 추가 성공")
-            } else if (res === 1){
-                console.log("좋아요 추가 안함")
-            }else{
-                console.log("좋아요 추가 중 예외발생")
-            }
-        },
-        error: function () {
-            console.log("좋아요 추가 중 에러발생")
-        }
-    })
-}
-
-//좋아요 수정 ajax
-function updateGood(data, callback){
-    $.ajax({
-        url: "updateGood",
+        url: "goodOnOff",
         data: {
             boardNo: data.boardNo,
             memberNo: data.memberNo,
-            heartStatus: data.isHeartOnOff
+            isHeartOnOff: data.isHeartOnOff
         },
-        success: function () {
+        success:function(res){
+            callback(res);
+            console.log("좋아요 onoffAjax성공")
         },
-        error: function () {
-            console.log("좋아요 DB수정 실패")
+        error:function(){
+            console.log("좋아요 onoffAjax실패")
         }
     })
 }
@@ -146,6 +110,7 @@ function addReplyAjax(data, callback){
 
 // 댓글 목록 가져오기
 function getReplyList(data, callback){
+    console.log("getReplyList: " + getReplyList);
     $.ajax({
         url: "replyList.bo",
         data: {boardNo: data},

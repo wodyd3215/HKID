@@ -110,22 +110,6 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.checkGood", map);
 	}
 	
-	//좋아요 상태 체크
-	public char checkGoodStatus(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
-		String result = sqlSession.selectOne("boardMapper.checkGoodStatus", map);
-		
-		if (result != null && !result.isEmpty()) {
-	        return result.charAt(0); //char로 형변환
-	    } else {
-	        throw new IllegalStateException("쿼리 결과가 null이거나 비어 있습니다.");
-	    }
-	}
-	
-	//좋아요 생성
-	public int insertGood(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
-		return sqlSession.insert("boardMapper.insertGood", map);
-	}
-	
 	//좋아요 수정
 	public int updateGood(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		return sqlSession.insert("boardMapper.updateGood", map);

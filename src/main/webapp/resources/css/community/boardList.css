@@ -180,8 +180,16 @@ table td:nth-child(5) { /* 5번째 td */
     font-size: 16px;
 }
 
-#common-table-header th{
+#table-header{
+    border-bottom: 3px solid black  ;
+}
+
+#table-header th{
     font-size: 20px;
+}
+
+#common-table{
+    border-bottom: 3px solid rgb(215, 214, 214);
 }
 
 #common-table a{

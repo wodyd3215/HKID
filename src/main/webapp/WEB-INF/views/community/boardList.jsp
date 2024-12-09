@@ -19,7 +19,7 @@
 <body onload="init('${pageName}', '${optional}')"></body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
-    <!-- 게시글 = ${list}
+    게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
@@ -31,9 +31,10 @@
     <br><br>
     pi.boardLimit = ${pi.boardLimit}
     <br><br>
-    category = ${category} -->
+    category = ${category}
 
 
+    b.memberNo = ${b.memberNo}
 
     <div class="wrapper">
         <br><br><br><br><br>
@@ -48,7 +49,7 @@
 
         <table id="common-table">
             <thead>
-                <tr id="common-table-header">
+                <tr id="table-header">
                     <th class="type-width">
                         <form action="list.bo">
                             <input type="hidden" name="choiceBoardCount" value="${pi.boardLimit}">

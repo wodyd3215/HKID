@@ -28,7 +28,7 @@
             <select name="communityNo" id="search-category">
                 <option value="" selected disabled hidden>게시판 선택</option>
                 <option value="전체">전체</option>
-                <option value="1">질문</option>
+                <option value="1" selected>질문</option>
                 <option value="2">팁</option>
                 <option value="3">자랑</option>
                 <option value="4">홍보</option>

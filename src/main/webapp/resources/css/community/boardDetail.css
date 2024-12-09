@@ -1,11 +1,16 @@
 hr{
-    margin: 8px;
+    margin: 8px !important;
 }
 
 .wrapper{
     display: flex;
     flex-direction: column;
     width: 1056px;
+}
+
+textarea:disabled {
+    cursor: default;
+    background-color: white;
 }
 
 #top-wrapper{
@@ -23,7 +28,7 @@ hr{
 }
 
 #board-title > p {
-    padding-left: 18px;
+    /* padding-left: 18px; */
     padding-top: 5px;
 }
 
@@ -182,6 +187,11 @@ hr{
     display: none;
 }
 
+#write-comment :disabled{
+    color: rgb(195, 195, 195);
+    background-color: #ffffff;
+}
+
 
 #sumbit-div{
     display: flex;
@@ -214,17 +224,30 @@ hr{
 .main-comment{
     display: flex;
     height: 100px;
+    width: 100%;
+}
+
+.sub-main-comment{
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    margin-left: 70px;  
 }
 
 .comment-left{
     display: flex;
     flex-direction: column;
     justify-content:space-around;
-    padding: 20px;
+    padding: 10px;
     padding-left: 30px;
     padding-top: 10px;
     width: 200px;
 }
+
+#sub-comments-body .comment-left{
+    padding-left: 0px;
+}
+
 
 .comment-left > p {
     /* margin-bottom: 5px; */
@@ -256,8 +279,6 @@ hr{
     font-weight: 600;
 }
 
-
-
 .add-sub-comment{
     background-color: white;
     border: none;
@@ -282,6 +303,7 @@ hr{
 }
 
 .comment-right{
+    width: 100px;
     display: flex;
     align-items: end;
 }
@@ -295,7 +317,7 @@ hr{
 }
 
 #sub-comments-body{
-    width: 88%;
+    /* width: 88%; */
     display: flex;
     flex-direction: column;
     position: relative;
@@ -303,9 +325,9 @@ hr{
 
 #drift-arrow{
     width: 20px;
-    position: absolute;
-    left: 0px;
-    top: 10px;
+    padding-top: 13px;
+    margin-right: 10px;
+    /* padding-right: 10px; */
 }
 
 /* ======== 게시글 리스트 css ============ */

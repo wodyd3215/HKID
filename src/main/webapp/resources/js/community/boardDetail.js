@@ -1,56 +1,38 @@
 // 처음 실행
 function detailOnload(bnoMno){ //DOM이 로드된 후 자동실행
+    const boardData = JSON.parse(bnoMno);   //String으로 온 데이터를 JSON으로 파싱
     // console.log("detailOnload의 매개변수: "+bnoMno)
 
-    checkGood(bnoMno)   //좋아요 상태를 확인
-    const boardData = JSON.parse(bnoMno);   //String으로 온 데이터를 JSON으로 파싱
+    //좋아요 비활성화
+
+    //좋아요 상태를 확인
+    checkGood(bnoMno, function(res){   });
+
+    //좋아요 개수
     countGood(boardData, drawCountGood);
 
     //댓글 목록 가져오기
     getReplyList(boardData.boardNo, setReplyData)
 }
 
-//하트 ON / OFF
-let isHeartOnOff;
-
-function changeHeart(_this, boardNo, memberNo){
-    if (($("#heart-img").attr('src')) === 'resources/image/board/heart.png'){
-        isHeartOnOff = true;
-    }else{
+// 하트 버튼누르면 실행되는 함수
+function HeartChangeBtn(_this, boardNo, memberNo) {
+    let isHeartOnOff = null;
+    if (($("#heart-img").attr('src')) === 'resources/image/board/heart.png') {
+        $("#heart-img").attr("src", "resources/image/board/emptyHeart.png")
         isHeartOnOff = false;
-    }
-
-    // 좋아요를 누른 적이 있는지 체크(=INSERT 중복 제외)
-    let existGood = null;
-    ExistGood({
-        boardNo, 
-        memberNo 
-    }, function(res){
-        existGood = res;
-        console.log("existGood: " + existGood)
-    }
-);
-    // console.log("existGood: " + existGood)
-
-
-    if(!isHeartOnOff){
-        $(_this).attr("src", "resources/image/board/heart.png");
+    } else {
+        $("#heart-img").attr("src", "resources/image/board/heart.png")
         isHeartOnOff = true;
-        console.log("하트 on")
-        if (!existGood){ //좋아요를 처음 눌렀을 경우
-            insertGood({ boardNo, memberNo })
+    }
+    console.log("boardNo: " + boardNo);
+    changeHeart({ _this, boardNo, memberNo, isHeartOnOff },
+        function(){
+            countGood({ boardNo }, drawCountGood)
         }
-    }else{
-        $(_this).attr("src", "resources/image/board/emptyHeart.png");
-        isHeartOnOff = false;
-        console.log("하트 off")
-    }
-    updateGood({
-            isHeartOnOff,
-            boardNo,
-            memberNo
-    });
+    )
 }
+
 
 // 좋아요 개수 그려주는 함수
 function drawCountGood(count){
@@ -59,18 +41,23 @@ function drawCountGood(count){
 
 /****************************  댓글   ****************************/
 //댓글 갯수 및 목록 초기화
-function setReplyData(commentsList){
-        $("#reply-count").html(commentsList.length); //댓글 개수를 List의 길이만큼
-        drawReplyList(document.querySelector("#all-reply-wrapper"), commentsList);
+function setReplyData(data){
+    const commentsList = data.replyList;
+    console.log("data.replyList: " + data.replyList);
+    console.log("data.loginMemberNo" + data.loginMemberNo);
+    
+    $("#reply-count").html(commentsList.length); //댓글 개수를 List의 길이만큼
+    drawReplyList(document.querySelector("#all-reply-wrapper"), data.replyList, data.loginMemberNo);
 }
 
-function drawReplyList(tbody, commentsList) {
+//댓글 그려주는 함수
+function drawReplyList(tbody, commentsList, loginMemberNo) {
     tbody.innerHTML = ""; // 기존 내용을 초기화
 
     let str = "";
     for (const comment of commentsList) {
         str += `
-        <hr>
+            <hr>
         <div class="comments-body">
             <div class="main-comment" id="main-comment${comment.replyNo}">
                 <div class="comment-left">
@@ -78,10 +65,12 @@ function drawReplyList(tbody, commentsList) {
                     <p>${comment.date}&nbsp;</p>
                     <button class="add-sub-comment">답글쓰기</button>
                 </div>
-                <div class="comment-middle"">${comment.content}</div>
+                <div class="comment-middle">${comment.content}</div>
                 <div class="comment-right">
-                    <button class="reply-update-btn" data-target="updateReply" onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
-                    <button class="reply-delete-btn" onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
+                    ${comment.memberNo === loginMemberNo ? `
+                        <button class="reply-update-btn" data-target="updateReply" onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
+                        <button class="reply-delete-btn" onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
+                    ` : ''}
                 </div>
             </div>
         </div>
@@ -160,15 +149,14 @@ function changeUpdate(replyNo, boardNo, memberNo) {
 
 // [수정완료] 기능
 function updateReply(replyNo, boardNo, memberNo){
-    console.log("Ddddddddddddd")
     // textarea의 값 가져오기
     const content = $(`#main-comment${replyNo} .comment-middle-input`).val();
     console.log(content);
 
     //ajax에 data로 보내기
-    console.log("boardNo: " + boardNo)
-    console.log("replyNo: " + replyNo)
-    console.log("memberNo: " + memberNo)
+    // console.log("boardNo: " + boardNo)
+    // console.log("replyNo: " + replyNo)
+    // console.log("memberNo: " + memberNo)
 
     updateReplyAjax({
         boardNo, replyNo, content
