@@ -73,14 +73,14 @@
                             
                             <td>
                                 <div class="cartQuantity" data-product-no="${item.productNo}" data-member-no="${loginMember.memberNo}">
-                                    <button class="decreaseBtn" >-</button>
+                                    <button class="decreaseBtn" onclick="" >-</button>
                                     <div class="quantityBtnText">${item.productQuantity}</div>
                                     <button class="increaseBtn">+</button>
                                 </div>
                             </td>
-                            <td class="productPrice">${item.price}</td>
+                            <td class="productPrice" data-price="${item.price}">${item.price}</td>
                             <td>
-                                <button class="btn delete-button" value="%{item.productNo}" onclick="delectOne(this)"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
+                                <button class="btn delete-button"  data-product-no="${item.productNo}" data-member-no="${loginMember.memberNo}" onclick="delectOne(this)"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -94,7 +94,7 @@
 
                     <form id="" action="delete.c">
                         <th>
-                            <input type="checkbox" class="selectCart" name="selectBox" onclick="selectAll(this)">
+                            <!-- <input type="checkbox" class="selectCart" name="selectBox" onclick="selectAll(this)"> -->
                         </th>
                         
                         <td>총</td>

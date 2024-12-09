@@ -18,30 +18,18 @@ function selectAll(selectAll)  {
   })
 }
 
+function checkSelectAll(checkbox) {
+    const selectAllCheckbox = document.querySelector('input[name="selectBox"][onclick="selectAll(this)"]');
+    const checkboxes = document.querySelectorAll('input[name="selectBox"]:not([onclick="selectAll(this)"])');
 
+    // 모든 체크박스가 체크되었는지 확인
+    const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
 
+    // 전체 체크박스의 상태를 업데이트
+    selectAllCheckbox.checked = allChecked;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// -------------------------------------------------------------------------------------------
 
 
 function addItem(loginMember){
@@ -86,27 +74,7 @@ $('.decreaseBtn').click(function() {
     updateQuantity(memberNo, productNo, -1); // -1은 수량 감소
 });
 
-function updateQuantity(memberNo, productNo, productQuantity){    
-    $.ajax({
-        url:'/qchange',
-        type:'POST',
-        data:{
-            memberNo : memberNo,
-            productNo: productNo,
-            productQuantity : productQuantity
-        },
-        success: function(response){
-                // 수량 업데이트
-                $('#quantity' + productNo).text(response.newQuantity);
 
-                // 총 금액 업데이트
-                $('#totalPrice').text(response.totalPrice);
-            
-        }, error: function(){
-            alert('서버 요청 중 오류가 발생하였습니다.');
-        }
-    });
-}
 
 // 숫자 3자리 콤마찍기
 // Number.prototype.formatNumber = function(){
@@ -144,12 +112,6 @@ function bottomBtn(){
 }
 
 
-
-
-
-
-
-
 function deleteAll(){
     checkCounts = document.querySelectorAll(".check");
     let lis;
@@ -162,18 +124,3 @@ function deleteAll(){
     });
 
 }
-
-$(function(){
-    $("checkAll").click(function(){
-        $(".check").prop("checked", this.checked);
-        // 첫 화면 들어오자마다 모두 체크 되어 있는 상태
-        if(this.checked){
-            checkCounts.forEach((check,index) => {
-                pushList(checkList, check.value);
-                pushList(deleteList, check.value);
-            });
-        } else {
-
-        }
-    })
-})

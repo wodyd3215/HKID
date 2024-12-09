@@ -39,10 +39,10 @@ public class PhaseServiceImpl implements PhaseService{
 		return phaseDao.insertReview(sqlSession, r);
 	}
 
-	@Override
-	public String selectDate(Review r) {
-		return phaseDao.selectReview(sqlSession, r);
-	}
+//	@Override
+//	public String selectDate(int memberNo) {
+//		return phaseDao.selectReview(sqlSession, r);
+//	}
 
 	@Override
 	public int selectListCount(int memberNo) {
