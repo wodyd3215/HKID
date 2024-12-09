@@ -32,8 +32,8 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public int deleteCart(Cart c) {
-		return cartDao.deleteCart(sqlSession, c);
+	public int deleteCart(String[] pick) {
+		return cartDao.deleteCart(sqlSession, pick);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public String deleteCart(HashMap<Object, Integer> de) {
+	public int deleteCart(HashMap<Object, Integer> de) {
 		return cartDao.deleteCart(sqlSession, de);
 	}
 

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kh.hkid.cart.model.service.CartService;
 import com.kh.hkid.cart.model.vo.Cart;
+import com.kh.hkid.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class CartController {
 	
@@ -52,8 +55,15 @@ public class CartController {
 	
 	
 	@ResponseBody
-	@RequestMapping("/qchange")
-	public int quantityChange(int memberNo, int productNo, int productQuantity, Model model) {
+	@GetMapping("/qchange")
+	public int quantityChange(HttpSession session, int productNo, int productQuantity, Model model) {
+		
+		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		
+		log.info("memberNo"+memberNo);
+		log.info("productNo" + productNo);
+		log.info("productQuantity" + productQuantity);
+		
 		HashMap<Object, Integer> map = new HashMap<>();
 		map.put("memberNo", memberNo);
 		map.put("productNo", productNo);
@@ -63,7 +73,7 @@ public class CartController {
 	}
 	
 	@PostMapping("delete.o")
-	public String delete(Cart c, Model model, int memberNo, int productNo) {
+	public int delete(Cart c, Model model, int memberNo, int productNo) {
 				
 		
 		HashMap<Object, Integer> de = new HashMap<>();
@@ -75,14 +85,13 @@ public class CartController {
 	}
 	
 	@ResponseBody
-	@PostMapping("delete.c")
+	@GetMapping("delete.c")
 	public int deleteOne(int memberNo, int productNo, Cart c, Model model, HttpServletRequest request) {
 		
 		String[] pick = request.getParameterValues("valueArr");
 		
-		
-		
-		int result = cartService.deleteCart(c);
+				
+		int result = cartService.deleteCart(pick);
 		return result;
 	}
 

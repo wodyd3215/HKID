@@ -23,11 +23,13 @@ public class FavoriteController {
 	}
 	
 	@GetMapping("favorite.li")
-	public String selectList(Model model, HttpSession session, int memberNo) {
+	public String selectList(Model model, int memberNo) {
 		
 		ArrayList<Favorite> flist = favoriteService.selectList(memberNo);
 		
-		model.addAttribute("list",flist);
+		model.addAttribute("flist", flist);
+		System.out.println("flist: " + flist);
+		System.out.println("Member No: " + memberNo);
 		
 		return "Products/favoriteList";
 	}

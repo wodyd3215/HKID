@@ -14,11 +14,11 @@ public interface CartService {
 	int changeQuantity(HashMap<Object, Integer> map);
 
 	// ajax 에서 받은 데이터 삭제
-	int deleteCart(Cart c);
+	int deleteCart(String[] pick);
 
 	// ajax 로 받은 데이터 추가
 	int addCart(Cart c);
 
 	// 한 개만 삭제
-	String deleteCart(HashMap<Object, Integer> de);
+	int deleteCart(HashMap<Object, Integer> de);
 }

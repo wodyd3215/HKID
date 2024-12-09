@@ -133,10 +133,10 @@ function bottomBtn(){
         let chk = confirm("");
         $.ajax({
             url:'delete.c',
-            type:"POST",
+            type:'GET',
             data:{valueArr : valueArr},
             success:function(){
-                callback
+               
             }
         })
     }

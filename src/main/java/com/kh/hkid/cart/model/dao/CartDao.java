@@ -19,16 +19,16 @@ public class CartDao {
 		return sqlSession.update("cartMapper.changeQuantity", map);
 	}
 
-	public int deleteCart(SqlSessionTemplate sqlSession, Cart c) {		
-		return sqlSession.delete("cartMapper.deleteCart", c);
+	public int deleteCart(SqlSessionTemplate sqlSession, String[] pick) {		
+		return sqlSession.delete("cartMapper.deleteCart", pick);
 	}
 
 	public int addCart(SqlSessionTemplate sqlSession, Cart c) {
 		return sqlSession.insert("carMapper.insertCart", c);
 	}
 
-	public String deleteCart(SqlSessionTemplate sqlSession, HashMap<Object, Integer> de) {
-		return null;
+	public int deleteCart(SqlSessionTemplate sqlSession, HashMap<Object, Integer> de) {
+		return sqlSession.delete("cartMapper.deleteCart",de);
 	}
 
 	
