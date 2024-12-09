@@ -50,6 +50,25 @@
                 <button class="material-symbols-outlined close-btn " onclick="closeModal()">disabled_by_default</button>
             </div>
             <div class="custom-modal-content">
+                <div id="top-wrapper">
+                    <!-- 게시글 제목칸-->
+                    <div id="board-title-wrapper">
+                        <div id="board-title">
+                            <p></p>
+                        </div>
+                        <div id="writer-date--update-delete">
+                            <div id="writer-date">
+                                <div></div> &nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            
+            <div id="second-div">
+                <div id="content" name="boardContent" required></div>
             </div>
         </div>
     </div>

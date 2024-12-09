@@ -47,10 +47,10 @@
                             </c:choose>
                             <td>
                                 <div class="management">
-                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('update', 'editProduct')">
+                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('editProduct')">
                                         edit
                                     </button>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete', 'deleteProduct')">
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteProduct')">
                                         delete
                                     </button>
         
@@ -67,21 +67,6 @@
         <div id="boCount-wirte-div" class="custom-div">
                 <a href="pEnroll.ad" class="btn btn-primary custom-btn">상품 등록</a>
         </div>
-
-        <div id="searchbar-div">
-            <select name="search-category" id="search-category">전체
-                <option value="all">전체</option>
-                <option value="question">식품</option>
-                <option value="tip">의류</option>
-                <option value="show-off">기구</option>
-
-            </select>
-            
-            <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">
-            <button id="search-btn" type="submit">
-                <img id="searchIcon" src="resources/image/searchIcon.png">
-            </button>
-        </div>  
 
         <!-- 페이지 버튼 -->
         <div id="paging-div">

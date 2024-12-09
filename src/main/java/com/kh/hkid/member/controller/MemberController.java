@@ -303,6 +303,8 @@ public class MemberController {
     public String imgChangeAjax(Member m, MultipartFile imgProfile, HttpSession session) {
     	m.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
     	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
+    	
+    	// 전달된 파일이 있는지 확인하는 구문
     	if(!imgProfile.getOriginalFilename().equals("")) {
 	    	m.setProfileImg("/resources/image/profileImg/"+ Template.saveFile(imgProfile, session, "/resources/image/profileImg/"));
 	    	

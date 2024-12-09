@@ -22,6 +22,7 @@ import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
 import com.kh.hkid.admin.service.AdminService;
+import com.kh.hkid.challenge.model.vo.Challenge;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.member.model.vo.Member;
@@ -359,11 +360,47 @@ public class AdminController {
 		}		
 	}
 	
-//	@ResponseBody
-//	@PostMapping(value="loadBoardAjax",  produces="application/json; charset=UTF-8")
-//	public String loadBoardAjax(int boardNo, Model model) {
-//		
-//		
-//		return new Gson().toJson(adminService.loadBoardAjax(boardNo));
-//	}
+	@GetMapping("challenges")
+	public String challenges(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		int totalCount = adminService.challengeCount();
+		PageInfo pi = Template.getPageInfo(totalCount, currentPage, 10, 10);
+		ArrayList<Challenge> list = adminService.selectChallengeList(pi);
+		
+		log.info("list: " + list);
+		log.info("pi: " + pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "admin/challengeManagement";
+	}
+	
+	@ResponseBody
+	@PostMapping("insertChallenge")
+	public String insertChallenge(Challenge ch, MultipartFile upfile, HttpSession session) {
+		
+		// 전달된 파일이 있는지 확인하는 구문
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = Template.saveFile(upfile, session, "/resources/image/challenge/");
+			
+			ch.setThumbnail("/resources/image/challenge/" + changeName);
+		}
+		
+		int result = adminService.insertChallenge(ch);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping(value="loadBoardAjax",  produces="application/json; charset=UTF-8")
+	public String loadBoardAjax(int boardNo, Model model) {
+		
+		
+		return new Gson().toJson(adminService.loadBoardAjax(boardNo));
+	}
+	
 }

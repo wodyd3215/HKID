@@ -64,6 +64,7 @@
                     </ul>
                 </li>
                 <li><a href="notice.ad">공지</a></li>
+                <li><a href="challenges">챌린지 관리</a></li>
             </ul>
         </div>
     </div>

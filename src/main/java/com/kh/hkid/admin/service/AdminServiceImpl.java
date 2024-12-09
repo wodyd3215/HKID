@@ -13,7 +13,9 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
+import com.kh.hkid.challenge.model.vo.Challenge;
 import com.kh.hkid.common.vo.PageInfo;
+import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.product.model.vo.Product;
 
 import lombok.RequiredArgsConstructor;
@@ -148,4 +150,25 @@ public class AdminServiceImpl implements AdminService{
 		if(result == 0)
 			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
 	}
+
+	@Override
+	public int challengeCount() {
+		return adminDao.challengeCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Challenge> selectChallengeList(PageInfo pi) {
+		return adminDao.selectChallengeList(sqlSession, pi);
+	}
+	
+	@Override
+	public int insertChallenge(Challenge ch) {
+		return adminDao.insertChallenge(sqlSession, ch);
+	}
+	
+	@Override
+	public Board loadBoardAjax(int boardNo) {
+		return adminDao.loadBoardAjax(sqlSession, boardNo);
+	}
+
 }

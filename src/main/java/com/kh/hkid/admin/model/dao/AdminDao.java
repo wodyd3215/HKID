@@ -11,8 +11,10 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
+import com.kh.hkid.challenge.model.vo.Challenge;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.BoardInfo;
+import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.product.model.vo.Product;
 
 @Repository
@@ -57,10 +59,6 @@ public class AdminDao {
 		
 	public int deleteReportTarget(SqlSessionTemplate sqlSession, Report r) {
 		return sqlSession.delete("adminMapper.deleteReportTarget", r);
-	}
-	
-	public BoardInfo loadBoardAjax(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.selectOne("adminMapper.loadBoardAjax");
 	}
 	
 	public int insertsuspension(SqlSessionTemplate sqlSession, SuspensionMember sm) {
@@ -116,5 +114,24 @@ public class AdminDao {
 	
 	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.update("productMapper.updateProduct", p); 
+	}
+	
+	public int challengeCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("challengeMapper.boardCount");
+	}
+	
+	public ArrayList<Challenge> selectChallengeList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("challengeMapper.selectList", null, rowBounds);
+	}
+	
+	public int insertChallenge(SqlSessionTemplate sqlSession, Challenge ch) {
+		return sqlSession.insert("challengeMapper.insertChallenge", ch);
+	}
+	
+	public Board loadBoardAjax(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 	}
 }

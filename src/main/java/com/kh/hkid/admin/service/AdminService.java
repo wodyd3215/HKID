@@ -6,9 +6,11 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
+import com.kh.hkid.challenge.model.vo.Challenge;
 import com.kh.hkid.common.vo.Attachment;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.BoardInfo;
+import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.product.model.vo.Product;
 
 public interface AdminService {
@@ -34,6 +36,8 @@ public interface AdminService {
 	
 	void insertsuspension(SuspensionMember sm, int reportNo);
 	
+	Board loadBoardAjax(int boardNo);
+	
 // ======================= 계정복구 =======================
 	int recoveryCount();
 	
@@ -49,4 +53,11 @@ public interface AdminService {
 	int deactivateProduct(int productNo);
 	
 	void updateProduct(Product p, String files);
+	
+//	======================= 챌린지 =======================
+	int challengeCount();
+	
+	ArrayList<Challenge> selectChallengeList(PageInfo pi);
+	
+	int insertChallenge(Challenge ch);
 }

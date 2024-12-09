@@ -64,12 +64,6 @@
             </table>
             <jsp:include page="detailModal.jsp" />
         </div>
-        <div id="searchbar-div">
-            <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">
-            <button id="search-btn" type="submit">
-                <img id="searchIcon" src="resources/image/searchIcon.png">
-            </button>
-        </div>  
 
         <!-- 페이지 버튼 -->
         <!-- 페이지 버튼 -->
