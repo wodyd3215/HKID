@@ -22,7 +22,7 @@
             <table id="common-table">
                 <thead>
                     <tr id="common-table-header">
-                        <th class="type-width8">유형</th>
+                        <th class="type-width8">번호</th>
                         <th class="type-width50">상품명</th>
                         <th class="type-width6">재고</th>
                         <th class="type-width12">등록일</th>
@@ -50,9 +50,19 @@
                                     <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('editProduct?productNo=${p.productNo}')">
                                         edit
                                     </button>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteProduct?productNo=${p.productNo}')">
-                                        delete
-                                    </button>
+                                    <c:choose>
+                                        <c:when test="${p.status eq 'Y'}">
+                                            <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteProduct?productNo=${p.productNo}&status=${p.status}')">
+                                                autorenew
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="material-symbols-outlined btn btn-primary custom-btn" id="renew" onclick="postFormSubmit('deleteProduct?productNo=${p.productNo}&status=${p.status}')">
+                                                autorenew
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
+
         
                                     <form action="" method="POST" id="postForm">
                                     </form>

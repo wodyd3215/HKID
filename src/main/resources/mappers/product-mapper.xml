@@ -271,12 +271,17 @@
 	</select>
 	
 	<update id="deactivateProduct">
-		UPDATE PRODUCT
-		   SET STATUS = 'N' 
-		 WHERE PRODUCT_NO = #{productNo}
+	    UPDATE PRODUCT
+	       SET STATUS = 'N'
+	    WHERE PRODUCT_NO = #{productNo}
 	</update>
 	
-		
+	<update id="activateProduct">
+		UPDATE PRODUCT
+	       SET STATUS = 'Y'
+	    WHERE PRODUCT_NO = #{productNo}
+	</update>
+	
 	<update id="updateAttachment">
 		UPDATE TOTAL_ATTACHMENT
 		   SET CHANGE_NAME = #{files}

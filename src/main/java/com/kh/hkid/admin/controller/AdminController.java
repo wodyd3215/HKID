@@ -309,13 +309,19 @@ public class AdminController {
 	}
 	
 	@PostMapping("deleteProduct")
-	public String deleteProduct(int productNo, HttpSession session) {
-		int result = adminService.deactivateProduct(productNo);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "상품 비활성화 성공");
+	public String deactivateProduct(int productNo, String status, HttpSession session) {
+		int result; 
+		if(status.equals("Y")) {
+			result = adminService.deactivateProduct(productNo);
 		} else {
-			session.setAttribute("alertMsg", "상품 비활성화 실패");
+			result = adminService.activateProduct(productNo);
+		}
+		
+
+		if(result > 0) {
+			session.setAttribute("alertMsg", "상품 상태 변화 성공");
+		} else {
+			session.setAttribute("alertMsg", "상품 상태 변화 실패");
 		}
 		
 		return "redirect:/product.ad";

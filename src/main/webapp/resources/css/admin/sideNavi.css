@@ -10,6 +10,7 @@
 }
 
 .sideNavi {
+    position: relative;
     width: 284px;
     background: #006494;
     position: fixed;
@@ -46,4 +47,11 @@
 
 #nav>ul>li>ul>li>a{
     font-size: 18px;
+}
+
+.logout {
+    position: absolute;
+    left: 50%;
+    bottom: 75px;
+    transform: translateX(-50%);
 }
