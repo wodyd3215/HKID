@@ -60,6 +60,16 @@ public class ProductDao {
 		return (ArrayList)sqlSession.selectList("productMapper.searchList", map, rowBounds);
 	}
 
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("productMapper.selectSearchCount", map);
+	}
+
+	public ArrayList<Product> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("productMapper.selectSearchList", map, rowBounds);
+	}
+	
 	public int reviewCount(SqlSessionTemplate sqlSession, int productNo) {
 		return sqlSession.selectOne("productMapper.reviewCount", productNo);
 	}
