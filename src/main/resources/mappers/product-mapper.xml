@@ -46,26 +46,34 @@
 	 	SELECT COUNT(*)
 	 	  FROM PRODUCT
 	 	 WHERE TYPE = '1'
+	 	   AND STATUS = 'Y'
 	 </select>
 	  
 	<!-- 상품 목록 (전체) 조회 -->
-	<select id="selectList" resultType="Product">
-		SELECT p.PRODUCT_NO productNo,
-	       p.PRODUCT_NAME productName,
-	       p.CONTENT content,
-	       p.QUANTITY quantity,
-	       p.PRICE price,
-	       p.CATEGORY category,
-	       TO_CHAR(p.REGISTRATION_DATE, 'YYYY-MM-DD') registrationDate,
-	       p.STATUS status,
-	       COALESCE(r.rate, 0) AS rate
-	  FROM PRODUCT p
-	  LEFT JOIN (
-	       SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
-	         FROM REVIEW
-	        GROUP BY PRODUCT_NO
-	  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
-	 ORDER BY p.PRODUCT_NO DESC
+	<select id="selectList" resultMap="productResultSet">
+		SELECT p.PRODUCT_NO,
+		       p.MEMBER_NO,
+		       p.PRODUCT_NAME,
+		       p.CONTENT,
+		       p.QUANTITY,
+		       p.PRICE,
+		       p.CATEGORY,
+		       t.FILE_NO,
+		       t.CHANGE_NAME,
+		       COALESCE(r.RATE, 0) AS RATE,
+		       COALESCE(r.REVIEW_COUNT, 0) AS REVIEW_COUNT
+		  FROM PRODUCT p
+		  JOIN TOTAL_ATTACHMENT t ON p.PRODUCT_NO = t.PRODUCT_NO
+		  LEFT JOIN (
+		       	SELECT ROUND(AVG(REVIEW_RATE)) AS RATE, 
+		       		   COUNT(*) AS REVIEW_COUNT,
+		               PRODUCT_NO
+		          FROM REVIEW
+		         GROUP BY PRODUCT_NO
+		  			) r ON p.PRODUCT_NO = r.PRODUCT_NO
+		 WHERE STATUS = 'Y'
+		   AND TYPE = 1
+		 ORDER BY p.PRODUCT_NO DESC
 	</select>
 	
 	<!-- 카테고리별 삼품 목록 총 갯수 -->
@@ -73,6 +81,7 @@
 		SELECT COUNT(*)
 			FROM PRODUCT
 		WHERE TYPE = '1'
+		  AND STATUS = 'Y'
 		<if test="category != '전체'">
         	AND CATEGORY = #{category}
     	</if>
@@ -80,22 +89,32 @@
 	
 	<!--  카테고리별 상품 목록 리스트  -->
 	<select id="selectProductCategoryList" resultType="Product">
-		SELECT p.PRODUCT_NO productNo,
-	       p.PRODUCT_NAME productName,
-	       p.CONTENT content,
-	       p.QUANTITY quantity,
-	       p.PRICE price,
-	       COALESCE(r.rate, 0) AS rate
-	  FROM PRODUCT p
-	  LEFT JOIN (
-	       SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
-	         FROM REVIEW
-	        GROUP BY PRODUCT_NO
-	  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
-		WHERE TYPE = '1' 
+		SELECT p.PRODUCT_NO,
+		       p.MEMBER_NO,
+		       p.PRODUCT_NAME,
+		       p.CONTENT,
+		       p.QUANTITY,
+		       p.PRICE,
+		       p.CATEGORY,
+		       t.FILE_NO,
+		       t.CHANGE_NAME,
+		       COALESCE(r.RATE, 0) AS RATE,
+		       COALESCE(r.REVIEW_COUNT, 0) AS REVIEW_COUNT
+		  FROM PRODUCT p
+		  LEFT JOIN TOTAL_ATTACHMENT t ON p.PRODUCT_NO = t.PRODUCT_NO
+		  LEFT JOIN (
+		       	SELECT ROUND(AVG(REVIEW_RATE)) AS RATE, 
+		       		   COUNT(*) AS REVIEW_COUNT,
+		               PRODUCT_NO
+		          FROM REVIEW
+		         GROUP BY PRODUCT_NO
+		  			) r ON p.PRODUCT_NO = r.PRODUCT_NO
+		 WHERE TYPE = '1' 
+		   AND STATUS = 'Y'
 	  	<if test="category != '전체'">
         	AND CATEGORY = #{category}
     	</if>
+    	 ORDER BY p.PRODUCT_NO DESC
 	</select>
 	
 	<!-- 상품 상세 페이지 

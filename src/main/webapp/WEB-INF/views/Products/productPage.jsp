@@ -60,7 +60,7 @@
                         </li>
 
                         <li>
-                            <input type="radio" class="usedMove" id="usedItem" name="ItemRbtn" onclick="productView('used')" /> 
+                            <input type="radio" class="usedMove" id="usedItem" name="ItemRbtn" onclick="productView('used')" disabled/> 
                             <label for="usedItem"> 중고 </label>
                         </li>
                     </ul>                
@@ -72,7 +72,7 @@
                         <!-- 상품 이미지 -->
                             <div class="productImg" >
                                 <a href="deteilItem.li?productNo=${p.productNo }">
-                                    <img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="noting">
+                                    <img src="${pageContext.request.contextPath}${p.changeName}" alt="noting">
                                 </a>
                             </div>
 
@@ -89,7 +89,7 @@
                                 
                                 <div class="productTextMid">
                                     <div class="productTexts">
-                                        <div class="textStar"></div>                                  
+                                        <div class="textStar" data-star="${p.rate}" data-count="${p.reviewCount}"></div>                                  
                                     </div>                                                                
                                     <div class="mainPrice">${p.price}원</div>
                                 </div>
