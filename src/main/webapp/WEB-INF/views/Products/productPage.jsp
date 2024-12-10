@@ -22,6 +22,11 @@
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+    category = ${category}
+    <br><br><br>
+    더미 List = ${list}
+    <br><br>
+    pi = ${pi}
     <div class="wrapper">
         <div id="productPage">
             <form id="sidecategory" action="product.se">
@@ -182,19 +187,16 @@
                 </div>
 
             <!-- 검색 바 -->
-            <form action="product.se">
+            <form action="productSearch.se">
                 <div class="produBottom">
-                    <input type="hidden" name="pPage" value="1"> 
-                    <input type="hidden" name="">                  
-                    <select name="searchCategory" id="produCategory">
-                        <option value="전체">전체</option>
-                        <option value="식품">식품</option>
-                        <option value="의류">의류</option>
-                        <option value="기구">기구</option>
+                    <input type="hidden" name="category" value="${category}"> <!--현재 카테고리-->            
+                    <select name="condition" id="produCategory"> <!--id 수정 권장-->
+                        <option value="title">상품명</option>
+                        <option value="content">내용</option>
                     </select>
                         
                     <div class="produSearch">
-                        <input type="text" class="produSearchCan" name="keyword" value="${keyword}" placeholder="검색어를 입력하세요.">
+                        <input type="text" class="produSearchCan" name="keyword" placeholder="검색어를 입력하세요.">
                         <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
                     </div>                        
                 </div>
