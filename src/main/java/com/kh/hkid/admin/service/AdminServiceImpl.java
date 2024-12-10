@@ -1,10 +1,10 @@
 package com.kh.hkid.admin.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +13,9 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
-import com.kh.hkid.common.vo.Attachment;
+import com.kh.hkid.challenge.model.vo.Challenge;
 import com.kh.hkid.common.vo.PageInfo;
+import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.product.model.vo.Product;
 
 import lombok.RequiredArgsConstructor;
@@ -26,9 +27,6 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private final SqlSessionTemplate sqlSession;
 
-	@Autowired
-	private final DataSourceTransactionManager transactionManager;
-	
 	@Autowired
 	private final AdminDao adminDao;
 
@@ -126,4 +124,51 @@ public class AdminServiceImpl implements AdminService{
 		if(result == 0)
 			throw new RuntimeException("이미지를 정상적으로 insert하지 못하였습니다.");
 	}
+	
+	public Product editProduct(int productNo) {
+		return adminDao.editProduct(sqlSession, productNo);
+	}
+
+	@Override
+	public int deactivateProduct(int productNo) {
+		return adminDao.deactivateProduct(sqlSession, productNo);
+	}
+
+	@Transactional(rollbackFor = {Exception.class})
+	@Override
+	public void updateProduct(Product p, String files) {
+		HashMap<String, Object> aMap = new HashMap<>();
+		
+		aMap.put("productNo", p.getProductNo());
+		aMap.put("files", files);
+		
+		int result = adminDao.updateAttachment(sqlSession, aMap);
+		if(result == 0)
+			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
+		
+		result = adminDao.updateProduct(sqlSession, p);
+		if(result == 0)
+			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
+	}
+
+	@Override
+	public int challengeCount() {
+		return adminDao.challengeCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Challenge> selectChallengeList(PageInfo pi) {
+		return adminDao.selectChallengeList(sqlSession, pi);
+	}
+	
+	@Override
+	public int insertChallenge(Challenge ch) {
+		return adminDao.insertChallenge(sqlSession, ch);
+	}
+	
+	@Override
+	public Board loadBoardAjax(int boardNo) {
+		return adminDao.loadBoardAjax(sqlSession, boardNo);
+	}
+
 }

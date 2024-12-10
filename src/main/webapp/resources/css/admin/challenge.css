@@ -1,0 +1,66 @@
+#common-table tbody tr{
+    height: 85px;
+}
+
+.thumbnail {
+    width: 12%;
+}
+
+.chall-name {
+    width: 40%;
+}
+
+.start-date,
+.end-date {
+    width: 20%;
+}
+
+.btn-area {
+    width: 5%;
+}
+
+td>img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+td>input[type='text'] {
+    width: 100%;
+    /* margin: 10px; */
+    outline: none;
+    border: 1px solid #d9d9d9;
+    height: 30px;
+}
+
+td>input[type='file'] {
+    display: none;
+}
+
+td#preview-img {
+    width: 76px;
+    height: 76px;
+    border: 1px solid #d9d9d9;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 5px;
+    color: #d9d9d9;
+}
+
+td .management {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+tbody .btn.custom-btn{
+    font-weight: bold;
+}
+
+tbody .btn.btn-primary.custom-btn {
+    width: 24px; /* 버튼 크기 조정 */
+    height: 24px; /* 버튼 크기 조정 */ 
+}

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.diary.model.dao.DiaryDao;
 import com.kh.hkid.diary.model.vo.Diary;
+import com.kh.hkid.diet.model.vo.Diet;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,6 +49,11 @@ public class DiaryServiceImpl implements DiaryService{
 		return diaryDao.detailDiary(sqlSession, d);
 	}
 
+	@Override
+	public Diet selectMyDiet(int foodNo) {
+		return diaryDao.selectMyDiet(sqlSession, foodNo);
+	}
+	
 	@Override
 	public int deleteDiary(Diary d) {
 		return diaryDao.deleteDiary(sqlSession, d);

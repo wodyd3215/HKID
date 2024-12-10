@@ -9,4 +9,6 @@ public class Cart {
 	private int productNo;
 	private int productQuantity;
 	private String productName;
+	private int price;
+	
 }

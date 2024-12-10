@@ -9,11 +9,15 @@
 	<resultMap type="Favorite" id="favoriteResultSet">
 		<!-- <result column="테이블 컬럼명" property="객체의 필드명"/> -->
 		<result column="MEMBER_NO" property="memberNo" />
-		<result column="PRODUCT_NO" property="productNo" />		
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRICE" property="PRICE" />
 	</resultMap>
 	
 	<select id="selectList" resultType="Favorite">
-		SELECT PRODUCT_NO productNo
+		SELECT PRODUCT_NO productNo,
+			   PRODUCT_NAME productName,
+			   PRICE price
 		  FROM FAVORITE F
 		  JOIN PRODUCT P
 		 USING (PRODUCT_NO)

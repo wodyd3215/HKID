@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.product.model.dao.ProductDao;
 import com.kh.hkid.product.model.vo.Product;
+import com.kh.hkid.product.model.vo.Review;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,8 +36,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product selectProduct(int pno) {
-		return productDao.selectProduct(sqlSession, pno);
+	public Product selectProduct(int productNo) {
+		return productDao.selectProduct(sqlSession, productNo);
 	}
 
 	@Override
@@ -63,6 +64,16 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<Product> searchList(HashMap<String, String> map, PageInfo pi) {
 		return productDao.searchList(sqlSession, map, pi);
+	}
+
+	@Override
+	public int reviewCount(int productNo) {
+		return productDao.reviewCount(sqlSession, productNo);
+	}
+
+	@Override
+	public ArrayList<Review> selectReviewList(PageInfo pi, int productNo) {
+		return productDao.selectReviewList(sqlSession, pi, productNo);
 	}
 
 }

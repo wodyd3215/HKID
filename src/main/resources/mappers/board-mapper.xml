@@ -171,7 +171,7 @@
   	<select id="selectBoard" resultMap="boardResultSet">
   	 SELECT BOARD_NO,
 			BOARD_TITLE,
-			TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') as BOARD_DATE,
+			TO_CHAR(BOARD_DATE, 'YYYY.MM.DD HH:MM') as BOARD_DATE,
 			BOARD_STATUS,
 			COMMUNITY_NO,
 			MEMBER_NO,
@@ -254,7 +254,7 @@
   					#{originName},
   					#{changeName},
   					#{file_path},
-  					SEQ_BOARD_NO.CURRVAL
+  					SEQ_BNO.CURRVAL
   					)
   </insert>
 
@@ -274,7 +274,6 @@
 			  WHERE BOARD_NO = #{boardNo}
 	</update>
 	
-	
 	<!-- 좋아요 유무체크 -->
 	<select id="checkGood" resultType="_int">
 		SELECT COUNT(*)
@@ -282,31 +281,23 @@
 		 WHERE BOARD_NO = #{boardNo} AND
 		 	   MEMBER_NO = #{memberNo}
 	</select>
-	
-	<!-- 좋아요 상태 체크 -->
-	<select id="checkGoodStatus" resultType="java.lang.String">
-		SELECT GOOD_STATUS
-		  FROM GOOD
-		 WHERE BOARD_NO = #{boardNo} AND
-		 	   MEMBER_NO = #{memberNo}
-	</select>
-	
-	<!-- 좋아요 추가 -->
-	<insert id="insertGood">
-		INSERT INTO GOOD(
-			   BOARD_NO,
-			   MEMBER_NO)
-		VALUES
-			 (#{boardNo},
-			 #{memberNo})
-	</insert>
 
 	<!-- 좋아요 수정 -->
 	<update id="updateGood">
-		UPDATE GOOD
-		   SET GOOD_STATUS = #{GoodStatus}
-		 WHERE BOARD_NO = #{boardNo} AND
-		 	   MEMBER_NO = #{memberNo}
+		<if test="isHeartOnOff == false">
+			DELETE FROM GOOD
+			WHERE BOARD_NO = #{boardNo} AND
+				MEMBER_NO = #{memberNo}
+		</if>
+		<if test="isHeartOnOff == true">
+			INSERT INTO GOOD(
+						BOARD_NO,
+						MEMBER_NO
+			)VALUES(
+			#{boardNo},
+			#{memberNo}
+			)
+		</if>
 	</update>
 	
 	<!-- 좋아요 개수 -->
@@ -318,7 +309,7 @@
 	
 	<!-- 댓글 리스트 -->
 	<select id="selectReplyList" resultMap="ReplyResultSet">
-		SELECT BOARD_NO, REPLY_NO, MEMBER_NO, NICKNAME, REPLY_CONTENT, TO_CHAR(REPLY_DATE, 'YYYY-MM-DD') AS REPLY_DATE
+		SELECT BOARD_NO, REPLY_NO, MEMBER_NO, NICKNAME, REPLY_CONTENT, TO_CHAR(REPLY_DATE, 'MM-DD HH:MM') AS REPLY_DATE
 		  FROM REPLY
 		  JOIN MEMBER USING (MEMBER_NO)
 		 WHERE BOARD_NO = #{boardNo}
@@ -336,18 +327,20 @@
 					SEQ_REPLY_NO.nextval,
 					#{boardNo},
 					#{memberNo},
-					#{replyContent}
-				)
+					#{replyContent})
 	</insert>
-	
 	<!-- 댓글 삭제 -->
 	<delete id="deleteReply">
 		DELETE FROM REPLY
 		WHERE REPLY_NO = #{replyNo} AND
 			  BOARD_NO = #{boardNo}
 	</delete>
-	
-	
+	<update id="updateReply">
+		UPDATE REPLY
+		   SET REPLY_CONTENT = #{replyContent}
+		 WHERE REPLY_NO = #{replyNo} AND
+			   BOARD_NO = #{boardNo}
+	</update>
 </mapper>
 
 

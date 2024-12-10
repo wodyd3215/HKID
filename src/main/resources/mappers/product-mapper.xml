@@ -17,6 +17,9 @@
 		<result column="CATEGORY" property="category" />
 		<result column="REGISTRATION_DATE" property="registrationDate" />
 		<result column="TYPE" property="type" />
+		<result column="STATUS" property="status" />
+		<result column="FILE_NO" property="fileNo"/>
+		<result column="CHANGE_NAME" property="changeName"/>
 	</resultMap>
 	
 	<resultMap type="Review" id="reviewResultSet">
@@ -27,6 +30,8 @@
 		<result column="REVIEW_CONTENT" property="reviewContent" />
 		<result column="REVIEW_RATE" property="reviewRate" />
 		<result column="REVIEW_DATE" property="reviewDate" />
+		<result column="NICKNAME" property="nickname" />
+		<result column="PRODUCT_NAME" property="productName" />
 	</resultMap>
 	<!-- 
 		* SELECT문 전송 시
@@ -48,6 +53,9 @@
 	       p.CONTENT content,
 	       p.QUANTITY quantity,
 	       p.PRICE price,
+	       p.CATEGORY category,
+	       TO_CHAR(p.REGISTRATION_DATE, 'YYYY-MM-DD') registrationDate,
+	       p.STATUS status,
 	       COALESCE(r.rate, 0) AS rate
 	  FROM PRODUCT p
 	  LEFT JOIN (
@@ -88,15 +96,15 @@
     	</if>
 	</select>
 	
-	<!-- 상품 상세 페이지 -->
+	<!-- 상품 상세 페이지 
 	<select id="selectProduct" resultType="Product">
-		    SELECT p.PRODUCT_NO,
-           p.PRODUCT_NAME productName,
-           p.CONTENT content,
-           p.CATEGORY category,
-           p.QUANTITY quantity,
-           p.PRICE price,
-           COALESCE(r.rate, 0) AS rate
+		SELECT p.PRODUCT_NO,
+           	   p.PRODUCT_NAME productName,
+           	   p.CONTENT content,
+           	   p.CATEGORY category,
+           	   p.QUANTITY quantity,
+           	   p.PRICE price,
+           	   COALESCE(r.rate, 0) AS rate
       FROM PRODUCT p
       LEFT JOIN (
            SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
@@ -105,6 +113,7 @@
       ) r ON p.PRODUCT_NO = r.PRODUCT_NO
      WHERE p.PRODUCT_NO = #{pno}
 	</select>
+	-->
 	
 	<!-- 상품 왼쪽 사이드바 -->
 	<select id="choseNav" resultType="Product">
@@ -203,5 +212,64 @@
 		  </choose>
 		  LIKE '%' || #{keyword} || '%'
 		  ORDER BY PRODUCT_NO DESC
+	</select>
+	
+	<select id="selectEditProduct" resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+			   MEMBER_NO,
+			   PRODUCT_NAME,
+			   CONTENT,
+			   QUANTITY,
+			   PRICE,
+			   CATEGORY,
+			   FILE_NO,
+			   CHANGE_NAME
+		  FROM PRODUCT
+		  JOIN TOTAL_ATTACHMENT USING (PRODUCT_NO)
+		 WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<update id="deactivateProduct">
+		UPDATE PRODUCT
+		   SET STATUS = 'N' 
+		 WHERE PRODUCT_NO = #{productNo}
+	</update>
+	
+		
+	<update id="updateAttachment">
+		UPDATE TOTAL_ATTACHMENT
+		   SET CHANGE_NAME = #{files}
+		 WHERE PRODUCT_NO = #{productNo}
+	</update>
+	
+	<update id="updateProduct">
+		UPDATE PRODUCT
+		   SET PRODUCT_NAME = #{productName},
+			   CONTENT = #{content},
+			   QUANTITY = #{quantity},
+			   PRICE = #{price},
+			   CATEGORY = #{category}
+		 WHERE PRODUCT_NO = #{productNo}
+			  
+	</update>
+	
+	<select id="reviewCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM REVIEW
+		 WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<select id="selectReviewList" resultMap="reviewResultSet">
+		SELECT REVIEW_NO,
+			   PRODUCT_NAME,
+			   NICKNAME,
+			   REVIEW_CONTENT,
+			   REVIEW_RATE,
+			   TO_CHAR(REVIEW_DATE, 'YYYY-MM-DD') AS REVIEW_DATE
+		  FROM REVIEW
+		  JOIN MEMBER USING (MEMBER_NO)
+		  JOIN PRODUCT USING (PRODUCT_NO)
+		 WHERE PRODUCT_NO = #{productNo}
+		 ORDER BY REVIEW_NO DESC 
 	</select>
  </mapper>

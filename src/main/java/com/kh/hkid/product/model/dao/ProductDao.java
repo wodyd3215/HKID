@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.product.model.vo.Product;
+import com.kh.hkid.product.model.vo.Review;
 
 @Repository
 public class ProductDao {
@@ -25,8 +26,8 @@ public class ProductDao {
 		return (ArrayList)sqlSession.selectList("productMapper.selectList", null, rowBounds);
 	}
 
-	public Product selectProduct(SqlSessionTemplate sqlSession, int pno) {
-		return sqlSession.selectOne("productMapper.selectProduct", pno);
+	public Product selectProduct(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.selectOne("productMapper.selectEditProduct", productNo);
 	}
 	
 
@@ -59,6 +60,15 @@ public class ProductDao {
 		return (ArrayList)sqlSession.selectList("productMapper.searchList", map, rowBounds);
 	}
 
-
+	public int reviewCount(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.selectOne("productMapper.reviewCount", productNo);
+	}
+	
+	public ArrayList<Review> selectReviewList(SqlSessionTemplate sqlSession, PageInfo pi, int productNo) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("productMapper.selectReviewList", productNo, rowBounds);
+	}
 	
 }

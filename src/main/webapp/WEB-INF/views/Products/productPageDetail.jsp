@@ -28,20 +28,12 @@
                 <!-- 상품 대표이미지 -->
                 <div class="representImg">                     
                     <div class="reImg">
-                        <img src="./resources/img/main_img.png/" alt="없음">
+                        <img src="" alt="없음">
                     </div>                    
                 </div>
 
                 <!-- 상품이미지 밑에 있는 다른 이미지들 -->
                 <div class="detailImg"> 
-                    <div class="diImg">
-                        <img src="./resources/img/sebuImg1.png/" alt="없음">
-                    </div> <!-- 이미지 1 -->
-                    <div class="diImg">
-                        <img src="./resources/img/sebuImg2.png/" alt="없음">
-                    </div> <!-- 이미지 2 -->
-                    <div class="diImg"></div> <!-- 이미지 3 -->
-                    <div class="diImg"></div> <!-- 이미지 4 -->
                 </div>
             </div>            
             
@@ -125,12 +117,16 @@
                     <!-- 상품 상세 이미지 -->
                     <li id="contentDetail" class="contentDetail"> 
                         <div class="contentImg">
-                            <img src="./resources/img/detail_Image.png/" alt="없음">
                         </div>
                     </li>
 
                     <li id="contentReview" class="contentReview"> <!-- 리뷰 -->
                         <br>
+                        <div class="pageInfo">
+                            <button id="prev">&lt;</button>
+                            <button id="currentPage"></button>
+                            <button id="next">&gt;</button>
+                        </div>
                         <div class="review1">
                             <!-- 리뷰 내용 -->
                             <div class="reviewHeader"> <!-- 리뷰 상단 -->

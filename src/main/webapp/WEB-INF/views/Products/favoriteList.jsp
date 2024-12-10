@@ -24,33 +24,44 @@
         </div>
 
         <table class="falist">
-
+            <thead>
+                <tr>
+                    <th class="selected"></th>
+                    <th class="imageSpace"></th>
+                    <th class="nameSpace">상품 이름</th>
+                    <th class="priceSpace">상품 가격</th>
+                    <th class="delete-button"></th>
+                </tr>
+            </thead>
 
 
             <!-- 찜한 목록들 -->
             <tbody>
-                <tr class="content-space">
-                    <th>
-                        <input type="checkbox" class="selected">
-                    </th>
-
-                    <th class="imageSpace">
-                        이미지 구역
-                    </th>
-
-                    <th class="nameSpace">
-                        상품이름 구역
-                    </th>
-
-                    <th class="priceSpace">
-                        가격 구역
-                    </th>
-
-
-                    <th>
-                        <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
-                    </th>
-                </tr>
+                <c:forEach var="favo" items="${flist}">
+                    <tr class="content-space">
+                        <th>
+                            <input type="checkbox" class="selected">
+                        </th>
+    
+                        <th class="imageSpace">
+                            이미지 구역
+                        </th>
+    
+                        <th class="nameSpace">
+                            ${favo.productName}
+                        </th>
+    
+                        <th class="priceSpace">
+                            ${favo.price}
+                        </th>
+    
+    
+                        <th>
+                            <button class="delete-button"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg" alt="삭제"></button>
+                        </th>
+                    </tr>
+                </c:forEach>
+                
             </tbody>
             
             <!-- 맨 아래 체크버튼 delete버튼-->

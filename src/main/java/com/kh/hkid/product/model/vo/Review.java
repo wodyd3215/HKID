@@ -11,6 +11,8 @@ public class Review {
 	private int productNo;
 	private int memberNo;
 	private String reviewContent;
-	private double reviewRate;
-	private Date reviewDate;
+	private int reviewRate;
+	private String reviewDate;
+	private String nickname;
+	private String productName;
 }

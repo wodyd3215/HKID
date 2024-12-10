@@ -20,6 +20,24 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+    b = ${b}
+    <br><br>
+    m = ${m}
+
+
+
+    <c:choose>
+        <c:when test="${m != null and not empty m}">
+            
+        </c:when>
+        <c:otherwise>
+            
+        </c:otherwise>
+    </c:choose>
+
+
+
     <!-- b = ${b} -->
     <br><br><br><br>
     <div class="wrapper">
@@ -36,8 +54,17 @@
                         <div>${b.boardDate}</div>
                     </div>
                     <div class="btn-div">
-                        <a class="btn" href="updateForm.bo?bno=${b.boardNo}">수정</a>
-                        <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
+                        <!--게시글의 작성자일 경우-->
+                        <c:choose>
+                            <c:when test="${b.memberNo == m.memberNo}">
+                                <a class="btn" href="updateForm.bo?bno=${b.boardNo}">수정</a>
+                                <button class="btn" data-target="delete-modal" onclick="openModal(event)">삭제</button>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn" href="">&nbsp;&nbsp;</a>
+                                <button class="btn">&nbsp;&nbsp;</button>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
@@ -47,15 +74,21 @@
             
             <div id="second-div">
                 <div id="content" name="boardContent" required>${b.content}</div>
-
                 <div id="etc-reply-wrapper">
                     <div id="etc-menu"> 
                         <div> 
                             <div class="heart-div" id="heart-div">
-                                <img id="heart-img" src="" alt="하트" onclick="changeHeart(this, '${b.boardNo}', '${loginMember.memberNo}')">
+                                <!-- 로그인 O / X -->
+                                <c:choose>
+                                    <c:when test="${m != null and not empty m}">
+                                        <img id="heart-img" src="" alt="하트" onclick="HeartChangeBtn(this, '${b.boardNo}', '${loginMember.memberNo}')">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img id="heart-img" src="resources/image/board/emptyHeart.png" alt="하트">
+                                    </c:otherwise>
+                                </c:choose>
                                 <p class="ptext" id="count-good">하트 개수</p>
                             </div>
-                            
                             <div class="heart-div">
                                 <img src="resources/image/talk.png" alt="">
                                 <p id="reply-count" class="ptext">${replyCount}</p>
@@ -72,64 +105,101 @@
                             </button>
                         </div>
                     </div>
-                        
+
                     <!-- 댓글 작성 -->
-                    <div id="comment">
-                        <p class="user-name">${b.nickName}</p>
-                        <textarea name="replyContent" id="write-comment" placeholder="댓글을 작성하세요"></textarea>
-                        <div>
-                            <button name="" id="submit-btn" onclick="addReply('${b.boardNo}', '${b.memberNo}')">등록</button>
-                        </div>
-                    </div>
-                    
+                    <!--로그인 조건 -->
+                    <c:choose>
+                        <c:when test="${m != null and not empty m}">
+                            <div id="comment">
+                                <p class="user-name">${m.nickName}</p>
+                                <textarea name="replyContent" id="write-comment" placeholder="댓글을 작성하세요"></textarea>
+                                <div>
+                                    <button name="" id="submit-btn" onclick="addReply('${b.boardNo}', '${m.memberNo}')">등록</button>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div id="comment">
+                                <p class="user-name">사용자</p>
+                                <textarea disabled name="replyContent" id="write-comment" placeholder="로그인이 필요합니다"></textarea>
+                                <div>
+                                    <button name="" id="submit-btn" onclick="">등록</button>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
 
-            <!-- 댓글리스트 -->
-            <div id="all-reply-wrapper">
-                <c:forEach var="c" items="${replyList}" > <!-- 댓글 반복 -->
-                    <hr>     
-                        <div class="comments-body">
-                            <div class="main-comment">
-                                <div id="comment-left">
-                                    <p class="user-name">${c.userName}</p>
-                                    <p>${c.date} &nbsp;</p>
-                                    <button class="add-sub-comment">답글쓰기</button>
-                                </div>
-                                <div class="comment-middle">${c.content}</div>
-                                <div class="comment-right">
-                                    <button class="reply-update-btn">수정</button>
-                                    <button class="reply-delete-btn" onclick="deleteReply('${b.boardNo}', '${b.memberNo}')">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                </c:forEach>
-            </div>
-            <hr>
-                <!-- 대댓글 -->
-                <div class="comments-body-wrapper">
-                    <div id="sub-comments-body">
-                        <div>
-                            <img id="drift-arrow" src="resources/image/driftArrow.png" alt="">
-                        </div>
-                        <div class="main-comment">
-                            <div id="comment-left">
-                                <p class="user-name">개떡도지</p>
-                                <p>2024.10.24 &nbsp; 13:34</p>
+
+
+            <!-- 본인이 작성한 댓글  -->
+            <!-- <c:choose>
+                <c:when test="${m != null and not empty m}">
+                    <div class="comments-body">
+                        <div class="main-comment" id="main-comment${comment.replyNo}">
+                            <div class="comment-left">
+                                <p class="user-name">${comment.nickName}</p>
+                                <p>${comment.date}&nbsp;</p>
                                 <button class="add-sub-comment">답글쓰기</button>
                             </div>
-                            <div class="comment-middle">
-                                dasdsa
-                            </div>
-                            <div class="comment-right">
-                                <button>수정</button>
-                                <button>삭제</button>
+                            <div class="comment-middle">${comment.content}</div>
+                                                    <div class=" comment-right">
+                                <button class="reply-update-btn" data-target="updateReply"
+                                    onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
+                                <button class="reply-delete-btn"
+                                    onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
                             </div>
                         </div>
                     </div>
-                </div>
-   
+                </c:when>
+                <c:otherwise>
+                    <div class="comments-body">
+                        <div class="main-comment" id="main-comment${comment.replyNo}">
+                            <div class="comment-left">
+                                <p class="user-name">${comment.nickName}</p>
+                                <p>${comment.date}&nbsp;</p>
+                                <button class="add-sub-comment">답글쓰기</button>
+                            </div>
+                            <div class="comment-middle">${comment.content}</div>
+                            <div class="comment-right">
+                                <button class="reply-update-btn">&nbsp;&nbsp;</button>
+                                <button class="reply-delete-btn">&nbsp;&nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </c:otherwise>
+            </c:choose> -->
+
+            <!-- 댓글리스트 -->
+            <div id="all-reply-wrapper">    <!--이 div으로 js에서 댓글 목록 작성-->
+                
+
+
+
+            </div>
             <hr>
+                <!-- 대댓글 -->
+                <!-- <div id="sub-comments-body">
+                    <div class="sub-main-comment">
+                        <div id="comment-front">
+                            <img id="drift-arrow" src="resources/image/driftArrow.png" alt="">
+                        </div>
+                        <div class="comment-left">
+                            <p class="user-name">개떡도지</p>
+                            <p>2024.10.24 &nbsp; 13:34</p>
+                            <button class="add-sub-comment">답글쓰기</button>
+                        </div>
+                        <div class="comment-middle">
+                            dasdsa
+                        </div>
+                        <div class="comment-right">
+                            <button class="reply-update-btn">수정</button>
+                            <button class="reply-delete-btn">삭제</button>
+                        </div>
+                    </div>
+                </div>
+            <hr> -->
 
         <!------------------ 아래쪽 게시글 목록 -------------------->
         <div id="bottom-wrapper">
