@@ -33,6 +33,11 @@ public interface ProductService {
 	// 검색 바
 	ArrayList<Product> searchList(HashMap<String, String> map, PageInfo pi);
 
+	//검색한 게시글의 개수
+	int selectSearchCount(HashMap<String, String> map);
+	
+	//검색한 게시글 목록
+	ArrayList<Product> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	int reviewCount(int productNo);
 	
 	ArrayList<Review> selectReviewList(PageInfo pi, int productNo);

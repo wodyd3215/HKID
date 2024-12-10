@@ -109,27 +109,29 @@ public class ProductController {
 		return new Gson().toJson(selectedRbtn);
 	}
 	
-	// 검색바
-	@GetMapping
+	// 게시글 검색 [작성자, 제목, 내용]
+	@GetMapping("productSearch.se")
 	public String searchItemKey(@RequestParam(value="pPage", defaultValue="1") int pPage,
-			Model model,String keyword, @RequestParam(value="searchCategory", defaultValue="전체")String searchCategory) {
+			@RequestParam(value="searchCategory", defaultValue="전체")String category,
+			String keyword,
+			String condition,
+			Model model) {
 		
 		HashMap<String, String> map = new HashMap<>();
 		map.put("keyword", keyword);
-		map.put("category", searchCategory);
+		map.put("condition", condition);
+		map.put("category", category);
 		
-		int searchCount = productService.selectProductCategoryListCount(searchCategory);
-		
+		//선택한 카테고리의 게시글 개수
+		int searchCount = productService.selectSearchCount(map); //검색한 게시글의 개수(카테고리, 검색조건)
 		PageInfo pi = Template.getPageInfo(searchCount, pPage, 5, 9);
-		
-		ArrayList<Product> list = productService.searchList(map, pi);
-		
+		ArrayList<Product> list = productService.selectSearchList(map, pi);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
-		model.addAttribute("category", searchCategory);
+		model.addAttribute("category", category);
 		model.addAttribute("keyword", keyword);
-		return "Product/productPage";
+		return "Products/productPage";
 	}
 	
 	@ResponseBody

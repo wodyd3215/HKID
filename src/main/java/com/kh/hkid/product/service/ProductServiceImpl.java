@@ -67,7 +67,16 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int reviewCount(int productNo) {
+	public int selectSearchCount(HashMap<String, String> map) {
+		return productDao.selectSearchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Product> selectSearchList(HashMap<String, String> map, PageInfo pi) {
+		return productDao.selectSearchList(sqlSession, map, pi);
+	}
+	
+		public int reviewCount(int productNo) {
 		return productDao.reviewCount(sqlSession, productNo);
 	}
 

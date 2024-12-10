@@ -79,9 +79,9 @@
 	<!-- 카테고리별 삼품 목록 총 갯수 -->
 	<select id="selectProductCategoryListCount" resultType="_int">
 		SELECT COUNT(*)
-			FROM PRODUCT
-		WHERE TYPE = '1'
-		  AND STATUS = 'Y'
+		  FROM PRODUCT
+		 WHERE TYPE = '1'
+		   AND STATUS = 'Y'
 		<if test="category != '전체'">
         	AND CATEGORY = #{category}
     	</if>
@@ -216,8 +216,8 @@
 		  FROM PRODUCT p
 		  JOIN (
 		  	SELECT AVG(REVIEW_RATE) rate, PRODUCT_NO
-		  		FROM REVIEW
-		  		GROUP BY PRODUCT_NO
+		  	  FROM REVIEW
+		  	 GROUP BY PRODUCT_NO
 		  ) r ON p.PRODUCT_NO = r.PRODUCT_NO
 		  WHERE p.TYPE = '1'
 		  <choose>
@@ -235,6 +235,54 @@
 		  ORDER BY PRODUCT_NO DESC
 	</select>
 	
+	<select id="selectSearchCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM PRODUCT
+		  JOIN MEMBER USING (MEMBER_NO)
+		 WHERE TYPE = '1'
+		 <if test="condition == 'writer'">
+  		 	AND NICKNAME
+	 	 </if>
+	 	 <if test="condition == 'title'">
+	 	 	AND PRODUCT_NAME
+	 	 </if>
+	 	 <if test="condition == 'content'">
+	 	 	AND CONTENT
+	 	 </if>
+	 	 	LIKE '%' || #{keyword} || '%'
+	 	 <if test="category != '전체'">
+	 	 	AND CATEGORY
+	 	 	LIKE '%' || #{category} || '%'
+	 	 </if>
+	</select>
+	
+	<select id="selectSearchList" resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+			   MEMBER_NO,
+			   PRODUCT_NAME,
+			   CONTENT,
+			   QUANTITY,
+			   PRICE,
+			   CATEGORY
+		  FROM PRODUCT
+		 WHERE  TYPE = '1'
+		 <if test="condition == 'writer'">
+  		 	AND MEMBER_NO
+	 	 </if>
+	 	 <if test="condition == 'title'">
+	 	 	AND PRODUCT_NAME
+	 	 </if>
+	 	 <if test="condition == 'content'">
+	 	 	AND CONTENT
+	 	 </if>
+	 	 	LIKE '%' || #{keyword} || '%'
+	 	 <if test="category != '전체'">
+	 	 	AND CATEGORY
+	 	 	LIKE '%' || #{category} || '%'
+	 	 </if>
+	 	 ORDER BY PRODUCT_NO DESC
+	</select>
+
 	<select id="selectEditProduct" resultMap="productResultSet">
 		SELECT p.PRODUCT_NO,
 		       p.MEMBER_NO,
