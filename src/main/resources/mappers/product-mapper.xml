@@ -47,6 +47,9 @@
 	 	  FROM PRODUCT
 	 	 WHERE TYPE = '1'
 	 	   AND STATUS = 'Y'
+	 	 <if test="category != '전체'">
+	 	 	AND CATEGORY = #{category}
+	 	 </if>
 	 </select>
 	  
 	<!-- 상품 목록 (전체) 조회 -->
@@ -73,49 +76,12 @@
 		  			) r ON p.PRODUCT_NO = r.PRODUCT_NO
 		 WHERE STATUS = 'Y'
 		   AND TYPE = 1
+		 <if test="category != '전체'">
+	 	 	AND CATEGORY = #{category}
+	 	 </if>
 		 ORDER BY p.PRODUCT_NO DESC
 	</select>
 	
-	<!-- 카테고리별 삼품 목록 총 갯수 -->
-	<select id="selectProductCategoryListCount" resultType="_int">
-		SELECT COUNT(*)
-		  FROM PRODUCT
-		 WHERE TYPE = '1'
-		   AND STATUS = 'Y'
-		<if test="category != '전체'">
-        	AND CATEGORY = #{category}
-    	</if>
-	</select>
-	
-	<!--  카테고리별 상품 목록 리스트  -->
-	<select id="selectProductCategoryList" resultType="Product">
-		SELECT p.PRODUCT_NO,
-		       p.MEMBER_NO,
-		       p.PRODUCT_NAME,
-		       p.CONTENT,
-		       p.QUANTITY,
-		       p.PRICE,
-		       p.CATEGORY,
-		       t.FILE_NO,
-		       t.CHANGE_NAME,
-		       COALESCE(r.RATE, 0) AS RATE,
-		       COALESCE(r.REVIEW_COUNT, 0) AS REVIEW_COUNT
-		  FROM PRODUCT p
-		  LEFT JOIN TOTAL_ATTACHMENT t ON p.PRODUCT_NO = t.PRODUCT_NO
-		  LEFT JOIN (
-		       	SELECT ROUND(AVG(REVIEW_RATE)) AS RATE, 
-		       		   COUNT(*) AS REVIEW_COUNT,
-		               PRODUCT_NO
-		          FROM REVIEW
-		         GROUP BY PRODUCT_NO
-		  			) r ON p.PRODUCT_NO = r.PRODUCT_NO
-		 WHERE TYPE = '1' 
-		   AND STATUS = 'Y'
-	  	<if test="category != '전체'">
-        	AND CATEGORY = #{category}
-    	</if>
-    	 ORDER BY p.PRODUCT_NO DESC
-	</select>
 	
 	<!-- 상품 상세 페이지 
 	<select id="selectProduct" resultType="Product">
@@ -238,18 +204,10 @@
 	<select id="selectSearchCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM PRODUCT
-		  JOIN MEMBER USING (MEMBER_NO)
 		 WHERE TYPE = '1'
-		 <if test="condition == 'writer'">
-  		 	AND NICKNAME
-	 	 </if>
-	 	 <if test="condition == 'title'">
-	 	 	AND PRODUCT_NAME
-	 	 </if>
-	 	 <if test="condition == 'content'">
-	 	 	AND CONTENT
-	 	 </if>
-	 	 	LIKE '%' || #{keyword} || '%'
+		   AND STATUS = 'Y'
+	 	   AND PRODUCT_NAME
+	 	  LIKE '%' || #{keyword} || '%'
 	 	 <if test="category != '전체'">
 	 	 	AND CATEGORY
 	 	 	LIKE '%' || #{category} || '%'
@@ -257,25 +215,30 @@
 	</select>
 	
 	<select id="selectSearchList" resultMap="productResultSet">
-		SELECT PRODUCT_NO,
-			   MEMBER_NO,
-			   PRODUCT_NAME,
-			   CONTENT,
-			   QUANTITY,
-			   PRICE,
-			   CATEGORY
-		  FROM PRODUCT
-		 WHERE  TYPE = '1'
-		 <if test="condition == 'writer'">
-  		 	AND MEMBER_NO
-	 	 </if>
-	 	 <if test="condition == 'title'">
-	 	 	AND PRODUCT_NAME
-	 	 </if>
-	 	 <if test="condition == 'content'">
-	 	 	AND CONTENT
-	 	 </if>
-	 	 	LIKE '%' || #{keyword} || '%'
+		SELECT p.PRODUCT_NO,
+		       p.MEMBER_NO,
+		       p.PRODUCT_NAME,
+		       p.CONTENT,
+		       p.QUANTITY,
+		       p.PRICE,
+		       p.CATEGORY,
+		       t.FILE_NO,
+		       t.CHANGE_NAME,
+		       COALESCE(r.RATE, 0) AS RATE,
+		       COALESCE(r.REVIEW_COUNT, 0) AS REVIEW_COUNT
+		  FROM PRODUCT p
+		  JOIN TOTAL_ATTACHMENT t ON p.PRODUCT_NO = t.PRODUCT_NO
+		  LEFT JOIN (
+		       	SELECT ROUND(AVG(REVIEW_RATE)) AS RATE, 
+		       		   COUNT(*) AS REVIEW_COUNT,
+		               PRODUCT_NO
+		          FROM REVIEW
+		         GROUP BY PRODUCT_NO
+		  			) r ON p.PRODUCT_NO = r.PRODUCT_NO
+		 WHERE TYPE = '1'
+		   AND STATUS = 'Y'
+	 	   AND PRODUCT_NAME
+	 	  LIKE '%' || #{keyword} || '%'
 	 	 <if test="category != '전체'">
 	 	 	AND CATEGORY
 	 	 	LIKE '%' || #{category} || '%'
@@ -283,7 +246,7 @@
 	 	 ORDER BY PRODUCT_NO DESC
 	</select>
 
-	<select id="selectEditProduct" resultMap="productResultSet">
+	<select id="selectProduct" resultMap="productResultSet">
 		SELECT p.PRODUCT_NO,
 		       p.MEMBER_NO,
 		       p.PRODUCT_NAME,
@@ -349,5 +312,28 @@
 		  JOIN PRODUCT USING (PRODUCT_NO)
 		 WHERE PRODUCT_NO = #{productNo}
 		 ORDER BY REVIEW_NO DESC 
+	</select>
+	
+	<select id="pCount" resultType="_int">
+		SELECT COUNT(*)
+	 	  FROM PRODUCT
+	 	 WHERE TYPE = '1'
+	</select>
+	
+	<select id="selectProductList" resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+		       PRODUCT_NAME,
+		       CONTENT,
+		       QUANTITY,
+		       PRICE,
+		       TO_CHAR(REGISTRATION_DATE, 'YYYY-MM-DD') AS REGISTRATION_DATE,
+		       CATEGORY,
+		       STATUS
+		  FROM PRODUCT
+		 ORDER BY PRODUCT_NO DESC 
+	</select>
+	
+	<select id="selectEditProductList" resultMap="productResultSet">
+	
 	</select>
  </mapper>

@@ -21,20 +21,14 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
-    category = ${category}
-    <br><br><br>
-    더미 List = ${list}
-    <br><br>
-    pi = ${pi}
     <div class="wrapper">
         <div id="productPage">
-            <form id="sidecategory" action="product.se">
+            <form id="sidecategory" action="product.li">
                 <div id="selected"> <!-- 왼쪽 사이드바 nav -->
                     <ul class="side-nav">
                         <li class="side-nav-header"> 상품 </li> 
                         <li>
-                            <input type="radio" id="sideAll" name="category" value="전체"onchange="this.form.submit()"/>                        
+                            <input type="radio" id="sideAll" name="category" value="전체" onchange="this.form.submit()"/>                        
                             <label for="sideAll"> 전체 </label>
                         </li>
 

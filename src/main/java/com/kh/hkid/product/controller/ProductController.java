@@ -34,11 +34,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping("product.li") // 상품페이지 메인
-	public String selectProList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int productCount = productService.selectListTotal();
+	public String selectProList(@RequestParam(value="cpage", defaultValue="1") int currentPage, 
+								@RequestParam(value="category", defaultValue="전체") String category, 
+								Model model) {
+		int productCount = productService.selectListTotal(category);
 		
 		PageInfo pi = Template.getPageInfo(productCount, currentPage, 5, 9);
-		ArrayList<Product> list = productService.selectList(pi);
+		ArrayList<Product> list = productService.selectList(pi, category);
 		
 		for(Product p : list) {
 			String pImg = p.getChangeName().split(",")[0];
@@ -54,21 +56,21 @@ public class ProductController {
 	}
 	
 	// 카테고리에 맞는 상품 목록을 반환하는 API
-    @GetMapping("product.se")
-    public String selectProductCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, 
-    										Model model, String category) {
-    	int productCount = productService.selectProductCategoryListCount(category);
-    	
-    	PageInfo pi = Template.getPageInfo(productCount, currentPage, 5, 9);
-    	ArrayList<Product> list = productService.selectProductCategoryList(pi, category);	//게시글 리스트
-    	
-    	model.addAttribute("pageName", "product");
-    	model.addAttribute("list", list);
-		model.addAttribute("category", category);
-		model.addAttribute("pi", pi);
-		
-        return "Products/productPage";
-    }
+//    @GetMapping("product.se")
+//    public String selectProductCategoryList(@RequestParam(value="cpage", defaultValue="1") int currentPage, 
+//    										Model model, String category) {
+//    	int productCount = productService.selectProductCategoryListCount(category);
+//    	
+//    	PageInfo pi = Template.getPageInfo(productCount, currentPage, 5, 9);
+//    	ArrayList<Product> list = productService.selectProductCategoryList(pi, category);	//게시글 리스트
+//    	
+//    	model.addAttribute("pageName", "product");
+//    	model.addAttribute("list", list);
+//		model.addAttribute("category", category);
+//		model.addAttribute("pi", pi);
+//		
+//        return "Products/productPage";
+//    }
     
 	
 	@GetMapping("deteilItem.li")
@@ -127,10 +129,16 @@ public class ProductController {
 		PageInfo pi = Template.getPageInfo(searchCount, pPage, 5, 9);
 		ArrayList<Product> list = productService.selectSearchList(map, pi);
 		
+		for(Product p : list) {
+			String pImg = p.getChangeName().split(",")[0];
+			
+			p.setChangeName(pImg);
+		}
+		
+		model.addAttribute("pageName", "product");
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
-		model.addAttribute("category", category);
-		model.addAttribute("keyword", keyword);
+
 		return "Products/productPage";
 	}
 	

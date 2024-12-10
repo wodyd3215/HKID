@@ -35,20 +35,18 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AdminController {
 	private final AdminService adminService;
-	private final ProductService productService;
 	
 	@Autowired
-	public AdminController(AdminService adminService, ProductService productService) {
+	public AdminController(AdminService adminService) {
 		this.adminService = adminService;
-		this.productService = productService;
 	}
 	
 	@RequestMapping("product.ad")
 	public String product(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int pCount = productService.selectListTotal();
+		int pCount = adminService.pCount();
 		
 		PageInfo pi = Template.getPageInfo(pCount, currentPage, 10, 10);
-		ArrayList<Product> list = productService.selectList(pi);
+		ArrayList<Product> list = adminService.selecProductList(pi);
 
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
