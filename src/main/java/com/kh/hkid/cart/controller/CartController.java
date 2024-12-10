@@ -2,6 +2,7 @@ package com.kh.hkid.cart.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,27 +73,25 @@ public class CartController {
 		return cartService.changeQuantity(map);
 	}
 	
-	@PostMapping("delete.o")
-	public int delete(Cart c, Model model, int memberNo, int productNo) {
-				
-		
-		HashMap<Object, Integer> de = new HashMap<>();
-		de.put("memberNo", memberNo);
-		de.put("productNo", productNo);
-		
-		
-		return cartService.deleteCart(de);
-	}
+//	@PostMapping("delete.o")
+//	public int delete(Cart c, Model model, int memberNo, int productNo) {
+//				
+//		
+//		HashMap<Object, Integer> de = new HashMap<>();
+//		de.put("memberNo", memberNo);
+//		de.put("productNo", productNo);
+//		
+//		
+//		return cartService.deleteCart(de);
+//	}
 	
 	@ResponseBody
-	@GetMapping("delete.c")
-	public int deleteOne(int memberNo, int productNo, Cart c, Model model, HttpServletRequest request) {
-		
-		String[] pick = request.getParameterValues("valueArr");
-		
-				
-		int result = cartService.deleteCart(pick);
-		return result;
+	@RequestMapping(value="delete.c", produces="application/json; charset-UTF-8")
+	public int deleteOne(Cart c) {
+		System.out.println(c);
+		return cartService.deleteCart(c);		
 	}
+	
+	
 
 }

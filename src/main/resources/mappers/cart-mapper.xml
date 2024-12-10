@@ -44,10 +44,8 @@
 	 
 	 
 	 <delete id="deleteCart">
-	 	DELETE B	
-	 	  FROM BUCKEY_LIST B
-	 	  JOIN PRODUCT P 
-	 	 USING (PRODUCT_NO)
+	 	DELETE 
+	 	  FROM BUCKEY_LIST 	 	 
 	 	 WHERE MEMBER_NO = #{memberNo} 
 	 	   AND PRODUCT_NO = #{productNo}
 	 </delete>

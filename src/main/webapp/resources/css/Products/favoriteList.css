@@ -76,3 +76,16 @@ tr, td {
 .content-space{
     height: 150px;
 }
+
+/* 페이징 스타일 */
+span button{
+    border: none;
+    background: none;
+}
+
+/* 현재 페이지 스타일 */
+.paging-link.active {
+    color: #006494;
+    font-weight: bold;
+    pointer-events: none;
+}

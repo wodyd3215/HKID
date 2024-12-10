@@ -19,6 +19,6 @@ public interface CartService {
 	// ajax 로 받은 데이터 추가
 	int addCart(Cart c);
 
-	// 한 개만 삭제
-	int deleteCart(HashMap<Object, Integer> de);
+	// 장바구니 삭제
+	int deleteCart(Cart c);
 }
