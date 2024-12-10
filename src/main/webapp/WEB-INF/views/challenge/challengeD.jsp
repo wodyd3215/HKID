@@ -58,8 +58,8 @@
 
 		<div id="boCount-wirte-div">
             <!-- 게시글 수  -->
-            <form action="list.bo" method="Get">
-                <input type="hidden" name="category" value="${category}">
+            <form action="ch.b" method="Get">
+                <input type="hidden" name="cno" value="${cno}"> <!-- cno 추가 -->
                 <input type="hidden" name="listCount" value="${pi.listCount}">
                 <input type="hidden" name="cpage" value="${pi.currentPage}">
                 <select name="choiceBoardCount" class="table-category" onchange="this.form.submit()">
@@ -77,11 +77,11 @@
 
 		<!-------------------------- 검색 바 -------------------------->
         <div id="searchbar-div">
-            <form action="searchBoard.bo" id="search-form">
+            <form action="searchBoard.ch" id="search-form">
                 <!-- 필요 데이터 전송 -->
+                <input type="hidden" name="cno" value="${cno}">
                 <input type="hidden" name="cpage" value="${pi.currentPage}">
                 <input type="hidden" name="choiceBoardCount" value="${pi.boardLimit}">
-                <input type="hidden" name="category" value="${category}">
                 
                 <select name="condition" id="search-category" >전체
                     <option value="writer" selected>작성자</option>

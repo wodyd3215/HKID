@@ -1,6 +1,7 @@
 package com.kh.hkid.challenge.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -48,6 +49,17 @@ public class ChallengeServiceImple implements ChallengeService {
 	@Override
 	public Challenge selectName(int cno) {
 		return challengeDao.selectName(sqlSession, cno);
+	}
+
+	
+	@Override
+	public int selectSearchCount(HashMap<String, Object> param) {
+		return challengeDao.selectSearchCount(sqlSession, param);
+	}
+
+	@Override
+	public ArrayList<ChallengeBoard> chBoardselectList(HashMap<String, Object> param, PageInfo pi) {
+		return challengeDao.chBoardselectList(sqlSession, param,  pi);
 	}
 
 	

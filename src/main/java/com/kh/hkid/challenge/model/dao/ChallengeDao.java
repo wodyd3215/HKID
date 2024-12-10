@@ -1,7 +1,7 @@
 package com.kh.hkid.challenge.model.dao;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -44,6 +44,18 @@ public class ChallengeDao {
 
 	public Challenge selectName(SqlSessionTemplate sqlSession, int cno) {
 		return sqlSession.selectOne("challengeMapper.selectName", cno);
+	}
+
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, Object> param) {
+		return sqlSession.selectOne("challengeMapper.selectSearchCount", param);
+	}
+
+	public ArrayList<ChallengeBoard> chBoardselectList(SqlSessionTemplate sqlSession, HashMap<String, Object> param, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList) sqlSession.selectList("challengeMapper.chBoardselectList", param, rowBounds);
 	}
 
 }

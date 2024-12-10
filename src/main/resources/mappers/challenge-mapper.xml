@@ -73,5 +73,44 @@
 		WHERE cr.che_res_no = #{cno}
    </select>
    
+   <!-- 검색된 챌린지 보드 갯수 -->
+   <select id="selectSearchCount" resultType="_int">
+   		SELECT COUNT(*)
+   		FROM CHELLAGE_BOARD 
+   		JOIN MEMBER USING(MEMBER_NO)
+   		WHERE CHE_RES_NO = #{cno}
+   		<if test="condition == 'writer'">
+  		 	AND NICKNAME
+	 	</if>
+	 	<if test="condition == 'title'">
+	 		AND CHE_TITLE
+	 	</if>
+	 		LIKE '%' || #{keyword} || '%'
+   </select>
+   
+   <!-- 검색된 챌린지보드 리스트 -->
+   <select id="chBoardselectList" resultMap="challengeBoardResultSet">
+   	SELECT cb.CHELLANGE_NO,
+	        cb.MEMBER_NO,
+	        cr.CHE_RES_NO,
+            cr.CHE_TITLE RES_CHE_TITLE,
+	        cb.CHE_TITLE,
+	        cb.CHE_CONTENT,
+	       TO_CHAR(cb.CHE_DATE,'YYYY-MM-DD') CHE_DATE,
+	        cb.COMMENT_COUNT,
+            m.NICKNAME
+        FROM CHELLAGE_BOARD cb
+        JOIN CHELLAGE_RES cr on cr.CHE_RES_NO = cb.CHE_RES_NO 
+        JOIN MEMBER m on cb.MEMBER_NO = m.MEMBER_NO
+        WHERE cr.CHE_RES_NO = #{cno}
+        <if test="condition == 'writer'">
+  		 	AND NICKNAME
+	 	</if>
+	 	<if test="condition == 'title'">
+	 		AND CHE_TITLE
+	 	</if>
+	 		LIKE '%' || #{keyword} || '%'
+   </select>
+   
  
   </mapper>

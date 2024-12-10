@@ -1,6 +1,7 @@
 package com.kh.hkid.challenge.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.hkid.challenge.model.vo.Challenge;
@@ -21,7 +22,14 @@ public interface ChallengeService {
 	//챌린지보드리스트 목록 가져옥;
 	ArrayList<ChallengeBoard> chBoardselectList(int cno, PageInfo pi);
 
+	//챌린지 이름 가져오는 용도
 	Challenge selectName(int cno);
+
+	//카테고리 검색 리스트 개수
+	int selectSearchCount(HashMap<String, Object> param);
+
+	//검색된 리스트 출력
+	ArrayList<ChallengeBoard> chBoardselectList(HashMap<String, Object> param, PageInfo pi);
 
 
 }
