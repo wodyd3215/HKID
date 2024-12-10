@@ -31,20 +31,22 @@
 			<tbody>
                 <tr class="notice">
                     <td class="board-category">공지</td>
+                    <c:forEach var="n" items="${nlist}" varStatus="status">
                     <td>
-						<a href="">게시글 작성 시 지켜야할 규칙 [필독]
+						<a href="">${n.noticeTitle}
 							<img src="./resources/img/file.png" alt="없음">
 						</a>
 					</td>
-                    <td>꾸준히운동</td>
-                    <td>2024-10-22</td>
-                    <td>2</td>
+                    <td>${n.nickName}</td>
+                    <td>${n.noticeDate}</td>
+                    <td>${n.viewCount}</td>
                 </tr>
+                </c:forEach>
 				<c:forEach var="c" items="${list}" varStatus="status">
                 <tr class="">
                     <td class="board-category">${status.index + 1}</td>
                     <td>
-						<a href="">${c.chaTitle}
+						<a href="cboardDetail.bo?cbno=${c.challengeBoardNo}">${c.chaTitle}
 							<img src="./resources/img/file.png" alt="없음">
 						</a>
 					</td>
@@ -71,7 +73,7 @@
             </form>
             <!-- 글쓰기  -->
             <c:if test="${not empty loginMember}">
-        	    <a class="btn" id="write-btn" href="enrollForm.bo">글쓰기</a>
+        	    <a class="btn" id="write-btn" href="cenrollForm.bo?cno=${cno}">글쓰기</a>
             </c:if> 
         </div>
 

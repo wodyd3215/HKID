@@ -22,7 +22,23 @@
   		<result column="COMMENT_COUNT" property="commentCount"/>
   		<result column="NICKNAME" property="nickName"/>
   		<result column="RES_CHE_TITLE" property="challengeTitle"/>
+  		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="file_path"/>
   	</resultMap>
+  	
+  	<resultMap id="noticeResultSet" type="Notice">
+		<result column="NOTICE_NO" property="noticeNo"/>
+	  	<result column="MEMBER_NO" property="memberNo"/>
+	  	<result column="NOTICE_TITLE" property="noticeTitle"/>
+	  	<result column="NOTICE_CONTENT" property="noticeContent"/>
+	  	<result column="ENROLL_DATE" property="noticeDate"/>
+	  	<result column="VIEW_COUNT" property="viewCount"/>
+	  	<result column="CATEGORY_NO" property="noticeType"/>
+	  	<result column="NOTICE_STATUS" property="noticeStatus"/>
+	  	<result column="NICKNAME" property="nickName"/>
+	  	<result column="CATEGOTY_NAME" property="noticeTypeName"/>
+	</resultMap>
   	
   	
   	
@@ -73,46 +89,145 @@
 		WHERE cr.che_res_no = #{cno}
    </select>
    
-
-   <!-- 검색된 챌린지 보드 갯수 -->
+<!-- 검색된 보드 총 갯수 -->
    <select id="selectSearchCount" resultType="_int">
-   		SELECT COUNT(*)
-   		FROM CHELLAGE_BOARD 
-   		JOIN MEMBER USING(MEMBER_NO)
-   		WHERE CHE_RES_NO = #{cno}
-   		<if test="condition == 'writer'">
-  		 	AND NICKNAME
-	 	</if>
-	 	<if test="condition == 'title'">
-	 		AND CHE_TITLE
-	 	</if>
-	 		LIKE '%' || #{keyword} || '%'
+         SELECT COUNT(*)
+      FROM CHELLAGE_BOARD cb
+      JOIN CHELLAGE_RES cr on cb.CHE_RES_NO = cr.CHE_RES_NO 
+      JOIN MEMBER USING (MEMBER_NO)
+      WHERE cr.CHE_RES_NO = #{cno}
+      <if test="condition == 'writer'">
+         AND NICKNAME
+       </if>
+       <if test="condition == 'title'">
+       AND cb.CHE_TITLE
+       </if>
+       LIKE '%' || #{keyword} || '%'
    </select>
+
    
-   <!-- 검색된 챌린지보드 리스트 -->
-   <select id="chBoardselectList" resultMap="challengeBoardResultSet">
-   	SELECT cb.CHELLANGE_NO,
-	        cb.MEMBER_NO,
-	        cr.CHE_RES_NO,
+    <select id="selectSearchList" resultMap="challengeBoardResultSet">
+      SELECT  cb.CHELLANGE_NO,
+           cb.MEMBER_NO,
+           cr.CHE_RES_NO,
             cr.CHE_TITLE RES_CHE_TITLE,
-	        cb.CHE_TITLE,
-	        cb.CHE_CONTENT,
-	       TO_CHAR(cb.CHE_DATE,'YYYY-MM-DD') CHE_DATE,
-	        cb.COMMENT_COUNT,
+           cb.CHE_TITLE,
+           cb.CHE_CONTENT,
+          TO_CHAR(cb.CHE_DATE,'YYYY-MM-DD') CHE_DATE,
+           cb.COMMENT_COUNT,
             m.NICKNAME
         FROM CHELLAGE_BOARD cb
         JOIN CHELLAGE_RES cr on cr.CHE_RES_NO = cb.CHE_RES_NO 
         JOIN MEMBER m on cb.MEMBER_NO = m.MEMBER_NO
         WHERE cr.CHE_RES_NO = #{cno}
         <if test="condition == 'writer'">
-  		 	AND NICKNAME
-	 	</if>
-	 	<if test="condition == 'title'">
-	 		AND CHE_TITLE
-	 	</if>
-	 		LIKE '%' || #{keyword} || '%'
+            AND m.NICKNAME
+       </if>
+       <if test="condition == 'title'">
+          AND cb.CHE_TITLE
+       </if>
+       LIKE '%' || #{keyword} || '%'
    </select>
    
+   <select id="selectBoard" resultMap="challengeBoardResultSet">
+   SELECT CHELLANGE_NO,
+			MEMBER_NO,
+			CHE_RES_NO,
+			CHE_TITLE,
+			CHE_CONTENT,
+			CHE_DATE,
+			COMMENT_COUNT,
+			NICKNAME
+	FROM CHELLAGE_BOARD
+	JOIN MEMBER USING (MEMBER_NO)
+   WHERE CHELLANGE_NO = #{cbno}
+   </select>
+   
+   <!-- 조회수 증가 -->
+	<update id="increaseView">
+	UPDATE CHELLAGE_BOARD
+		SET COMMENT_COUNT = COMMENT_COUNT + 1
+	WHERE CHELLANGE_NO = #{challengeBoardNo}
+	
+	</update>
+   
+   <!-- 공지 -->
+   <select id="selectNoticeList" resultMap="noticeResultSet">
+	  SELECT 
+	    n.NOTICE_NO,
+	    n.MEMBER_NO,          
+	    n.NOTICE_TITLE,
+	    n.NOTICE_CONTENT,
+	    TO_CHAR(n.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
+	    n.VIEW_COUNT,
+	    n.CATEGORY_NO,        
+	    m.NICKNAME,           
+	    n.NOTICE_STATUS
+	FROM 
+	    NOTICE n
+	JOIN 
+	    NOTICE_CATEGORY nc ON n.CATEGORY_NO = nc.CATEGORY_NO   
+	JOIN 
+	    MEMBER m ON n.MEMBER_NO = m.MEMBER_NO   
+	WHERE 
+	    n.NOTICE_STATUS = 'Y' 
+	    AND n.CATEGORY_NO = 2
+   </select>
+   
+   <!-- 게시글 추가 -->
+   <insert id="insertBoard">
+   INSERT INTO CHELLAGE_BOARD(
+	  				CHELLANGE_NO,
+					MEMBER_NO,
+					CHE_RES_NO,
+					CHE_TITLE,
+                    CHE_DATE,
+					CHE_CONTENT
+  					)
+  					VALUES(
+  					SEQ_CBNO.NEXTVAL,
+  					#{memberNo},
+  					#{challengeNo},
+  					#{chaTitle},
+  					SYSDATE,
+  					#{chaContent}
+  					)
+   </insert>
+   
+   <!-- 게시글(파일) 추가 -->
+   <insert id="insertBoardFile">
+   INSERT INTO TOTAL_ATTACHMENT(
+  					FILE_NO,
+	  				ORIGIN_NAME,
+	  				CHANGE_NAME,
+	  				FILE_PATH,
+	  				CHELLANGE_NO
+  					)
+  					VALUES(
+  					SEQ_FILE_NO.nextval,
+  					#{originName},
+  					#{changeName},
+  					#{file_path},
+  					SEQ_CBNO.CURRVAL
+  					)
+   
+   </insert>
+   
+   <!-- 게시글 수정 -->
+   <update id="updateBoard">
+		UPDATE CHELLAGE_BOARD
+  	 	   SET CHE_TITLE = #{chaTitle},
+			   CHE_CONTENT = #{chaContent}
+	  	 WHERE CHELLANGE_NO = #{challengeBoardNo}
+	</update>
+	
+	<update id="updateBoardFile">
+			 UPDATE TOTAL_ATTACHMENT
+			    SET ORIGIN_NAME = #{originName},
+ 					CHANGE_NAME = #{changeName},
+ 					FILE_PATH = #{file_path}
+			  WHERE CHELLANGE_NO = #{challengeBoardNo}
+	</update>
  
 
  	<insert id="insertChallenge">
@@ -131,5 +246,7 @@
  						  			#{thumbnail}
  						  		 )
  	</insert>
+ 	
+ 	
 
   </mapper>
