@@ -65,6 +65,7 @@ function postFormSubmit(url) {
     //         break;
     // }
 
+    console.log(url)
     $(formEl).attr("action", url)
 
     $(formEl).submit();

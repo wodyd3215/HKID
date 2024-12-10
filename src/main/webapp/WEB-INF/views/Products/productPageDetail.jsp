@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <% String contextPath = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +50,7 @@
                         <div> ${p.productName}</div>
     
                         <!-- 평점 -->
-                        <div class="assess">${r.rate}</div> 
+                        <div class="assess" data-star="${p.rate}" data-count="${p.reviewCount}"></div> 
                     </div>            
         
                     <!-- 수량 버튼 -->

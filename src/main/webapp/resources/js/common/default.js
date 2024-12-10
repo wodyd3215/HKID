@@ -29,5 +29,8 @@ function init(contextPath, memberNo, pageName, optional) {
         case "productDetail":
             initProductDetail(contextPath, JSON.parse(optional));
             break;
+        case "product":
+            initProduct();
+            break;
     }
 }

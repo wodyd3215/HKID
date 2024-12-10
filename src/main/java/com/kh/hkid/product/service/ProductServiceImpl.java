@@ -26,13 +26,13 @@ public class ProductServiceImpl implements ProductService{
 	private final ProductDao productDao;
 
 	@Override
-	public int selectListTotal() {
-		return productDao.selectListTotal(sqlSession);
+	public int selectListTotal(String category) {
+		return productDao.selectListTotal(sqlSession, category);
 	}
 
 	@Override
-	public ArrayList<Product> selectList(PageInfo pi) {
-		return productDao.selectList(sqlSession, pi);
+	public ArrayList<Product> selectList(PageInfo pi, String category) {
+		return productDao.selectList(sqlSession, pi, category);
 	}
 
 	@Override
@@ -51,15 +51,15 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	
-	@Override
-	public int selectProductCategoryListCount(String category) {
-		return productDao.selectProductCategoryListCount(sqlSession, category);
-	}
-
-	@Override
-	public ArrayList<Product> selectProductCategoryList(PageInfo pi, String category) {
-		return productDao.selectProductCategoryList(sqlSession, pi, category);
-	}
+//	@Override
+//	public int selectProductCategoryListCount(String category) {
+//		return productDao.selectProductCategoryListCount(sqlSession, category);
+//	}
+//
+//	@Override
+//	public ArrayList<Product> selectProductCategoryList(PageInfo pi, String category) {
+//		return productDao.selectProductCategoryList(sqlSession, pi, category);
+//	}
 
 	@Override
 	public ArrayList<Product> searchList(HashMap<String, String> map, PageInfo pi) {
@@ -67,7 +67,16 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int reviewCount(int productNo) {
+	public int selectSearchCount(HashMap<String, String> map) {
+		return productDao.selectSearchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Product> selectSearchList(HashMap<String, String> map, PageInfo pi) {
+		return productDao.selectSearchList(sqlSession, map, pi);
+	}
+	
+		public int reviewCount(int productNo) {
 		return productDao.reviewCount(sqlSession, productNo);
 	}
 

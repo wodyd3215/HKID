@@ -21,9 +21,9 @@
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-    b = ${b}
+    <!-- b = ${b}
     <br><br>
-    m = ${m}
+    m = ${m} -->
 
 
 
