@@ -29,98 +29,62 @@ function checkSelectAll(checkbox) {
     selectAllCheckbox.checked = allChecked;
 }
 
+
+
+
 // -------------------------------------------------------------------------------------------
-
-
-function addItem(loginMember){
-    const productNo = document.querySelector(".productNo").value;
-    const productQuantity = document.querySelector(".quantityBtnText").value;
-
-    const data = {
-        memberNo: loginMember,
-        productNo : productNo,
-        quantity: productQuantity
-    };
-
-    addAjaxItem(data, function(res){
-    })
-}
-
-function addAjaxItem(data, callback){
-    $.ajax({
-        url:'addCart.c',
-        type: 'POST',
-        data:data,
-        success:function(res){
-            alert("장바구니에 담겨졌습니다.");
-            callback(res)
-        }
-    })
-}
-
-
-
+let quantity = 1;
 
 // 수량 증가 및 감소 버튼
-$('.increaseBtn').click(function() {
-    let productNo = $(this).closest('.cartQuantity').data('productNo');
-    let memberNo = $(this).closest('.cartQuantity').data('memberNo');
-    updateQuantity(memberNo, productNo, 1); // 1은 수량 증가
-});
+function increaseBtn(){    
+    const cartQuantity = document.querySelector(".cartQuantity");
+    const quantityBtnText = document.querySelector(".quantityBtnText");
+    const productPrice = document.querySelector(".productPrice");
+    const price = parseInt(price.getAttribute("data-price"));
 
-$('.decreaseBtn').click(function() {
+    const mNo = document.querySelector(".mNo");
+    const pNo = document.querySelector(".pNo");
+
+    
+
+    quantity += 1;
+    quantityBtnText.textContent = quantity;
+
+    $.ajax({
+        url:'/qchange',
+        data:'{}'
+    })
+}
+
+function decreaseBtn(){
     let productNo = $(this).closest('.cartQuantity').data('productNo');
     let memberNo = $(this).closest('.cartQuantity').data('memberNo');
     updateQuantity(memberNo, productNo, -1); // -1은 수량 감소
-});
+}
 
 
+// -------------------------------------------------------------------------------------------
+function delectOne(){
+    const btn = document.querySelector('.btn.delete-button')
+    const pNo = btn.getAttribute('data-product-no')
+    const mNo = btn.getAttribute('data-member-no')
 
-// 숫자 3자리 콤마찍기
-// Number.prototype.formatNumber = function(){
-//     if(this==0) return 0;
-//     let regex = /(^[+-]?\d+)(\d)/;
-//     let nstr = (this + '');
-//     while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
-//     return nstr;
-// };
+    console.log(pNo); 
+    console.log(mNo); 
 
-
-function bottomBtn(){
-    let valueArr = new Array();
-    let list = $("input[name='selectBox']");
-    for(let i=0; i<list.length; i++){
-        if(list[i].checked){
-            valueArr.push(list[i].value);
+    $.ajax({
+        url:'delete.c',
+        data:{
+            productNo : pNo,
+            memberNo : mNo
+        },
+        success : function(res){
+            console.log("전송완료");
+            location.href = `cartlist.li?memberNo=${mNo}`;
+        }, error : function() {
+            console.log("실패");
         }
-    }
-
-    if(valueArr.length == 0){
-        alert("선택된 상품이 없습니다.");
-    } else{
-        let chk = confirm("");
-        $.ajax({
-            url:'delete.c',
-            type:'GET',
-            data:{valueArr : valueArr},
-            success:function(){
-               
-            }
-        })
-    }
-
-}
-
-
-function deleteAll(){
-    checkCounts = document.querySelectorAll(".check");
-    let lis;
-
-    checkNone(deleteList);
-
-    checkCounts.forEach(check => {
-        lis = document.querySelector(""+check.value);
-        lis.closest("").remove();
     });
-
 }
+
+

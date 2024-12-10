@@ -42,8 +42,9 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public int deleteCart(HashMap<Object, Integer> de) {
-		return cartDao.deleteCart(sqlSession, de);
+	public int deleteCart(Cart c) {
+		return cartDao.deleteCart(sqlSession, c);
+		
 	}
 
 

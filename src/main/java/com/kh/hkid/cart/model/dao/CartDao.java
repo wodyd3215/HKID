@@ -27,8 +27,8 @@ public class CartDao {
 		return sqlSession.insert("carMapper.insertCart", c);
 	}
 
-	public int deleteCart(SqlSessionTemplate sqlSession, HashMap<Object, Integer> de) {
-		return sqlSession.delete("cartMapper.deleteCart",de);
+	public int deleteCart(SqlSessionTemplate sqlSession, Cart c) {
+		return sqlSession.delete("cartMapper.deleteCart", c);		
 	}
 
 	
