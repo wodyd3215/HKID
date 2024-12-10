@@ -56,6 +56,8 @@ public interface AdminService {
 	
 	int deactivateProduct(int productNo);
 	
+	int activateProduct(int productNo);
+	
 	void updateProduct(Product p, String files);
 	
 //	======================= 챌린지 =======================

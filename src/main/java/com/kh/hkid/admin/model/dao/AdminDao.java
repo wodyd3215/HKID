@@ -108,6 +108,10 @@ public class AdminDao {
 		return sqlSession.update("productMapper.deactivateProduct", productNo);
 	}
 	
+	public int activateProduct(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.update("productMapper.activateProduct", productNo);
+	}
+	
 	public int updateAttachment(SqlSessionTemplate sqlSession, HashMap<String, Object> aMap) {
 		return sqlSession.update("productMapper.updateAttachment", aMap);
 	}
@@ -145,6 +149,4 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("productMapper.selectProductList", null, rowBounds);
 	}
-	
-	
 }
