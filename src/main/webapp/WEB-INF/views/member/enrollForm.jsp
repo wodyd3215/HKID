@@ -97,7 +97,7 @@
                         <div></div>
                     </div>
                     <div id="certifyClick" class="enroll-input-area">
-                        <input type="text" id="certifyNo" name="certifyNo" placeholder="인증번호 입력" required>
+                        <input type="text" id="certifyNo" name="certifyNo" placeholder="인증번호 입력" required readonly>
                         <input type="text" id="receiveCertifyNo" hidden>
                         <div class="all-btn" onclick="checkCertify()">인증</div>
                     </div>
