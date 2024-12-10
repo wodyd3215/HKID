@@ -145,4 +145,6 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("productMapper.selectProductList", null, rowBounds);
 	}
+	
+	
 }

@@ -333,7 +333,17 @@
 		 ORDER BY PRODUCT_NO DESC 
 	</select>
 	
-	<select id="selectEditProductList" resultMap="productResultSet">
-	
+	<select id="selectEditProduct" resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+		       PRODUCT_NAME,
+		       CONTENT,
+		       QUANTITY,
+			   PRICE,
+			   CATEGORY,
+			   FILE_NO,
+		       CHANGE_NAME
+		  FROM PRODUCT
+		  JOIN TOTAL_ATTACHMENT USING (PRODUCT_NO)
+		 WHERE PRODUCT_NO = #{productNo}
 	</select>
  </mapper>
