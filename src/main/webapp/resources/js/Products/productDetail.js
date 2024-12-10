@@ -1,30 +1,127 @@
-// 상세정보, 리뷰 클릭 시 메뉴 이동
-// function moveScroll(name) {
-//     // 클릭 시 메뉴 색깔 바뀜
-//     let input = document.getElementById(name);
-//     if (input){
-//         input.checked = true;
-//         console.log("Radio button '" + name + "' is checked."); // 디버깅용
-//     } else {
-//         console.log("Radio button with id '" + name + "' not found.");
-//     }
-
-//     // location 오타 수정 및 디버깅용 콘솔 로그 추가
-//     let location = document.querySelector("." + name);
-    
-//     if (location) { // 요소가 존재하는지 확인
-//         let offsetTop = location.offsetTop;
-//         console.log("Offset top for", name, ":", offsetTop); // 디버깅용
-//         window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-//     } else {
-//         console.log("Element with class '" + name + "' not found.");
-//     }
-
-    
-// }
-
  // 초기 수량
  let quantity = 1;
+
+function initProductDetail(contextPath, optional) {
+    const imgArr = optional.imgs.split(',');
+
+    drawDetailImg(contextPath, imgArr)
+    drawContent(optional.content)
+    drawReview(optional.productNo)
+}
+
+// 디테일 이미지 가져오기
+function drawDetailImg(contextPath, imgArr) {
+    imgArr.forEach((img, index) => {
+        const imgsArea = $('.detailImg')
+        const imgForm = $('<div>').addClass('diImg').click(() => {
+            drawRepresentImg(contextPath + imgArr[index])
+        })
+        const imgArea = $('<img>')
+
+        imgArea.attr('src', contextPath + img)
+
+        imgForm.append(imgArea)
+        imgsArea.append(imgForm)
+    });
+
+    $('.reImg img').attr('src', contextPath + imgArr[0])
+}
+
+// 클릭 시, 대표 이미지 변경
+function drawRepresentImg(img) {
+    $('.reImg img').attr('src', img)
+}
+
+function drawContent(content) {
+    $('.contentImg').html(content)
+}
+
+function drawReview(productNo) {
+    let pageInfo = {
+        productNo: productNo,
+        currentPage: 1,
+        maxPage: null,
+    }
+
+    const loadReview = loadReviewAjax(pageInfo, (res) => {
+        pageInfo.maxPage = res.maxPage;
+
+        const reviewArea = $('.contentReview')
+        reviewArea.children().not('.pageInfo').remove()
+        
+        $('#currentPage').text(pageInfo.currentPage)
+
+        res.list.forEach((review) => {
+            const star = drawStar(review.reviewRate)
+
+            const html = `<div class="review1">
+                            <div class="reviewHeader">
+                            <div class="reviewUser">${review.nickname}</div>
+                            <div class="assessUser">${star}</div>
+                            <div class="assessDate">${review.reviewDate}</div>
+                          </div>  
+                          <div class="reviewImg">
+                            <div class="reviImg"></div>
+                          </div>
+                          <div class="reviewProName">${review.productName}</div>
+                            <div>${review.reviewContent}</div>
+                          </div>`
+            
+            reviewArea.append(html);              
+        })
+    })
+
+    loadReview()
+
+    document.querySelector('.pageInfo #prev').onclick = () => {
+        if(pageInfo.currentPage !== 1 && pageInfo.currentPage > 1) {
+            pageInfo.currentPage--
+
+            loadReview()
+        } else {
+            return
+        }
+    }
+
+    document.querySelector('.pageInfo #next').onclick = () => {
+        if(pageInfo.currentPage < pageInfo.maxPage) {
+            pageInfo.currentPage++
+
+            loadReview()
+        } else {
+            return
+        }
+    }
+}
+
+function drawStar(reviewRate) {
+    const max = 5
+    let star = ''
+
+    for(let i = 0; i < max; i++) {
+        if(i < reviewRate) {
+            star += '★';
+        } else {
+            star += '☆'
+        }
+    }
+
+    return star;
+}
+
+function loadReviewAjax(pageInfo, callback) {
+    return function() {
+        $.ajax({
+            type: 'POST',
+            url: 'loadReviewAjax',
+            data: pageInfo,
+            success: callback,
+            error: () => {
+                console.log('리뷰 조회 실패')
+            }
+        })
+    }
+}
 
  // 증가 함수
  function increaseQuantity() {
@@ -71,8 +168,6 @@
     }
 }
 
-
-
 $('.tab > ul > li > a').click(function(e) {
     let href = $(this).attr('href');
 
@@ -113,7 +208,7 @@ function Page__updateOffsetTop() {
         let $page = $(node);
         let offsetTop = $page.offset().top;
         
-        $tabContent.attr('data-offset-top', offsetTop);
+        $('.tabContent').attr('data-offset-top', offsetTop);
     });
     
     // 계산이 바뀌었으니까, 다시 상태 업데이트

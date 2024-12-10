@@ -40,10 +40,10 @@
                             <td>${n.viewCount}</td>
                             <td>
                                 <div class="management">
-                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('edit', 'editNotice')">
+                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('editNotice')">
                                         edit
                                     </button>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('delete', 'deleteNotice')">
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteNotice')">
                                         delete
                                     </button>
         
@@ -60,12 +60,6 @@
         <div id="boCount-wirte-div" class="custom-div">
             <a href="nEnroll.ad" class="btn btn-primary custom-btn">공지 등록</a>
         </div>            
-        <div id="searchbar-div">
-            <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">
-            <button id="search-btn" type="submit">
-                <img id="searchIcon" src="resources/image/searchIcon.png">
-            </button>
-        </div>  
 
         <!-- 페이지 버튼 -->
         <div id="paging-div">

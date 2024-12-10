@@ -13,6 +13,9 @@ public class Product {
 	private int quantity;
 	private int price;
 	private String category;
-	private Date registrationDate;
+	private String registrationDate;
 	private String type;
+	private String status;
+	private int fileNo;
+	private String changeName;
 }

@@ -1,13 +1,10 @@
 package com.kh.hkid.diary.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.diary.model.vo.Diary;
+import com.kh.hkid.diet.model.vo.Diet;
 
 public interface DiaryService {
 	int selectDiaryCount(int memberNo);
@@ -17,6 +14,8 @@ public interface DiaryService {
 	int insertDiary(Diary d);
 	
 	Diary detailDiary(Diary d);
+	
+	Diet selectMyDiet(int foodNo);
 	
 	int deleteDiary(Diary d);
 	

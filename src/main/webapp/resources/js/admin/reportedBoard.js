@@ -11,18 +11,21 @@ function inputDetailData(optional) {
 }
 
 function loadContent(optional) {
-    const contentArea = document.querySelector('#content-detail .custom-modal-content')
+    console.log(typeof optional);
+    const contentArea = $('#content-detail .custom-modal-content')
 
-    loadBoardAjax(optional, (res) => {
-
+    loadBoardAjax({boardNo: optional}, (res) => {
+        $('#board-title p').text(res.boardTitle)
+        $('#writer-date div').text(res.nickName)
+        $('#content').html(res.content)
     })
 }
 
-function loadBoardAjax(boardNo, callback) {
+function loadBoardAjax(data, callback) {
     $.ajax({
         url: 'loadBoardAjax',
         type: 'POST',
-        data: boardNo,
+        data: data,
         success: callback,
         error: () => {
             console.log('게시글 불러오기 실패')

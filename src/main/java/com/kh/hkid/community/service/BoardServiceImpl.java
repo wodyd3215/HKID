@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dao.BoardDao;
@@ -89,54 +90,50 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.insertReport(sqlSession, map);
 	}
 	
+	@Transactional
 	@Override
 	public int insertBoard(Board b) {
-		int result = 0;
-		if(boardDao.insertBoard(sqlSession, b) > 0) {
-			result = boardDao.insertBoardFile(sqlSession, b);
-		}
-		return result;
+	    int result = boardDao.insertBoard(sqlSession, b);
+	    if (result > 0) {
+	        result = boardDao.insertBoardFile(sqlSession, b); 
+	    } else {
+	        throw new RuntimeException("게시글 삽입 실패");
+	    }
+	    return result;
 	}
 
+
+	@Transactional
 	@Override
 	public int updateBoard(Board b) {
-		int result = 0;
-		if(boardDao.updateBoard(sqlSession, b) > 0) {
-			result = boardDao.updateBoardFile(sqlSession, b);
-		}
-		
-		return boardDao.updateBoard(sqlSession, b);
+	    int result = boardDao.updateBoard(sqlSession, b); // 게시글 수정
+	    if (result > 0) {
+	        result = boardDao.updateBoardFile(sqlSession, b); // 첨부 파일 수정
+	    } else {
+	        throw new RuntimeException("게시글 수정 실패");
+	    }
+	    return result;
 	}
 
-	//좋아요 생성
-	@Override
-	public int insertGood(HashMap<String, Integer> map) {
-		return boardDao.insertGood(sqlSession, map);
-	}
-
+	
 	//좋아요를 누른 적이 있는지
 	@Override
 	public int checkGood(HashMap<String, Integer> map) {
-		int result = 0;
-		
-		//로그인하지 않았으면 (빈하트)
-		if((map.get("memberNo")) == null){
-			return 0;
-		}
-		System.out.println("boardDao.checkGood(sqlSession, map) => " + boardDao.checkGood(sqlSession, map));
-		//좋아요를 클릭했던 적이 있으면 1
-		if(boardDao.checkGood(sqlSession, map) > 0) {
-			if(boardDao.checkGoodStatus(sqlSession, map) == 'Y') {
-				result = 1;
-			}
-		}
-		return result;
+		return boardDao.checkGood(sqlSession, map);
 	}
 
 	//좋아요 수정
 	@Override
 	public int updateGood(HashMap<String, Object> map) {
-		return boardDao.updateGood(sqlSession, map);
+		//좋아요 상태변경
+		int result = boardDao.updateGood(sqlSession, map);
+		int boardNo = (int) map.get("boardNo");
+		
+		if(result > 0) {
+			return boardDao.countGood(sqlSession, boardNo);
+		}else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -159,6 +156,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteReply(sqlSession, map);
 	}
 
+	@Override
+	public int updateReply(Reply r) {
+		return boardDao.updateReply(sqlSession, r);
+	}
 	
 	
 

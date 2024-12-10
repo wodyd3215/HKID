@@ -37,6 +37,7 @@
 .reImg > img{
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .detailImg{
@@ -46,6 +47,10 @@
     align-items: center;
     gap: 5px;
 
+}
+
+.detailImg img {
+    object-fit: cover;
 }
 
 .diImg{

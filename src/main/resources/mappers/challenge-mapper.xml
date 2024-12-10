@@ -73,5 +73,20 @@
 		WHERE cr.che_res_no = #{cno}
    </select>
    
- 
+ 	<insert id="insertChallenge">
+ 		INSERT INTO CHELLAGE_RES (
+ 									CHE_RES_NO,
+									CHE_TITLE,
+									START_DATE,
+									END_DATE,
+									THUMBNAIL
+ 								 )
+ 						  VALUES (
+ 						  			SEQ_CNO.NEXTVAL,
+ 						  			#{challengeTitle},
+ 						  			#{startDate},
+ 						  			#{endDate},
+ 						  			#{thumbnail}
+ 						  		 )
+ 	</insert>
   </mapper>
