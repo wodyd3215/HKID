@@ -5,6 +5,7 @@ function initProductDetail(contextPath, optional) {
     const imgArr = optional.imgs.split(',');
 
     drawDetailImg(contextPath, imgArr)
+    drawReviewAvg()
     drawContent(optional.content)
     drawReview(optional.productNo)
 }
@@ -30,6 +31,13 @@ function drawDetailImg(contextPath, imgArr) {
 // 클릭 시, 대표 이미지 변경
 function drawRepresentImg(img) {
     $('.reImg img').attr('src', img)
+}
+
+function drawReviewAvg() {
+    const star = drawStar($('.assess').data('star'))
+    const count = '(' + $('.assess').data('count') + ')'
+
+    $('.assess').text(star + ' ' + count)
 }
 
 function drawContent(content) {

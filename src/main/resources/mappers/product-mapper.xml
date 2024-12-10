@@ -20,6 +20,8 @@
 		<result column="STATUS" property="status" />
 		<result column="FILE_NO" property="fileNo"/>
 		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="RATE" property="rate"/>
+		<result column="REVIEW_COUNT" property="reviewCount"/>
 	</resultMap>
 	
 	<resultMap type="Review" id="reviewResultSet">
@@ -215,18 +217,27 @@
 	</select>
 	
 	<select id="selectEditProduct" resultMap="productResultSet">
-		SELECT PRODUCT_NO,
-			   MEMBER_NO,
-			   PRODUCT_NAME,
-			   CONTENT,
-			   QUANTITY,
-			   PRICE,
-			   CATEGORY,
-			   FILE_NO,
-			   CHANGE_NAME
-		  FROM PRODUCT
-		  JOIN TOTAL_ATTACHMENT USING (PRODUCT_NO)
-		 WHERE PRODUCT_NO = #{productNo}
+		SELECT p.PRODUCT_NO,
+		       p.MEMBER_NO,
+		       p.PRODUCT_NAME,
+		       p.CONTENT,
+		       p.QUANTITY,
+		       p.PRICE,
+		       p.CATEGORY,
+		       t.FILE_NO,
+		       t.CHANGE_NAME,
+		       COALESCE(r.RATE, 0) AS RATE,
+		       COALESCE(r.REVIEW_COUNT, 0) AS REVIEW_COUNT
+		  FROM PRODUCT p
+		  JOIN TOTAL_ATTACHMENT t ON p.PRODUCT_NO = t.PRODUCT_NO
+		  LEFT JOIN (
+		       	SELECT ROUND(AVG(REVIEW_RATE)) AS RATE, 
+		       		   COUNT(*) AS REVIEW_COUNT,
+		               PRODUCT_NO
+		          FROM REVIEW
+		         GROUP BY PRODUCT_NO
+		  			) r ON p.PRODUCT_NO = r.PRODUCT_NO
+		 WHERE p.PRODUCT_NO = #{productNo}
 	</select>
 	
 	<update id="deactivateProduct">
