@@ -89,20 +89,7 @@
                                 
                                 <div class="productTextMid">
                                     <div class="productTexts">
-                                        <div class="textStar">★</div>
-                                        
-                                        <c:choose >
-                                            <c:when test="${r.rate == null}">
-                                                <div class="totalRate">
-                                                    0.0
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="totalRate">
-                                                    ${r.rate}
-                                                </div>
-                                            </c:otherwise>
-                                        </c:choose>                                    
+                                        <div class="textStar"></div>                                  
                                     </div>                                                                
                                     <div class="mainPrice">${p.price}원</div>
                                 </div>

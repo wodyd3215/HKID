@@ -51,7 +51,7 @@
                         <div> ${p.productName}</div>
     
                         <!-- 평점 -->
-                        <div class="assess">${r.rate}</div> 
+                        <div class="assess" data-star="${p.rate}" data-count="${p.reviewCount}"></div> 
                     </div>            
         
                     <!-- 수량 버튼 -->
