@@ -14,20 +14,20 @@ import com.kh.hkid.product.model.vo.Review;
 @Repository
 public class ProductDao {
 
-	public int selectListTotal(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("productMapper.selectListTotal");
+	public int selectListTotal(SqlSessionTemplate sqlSession, String category) {
+		return sqlSession.selectOne("productMapper.selectListTotal", category);
 	}
 
-	public ArrayList<Product> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Product> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String category) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("productMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("productMapper.selectList", category, rowBounds);
 	}
 
 	public Product selectProduct(SqlSessionTemplate sqlSession, int productNo) {
-		return sqlSession.selectOne("productMapper.selectEditProduct", productNo);
+		return sqlSession.selectOne("productMapper.selectProduct", productNo);
 	}
 	
 
@@ -38,19 +38,17 @@ public class ProductDao {
 	public ArrayList<Product> selectRbtn(SqlSessionTemplate sqlSession, String rbtn) {
 		return (ArrayList)sqlSession.selectList("productMapper.Rbtn", rbtn);
 	}
-
 	
-	
-	public int selectProductCategoryListCount(SqlSessionTemplate sqlSession, String category) {
-		return sqlSession.selectOne("productMapper.selectProductCategoryListCount", category);
-	}
+//	public int selectProductCategoryListCount(SqlSessionTemplate sqlSession, String category) {
+//		return sqlSession.selectOne("productMapper.selectProductCategoryListCount", category);
+//	}
 
-	public ArrayList<Product> selectProductCategoryList(SqlSessionTemplate sqlSession, PageInfo pi, String category) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("productMapper.selectProductCategoryList", category, rowBounds);
-	}
+//	public ArrayList<Product> selectProductCategoryList(SqlSessionTemplate sqlSession, PageInfo pi, String category) {
+//		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+//		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+//		
+//		return (ArrayList)sqlSession.selectList("productMapper.selectProductCategoryList", category, rowBounds);
+//	}
 
 	public ArrayList<Product> searchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();

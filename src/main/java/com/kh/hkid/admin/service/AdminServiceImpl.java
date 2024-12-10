@@ -171,4 +171,14 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.loadBoardAjax(sqlSession, boardNo);
 	}
 
+	@Override
+	public int pCount() {
+		return adminDao.pCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Product> selecProductList(PageInfo pi) {
+		return adminDao.selecProductList(sqlSession, pi);
+	}
+	
 }

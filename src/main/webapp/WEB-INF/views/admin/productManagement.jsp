@@ -47,15 +47,14 @@
                             </c:choose>
                             <td>
                                 <div class="management">
-                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('editProduct')">
+                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('editProduct?productNo=${p.productNo}')">
                                         edit
                                     </button>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteProduct')">
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteProduct?productNo=${p.productNo}')">
                                         delete
                                     </button>
         
                                     <form action="" method="POST" id="postForm">
-                                        <input type="hidden" name="productNo" value="${p.productNo}">
                                     </form>
                                 </div>
                             </td>

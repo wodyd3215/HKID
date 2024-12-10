@@ -21,20 +21,14 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
-    category = ${category}
-    <br><br><br>
-    더미 List = ${list}
-    <br><br>
-    pi = ${pi}
     <div class="wrapper">
         <div id="productPage">
-            <form id="sidecategory" action="product.se">
+            <form id="sidecategory" action="product.li">
                 <div id="selected"> <!-- 왼쪽 사이드바 nav -->
                     <ul class="side-nav">
                         <li class="side-nav-header"> 상품 </li> 
                         <li>
-                            <input type="radio" id="sideAll" name="category" value="전체"onchange="this.form.submit()"/>                        
+                            <input type="radio" id="sideAll" name="category" value="전체" onchange="this.form.submit()"/>                        
                             <label for="sideAll"> 전체 </label>
                         </li>
 
@@ -65,7 +59,7 @@
                         </li>
 
                         <li>
-                            <input type="radio" class="usedMove" id="usedItem" name="ItemRbtn" onclick="productView('used')" /> 
+                            <input type="radio" class="usedMove" id="usedItem" name="ItemRbtn" onclick="productView('used')" disabled/> 
                             <label for="usedItem"> 중고 </label>
                         </li>
                     </ul>                
@@ -77,7 +71,7 @@
                         <!-- 상품 이미지 -->
                             <div class="productImg" >
                                 <a href="deteilItem.li?productNo=${p.productNo }">
-                                    <img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="noting">
+                                    <img src="${pageContext.request.contextPath}${p.changeName}" alt="noting">
                                 </a>
                             </div>
 
@@ -94,7 +88,7 @@
                                 
                                 <div class="productTextMid">
                                     <div class="productTexts">
-                                        <div class="textStar"></div>                                  
+                                        <div class="textStar" data-star="${p.rate}" data-count="${p.reviewCount}"></div>                                  
                                     </div>                                                                
                                     <div class="mainPrice">${p.price}원</div>
                                 </div>

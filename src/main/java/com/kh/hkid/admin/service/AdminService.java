@@ -46,6 +46,10 @@ public interface AdminService {
 	void recoveryAccount(int memberNo);
 	
 // ======================= 상품 =======================
+	int pCount();
+	
+	ArrayList<Product> selecProductList(PageInfo pi);
+	
 	void insertProduct(Product p, String files);
 	
 	Product editProduct(int productNo);
