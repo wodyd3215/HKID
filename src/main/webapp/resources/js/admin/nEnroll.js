@@ -1,4 +1,5 @@
 function initNoticeEnroll(contextPath, noticeContent) {
+    console.log("n : " + noticeContent)
     const setting = {
         placeholder: "오늘 하루는 어떠셨나요?",
         height: 578,

@@ -1,8 +1,6 @@
 package com.kh.hkid.diary.controller;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,13 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.diary.model.vo.Diary;
 import com.kh.hkid.diary.service.DiaryService;
+import com.kh.hkid.diet.model.vo.Diet;
 import com.kh.hkid.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -76,11 +74,20 @@ public class DiaryController {
     }
     
     @GetMapping("detailDiary.di")
-    public String detailDiary(Diary d, Model model, HttpSession session) {
-    	d.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    public String detailDiary(Diary dy, Model model, HttpSession session) {
+    	dy.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
     	
-    	model.addAttribute("diary", diaryService.detailDiary(d));
+    	Diary ndy = diaryService.detailDiary(dy);
     	
+    	log.info("다이어트 정보 있음: " + ndy.getFoodNo());
+    	if(ndy.getFoodNo() != 0) {
+    		Diet dt = diaryService.selectMyDiet(ndy.getFoodNo());
+    		
+        	model.addAttribute("diet", dt);
+    	}
+
+    	model.addAttribute("diary", ndy);
+  	
     	return "diary/myDiaryDetail";
     }
     

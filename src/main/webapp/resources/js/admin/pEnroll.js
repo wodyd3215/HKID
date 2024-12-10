@@ -1,3 +1,8 @@
+function initProduct(contextPath, optional) {
+    initProductEnroll(contextPath, optional.content)
+    initFile(contextPath, optional)
+}
+
 function initProductEnroll(contextPath, productContent) {
     const setting = {
         placeholder: "상품 설명을 입력하세요.",
@@ -21,12 +26,16 @@ function initProductEnroll(contextPath, productContent) {
     }
 }
 
-function initFile() {
+function initFile(contextPath, files) {
     // 파일 정보 객체 초기화
     let fileInfo = {
+        fileNo: null,
         filesArr: [], // 이미지 파일 누적시키는 배열
-        maxFileCnt: 4, // 첨부 파일 최대 개수
     };
+
+    if(files) {
+        insertArr(contextPath, fileInfo, files)
+    }
 
     // 파일 입력 요소 가져오기
     const include = document.querySelector('.include-img');
@@ -34,42 +43,53 @@ function initFile() {
 
     // 첨부 파일 누적 저장
     include.onchange = () => {
-         addFiles(fileInfo, include) 
+        addFiles(contextPath, fileInfo, include) 
     };
 
     form.onclick = () => {
-        submitFile(fileInfo.filesArr)
+        submitFile(fileInfo.filesArr, form.dataset.url) 
     }
+}
+
+function insertArr(contextPath, fileInfo, files) {
+    fileInfo.fileNo = files.fileNo
+
+    for(let file of files.changeName.split(",")) {
+        fileInfo.filesArr.push(file)
+    }
+
+    drawView(contextPath, fileInfo.filesArr);
 }
 
 function includeImg() {
     document.querySelector('.include-img').click()
 }
 
-function addFiles(fileInfo, include) {
+// 파일 추가 감지 시 작동하는 함수
+function addFiles(contextPath, fileInfo, include) {
+    const maxFileCnt = 4 // 첨부 파일 최대 개수
     const attFileCnt = fileInfo.filesArr.length; // 기존 추가된 첨부파일 개수
-        const remainFileCnt = fileInfo.maxFileCnt - attFileCnt; // 추가로 첨부 가능한 개수
-        const currFileCnt = include.files.length; // 현재 선택된 첨부파일 개수
+    const remainFileCnt = maxFileCnt - attFileCnt; // 추가로 첨부 가능한 개수
+    const currFileCnt = include.files.length; // 현재 선택된 첨부파일 개수
 
-        if (currFileCnt > remainFileCnt) {
-            alert("첨부 파일은 최대 " + fileInfo.maxFileCnt + "개 까지 첨부 가능합니다.");
-            return;
+    if (currFileCnt > remainFileCnt) {
+        alert("첨부 파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
+        return;
+    }
+
+    // Math.min(): 두 값을 비교하여 더 작은 값을 반환
+    for (let cnt = 0; cnt < Math.min(currFileCnt, remainFileCnt); cnt++) {
+        const file = include.files[cnt];
+
+        if(validation(file)) {
+            fileInfo.filesArr.push(file); // filesArr에 파일 추가
         }
+    }
 
-        // Math.min(): 두 값을 비교하여 더 작은 값을 반환
-        for (let cnt = 0; cnt < Math.min(currFileCnt, remainFileCnt); cnt++) {
-            const file = include.files[cnt];
-
-            if(validation(file)) {
-                fileInfo.filesArr.push(file); // filesArr에 파일 추가
-            }
-        }
-
-        drawView(fileInfo.filesArr)
-        
-        console.log(fileInfo.filesArr);
+    drawView(contextPath, fileInfo.filesArr)
 }
 
+// 파일 상태 유효 확인 함수
 function validation(file) {
     const type = ['image/jpeg', 'image/png']
 
@@ -84,34 +104,37 @@ function validation(file) {
     }
 }
 
-function drawView(filesArr) {
+async function drawView(contextPath, filesArr) {
+    let imgSrc = null;
+    
+    console.log(filesArr)
+
     const pre = $('#img-area')
     // children() : 요소의 직계 자식 요소 선택
     // not() : 직계 자식 요소 제외시켜줌 
     pre.children().not('input[type="file"]').remove()
 
-    filesArr.forEach((file, index) => {
-        // 파일 내용을 비동기로 읽을 수 있는 브라우저 API
-        const reader = new FileReader();
+    for(const[index, file] of filesArr.entries()) {
+        console.log("그려짐")
+        if(typeof file === 'string') {  
+            imgSrc = contextPath + file
+            console.log(imgSrc)
+        } else {
+            imgSrc = await readFileAsDataURL(file);
+        } 
+        console.log("이미지 주소2: " + imgSrc)
         
-        // 파일이 성공적으로 읽히면 실행
-        reader.onload = (event) => {
-            // 파일의 Base64데이터(URL 형식)가 담겨 있음
-            const imgSrc = event.target.result
+        const previewArea = $('<div>').addClass('previewImg')
+        const imgArea = $('<img>').attr('src', imgSrc)
+        const closeBtn = $('<div>').addClass('material-symbols-outlined close-btn').text('close').click(() => {
+            excludeFile(contextPath, filesArr, index)
+        })
+    
+        previewArea.append(imgArea, closeBtn)
+        pre.append(previewArea)
+    }
 
-            const previewArea = $('<div>').addClass('previewImg')
-            const imgArea = $('<img>').attr('src', imgSrc)
-            const closeBtn = $('<div>').addClass('material-symbols-outlined close-btn').text('close').click(() => {
-                excludeFile(filesArr, index)
-            })
-
-            previewArea.append(imgArea, closeBtn)
-            pre.append(previewArea)
-        }
-
-        // Base64 형식의 데이터 URL로 읽힘
-        reader.readAsDataURL(file)
-    });
+    // filesArr.forEach(async (file, index) => { });
 
     if(filesArr.length < 4) {
         const addArea = $('<div>').addClass('material-symbols-outlined').text('add').click(() => {
@@ -122,14 +145,37 @@ function drawView(filesArr) {
     }
 }
 
-function excludeFile(filesArr, index) {
+// 이미지 미리보기 비동기과정을 동기처럼 만들어줌 
+function readFileAsDataURL(file) {
+    return new Promise((resolve) => {
+        // 파일 내용을 비동기로 읽을 수 있는 브라우저 API
+        const reader = new FileReader();
+            
+        // 파일이 성공적으로 읽히면 실행
+        reader.onload = (event) => {
+            // 파일의 Base64데이터(URL 형식)가 담겨 있음
+            resolve(event.target.result)
+        }
+
+        // Base64 형식의 데이터 URL로 읽힘
+        reader.readAsDataURL(file) 
+    })
+}
+
+function excludeFile(contextPath, filesArr, index) {
     // 배열의 특정 인덱스 제거 : .splice(시작 위치, 갯수)
     filesArr.splice(index, 1)
 
-    drawView(filesArr)
+    drawView(contextPath, filesArr)
 }
 
-function submitFile(fileArr) {
+// 등록 버튼 눌렀을 때 작동하는 함수
+function submitFile(filesArr, url) {
+    if(filesArr.length < 1) {
+        alert("이미지는 1개 이상 첨부해야합니다")
+        return
+    }
+
     const fd = new FormData()
 
     fd.append("productName", $('.productName').val())
@@ -138,11 +184,19 @@ function submitFile(fileArr) {
     fd.append("price", $('.price').val())
     fd.append("content", $('.content').val())
 
-    for(const file of fileArr) {
-        fd.append("fileList", file)
+    for(const file of filesArr) {
+        if(typeof file !== "string") {
+            fd.append("fileList", file) 
+        } else {
+            fd.append("srcList", file)
+        }
     }
 
-    insertProduct(fd, function(res) {
+    if(url === 'updateProduct') {
+        fd.append("productNo", $('.productNo').val())
+    }
+
+    registrationProduct(fd, url, function(res) {
         if(res === 'success') {
             alert("상품 등록 성공")
 
@@ -153,15 +207,17 @@ function submitFile(fileArr) {
     })
 }
 
-function insertProduct(data, callback) {
+// 상품 등록 및 수정 AJax
+function registrationProduct(data, url, callback) {
     $.ajax({
-        url: 'insertProduct',
+        url: url,
         type: 'POST',
         data: data,
         processData: false, //기본이 true -> 전송하는 data를 string으로 변환해서 요청
         contentType: false,  // 요청할 때 타입 -> false -> multipart/form-data 형식
         success: callback,
         error: () => {
+            alert('비어있는 양식이 있습니다.')
             console.log("ajax 실패")
         },
     })

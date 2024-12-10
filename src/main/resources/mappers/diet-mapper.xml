@@ -43,4 +43,13 @@
   	 WHERE MEMBER_NO = #{memberNo}
   	   AND TO_CHAR(SAVE_DATE) = TO_CHAR(SYSDATE)
   </select>
+  
+  <select id="selectMyDiet" resultMap="dietResultSet">
+  	SELECT TOTAL_KCAL,
+  		   TOTAL_CARBO,
+  		   TOTAL_PROTEIN,
+  		   TOTAL_FAT
+  	  FROM CAL_LOG
+  	 WHERE FOOD_NO = #{foodNo}
+  </select>
 </mapper>

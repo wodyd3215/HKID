@@ -16,7 +16,7 @@ function previewProfile(input, contextPath, imgUrl) {
       }
     })
   } else {
-      $('.profile-img').attr('src', contextPath + imgUrl)
+    return
   }
 }
 

@@ -1,6 +1,7 @@
 package com.kh.hkid.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,9 +11,10 @@ import com.kh.hkid.admin.model.vo.AccRecovery;
 import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.admin.model.vo.Report;
 import com.kh.hkid.admin.model.vo.SuspensionMember;
-import com.kh.hkid.common.vo.Attachment;
+import com.kh.hkid.challenge.model.vo.Challenge;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.BoardInfo;
+import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.product.model.vo.Product;
 
 @Repository
@@ -59,10 +61,6 @@ public class AdminDao {
 		return sqlSession.delete("adminMapper.deleteReportTarget", r);
 	}
 	
-	public BoardInfo loadBoardAjax(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.selectOne("adminMapper.loadBoardAjax");
-	}
-	
 	public int insertsuspension(SqlSessionTemplate sqlSession, SuspensionMember sm) {
 		return sqlSession.insert("adminMapper.insertsuspension", sm);
 	}
@@ -100,5 +98,40 @@ public class AdminDao {
 	
 	public int insertAttachment(SqlSessionTemplate sqlSession, String files) {
 		return sqlSession.insert("productMapper.insertAttachment", files);
+	}
+	
+	public Product editProduct(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.selectOne("productMapper.selectEditProduct", productNo);
+	}
+	
+	public int deactivateProduct(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.update("productMapper.deactivateProduct", productNo);
+	}
+	
+	public int updateAttachment(SqlSessionTemplate sqlSession, HashMap<String, Object> aMap) {
+		return sqlSession.update("productMapper.updateAttachment", aMap);
+	}
+	
+	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
+		return sqlSession.update("productMapper.updateProduct", p); 
+	}
+	
+	public int challengeCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("challengeMapper.boardCount");
+	}
+	
+	public ArrayList<Challenge> selectChallengeList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("challengeMapper.selectList", null, rowBounds);
+	}
+	
+	public int insertChallenge(SqlSessionTemplate sqlSession, Challenge ch) {
+		return sqlSession.insert("challengeMapper.insertChallenge", ch);
+	}
+	
+	public Board loadBoardAjax(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 	}
 }

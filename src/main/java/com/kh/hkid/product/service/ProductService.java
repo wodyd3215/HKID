@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.dto.Community;
 import com.kh.hkid.product.model.vo.Product;
+import com.kh.hkid.product.model.vo.Review;
 
 public interface ProductService {
 
@@ -22,7 +22,7 @@ public interface ProductService {
 	ArrayList<Product> selectProductCategoryList(PageInfo pi, String category);
 	
 	// productNo로 상품 목록 조회
-	Product selectProduct(int pno);
+	Product selectProduct(int productNo);
 
 	// ajax 를 활용하여 왼쪽 사이드바에 의해 리스트 정렬
 	ArrayList<Product> ajaxSelectedNav(String selectedValue);
@@ -38,6 +38,9 @@ public interface ProductService {
 	
 	//검색한 게시글 목록
 	ArrayList<Product> selectSearchList(HashMap<String, String> map, PageInfo pi);
+	int reviewCount(int productNo);
+	
+	ArrayList<Review> selectReviewList(PageInfo pi, int productNo);
 
 	
 

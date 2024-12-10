@@ -45,22 +45,27 @@ function copyLink(text, successMsg, errorMsg){
 }
 
 // type 인자를 받아 form태그 action에 주소를 넣어주는 함수
-function postFormSubmit(type, url) {
+function postFormSubmit(url) {
     const formEl = $("#postForm");
-    switch(type) {
-        case "delete":
-            $(formEl).attr("action", url)
-            break;
-        case "report":
-            $(formEl).attr("action", url);
-            break;
-        case "insert":
-            $(formEl).attr("action", url);
-            break;
-        case "update":
-            $(formEl).attr("action", url)
-            break;
-    }
+    // switch(type) {
+    //     // case "update": 
+    //     //     $(formEl).attr("action", url)
+    //     //     break;
+    //     case "delete":
+
+    //         break;
+    //     case "report":
+    //         $(formEl).attr("action", url);
+    //         break;
+    //     case "insert":
+    //         $(formEl).attr("action", url);
+    //         break;
+    //     case "update":
+    //         $(formEl).attr("action", url)
+    //         break;
+    // }
+
+    $(formEl).attr("action", url)
 
     $(formEl).submit();
 }
