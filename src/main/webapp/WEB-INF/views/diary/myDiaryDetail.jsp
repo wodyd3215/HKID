@@ -24,8 +24,8 @@
                     <div id="enroll-date">${diary.createDate}</div>
                 </div>
                 <div id="btn-area">
-                    <button onclick="postFormSubmit('edit', 'updateDiaryForm.di')">수정</button>
-                    <button onclick="postFormSubmit('delete', 'delete.di')">삭제</button>
+                    <button onclick="postFormSubmit('updateDiaryForm.di')">수정</button>
+                    <button onclick="postFormSubmit('delete.di')">삭제</button>
                 </div>
             </div>
         </div>
