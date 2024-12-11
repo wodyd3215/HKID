@@ -21,4 +21,7 @@ public class ChallengeBoard {
 	private int commentCount;
 	private String nickName;
 	private String challengeTitle;
+	private String originName;
+	private String changeName;
+	private String file_path;
 }

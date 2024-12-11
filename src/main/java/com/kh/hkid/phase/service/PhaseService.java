@@ -20,7 +20,7 @@ public interface PhaseService {
 	int addReview(Review r);
 
 	// 리뷰 등록 날짜 가져오기
-	String selectDate(Review r);
+//	String selectDate(Review r);
 
 	// 구매내역 페이징
 	int selectListCount(int memberNo);

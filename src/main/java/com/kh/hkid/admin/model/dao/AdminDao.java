@@ -108,6 +108,10 @@ public class AdminDao {
 		return sqlSession.update("productMapper.deactivateProduct", productNo);
 	}
 	
+	public int activateProduct(SqlSessionTemplate sqlSession, int productNo) {
+		return sqlSession.update("productMapper.activateProduct", productNo);
+	}
+	
 	public int updateAttachment(SqlSessionTemplate sqlSession, HashMap<String, Object> aMap) {
 		return sqlSession.update("productMapper.updateAttachment", aMap);
 	}
@@ -133,5 +137,16 @@ public class AdminDao {
 	
 	public Board loadBoardAjax(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
+	}
+	
+	public int pCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("productMapper.pCount");
+	}
+	
+	public ArrayList<Product> selecProductList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("productMapper.selectProductList", null, rowBounds);
 	}
 }

@@ -10,16 +10,16 @@ import com.kh.hkid.product.model.vo.Review;
 public interface ProductService {
 
 	// 상품 페이지 모두 불러오기
-	int selectListTotal();
+	int selectListTotal(String category);
 
 	// 상품 페이지 목록 불러오기 
-	ArrayList<Product> selectList(PageInfo pi);
+	ArrayList<Product> selectList(PageInfo pi, String category);
 	
-	// 카테고리별 상품 페이지 갯수
-	int selectProductCategoryListCount(String category);
-	
-	// 카테고리별 상품 페이지 리스트
-	ArrayList<Product> selectProductCategoryList(PageInfo pi, String category);
+//	// 카테고리별 상품 페이지 갯수
+//	int selectProductCategoryListCount(String category);
+//	
+//	// 카테고리별 상품 페이지 리스트
+//	ArrayList<Product> selectProductCategoryList(PageInfo pi, String category);
 	
 	// productNo로 상품 목록 조회
 	Product selectProduct(int productNo);
@@ -33,6 +33,11 @@ public interface ProductService {
 	// 검색 바
 	ArrayList<Product> searchList(HashMap<String, String> map, PageInfo pi);
 
+	//검색한 게시글의 개수
+	int selectSearchCount(HashMap<String, String> map);
+	
+	//검색한 게시글 목록
+	ArrayList<Product> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	int reviewCount(int productNo);
 	
 	ArrayList<Review> selectReviewList(PageInfo pi, int productNo);

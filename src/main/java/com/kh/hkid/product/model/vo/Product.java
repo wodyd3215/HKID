@@ -16,6 +16,8 @@ public class Product {
 	private String registrationDate;
 	private String type;
 	private String status;
+	private int rate;
+	private int reviewCount;
 	private int fileNo;
 	private String changeName;
 }

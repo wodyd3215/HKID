@@ -26,7 +26,7 @@ public class PhaseDao {
 		return sqlSession.insert("phaseMapper.insertReview", r);
 	}
 
-	public String selectReview(SqlSessionTemplate sqlSession, Review r) {
+	public Review selectReview(SqlSessionTemplate sqlSession, Review r) {
 		return sqlSession.selectOne("phaseMapper.selelctReview", r);
 	}
 

@@ -14,6 +14,12 @@
 		<result column="PRICE" property="PRICE" />
 	</resultMap>
 	
+	<select id="selectCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM FAVORITE
+		 WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 	<select id="selectList" resultType="Favorite">
 		SELECT PRODUCT_NO productNo,
 			   PRODUCT_NAME productName,

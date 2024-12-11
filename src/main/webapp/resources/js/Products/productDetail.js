@@ -2,11 +2,13 @@
  let quantity = 1;
 
 function initProductDetail(contextPath, optional) {
-    const imgArr = optional.imgs.split(',');
-
+    const imgArr = $('input[name="changeName"]').val().split(',');
+    const productNo = $('input[name="productNo"]').val()
+    
     drawDetailImg(contextPath, imgArr)
-    drawContent(optional.content)
-    drawReview(optional.productNo)
+    drawReviewAvg()
+    drawContent(optional)
+    drawReview(productNo)
 }
 
 // 디테일 이미지 가져오기
@@ -30,6 +32,13 @@ function drawDetailImg(contextPath, imgArr) {
 // 클릭 시, 대표 이미지 변경
 function drawRepresentImg(img) {
     $('.reImg img').attr('src', img)
+}
+
+function drawReviewAvg() {
+    const star = drawStar($('.assess').data('star'))
+    const count = '(' + $('.assess').data('count') + ')'
+
+    $('.assess').text(star + ' ' + count)
 }
 
 function drawContent(content) {

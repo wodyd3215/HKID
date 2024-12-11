@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dao.BoardDao;
 import com.kh.hkid.community.model.dto.CommentReply;
@@ -159,6 +160,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int updateReply(Reply r) {
 		return boardDao.updateReply(sqlSession, r);
+	}
+
+	@Override
+	public Board selectNotice(int noticeNo) {
+		return boardDao.selectNotice(sqlSession, noticeNo);
 	}
 	
 	

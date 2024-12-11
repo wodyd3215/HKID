@@ -27,28 +27,27 @@ import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.product.model.vo.Product;
-import com.kh.hkid.product.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
+
+
 
 @Slf4j
 @Controller
 public class AdminController {
 	private final AdminService adminService;
-	private final ProductService productService;
 	
 	@Autowired
-	public AdminController(AdminService adminService, ProductService productService) {
+	public AdminController(AdminService adminService) {
 		this.adminService = adminService;
-		this.productService = productService;
 	}
 	
 	@RequestMapping("product.ad")
 	public String product(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int pCount = productService.selectListTotal();
+		int pCount = adminService.pCount();
 		
 		PageInfo pi = Template.getPageInfo(pCount, currentPage, 10, 10);
-		ArrayList<Product> list = productService.selectList(pi);
+		ArrayList<Product> list = adminService.selecProductList(pi);
 
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
@@ -292,32 +291,27 @@ public class AdminController {
 	public String editProduct(int productNo, Model model) {
 		Product product = adminService.editProduct(productNo);
 		
-		model.addAttribute("product", product);
-		model.addAttribute("pageName", "pEnroll");
-		
-		HashMap<String, Object> pMap = new HashMap<>();
-		
-		pMap.put("content", product.getContent());
-		pMap.put("fileNo", product.getFileNo());
-		pMap.put("changeName", product.getChangeName());
-		pMap.put("category", product.getCategory());
-		
-		String pData = new Gson().toJson(pMap);
-		
 		model.addAttribute("p", product);
-		model.addAttribute("optional", pData);
+		model.addAttribute("pageName", "pEnroll");
+		model.addAttribute("optional", product.getContent());
 		
 		return "admin/productUpdateForm";
 	}
 	
 	@PostMapping("deleteProduct")
-	public String deleteProduct(int productNo, HttpSession session) {
-		int result = adminService.deactivateProduct(productNo);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "상품 비활성화 성공");
+	public String deactivateProduct(int productNo, String status, HttpSession session) {
+		int result; 
+		if(status.equals("Y")) {
+			result = adminService.deactivateProduct(productNo);
 		} else {
-			session.setAttribute("alertMsg", "상품 비활성화 실패");
+			result = adminService.activateProduct(productNo);
+		}
+		
+
+		if(result > 0) {
+			session.setAttribute("alertMsg", "상품 상태 변화 성공");
+		} else {
+			session.setAttribute("alertMsg", "상품 상태 변화 실패");
 		}
 		
 		return "redirect:/product.ad";

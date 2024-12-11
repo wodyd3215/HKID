@@ -21,7 +21,6 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
     <div class="wrapper">
         <c:if test="${ not empty alertMsg}">
 			<script>
@@ -30,12 +29,12 @@
 			<c:remove var="alertMsg" scope="session"/>
 		</c:if> 
         <div id="productPage">
-            <form id="sidecategory" action="product.se">
+            <form id="sidecategory" action="product.li">
                 <div id="selected"> <!-- 왼쪽 사이드바 nav -->
                     <ul class="side-nav">
                         <li class="side-nav-header"> 상품 </li> 
                         <li>
-                            <input type="radio" id="sideAll" name="category" value="전체"onchange="this.form.submit()"/>                        
+                            <input type="radio" id="sideAll" name="category" value="전체" onchange="this.form.submit()"/>                        
                             <label for="sideAll"> 전체 </label>
                         </li>
 
@@ -66,7 +65,7 @@
                         </li>
 
                         <li>
-                            <input type="radio" class="usedMove" id="usedItem" name="ItemRbtn" onclick="productView('used')" /> 
+                            <input type="radio" class="usedMove" id="usedItem" name="ItemRbtn" onclick="productView('used')" disabled/> 
                             <label for="usedItem"> 중고 </label>
                         </li>
                     </ul>                
@@ -78,7 +77,7 @@
                         <!-- 상품 이미지 -->
                             <div class="productImg" >
                                 <a href="deteilItem.li?productNo=${p.productNo }">
-                                    <img src="./resources/image/exerciseImages/45_SIDE_BEND.gif" alt="noting">
+                                    <img src="${pageContext.request.contextPath}${p.changeName}" alt="noting">
                                 </a>
                             </div>
 
@@ -95,20 +94,7 @@
                                 
                                 <div class="productTextMid">
                                     <div class="productTexts">
-                                        <div class="textStar">★</div>
-                                        
-                                        <c:choose >
-                                            <c:when test="${r.rate == null}">
-                                                <div class="totalRate">
-                                                    0.0
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="totalRate">
-                                                    ${r.rate}
-                                                </div>
-                                            </c:otherwise>
-                                        </c:choose>                                    
+                                        <div class="textStar" data-star="${p.rate}" data-count="${p.reviewCount}"></div>                                  
                                     </div>                                                                
                                     <div class="mainPrice">${p.price}원</div>
                                 </div>
@@ -187,25 +173,22 @@
                     </c:choose>
                 </div>
 
-            <!-- 검색 바 -->
-            <form action="product.se">
-                <div class="produBottom">
-                    <input type="hidden" name="pPage" value="1"> 
-                    <input type="hidden" name="">                  
-                    <select name="searchCategory" id="produCategory">
-                        <option value="전체">전체</option>
-                        <option value="식품">식품</option>
-                        <option value="의류">의류</option>
-                        <option value="기구">기구</option>
-                    </select>
-                        
-                    <div class="produSearch">
-                        <input type="text" class="produSearchCan" name="keyword" value="${keyword}" placeholder="검색어를 입력하세요.">
-                        <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
-                    </div>                        
-                </div>
-            </form>
-        </div>
+                <!-- 검색 바 -->
+                <form action="productSearch.se">
+                    <div class="produBottom">
+                        <input type="hidden" name="category" value="${category}"> <!--현재 카테고리-->            
+                        <select name="condition" id="produCategory"> <!--id 수정 권장-->
+                            <option value="title">상품명</option>
+                            <option value="content">내용</option>
+                        </select>
+                            
+                        <div class="produSearch">
+                            <input type="text" class="produSearchCan" name="keyword" placeholder="검색어를 입력하세요.">
+                            <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
+                        </div>                        
+                    </div>
+                </form>
+            </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
      <!-- js -->
