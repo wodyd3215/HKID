@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/challenge/challengeM.css?after">
-<link rel="stylesheet" href="./resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/challenge/challengeM.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -21,7 +21,7 @@
 			<div class="chList">
 				<a href="ch.b?cno=${c.challengeNo }">
 					<div class="listImg">
-						<img src="${ c.thumbnail}" alt="">
+						<img src="${pageContext.request.contextPath}${c.thumbnail}" alt="">
 					</div>
 					<div class="under">
 						<div class="challengeName">
