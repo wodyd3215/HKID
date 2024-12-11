@@ -72,8 +72,9 @@ public class BoardController {
 			list = boardService.selectList(pi); //전체 게시글
 		}
 		
-		ArrayList<Notice> li = adminService.selectNoticeList(pi);
+		ArrayList<Notice> li = boardService.selectNoticeList();
 		System.out.println("공지글 : "+ li);
+		
 		
 		/*	[pageInfo] 
 		 	pageInfo(현재 총 게시글 수, 사용자가 요청한 페이지, 페이징바의 개수, 보여질 게시글의 최대개수)
@@ -83,7 +84,7 @@ public class BoardController {
 		model.addAttribute("category", category); //선택한 카테고리 띄울 때 필요함
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
-		model.addAttribute("nList", adminService.selectNoticeList(pi)); //공지 게시글
+		model.addAttribute("nList", li); //공지 게시글
 		return "community/boardList";
 	}
 	

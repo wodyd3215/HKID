@@ -110,16 +110,18 @@
 
                 
                 <!-- 공지 게시글 -->
-                <c:forEach var="n" items="${nList}" varStatus="status">
-                    <tr class="notice">
-                        <td class="board-category">공지</td>
-                        <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}<img src="./resources/img/file.png" alt="없음"></a>
-                        </td>
-                        <td>${n.nickName}</td>
-                        <td>${n.noticeDate}</td>
-                        <td>${n.viewCount}</td>
-                    </tr>
-                </c:forEach>
+                <c:if test="${pi.currentPage == 1}">
+                    <c:forEach var="n" items="${nList}" varStatus="status">
+                        <tr class="notice">
+                            <td class="board-category">공지</td>
+                            <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}<img src="./resources/img/file.png" alt="없음"></a>
+                            </td>
+                            <td>${n.nickName}</td>
+                            <td>${n.noticeDate}</td>
+                            <td>${n.viewCount}</td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
                     <!-------------- 일반 게시글 --------------->
                 <c:forEach var="b" items="${list}">
                     <tr>
