@@ -285,7 +285,7 @@
                 <form id="postForm" method="post" action="">
                     <input type="hidden" name="bno" value="${b.boardNo}">
                     <!-- 게시글 삭제 버튼 -->
-                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete', 'boardDelete.bo')">예</button>
+                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('boardDelete.bo')">예</button>
                 </form>
                 <!-- 모달 닫기 -->
                 <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
@@ -328,7 +328,7 @@
                 
 
                 <div class="custom-modal-content">
-                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report', 'report.bo')">제출</button>
+                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button>
                 </div>
             </form>
         </div>
