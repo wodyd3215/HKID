@@ -40,15 +40,14 @@
                             <td>${n.viewCount}</td>
                             <td>
                                 <div class="management">
-                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('editNotice')">
+                                    <button class="material-symbols-outlined btn btn-warning custom-btn" onclick="postFormSubmit('editNotice?noticeNo=${n.noticeNo}')">
                                         edit
                                     </button>
-                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteNotice')">
+                                    <button class="material-symbols-outlined btn btn-danger custom-btn" onclick="postFormSubmit('deleteNotice?noticeNo=${n.noticeNo}')">
                                         delete
                                     </button>
         
                                     <form action="" method="POST" id="postForm">
-                                        <input type="hidden"  name="noticeNo" value="${n.noticeNo}">
                                     </form>
                                 </div>
                             </td>

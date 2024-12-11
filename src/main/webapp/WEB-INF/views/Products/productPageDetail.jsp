@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <% String contextPath = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,7 +207,7 @@
                     </li> 
                 </ul>
             </div>
-            
+            <input type="hidden" name="changeName" value="${p.changeName}">
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />

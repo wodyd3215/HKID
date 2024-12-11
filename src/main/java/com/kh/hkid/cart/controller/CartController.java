@@ -3,21 +3,16 @@ package com.kh.hkid.cart.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.kh.hkid.cart.model.service.CartService;
 import com.kh.hkid.cart.model.vo.Cart;
 import com.kh.hkid.member.model.vo.Member;
@@ -46,13 +41,6 @@ public class CartController {
 		return "Products/carts";
 	}
 	
-	@PostMapping("addCart.c")
-	public int addCart(Cart c) {
-		//ArrayList<Cart> list = 
-		
-		return cartService.addCart(c);
-	}	
-	
 	
 	@ResponseBody
 	@GetMapping("/qchange")
@@ -72,27 +60,27 @@ public class CartController {
 		return cartService.changeQuantity(map);
 	}
 	
-	@PostMapping("delete.o")
-	public int delete(Cart c, Model model, int memberNo, int productNo) {
-				
-		
-		HashMap<Object, Integer> de = new HashMap<>();
-		de.put("memberNo", memberNo);
-		de.put("productNo", productNo);
-		
-		
-		return cartService.deleteCart(de);
+	
+	@ResponseBody
+	@RequestMapping(value="delete.c", produces="application/json; charset-UTF-8")
+	public int deleteOne(Cart c) {
+		System.out.println(c);
+		return cartService.deleteCart(c);		
 	}
 	
 	@ResponseBody
-	@GetMapping("delete.c")
-	public int deleteOne(int memberNo, int productNo, Cart c, Model model, HttpServletRequest request) {
+	@RequestMapping(value="delete.a", produces="application/json; charset-UTF-8")
+	public int deleteAll(@RequestParam(value="productNo[]") ArrayList<String> pno, Cart c, HttpSession session) {
 		
-		String[] pick = request.getParameterValues("valueArr");
+		Member m = (Member)session.getAttribute("loginMember");
 		
-				
-		int result = cartService.deleteCart(pick);
-		return result;
+		HashMap<String, Object> map = new HashMap<>();
+		
+		map.put("memberNo", m.getMemberNo());
+		map.put("productNo", pno);
+		
+		System.out.println();
+		return cartService.deleteCarts(map);
 	}
 
 }

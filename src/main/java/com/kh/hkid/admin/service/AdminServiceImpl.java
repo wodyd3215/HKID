@@ -133,7 +133,12 @@ public class AdminServiceImpl implements AdminService{
 	public int deactivateProduct(int productNo) {
 		return adminDao.deactivateProduct(sqlSession, productNo);
 	}
-
+	
+	@Override
+	public int activateProduct(int productNo) {
+		return adminDao.activateProduct(sqlSession, productNo);
+	}
+	
 	@Transactional(rollbackFor = {Exception.class})
 	@Override
 	public void updateProduct(Product p, String files) {
@@ -171,4 +176,14 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.loadBoardAjax(sqlSession, boardNo);
 	}
 
+	@Override
+	public int pCount() {
+		return adminDao.pCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Product> selecProductList(PageInfo pi) {
+		return adminDao.selecProductList(sqlSession, pi);
+	}
+	
 }

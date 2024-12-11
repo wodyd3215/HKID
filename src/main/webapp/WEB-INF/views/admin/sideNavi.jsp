@@ -67,6 +67,9 @@
                 <li><a href="challenges">챌린지 관리</a></li>
             </ul>
         </div>
+        <div class="logout">
+            <a href="logout.me">로그아웃</a>
+        </div>
     </div>
 </body>
 </html>
