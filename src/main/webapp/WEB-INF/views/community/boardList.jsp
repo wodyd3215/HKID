@@ -251,9 +251,7 @@
         </div>
         <div class="custom-modal-content">
             <!-- 로그인하러가는  "예" 버튼 -->
-             <!-- <form action="boardWrite.bo" method="GET"> -->
-            <a href="boardWrite.bo"><button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">로그인</button></a>
-             <!-- </form> -->
+            <a href="boardWrite.bo"></a>
             <!-- 모달 닫기 -->
             <button class="modal-btn" id="no-btn" onclick="closeModal()">닫기</button>
         </div>

@@ -63,7 +63,7 @@ function drawReplyList(tbody, commentsList, loginMemberNo) {
                 <div class="comment-left">
                     <p class="user-name">${comment.nickName}</p>
                     <p>${comment.date}&nbsp;</p>
-                    <button class="add-sub-comment">답글쓰기</button>
+                    
                 </div>
                 <div class="comment-middle">${comment.content}</div>
                 <div class="comment-right">

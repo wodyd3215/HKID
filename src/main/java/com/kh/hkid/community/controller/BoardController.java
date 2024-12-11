@@ -271,6 +271,8 @@ public class BoardController {
 	public String insertReport(int bno, int reportTypeNo, String reportDetailContent, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<>();
 		
+		System.out.println("신고 요청 Controller에서 받음");
+		
 		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 		int reportedUserNo = boardService.selectReportedUserNo(bno); //신고당한 사람
 		
