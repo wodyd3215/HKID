@@ -49,7 +49,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<Community> selectNoticeList() {
+	public ArrayList<Notice> selectNoticeList() {
 		
 		return boardDao.selectNoticeList(sqlSession);
 	}
