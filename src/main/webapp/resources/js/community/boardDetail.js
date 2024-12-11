@@ -58,23 +58,23 @@ function drawReplyList(tbody, commentsList, loginMemberNo) {
     for (const comment of commentsList) {
         str += `
             <hr>
-        <div class="comments-body">
-            <div class="main-comment" id="main-comment${comment.replyNo}">
-                <div class="comment-left">
-                    <p class="user-name">${comment.nickName}</p>
-                    <p>${comment.date}&nbsp;</p>
-                    
+                <div class="comments-body">
+                    <div class="main-comment" id="main-comment${comment.replyNo}">
+                        <div class="comment-left">
+                            <p class="user-name">${comment.nickName}</p>
+                            <p>${comment.date}&nbsp;</p>
+                            
+                        </div>
+                        <div class="comment-middle">${comment.content}</div>
+                        <div class="comment-right">
+                            ${comment.memberNo === loginMemberNo ? `
+                                <button class="reply-update-btn" data-target="updateReply" onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
+                                <button class="reply-delete-btn" onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
+                            ` : ''}
+                        </div>
+                    </div>
                 </div>
-                <div class="comment-middle">${comment.content}</div>
-                <div class="comment-right">
-                    ${comment.memberNo === loginMemberNo ? `
-                        <button class="reply-update-btn" data-target="updateReply" onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
-                        <button class="reply-delete-btn" onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
-                    ` : ''}
-                </div>
-            </div>
-        </div>
-        `;
+            `;
     }
     tbody.innerHTML += str;
 }
@@ -163,4 +163,19 @@ function updateReply(replyNo, boardNo, memberNo){
     }, function(){
         getReplyList(boardNo, setReplyData);
     });
+}
+
+function btnDisable2() {
+    const category = $("#report-textarea").val()
+    const submitBtn = $("#report-submit-btn")
+
+    if (category === null || category === "") {
+        submitBtn.prop('disabled', true);
+        submitBtn.css("color", "rgb(145, 144, 144)");
+        submitBtn.css("cursor", "default");
+    } else {
+        submitBtn.prop('disabled', false);
+        submitBtn.css("color", "#00a6fb");
+        submitBtn.css("cursor", "pointer")
+    }
 }
