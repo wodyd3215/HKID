@@ -98,7 +98,17 @@
                                     src="resources/image/Link.png" alt="URL 복사 버튼">
                             </button>
                             <button id=siren-btn class=".img-button">
-                                <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal" onclick="openModal(event)">
+
+                                <c:choose>
+                                    <c:when test="${m != null and not empty m}">
+                                        <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal"
+                                            onclick="openModal(event)">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img id="siren-img" src="resources/image/siren.png">
+                                    </c:otherwise>
+                                </c:choose>
+                                <!-- <img id="siren-img" src="resources/image/siren.png" alt="신고 버튼" data-target="report-modal" onclick="openModal(event)"> -->
                             </button>
                         </div>
                     </div>
@@ -255,7 +265,7 @@
                 <input type="hidden" name="bno" value="${b.boardNo}">
                 <div class="custom-modal-header">
                     <div class="custom-modal-title"><h3>신고</h3></div>
-                    <button class="material-symbols-outlined close-btn" onclick="closeModal()">x</button>
+                    <button type="button"  class="material-symbols-outlined close-btn" onclick="closeModal()">x</button>
                 </div>
                 <hr class="report-h3">
                 <div id="model-middle">
@@ -277,17 +287,13 @@
                     <hr>
                     <div>
                         <h5>상세내용</h5>
-                        <textarea name="reportDetailContent" id="report-textarea"></textarea>
+                        <textarea name="reportDetailContent" id="report-textarea" onchange="btnDisable()" required></textarea>
                     </div>
                 </div>
             
                 <div class="custom-modal-content">
-<<<<<<< HEAD
                     <!-- <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button> -->
-                    <button type="submit" class="modal-btn" id="report-submit-btn">제출</button>
-=======
-                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button>
->>>>>>> 0e0d9ddbe5d869d0c9ee65820efe480008b0e072
+                    <button type="submit" class="modal-btn" id="report-submit-btn" >제출</button>
                 </div>
             </form>
         </div>
