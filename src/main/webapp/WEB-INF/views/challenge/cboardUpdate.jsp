@@ -22,7 +22,7 @@
         <h3>게시글 수정</h3>
         <hr class="board-Write-hr">
         <form id="postForm" class="postForm" action="" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="cno" value="${cno}">
+            <input type="hidden" name="cbno" value="${cbno}">
 
             <input type="text" name="chaTitle" id="board-title" value="${c.chaTitle}" placeholder="제목을 입력해주세요">
             <textarea id="content" rows="10" name="chaContent" required>${c.chaContent}</textarea>

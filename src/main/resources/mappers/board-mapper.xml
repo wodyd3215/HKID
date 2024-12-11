@@ -368,6 +368,20 @@
 		 WHERE REPLY_NO = #{replyNo} AND
 			   BOARD_NO = #{boardNo}
 	</update>
+	
+	<select id="selectPopularCommunity" resultMap="boardResultSet">
+	SELECT BOARD_NO,
+			BOARD_TITLE,
+			BOARD_CONTENT,
+			BOARD_DATE,
+			BOARD_VIEW_COUNT,
+			BOARD_STATUS,
+			COMMUNITY_NO,
+			MEMBER_NO,
+			CHANGE_NAME
+	FROM COMMUNITY
+	
+	</select>
 </mapper>
 
 

@@ -163,8 +163,14 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public ArrayList<Board> selectPopularCommunity(PageInfo pi) {
+		return boardDao.selectPopularCommunity(sqlSession,pi);
+	}
+
+	@Override
 	public Board selectNotice(int noticeNo) {
 		return boardDao.selectNotice(sqlSession, noticeNo);
+
 	}
 	
 	

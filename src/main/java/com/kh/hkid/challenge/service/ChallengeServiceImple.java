@@ -106,6 +106,18 @@ public class ChallengeServiceImple implements ChallengeService {
 	    return result;
 	}
 
+	//게시글 삭제
+	@Transactional
+	@Override
+	public int deleteboard(int cbno) {
+		return challengeDao.deleteboard(sqlSession, cbno);
+	}
+
+	@Override
+	public ChallengeBoard selectCno(int cbno) {
+		return challengeDao.selectCno(sqlSession, cbno);
+	}
+
 	
 
 }

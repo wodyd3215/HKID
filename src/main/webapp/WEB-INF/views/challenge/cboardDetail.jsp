@@ -11,7 +11,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/tableForm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/boardDetail.css">
 <link rel="stylesheet" href="./resources/css/default.css">
+
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="wrapper">
@@ -50,78 +52,26 @@
             <div id="content" name="boardContent" required>${c.chaContent}</div>
         </div>
 
-        <!------------------ 아래쪽 게시글 목록 -------------------->
-        <div id="bottom-wrapper">
-            <table id="top-table">
-                <tr>
-                    <th>
-                        <select name="category" class="category-choice">전체
-                            <option value="all">전체</option>
-                            <option value="question">질문</option>
-                            <option value="tip">팁</option>
-                            <option value="show-off">자랑</option>
-                            <option value="ad">홍보</option>
-                        </select>
-                    </th>
-                    <th id="th-title">제목</th>
-                    <th id="writer">작성자</th>
-                    <th id="write-date">작성일</th>
-                    <th id="view-count">조회수</th>
-                </tr>
-            </table>
-            
-            <!-------------- 게시글 목록  ---------------->
-            <table id="main-table">
-                <tr>
-                    <td id="board-category">질문</td>
-                    <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다 [0]</a></td>
-                    <td id="writer2">꾸준히 운동</td>
-                    <td id="write-date2">2024-10-10</td>
-                    <td class id="view-counts">4</td>
-                </tr>
-            </table>
-            
-            
-            <!-- 게시글 수 + 글쓰기 버튼 -->
-            <div id="boCount-wirte-div">
-                <select name="board-bottom-div" class="category-choice">
-                    <option value="">5개씩</option>
-                    <option value="">10개씩</option>
-                    <option value="">15개씩</option>
-                </select>
-
+    <!-------- 삭제 버튼 모달 --------->
+    <div class="modal" id="delete-modal">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-title">게시글을 삭제하시겠습니까?</div>
             </div>
-    
-            <!-- 검색 바 -->
-            <div id="searchbar-div">
-                <select name="search-category" id="search-category">전체
-                    <option value="all">전체</option>
-                    <option value="question">질문</option>
-                    <option value="tip">팁</option>
-                    <option value="show-off">자랑</option>
-                    <option value="ad">홍보</option>
-                </select>
-                
-                <input type="search" name="" id="board-search-bar" placeholder="검색어를 입력해주세요">
-                <button id="search-btn" type="submit">
-                    <img id="searchIcon" src="resources/image/searchIcon.png">
-                </button>
-            </div>  
-    
-            <!-- 페이지 버튼 -->
-            <div id="paging-div">
-                <button class="page-btn">&lt;</button>
-                <button class="page-btn">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn">4</button>
-                <button class="page-btn">5</button>
-                <button class="page-btn">&gt;</button>
+            <div class="custom-modal-content">
+                <form id="postForm" method="post" action="">
+                    <input type="hidden" name="cbno" value="${cbno}">
+                    <!-- 게시글 삭제 버튼 -->
+                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('boardDelete.cbo')">예</button>
+                </form>
+                <!-- 모달 닫기 -->
+                <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
             </div>
         </div>
-
     </div>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+    <script src="${pageContext.request.contextPath}/resources/js/common/modal.js"></script>
 </body>
 </html>

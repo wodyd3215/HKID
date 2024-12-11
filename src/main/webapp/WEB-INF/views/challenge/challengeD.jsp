@@ -32,11 +32,8 @@
                 <c:forEach var="n" items="${nlist}" varStatus="status">
                 <tr class="notice">
                     <td class="board-category">공지</td>
-                    
                     <td>
-						<a href="">${n.noticeTitle}
-							<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음">
-						</a>
+						<a href="">${n.noticeTitle}</a>
 					</td>
                     <td>${n.nickName}</td>
                     <td>${n.noticeDate}</td>
@@ -48,7 +45,9 @@
                     <td class="board-category">${status.index + 1}</td>
                     <td>
 						<a href="cboardDetail.bo?cbno=${c.challengeBoardNo}">${c.chaTitle}
-							<img src="./resources/img/file.png" alt="없음">
+                            <c:if test="${not empty c.changeName}">
+							    <img src="./resources/img/file.png" alt="없음">
+                            </c:if>
 						</a>
 					</td>
                     <td>${c.nickName}</td>
@@ -89,7 +88,6 @@
                 <select name="condition" id="search-category" >전체
                     <option value="writer" selected>작성자</option>
                     <option value="title">제목</option>
-                    <option value="content">내용</option>
                 </select>
                 
                 <div id="search-wrapper">
@@ -103,5 +101,6 @@
 		
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <script src="./resources/js/challenge/challengeD.js"></script>
 </body>
 </html>

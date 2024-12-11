@@ -83,6 +83,9 @@ public interface BoardService {
 	
 	//댓글 수정
 	int updateReply(Reply r);
+
+	//인기
+	ArrayList<Board> selectPopularCommunity(PageInfo pi);
 	
 }
 

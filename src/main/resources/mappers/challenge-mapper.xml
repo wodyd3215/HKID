@@ -74,10 +74,12 @@
 	        cb.CHE_CONTENT,
 	       TO_CHAR(cb.CHE_DATE,'YYYY-MM-DD') CHE_DATE,
 	        cb.COMMENT_COUNT,
-            m.NICKNAME
+            m.NICKNAME,
+            CHANGE_NAME
         FROM CHELLAGE_BOARD cb
         JOIN CHELLAGE_RES cr on cr.CHE_RES_NO = cb.CHE_RES_NO 
         JOIN MEMBER m on cb.MEMBER_NO = m.MEMBER_NO
+        JOIN TOTAL_ATTACHMENT T on t.CHELLANGE_NO = cb.CHELLANGE_NO
         WHERE cr.CHE_RES_NO = #{cno}
    </select>
    
@@ -223,6 +225,23 @@
  					FILE_PATH = #{file_path}
 			  WHERE CHELLANGE_NO = #{challengeBoardNo}
 	</update>
+	
+	<delete id="deleteboard">
+	DELETE FROM CHELLAGE_BOARD
+	WHERE CHELLANGE_NO = #{cbno}
+	</delete>
+	
+	<select id="selectCno" resultMap="challengeBoardResultSet">
+	SELECT CHELLANGE_NO,
+	    MEMBER_NO,
+	    CHE_RES_NO,
+	    CHE_TITLE,
+	    CHE_CONTENT,
+	    CHE_DATE,
+	    COMMENT_COUNT
+	FROM CHELLAGE_BOARD
+	WHERE CHELLANGE_NO = #{cbno}
+	</select>
  
 
  	<insert id="insertChallenge">

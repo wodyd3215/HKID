@@ -149,6 +149,13 @@ public class BoardDao {
 	public int updateReply(SqlSessionTemplate sqlSession, Reply r) {
 		return sqlSession.update("boardMapper.updateReply", r);
 	}
+
+	//인기
+	public ArrayList<Board> selectPopularCommunity(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("boardMapper.selectPopularCommunity", rowBounds);
+	}
 	
 	
 	
