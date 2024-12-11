@@ -32,5 +32,8 @@ function init(contextPath, memberNo, pageName, optional) {
         case "product":
             initProduct();
             break;
+        case "orderPage":
+            initOrderPage(optional)
+            break;
     }
 }

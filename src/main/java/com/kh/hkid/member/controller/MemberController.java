@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.hkid.common.template.Template;
+import com.kh.hkid.mail.controller.MailController;
+import com.kh.hkid.member.model.dto.RecoveryMember;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
 
@@ -102,27 +105,45 @@ public class MemberController {
     
     // 로그인
     @PostMapping("login.me")
-    public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response) {
-    	Member loginMember = memberService.loginMember(m);
+    public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response, Model model) {
+    	RecoveryMember loginMember = memberService.loginMember(m);
+    	Date today = new Date();
     	System.out.println(loginMember);
+    	System.out.println("today : " + today);
     	if(loginMember == null || !bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
     		session.setAttribute("alertMsg", "로그인 정보에 맞는 아이디가 존재하지 않습니다."); 
     		return "redirect:/loginForm.me";
     	} else {
-    		Cookie ck = new Cookie("saveId", loginMember.getMemberId());
-    		System.out.println("쿠키:" + ck);
-    		if(saveId == null) {
-    			ck.setMaxAge(0); // 쿠키의 유효기간 설정
-    		}
-    		response.addCookie(ck);
-    		
-    		session.setAttribute("loginMember", loginMember);
-    		if(loginMember.getIsAdmin().equals("N")) {
-    			return "redirect:/";
+    		if(loginMember.getStatus().equals("N")) {
+    			if(loginMember.getUnsuspensionDate().after(today)) {
+    				session.setAttribute("alertMsg", "정지 당한 아이디 입니다. 정지 해제 날짜 : " + loginMember.getUnsuspensionDate());
+    				return "redirect:/loginForm.me";
+    			} else {
+    				session.setAttribute("alertMsg", "탈퇴했거나 정지당한 아이디 입니다.");
+        		
+        			model.addAttribute("email", loginMember.getEmail());
+        			model.addAttribute("memberNo", loginMember.getMemberNo());
+        			
+        			System.out.println("이메일 : " + loginMember.getEmail());
+        			System.out.println("회원 번호 : " + loginMember.getMemberNo());
+
+        			return "member/recoveryForm";
+    			}
     		} else {
-    			return "redirect:/product.ad";
+	    		Cookie ck = new Cookie("saveId", loginMember.getMemberId());
+	    		System.out.println("쿠키:" + ck);
+	    		if(saveId == null) {
+	    			ck.setMaxAge(0); // 쿠키의 유효기간 설정
+	    		}
+	    		response.addCookie(ck);
+	    		
+	    		session.setAttribute("loginMember", loginMember);
+	    		if(loginMember.getIsAdmin().equals("N")) {
+	    			return "redirect:/";
+	    		} else {
+	    			return "redirect:/product.ad";
+	    		}
     		}
-    		
     	}
     }
     
@@ -311,7 +332,7 @@ public class MemberController {
 	    	int result = memberService.imgChangeAjax(m);
 	    	
 	    	if(result > 0) {
-	    		Member nm = memberService.loginMember(m);
+	    		RecoveryMember nm = memberService.loginMember(m);
 	    		
 	    		session.setAttribute("loginMember", nm);
 	    		return nm.getProfileImg();
@@ -332,7 +353,7 @@ public class MemberController {
     	int result = memberService.imgChangeAjax(m);
     	
     	if(result > 0) {
-    		Member nm = memberService.loginMember(m);
+    		RecoveryMember nm = memberService.loginMember(m);
     		
     		session.setAttribute("loginMember", nm);
     		return nm.getProfileImg();
@@ -343,7 +364,7 @@ public class MemberController {
     
     // 소셜 로그인(네이버)
     @RequestMapping("naver-login")
-    public String naverLoginCallback(Member m, String code, String state, HttpSession session) throws IOException {
+    public String naverLoginCallback(Member m, String code, String state, HttpSession session, Model model) throws IOException {
     	
     	String redirectURL = URLEncoder.encode("http://localhost:7777/HKID/naver-login", "UTF-8");
     	String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code";
@@ -395,21 +416,40 @@ public class MemberController {
         	
         	int findMember = memberService.searchMember(m);
         	
+        	Date today = new Date();
+        	
         	if(findMember > 0) {
-        		Member loginMember = memberService.socialLoginMember(m);
-        		System.out.println(loginMember);
-        		session.setAttribute("loginMember", loginMember);
+        		RecoveryMember loginMember = memberService.socialLoginMember(m);
+        		System.out.println("소셜로그인 : " + loginMember);
         		
-        		return "redirect:/";
+        		if(loginMember.getStatus().equals("N")) {
+        			if(loginMember.getUnsuspensionDate().after(today)) {
+        				session.setAttribute("alertMsg", "정지 당한 아이디 입니다.\n" + "정지 해제 날짜 : " + loginMember.getUnsuspensionDate());
+        				return "redirect:/loginForm.me";
+        			} else {
+        				session.setAttribute("alertMsg", "탈퇴했거나 정지당한 아이디 입니다.");
+                		
+            			model.addAttribute("email", loginMember.getEmail());
+            			model.addAttribute("memberNo", loginMember.getMemberNo());
+            			
+            			System.out.println("이메일 : " + loginMember.getEmail());
+            			System.out.println("회원 번호 : " + loginMember.getMemberNo());
+            			
+            			return "member/recoveryForm";
+        			}
+        		} else {
+        			session.setAttribute("loginMember", loginMember);
+        			return "redirect:/";
+        		}
         	} else {
         		int socialResult = memberService.insertSocialMember(m);
-        		
-        		if(socialResult > 0) {
-        			Member loginMember = memberService.socialLoginMember(m);
-        			
-        			session.setAttribute("loginMember", loginMember);
-        			
-        			return "redirect:/";
+                
+                if(socialResult > 0) {
+                   RecoveryMember loginMember = memberService.socialLoginMember(m);
+                   
+                   session.setAttribute("loginMember", loginMember);
+                   
+                   return "redirect:/";
         		}
         	}
     	}
@@ -430,4 +470,31 @@ public class MemberController {
     		return new Gson().toJson(nickArr);
     	}
     }
+    
+    // 계정 복구 신청
+    @PostMapping("recovery.me")
+    public String recoveryApply(int memberNo, HttpSession session) {
+    	int result = memberService.recoveryApply(memberNo);
+    	
+    	if(result > 0) {
+    		session.setAttribute("alertMsg", "계정 복구 신청이 완료되었습니다.");
+    	} else {
+    		session.setAttribute("alertMsg", "계정 복구 신청이 실패하였습니다.");
+    	}
+    	return "redirect:/loginForm.me";
+    }
+    
+    // 이메일 중복 체크
+    @ResponseBody
+	@RequestMapping("emailCheck.me")
+	public String emailCheck(String email) {
+		int result = memberService.emailCheck(email);
+		
+		if(result > 0) {
+			return "NNNNN";
+		} else {
+			return "NNNNY";
+		}
+		
+	}
 }

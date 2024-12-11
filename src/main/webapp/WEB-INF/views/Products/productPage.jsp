@@ -22,6 +22,12 @@
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="wrapper">
+        <c:if test="${ not empty alertMsg}">
+			<script>
+				alert("${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>
+		</c:if> 
         <div id="productPage">
             <form id="sidecategory" action="product.li">
                 <div id="selected"> <!-- 왼쪽 사이드바 nav -->

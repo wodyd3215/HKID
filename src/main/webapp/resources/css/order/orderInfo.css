@@ -88,3 +88,17 @@
     background-color: #00A6FB;
     font-size: 24px;
 }
+
+#purchase-request{
+    width: 730px;
+    border: 1px solid rgb(212, 212, 212);
+    padding-left: 5px;
+}
+
+#productCountArea{
+    display: none;
+}
+
+#product-name {
+    width: 730px;
+}

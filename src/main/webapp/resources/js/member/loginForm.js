@@ -1,7 +1,3 @@
-function init(alertMsg){
-    checkAlertMessage(alertMsg)
-}
-
 // 기본 로그인
 function loginBtn(){
     const inputId = document.querySelector("#login-id").value;

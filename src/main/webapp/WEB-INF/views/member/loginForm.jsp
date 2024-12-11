@@ -10,15 +10,14 @@
     <script src="${pageContext.request.contextPath}/resources/js/member/loginForm.js"></script>
     <title>Insert title here</title>
 </head>
-<body onload="init('${alertMsg}')">
-    <c:remove var="alertMsg" scope="session"/>
+<body>
     <div class="wrapper"> 
-    	<!-- <c:if test="${ not empty alertMsg}">
+    	<c:if test="${ not empty alertMsg}">
 			<script>
 				alert("${alertMsg}");
 			</script>
 			<c:remove var="alertMsg" scope="session"/>
-		</c:if>  -->
+		</c:if> 
         <div id="logo-img">
             <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/image/HKID_Logo.png" alt="로고"></a>
         </div> 

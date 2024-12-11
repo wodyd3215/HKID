@@ -41,17 +41,19 @@
 	</resultMap>
 	 
 	<select id="selectList" parameterType="Phase" resultMap="phaseResultSet">
-		SELECT MEMBR_NAME memberName,
-			   EMAIL email,
-			   ADDRESS address,
-			   PHONE phone,
-			   PRODUCT_NAME productName,			   
-			   SYSDATE
-		  FROM PURCHASE
-		  JOIN MEMBER USING (MEMBER_NO)
-		  JOIN PRODUCT USING (PRODUCT_NO)
-		 WHERE MEMBER_ID = #{memberNo}
-		   AND PRODUCT_ID = #{productNo}
+		SELECT 
+        MEMBER_NAME,
+        MEMBER_NO,
+        PRODUCT_NO,
+        PRICE,
+        EMAIL,
+        ADDRESS,
+        PHONE,
+        PRODUCT_NAME
+    FROM PRODUCT
+    JOIN MEMBER USING (MEMBER_NO)
+    WHERE MEMBER_NO = #{memberNo}
+    AND PRODUCT_NO = #{productNo}
 	</select>
 	
 	<!-- 구매리스트 조회 -->
