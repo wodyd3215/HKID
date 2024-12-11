@@ -282,8 +282,12 @@
                 </div>
             
                 <div class="custom-modal-content">
+<<<<<<< HEAD
                     <!-- <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button> -->
                     <button type="submit" class="modal-btn" id="report-submit-btn">제출</button>
+=======
+                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button>
+>>>>>>> 0e0d9ddbe5d869d0c9ee65820efe480008b0e072
                 </div>
             </form>
         </div>
