@@ -6,7 +6,7 @@ function init(contextPath, pageName, optional) {
             initNoticeEnroll(contextPath, optional);
         break;
         case "pEnroll":
-            initProduct(contextPath, optional ? JSON.parse(optional) : '');
+            initProduct(contextPath, optional);
         break;
     }
     

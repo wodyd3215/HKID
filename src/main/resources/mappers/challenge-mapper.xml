@@ -55,7 +55,7 @@
 		       TO_CHAR(END_DATE, 'YYYY-MM-DD') AS endDate,
 		       THUMBNAIL AS thumbnail
 		FROM CHELLAGE_RES
-		ORDER BY ABS(TRUNC(END_DATE) - TRUNC(SYSDATE)) ASC
+		ORDER BY CHE_RES_NO DESC
    </select>
    
    <select id="selectName" resultMap="challengeResultSet">
