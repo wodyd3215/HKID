@@ -35,6 +35,7 @@
  		<typeAlias type="com.kh.hkid.community.model.dto.CommentReply" alias="CommentReply"/>
 		<typeAlias type="com.kh.hkid.challenge.model.vo.Challenge" alias="Challenge"/>
 		<typeAlias type="com.kh.hkid.challenge.model.vo.ChallengeBoard" alias="ChallengeBoard"/>
+		<typeAlias type="com.kh.hkid.order.model.vo.Order" alias="Order"/>
  	</typeAliases>
  	
  	<mappers>
@@ -50,6 +51,7 @@
  		<mapper resource="mappers/admin-mapper.xml"/>
  		<mapper resource="mappers/chat-mapper.xml"/>
  		<mapper resource="mappers/challenge-mapper.xml"/>
+ 		<mapper resource="mappers/order-mapper.xml"/>
 
  	</mappers>
 

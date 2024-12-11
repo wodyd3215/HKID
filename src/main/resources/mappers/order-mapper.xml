@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderMapper">
+	<resultMap type="Order" id="orderResultSet">
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="PRODUCT_NO" property="productNo"/>
+	  	<result column="MEMBER_NAME" property="memberName"/>
+	  	<result column="EMAIL" property="email"/>
+	  	<result column="PHONE" property="phone"/>
+	  	<result column="ADDRESS" property="address"/>
+	  	<result column="REQUEST" property="request"/>
+	  	<result column="PRODUCT_NAME" property="productName"/>
+	  	<result column="TOTAL_PURCHASE" property="totalPurchase"/>
+	  	<result column="QUANTITY" property="quantity"/>
+	  	<result column="PURCHASE_DATE" property="purchaseDate"/>
+	</resultMap>
+	
+	<insert id="insertPurchaseInfo">
+		INSERT INTO PURCHASE (
+			   PURCHASE_NO,
+			   MEMBER_NO,
+			   PRODUCT_NO,
+			   TOTAL_PURCHASE,
+			   QUANTITY,
+			   REQUEST,
+			   PAYMENT_METHOD,
+			   PAYMENT_STATUS,
+		)VALUES(
+			   SEQ_PURCHASE_NO.NEXTVAL,
+			   #{memberNo},
+			   #{productNo},
+			   #{totalPurchase},
+			   #{quantity},
+			   #{request},
+			   '카드',
+			   'Y'
+		)	   
+	</insert>
+	
+	<select id="selectPurchaseInfo" resultMap="orderResultSet">
+		SELECT MEMBER_NO,
+			   PRODUCT_NO,
+			   MEMBER_NAME,
+			   EMAIL,
+			   PHONE,
+			   ADDRESS,
+			   REQUEST,
+			   PRODUCT_NAME,
+			   TOTAL_PURCHASE,
+			   QUANTITY,
+			   PURCHASE_DATE
+		  FROM PURCHASE
+		  JOIN MEMBER USING (MEMBER_NO)
+		  JOIN PRODUCT USING (PRODUCT_NO)
+		 WHERE MEMBER_NO = #{memberNo}
+		   AND PRODUCT_NO = #{productNo}
+	</select>
+</mapper>

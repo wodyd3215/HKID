@@ -39,28 +39,23 @@ public class PhaseInfoController {
 	}
 	
 	// 결제 화면 이동
-	@ResponseBody
 	@RequestMapping("phaseInfo.li")
-	public String selectPhaseInfo(@RequestParam(value="phaseList") String phaseList,
-								HttpSession session, Model model, Phase p) {
+	public String selectPhaseInfo(HttpSession session) {
 		
-		
-//		Member m = (Member)session.getAttribute("loginMember");		
-//		if(m == null) {
-//			session.setAttribute("alertMsg","로그인 이후 이용 가능한 서비스입니다.");
-//			return "redirect:/loginForm.me";
-//		}
-		
-		
-//		HashMap<String, Object> order1= new HashMap<>();
-//		order1.put("memberNo", (m));
-//		order1.put("productNo", session.getAttribute("productNo"));
-//		 
-//		ArrayList<Phase> order = phaseService.selectList(order1);		 
-//		 
-//		model.addAttribute("order",order);
-		
-		return "order/orderInfo";
+//		int totalPrice = p.getPrice() * productCount;
+//		
+//		ArrayList<Phase> phaseInfo = phaseService.selectList(p);
+//		System.out.println("phaseInfo : " + phaseInfo);
+//		System.out.println("totalPrice : " + totalPrice);
+//		
+//		model.addAttribute("phase", p);
+//		
+//		model.addAttribute("pageName", "orderPage");
+//		model.addAttribute("optional", totalPrice);
+//		model.addAttribute("productCount", productCount);
+//		model.addAttribute("phases", phaseInfo);
+		session.setAttribute("alertMsg", "준비중인 서비스 입니다.");
+		return "redirect:/product.li";
 	}
 
 	

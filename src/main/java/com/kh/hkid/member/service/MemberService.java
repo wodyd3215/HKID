@@ -58,4 +58,7 @@ public interface MemberService {
 
 	// 계정 복구 신청
 	int recoveryApply(int memberNo);
+	
+	// 이메일 중복 체크
+	int emailCheck(String email);
 }

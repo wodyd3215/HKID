@@ -130,4 +130,9 @@ public class MemberServiceImpl implements MemberService {
 	public int recoveryApply(int memberNo) {
 		return memberDao.recoveryApply(sqlSession, memberNo);
 	}
+
+	@Override
+	public int emailCheck(String email) {
+		return memberDao.emailCheck(sqlSession, email);
+	}
 }

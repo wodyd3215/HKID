@@ -94,4 +94,9 @@ public class MemberDao {
 	public int recoveryApply(SqlSessionTemplate sqlSession, int memberNo) {
 		return sqlSession.insert("memberMapper.recoveryApply", memberNo);
 	}
+	
+	// 이메일 중복 체크
+	public int emailCheck(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.emailCheck", email);
+	}
 }

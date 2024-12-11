@@ -22,6 +22,12 @@
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     
     <div class="wrapper">
+    	<c:if test="${ not empty alertMsg}">
+			<script>
+				alert("${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>
+		</c:if> 
         <div class="productDetailHeader" id="top"> <!-- 상품 맨 위 -->
 
             <div class="productImg">
@@ -37,10 +43,12 @@
                 </div>
             </div>            
             
-            <form action="" method="">
-                <input type="hidden" name="memberNo" value="${p.memberNo}">
+            <form action="phaseInfo.li" method="post">
+                <!-- <input type="hidden" name="memberNo" value="${p.memberNo}">
                 <input type="hidden" name="productNo" value="${p.productNo}">
-            </form>
+                <input type="hidden" name="price" value="${p.price}">
+                <input type="hidden" name="productName" value="${p.productName}"> -->
+
                 <div class="productContent"> <!-- 상품 버튼-->
                     <!-- 상품 위치 -->
                     <div class="productLocation"> 상품 > ${p.category}</div>
@@ -57,22 +65,22 @@
                     <!-- 수량 버튼 -->
                     <div class="BtnPrice">
                         <div class="quantityBtn" data-max-quantity="${p.quantity}">
-                            <button class="Btnmin" onclick="decreaseQuantity()">-</button>
-                            <span class="quanText">1</span>
-                            <button class="Btnpls" onclick="increaseQuantity()">+</button>
+                            <input type="number" id="productCount" name="productCount" onclick="productQuantity('${p.price}')" value="1" min="1" max="10" width="70px">
                         </div>                                       
                         <div class="priceText" data-price="${p.price}">                         
-                            ${p.price} 원
+                            ${p.price}원
                         </div>
                     </div>
+                    
 
                         <!-- 구매 및 장바구니 버튼 -->
                     <div class="phaseCartBtn">
-                        <button type="submit" class="phaseBtn"> <a href="phaseInfo.li"> 구매 </a></button>
+                        <button type="submit" class="phaseBtn">구매</button>
                         <button class="cartBtn" onclick="addItem('${loginMember.memberNo}')"> 장바구니 </button> 
                         <button class="favoriteBtn"><img src="${pageContext.request.contextPath}/resources/image/favoriteIcon.svg"></button>          
                     </div>                
                 </div>
+            </form>
 
                 
         </div>     

@@ -25,8 +25,8 @@ public class PhaseServiceImpl implements PhaseService{
 	private final PhaseDao phaseDao;	
 
 	@Override
-	public ArrayList<Phase> selectList(HashMap<String, Object> order1) {
-		return phaseDao.selectList(sqlSession, order1);
+	public ArrayList<Phase> selectList(Phase p) {
+		return phaseDao.selectList(sqlSession, p);
 	}
 
 	@Override

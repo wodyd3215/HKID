@@ -14,8 +14,8 @@ import com.kh.hkid.product.model.vo.Review;
 @Repository
 public class PhaseDao {
 
-	public ArrayList<Phase> selectList(SqlSessionTemplate sqlSession, HashMap<String, Object> order1) {
-		return (ArrayList)sqlSession.selectList("phaseMapper.phaseInfo", order1);
+	public ArrayList<Phase> selectList(SqlSessionTemplate sqlSession, Phase p) {
+		return (ArrayList)sqlSession.selectList("phaseMapper.selectList", p);
 	}
 
 	public int insertPhase(SqlSessionTemplate sqlSession, Phase p) {

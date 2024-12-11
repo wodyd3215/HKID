@@ -34,10 +34,6 @@
     border-radius: 5px;
 }
 
-#certifyNo {
-    padding-left: 5px;
-}
-
 .wrapper > form > div > input[type="submit"] {
     background-color: rgba(0, 166, 251, 1);
     color: white;
@@ -49,4 +45,49 @@
 #certifyArea {
     text-align: center;
     padding-bottom: 10px;
+}
+
+#enroll-email-certify{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.enroll-input-area{
+    width: 298px;
+    height: 35px;
+    border: 1px solid rgb(199, 199, 199); 
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.enroll-input-area > input {
+    width: 83%;
+    height: 100%;
+}
+
+.enroll-input-area > input:focus {
+    outline: none;
+}
+
+.enroll-input-area > div {
+    width: 90px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(0, 166, 251, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.all-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

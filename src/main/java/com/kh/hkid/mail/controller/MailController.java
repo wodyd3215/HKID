@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 @Controller
 public class MailController {
 
-	private final JavaMailSender sender;
+	private static JavaMailSender sender = null;
 	
 	@Autowired
 	public MailController(JavaMailSender sender) {
@@ -23,7 +23,7 @@ public class MailController {
 	
 	@RequestMapping(value="send", produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public String mail(String email, String subject, String content) {
+	public static String mail(String email, String subject, String content) {
 		// 난수 생성 Random 클래스
 		Random random = new Random();
         
@@ -45,7 +45,7 @@ public class MailController {
 		String[] to = {email};
 		message.setTo(to);
 		
-		String[] cc = {"tjwodyd3215@gmail.com"};
+		String[] cc = {};
 		message.setCc(cc);
 		
 		System.out.println("메세지 정보" + message);

@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,32 +107,27 @@ public class MemberController {
     @PostMapping("login.me")
     public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response, Model model) {
     	RecoveryMember loginMember = memberService.loginMember(m);
+    	Date today = new Date();
     	System.out.println(loginMember);
+    	System.out.println("today : " + today);
     	if(loginMember == null || !bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
     		session.setAttribute("alertMsg", "로그인 정보에 맞는 아이디가 존재하지 않습니다."); 
     		return "redirect:/loginForm.me";
     	} else {
     		if(loginMember.getStatus().equals("N")) {
-    			if(loginMember.getSuspensionDate() != null) {
-    				session.setAttribute("alertMsg", "정지 당한 아이디 입니다.\n" + "정지 해제 날짜 : " + loginMember.getUnsuspensionDate());
+    			if(loginMember.getUnsuspensionDate().after(today)) {
+    				session.setAttribute("alertMsg", "정지 당한 아이디 입니다. 정지 해제 날짜 : " + loginMember.getUnsuspensionDate());
     				return "redirect:/loginForm.me";
     			} else {
-    				session.setAttribute("alertMsg1", "탈퇴했거나 정지당한 아이디 입니다.");
-        			session.setAttribute("alertMsg2", "계정 복구를 원하시면 이메일로 보내드린 인증번호를 입력해주세요.");
-
+    				session.setAttribute("alertMsg", "탈퇴했거나 정지당한 아이디 입니다.");
         		
-        			String email = loginMember.getEmail();
-        			String subject = "HKID 이메일 인증번호 입니다.";
-        			String content = "인증번호 : ";
-        			
-        			MailController certifyMail = null;;
-        			
-//        			int certifyNo = Integer.parseInt(certifyMail.mail(email, subject, content));
-//        			System.out.println(certifyNo);
-//        			model.addAttribute("certifyNo", certifyNo);
-        			
+        			model.addAttribute("email", loginMember.getEmail());
         			model.addAttribute("memberNo", loginMember.getMemberNo());
-            		return "member/recoveryForm";
+        			
+        			System.out.println("이메일 : " + loginMember.getEmail());
+        			System.out.println("회원 번호 : " + loginMember.getMemberNo());
+
+        			return "member/recoveryForm";
     			}
     		} else {
 	    		Cookie ck = new Cookie("saveId", loginMember.getMemberId());
@@ -420,30 +416,26 @@ public class MemberController {
         	
         	int findMember = memberService.searchMember(m);
         	
+        	Date today = new Date();
+        	
         	if(findMember > 0) {
         		RecoveryMember loginMember = memberService.socialLoginMember(m);
-        		System.out.println(loginMember);
+        		System.out.println("소셜로그인 : " + loginMember);
         		
         		if(loginMember.getStatus().equals("N")) {
-        			if(loginMember.getSuspensionDate() != null) {
+        			if(loginMember.getUnsuspensionDate().after(today)) {
         				session.setAttribute("alertMsg", "정지 당한 아이디 입니다.\n" + "정지 해제 날짜 : " + loginMember.getUnsuspensionDate());
         				return "redirect:/loginForm.me";
         			} else {
-        				session.setAttribute("alertMsg1", "탈퇴했거나 정지당한 아이디 입니다.");
-            			session.setAttribute("alertMsg2", "계정 복구를 원하시면 이메일로 보내드린 인증번호를 입력해주세요.");
-
-            		
-            			String email = loginMember.getEmail();
-            			String subject = "HKID 이메일 인증번호 입니다.";
-            			String content = "인증번호 : ";
-            			
-            			MailController certifyMail = null;;
-            			
-            			int certifyNo = Integer.parseInt(certifyMail.mail(email, subject, content));
-            			System.out.println(certifyNo);
-            			model.addAttribute("certifyNo", certifyNo);
+        				session.setAttribute("alertMsg", "탈퇴했거나 정지당한 아이디 입니다.");
+                		
+            			model.addAttribute("email", loginMember.getEmail());
             			model.addAttribute("memberNo", loginMember.getMemberNo());
-                		return "member/recoveryForm";
+            			
+            			System.out.println("이메일 : " + loginMember.getEmail());
+            			System.out.println("회원 번호 : " + loginMember.getMemberNo());
+            			
+            			return "member/recoveryForm";
         			}
         		} else {
         			session.setAttribute("loginMember", loginMember);
@@ -451,29 +443,13 @@ public class MemberController {
         		}
         	} else {
         		int socialResult = memberService.insertSocialMember(m);
-        		
-        		if(socialResult > 0) {
-        			RecoveryMember loginMember = memberService.socialLoginMember(m);
-        			if(loginMember.getStatus().equals("N")) {
-            			session.setAttribute("alertMsg1", "탈퇴했거나 정지당한 아이디 입니다.");
-            			session.setAttribute("alertMsg2", "계정 복구를 원하시면 이메일로 보내드린 인증번호를 입력해주세요.");
-
-            		
-            			String email = loginMember.getEmail();
-            			String subject = "HKID 이메일 인증번호 입니다.";
-            			String content = "인증번호 : ";
-            			
-            			MailController certifyMail = null;;
-            			
-            			int certifyNo = Integer.parseInt(certifyMail.mail(email, subject, content));
-            			System.out.println(certifyNo);
-            			model.addAttribute("certifyNo", certifyNo);
-            			
-                		return "member/recoveryForm";
-            		} else {
-            			session.setAttribute("loginMember", loginMember);
-            			return "redirect:/";
-            		}
+                
+                if(socialResult > 0) {
+                   RecoveryMember loginMember = memberService.socialLoginMember(m);
+                   
+                   session.setAttribute("loginMember", loginMember);
+                   
+                   return "redirect:/";
         		}
         	}
     	}
@@ -507,4 +483,18 @@ public class MemberController {
     	}
     	return "redirect:/loginForm.me";
     }
+    
+    // 이메일 중복 체크
+    @ResponseBody
+	@RequestMapping("emailCheck.me")
+	public String emailCheck(String email) {
+		int result = memberService.emailCheck(email);
+		
+		if(result > 0) {
+			return "NNNNN";
+		} else {
+			return "NNNNY";
+		}
+		
+	}
 }

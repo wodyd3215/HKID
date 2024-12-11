@@ -100,3 +100,39 @@ function checkCertify() {
         $("#certifyNo").attr("readonly", false);
     }
 }
+
+function inputCheckEmail() {
+    const emailInput = document.querySelector("#email-input1").value;
+
+    if(emailInput.trim().length >= 10){ 
+        setTimeout(function(){ // 1초뒤에 값을 확인해서 ajax요청
+            // ajax요청
+            $.ajax({
+                url: "emailCheck.me",
+                data: {email: emailInput},
+                success : function(result){
+                    const checkResult = document.querySelector("#emailCheck div");
+                    checkResult.style.display = "block";
+
+                    if(result === "NNNNN"){
+                        checkResult.style.color = "red";
+                        checkResult.innerText = "이미 가입한 이메일 입니다.";
+
+                        document.querySelector("#enroll-enter").disabled = true;
+                    } else {
+                        checkResult.style.color = "blue";
+                        checkResult.innerText = "사용 가능한 이메일 입니다.";
+
+                        document.querySelector("#enroll-enter").disabled = false;
+                    }
+                }, error : function(){
+                    console.log("아이디 중복체크 ajax 실패")
+                }
+            })
+        }, 1000)
+    } else {
+        document.querySelector("#enroll-enter").disabled = true;
+        document.querySelector("#emailCheck div").style.display = "none";
+    }
+    
+}

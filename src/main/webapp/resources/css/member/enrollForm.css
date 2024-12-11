@@ -194,3 +194,14 @@ input::placeholder{
     align-items: center;
     cursor: pointer;
 }
+
+#emailCheck {
+    display: flex;
+    align-items: center;
+}
+
+#emailCheck div {
+    display: none;
+    font-size: 10px;
+    padding-top: 14px;
+}
