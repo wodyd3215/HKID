@@ -31,8 +31,8 @@
                 <option value="4">홍보</option>
             </select>
 
-            <input type="text" name="boardTitle" id="board-title" value="${b.boardTitle}" placeholder="제목을 입력해주세요">
-            <textarea id="content" rows="10" name="content" required>${b.content}</textarea>
+            <input type="text" name="boardTitle" id="board-title" value="${b.boardTitle}" onchange="btnDisable()" placeholder="제목을 입력해주세요">
+            <textarea id="content" rows="10" name="content" onchange="btnDisable()" required>${b.content}</textarea>
             <p id="can-file-types">첨부파일 'png', 'gif', 'jpg', 'jpeg' 파일만 업로드가 가능합니다.</p>
             <div id="att-files">
                 <input type="file" class="add-file" name="reupfile">
