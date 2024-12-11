@@ -19,7 +19,7 @@
 <body onload="init('${pageName}', '${optional}')"></body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
-    <!-- 게시글 = ${list}
+    게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
@@ -34,7 +34,7 @@
     category = ${category}
 
 
-    b.memberNo = ${b.memberNo} -->
+    b.memberNo = ${b.memberNo}
 
     <div class="wrapper">
         <br><br><br><br><br>
@@ -46,21 +46,58 @@
                 <h1>전체</h1>
             </c:otherwise>
         </c:choose>
-
+        
         <table id="common-table">
             <thead>
                 <tr id="table-header">
                     <th class="type-width">
                         <form action="list.bo">
                             <input type="hidden" name="choiceBoardCount" value="${pi.boardLimit}">
-                            <select name="category" class="table-category" onchange="this.form.submit()" >전체
-                                <option value="전체">전체</option>
-                                <option value="질문" >질문</option>
-                                <option value="팁">팁</option>
-                                <option value="자랑">자랑</option>
-                                <option value="홍보">홍보</option>
+                            <select name="category" class="table-category" onchange="this.form.submit()">
+                                <c:choose>
+                                    <c:when test="${category == '전체'}">
+                                        <option value="전체" selected>전체</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="전체">전체</option>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${category == '질문'}">
+                                        <option value="질문" selected>질문</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="질문">질문</option>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${category == '팁'}">
+                                        <option value="팁" selected>팁</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="팁">팁</option>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${category == '자랑'}">
+                                        <option value="자랑" selected>자랑</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="자랑">자랑</option>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${category == '홍보'}">
+                                        <option value="홍보" selected>홍보</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="홍보">홍보</option>
+                                    </c:otherwise>
+                                </c:choose>
                             </select>
                         </form>
+
+
                     </th>
                     <th class="type-width50">제목</th>
                     <th class="type-width6">작성자</th>
@@ -70,7 +107,20 @@
             </thead>
 
             <tbody>
-                <!-------------- 일반 게시글 --------------->
+
+                
+                <!-- 공지 게시글 -->
+                <c:forEach var="n" items="${nList}" varStatus="status">
+                    <tr class="notice">
+                        <td class="board-category">공지</td>
+                        <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}<img src="./resources/img/file.png" alt="없음"></a>
+                        </td>
+                        <td>${n.nickName}</td>
+                        <td>${n.noticeDate}</td>
+                        <td>${n.viewCount}</td>
+                    </tr>
+                </c:forEach>
+                    <!-------------- 일반 게시글 --------------->
                 <c:forEach var="b" items="${list}">
                     <tr>
                         <td class="board-category">${b.communityName}</td>
@@ -118,7 +168,7 @@
                 </select>
                 
                 <div id="search-wrapper">
-                    <input type="search" name="keyword" id="boardsearch-bar" placeholder="검색어를 입력해주세요">
+                    <input type="search" id="boardsearch-bar" name="keyword" placeholder="검색어를 입력해주세요">
                     <button id="board-search-btn" type="submit">
                         <img id="searchIcon" src="resources/image/searchIcon.png">
                     </button>
@@ -201,9 +251,7 @@
         </div>
         <div class="custom-modal-content">
             <!-- 로그인하러가는  "예" 버튼 -->
-             <!-- <form action="boardWrite.bo" method="GET"> -->
-            <a href="boardWrite.bo"><button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete')">로그인</button></a>
-             <!-- </form> -->
+            <a href="boardWrite.bo"></a>
             <!-- 모달 닫기 -->
             <button class="modal-btn" id="no-btn" onclick="closeModal()">닫기</button>
         </div>

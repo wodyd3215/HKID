@@ -167,22 +167,22 @@
                     </c:choose>
                 </div>
 
-            <!-- 검색 바 -->
-            <form action="productSearch.se">
-                <div class="produBottom">
-                    <input type="hidden" name="category" value="${category}"> <!--현재 카테고리-->            
-                    <select name="condition" id="produCategory"> <!--id 수정 권장-->
-                        <option value="title">상품명</option>
-                        <option value="content">내용</option>
-                    </select>
-                        
-                    <div class="produSearch">
-                        <input type="text" class="produSearchCan" name="keyword" placeholder="검색어를 입력하세요.">
-                        <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
-                    </div>                        
-                </div>
-            </form>
-        </div>
+                <!-- 검색 바 -->
+                <form action="productSearch.se">
+                    <div class="produBottom">
+                        <input type="hidden" name="category" value="${category}"> <!--현재 카테고리-->            
+                        <select name="condition" id="produCategory"> <!--id 수정 권장-->
+                            <option value="title">상품명</option>
+                            <option value="content">내용</option>
+                        </select>
+                            
+                        <div class="produSearch">
+                            <input type="text" class="produSearchCan" name="keyword" placeholder="검색어를 입력하세요.">
+                            <button type="submit"><img src="${pageContext.request.contextPath}/resources/image/SearchIcon.svg" alt=""></button>                       
+                        </div>                        
+                    </div>
+                </form>
+            </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
      <!-- js -->

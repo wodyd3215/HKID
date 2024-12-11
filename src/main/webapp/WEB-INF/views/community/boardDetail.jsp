@@ -36,9 +36,6 @@
         </c:otherwise>
     </c:choose>
 
-
-
-    <!-- b = ${b} -->
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -50,7 +47,7 @@
                 </div>
                 <div id="writer-date--update-delete">
                     <div id="writer-date">
-                        <div>${b.nickName}</div> &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
                         <div>${b.boardDate}</div>
                     </div>
                     <div class="btn-div">
@@ -132,50 +129,9 @@
             </div>
 
 
-
-            <!-- 본인이 작성한 댓글  -->
-            <!-- <c:choose>
-                <c:when test="${m != null and not empty m}">
-                    <div class="comments-body">
-                        <div class="main-comment" id="main-comment${comment.replyNo}">
-                            <div class="comment-left">
-                                <p class="user-name">${comment.nickName}</p>
-                                <p>${comment.date}&nbsp;</p>
-                                <button class="add-sub-comment">답글쓰기</button>
-                            </div>
-                            <div class="comment-middle">${comment.content}</div>
-                                                    <div class=" comment-right">
-                                <button class="reply-update-btn" data-target="updateReply"
-                                    onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
-                                <button class="reply-delete-btn"
-                                    onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="comments-body">
-                        <div class="main-comment" id="main-comment${comment.replyNo}">
-                            <div class="comment-left">
-                                <p class="user-name">${comment.nickName}</p>
-                                <p>${comment.date}&nbsp;</p>
-                                <button class="add-sub-comment">답글쓰기</button>
-                            </div>
-                            <div class="comment-middle">${comment.content}</div>
-                            <div class="comment-right">
-                                <button class="reply-update-btn">&nbsp;&nbsp;</button>
-                                <button class="reply-delete-btn">&nbsp;&nbsp;</button>
-                            </div>
-                        </div>
-                    </div>
-                </c:otherwise>
-            </c:choose> -->
-
             <!-- 댓글리스트 -->
             <div id="all-reply-wrapper">    <!--이 div으로 js에서 댓글 목록 작성-->
                 
-
-
 
             </div>
             <hr>
@@ -202,7 +158,7 @@
             <hr> -->
 
         <!------------------ 아래쪽 게시글 목록 -------------------->
-        <div id="bottom-wrapper">
+        <!-- <div id="bottom-wrapper">
             <table id="top-table">
                 <tr>
                     <th>
@@ -219,10 +175,10 @@
                     <th id="write-date">작성일</th>
                     <th id="view-count">조회수</th>
                 </tr>
-            </table>
+            </table> -->
             
             <!-------------- 게시글 목록  ---------------->
-            <table id="main-table">
+            <!-- <table id="main-table">
                 <tr>
                     <td id="board-category">질문</td>
                     <td><a href="boardDetail.bo">세트별 개수 설정에 대해 질문드립니다 [0]</a></td>
@@ -230,21 +186,20 @@
                     <td id="write-date2">2024-10-10</td>
                     <td class id="view-counts">4</td>
                 </tr>
-            </table>
+            </table> -->
             
             
             <!-- 게시글 수 + 글쓰기 버튼 -->
-            <div id="boCount-wirte-div">
+            <!-- <div id="boCount-wirte-div">
                 <select name="board-bottom-div" class="category-choice">
                     <option value="">5개씩</option>
                     <option value="">10개씩</option>
                     <option value="">15개씩</option>
                 </select>
-
-            </div>
+            </div> -->
     
             <!-- 검색 바 -->
-            <div id="searchbar-div">
+            <!-- <div id="searchbar-div">
                 <select name="search-category" id="search-category">전체
                     <option value="all">전체</option>
                     <option value="question">질문</option>
@@ -257,10 +212,10 @@
                 <button id="search-btn" type="submit">
                     <img id="searchIcon" src="resources/image/searchIcon.png">
                 </button>
-            </div>  
+            </div>   -->
     
             <!-- 페이지 버튼 -->
-            <div id="paging-div">
+            <!-- <div id="paging-div">
                 <button class="page-btn">&lt;</button>
                 <button class="page-btn">1</button>
                 <button class="page-btn">2</button>
@@ -270,7 +225,7 @@
                 <button class="page-btn">&gt;</button>
             </div>
         </div>
-    </div>
+    </div> -->
     
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
@@ -296,7 +251,7 @@
     <!-------- 신고 모달 --------->
     <div class="modal" id="report-modal">
         <div class="custom-modal">
-            <form class="postForm" method="post" action="">
+            <form class="postForm" method="post" action="report.bo">
                 <input type="hidden" name="bno" value="${b.boardNo}">
                 <div class="custom-modal-header">
                     <div class="custom-modal-title"><h3>신고</h3></div>
@@ -325,10 +280,14 @@
                         <textarea name="reportDetailContent" id="report-textarea"></textarea>
                     </div>
                 </div>
-                
-
+            
                 <div class="custom-modal-content">
+<<<<<<< HEAD
+                    <!-- <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button> -->
+                    <button type="submit" class="modal-btn" id="report-submit-btn">제출</button>
+=======
                     <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button>
+>>>>>>> 0e0d9ddbe5d869d0c9ee65820efe480008b0e072
                 </div>
             </form>
         </div>

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kh.hkid.admin.model.vo.Notice;
+import com.kh.hkid.admin.service.AdminService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.CommentReply;
@@ -36,13 +38,17 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class BoardController {
 	private final BoardService boardService;
-
+	private final AdminService adminService;
+	
 	@Autowired
-	public BoardController(BoardService boardService) {
+	public BoardController(BoardService boardService, AdminService adminService) {
 		super();
 		this.boardService = boardService;
+		this.adminService = adminService;
 	}
-	
+
+
+
 	//리팩토링
 	@GetMapping("list.bo")
 	public String selectList(
@@ -56,7 +62,7 @@ public class BoardController {
 		ArrayList<Community> list;
 		PageInfo pi;
 		//카테고리 선택 시
-		if(!category.equals("전체")) { //카테고리가 "전체"가 아니면 모든 카테고리별 게시글 출력
+		if(!(category.equals("전체"))) { //카테고리가 "전체"가 아니면 모든 카테고리별 게시글 출력
 			boardCount = boardService.selectCategoryListCount(category); //카테고리 게시글 개수
 			pi = Template.getPageInfo(boardCount, cpage, 10, choiceBoardCount); //페이징 처리
 			list = boardService.selectCategoryList(pi, category);	//게시글 리스트
@@ -66,6 +72,9 @@ public class BoardController {
 			list = boardService.selectList(pi); //전체 게시글
 		}
 		
+		ArrayList<Notice> li = adminService.selectNoticeList(pi);
+		System.out.println("공지글 : "+ li);
+		
 		/*	[pageInfo] 
 		 	pageInfo(현재 총 게시글 수, 사용자가 요청한 페이지, 페이징바의 개수, 보여질 게시글의 최대개수)
 		*/
@@ -74,7 +83,7 @@ public class BoardController {
 		model.addAttribute("category", category); //선택한 카테고리 띄울 때 필요함
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
-		model.addAttribute("nList", boardService.selectNoticeList()); //공지 게시글
+		model.addAttribute("nList", adminService.selectNoticeList(pi)); //공지 게시글
 		return "community/boardList";
 	}
 	
@@ -97,8 +106,8 @@ public class BoardController {
 		PageInfo pi = Template.getPageInfo(searchCount, cpage, 10, choiceBoardCount);
 		ArrayList<Community> list = boardService.selectSearchList(map, pi);
 
-		System.out.println("검색한 게시글 목록 >>>" + list);
-		System.out.println("검색한 게시글의 개수 >>>" + searchCount);
+//		System.out.println("검색한 게시글 목록 >>>" + list);
+//		System.out.println("검색한 게시글의 개수 >>>" + searchCount);
 		
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
@@ -111,7 +120,6 @@ public class BoardController {
 	
 	
 	//게시글 디테일
-//	@GetMapping("boardDetail.bo")
 	@RequestMapping("boardDetail.bo")
 	public String selectDetailBoard(Model model, int bno, HttpSession session) {
 		HashMap<String, Integer> map = new HashMap<>();
@@ -123,10 +131,7 @@ public class BoardController {
 		}else { //로그인을 안 했으면
 			
 		}
-		
 		Member m = (Member)session.getAttribute("loginMember");
-		
-		
 		Integer bNo = (Integer)bno;
 		map.put("boardNo", bNo);
 		
@@ -138,6 +143,38 @@ public class BoardController {
 		Board b = boardService.selectBoard(bno);
 		model.addAttribute("b", b);
 		model.addAttribute("pageName", "boardDetail");
+		model.addAttribute("m", m);
+		
+		return "community/boardDetail";
+	}
+	
+	//공지 게시글
+	@RequestMapping("noticeDetail.bo")
+	public String selectnoticeDetail(Model model, int noticeNo, HttpSession session) {
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		// 로그인을 했을 때만 좋아요 검사
+		if(((Member)session.getAttribute("loginMember")) != null) {
+			int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+			map.put("memberNo", memberNo);
+		}else { //로그인을 안 했으면
+			
+		}
+		Member m = (Member)session.getAttribute("loginMember");
+		Integer bNo = (Integer)noticeNo;
+		map.put("noticeNo", bNo);
+		
+		//게시글 조회 + 조회수 증가
+		Board nb = boardService.selectNotice(noticeNo);	// 공지 게시글의 쿼리 만들어서 가져오고
+		System.out.println("nb: "+nb);
+		
+		// JSON타입으로 변환해서 전달
+		String jsonMap = new Gson().toJson(map);
+		model.addAttribute("optional", jsonMap);
+		
+		
+		model.addAttribute("b", nb);						// noticeDetail.jsp으로 응답하기
+//		model.addAttribute("pageName", "boardDetail");
 		model.addAttribute("m", m);
 		
 		return "community/boardDetail";
@@ -233,6 +270,8 @@ public class BoardController {
 	@PostMapping("report.bo")
 	public String insertReport(int bno, int reportTypeNo, String reportDetailContent, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<>();
+		
+		System.out.println("신고 요청 Controller에서 받음");
 		
 		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 		int reportedUserNo = boardService.selectReportedUserNo(bno); //신고당한 사람

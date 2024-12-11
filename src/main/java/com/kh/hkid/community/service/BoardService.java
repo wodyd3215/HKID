@@ -3,6 +3,7 @@ package com.kh.hkid.community.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.CommentReply;
 import com.kh.hkid.community.model.dto.Community;
@@ -16,6 +17,12 @@ public interface BoardService {
 	
 	//게시글 목록
 	ArrayList<Community> selectList(PageInfo pi);
+	
+	//공지글 목록
+	ArrayList<Community> selectNoticeList();
+	
+	//공지 게시글
+	Board selectNotice(int noticeNo);
 
 	//카테고리 게시글 개수
 	int selectCategoryListCount(String category);
@@ -23,8 +30,6 @@ public interface BoardService {
 	//카테고리 게시글 목록
 	ArrayList<Community> selectCategoryList(PageInfo pi, String category);
 	
-	//공지글 목록
-	ArrayList<Community> selectNoticeList();
 	
 	//검색게시글 개수
 	int selectSearchCount(HashMap<String, String> map);
