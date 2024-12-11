@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dto.CommentReply;
 import com.kh.hkid.community.model.dto.Community;
@@ -43,8 +44,17 @@ public class BoardDao {
 	}
 	
 	//공지 게시글 목록
-	public ArrayList<Community> selectNoticeList(SqlSessionTemplate sqlSession){
+	public ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("boardMapper.selectNoticeList");
+	}
+	
+	//공지 게시글
+	public Board selectNotice(SqlSessionTemplate sqlSession, int noticeNo) {
+		System.out.println("noticeNo : "+ noticeNo);
+		Board a = sqlSession.selectOne("boardMapper.selectNotice", noticeNo);
+		System.out.println("Dao에서 체크" + a);
+		
+		return sqlSession.selectOne("boardMapper.selectNotice", noticeNo);
 	}
 	
 	//검색게시글  개수

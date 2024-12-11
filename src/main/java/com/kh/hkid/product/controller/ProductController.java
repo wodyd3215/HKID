@@ -79,16 +79,7 @@ public class ProductController {
 
 		model.addAttribute("pageName", "productDetail");
 		model.addAttribute("p", p);
-		
-		HashMap<String, Object> pMap = new HashMap<>();
-		
-		pMap.put("content", p.getContent());
-		pMap.put("imgs", p.getChangeName());
-		pMap.put("productNo", p.getProductNo());
-		
-		String pData = new Gson().toJson(pMap);
-		
-		model.addAttribute("optional", pData);
+		model.addAttribute("optional", p.getContent());
 		
 		return "Products/productPageDetail";	
 	}

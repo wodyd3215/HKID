@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.hkid.admin.model.vo.Notice;
 import com.kh.hkid.common.vo.PageInfo;
 import com.kh.hkid.community.model.dao.BoardDao;
 import com.kh.hkid.community.model.dto.CommentReply;
@@ -48,7 +49,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<Community> selectNoticeList() {
+	public ArrayList<Notice> selectNoticeList() {
 		
 		return boardDao.selectNoticeList(sqlSession);
 	}
@@ -161,10 +162,15 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updateReply(sqlSession, r);
 	}
 
-
 	@Override
 	public ArrayList<Board> selectPopularCommunity(PageInfo pi) {
 		return boardDao.selectPopularCommunity(sqlSession,pi);
+	}
+
+	@Override
+	public Board selectNotice(int noticeNo) {
+		return boardDao.selectNotice(sqlSession, noticeNo);
+
 	}
 	
 	

@@ -40,7 +40,7 @@ public interface ChallengeService {
 	int insertBoard(ChallengeBoard c);
 
 	//공지 조회
-	ArrayList<Notice> selectNoticeList(PageInfo pi);
+	ArrayList<Notice> selectNoticeList();
 
 	//게시글 수정
 	int updateBoard(ChallengeBoard c);

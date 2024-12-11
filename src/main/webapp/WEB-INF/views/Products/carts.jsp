@@ -32,7 +32,7 @@
                 <thead class="cartTableHead">
                     <tr>
                         <th class="check-space">
-                            <input type="checkbox" class="selectCart" name="selectBox" onclick="selectAll(this)">
+                            <input type="checkbox" class="selectCart" name="selectAll" onclick="selectAll(this)">
                         </th>
                         <th class="img-space"></th> <!-- 상품이미지 영역 -->
                         <th class="name-space">상품명</th>
@@ -66,9 +66,7 @@
                             </c:if> -->
                         </td>
                         
-                        <td class="cartItemName">
-                            <input type="hidden" class="mNo" value="${loginMember.memberNo}">
-                            <input type="hidden" class="pNo" value="${item.productNo}">
+                        <td class="cartItemName">                            
                             ${item.productName}
                         </td>
                         
@@ -107,7 +105,7 @@
                     </td>
 
                     <td>
-                        <button class="delete-button"  onclick="deleteAll()"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg"></button>
+                        <button class="delete-button" data-member-no="${loginMember.memberNo}" onclick="deleteAll()"><img src="${pageContext.request.contextPath}/resources/image/garbage.svg"></button>
                     </td>
                 
                     

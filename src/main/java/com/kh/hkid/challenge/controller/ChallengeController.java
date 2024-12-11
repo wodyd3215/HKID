@@ -59,7 +59,7 @@ public class ChallengeController {
 		PageInfo pi = Template.getPageInfo(challengeBoardCount, currentPage, 10, choiceBoardCount);
 		
 		ArrayList<ChallengeBoard> list = challengeService.chBoardselectList(cno, pi);
-		ArrayList<Notice> nlist = challengeService.selectNoticeList(pi);
+		ArrayList<Notice> nlist = challengeService.selectNoticeList();
 		
 		System.out.println("list" + list);
 		
