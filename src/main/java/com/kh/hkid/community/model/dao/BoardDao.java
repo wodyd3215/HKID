@@ -44,7 +44,7 @@ public class BoardDao {
 	}
 	
 	//공지 게시글 목록
-	public ArrayList<Community> selectNoticeList(SqlSessionTemplate sqlSession){
+	public ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("boardMapper.selectNoticeList");
 	}
 	

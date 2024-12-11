@@ -76,11 +76,8 @@ public class ChallengeDao {
 		return sqlSession.insert("challengeMapper.insertBoardFile", c);
 	}
 
-	public ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-	    int limit = pi.getBoardLimit();
-	    RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList) sqlSession.selectList("challengeMapper.selectNoticeList", rowBounds);
+	public ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession) {
+		return (ArrayList) sqlSession.selectList("challengeMapper.selectNoticeList");
 	}
 
 	//조회수

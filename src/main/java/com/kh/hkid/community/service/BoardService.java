@@ -19,7 +19,7 @@ public interface BoardService {
 	ArrayList<Community> selectList(PageInfo pi);
 	
 	//공지글 목록
-	ArrayList<Community> selectNoticeList();
+	ArrayList<Notice> selectNoticeList();
 	
 	//공지 게시글
 	Board selectNotice(int noticeNo);

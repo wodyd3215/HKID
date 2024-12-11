@@ -89,8 +89,8 @@ public class ChallengeServiceImple implements ChallengeService {
 
 	//공지
 	@Override
-	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
-		return challengeDao.selectNoticeList(sqlSession, pi);
+	public ArrayList<Notice> selectNoticeList() {
+		return challengeDao.selectNoticeList(sqlSession);
 	}
 
 	//게시글 수정

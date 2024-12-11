@@ -29,12 +29,13 @@
 				</tr>
 			</thead>
 			<tbody>
+                <c:forEach var="n" items="${nlist}" varStatus="status">
                 <tr class="notice">
                     <td class="board-category">공지</td>
-                    <c:forEach var="n" items="${nlist}" varStatus="status">
+                    
                     <td>
 						<a href="">${n.noticeTitle}
-							<img src="./resources/img/file.png" alt="없음">
+							<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음">
 						</a>
 					</td>
                     <td>${n.nickName}</td>

@@ -153,25 +153,20 @@
    
    <!-- 공지 -->
    <select id="selectNoticeList" resultMap="noticeResultSet">
-	  SELECT 
-	    n.NOTICE_NO,
-	    n.MEMBER_NO,          
-	    n.NOTICE_TITLE,
-	    n.NOTICE_CONTENT,
-	    TO_CHAR(n.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
-	    n.VIEW_COUNT,
-	    n.CATEGORY_NO,        
-	    m.NICKNAME,           
-	    n.NOTICE_STATUS
-	FROM 
-	    NOTICE n
-	JOIN 
-	    NOTICE_CATEGORY nc ON n.CATEGORY_NO = nc.CATEGORY_NO   
-	JOIN 
-	    MEMBER m ON n.MEMBER_NO = m.MEMBER_NO   
-	WHERE 
-	    n.NOTICE_STATUS = 'Y' 
-	    AND n.CATEGORY_NO = 2
+	SELECT *
+	  FROM (
+			 SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO DESC) AS ROW_NUM,
+	       	 		NOTICE_NO,
+	       	 		NOTICE_TITLE,
+	       			TO_CHAR(n.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
+	       			VIEW_COUNT,
+	       			NICKNAME
+			   FROM NOTICE n
+			   JOIN NOTICE_CATEGORY USING(CATEGORY_NO)
+			   JOIN MEMBER m ON n.MEMBER_NO = m.MEMBER_NO
+			  WHERE NOTICE_STATUS = 'Y'
+	  		    AND CATEGORY_NO = 2)
+	 WHERE ROW_NUM BETWEEN 1 AND 5
    </select>
    
    <!-- 게시글 추가 -->

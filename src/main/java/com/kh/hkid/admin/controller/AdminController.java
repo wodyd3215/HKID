@@ -233,8 +233,6 @@ public class AdminController {
 	@SuppressWarnings("finally") // 자바 컴파일러가 finally 블록 관련 경고를 무시하도록 지시하는 주석 
 	@PostMapping("suspensionMember")
 	public String insertsuspension(SuspensionMember sm, int reportNo, HttpSession session) {
-		sm.setSuspensionComment("그냥 정지당해라");
-		
 		try {
 			adminService.insertsuspension(sm, reportNo);
 			session.setAttribute("alertMsg", "유저 정지 성공");
