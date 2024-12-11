@@ -45,6 +45,14 @@ public interface ChallengeService {
 	//게시글 수정
 	int updateBoard(ChallengeBoard c);
 
+	//게시글 삭제
+	int deleteboard(int cbno);
+
+	//cno 가져오기
+	ChallengeBoard selectCno(int cbno);
+
+	
+
 
 
 }

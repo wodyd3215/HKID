@@ -160,6 +160,12 @@ public class BoardServiceImpl implements BoardService {
 	public int updateReply(Reply r) {
 		return boardDao.updateReply(sqlSession, r);
 	}
+
+
+	@Override
+	public ArrayList<Board> selectPopularCommunity(PageInfo pi) {
+		return boardDao.selectPopularCommunity(sqlSession,pi);
+	}
 	
 	
 

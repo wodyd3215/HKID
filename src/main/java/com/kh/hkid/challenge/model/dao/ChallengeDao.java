@@ -98,4 +98,14 @@ public class ChallengeDao {
 		return sqlSession.update("challengeMapper.updateBoardFile", c);
 	}
 
+	//게시글 삭제
+	public int deleteboard(SqlSessionTemplate sqlSession, int cbno) {
+		return sqlSession.delete("challengeMapper.deleteboard", cbno);
+	}
+
+	//cbno로 cno가져오기
+	public ChallengeBoard selectCno(SqlSessionTemplate sqlSession, int cbno) {
+		return sqlSession.selectOne("challengeMapper.selectCno", cbno);
+	}
+
 }

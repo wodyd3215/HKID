@@ -43,6 +43,20 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 	
+	@RequestMapping()
+	public String popularCommunity(
+			@RequestParam(value="cpage", defaultValue="1") int currentPage,  Model model) {
+		int boardCount = boardService.selectListCount();
+		
+		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 2);
+		
+		ArrayList<Board> list = boardService.selectPopularCommunity(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		return "main";
+	}
+	
 	//리팩토링
 	@GetMapping("list.bo")
 	public String selectList(

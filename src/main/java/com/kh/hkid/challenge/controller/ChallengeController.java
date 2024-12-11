@@ -61,6 +61,8 @@ public class ChallengeController {
 		ArrayList<ChallengeBoard> list = challengeService.chBoardselectList(cno, pi);
 		ArrayList<Notice> nlist = challengeService.selectNoticeList(pi);
 		
+		System.out.println("list" + list);
+		
 		model.addAttribute("nlist", nlist);
 		model.addAttribute("cno", cno);
 		model.addAttribute("c", c);
@@ -96,11 +98,14 @@ public class ChallengeController {
 	   }
 	
 	@RequestMapping("cboardDetail.bo")
-	   public String selectDetailChallengeBoard(int cbno, Model model, HttpSession session) {
+	   public String selectDetailChallengeBoard(
+			   @RequestParam("cbno") int cbno,
+			   Model model, HttpSession session) {
 		
 		Member m = (Member)session.getAttribute("loginMember");
 		
 		ChallengeBoard c = challengeService.selectBoard(cbno);
+		model.addAttribute("cbno", cbno);
 		model.addAttribute("c", c);
 		model.addAttribute("pageName", "cboardDetail");
 		model.addAttribute("m", m);
@@ -153,10 +158,13 @@ public class ChallengeController {
 		
 		//게시글 수정Form
 		@RequestMapping("updateForm.cbo")
-		public String updateForm(int cbno, Model model) {
+		public String updateForm(
+				@RequestParam("cbno") int cbno,
+				 Model model) {
 			//게시글 조회
 			ChallengeBoard c = challengeService.selectBoard(cbno);
-		
+			
+			model.addAttribute("cbno", cbno);
 			model.addAttribute("c", c);
 			model.addAttribute("pageName", "updateForm");
 			model.addAttribute("optional", c.getChaContent());
@@ -165,7 +173,13 @@ public class ChallengeController {
 	
 		//게시글 수정
 		@RequestMapping("update.cbo")
-		public String updateBoard(ChallengeBoard c, MultipartFile reupfile, HttpSession session, Model m) {
+		public String updateBoard(
+				@RequestParam("cbno") int cbno,
+				ChallengeBoard c, MultipartFile reupfile, HttpSession session, Model m) {
+			int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+			c.setMemberNo(memberNo);
+			c.setChallengeBoardNo(cbno);
+			
 			//수정 할 첨부파일이 있을 경우
 			if(!reupfile.getOriginalFilename().equals("")) {
 				//기존 첨부파일이 있다 -> 기존파일을 삭제
@@ -187,7 +201,24 @@ public class ChallengeController {
 			}else {
 				session.setAttribute("alertMsg", "게시글 수정 실패");
 			}
-			return "redirect:/ch.b?cno=" + c.getChallengeNo();
+			return "redirect:/cboardDetail.bo?cbno=" + cbno;
+		}
+		
+		//게시글 삭제
+		@PostMapping("boardDelete.cbo")
+		public String boardDelete( @RequestParam("cbno") int cbno, 
+				 MultipartFile defile, HttpSession session, Model model) {
+			
+			ChallengeBoard c = challengeService.selectCno(cbno);
+			
+			if(challengeService.deleteboard(cbno) > 0) { //성공 시	
+				session.setAttribute("alertMsg", "게시글 삭제 완료");
+				return "redirect:/ch.b?cno=" + c.getChallengeNo();
+			}else {
+				session.setAttribute("alertMsg", "게시글 삭제 실패");
+				return "redirect:/boardDetail.bo?bno=" + cbno;
+			}
+			//첨부파일 삭제도 추가
 		}
 		
 	

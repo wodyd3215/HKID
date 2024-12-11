@@ -28,6 +28,8 @@
             
             <input type="hidden" name="cno" value="${cno}">
 
+            <input type="hidden" name="cbno" value="${cbno}">
+
             <input type="text" name="chaTitle" id="board-title" placeholder="제목을 입력해주세요">
             <textarea id="content" rows="10" name="chaContent" required></textarea>
             <p id="can-file-types">첨부파일 'png', 'gif', 'jpg', 'jpeg' 파일만 업로드가 가능합니다.</p>
