@@ -50,6 +50,16 @@
 	 	   AND PRODUCT_NO = #{productNo}
 	 </delete>
 	 
+	 <delete id="deleteCarts">
+	 	DELETE
+	 	  FROM BUCKEY_LIST
+	 	 WHERE MEMBER_NO=#{memberNo}
+	 	   AND PRODUCT_NO IN
+	 	   <foreach item="productNo" collection="productNo" open="(" separator="," close=")">
+	 	   	#{productNo}
+	 	   </foreach>
+	 </delete>
+	 
 	 <insert id="insertCart">
 	 	INSERT 
 	 	INTO BUCKEY_LIST(

@@ -11,7 +11,7 @@ function selectAll(checkbox){
 
 
 function selectAll(selectAll)  {
-    const checkboxes = document.getElementsByName('selectBox');
+    const checkboxes = document.getElementsByClassName('selectCart');
   
   checkboxes.forEach((checkbox) => {
     checkbox.checked = selectAll.checked
@@ -65,9 +65,9 @@ function decreaseBtn(){
 
 // -------------------------------------------------------------------------------------------
 function delectOne(){
-    const btn = document.querySelector('.btn.delete-button')
-    const pNo = btn.getAttribute('data-product-no')
-    const mNo = btn.getAttribute('data-member-no')
+    const btn = document.querySelector('.btn.delete-button');
+    const pNo = btn.getAttribute('data-product-no');
+    const mNo = btn.getAttribute('data-member-no');
 
     console.log(pNo); 
     console.log(mNo); 
@@ -87,4 +87,34 @@ function delectOne(){
     });
 }
 
+// -------------------------------------------------------------------------------------------
+function deleteAll(){   
+    const btn = document.querySelector('.delete-button');
 
+    let checkArr = new Array();
+
+    $('input[name="selectBox"]:checked').each(function(){
+
+        checkArr.push($(this).val());
+    });
+
+    const mNo = btn.getAttribute('data-member-no');
+
+    console.log(checkArr);
+    console.log(mNo);
+
+    $.ajax({
+        url:'delete.a',
+        type:'post',
+        data:{
+            productNo : checkArr,
+            memberNo : mNo
+        },
+        success:function(res){
+            console.log("전송완료");
+            location.href = `cartlist.li?memberNo=${mNo}`;
+        }, error: function(err){
+            console.log("실패");
+        }
+    })
+}
