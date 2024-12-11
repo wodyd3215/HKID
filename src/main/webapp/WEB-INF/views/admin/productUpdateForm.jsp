@@ -43,17 +43,22 @@
                     </tr>
                     <tr>
                         <th class="he-50" id="sumHe" data-he="308">상세내용</th>
+                        
                         <td id="detail-area"><textarea id="content" class="content"></textarea></td>
                     </tr>
                     <tr>
                         <th class="he-20">대표 이미지 추가</th>
                         <td id="img-area">
+                                                        
                             <input type="file" class="include-img" name="fileList" multiple>
                             <div class="material-symbols-outlined" onclick="includeImg()">add</div>
                         </td>
                     </tr>
                 </table>
                 <div>
+                    <input type="hidden" name="fileNo" value="${p.fileNo}">
+                    <input type="hidden" name="changeName" value="${p.changeName}">
+                    <input type="hidden" name="category" value="{p.category}">
                     <input type="hidden" class="productNo" name="productNo" value="${p.productNo}">
                     <button class="btn btn-primary custom-btn submit-btn" data-url="updateProduct">등록하기</button>
                     <button class="btn btn-danger custom-btn" data-target="cancel">취소하기</button>

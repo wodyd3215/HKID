@@ -207,7 +207,7 @@
                     </li> 
                 </ul>
             </div>
-            
+            <input type="hidden" name="changeName" value="${p.changeName}">
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />

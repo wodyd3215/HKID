@@ -1,6 +1,11 @@
 function initProduct(contextPath, optional) {
-    initProductEnroll(contextPath, optional.content)
-    initFile(contextPath, optional)
+    const files = {
+        fileNo: $('input[name="fileNo"]').length > 0 ? $('input[name="fileNo"]').val() : null,
+        changeName: $('input[name="changeName"]').length > 0 ? $('input[name="changeName"]').val() : null,
+    }
+
+    initProductEnroll(contextPath, optional)
+    initFile(contextPath, files)
 }
 
 function initProductEnroll(contextPath, productContent) {
@@ -33,7 +38,7 @@ function initFile(contextPath, files) {
         filesArr: [], // 이미지 파일 누적시키는 배열
     };
 
-    if(files) {
+    if(files.fileNo && files.changeName) {
         insertArr(contextPath, fileInfo, files)
     }
 

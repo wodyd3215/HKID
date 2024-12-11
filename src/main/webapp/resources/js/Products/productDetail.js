@@ -2,12 +2,13 @@
  let quantity = 1;
 
 function initProductDetail(contextPath, optional) {
-    const imgArr = optional.imgs.split(',');
-
+    const imgArr = $('input[name="changeName"]').val().split(',');
+    const productNo = $('input[name="productNo"]').val()
+    
     drawDetailImg(contextPath, imgArr)
     drawReviewAvg()
-    drawContent(optional.content)
-    drawReview(optional.productNo)
+    drawContent(optional)
+    drawReview(productNo)
 }
 
 // 디테일 이미지 가져오기

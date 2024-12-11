@@ -27,7 +27,7 @@ function init(contextPath, memberNo, pageName, optional) {
             initDiaryPage(optional)
             break;
         case "productDetail":
-            initProductDetail(contextPath, JSON.parse(optional));
+            initProductDetail(contextPath, optional);
             break;
         case "product":
             initProduct();
