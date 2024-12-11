@@ -41,7 +41,7 @@
             <button id="att-add-btn">첨부파일 추가</button>
 
             <div id="submit-btn-wrapper">
-                <button id="submit-btn" type="submit" onclick="postFormSubmit('update', 'update.bo')">게시글 등록</button>
+                <button id="submit-btn" type="submit" onclick="postFormSubmit('update.bo')">게시글 등록</button>
             </div>
         </form>
 

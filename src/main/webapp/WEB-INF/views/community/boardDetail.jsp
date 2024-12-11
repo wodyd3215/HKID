@@ -21,9 +21,9 @@
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-    <!-- b = ${b}
+    b = ${b}
     <br><br>
-    m = ${m} -->
+    m = ${m}
 
 
 
@@ -36,9 +36,6 @@
         </c:otherwise>
     </c:choose>
 
-
-
-    <!-- b = ${b} -->
     <br><br><br><br>
     <div class="wrapper">
         <hr>
@@ -132,50 +129,9 @@
             </div>
 
 
-
-            <!-- 본인이 작성한 댓글  -->
-            <!-- <c:choose>
-                <c:when test="${m != null and not empty m}">
-                    <div class="comments-body">
-                        <div class="main-comment" id="main-comment${comment.replyNo}">
-                            <div class="comment-left">
-                                <p class="user-name">${comment.nickName}</p>
-                                <p>${comment.date}&nbsp;</p>
-                                <button class="add-sub-comment">답글쓰기</button>
-                            </div>
-                            <div class="comment-middle">${comment.content}</div>
-                                                    <div class=" comment-right">
-                                <button class="reply-update-btn" data-target="updateReply"
-                                    onclick="changeUpdate('${comment.replyNo}', '${comment.boardNo}', '${comment.memberNo}')">수정</button>
-                                <button class="reply-delete-btn"
-                                    onclick="deleteReply('${comment.boardNo}', '${comment.replyNo}')">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="comments-body">
-                        <div class="main-comment" id="main-comment${comment.replyNo}">
-                            <div class="comment-left">
-                                <p class="user-name">${comment.nickName}</p>
-                                <p>${comment.date}&nbsp;</p>
-                                <button class="add-sub-comment">답글쓰기</button>
-                            </div>
-                            <div class="comment-middle">${comment.content}</div>
-                            <div class="comment-right">
-                                <button class="reply-update-btn">&nbsp;&nbsp;</button>
-                                <button class="reply-delete-btn">&nbsp;&nbsp;</button>
-                            </div>
-                        </div>
-                    </div>
-                </c:otherwise>
-            </c:choose> -->
-
             <!-- 댓글리스트 -->
             <div id="all-reply-wrapper">    <!--이 div으로 js에서 댓글 목록 작성-->
                 
-
-
 
             </div>
             <hr>
@@ -240,7 +196,6 @@
                     <option value="">10개씩</option>
                     <option value="">15개씩</option>
                 </select>
-
             </div>
     
             <!-- 검색 바 -->
@@ -285,7 +240,7 @@
                 <form id="postForm" method="post" action="">
                     <input type="hidden" name="bno" value="${b.boardNo}">
                     <!-- 게시글 삭제 버튼 -->
-                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('delete', 'boardDelete.bo')">예</button>
+                    <button class="modal-btn" id="yes-btn" onclick="postFormSubmit('boardDelete.bo')">예</button>
                 </form>
                 <!-- 모달 닫기 -->
                 <button class="modal-btn" id="no-btn" onclick="closeModal()">아니오</button>
@@ -328,7 +283,7 @@
                 
 
                 <div class="custom-modal-content">
-                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report', 'report.bo')">제출</button>
+                    <button class="modal-btn" id="report-submit-btn" onclick="postFormSubmit('report.bo')">제출</button>
                 </div>
             </form>
         </div>

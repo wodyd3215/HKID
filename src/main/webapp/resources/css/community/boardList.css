@@ -33,6 +33,11 @@ th, td, tr{
     text-align: center;
 }
 
+/* 공지 */
+.notice { 
+    background-color: #DBF1FD;
+}
+
 table th:nth-child(1) { /* 1번째 th */
     width: 8%;
 }
