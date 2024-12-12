@@ -157,6 +157,7 @@
 		  <choose>
 		  	<when test="category == 'board'">
 		  		JOIN COMMUNITY USING (BOARD_NO)
+		  	   WHERE BOARD_STATUS = 'Y'
 		  	</when>
 		  	<when test="category == 'reply'">
 		  		JOIN REPLY USING (REPLY_NO)
@@ -168,20 +169,15 @@
 		 ORDER BY REPORT_NO DESC
 	</select>
 		
-	<delete id="deleteReportTarget">
-		DELETE FROM 
-		<choose>
-		 	<when test="boardNo != 0">
-				COMMUNITY
-		 		WHERE 
-		 		BOARD_NO = #{boardNo}
-		 	</when>
-		 	<when test="replyNo != 0">
-		 		REPLY
-		 		WHERE
-		 		REPLY_NO= #{replyNo}
-		 	</when>
-		 </choose>
+	<update id="deleteReportBoard">
+		UPDATE COMMUNITY
+		   SET BOARD_STATUS = 'N'
+		 WHERE BOARD_NO = #{boardNo} 
+	</update>	
+		
+	<delete id="deleteReportReply">
+		DELETE FROM REPLY
+		 WHERE REPLY_NO= #{replyNo}
 	</delete>
 	
 	<!-- 유저 정지 -->
