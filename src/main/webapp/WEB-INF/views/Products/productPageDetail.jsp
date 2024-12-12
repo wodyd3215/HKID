@@ -120,7 +120,6 @@
 
 
                 <ul class="tabContent">
-
                     <!-- 상품 상세 이미지 -->
                     <li id="contentDetail" class="contentDetail"> 
                         <div class="contentImg">
@@ -148,9 +147,6 @@
                         <div class="pageInfo">
                             <button id="prev"><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg" alt=""></button>
                             <button id="currentPage"></button>
-                            <button id="next"><img src="${pageContext.request.contextPath}/resources/image/rightBtn.svg" alt=""></button>
-                        </div>
-   
                     </li>
 
                     <li id="contentExchange" class="contentExchange">
