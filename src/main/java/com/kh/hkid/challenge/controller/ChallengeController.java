@@ -63,7 +63,7 @@ public class ChallengeController {
 		ArrayList<ChallengeBoard> list = challengeService.chBoardselectList(cno, pi);
 		ArrayList<Notice> nList = challengeService.selectNoticeList();
 		
-		log.info("공지 : " + nList);
+		log.info("게시글 : " + list);
 		
 		model.addAttribute("nlist", nList);
 		model.addAttribute("cno", cno);
