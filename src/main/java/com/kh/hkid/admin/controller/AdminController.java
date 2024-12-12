@@ -205,7 +205,7 @@ public class AdminController {
 	// 신고
 	@PostMapping("deleteReportB")
 	public String deleteReportB(Report r, HttpSession session) {
-		int result = adminService.deleteReportTarget(r);
+		int result = adminService.deleteReportBoard(r);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "신고 게시물 삭제 완료");
@@ -218,7 +218,7 @@ public class AdminController {
 	
 	@PostMapping("deleteReportR")
 	public String deleteReportR(Report r, HttpSession session) {
-		int result = adminService.deleteReportTarget(r);
+		int result = adminService.deleteReportReply(r);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "신고 댓글 삭제 완료");
@@ -248,6 +248,7 @@ public class AdminController {
 	@PostMapping("recoveryAccount.ad")
 	public String recoveryAccount(int memberNo, HttpSession session) {
 		try {
+			// 가독성 문제로 수정 필요!!!
 			adminService.recoveryAccount(memberNo);
 			session.setAttribute("alertMsg", "계정 복구 성공");
 		} catch(RuntimeException e) {

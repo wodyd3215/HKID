@@ -167,7 +167,7 @@
 										PRODUCT_NO
 									 )
 							  VALUES (
-							  			SEQ_FNO.NEXTVAL,
+							  			SEQ_FILE_NO.NEXTVAL,
 							  			#{files},
 							  			SEQ_PNO.CURRVAL
 							  		 )					

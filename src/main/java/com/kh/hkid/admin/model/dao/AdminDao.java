@@ -57,8 +57,12 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectReportList", categoty, rowBounds);
 	}
 		
-	public int deleteReportTarget(SqlSessionTemplate sqlSession, Report r) {
-		return sqlSession.delete("adminMapper.deleteReportTarget", r);
+	public int deleteReportBoard(SqlSessionTemplate sqlSession, Report r) {
+		return sqlSession.update("adminMapper.deleteReportBoard", r);
+	}
+	
+	public int deleteReportReply(SqlSessionTemplate sqlSession, Report r) {
+		return sqlSession.delete("adminMapper.deleteReportReply", r);
 	}
 	
 	public int insertsuspension(SqlSessionTemplate sqlSession, SuspensionMember sm) {

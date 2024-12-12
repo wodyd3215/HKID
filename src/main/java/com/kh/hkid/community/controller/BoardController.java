@@ -48,7 +48,8 @@ public class BoardController {
 	}
 
 	
-	@RequestMapping()
+	//인기 게시글
+	@RequestMapping("/")
 	public String popularCommunity(
 			@RequestParam(value="cpage", defaultValue="1") int currentPage,  Model model) {
 		int boardCount = boardService.selectListCount();
@@ -57,6 +58,7 @@ public class BoardController {
 		
 		ArrayList<Board> list = boardService.selectPopularCommunity(pi);
 		
+		System.out.println("list" + list);
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "main";

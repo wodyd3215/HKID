@@ -107,14 +107,13 @@ public class MemberController {
     public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response, Model model) {
     	Member loginMember = memberService.loginMember(m);
     	Date today = new Date();
-    	System.out.println(loginMember);
-    	System.out.println("today : " + today);
+
     	if(loginMember == null || !bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
     		session.setAttribute("alertMsg", "로그인 정보에 맞는 아이디가 존재하지 않습니다."); 
     		return "redirect:/loginForm.me";
     	} else {
     		if(loginMember.getStatus().equals("N")) {
-    			if(loginMember.getUnsuspensionDate().after(today)) {
+    			if(loginMember.getUnsuspensionDate() != null && loginMember.getUnsuspensionDate().after(today)) {
     				session.setAttribute("alertMsg", "정지 당한 아이디 입니다. 정지 해제 날짜 : " + loginMember.getUnsuspensionDate());
     				return "redirect:/loginForm.me";
     			} else {

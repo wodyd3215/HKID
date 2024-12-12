@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <% String contextPath = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,24 +28,26 @@
 				</tr>
 			</thead>
 			<tbody>
-                <c:forEach var="n" items="${nlist}" varStatus="status">
-                <tr class="notice">
-                    <td class="board-category">공지</td>
-                    <td>
-						<a href="">${n.noticeTitle}</a>
-					</td>
-                    <td>${n.nickName}</td>
-                    <td>${n.noticeDate}</td>
-                    <td>${n.viewCount}</td>
-                </tr>
-                </c:forEach>
+                <!-- 공지 게시글 -->
+                <c:if test="${pi.currentPage == 1}">
+                    <c:forEach var="n" items="${nlist}">
+                        <tr class="notice">
+                            <td class="board-category">공지</td>
+                            <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
+                            </td>
+                            <td>${n.nickName}</td>
+                            <td>${n.noticeDate}</td>
+                            <td>${n.viewCount}</td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
 				<c:forEach var="c" items="${list}" varStatus="status">
                 <tr class="">
                     <td class="board-category">${status.index + 1}</td>
                     <td>
 						<a href="cboardDetail.bo?cbno=${c.challengeBoardNo}">${c.chaTitle}
                             <c:if test="${not empty c.changeName}">
-							    <img src="./resources/img/file.png" alt="없음">
+							    <img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음">
                             </c:if>
 						</a>
 					</td>
@@ -88,12 +89,13 @@
                 <select name="condition" id="search-category" >전체
                     <option value="writer" selected>작성자</option>
                     <option value="title">제목</option>
+                    <option value="content">내용</option>
                 </select>
                 
                 <div id="search-wrapper">
                     <input type="search" name="keyword" id="boardsearch-bar" placeholder="검색어를 입력해주세요">
                     <button id="board-search-btn" type="submit">
-                        <img id="searchIcon" src="resources/image/searchIcon.png">
+                        <img id="searchIcon" src="${pageContext.request.contextPath}/resources/image/searchIcon.png">
                     </button>
                 </div>
             </form>
@@ -101,6 +103,5 @@
 		
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-    <script src="./resources/js/challenge/challengeD.js"></script>
 </body>
 </html>

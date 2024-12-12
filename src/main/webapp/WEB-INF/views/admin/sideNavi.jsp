@@ -47,7 +47,7 @@
     </c:if> 
     <div class="sideNavi">
         <div id="logo">
-            <a href="">대충 로고</a>
+            <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/img/AdminLogo.png" alt=""></a>           
         </div>
         <div id="nav">
             <ul>

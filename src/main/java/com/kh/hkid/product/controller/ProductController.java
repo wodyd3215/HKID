@@ -137,7 +137,7 @@ public class ProductController {
 	@PostMapping(value="loadReviewAjax", produces="application/json; charset=UTF-8") 
 	public String loadReviewAjax(int productNo, int currentPage){
 		int reviewCount = productService.reviewCount(productNo);
-    	
+		
     	PageInfo pi = Template.getPageInfo(reviewCount, currentPage, 1, 3);
     	ArrayList<Review> list = productService.selectReviewList(pi, productNo);
 		

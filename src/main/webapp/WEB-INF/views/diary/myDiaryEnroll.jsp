@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
     <div class="wrapper">
         <form action="insertDiary.di" class="enroll-form" method="POST">
             <div id="diary-title">
-                <input type="text" name="diaryTitle" placeholder="제목을 입력하세요">
+                <input type="text" name="diaryTitle" placeholder="제목을 입력하세요" required>
             </div>
             <div id="today-ate-cal-info" onclick="loadTodayCal('${loginMember.memberNo}')">
                 <div id="not-loaded-status">클릭해서 가져오기</div>
@@ -38,7 +38,7 @@ pageEncoding="UTF-8"%>
             </div>
             <input type="hidden" name="foodNo" value="0">
             <div class="edit-area">
-                <textarea id="content" name="diaryContent"></textarea>
+                <textarea id="content" name="diaryContent" required></textarea>
             </div>
             <div id="content-bottom">
                 <a href="myDiaryList.me">나가기</a>

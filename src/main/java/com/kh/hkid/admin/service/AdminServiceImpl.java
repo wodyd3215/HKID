@@ -71,8 +71,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int deleteReportTarget(Report r){
-		return adminDao.deleteReportTarget(sqlSession, r);
+	public int deleteReportBoard(Report r) {
+		return adminDao.deleteReportBoard(sqlSession, r);
+	}
+	
+	@Override
+	public int deleteReportReply(Report r){
+		return adminDao.deleteReportReply(sqlSession, r);
 	}
 	
 	@Transactional(rollbackFor = {Exception.class})
