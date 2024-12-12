@@ -52,9 +52,9 @@
         <!-- 간편로그인 -->
         <fieldset id="social-login">
             <legend>&nbsp;&nbsp;간편 로그인&nbsp;&nbsp;</legend>
-            <button id="kakao-login" onclick="kakaoLogin()"><img src="${pageContext.request.contextPath}/resources/image/Kakao_Logo.png"><p>카카오 로그인</p></button>
+            <!-- <button id="kakao-login" onclick="kakaoLogin()"><img src="${pageContext.request.contextPath}/resources/image/Kakao_Logo.png"><p>카카오 로그인</p></button> -->
             <button id="naver-login" onclick="naverLogin()" value="네이버로그인"><img src="${pageContext.request.contextPath}/resources/image/Naver_Logo.png"><p>네이버 로그인</p></button>
-            <button id="google-login" onclick="googleLogin()"><img src="${pageContext.request.contextPath}/resources/image/Google_Logo.png"><p>Google 로그인</p></button>
+            <!-- <button id="google-login" onclick="googleLogin()"><img src="${pageContext.request.contextPath}/resources/image/Google_Logo.png"><p>Google 로그인</p></button> -->
         </fieldset>
     </div>
 </body>
