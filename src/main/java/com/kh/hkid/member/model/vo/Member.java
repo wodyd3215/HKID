@@ -22,4 +22,6 @@ public class Member {
 	private String profileImg;
 	private String isAdmin;
 	private String isSocial;
+	private Date suspensionDate;
+	private Date unsuspensionDate;
 }

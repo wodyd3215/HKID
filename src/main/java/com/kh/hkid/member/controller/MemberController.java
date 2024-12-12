@@ -32,7 +32,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.mail.controller.MailController;
-import com.kh.hkid.member.model.dto.RecoveryMember;
 import com.kh.hkid.member.model.vo.Member;
 import com.kh.hkid.member.service.MemberService;
 
@@ -106,7 +105,7 @@ public class MemberController {
     // 로그인
     @PostMapping("login.me")
     public String loginMember(Member m, HttpSession session, String saveId, HttpServletResponse response, Model model) {
-    	RecoveryMember loginMember = memberService.loginMember(m);
+    	Member loginMember = memberService.loginMember(m);
     	Date today = new Date();
     	System.out.println(loginMember);
     	System.out.println("today : " + today);
@@ -332,7 +331,7 @@ public class MemberController {
 	    	int result = memberService.imgChangeAjax(m);
 	    	
 	    	if(result > 0) {
-	    		RecoveryMember nm = memberService.loginMember(m);
+	    		Member nm = memberService.loginMember(m);
 	    		
 	    		session.setAttribute("loginMember", nm);
 	    		return nm.getProfileImg();
@@ -353,7 +352,7 @@ public class MemberController {
     	int result = memberService.imgChangeAjax(m);
     	
     	if(result > 0) {
-    		RecoveryMember nm = memberService.loginMember(m);
+    		Member nm = memberService.loginMember(m);
     		
     		session.setAttribute("loginMember", nm);
     		return nm.getProfileImg();
@@ -419,7 +418,7 @@ public class MemberController {
         	Date today = new Date();
         	
         	if(findMember > 0) {
-        		RecoveryMember loginMember = memberService.socialLoginMember(m);
+        		Member loginMember = memberService.socialLoginMember(m);
         		System.out.println("소셜로그인 : " + loginMember);
         		
         		if(loginMember.getStatus().equals("N")) {
@@ -445,7 +444,7 @@ public class MemberController {
         		int socialResult = memberService.insertSocialMember(m);
                 
                 if(socialResult > 0) {
-                   RecoveryMember loginMember = memberService.socialLoginMember(m);
+                	Member loginMember = memberService.socialLoginMember(m);
                    
                    session.setAttribute("loginMember", loginMember);
                    

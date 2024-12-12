@@ -3,7 +3,6 @@ package com.kh.hkid.member.service;
 import java.util.ArrayList;
 
 import com.kh.hkid.chatting.model.vo.Message;
-import com.kh.hkid.member.model.dto.RecoveryMember;
 import com.kh.hkid.member.model.vo.Member;
 
 public interface MemberService {
@@ -12,7 +11,7 @@ public interface MemberService {
 	int insertMember(Member m);
 	
 	// 로그인
-	RecoveryMember loginMember(Member m);
+	Member loginMember(Member m);
 	
 	// 아이디 중복체크
 	int idCheck(String checkId);
@@ -45,7 +44,7 @@ public interface MemberService {
 	int searchMember(Member m);
 	
 	// 소셜로그인
-	RecoveryMember socialLoginMember(Member m);
+	Member socialLoginMember(Member m);
 	
 	// 소셜회원가입
 	int insertSocialMember(Member m);
