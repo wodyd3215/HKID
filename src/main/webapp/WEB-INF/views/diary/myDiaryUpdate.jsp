@@ -31,12 +31,12 @@ pageEncoding="UTF-8"%>
     <div class="wrapper">
         <form action="updateDiary.di?diaryNo=${diary.diaryNo}" class="enroll-form" method="POST">
             <div id="diary-title">
-                <input type="text" name="diaryTitle" placeholder="제목을 입력하세요" value="${diary.diaryTitle}">
+                <input type="text" name="diaryTitle" placeholder="제목을 입력하세요" value="${diary.diaryTitle}" required>
             </div>
             <div id="today-ate-cal-info">
             </div>
             <div class="edit-area">
-                <textarea id="content" name="diaryContent"></textarea>
+                <textarea id="content" name="diaryContent" required></textarea>
             </div> 
             <div id="content-bottom">
                 <a href="detailDiary.di?diaryNo=${diary.diaryNo}">나가기</a>
