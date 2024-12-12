@@ -31,10 +31,10 @@
 			<tbody>
                 <!-- 공지 게시글 -->
                 <c:if test="${pi.currentPage == 1}">
-                    <c:forEach var="n" items="${nList}" varStatus="status">
+                    <c:forEach var="n" items="${nList}">
                         <tr class="notice">
                             <td class="board-category">공지</td>
-                            <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}<img src="./resources/img/file.png" alt="없음"></a>
+                            <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음"></a>
                             </td>
                             <td>${n.nickName}</td>
                             <td>${n.noticeDate}</td>
@@ -47,7 +47,7 @@
                     <td class="board-category">${status.index + 1}</td>
                     <td>
 						<a href="cboardDetail.bo?cbno=${c.challengeBoardNo}">${c.chaTitle}
-							<img src="./resources/img/file.png" alt="없음">
+							<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음">
 						</a>
 					</td>
                     <td>${c.nickName}</td>
@@ -94,7 +94,7 @@
                 <div id="search-wrapper">
                     <input type="search" name="keyword" id="boardsearch-bar" placeholder="검색어를 입력해주세요">
                     <button id="board-search-btn" type="submit">
-                        <img id="searchIcon" src="resources/image/searchIcon.png">
+                        <img id="searchIcon" src="${pageContext.request.contextPath}/resources/image/searchIcon.png">
                     </button>
                 </div>
             </form>
