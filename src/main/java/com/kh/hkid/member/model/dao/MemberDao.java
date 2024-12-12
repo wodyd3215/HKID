@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hkid.chatting.model.vo.Message;
-import com.kh.hkid.member.model.dto.RecoveryMember;
 import com.kh.hkid.member.model.vo.Member;
 
 @Repository
@@ -18,7 +17,7 @@ public class MemberDao {
 	}
 	
 	// 로그인
-	public RecoveryMember loginMember(SqlSessionTemplate sqlSession, Member m) {
+	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 	
@@ -71,7 +70,7 @@ public class MemberDao {
 	}
 	
 	// 소셜로그인
-	public RecoveryMember socialLoginMember(SqlSessionTemplate sqlSession, Member m) {
+	public Member socialLoginMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.socialLoginMember", m);
 	}
 	

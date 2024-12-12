@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.hkid.chatting.model.vo.Message;
 import com.kh.hkid.member.model.dao.MemberDao;
-import com.kh.hkid.member.model.dto.RecoveryMember;
 import com.kh.hkid.member.model.vo.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 로그인
 	@Override
-	public RecoveryMember loginMember(Member m) {
+	public Member loginMember(Member m) {
 		return memberDao.loginMember(sqlSession, m);
 	}
 	
@@ -102,7 +101,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 소셜로그인
 	@Override
-	public RecoveryMember socialLoginMember(Member m) {
+	public Member socialLoginMember(Member m) {
 		return memberDao.socialLoginMember(sqlSession, m);
 	}
 
