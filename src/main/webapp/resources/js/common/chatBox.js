@@ -251,6 +251,8 @@ function showChat(path, searchUser, selectChat, memberNo, receiverNo, senderNo) 
 
             // result 배열을 반복하여 각 메시지를 처리
             result.forEach(m => {
+                chatLogArea.id = `${m.senderNo}${m.receiverNo}`;
+
                 // 내가 보낸 메시지인지 확인 (예: senderNo와 메시지의 senderNo가 같으면 내 메시지)
                 const isMyMessage = m.senderNo === memberNo;
                 // 메시지 HTML을 동적으로 생성
@@ -316,6 +318,9 @@ function inputChatting(memberNo, receiverNo, senderNo) {
 
     const chatText = document.querySelector("#input-chat-text");
     const chatUser = document.querySelector(".trade-user-nick");
+    console.log(senderNo);
+    console.log(receiverNo);
+
     // 채팅 내용이 비어 있지 않으면
     if (chatText.value.trim() === "") {
         return; // 비어 있으면 채팅을 보내지 않음
