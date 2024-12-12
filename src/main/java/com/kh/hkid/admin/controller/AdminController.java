@@ -248,6 +248,7 @@ public class AdminController {
 	@PostMapping("recoveryAccount.ad")
 	public String recoveryAccount(int memberNo, HttpSession session) {
 		try {
+			// 가독성 문제로 수정 필요!!!
 			adminService.recoveryAccount(memberNo);
 			session.setAttribute("alertMsg", "계정 복구 성공");
 		} catch(RuntimeException e) {

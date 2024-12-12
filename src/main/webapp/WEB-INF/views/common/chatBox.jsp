@@ -26,9 +26,9 @@
             </div>
             <div class="chat-box-content">
                 <div class="chat-box-left">
-                    <div id="chat-admin">
+                    <!-- <div id="chat-admin">
                         <button name="chat-name" onclick="changeElement('${pageContext.request.contextPath}', this, '#chat-search', '#chat-content')">관리자</button>
-                    </div>
+                    </div> -->
                     <div id="chat-trade">
                         <button onclick="showAndHideElement('#chat-trade-user')">내 채팅방&nbsp;
                             <img src="${pageContext.request.contextPath}/resources/image/down.png">
