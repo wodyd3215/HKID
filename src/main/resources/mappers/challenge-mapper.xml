@@ -253,7 +253,7 @@
 									THUMBNAIL
  								 )
  						  VALUES (
- 						  			SEQ_CNO.NEXTVAL,
+ 						  			SEQ_CRNO.NEXTVAL,
  						  			#{challengeTitle},
  						  			#{startDate},
  						  			#{endDate},

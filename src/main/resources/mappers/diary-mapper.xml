@@ -85,6 +85,6 @@
 			   SET DIARY_TITLE = #{diaryTitle},
 			   	   DIARY_CONTENT = #{diaryContent}
 			 WHERE DIARY_NUMBER = #{diaryNo}
-			   AND MEMBER_NO = #{memberNo}	   
+			   AND MEMBER_NO = #{memberNo}
 		</update>
 </mapper>

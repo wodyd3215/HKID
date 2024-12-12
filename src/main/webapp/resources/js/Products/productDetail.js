@@ -4,7 +4,7 @@
 function initProductDetail(contextPath, optional) {
     const imgArr = $('input[name="changeName"]').val().split(',');
     const productNo = $('input[name="productNo"]').val()
-    
+
     drawDetailImg(contextPath, imgArr)
     drawReviewAvg()
     drawContent(optional)
