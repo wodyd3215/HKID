@@ -329,3 +329,9 @@
 #qwer{
     width: 120px;
 }
+
+.prev .next {
+    border: none;
+    background: none;
+}
+
