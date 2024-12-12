@@ -34,9 +34,9 @@ html,
     }
 
     .swiper-slide img {
-      margin-top: 50px;
-      width: 800px;
-      height: 250px;
+    margin-top: 30px;
+    width: auto;
+    height: 300px;
     }
 
 /* 인기상품 스와이퍼 */

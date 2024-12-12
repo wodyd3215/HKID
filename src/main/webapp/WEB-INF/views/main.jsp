@@ -21,9 +21,9 @@
 	<div class="wrapper">
 			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
-				  <div class="swiper-slide">
+				  <div class="swiper-slide" style="margin-right: 0px !important;">
 					<a href="">
-						<img src="${pageContext.servletContext.contextPath}/resources/img/image.png" alt="없음">
+						<img src="${pageContext.servletContext.contextPath}/resources/img/4db3c23a64a7de754efc2b2930a35a10.jpg" alt="없음">
 					</a>
 				</div>
 				  <div class="swiper-slide">Slide 2</div>
@@ -155,22 +155,22 @@
 				<div class="swiper-wrapper">
 				  <div class="swiper-slide">
 					<a href="">
-						<img src="./resources/img/image.png" alt="없음" id="underImg">
+						<img src="./resources/img/20241211094256_73141.jpg" alt="없음" id="underImg">
 					</a>
 				</div>
 				  <div class="swiper-slide">
 					<a href="">
-						<img src="./resources/img/image.png" alt="없음" id="underImg">
+						<img src="./resources/img/20241212152409_63532.jpg" alt="없음" id="underImg">
 					</a>
 				  </div>
 				  <div class="swiper-slide">
 					<a href="">
-						<img src="./resources/img/image.png" alt="없음" id="underImg">
+						<img src="./resources/img/20241212152209_13377.jpg" alt="없음" id="underImg">
 					</a>
 				  </div>
 				  <div class="swiper-slide">
 					<a href="">
-						<img src="./resources/img/image.png" alt="없음" id="underImg">
+						<img src="./resources/img/20241211114712_18753.jpg" alt="없음" id="underImg">
 					</a>
 				  </div>
 				  <div class="swiper-slide">Slide 5</div>
