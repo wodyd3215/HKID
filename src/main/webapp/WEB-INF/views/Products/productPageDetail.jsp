@@ -186,6 +186,7 @@
                     </li> 
                 </ul>
             </div>
+            <input type="hidden" name="productNo" value="${p.productNo}">
             <input type="hidden" name="changeName" value="${p.changeName}">
         </div>
     </div>
