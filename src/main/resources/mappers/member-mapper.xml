@@ -22,24 +22,6 @@
   	<result column="PROFILE_IMG" property="profileImg"/>
   	<result column="ISADMIN" property="isAdmin"/>
   	<result column="IS_SOCIAL" property="isSocial"/>
-  </resultMap>
-  <resultMap type="RecoveryMember" id="recoveryMemberResultSet">
-  <result column="MEMBER_NO" property="memberNo"/>
-  	<result column="MEMBER_ID" property="memberId"/>
-  	<result column="MEMBER_PWD" property="memberPwd"/>
-  	<result column="MEMBER_NAME" property="memberName"/>
-  	<result column="NICKNAME" property="nickName"/>
-  	<result column="PHONE" property="phone"/>
-  	<result column="EMAIL" property="email"/>
-  	<result column="ADDRESS" property="address"/>
-  	<result column="DETAIL_ADDRESS" property="detailAddress"/>
-  	<result column="POST_NO" property="postNo"/>
-  	<result column="POINT" property="point"/>
-  	<result column="ENROLL_DATE" property="enrollDate"/>
-  	<result column="STATUS" property="status"/>
-  	<result column="PROFILE_IMG" property="profileImg"/>
-  	<result column="ISADMIN" property="isAdmin"/>
-  	<result column="IS_SOCIAL" property="isSocial"/>
   	<result column="SUSPENSION_DATE" property="suspensionDate"/>
   	<result column="UNSUSPENSION_DATE" property="unsuspensionDate"/>
   </resultMap>
@@ -72,7 +54,7 @@
   </insert>
   
   <!-- 로그인 -->
-  <select id="loginMember" parameterType="Member" resultMap="recoveryMemberResultSet">
+  <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
   	SELECT MEMBER_NO,
   		   MEMBER_ID,
   		   MEMBER_PWD,
@@ -170,7 +152,7 @@
   </select>
   
   <!-- 소셜 로그인 -->
-  <select id="socialLoginMember" resultMap="recoveryMemberResultSet">
+  <select id="socialLoginMember" resultMap="memberResultSet">
     SELECT MEMBER_NO,
   		   MEMBER_ID,
   		   MEMBER_PWD,
