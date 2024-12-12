@@ -33,7 +33,7 @@ public class ChatServer extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Member m = (Member)session.getAttributes().get("loginMember");
 		String nick = m.getNickName();
-		System.out.println("닉네임ㅋㅋ : " + nick);
+		
 		log.info("{} 연결됨...");
 		
 		userSessions.put(nick, session);
@@ -43,11 +43,10 @@ public class ChatServer extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// 세션에 저장되어있는 발신자의 닉네임 가져오기
-		System.out.println("???");
 		Member m = (Member)session.getAttributes().get("loginMember");
 		String nick = m.getNickName();
 		String profileImg = m.getProfileImg();
-		int mSenderNo = m.getMemberNo();
+		int senderNo = m.getMemberNo();
 		
 		System.out.println("여기까지 왔나?");
 		
@@ -60,9 +59,7 @@ public class ChatServer extends TextWebSocketHandler{
 		MsgVo vo = new MsgVo();
 		vo.setMsg(obj.get("message").getAsString()); // 메세지
 		vo.setNick(nick); // 발신자
-		vo.setSenderNo(obj.get("senderNo").getAsInt());
-		vo.setReceiverNo(obj.get("receiverNo").getAsInt());
-		vo.setMSenderNo(mSenderNo);
+		vo.setSenderNo(senderNo);
 		vo.setProfileImg(profileImg); // 발신자 프로필
 		vo.setTargetNick(obj.get("target").getAsString()); // 수신자
 		vo.setTime(new Date().toLocaleString()); // 발신 시간
@@ -82,7 +79,7 @@ public class ChatServer extends TextWebSocketHandler{
 	    WebSocketSession mySession = userSessions.get(vo.getNick());
 	    // 수신자 세션 정보 가져오기
 	    WebSocketSession targetSession = userSessions.get(vo.getTargetNick());
-	    
+
 	    log.info("발신자 session : {}", mySession);
 	    log.info("수신자 session : {}", targetSession);
 
@@ -100,7 +97,7 @@ public class ChatServer extends TextWebSocketHandler{
 	        if (targetSession != null && targetSession.isOpen()) {
 	            targetSession.sendMessage(msg);  // 수신자에게 메시지 전송
 	        }
-	        
+
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }

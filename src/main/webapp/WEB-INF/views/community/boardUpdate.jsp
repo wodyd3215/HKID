@@ -22,7 +22,7 @@
         <h3>게시글 수정</h3>
         <hr class="board-Write-hr">
         <form id="postForm" class="postForm" action="" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="boardNo" value="${b.boardNo}">
+            <input type="hidden" name="boardNo" value="${b.boardNo}" required>
             <select name="communityNo" id="search-category" onchange="btnDisable()" required>
                 <option value="" selected disabled hidden>게시판 선택</option>
                 <option value="1">질문</option>
@@ -31,7 +31,7 @@
                 <option value="4">홍보</option>
             </select>
 
-            <input type="text" name="boardTitle" id="board-title" value="${b.boardTitle}" onchange="btnDisable()" placeholder="제목을 입력해주세요">
+            <input type="text" name="boardTitle" id="board-title" value="${b.boardTitle}" onchange="btnDisable()" placeholder="제목을 입력해주세요" required>
             <textarea id="content" rows="10" name="content" onchange="btnDisable()" required>${b.content}</textarea>
             <p id="can-file-types">첨부파일 'png', 'gif', 'jpg', 'jpeg' 파일만 업로드가 가능합니다.</p>
             <div id="att-files">

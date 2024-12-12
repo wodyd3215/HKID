@@ -35,13 +35,19 @@
   
   <select id="loadDietAjax" resultMap="dietResultSet">
   	SELECT FOOD_NO,
-  		   TOTAL_KCAL,
-  		   TOTAL_CARBO,
-  		   TOTAL_PROTEIN,
-  		   TOTAL_FAT
-  	  FROM CAL_LOG
-  	 WHERE MEMBER_NO = #{memberNo}
-  	   AND TO_CHAR(SAVE_DATE) = TO_CHAR(SYSDATE)
+           TOTAL_KCAL,
+           TOTAL_CARBO,
+           TOTAL_PROTEIN,
+           TOTAL_FAT
+       FROM CAL_LOG
+      WHERE MEMBER_NO = #{memberNo}
+        AND TO_CHAR(SAVE_DATE) = TO_CHAR(SYSDATE)
+        AND FOOD_NO = (
+                       SELECT MAX(FOOD_NO)
+                         FROM CAL_LOG
+                        WHERE MEMBER_NO = #{memberNo}
+                          AND TO_CHAR(SAVE_DATE) = TO_CHAR(SYSDATE) 
+                     )
   </select>
   
   <select id="selectMyDiet" resultMap="dietResultSet">
