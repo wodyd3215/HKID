@@ -216,6 +216,7 @@ public class BoardController {
 	@GetMapping("enrollForm.bo")
 	public String boardWrite(Model model) {
 		
+		
 		model.addAttribute("pageName", "enrollForm");
 		return "community/boardWrite";
 	}
@@ -223,7 +224,7 @@ public class BoardController {
 	
 	//게시글 추가
 	@PostMapping("insert.bo")
-	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model m) {
+	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model model) {
 		
 		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 		b.setMemberNo(memberNo);
@@ -240,6 +241,7 @@ public class BoardController {
 		} else { //실패 -> 에러페이지
 			session.setAttribute("alertMsg", "게시글 작성 실패");
 		}
+		model.addAttribute("pageName", "boardWrite");
 		return "redirect:/list.bo";
 	}
 	
