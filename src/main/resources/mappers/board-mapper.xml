@@ -369,17 +369,37 @@
 			   BOARD_NO = #{boardNo}
 	</update>
 	
+	<!-- 인기게시글 -->
 	<select id="selectPopularCommunity" resultMap="boardResultSet">
-	SELECT BOARD_NO,
-			BOARD_TITLE,
-			BOARD_CONTENT,
-			BOARD_DATE,
-			BOARD_VIEW_COUNT,
-			BOARD_STATUS,
-			COMMUNITY_NO,
-			MEMBER_NO,
-			CHANGE_NAME
-	FROM COMMUNITY
+	SELECT 
+    B.BOARD_NO,
+    B.BOARD_TITLE,
+    B.BOARD_CONTENT,
+    B.BOARD_DATE,
+    B.BOARD_VIEW_COUNT,
+    B.BOARD_STATUS,
+    B.COMMUNITY_NO,
+    B.MEMBER_NO,
+    A.CHANGE_NAME
+FROM (
+    SELECT 
+        B.BOARD_NO,
+        B.BOARD_TITLE,
+        B.BOARD_CONTENT,
+        B.BOARD_DATE,
+        B.BOARD_VIEW_COUNT,
+        B.BOARD_STATUS,
+        B.COMMUNITY_NO,
+        B.MEMBER_NO,
+        A.CHANGE_NAME,
+        ROWNUM AS RNUM
+    FROM COMMUNITY B
+    JOIN TOTAL_ATTACHMENT A ON B.BOARD_NO = A.BOARD_NO
+    WHERE ROWNUM &lt; 3
+    ORDER BY B.BOARD_VIEW_COUNT DESC
+) B
+JOIN TOTAL_ATTACHMENT A ON B.BOARD_NO = A.BOARD_NO
+
 	
 	</select>
 </mapper>

@@ -33,7 +33,7 @@
                     <c:forEach var="n" items="${nlist}">
                         <tr class="notice">
                             <td class="board-category">공지</td>
-                            <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음"></a>
+                            <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
                             </td>
                             <td>${n.nickName}</td>
                             <td>${n.noticeDate}</td>
@@ -46,7 +46,9 @@
                     <td class="board-category">${status.index + 1}</td>
                     <td>
 						<a href="cboardDetail.bo?cbno=${c.challengeBoardNo}">${c.chaTitle}
-							<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음">
+                            <c:if test="${not empty c.changeName}">
+							    <img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음">
+                            </c:if>
 						</a>
 					</td>
                     <td>${c.nickName}</td>

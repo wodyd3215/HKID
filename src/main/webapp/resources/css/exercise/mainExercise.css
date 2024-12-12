@@ -202,7 +202,9 @@
  }
  
  #paging-area{
- 	margin-left: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: large;
     font-weight: 600;
     padding-block: 50px;
@@ -227,7 +229,7 @@
 
 /* 현재 페이지 스타일 */
 .paging-link.active {
-    color: white;
+    color: #b5d9f9;
     font-weight: bold;
     pointer-events: none;
 }
