@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <% String contextPath = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +30,7 @@
 			<tbody>
                 <!-- 공지 게시글 -->
                 <c:if test="${pi.currentPage == 1}">
-                    <c:forEach var="n" items="${nList}">
+                    <c:forEach var="n" items="${nlist}">
                         <tr class="notice">
                             <td class="board-category">공지</td>
                             <td><a href="noticeDetail.bo?noticeNo=${n.noticeNo}">${n.noticeTitle}<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="없음"></a>

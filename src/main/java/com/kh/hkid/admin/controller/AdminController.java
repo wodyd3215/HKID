@@ -205,7 +205,7 @@ public class AdminController {
 	// 신고
 	@PostMapping("deleteReportB")
 	public String deleteReportB(Report r, HttpSession session) {
-		int result = adminService.deleteReportTarget(r);
+		int result = adminService.deleteReportBoard(r);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "신고 게시물 삭제 완료");
@@ -218,7 +218,7 @@ public class AdminController {
 	
 	@PostMapping("deleteReportR")
 	public String deleteReportR(Report r, HttpSession session) {
-		int result = adminService.deleteReportTarget(r);
+		int result = adminService.deleteReportReply(r);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "신고 댓글 삭제 완료");

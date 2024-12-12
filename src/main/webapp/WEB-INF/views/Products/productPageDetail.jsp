@@ -120,7 +120,6 @@
 
 
                 <ul class="tabContent">
-
                     <!-- 상품 상세 이미지 -->
                     <li id="contentDetail" class="contentDetail"> 
                         <div class="contentImg">
@@ -134,48 +133,6 @@
                             <button id="currentPage"></button>
                             <button id="next">&gt;</button>
                         </div>
-                        <div class="review1">
-                            <!-- 리뷰 내용 -->
-                            <div class="reviewHeader"> <!-- 리뷰 상단 -->
-                                <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
-                                <div class="assessUser">★★★★★</div> <!-- 평점 -->
-                                <div class="assessDate">2024.12.12</div> <!-- 리뷰 작성일 -->
-                            </div>  
-                            <div class="reviewImg">
-                                <div class="reviImg"></div>
-                            </div>
-                            <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
-                            <div> 너무 좋아요!! </div> <!-- 리뷰 내용 -->
-                        </div>
-
-                        <div class="review1">
-                            <!-- 리뷰 내용 -->
-                            <div class="reviewHeader"> <!-- 리뷰 상단 -->
-                                <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
-                                <div class="assessUser">★★★★★</div> <!-- 평점 -->
-                                <div class="assessDate">2024.12.12</div> <!-- 리뷰 작성일 -->
-                            </div>  
-                            <div class="reviewImg">
-                                <div class="reviImg"></div>
-                            </div>
-                            <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
-                            <div> 너무 좋아요!! </div> <!-- 리뷰 내용 -->
-                        </div>
-
-                        <div class="review1">
-                            <!-- 리뷰 내용 -->
-                            <div class="reviewHeader"> <!-- 리뷰 상단 -->
-                                <div class="reviewUser">닉네임</div> <!-- 유저 닉네임 -->
-                                <div class="assessUser">★★★★★</div> <!-- 평점 -->
-                                <div class="assessDate">2024.12.12</div> <!-- 리뷰 작성일 -->
-                            </div>  
-                            <div class="reviewImg">
-                                <div class="reviImg"></div>
-                            </div>
-                            <div class="reviewProName"> 상품 이름</div> <!-- 상품 이름 -->
-                            <div> 너무 좋아요!! </div> <!-- 리뷰 내용 -->
-                        </div>
-   
                     </li>
 
                     <li id="contentExchange" class="contentExchange">

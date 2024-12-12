@@ -32,7 +32,9 @@ public interface AdminService {
 	
 	ArrayList<Report> selectReportList(PageInfo pi, String categoty);
 	
-	int deleteReportTarget(Report r);
+	int deleteReportBoard(Report r);
+	
+	int deleteReportReply(Report r);
 	
 	void insertsuspension(SuspensionMember sm, int reportNo);
 	

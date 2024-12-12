@@ -61,13 +61,11 @@ public class ChallengeController {
 		PageInfo pi = Template.getPageInfo(challengeBoardCount, currentPage, 10, choiceBoardCount);
 		
 		ArrayList<ChallengeBoard> list = challengeService.chBoardselectList(cno, pi);
-		ArrayList<Notice> nlist = challengeService.selectNoticeList();
+		ArrayList<Notice> nList = challengeService.selectNoticeList();
 		
-		log.info(nlist.toString());
+		log.info("공지 : " + nList);
 		
-		System.out.println("list" + list);
-		
-		model.addAttribute("nlist", nlist);
+		model.addAttribute("nlist", nList);
 		model.addAttribute("cno", cno);
 		model.addAttribute("c", c);
 		model.addAttribute("list", list);

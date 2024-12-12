@@ -42,6 +42,12 @@
   	  FROM CAL_LOG
   	 WHERE MEMBER_NO = #{memberNo}
   	   AND TO_CHAR(SAVE_DATE) = TO_CHAR(SYSDATE)
+  	   AND FOOD_NO = (
+  	   					SELECT MAX(FOOD_NO)
+  	   					  FROM CAL_LOG
+  	   					 WHERE MEMBER_NO = #{memberNo}
+  	   					   AND TO_CHAR(SAVE_DATE) = TO_CHAR(SYSDATE) 
+  	   				 )
   </select>
   
   <select id="selectMyDiet" resultMap="dietResultSet">
