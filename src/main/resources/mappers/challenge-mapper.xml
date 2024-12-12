@@ -66,21 +66,18 @@
    
    <!-- CHE_RES_NO로 CHELLANGE_NO조회 -->
    <select id="challengeSelect" resultMap="challengeBoardResultSet">
-		SELECT cb.CHELLANGE_NO,
-	        cb.MEMBER_NO,
-	        cr.CHE_RES_NO,
-            cr.CHE_TITLE RES_CHE_TITLE,
-	        cb.CHE_TITLE,
-	        cb.CHE_CONTENT,
-	       TO_CHAR(cb.CHE_DATE,'YYYY-MM-DD') CHE_DATE,
-	        cb.COMMENT_COUNT,
-            m.NICKNAME,
-            CHANGE_NAME
-        FROM CHELLAGE_BOARD cb
-        JOIN CHELLAGE_RES cr on cr.CHE_RES_NO = cb.CHE_RES_NO 
-        JOIN MEMBER m on cb.MEMBER_NO = m.MEMBER_NO
-        JOIN TOTAL_ATTACHMENT T on t.CHELLANGE_NO = cb.CHELLANGE_NO
-        WHERE cr.CHE_RES_NO = #{cno}
+		SELECT cb.CHELLANGE_NO, 
+		       cb.CHE_RES_NO, 
+		       cb.CHE_TITLE, 
+		       TO_CHAR(cb.CHE_DATE, 'YYYY-MM-DD') AS CHE_DATE, 
+		       cb.COMMENT_COUNT, 
+		       m.NICKNAME, 
+		       ta.CHANGE_NAME
+		FROM CHELLAGE_BOARD cb
+		JOIN MEMBER m ON cb.MEMBER_NO = m.MEMBER_NO
+		LEFT JOIN TOTAL_ATTACHMENT ta ON cb.CHELLANGE_NO = ta.CHELLANGE_NO
+		WHERE cb.CHE_RES_NO = #{cno} 
+		AND cb.STATUS = 'Y'
    </select>
    
    <!-- 챌린지보드 갯수 -->
@@ -89,6 +86,7 @@
 		FROM CHELLAGE_RES cr
 		JOIN CHELLAGE_BOARD cb on cr.CHE_RES_NO = cb.CHE_RES_NO 
 		WHERE cr.che_res_no = #{cno}
+		AND STATUS = 'Y'
    </select>
    
 <!-- 검색된 보드 총 갯수 -->
@@ -96,15 +94,19 @@
          SELECT COUNT(*)
       FROM CHELLAGE_BOARD cb
       JOIN CHELLAGE_RES cr on cb.CHE_RES_NO = cr.CHE_RES_NO 
-      JOIN MEMBER USING (MEMBER_NO)
+      JOIN MEMBER m ON cb.MEMBER_NO = m.MEMBER_NO
       WHERE cr.CHE_RES_NO = #{cno}
       <if test="condition == 'writer'">
-         AND NICKNAME
+         AND m.NICKNAME
        </if>
        <if test="condition == 'title'">
        AND cb.CHE_TITLE
        </if>
+       <if test="condition == 'content'">
+       	AND cb.CHE_CONTENT
+       </if>
        LIKE '%' || #{keyword} || '%'
+       AND cb.STATUS = 'Y'
    </select>
 
    
@@ -128,7 +130,11 @@
        <if test="condition == 'title'">
           AND cb.CHE_TITLE
        </if>
+       <if test="condition == 'content'">
+       	AND cb.CHE_CONTENT
+       </if>
        LIKE '%' || #{keyword} || '%'
+       AND cb.STATUS = 'Y'
    </select>
    
    <select id="selectBoard" resultMap="challengeBoardResultSet">
@@ -227,8 +233,9 @@
 	</update>
 	
 	<delete id="deleteboard">
-	DELETE FROM CHELLAGE_BOARD
-	WHERE CHELLANGE_NO = #{cbno}
+	UPDATE CHELLAGE_BOARD
+	   SET STATUS = 'N'
+	 WHERE CHELLANGE_NO = #{cbno}
 	</delete>
 	
 	<select id="selectCno" resultMap="challengeBoardResultSet">
