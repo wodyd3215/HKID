@@ -186,5 +186,6 @@ a.login {
 
 #logout-btn {
     color: red;
+    padding-top: 0;
     padding-bottom: 8px;
 }

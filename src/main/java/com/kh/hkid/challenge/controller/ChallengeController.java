@@ -21,9 +21,11 @@ import com.kh.hkid.challenge.model.vo.ChallengeBoard;
 import com.kh.hkid.challenge.service.ChallengeService;
 import com.kh.hkid.common.template.Template;
 import com.kh.hkid.common.vo.PageInfo;
-import com.kh.hkid.community.model.vo.Board;
 import com.kh.hkid.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class ChallengeController {
 	private final ChallengeService challengeService;
@@ -60,6 +62,8 @@ public class ChallengeController {
 		
 		ArrayList<ChallengeBoard> list = challengeService.chBoardselectList(cno, pi);
 		ArrayList<Notice> nlist = challengeService.selectNoticeList();
+		
+		log.info(nlist.toString());
 		
 		System.out.println("list" + list);
 		

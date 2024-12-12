@@ -1,7 +1,7 @@
 function init(contextPath, diaryContent) {
     const setting = {
         placeholder: "오늘 하루는 어떠셨나요?",
-        height: 578,
+        height: 460,
         width: '100%',
         toolbar: [
             ['style', ['style']],
