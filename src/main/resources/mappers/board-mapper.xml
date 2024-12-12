@@ -369,6 +369,7 @@
 			   BOARD_NO = #{boardNo}
 	</update>
 	
+	<!-- 인기게시글 -->
 	<select id="selectPopularCommunity" resultMap="boardResultSet">
 	SELECT BOARD_NO,
 			BOARD_TITLE,
