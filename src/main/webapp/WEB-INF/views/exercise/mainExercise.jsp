@@ -99,52 +99,53 @@
 					
 					
 
-					<div id="paging-area">
-						<c:choose>
-							<c:when test="${pi.currentPage > 1}">
-								<c:choose>
-									<c:when test="${empty part and empty difficulty and empty keyword}">
-										<a href="list.ex?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}">&lt;</a>
-									</c:when>
-									<c:otherwise>
-										<a href="exercise.se?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&lt;</a>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-						</c:choose>
-
-						<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
-							
-							<c:choose>
-								<c:when test="${empty part and empty difficulty and empty keyword}">
-									<a href="list.ex?cpage=${i}"
-									class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
-								</c:when>
-								
-								<c:otherwise>
-									<a href="exercise.se?cpage=${i}&part=${part}&difficulty=${difficulty}&keyword=${keyword}"
-									class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
-								</c:otherwise>
-							</c:choose>
-							
-						</c:forEach>
-
-						<c:choose>
-							<c:when test="${pi.currentPage < pi.maxPage}">
-								<c:choose>
-									<c:when test="${empty part and empty difficulty and empty keyword}">
-										<a href="list.ex?cpage=${pi.currentPage + 5 < pi.maxPage ? pi.currentPage + 5 : pi.maxPage}">&gt;</a>
-									</c:when>
-									
-									<c:otherwise>
-										<a href="exercise.se?cpage=${pi.currentPage + 5 < pi.maxPage ? pi.currentPage + 5 : pi.maxPage}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&gt;</a>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-						</c:choose>
-        			</div>
+					
         <br><br>
     		</div>
+			<div id="paging-area">
+				<c:choose>
+					<c:when test="${pi.currentPage > 1}">
+						<c:choose>
+							<c:when test="${empty part and empty difficulty and empty keyword}">
+								<a href="list.ex?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}">&lt;</a>
+							</c:when>
+							<c:otherwise>
+								<a href="exercise.se?cpage=${pi.currentPage - 5 > 1 ? pi.currentPage - 5 : 1}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&lt;</a>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+				</c:choose>
+
+				<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
+					
+					<c:choose>
+						<c:when test="${empty part and empty difficulty and empty keyword}">
+							<a href="list.ex?cpage=${i}"
+							class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
+						</c:when>
+						
+						<c:otherwise>
+							<a href="exercise.se?cpage=${i}&part=${part}&difficulty=${difficulty}&keyword=${keyword}"
+							class="paging-link ${i == pi.currentPage ? 'active' : ''}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+					
+				</c:forEach>
+
+				<c:choose>
+					<c:when test="${pi.currentPage < pi.maxPage}">
+						<c:choose>
+							<c:when test="${empty part and empty difficulty and empty keyword}">
+								<a href="list.ex?cpage=${pi.currentPage + 5 < pi.maxPage ? pi.currentPage + 5 : pi.maxPage}">&gt;</a>
+							</c:when>
+							
+							<c:otherwise>
+								<a href="exercise.se?cpage=${pi.currentPage + 5 < pi.maxPage ? pi.currentPage + 5 : pi.maxPage}&part=${part}&difficulty=${difficulty}&keyword=${keyword}">&gt;</a>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+				</c:choose>
+			</div>
 		</div>
 
 		<div class="flootbox">

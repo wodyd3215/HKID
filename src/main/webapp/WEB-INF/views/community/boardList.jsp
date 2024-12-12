@@ -19,7 +19,7 @@
 <body onload="init('${pageName}', '${optional}')"></body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
-    게시글 = ${list}
+    <!-- 게시글 = ${list}
     <br><br><br>
     공지 = ${nList}
     <br><br>
@@ -34,7 +34,7 @@
     category = ${category}
 
 
-    b.memberNo = ${b.memberNo}
+    b.memberNo = ${b.memberNo} -->
 
     <div class="wrapper">
         <br><br><br><br><br>

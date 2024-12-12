@@ -37,22 +37,33 @@
                         <td>2025-02-09</td>
                         <td><button class="material-symbols-outlined btn btn-primary custom-btn single-btn" onclick="addFormChallenge()">add</button></td>
                     </tr> -->
-                    <c:forEach var="c" items="${list}" varStatus="status">
-                        <tr class="common-table-body">
-                            <td><img src="${pageContext.request.contextPath}${c.thumbnail}" alt=""></td>
-                            <td>${c.challengeTitle}</td>
-                            <td>${c.startDate}</td>
-                            <td>${c.endDate}</td>
-                            <c:choose>
-                                <c:when test="${status.index == 0}">
-                                    <td><button class="material-symbols-outlined btn btn-primary custom-btn single-btn" onclick="addFormChallenge()">add</button></td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td></td>
-                                </c:otherwise>
-                            </c:choose>
-                        </tr>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${not empty list}">
+                            <c:forEach var="c" items="${list}" varStatus="status">
+                                <tr class="common-table-body">
+                                    <td><img src="${pageContext.request.contextPath}${c.thumbnail}" alt=""></td>
+                                    <td>${c.challengeTitle}</td>
+                                    <td>${c.startDate}</td>
+                                    <td>${c.endDate}</td>
+                                    <c:choose>
+                                        <c:when test="${status.index == 0}">
+                                            <td><button class="material-symbols-outlined btn btn-primary custom-btn single-btn" onclick="addFormChallenge()">add</button></td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td></td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><button class="material-symbols-outlined btn btn-primary custom-btn single-btn" onclick="addFormChallenge()">add</button></td>
+                        </c:otherwise>
+                    </c:choose>
                 </tbody>
             </table>
         </div>

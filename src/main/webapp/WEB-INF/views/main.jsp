@@ -46,7 +46,7 @@
 					<div class="weather-header">
 						<p>날씨 정보</p>
 						<div class="area-select">
-							<select name="area" id="area" onchange="categoryChange(this)">
+							<!-- <select name="area" id="area" onchange="categoryChange(this)">
 								<option value>시/도 선택</option>
 								<option value="geranel01">강원</option>
 								<option value="general02">경기</option>
@@ -67,7 +67,7 @@
 							</select>
 							<select name="location" id="state">
 								<option>군/구 선택</option>
-							</select>
+							</select> -->
 						</div>
 					</div>
 
@@ -245,22 +245,26 @@
 						<td>16</td>
 					</tr>
 					<tr id="community-table-body">
-						<td>팁</td>
+						<td>자랑</td>
 						<td>
-							<a href="">세트별 개수 설정에 대해 질문드립니다 [0]</a>
+							<a href="">세트별 개수 설정에 대해 질문드립니다 [0]
+								<img src="./resources/img/file.png" alt="없음">
+							</a>
 						</td>
 						<td>꾸준히 운동</td>
 						<td>2024-10-10</td>
-						<td>15</td>
+						<td>16</td>
 					</tr>
 					<tr id="community-table-body">
-						<td>질문</td>
+						<td>자랑</td>
 						<td>
-							<a href="">세트별 개수 설정에 대해 질문드립니다 [0]</a>
+							<a href="">세트별 개수 설정에 대해 질문드립니다 [0]
+								<img src="./resources/img/file.png" alt="없음">
+							</a>
 						</td>
 						<td>꾸준히 운동</td>
 						<td>2024-10-10</td>
-						<td>23</td>
+						<td>16</td>
 					</tr>
 				</tbody>
 			</table>

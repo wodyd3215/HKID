@@ -39,12 +39,12 @@
 }
 
 .enroll-form .edit-area {
-    height: 620px;
     overflow: hidden;
 }
 
 .enroll-form #content-bottom{
     display: flex;
+    background-color: white;
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #d9d9d9;
@@ -79,7 +79,6 @@
 .enroll-form .note-editable {
     background: white;
     border: none;
-    max-height: calc(100% - 42px);
     overflow-y: auto;
     overflow-x: hidden;
 }
