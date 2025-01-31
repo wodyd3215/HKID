@@ -1,3 +1,4 @@
+// 신고 확인 메서드(모달)
 function inputDetailData(optional) {
     const modals = document.querySelectorAll('#report-info .content div')
     const textarea = document.querySelector('#report-detail textarea')
@@ -10,6 +11,7 @@ function inputDetailData(optional) {
     textarea.value = optional[index]
 }
 
+// 신고된 게시글 미리보기 메서드(모달)
 function loadContent(optional) {
     console.log(typeof optional);
     const contentArea = $('#content-detail .custom-modal-content')

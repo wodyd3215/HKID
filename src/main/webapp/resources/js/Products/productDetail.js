@@ -11,7 +11,7 @@ function initProductDetail(contextPath, optional) {
     drawReview(productNo)
 }
 
-// 디테일 이미지 가져오기
+// 처음 대표 이미지 가져오기
 function drawDetailImg(contextPath, imgArr) {
     imgArr.forEach((img, index) => {
         const imgsArea = $('.detailImg')
@@ -34,6 +34,7 @@ function drawRepresentImg(img) {
     $('.reImg img').attr('src', img)
 }
 
+// 리뷰 평점 평균 메서드
 function drawReviewAvg() {
     const star = drawStar($('.assess').data('star'))
     const count = '(' + $('.assess').data('count') + ')'
@@ -41,10 +42,12 @@ function drawReviewAvg() {
     $('.assess').text(star + ' ' + count)
 }
 
+// 상품 상세 내용 불러오는 메서드
 function drawContent(content) {
     $('.contentImg').html(content)
 }
 
+// 작성된 리뷰 출력하는 메서드(페이징 처리)
 function drawReview(productNo) {
     let pageInfo = {
         productNo: productNo,
