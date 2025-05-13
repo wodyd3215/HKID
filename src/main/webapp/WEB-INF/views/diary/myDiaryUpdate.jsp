@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +35,31 @@ pageEncoding="UTF-8"%>
                 <input type="text" name="diaryTitle" placeholder="제목을 입력하세요" value="${diary.diaryTitle}" required>
             </div>
             <div id="today-ate-cal-info">
+                <c:choose>
+                    <c:when test="${diary.foodNo != 0}">
+                        <table class="food-info-table">
+                            <thead>
+                                <tr id="food-title">
+                                    <th id="food-kcal">칼로리(kcal)</th>
+                                    <th id="food-carbo">탄수화물(g)</th>
+                                    <th id="food-pro">단백질(g)</th>
+                                    <th id="food-fat">지방(g)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="food-detail">
+                                    <td class="kcal-figure">${diet.totalKcal}</td>
+                                    <td class="carbo-figure">${diet.totalCarbo}</td>
+                                    <td class="pro-figure">${diet.totalProtein}</td>
+                                    <td class="fat-figure">${diet.totalFat}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </c:when>
+                    <c:otherwise>
+                        <div>저장한 정보가 없습니다.</div>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="edit-area">
                 <textarea id="content" name="diaryContent" required></textarea>

@@ -36,7 +36,7 @@ public interface AdminService {
 	
 	int deleteReportReply(Report r);
 	
-	void insertsuspension(SuspensionMember sm, int reportNo);
+	int insertsuspension(SuspensionMember sm, int reportNo);
 	
 	Board loadBoardAjax(int boardNo);
 	
@@ -45,14 +45,14 @@ public interface AdminService {
 	
 	ArrayList<AccRecovery> selectRecoveryList(PageInfo pi);
 	
-	void recoveryAccount(int memberNo);
+	int recoveryAccount(int memberNo);
 	
 // ======================= 상품 =======================
 	int pCount();
 	
 	ArrayList<Product> selecProductList(PageInfo pi);
 	
-	void insertProduct(Product p, String files);
+	int insertProduct(Product p, String files);
 	
 	Product editProduct(int productNo);
 	
@@ -60,7 +60,7 @@ public interface AdminService {
 	
 	int activateProduct(int productNo);
 	
-	void updateProduct(Product p, String files);
+	int updateProduct(Product p, String files);
 	
 //	======================= 챌린지 =======================
 	int challengeCount();

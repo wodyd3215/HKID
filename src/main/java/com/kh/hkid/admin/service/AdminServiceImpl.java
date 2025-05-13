@@ -82,18 +82,20 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Transactional(rollbackFor = {Exception.class})
 	@Override
-	public void insertsuspension(SuspensionMember sm, int reportNo) {
-		int result = adminDao.insertsuspension(sqlSession, sm);
-		if(result == 0)
+	public int insertsuspension(SuspensionMember sm, int reportNo) {
+		int result1 = adminDao.insertsuspension(sqlSession, sm);
+		if(result1 == 0)
 			throw new RuntimeException("리스트에 정상적으로 insert되지 않았습니다.");
 		
-		result = adminDao.updateStatus(sqlSession, sm);
-		if(result == 0)
+		int result2 = adminDao.updateStatus(sqlSession, sm);
+		if(result2 == 0)
 			throw new RuntimeException("유저정보가 정상적으로 update되지 않았습니다.");
 		
-		result = adminDao.deleteReport(sqlSession, reportNo);
-		if(result == 0) 
+		int result3 = adminDao.deleteReport(sqlSession, reportNo);
+		if(result3 == 0) 
 			throw new RuntimeException("신고 정보가 정상적으로 delete되지 않았습니다");
+		
+		return result1 * result2 * result3;
 	}
 
 	@Override
@@ -108,26 +110,30 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Transactional(rollbackFor = {Exception.class})
 	@Override
-	public void recoveryAccount(int memberNo) {
-		int result = adminDao.recoveryAccount(sqlSession, memberNo);
-		if(result == 0)
+	public int recoveryAccount(int memberNo) {
+		int result1 = adminDao.recoveryAccount(sqlSession, memberNo);
+		if(result1 == 0)
 			throw new RuntimeException("계정 정보를 정상적으로 update하지 못하였습니다.");
 		
-		result = adminDao.deleteRecovery(sqlSession, memberNo);
-		if(result == 0)
+		int result2 = adminDao.deleteRecovery(sqlSession, memberNo);
+		if(result2 == 0)
 			throw new RuntimeException("신청서를 정상적으로 delete하지 못하였습니다.");
+		
+		return result1 * result2;
 	}
 	
 	@Transactional(rollbackFor = {Exception.class})
 	@Override
-	public void insertProduct(Product p, String files) {
-		int result = adminDao.insertProduct(sqlSession, p);
-		if(result == 0)
+	public int insertProduct(Product p, String files) {
+		int result1 = adminDao.insertProduct(sqlSession, p);
+		if(result1 == 0)
 			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
 		
-		result = adminDao.insertAttachment(sqlSession, files);
-		if(result == 0)
+		int result2 = adminDao.insertAttachment(sqlSession, files);
+		if(result2 == 0)
 			throw new RuntimeException("이미지를 정상적으로 insert하지 못하였습니다.");
+		
+		return result1 * result2;
 	}
 	
 	public Product editProduct(int productNo) {
@@ -146,19 +152,21 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Transactional(rollbackFor = {Exception.class})
 	@Override
-	public void updateProduct(Product p, String files) {
+	public int updateProduct(Product p, String files) {
 		HashMap<String, Object> aMap = new HashMap<>();
 		
 		aMap.put("productNo", p.getProductNo());
 		aMap.put("files", files);
 		
-		int result = adminDao.updateAttachment(sqlSession, aMap);
-		if(result == 0)
+		int result1 = adminDao.updateAttachment(sqlSession, aMap);
+		if(result1 == 0)
 			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
 		
-		result = adminDao.updateProduct(sqlSession, p);
-		if(result == 0)
+		int result2 = adminDao.updateProduct(sqlSession, p);
+		if(result2 == 0)
 			throw new RuntimeException("상품을 정상적으로 insert하지 못하였습니다.");
+		
+		return result1 * result2;
 	}
 
 	@Override

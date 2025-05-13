@@ -147,6 +147,7 @@
                         <div class="pageInfo">
                             <button id="prev"><img src="${pageContext.request.contextPath}/resources/image/leftBtn.svg" alt=""></button>
                             <button id="currentPage"></button>
+                            <button id="next"><img src="${pageContext.request.contextPath}/resources/image/rightBtn.svg" alt=""></button>
                     </li>
 
                     <li id="contentExchange" class="contentExchange">

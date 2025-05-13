@@ -324,8 +324,9 @@ public class MemberController {
     	m.setMemberId(((Member)session.getAttribute("loginMember")).getMemberId());
     	
     	// 전달된 파일이 있는지 확인하는 구문
-    	if(!imgProfile.getOriginalFilename().equals("")) {
-	    	m.setProfileImg("/resources/image/profileImg/"+ Template.saveFile(imgProfile, session, "/resources/image/profileImg/"));
+    	if(imgProfile != null && !imgProfile.getOriginalFilename().equals("")) {
+	    	m.setProfileImg("/resources/image/profileImg/"
+	    			+ Template.saveFile(imgProfile, session, "/resources/image/profileImg/"));
 	    	
 	    	int result = memberService.imgChangeAjax(m);
 	    	

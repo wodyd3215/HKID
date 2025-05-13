@@ -1,5 +1,6 @@
 function initProduct(contextPath, optional) {
     const files = {
+        // input내 요소가 존재하면 해당 값을 가져오고, 없다면 null로 설정
         fileNo: $('input[name="fileNo"]').length > 0 ? $('input[name="fileNo"]').val() : null,
         changeName: $('input[name="changeName"]').length > 0 ? $('input[name="changeName"]').val() : null,
     }
@@ -38,6 +39,7 @@ function initFile(contextPath, files) {
         filesArr: [], // 이미지 파일 누적시키는 배열
     };
 
+    // 상품 정보 수정 시 파일 정보가 존재할 경우 실행
     if(files.fileNo && files.changeName) {
         insertArr(contextPath, fileInfo, files)
     }
@@ -56,6 +58,7 @@ function initFile(contextPath, files) {
     }
 }
 
+// 수정 파일 정보를 업데이트하고 화면에 반영하는 함수
 function insertArr(contextPath, fileInfo, files) {
     fileInfo.fileNo = files.fileNo
 
@@ -111,23 +114,21 @@ function validation(file) {
 
 async function drawView(contextPath, filesArr) {
     let imgSrc = null;
-    
-    console.log(filesArr)
 
     const pre = $('#img-area')
     // children() : 요소의 직계 자식 요소 선택
     // not() : 직계 자식 요소 제외시켜줌 
     pre.children().not('input[type="file"]').remove()
 
-    for(const[index, file] of filesArr.entries()) {
-        console.log("그려짐")
+    // const [] : 구조 분해 할당(객체나 배열을 변수로 분해할 수 있게 해주는 특별한 문법)
+    // Object.entries() : 객체를 배열로 변환해주는 메소드
+    for(const [index, file] of filesArr.entries()) {
         if(typeof file === 'string') {  
             imgSrc = contextPath + file
             console.log(imgSrc)
         } else {
             imgSrc = await readFileAsDataURL(file);
         } 
-        console.log("이미지 주소2: " + imgSrc)
         
         const previewArea = $('<div>').addClass('previewImg')
         const imgArea = $('<img>').attr('src', imgSrc)
@@ -138,8 +139,6 @@ async function drawView(contextPath, filesArr) {
         previewArea.append(imgArea, closeBtn)
         pre.append(previewArea)
     }
-
-    // filesArr.forEach(async (file, index) => { });
 
     if(filesArr.length < 4) {
         const addArea = $('<div>').addClass('material-symbols-outlined').text('add').click(() => {
