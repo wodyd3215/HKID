@@ -109,7 +109,13 @@ public class DiaryController {
     public String updateDiaryForm(Diary d, Model model, HttpSession session) {
     	d.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
     	
-    	model.addAttribute("diary", diaryService.detailDiary(d));
+    	Diary nd = diaryService.detailDiary(d);
+    	
+    	model.addAttribute("diary", nd);
+    	
+    	if(nd.getFoodNo() != 0) {
+    		model.addAttribute("diet", diaryService.selectMyDiet(nd.getFoodNo()));
+    	}
     	
     	return "diary/myDiaryUpdate";
     }

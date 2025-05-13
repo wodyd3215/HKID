@@ -30,6 +30,8 @@ import com.kh.hkid.product.model.vo.Product;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+
 @Slf4j
 @Controller
 public class AdminController {
@@ -228,33 +230,35 @@ public class AdminController {
 	}
 	
 	
-	@SuppressWarnings("finally") // 자바 컴파일러가 finally 블록 관련 경고를 무시하도록 지시하는 주석 
+	// @SuppressWarnings("finally") // 자바 컴파일러가 finally 블록 관련 경고를 무시하도록 지시하는 주석 
 	@PostMapping("suspensionMember")
 	public String insertsuspension(SuspensionMember sm, int reportNo, HttpSession session) {
+		String message;
 		try {
-			adminService.insertsuspension(sm, reportNo);
-			session.setAttribute("alertMsg", "유저 정지 성공");
+			int result = adminService.insertsuspension(sm, reportNo);
+			message = (result > 0) ? "유저 정지 성공" : "유저 정지 실패";
 		} catch(RuntimeException e) {
 			e.printStackTrace();
-			session.setAttribute("alertMsg", "유저 정지 실패");
-		} finally {
-			return "redirect:/reportedUser.ad";
+			message = "유저 정지 실패";
 		}
+		
+		session.setAttribute("alertMsg", message);
+		return "redirect:/reportedUser.ad";
 	}
 	
-	@SuppressWarnings("finally")
 	@PostMapping("recoveryAccount.ad")
 	public String recoveryAccount(int memberNo, HttpSession session) {
+		String message;
 		try {
-			// 가독성 문제로 수정 필요!!!
-			adminService.recoveryAccount(memberNo);
-			session.setAttribute("alertMsg", "계정 복구 성공");
+			int result = adminService.recoveryAccount(memberNo);
+			message = (result > 0) ? "계정 복구 성공" : "계정 복구 실패";
 		} catch(RuntimeException e) {
 			e.printStackTrace();
-			session.setAttribute("alertMsg", "계정 복구 실패");
-		} finally {
-			return "redirect:/accRecovery.ad";
+			message = "계정 복구 실패";
 		}
+		
+		session.setAttribute("alertMsg", message);
+		return "redirect:/accRecovery.ad";
 	}
 	
 	@ResponseBody
@@ -274,14 +278,14 @@ public class AdminController {
 		
 		log.info(files);
 		
+		int result = 0;
 		try {
-			adminService.insertProduct(p, files);
-			
-			return "success";
+			result = adminService.insertProduct(p, files);
 		} catch(RuntimeException e) {
 			e.printStackTrace();
-			return "fail";
 		}
+		
+		return (result > 0) ? "success" : "fail";
 	}
 	
 	@PostMapping("editProduct")
@@ -303,7 +307,6 @@ public class AdminController {
 		} else {
 			result = adminService.activateProduct(productNo);
 		}
-		
 
 		if(result > 0) {
 			session.setAttribute("alertMsg", "상품 상태 변화 성공");
@@ -315,6 +318,7 @@ public class AdminController {
 		
 	}
 	
+	// 등록된 상품을 수정하는 함수
 	@ResponseBody
 	@PostMapping("updateProduct")
 	public String updateProduct(Product p, 
@@ -340,17 +344,18 @@ public class AdminController {
 		}
 
 		String files = String.join(",", list);
+		int result = 0;
 		
 		try {
-			adminService.updateProduct(p, files);
-			
-			return "success";
+			result = adminService.updateProduct(p, files);
 		} catch(RuntimeException e) {
 			e.printStackTrace();
-			return "fail";
-		}		
+		}	
+		
+		return (result > 0) ? "success" : "fail";
 	}
 	
+	// 챌린지 목록을 불러오는 함수
 	@GetMapping("challenges")
 	public String challenges(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int totalCount = adminService.challengeCount();
@@ -366,6 +371,7 @@ public class AdminController {
 		return "admin/challengeManagement";
 	}
 	
+	// 챌린지를 추가하는 함수
 	@ResponseBody
 	@PostMapping("insertChallenge")
 	public String insertChallenge(Challenge ch, MultipartFile upfile, HttpSession session) {

@@ -2,8 +2,6 @@ function loadTodayCal() {
     const kcalArea = $('#today-ate-cal-info')
     kcalArea.empty()
 
-    let isLoad = false
-
     loadDietAjax((res) => {
         drawTableDiet(res)
     })

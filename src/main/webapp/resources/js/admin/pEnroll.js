@@ -140,8 +140,6 @@ async function drawView(contextPath, filesArr) {
         pre.append(previewArea)
     }
 
-    // filesArr.forEach(async (file, index) => { });
-
     if(filesArr.length < 4) {
         const addArea = $('<div>').addClass('material-symbols-outlined').text('add').click(() => {
             includeImg()

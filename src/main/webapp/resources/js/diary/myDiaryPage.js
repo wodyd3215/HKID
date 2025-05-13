@@ -3,7 +3,7 @@ function initDiaryPage(optional) {
 }
 
 function initScrollPaging(mNo) {
-    let timer;
+    let timer = false;
 
     let pageInfo = {
         memberNo: mNo,
@@ -13,12 +13,13 @@ function initScrollPaging(mNo) {
     }
 
     const loadEl = (dList) => {
-        if(dList) {
+        if(Array.isArray(dList) && dList.length > 0) {
             console.log(dList)
             drawDiaryPreview(dList)
             pageInfo.currentPage++
         } else {
             pageInfo.isLoad = false;
+            console.log(pageInfo.isLoad)
         }
         
     }
@@ -31,19 +32,34 @@ function initScrollPaging(mNo) {
     // $(window).scrollTop() : 스크롤이 시작하는 부분부터 스크롤바 맨 위 부분의 사이 간격(스크롤바 맨 위 부분 위치)
     // $(window).height() : 우리가 보는 화면 크기(100vh)
     // $(document).height() : 전체(모든 요소 포함) 화면 크기
-    document.onscroll = () => {
-        // 이전에 설정된 타이머를 초기화하여 연속 호출 방지
-        clearTimeout(timer) 
+    // document.onscroll = () => {
+    //     // 이전에 설정된 타이머를 초기화하여 연속 호출 방지
+    //     clearTimeout(timer) 
 
-        // 200ms 대기 후 로직 실행(디바운싱)
-        // 디바운싱 : 마지막 이벤트를 기준으로 일정 시간이 지나면 이벤트를 1번만 발생시키는 기법
-        timer = setTimeout(() => {
+    //     // 200ms 대기 후 로직 실행(디바운싱)
+    //     // 디바운싱 : 이벤트가 연속으로 발생할 때, 마지막 이벤트가 끝나고 일정 시간이 지난 후에 실행하는 방식
+    //     timer = setTimeout(() => {
+    //         if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+    //             if(pageInfo.isLoad === true) {
+    //                 loadDiary()
+    //             }        
+    //         }
+    //     }, 200)    
+    // } 
+
+    document.onscroll = () => {
+        // 쓰로틀링 : 일정 간격마다 한 번만 실행되도록 하는 방식
+        if(timer) return;
+
+        timer= true
+        setTimeout(() => {
             if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
                 if(pageInfo.isLoad === true) {
                     loadDiary()
                 }        
             }
-        }, 200)    
+            timer = false;
+        }, 400)    
     } 
 }
  
